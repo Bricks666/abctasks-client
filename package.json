@@ -15,6 +15,14 @@
 		"web-vitals": "^2.1.2"
 	},
 	"devDependencies": {
+		"@storybook/addon-actions": "^6.4.9",
+		"@storybook/addon-essentials": "^6.4.9",
+		"@storybook/addon-links": "^6.4.9",
+		"@storybook/builder-webpack5": "^6.4.9",
+		"@storybook/manager-webpack5": "^6.4.9",
+		"@storybook/node-logger": "^6.4.9",
+		"@storybook/preset-create-react-app": "^4.0.0",
+		"@storybook/react": "^6.4.9",
 		"@testing-library/jest-dom": "^5.16.1",
 		"@testing-library/react": "^12.1.2",
 		"@testing-library/user-event": "^13.5.0",
@@ -30,19 +38,34 @@
 		"eslint-plugin-react": "^7.28.0",
 		"eslint-plugin-react-hooks": "^4.3.0",
 		"eslint-plugin-sonarjs": "^0.11.0",
+		"eslint-plugin-storybook": "^0.5.5",
 		"jest": "^27.4.7",
-		"typescript": "^4.5.4"
+		"typescript": "^4.5.4",
+		"webpack": "^5.65.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"lint": "eslint --ext .ts,.tsx src/",
+		"storybook": "start-storybook -p 6006 -s public",
+		"build-storybook": "build-storybook -s public"
 	},
 	"eslintConfig": {
 		"extends": [
 			"react-app",
 			"react-app/jest"
+		],
+		"overrides": [
+			{
+				"files": [
+					"**/*.stories.*"
+				],
+				"rules": {
+					"import/no-anonymous-default-export": "off"
+				}
+			}
 		]
 	},
 	"browserslist": {

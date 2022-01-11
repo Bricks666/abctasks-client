@@ -1,9 +1,11 @@
 import { DateType } from "../common";
-import { Group } from ".";
 
-export interface TodoStructure {
+export type TaskStatus = "Done" | "Ready" | "Review" | "Progress";
+
+export interface TaskStructure {
 	id: number;
-	group: Group;
+	group: string;
+	status: TaskStatus;
 	content: string;
 	commentCount: number;
 	addedDate: DateType;

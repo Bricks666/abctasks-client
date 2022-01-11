@@ -1,0 +1,24 @@
+.label {
+	display: grid;
+	grid-template-columns: 1fr min-content;
+
+	row-gap: 5px;
+	column-gap: 5px;
+}
+
+.progressNumbers {
+	font-size: 14px;
+	color: rgb(150, 150, 150);
+}
+
+.progress {
+	grid-column: span 2;
+
+	width: 100%;
+
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+
+	height: 10px;
+}
