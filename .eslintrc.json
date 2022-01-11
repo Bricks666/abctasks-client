@@ -1,0 +1,64 @@
+{
+	"root": true,
+	"env": {
+		"browser": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:jsx-a11y/recommended",
+		"plugin:sonarjs/recommended",
+		"plugin:jest/recommended",
+		"plugin:effector/recommended",
+		"plugin:effector/react"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "tsconfig.json",
+		"ecmaVersion": "latest",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"settings": {
+		"react": {
+			"pragma": "React",
+			"version": "detect"
+		}
+	},
+	"plugins": [
+		"react",
+		"react-hooks",
+		"@typescript-eslint",
+		"jsx-a11y",
+		"sonarjs",
+		"jest",
+		"effector"
+	],
+	"rules": {
+		/* STANDARD */
+		"indent": ["warn", "tab", { "SwitchCase": 1 }],
+		"no-mixed-spaces-and-tabs": "warn",
+		"quotes": ["error", "double"],
+		"semi": ["warn", "always"],
+		"no-alert": "error",
+		"no-debugger": "warn",
+		"no-constructor-return": "error",
+		"no-duplicate-imports": "warn",
+		"no-promise-executor-return": "error",
+		"no-self-compare": "error",
+		"no-console": "warn",
+
+		/* TYPESCRIPT */
+		"@typescript-eslint/no-explicit-any": "error",
+
+		/* REACT */
+		"react/display-name": "off",
+		"react/prop-types": "off",
+
+		/* REACT HOOKS */
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn"
+	}
+}
