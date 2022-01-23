@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { OnlyClassName } from "../../interfaces/common";
-import { TaskStructure } from "../../interfaces/structures";
+import { TaskStructure } from "../../models/Tasks";
 
 interface TaskCardComponent extends OnlyClassName, TaskStructure {}
 

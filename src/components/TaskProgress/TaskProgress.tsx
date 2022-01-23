@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { TaskProgressStructure } from "../../interfaces/structures";
+import { TaskProgressStructure } from "../../models/TasksProgress";
 import { OnlyClassName } from "../../interfaces/common";
-import { ProgressBar } from "../ProgressBar";
+import { ProgressBar } from "../../ui/ProgressBar";
 
 interface TaskProgressComponent extends OnlyClassName, TaskProgressStructure {}
 

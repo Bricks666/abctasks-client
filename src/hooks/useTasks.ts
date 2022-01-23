@@ -1,11 +1,9 @@
-import { useStoreMap } from "effector-react";
+import { useStore } from "effector-react";
 import { useEffect } from "react";
-import { loadTasksFx } from "../effects";
-import { TaskStructure } from "../interfaces/structures";
-import { $TasksStore } from "../stores";
+import { $Tasks, loadTasksFx, TaskStructure } from "../models/Tasks/";
 
 export const useTasks = (): TaskStructure[] => {
-	const tasks = useStoreMap($TasksStore, (state) => state.tasks);
+	const tasks = useStore($Tasks);
 
 	useEffect(() => {
 		if (tasks.length === 0) {

@@ -1,17 +1,18 @@
 import { useEffect } from "react";
-import { useStoreMap } from "effector-react";
-import { loadTasksProgressFx } from "../effects";
-import { TaskProgressStructure } from "../interfaces/structures";
-import { $TasksProgressStore } from "../stores";
+import { useStore } from "effector-react";
+import {
+	$TasksProgress,
+	loadTasksProgressFx,
+	TaskProgressStructure,
+} from "../models/TasksProgress";
 
 export const useTasksProgress = (): TaskProgressStructure[] => {
-	const tasksProgress = useStoreMap(
-		$TasksProgressStore,
-		(state) => state.tasksProgress
-	);
+	const tasksProgress = useStore($TasksProgress);
 
 	useEffect(() => {
-		loadTasksProgressFx();
+		if (tasksProgress.length === 0) {
+			loadTasksProgressFx();
+		}
 	}, [tasksProgress.length]);
 
 	return tasksProgress;

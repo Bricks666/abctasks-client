@@ -16,6 +16,7 @@ export const ProgressBar: FC<ProgressBarComponent> = ({
 	children,
 	className,
 }) => {
+  /* TODO: Переделать на дивах для красоты */
 	return (
 		<label className={classNames(ProgressBarStyle.label, className)}>
 			{children}

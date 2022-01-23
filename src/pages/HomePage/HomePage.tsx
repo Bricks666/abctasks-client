@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { OnlyClassName } from "../../interfaces/common";
-import { SectionHeader } from "../../components/SectionHeader";
-import { ContentLayout } from "../../components/ContentLayout";
-import { Aside } from "../../components/Aside";
+import { SectionHeader } from "../../ui/SectionHeader";
+import { ContentLayout } from "../../ui/ContentLayout";
+import { Aside } from "../../ui/Aside";
 import { TasksProgress } from "../../components/TasksProgress";
 import { Tasks } from "../../components/Tasks";
 

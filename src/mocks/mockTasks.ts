@@ -1,4 +1,4 @@
-import { TaskStructure } from "../interfaces/structures";
+import { TaskStructure } from "../models/Tasks";
 
 export const mockTasks: TaskStructure[] = [
 	{

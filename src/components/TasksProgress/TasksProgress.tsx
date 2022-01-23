@@ -3,8 +3,8 @@ import classNames from "classnames";
 import { OnlyClassName } from "../../interfaces/common";
 import { useTasksProgress, useTasksProgressLoading } from "../../hooks";
 import { TaskProgress } from "../TaskProgress";
-import { ListWithLoading } from "../ListWithLoading";
-import { SubsectionHeader } from "../SubsectionHeader";
+import { ListWithLoading } from "../../ui/ListWithLoading";
+import { SubsectionHeader } from "../../ui/SubsectionHeader";
 
 import TasksProgressStyle from "./TasksProgress.module.css";
 
