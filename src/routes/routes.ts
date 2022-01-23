@@ -1,6 +1,5 @@
 import { ComponentType } from "react";
-import { HomePage } from "../pages";
-import { LoginPage } from "../pages/LoginPage";
+import { HomePage, LoginPage, RegistrationPage } from "../pages";
 
 interface Route {
 	readonly path: string;
@@ -17,5 +16,9 @@ export const routes: Route[] = [
 	{
 		path: "/login",
 		Component: LoginPage,
+	},
+	{
+		path: "/registration",
+		Component: RegistrationPage,
 	},
 ];

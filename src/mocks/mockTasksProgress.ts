@@ -1,23 +1,16 @@
 import { TaskProgressStructure } from "../models/TasksProgress";
+import { mockIllustrationGroup, mockUIGroup } from "./mockGroups";
 
 export const mockTasksProgress: TaskProgressStructure[] = [
 	{
 		id: 1,
-		group: {
-			group: "UI",
-			backgroundColor: "#ecd8e6",
-			textColor: "#d459e8",
-		},
+		group: mockUIGroup,
 		completedCount: 1,
 		totalCount: 10,
 	},
 	{
 		id: 2,
-		group: {
-			group: "Illustration",
-			backgroundColor: "#dee7e3",
-			textColor: "#46bd84",
-		},
+		group: mockIllustrationGroup,
 		completedCount: 5,
 		totalCount: 10,
 	},

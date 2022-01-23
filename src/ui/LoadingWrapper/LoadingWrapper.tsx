@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React, { FC, ReactElement } from "react";
-import { OnlyClassName } from "../../interfaces/common";
+import { ClassNameComponent } from "../../interfaces/common";
 
-interface LoadingWrapperComponent extends OnlyClassName {
+interface LoadingWrapperComponent extends ClassNameComponent {
 	isLoading: boolean;
 	loadingIndicator: ReactElement;
 	children: ReactElement | ReactElement[];

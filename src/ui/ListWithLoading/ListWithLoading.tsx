@@ -1,9 +1,9 @@
 import React, { ComponentType, ReactElement } from "react";
-import { AnyObject, OnlyClassName } from "../../interfaces/common";
+import { AnyObject, ClassNameComponent } from "../../interfaces/common";
 import { List } from "../List";
 import { LoadingWrapper } from "../LoadingWrapper";
 
-interface ListWithLoading<T> extends OnlyClassName {
+interface ListWithLoading<T> extends ClassNameComponent {
 	items: T[];
 	Component: ComponentType<T>;
 	isLoading: boolean;

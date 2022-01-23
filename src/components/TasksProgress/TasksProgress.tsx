@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-import { OnlyClassName } from "../../interfaces/common";
+import { ClassNameComponent } from "../../interfaces/common";
 import { useTasksProgress, useTasksProgressLoading } from "../../hooks";
 import { TaskProgress } from "../TaskProgress";
 import { ListWithLoading } from "../../ui/ListWithLoading";
@@ -8,7 +8,7 @@ import { SubsectionHeader } from "../../ui/SubsectionHeader";
 
 import TasksProgressStyle from "./TasksProgress.module.css";
 
-export const TasksProgress: FC<OnlyClassName> = ({ className }) => {
+export const TasksProgress: FC<ClassNameComponent> = ({ className }) => {
 	const tasks = useTasksProgress();
 	const isLoading = useTasksProgressLoading();
 

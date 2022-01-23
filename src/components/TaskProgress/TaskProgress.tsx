@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { TaskProgressStructure } from "../../models/TasksProgress";
-import { OnlyClassName } from "../../interfaces/common";
+import { ClassNameComponent } from "../../interfaces/common";
 import { ProgressBar } from "../../ui/ProgressBar";
 
-interface TaskProgressComponent extends OnlyClassName, TaskProgressStructure {}
+interface TaskProgressComponent extends ClassNameComponent, TaskProgressStructure {}
 
 export const TaskProgress: FC<TaskProgressComponent> = ({
 	completedCount,
@@ -16,6 +16,9 @@ export const TaskProgress: FC<TaskProgressComponent> = ({
 			className={className}
 			currentValue={completedCount}
 			maxValue={totalCount}
+			ariaText={`Progress of ${group.group} tasks is ${completedCount}`}
+			progressbarBGColor={group.backgroundColor}
+			progressbarColor={group.textColor}
 		>
 			{group.group}
 		</ProgressBar>

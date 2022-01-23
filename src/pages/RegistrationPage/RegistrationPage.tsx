@@ -1,15 +1,15 @@
 import React, { FC } from "react";
-import { LoginForm } from "../../components/LoginForm";
+import { RegistrationForm } from "../../components/RegistrationForm";
 import { SaveLink } from "../../components/SaveLink";
 import { ContentLayout } from "../../ui/ContentLayout";
 import { SectionHeader } from "../../ui/SectionHeader";
 
-export const LoginPage: FC = () => {
+export const RegistrationPage: FC = () => {
 	return (
 		<ContentLayout>
-			<SectionHeader>Login</SectionHeader>
-			<LoginForm />
-			<SaveLink to="/registration">Registration</SaveLink>
+			<SectionHeader>Registration</SectionHeader>
+			<RegistrationForm />
+			<SaveLink to="/login">Login</SaveLink>
 		</ContentLayout>
 	);
 };

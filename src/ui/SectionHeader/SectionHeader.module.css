@@ -1,4 +1,6 @@
 .sectionHeader {
+  height: min-content;
+
 	margin: 0;
 	padding: 0;
 

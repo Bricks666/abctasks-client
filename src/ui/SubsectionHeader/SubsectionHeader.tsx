@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React, { FC, ReactText } from "react";
-import { OnlyClassName } from "../../interfaces/common";
+import { ClassNameComponent } from "../../interfaces/common";
 
 import SubsectionHeaderStyle from "./SubsectionHeader.module.css";
 
-interface SubsectionHeaderComponent extends OnlyClassName {
+interface SubsectionHeaderComponent extends ClassNameComponent {
 	children: ReactText | ReactText[];
 }
 

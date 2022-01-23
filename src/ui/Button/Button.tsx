@@ -1,9 +1,9 @@
 import React, { FC, MouseEventHandler } from "react";
-import { OnlyClassName } from "../../interfaces/common";
+import { ClassNameComponent } from "../../interfaces/common";
 
 type ButtonType = "button" | "submit" | "reset";
 
-interface ButtonComponent extends OnlyClassName {
+interface ButtonComponent extends ClassNameComponent {
 	type?: ButtonType;
 	onClick?: MouseEventHandler<HTMLButtonElement>;
 	disabled?: boolean;

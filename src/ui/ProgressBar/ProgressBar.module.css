@@ -11,14 +11,21 @@
 	color: rgb(150, 150, 150);
 }
 
-.progress {
+.progressbar {
 	grid-column: span 2;
 
 	width: 100%;
+	height: 10px;
 
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 
-	height: 10px;
+  border-radius: 10px;
+
+	overflow: hidden;
+}
+
+.progress {
+	height: 100%;
 }

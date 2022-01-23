@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React, { ComponentType } from "react";
-import { AnyObject, OnlyClassName } from "../../interfaces/common";
+import { AnyObject, ClassNameComponent } from "../../interfaces/common";
 
 import ListStyle from "./List.module.css";
 
-interface ListComponent<T> extends OnlyClassName {
+interface ListComponent<T> extends ClassNameComponent {
 	items: T[];
 	Component: ComponentType<T>;
 	indexedBy: keyof T;

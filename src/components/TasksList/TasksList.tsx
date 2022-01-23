@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import React, { DragEventHandler, FC } from "react";
-import { OnlyClassName } from "../../interfaces/common";
+import { ClassNameComponent } from "../../interfaces/common";
 import { TaskStructure } from "../../models/Tasks";
 import { DropZone } from "../../ui/DropZone";
 import { List } from "../../ui/List";
 import { SubsectionHeader } from "../../ui/SubsectionHeader";
 import { TaskCard } from "../TaskCard";
 
-interface TasksListComponent extends OnlyClassName {
+interface TasksListComponent extends ClassNameComponent {
 	tasks: TaskStructure[];
 	listHeader: string;
 }

@@ -1,7 +1,1 @@
-export type {
-	HEX,
-	DateType,
-	OnlyClassName,
-	MappedObject,
-	AnyObject,
-} from "./Common";
+export * from "./Common";

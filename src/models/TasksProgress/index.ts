@@ -1,11 +1,5 @@
 import { combine, createEffect, createStore } from "effector-logger";
-import { HEX } from "../../interfaces/common";
-
-export interface GroupStructure {
-	group: string;
-	textColor: HEX;
-	backgroundColor: HEX;
-}
+import { GroupStructure } from "../../interfaces/common";
 
 export interface TaskProgressStructure {
 	id: number;

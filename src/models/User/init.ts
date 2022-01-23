@@ -18,6 +18,9 @@ loginFx.use(async (credentials) => {
 	const response = await login(credentials);
 	return response.user;
 });
+registrationFx.use(async (credentials) => {
+	await registration(credentials);
+});
 
 $Login
 	.on([authFx.done, loginFx.done], () => true)
@@ -26,4 +29,3 @@ $Login
 $User.on([loginFx.doneData, authFx.doneData], (_, user) => user);
 
 $Authorizing.on(authFx.pending, (_, isLoading) => isLoading);
-/* registrationFx.use(registration); */

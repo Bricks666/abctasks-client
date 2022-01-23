@@ -1,10 +1,10 @@
 import React, { FC, ReactText } from "react";
 import classNames from "classnames";
-import { OnlyClassName } from "../../interfaces/common";
+import { ClassNameComponent } from "../../interfaces/common";
 
 import SectionHeaderStyle from "./SectionHeader.module.css";
 
-interface SectionHeaderComponent extends OnlyClassName {
+interface SectionHeaderComponent extends ClassNameComponent {
 	children: ReactText | ReactText[];
 }
 

@@ -1,0 +1,20 @@
+.layout {
+	grid-template-rows: min-content auto;
+	grid-template-areas: "header aside" "tasks aside";
+}
+
+.header {
+	grid-area: header;
+
+	padding: 2rem 0;
+}
+
+.tasks {
+	grid-area: tasks;
+}
+
+.aside {
+	grid-area: aside;
+
+	border-left: 1px solid #d9e0e9;
+}

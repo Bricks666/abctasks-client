@@ -1,8 +1,8 @@
 import React, { forwardRef, HTMLInputTypeAttribute } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { OnlyClassName } from "../../interfaces/common";
+import { ClassNameComponent } from "../../interfaces/common";
 
-interface InputComponent extends OnlyClassName, UseFormRegisterReturn {
+interface InputComponent extends ClassNameComponent, UseFormRegisterReturn {
 	type?: HTMLInputTypeAttribute;
 }
 

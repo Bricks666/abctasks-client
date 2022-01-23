@@ -1,0 +1,36 @@
+.card {
+	display: grid;
+
+	row-gap: 1.2em;
+
+	padding: 1rem;
+
+	border-radius: 8px;
+}
+
+.card:hover {
+	box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+	border-color: rgba(162, 179, 207, 0.2);
+}
+
+.content {
+	margin: 0;
+
+	font-size: 15px;
+}
+
+.additionInfo {
+	display: flex;
+
+	column-gap: 1rem;
+
+	font-size: 12px;
+	color: #636568;
+}
+
+.image {
+	width: 25px;
+	height: 25px;
+
+	margin-left: auto;
+}
