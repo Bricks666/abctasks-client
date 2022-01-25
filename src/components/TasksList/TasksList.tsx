@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React, { DragEventHandler, FC } from "react";
 import { useLoadingTasks } from "../../hooks";
 import { ClassNameComponent } from "../../interfaces/common";
-import { TaskStructure } from "../../models/Tasks";
+import { TaskWithGroup } from "../../models/Tasks";
 import { DropZone } from "../../ui/DropZone";
 import { ListWithLoading } from "../../ui/ListWithLoading";
 import { SubsectionHeader } from "../../ui/SubsectionHeader";
@@ -11,7 +11,7 @@ import { TaskCard } from "../TaskCard";
 import TasksListStyle from "./TasksList.module.css";
 
 interface TasksListComponent extends ClassNameComponent {
-	readonly tasks: TaskStructure[];
+	readonly tasks: TaskWithGroup[];
 	readonly listHeader: string;
 }
 const onDrop: DragEventHandler<HTMLDivElement> = (evt) => console.log(evt);

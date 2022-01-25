@@ -2,13 +2,13 @@ import classNames from "classnames";
 import dayjs from "dayjs";
 import React, { FC, memo } from "react";
 import { ClassNameComponent } from "../../interfaces/common";
-import { TaskStructure } from "../../models/Tasks";
+import { TaskWithGroup } from "../../models/Tasks";
 import { Group } from "../../ui/Group";
 import { Picture } from "../../ui/Picture";
 
 import TaskCardStyle from "./TaskCard.module.css";
 
-interface TaskCardComponent extends ClassNameComponent, TaskStructure {}
+interface TaskCardComponent extends ClassNameComponent, TaskWithGroup {}
 
 export const TaskCard: FC<TaskCardComponent> = memo(
 	({ className, group, content, commentCount, addedDate, author }) => {

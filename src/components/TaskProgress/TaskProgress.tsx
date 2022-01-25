@@ -1,26 +1,30 @@
 import React, { FC } from "react";
-import { TaskProgressStructure } from "../../models/TasksProgress";
+import { TaskProgressWithGroup } from "../../models/TasksProgress";
 import { ClassNameComponent } from "../../interfaces/common";
 import { ProgressBar } from "../../ui/ProgressBar";
 
-interface TaskProgressComponent extends ClassNameComponent, TaskProgressStructure {}
+interface TaskProgressComponent
+	extends ClassNameComponent,
+		TaskProgressWithGroup {}
 
 export const TaskProgress: FC<TaskProgressComponent> = ({
 	completedCount,
 	totalCount,
 	className,
-	group,
+	name,
+	mainColor,
+	secondColor,
 }) => {
 	return (
 		<ProgressBar
 			className={className}
 			currentValue={completedCount}
 			maxValue={totalCount}
-			ariaText={`Progress of ${group.group} tasks is ${completedCount}`}
-			progressbarBGColor={group.backgroundColor}
-			progressbarColor={group.textColor}
+			ariaText={`Progress of ${name} tasks is ${completedCount}`}
+			progressbarBGColor={secondColor}
+			progressbarColor={mainColor}
 		>
-			{group.group}
+			{name}
 		</ProgressBar>
 	);
 };

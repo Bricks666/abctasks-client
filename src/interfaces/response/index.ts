@@ -3,3 +3,4 @@ export * from "./TokensResponse";
 export * from "./UserResponse";
 export * from "./TasksResponse";
 export * from "./TasksProgressResponse";
+export * from "./TaskGRoupsResponse";

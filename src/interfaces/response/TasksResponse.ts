@@ -8,9 +8,7 @@ export interface TasksResponse {
 export interface TaskResponse {
 	readonly content: string;
 	readonly date: string;
-  readonly groupName: string;
-	readonly groupMainColor: HEX;
-	readonly groupSecondColor: HEX;
+  readonly groupId: number;
 	readonly login: string;
 	readonly photo: null | string;
 	readonly status: TaskStatus;

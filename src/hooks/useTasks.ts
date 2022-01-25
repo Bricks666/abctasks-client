@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import {
 	$GroupedByStatusTasksStore,
 	GroupedByStatusTasksStore,
-	loadTasksFx,
+	loadTasks,
 } from "../models/Tasks/";
 
 export const useTasks = (): GroupedByStatusTasksStore => {
 	const tasks = useStore($GroupedByStatusTasksStore);
 
 	useEffect(() => {
-		loadTasksFx();
+		loadTasks();
 	}, []);
 
 	return tasks;

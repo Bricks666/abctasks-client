@@ -15,7 +15,7 @@ instance.interceptors.response.use(
 	},
 	async (err) => {
 		if (err.response.status === 403) {
-			debugger;
+
 			console.log(err);
 		}
 

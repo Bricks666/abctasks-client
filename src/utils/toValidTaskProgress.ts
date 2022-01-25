@@ -5,11 +5,7 @@ export const toValidTaskProgress = (
 	taskProgress: TaskProgressResponse
 ): TaskProgressStructure => {
 	return {
-		group: {
-			group: taskProgress.groupName,
-			backgroundColor: taskProgress.groupSecondColor,
-			textColor: taskProgress.groupMainColor,
-		},
+		groupId: taskProgress.groupId,
 		totalCount: taskProgress.totalCount,
 		completedCount: taskProgress.doneCount,
 	};

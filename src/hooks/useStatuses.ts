@@ -1,6 +1,6 @@
 import { useStore } from "effector-react";
-import { $GroupNamesStore } from "../models/Tasks";
+import { $StatusNamesStore } from "../models/Tasks";
 
 export const useStatuses = () => {
-	return useStore($GroupNamesStore);
+	return useStore($StatusNamesStore);
 };

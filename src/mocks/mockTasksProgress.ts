@@ -1,14 +1,13 @@
 import { TaskProgressStructure } from "../models/TasksProgress";
-import { mockIllustrationGroup, mockUIGroup } from "./mockGroups";
 
 export const mockTasksProgress: TaskProgressStructure[] = [
 	{
-		group: mockUIGroup,
+		groupId: 1,
 		completedCount: 1,
 		totalCount: 10,
 	},
 	{
-		group: mockIllustrationGroup,
+		groupId: 2,
 		completedCount: 5,
 		totalCount: 10,
 	},

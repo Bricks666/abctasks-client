@@ -10,11 +10,7 @@ export const toValidTask = (task: TaskResponse): TaskStructure => {
 			photo: task.photo,
 		},
 		content: task.content,
-		group: {
-			group: task.groupName,
-			backgroundColor: task.groupSecondColor,
-			textColor: task.groupMainColor,
-		},
+		groupId: task.groupId,
 		addedDate: task.date,
 		commentCount: 0,
 	};

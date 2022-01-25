@@ -4,8 +4,9 @@ import {
 	createEvent,
 	createStore,
 } from "effector-logger";
-import { DateType, GroupStructure } from "../../interfaces/common";
+import { DateType } from "../../interfaces/common";
 import { TasksResponse } from "../../interfaces/response";
+import { $TaskGroupsMap, TaskGroup } from "../Group";
 
 export type TaskStatus = "Done" | "Ready" | "Review" | "In Progress";
 
@@ -16,19 +17,22 @@ export interface TaskAuthor {
 
 export interface TaskStructure {
 	readonly id: number;
-	readonly group: GroupStructure;
+	readonly groupId: number;
 	readonly status: TaskStatus;
 	readonly content: string;
 	readonly commentCount: number;
 	readonly addedDate: DateType;
 	readonly author: TaskAuthor;
 }
+export interface TaskWithGroup extends Omit<TaskStructure, "groupId"> {
+	readonly group: TaskGroup;
+}
 
 export interface GroupedByStatusTasksStore {
-	readonly ready: TaskStructure[];
-	readonly inProgress: TaskStructure[];
-	readonly needReview: TaskStructure[];
-	readonly done: TaskStructure[];
+	readonly ready: TaskWithGroup[];
+	readonly inProgress: TaskWithGroup[];
+	readonly needReview: TaskWithGroup[];
+	readonly done: TaskWithGroup[];
 }
 
 export interface TasksStore {
@@ -36,43 +40,60 @@ export interface TasksStore {
 	readonly isLoading: boolean;
 }
 
-export type GroupNamesStore = {
+export type StatusNamesStore = {
 	[key in keyof GroupedByStatusTasksStore]: TaskStatus;
 };
 
 export const $Tasks = createStore<TaskStructure[]>([], { name: "Tasks" });
 
-export const addTask = createEvent<TaskStructure>("addTask");
-export const changeTaskGroup =
-	createEvent<{ taskID: number; newGroup: GroupStructure }>("changeTaskStatus");
-
-export const loadTasksFx = createEffect<void, TasksResponse>("loadTasks");
+export const $TasksWidthGroups = combine(
+	$Tasks,
+	$TaskGroupsMap,
+	(tasks, groups) =>
+		tasks.map<TaskWithGroup>((task) => {
+			const group = groups[task.groupId];
+			return {
+				id: task.id,
+				author: task.author,
+				content: task.content,
+				status: task.status,
+				commentCount: task.commentCount,
+				addedDate: task.addedDate,
+				group: group,
+			};
+		})
+);
 
 const createGrouper = (status: TaskStatus) => {
-	return (state: TaskStructure[]) => {
+	return (state: TaskWithGroup[]) => {
 		return state.filter((task) => task.status === status);
 	};
 };
 
-export const $ReadyTasks = $Tasks.map(createGrouper("Ready"));
-export const $InProgressTasks = $Tasks.map(createGrouper("In Progress"));
-export const $NeedReviewTasks = $Tasks.map(createGrouper("Review"));
-export const $DoneTasks = $Tasks.map(createGrouper("Done"));
+export const $GroupedByStatusTasksStore = combine<
+	TaskWithGroup[],
+	GroupedByStatusTasksStore
+>($TasksWidthGroups, (tasks) => ({
+	done: createGrouper("Done")(tasks),
+	inProgress: createGrouper("In Progress")(tasks),
+	ready: createGrouper("Ready")(tasks),
+	needReview: createGrouper("Review")(tasks),
+}));
 
-export const $GroupedByStatusTasksStore = combine<GroupedByStatusTasksStore>({
-	ready: $ReadyTasks,
-	inProgress: $InProgressTasks,
-	needReview: $NeedReviewTasks,
-	done: $DoneTasks,
-});
+export const loadTasks = createEvent("loadTasks");
 
+export const loadTasksFx = createEffect<void, TasksResponse>("loadTasksFx");
 
 export const $TasksStore = combine<TasksStore>({
 	tasks: $Tasks,
 	isLoading: loadTasksFx.pending,
 });
 
-export const $GroupNamesStore = createStore<GroupNamesStore>(
+export const $MayLoadTasks = createStore<boolean>(true, {
+	name: "MayLoadTasks",
+});
+
+export const $StatusNamesStore = createStore<StatusNamesStore>(
 	{
 		done: "Done",
 		inProgress: "In Progress",
