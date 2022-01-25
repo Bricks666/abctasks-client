@@ -6,6 +6,8 @@
 	padding: 1rem;
 
 	border-radius: 8px;
+
+	background-color: white;
 }
 
 .card:hover {
@@ -16,6 +18,7 @@
 .content {
 	margin: 0;
 
+	word-break: break-all;
 	font-size: 15px;
 }
 

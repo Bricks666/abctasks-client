@@ -10,6 +10,9 @@ import { Location, useNavigate } from "react-router-dom";
 import { useLocationState } from "../../hooks";
 import { Button } from "../../ui/Button";
 
+import RegistrationFormStyle from "./RegistrationForm.module.css";
+import classNames from "classnames";
+
 const initialValues: RegistrationRequest = {
 	login: "",
 	password: "",
@@ -22,7 +25,7 @@ const validationSchema = Joi.object<RegistrationRequest>({
 	repeatPassword: Joi.string().valid(Joi.ref("password")),
 });
 
-export const RegistrationForm: FC<ClassNameComponent> = () => {
+export const RegistrationForm: FC<ClassNameComponent> = ({ className }) => {
 	const { register, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
@@ -37,7 +40,7 @@ export const RegistrationForm: FC<ClassNameComponent> = () => {
 				await registrationFx(values);
 				navigate("/login", { replace: true, state });
 			} catch (e) {
-				console.log();
+				console.log(e);
 			}
 		},
 		[navigate, state]
@@ -46,21 +49,28 @@ export const RegistrationForm: FC<ClassNameComponent> = () => {
 	const { isSubmitting, isDirty } = formState;
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<Input
-				{...register("login", { required: true, disabled: isSubmitting })}
-			/>
+		<form
+			className={classNames(RegistrationFormStyle.form, className)}
+			onSubmit={handleSubmit(onSubmit)}
+		>
+			<Input {...register("login", { required: true, disabled: isSubmitting })}>
+				Login
+			</Input>
 			<Input
 				{...register("password", { required: true, disabled: isSubmitting })}
 				type="password"
-			/>
+			>
+				Password
+			</Input>
 			<Input
 				{...register("repeatPassword", {
 					required: true,
 					disabled: isSubmitting,
 				})}
 				type="password"
-			/>
+			>
+				Repeat password
+			</Input>
 			<Button disabled={!isDirty || isSubmitting}>Registration</Button>
 		</form>
 	);

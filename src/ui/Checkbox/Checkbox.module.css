@@ -1,0 +1,37 @@
+.label {
+	position: relative;
+
+	display: inline-block;
+
+	height: min-content;
+
+	padding-left: 1.25rem;
+
+	font-size: 16px;
+}
+
+.label::before {
+	content: "";
+
+	display: inline-block;
+
+	position: absolute;
+	top: 50%;
+	left: 0;
+
+	width: 1rem;
+	height: 1rem;
+
+	border-radius: 4px;
+	border: 2px solid var(--violet);
+
+	transform: translateY(-50%);
+}
+
+.input:checked + .label::before {
+	background-color: var(--violet);
+}
+
+.input:focus-visible + .label::before {
+	box-shadow: var(--black-violet) 0 0 0 2px;
+}

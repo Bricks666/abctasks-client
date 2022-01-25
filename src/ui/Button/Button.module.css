@@ -1,0 +1,37 @@
+.button {
+	padding: 1rem;
+
+	color: white;
+	font-size: var(--font-size);
+	text-transform: capitalize;
+
+	background-color: var(--violet);
+
+	border: rgba(99, 99, 99, 0.3);
+	border-radius: 16px;
+}
+.button:disabled {
+	background-color: var(--grey-violet);
+}
+
+.button:not(:disabled):hover {
+	background-color: var(--blacker-violet);
+
+	box-shadow: var(--black-violet) 0 2px 8px 0;
+}
+
+.button:focus-visible {
+	outline: var(--black-violet) solid 2px;
+}
+
+@media (min-width: 600px) {
+	.button {
+		--font-size: 16px;
+	}
+}
+
+@media (max-width: 600px) {
+	.button {
+		--font-size: 12px;
+	}
+}

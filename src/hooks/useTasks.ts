@@ -1,15 +1,17 @@
 import { useStore } from "effector-react";
 import { useEffect } from "react";
-import { $Tasks, loadTasksFx, TaskStructure } from "../models/Tasks/";
+import {
+	$GroupedByStatusTasksStore,
+	GroupedByStatusTasksStore,
+	loadTasksFx,
+} from "../models/Tasks/";
 
-export const useTasks = (): TaskStructure[] => {
-	const tasks = useStore($Tasks);
+export const useTasks = (): GroupedByStatusTasksStore => {
+	const tasks = useStore($GroupedByStatusTasksStore);
 
 	useEffect(() => {
-		if (tasks.length === 0) {
-			loadTasksFx();
-		}
-	}, [tasks.length]);
+		loadTasksFx();
+	}, []);
 
 	return tasks;
 };

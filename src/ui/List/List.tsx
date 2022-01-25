@@ -4,11 +4,11 @@ import { AnyObject, ClassNameComponent } from "../../interfaces/common";
 
 import ListStyle from "./List.module.css";
 
-interface ListComponent<T> extends ClassNameComponent {
-	items: T[];
-	Component: ComponentType<T>;
-	indexedBy: keyof T;
-	itemClassName?: string;
+interface ListComponent<T extends AnyObject> extends ClassNameComponent {
+	readonly items: T[];
+	readonly Component: ComponentType<T>;
+	readonly indexedBy: keyof T;
+	readonly itemClassName?: string;
 }
 
 export const List = <T extends AnyObject>({

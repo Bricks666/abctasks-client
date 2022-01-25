@@ -1,6 +1,9 @@
 .layout {
-	grid-template-rows: min-content auto;
-	grid-template-areas: "header aside" "tasks aside";
+	display: grid;
+
+	grid-template-columns: var(--template-columns);
+	grid-template-areas: var(--template-areas);
+	grid-template-rows: min-content 1fr;
 }
 
 .header {
@@ -17,4 +20,17 @@
 	grid-area: aside;
 
 	border-left: 1px solid #d9e0e9;
+}
+
+@media (min-width: 1300px) {
+	.layout {
+		--template-columns: 4fr 1fr;
+		--template-areas: "header aside" "tasks aside";
+	}
+}
+
+@media (max-width: 1300px) {
+	.layout {
+		--template-areas: "header header" "tasks tasks" "aside aside";
+	}
 }

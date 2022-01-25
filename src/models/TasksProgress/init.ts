@@ -1,9 +1,13 @@
+import { sample } from "effector";
 import { $TasksProgress, loadTasksProgressFx } from ".";
 import { getTasksProgress } from "../../api";
+import { toValidTaskProgress } from "../../utils";
 
 loadTasksProgressFx.use(getTasksProgress);
 
-$TasksProgress.on(
-	loadTasksProgressFx.doneData,
-	(_, tasksProgress) => tasksProgress
-);
+sample({
+	clock: loadTasksProgressFx.doneData,
+	fn: (taskProgressServer) =>
+		taskProgressServer.tasksProgress.map(toValidTaskProgress),
+	target: $TasksProgress,
+});

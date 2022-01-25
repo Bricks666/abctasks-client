@@ -5,3 +5,4 @@ export { useTasksProgressLoading } from "./useTasksProgressLoading";
 export { useIsLogin } from "./useIsLogin";
 export { useLocationState } from "./useLocationState";
 export { useIsAuthorizing } from "./useIsAuthorizing";
+export { useStatuses } from "./useStatuses";

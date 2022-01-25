@@ -1,7 +1,8 @@
 import React, { FC } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useLocationState } from "../../hooks";
 import { ClassNameComponent } from "../../interfaces/common";
+import { Link } from "../../ui/Link";
 
 interface SaveLinkComponent extends ClassNameComponent {
 	to: string;
@@ -16,7 +17,7 @@ export const SaveLink: FC<SaveLinkComponent> = ({
 	const state = useLocationState();
 
 	return (
-		<Link className={className} to={to} state={state || location}>
+		<Link className={className} type="react" to={to} state={state || location}>
 			{children}
 		</Link>
 	);

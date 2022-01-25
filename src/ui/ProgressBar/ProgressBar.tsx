@@ -26,7 +26,7 @@ export const ProgressBar: FC<ProgressBarComponent> = memo(
 		const progressbarStyle: CSSProperties = {
 			backgroundColor: progressbarBGColor,
 		};
-		const progress = {
+		const progress: CSSProperties = {
 			backgroundColor: progressbarColor,
 			width: `${(currentValue / maxValue) * 100}%`,
 		};

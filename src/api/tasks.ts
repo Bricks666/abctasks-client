@@ -1,10 +1,11 @@
-import { TaskStructure } from "../models/Tasks";
-import { TaskProgressStructure } from "../models/TasksProgress";
-import { mockServerResponse, mockTasks, mockTasksProgress } from "../mocks";
+import { instance } from "./instance";
+import { TasksProgressResponse, TasksResponse } from "../interfaces/response";
 
-export const getTasksProgress = async (): Promise<TaskProgressStructure[]> => {
-	return await mockServerResponse(mockTasksProgress, 3000);
+export const getTasksProgress = async (): Promise<TasksProgressResponse> => {
+	const response = await instance.get("/todos/progress");
+	return response.data;
 };
-export const getTasks = async (): Promise<TaskStructure[]> => {
-	return await mockServerResponse(mockTasks, 3000);
+export const getTasks = async (): Promise<TasksResponse> => {
+	const response = await instance.get("/todos/");
+	return response.data;
 };

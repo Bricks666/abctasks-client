@@ -1,15 +1,15 @@
-import React, { ComponentType, ReactElement } from "react";
+import React, { ComponentType, memo, ReactElement } from "react";
 import { AnyObject, ClassNameComponent } from "../../interfaces/common";
 import { List } from "../List";
 import { LoadingWrapper } from "../LoadingWrapper";
 
-interface ListWithLoading<T> extends ClassNameComponent {
-	items: T[];
-	Component: ComponentType<T>;
-	isLoading: boolean;
-	loadingIndicator: ReactElement;
-	indexedBy: keyof T;
-	itemClassName?: string;
+interface ListWithLoadingComponent<T> extends ClassNameComponent {
+	readonly items: T[];
+	readonly Component: ComponentType<T>;
+	readonly isLoading: boolean;
+	readonly loadingIndicator: ReactElement;
+	readonly indexedBy: keyof T;
+	readonly itemClassName?: string;
 }
 
 export const ListWithLoading = <T extends AnyObject>({
@@ -20,7 +20,7 @@ export const ListWithLoading = <T extends AnyObject>({
 	isLoading,
 	itemClassName,
 	className,
-}: ListWithLoading<T>) => {
+}: ListWithLoadingComponent<T>) => {
 	return (
 		<LoadingWrapper
 			className={className}
@@ -32,7 +32,7 @@ export const ListWithLoading = <T extends AnyObject>({
 				items={items}
 				Component={Component}
 				itemClassName={itemClassName}
-				indexedBy={indexedBy}
+				indexedBy={indexedBy as string | number}
 			/>
 		</LoadingWrapper>
 	);

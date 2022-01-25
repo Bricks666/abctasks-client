@@ -6,6 +6,13 @@
 
 :root {
 	--background: #ebf0f7;
+
+	--grey-violet: #757ba3;
+	--violet: #7784ee;
+	--blacker-violet: #606bbd;
+	--black-violet: #34395c;
+
+	--shadow: rgba(99, 99, 99, 0.3);
 }
 
 body {
@@ -17,4 +24,19 @@ body {
 		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
 	color: #2e2e2e;
+}
+
+.visibility-hidden {
+	display: inline-block;
+
+	position: absolute;
+	top: -99999;
+	left: -9999;
+
+	width: 1px;
+	height: 1px;
+
+	clip: rect(0, 0, 0, 0);
+
+	font-size: 1px;
 }

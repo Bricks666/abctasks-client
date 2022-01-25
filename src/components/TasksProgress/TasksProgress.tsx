@@ -19,7 +19,7 @@ export const TasksProgress: FC<ClassNameComponent> = ({ className }) => {
 				className={TasksProgressStyle.list}
 				items={tasks}
 				Component={TaskProgress}
-				indexedBy={"id"}
+				indexedBy={"group"}
 				isLoading={isLoading}
 				loadingIndicator={<h2>Загрузка...</h2>}
 			/>

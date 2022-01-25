@@ -1,2 +1,2 @@
 export { getTasksProgress, getTasks } from "./tasks";
-export { auth, login, registration } from "./login";
+export { auth, login, registration, logout, refresh } from "./auth";

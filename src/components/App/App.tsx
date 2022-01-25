@@ -5,6 +5,7 @@ import { authFx } from "../../models/User";
 import { routes } from "../../routes";
 import { LoadingWrapper } from "../../ui/LoadingWrapper";
 import { AuthRoute } from "../AuthRoute";
+import { Header } from "../Header";
 
 export const App: FC = () => {
 	const isAuthorizing = useIsAuthorizing();
@@ -13,12 +14,12 @@ export const App: FC = () => {
 		authFx();
 	}, []);
 
-
 	return (
 		<LoadingWrapper
 			isLoading={isAuthorizing}
 			loadingIndicator={<h2>Загрузка...</h2>}
 		>
+			<Header />
 			<Routes>
 				{routes.map(({ isOnlyAuth, path, Component }) => (
 					<Route

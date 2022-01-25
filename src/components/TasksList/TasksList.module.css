@@ -1,0 +1,13 @@
+.tasks {
+	display: grid;
+
+	grid-template-rows: min-content 1fr;
+
+	row-gap: 1.5rem;
+}
+
+.list {
+	display: grid;
+
+	row-gap: 1.5rem;
+}

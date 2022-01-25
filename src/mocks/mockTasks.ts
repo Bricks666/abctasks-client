@@ -37,7 +37,7 @@ export const mockTasks: TaskStructure[] = [
 	{
 		id: 6,
 		author: mockAuthor,
-		status: "Progress",
+		status: "In Progress",
 		group: mockUIGroup,
 		content: "AderAderAder",
 		addedDate: "2022-01-09",
@@ -74,7 +74,7 @@ export const mockTasks: TaskStructure[] = [
 	{
 		id: 61,
 		author: mockAuthor,
-		status: "Progress",
+		status: "In Progress",
 		group: mockIllustrationGroup,
 		content: "AderAderAder",
 		addedDate: "2022-01-09",

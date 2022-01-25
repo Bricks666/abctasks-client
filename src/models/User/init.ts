@@ -1,3 +1,4 @@
+import { forward } from "effector";
 import {
 	$Authorizing,
 	$Login,
@@ -8,7 +9,7 @@ import {
 	refreshFx,
 	registrationFx,
 } from ".";
-import { auth, login, registration } from "../../api";
+import { auth, login, logout, refresh, registration } from "../../api";
 
 authFx.use(async () => {
 	const response = await auth();
@@ -21,11 +22,23 @@ loginFx.use(async (credentials) => {
 registrationFx.use(async (credentials) => {
 	await registration(credentials);
 });
+logoutFx.use(async () => {
+	await logout();
+});
+refreshFx.use(async () => {
+	await refresh();
+});
 
 $Login
 	.on([authFx.done, loginFx.done], () => true)
 	.on([logoutFx.done, refreshFx.fail], () => false);
 
-$User.on([loginFx.doneData, authFx.doneData], (_, user) => user);
+forward({
+	from: [loginFx.doneData, authFx.doneData],
+	to: $User,
+});
 
-$Authorizing.on(authFx.pending, (_, isLoading) => isLoading);
+forward({
+	from: authFx.pending,
+	to: $Authorizing,
+});
