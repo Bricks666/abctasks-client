@@ -5,7 +5,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import { ClassNameComponent } from "../../interfaces/common";
 import { RegistrationRequest } from "../../interfaces/requests";
 import { Input } from "../../ui/Input";
-import { registrationFx } from "../../models/User";
+import { registration } from "../../models/User";
 import { Location, useNavigate } from "react-router-dom";
 import { useLocationState } from "../../hooks";
 import { Button } from "../../ui/Button";
@@ -37,7 +37,7 @@ export const RegistrationForm: FC<ClassNameComponent> = ({ className }) => {
 	const onSubmit = useCallback<SubmitHandler<RegistrationRequest>>(
 		async (values) => {
 			try {
-				await registrationFx(values);
+				await registration(values);
 				navigate("/login", { replace: true, state });
 			} catch (e) {
 				console.log(e);

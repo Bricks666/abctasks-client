@@ -1,4 +1,4 @@
-import { combine, createEffect, createStore } from "effector-logger";
+import { createDomain } from "effector-logger";
 import { LoginRequest, RegistrationRequest } from "../../interfaces/requests";
 
 export interface User {
@@ -7,29 +7,28 @@ export interface User {
 	readonly photo: string | null;
 }
 
-interface UserStore {
-	readonly user: User;
-	readonly isLogin: boolean;
-	readonly isAuthorizing: boolean;
-}
+export const Auth = createDomain("AuthDomain");
 
-export const $Login = createStore<boolean>(false, { name: "Login" });
-export const $User = createStore<User>(
+export const $Login = Auth.createStore<boolean>(false, { name: "Login" });
+export const $User = Auth.createStore<User>(
 	{ userId: 0, login: "", photo: null },
 	{ name: "User" }
 );
-export const $Authorizing = createStore<boolean>(true, { name: "Authorizing" });
+export const $Authorizing = Auth.createStore<boolean>(true, {
+	name: "Authorizing",
+});
 
-export const loginFx = createEffect<LoginRequest, User>("loginFx");
-export const authFx = createEffect<void, User>("authFx");
-export const registrationFx = createEffect<RegistrationRequest, void>(
+export const loginFx = Auth.createEffect<LoginRequest, User>("loginFx");
+export const authFx = Auth.createEffect<void, User>("authFx");
+export const registrationFx = Auth.createEffect<RegistrationRequest, void>(
 	"registrationFx"
 );
-export const logoutFx = createEffect<void, void>("logoutFx");
-export const refreshFx = createEffect<void, void>("refreshFx");
+export const logoutFx = Auth.createEffect<void, void>("logoutFx");
+export const refreshFx = Auth.createEffect<void, void>("refreshFx");
 
-export const $UserStore = combine<UserStore>({
-	user: $User,
-	isLogin: $Login,
-	isAuthorizing: $Authorizing,
-});
+export const login = Auth.createEvent<LoginRequest>("loginEvent");
+export const auth = Auth.createEvent<void>("authEvent");
+export const registration =
+	Auth.createEvent<RegistrationRequest>("registrationEvent");
+export const logout = Auth.createEvent("logoutEvent");
+export const refresh = Auth.createEvent<void>("refreshEvent");

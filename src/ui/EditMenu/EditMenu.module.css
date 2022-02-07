@@ -1,0 +1,20 @@
+.button {
+	width: 20px;
+	min-height: 20px;
+
+	background-color: transparent;
+	background-image: url("./dots.svg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.list {
+	display: grid;
+
+	row-gap: 5px;
+
+	background-color: white;
+
+	padding: 10px;
+}

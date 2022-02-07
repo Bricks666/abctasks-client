@@ -6,3 +6,5 @@ export { useIsLogin } from "./useIsLogin";
 export { useLocationState } from "./useLocationState";
 export { useIsAuthorizing } from "./useIsAuthorizing";
 export { useStatuses } from "./useStatuses";
+export { useClickOutside } from "./useClickOutside";
+export { usePrepareLink } from "./usePrepareLink";

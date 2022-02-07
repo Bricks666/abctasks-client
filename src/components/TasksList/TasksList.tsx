@@ -5,8 +5,8 @@ import { ClassNameComponent } from "../../interfaces/common";
 import { TaskWithGroup } from "../../models/Tasks";
 import { DropZone } from "../../ui/DropZone";
 import { ListWithLoading } from "../../ui/ListWithLoading";
-import { SubsectionHeader } from "../../ui/SubsectionHeader";
 import { TaskCard } from "../TaskCard";
+import { TaskListHeader } from "../TaskListHeader";
 
 import TasksListStyle from "./TasksList.module.css";
 
@@ -26,7 +26,7 @@ export const TasksList: FC<TasksListComponent> = ({
 
 	return (
 		<section className={classNames(TasksListStyle.tasks, className)}>
-			<SubsectionHeader>{listHeader}</SubsectionHeader>
+			<TaskListHeader columnName={listHeader}>{listHeader}</TaskListHeader>
 			<DropZone onDrop={onDrop} onDragOver={onDragOver}>
 				<ListWithLoading
 					className={TasksListStyle.list}

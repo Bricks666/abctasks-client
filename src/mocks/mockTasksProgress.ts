@@ -1,4 +1,4 @@
-import { TaskProgressStructure } from "../models/TasksProgress";
+import { TaskProgressStructure } from "../models/Tasks";
 
 export const mockTasksProgress: TaskProgressStructure[] = [
 	{

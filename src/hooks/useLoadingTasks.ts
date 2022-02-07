@@ -1,6 +1,6 @@
-import { useStoreMap } from "effector-react";
-import { $TasksStore } from "../models/Tasks";
+import { useStore } from "effector-react";
+import { $LoadingTasks } from "../models/Tasks";
 
 export const useLoadingTasks = (): boolean => {
-	return useStoreMap($TasksStore, (state) => state.isLoading);
+	return useStore($LoadingTasks);
 };

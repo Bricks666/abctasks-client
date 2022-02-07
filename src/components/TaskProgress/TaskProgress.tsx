@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { TaskProgressWithGroup } from "../../models/TasksProgress";
+import { TaskProgressWithGroup } from "../../models/Tasks";
 import { ClassNameComponent } from "../../interfaces/common";
 import { ProgressBar } from "../../ui/ProgressBar";
 

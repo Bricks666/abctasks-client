@@ -1,19 +1,18 @@
 import React, { FC, useCallback, useEffect } from "react";
 import Joi from "joi";
+import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { LoginRequest } from "../../interfaces/requests";
 import { Button } from "../../ui/Button";
 import { Input } from "../../ui/Input";
-import { loginFx } from "../../models/User";
+import { login } from "../../models/User";
 import { Location, useNavigate } from "react-router-dom";
 import { useLocationState } from "../../hooks";
-import { createPath } from "../../utils";
-
-import LoginFormStyle from "./LoginForm.module.css";
-import classNames from "classnames";
 import { ClassNameComponent } from "../../interfaces/common";
 import { Checkbox } from "../../ui/Checkbox";
+
+import LoginFormStyle from "./LoginForm.module.css";
 
 const initialValue: LoginRequest = {
 	login: "",
@@ -47,8 +46,9 @@ export const LoginForm: FC<ClassNameComponent> = ({ className }) => {
 	const onSubmit = useCallback<SubmitHandler<LoginRequest>>(
 		async (values) => {
 			try {
-				await loginFx(values);
-				const to = (state && createPath(state)) || "/";
+				debugger;
+				await login(values);
+				const to = state || "/";
 
 				navigate(to, { replace: true });
 			} catch (e) {
@@ -77,7 +77,9 @@ export const LoginForm: FC<ClassNameComponent> = ({ className }) => {
 			>
 				Remember me
 			</Checkbox>
-			<Button disabled={!isDirty || isSubmitting}>login</Button>
+			<Button disabled={!isDirty || isSubmitting} buttonType="submit">
+				login
+			</Button>
 		</form>
 	);
 };

@@ -1,0 +1,12 @@
+.popover {
+	z-index: 1;
+
+	padding: 5px;
+
+	background-color: white;
+
+	border-radius: 8px;
+
+	box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+	border-color: rgba(162, 179, 207, 0.2);
+}

@@ -1,12 +1,12 @@
+import { createGroupsMap } from "./../../utils/createGroupsMap";
+import { combine, createDomain } from "effector-logger";
+import { DateType, HEX } from "../../interfaces/common";
 import {
-	combine,
-	createEffect,
-	createEvent,
-	createStore,
-} from "effector-logger";
-import { DateType } from "../../interfaces/common";
-import { TasksResponse } from "../../interfaces/response";
-import { $TaskGroupsMap, TaskGroup } from "../Group";
+	TaskGroupsResponse,
+	TasksProgressResponse,
+	TasksResponse,
+} from "../../interfaces/response";
+import { combineProgressAndGroup, combineTaskAndGroup } from "../../utils";
 
 export type TaskStatus = "Done" | "Ready" | "Review" | "In Progress";
 
@@ -34,34 +34,73 @@ export interface GroupedByStatusTasksStore {
 	readonly needReview: TaskWithGroup[];
 	readonly done: TaskWithGroup[];
 }
-
-export interface TasksStore {
-	readonly tasks: TaskStructure[];
-	readonly isLoading: boolean;
+export interface TaskGroup {
+	readonly id: number;
+	readonly name: string;
+	readonly mainColor: HEX;
+	readonly secondColor: HEX;
 }
 
+export interface TaskGroupsMap {
+	[id: number]: TaskGroup;
+}
+
+export interface TaskProgressStructure {
+	readonly groupId: number;
+	readonly completedCount: number;
+	readonly totalCount: number;
+}
+
+export interface TaskProgressWithGroup
+	extends Omit<TaskProgressStructure, "groupId">,
+		TaskGroup {}
+
 export type StatusNamesStore = {
-	[key in keyof GroupedByStatusTasksStore]: TaskStatus;
+	readonly [key in keyof GroupedByStatusTasksStore]: TaskStatus;
 };
 
-export const $Tasks = createStore<TaskStructure[]>([], { name: "Tasks" });
+export const TasksDomain = createDomain("TasksDomain");
 
+export const $Tasks = TasksDomain.createStore<TaskStructure[]>([], {
+	name: "Tasks",
+});
+export const $LoadingTasks = TasksDomain.createStore<boolean>(false, {
+	name: "LoadingTasks",
+});
+export const $StatusNamesStore = TasksDomain.createStore<StatusNamesStore>(
+	{
+		done: "Done",
+		inProgress: "In Progress",
+		needReview: "Review",
+		ready: "Ready",
+	},
+	{ name: "GroupNameStore" }
+);
+export const $TaskGroups = TasksDomain.createStore<TaskGroup[]>([], {
+	name: "TaskGroups",
+});
+export const $TaskGroupsMap = combine<TaskGroup[], TaskGroupsMap>(
+	$TaskGroups,
+	createGroupsMap
+);
 export const $TasksWidthGroups = combine(
 	$Tasks,
 	$TaskGroupsMap,
-	(tasks, groups) =>
-		tasks.map<TaskWithGroup>((task) => {
-			const group = groups[task.groupId];
-			return {
-				id: task.id,
-				author: task.author,
-				content: task.content,
-				status: task.status,
-				commentCount: task.commentCount,
-				addedDate: task.addedDate,
-				group: group,
-			};
-		})
+	combineTaskAndGroup
+);
+export const $TasksProgress = TasksDomain.createStore<TaskProgressStructure[]>(
+	[],
+	{
+		name: "TasksProgress",
+	}
+);
+export const $LoadingTasksProgress = TasksDomain.createStore<boolean>(false, {
+	name: "LoadingTasksProgress",
+});
+export const $TasksProgressWithGroups = combine(
+	$TasksProgress,
+	$TaskGroupsMap,
+	combineProgressAndGroup
 );
 
 const createGrouper = (status: TaskStatus) => {
@@ -69,7 +108,7 @@ const createGrouper = (status: TaskStatus) => {
 		return state.filter((task) => task.status === status);
 	};
 };
-
+/* Может не стоит комбинировать в один объект */
 export const $GroupedByStatusTasksStore = combine<
 	TaskWithGroup[],
 	GroupedByStatusTasksStore
@@ -80,25 +119,18 @@ export const $GroupedByStatusTasksStore = combine<
 	needReview: createGrouper("Review")(tasks),
 }));
 
-export const loadTasks = createEvent("loadTasks");
-
-export const loadTasksFx = createEffect<void, TasksResponse>("loadTasksFx");
-
-export const $TasksStore = combine<TasksStore>({
-	tasks: $Tasks,
-	isLoading: loadTasksFx.pending,
-});
-
-export const $MayLoadTasks = createStore<boolean>(true, {
-	name: "MayLoadTasks",
-});
-
-export const $StatusNamesStore = createStore<StatusNamesStore>(
-	{
-		done: "Done",
-		inProgress: "In Progress",
-		needReview: "Review",
-		ready: "Ready",
-	},
-	{ name: "GroupNameStore" }
+export const loadTasksFx = TasksDomain.createEffect<void, TasksResponse>(
+	"loadTasksFx"
 );
+export const loadTasksProgressFx = TasksDomain.createEffect<
+	void,
+	TasksProgressResponse
+>("loadTasksProgress");
+export const loadTaskGroupsFx = TasksDomain.createEffect<
+	void,
+	TaskGroupsResponse
+>("loadTaskGroupsFx");
+
+export const loadTasks = TasksDomain.createEvent("loadTasks");
+export const loadTasksProgress = TasksDomain.createEvent("loadTasksProgress");
+export const loadTaskGroups = TasksDomain.createEvent("loadTaskGroups");

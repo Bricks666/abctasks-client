@@ -1,27 +1,60 @@
 .button {
-	padding: 1rem;
+	display: inline-block;
 
-	color: white;
 	font-size: var(--font-size);
 	text-transform: capitalize;
+	text-decoration: none;
 
-	background-color: var(--violet);
+	transition-property: background-color;
+	transition-duration: 0.25s;
+}
 
-	border: rgba(99, 99, 99, 0.3);
+.button--common {
+	padding: 1rem;
 	border-radius: 16px;
 }
-.button:disabled {
+
+.button--listed {
+	padding: 0.5rem 1rem;
+
+	border-radius: 0;
+	border: 0;
+}
+
+.button--primary {
+	color: white;
+
+	border: rgba(99, 99, 99, 0.3);
+	background-color: var(--violet);
+}
+
+.button--primary:disabled {
 	background-color: var(--grey-violet);
 }
 
-.button:not(:disabled):hover {
+.button--primary:not(:disabled):hover {
 	background-color: var(--blacker-violet);
 
 	box-shadow: var(--black-violet) 0 2px 8px 0;
 }
 
-.button:focus-visible {
+.button--primary:focus-visible {
 	outline: var(--black-violet) solid 2px;
+}
+
+.button--monotype {
+	color: black;
+	background-color: white;
+
+	border: 0;
+}
+
+.button--monotype:disabled {
+	background-color: whitesmoke;
+}
+
+.button--monotype:not(:disabled):hover {
+	text-decoration: underline;
 }
 
 @media (min-width: 600px) {

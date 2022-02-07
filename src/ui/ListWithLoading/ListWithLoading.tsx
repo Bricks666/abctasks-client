@@ -1,4 +1,4 @@
-import React, { ComponentType, memo, ReactElement } from "react";
+import React, { ComponentType, ReactElement } from "react";
 import { AnyObject, ClassNameComponent } from "../../interfaces/common";
 import { List } from "../List";
 import { LoadingWrapper } from "../LoadingWrapper";

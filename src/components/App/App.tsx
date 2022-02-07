@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useIsAuthorizing } from "../../hooks";
-import { authFx } from "../../models/User";
+import { auth } from "../../models/User";
 import { routes } from "../../routes";
 import { LoadingWrapper } from "../../ui/LoadingWrapper";
 import { AuthRoute } from "../AuthRoute";
@@ -11,7 +11,7 @@ export const App: FC = () => {
 	const isAuthorizing = useIsAuthorizing();
 
 	useEffect(() => {
-		authFx();
+		auth();
 	}, []);
 
 	return (

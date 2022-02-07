@@ -1,13 +1,17 @@
-import { forward } from "effector";
+import { forward, guard, sample } from "effector";
 import {
 	$Authorizing,
 	$Login,
-	$User,
 	authFx,
 	loginFx,
 	logoutFx,
 	refreshFx,
 	registrationFx,
+	login as loginEv,
+	logout as logoutEv,
+	refresh as refreshEv,
+	registration as registrationEv,
+	auth as authEv,
 } from ".";
 import { auth, login, logout, refresh, registration } from "../../api";
 
@@ -29,16 +33,64 @@ refreshFx.use(async () => {
 	await refresh();
 });
 
-$Login
-	.on([authFx.done, loginFx.done], () => true)
-	.on([logoutFx.done, refreshFx.fail], () => false);
-
-forward({
-	from: [loginFx.doneData, authFx.doneData],
-	to: $User,
-});
-
 forward({
 	from: authFx.pending,
 	to: $Authorizing,
+});
+
+guard({
+	clock: loginEv,
+	filter: sample({
+		clock: loginFx.pending,
+		fn: (isLoading) => !isLoading,
+	}),
+	target: loginFx,
+});
+
+guard({
+	clock: authEv,
+	filter: sample({
+		clock: authFx.pending,
+		fn: (isLoading) => !isLoading,
+	}),
+	target: authFx,
+});
+
+sample({
+	clock: [loginFx.done, authFx.done],
+	fn: () => true,
+	target: $Login,
+});
+
+guard({
+	clock: logoutEv,
+	filter: sample({
+		clock: logoutFx.pending,
+		fn: (isLoading) => !isLoading,
+	}),
+	target: logoutFx,
+});
+
+guard({
+	clock: refreshEv,
+	filter: sample({
+		clock: refreshFx.pending,
+		fn: (isLoading) => !isLoading,
+	}),
+	target: refreshFx,
+});
+
+sample({
+	clock: [logoutFx.done, refreshFx.fail],
+	fn: () => false,
+	target: $Login,
+});
+
+guard({
+	clock: registrationEv,
+	filter: sample({
+		clock: registrationFx.pending,
+		fn: (isLoading) => !isLoading,
+	}),
+	target: registrationFx,
 });

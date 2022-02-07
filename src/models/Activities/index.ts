@@ -1,9 +1,4 @@
-import {
-	combine,
-	createEffect,
-	createEvent,
-	createStore,
-} from "effector-logger";
+import { createEffect, createEvent, createStore } from "effector-logger";
 
 export type Activities =
 	| "uploaded"
@@ -12,16 +7,11 @@ export type Activities =
 	| "change task status";
 
 export interface ActivityStructure {
-	id: number;
-	whoDone: string;
-	activity: Activities;
-	documentCount?: number;
-	taskName?: string;
-}
-
-interface ActivitiesStore {
-	activities: ActivityStructure[];
-	isLoading: boolean;
+	readonly id: number;
+	readonly whoDone: string;
+	readonly activity: Activities;
+	readonly documentCount?: number;
+	readonly taskName?: string;
 }
 
 export const $Activities = createStore<ActivityStructure[]>([], {
@@ -33,8 +23,3 @@ export const addActivity = createEvent<ActivityStructure>("addActivity");
 export const loadActivitiesFx = createEffect<void, ActivityStructure[]>(
 	"loadActivities"
 );
-
-export const $ActivitiesStore = combine<ActivitiesStore>({
-	activities: $Activities,
-	isLoading: loadActivitiesFx.pending,
-});

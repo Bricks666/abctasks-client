@@ -1,6 +1,6 @@
-import { useStoreMap } from "effector-react";
-import { $TasksProgressStore } from "../models/TasksProgress";
+import { useStore } from "effector-react";
+import { $LoadingTasksProgress } from "../models/Tasks";
 
 export const useTasksProgressLoading = (): boolean => {
-	return useStoreMap($TasksProgressStore, (state) => state.isLoading);
+	return useStore($LoadingTasksProgress);
 };

@@ -7,7 +7,7 @@ import LinkStyle from "./Link.module.css";
 
 type LinkType = "common" | "react";
 
-interface LinkComponent extends ClassNameComponent, LinkProps {
+interface LinkComponent extends ClassNameComponent, Readonly<LinkProps> {
 	readonly type: LinkType;
 	readonly to: string;
 }
