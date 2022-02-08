@@ -1,0 +1,52 @@
+.wrapper {
+	display: grid;
+
+	row-gap: 5px;
+}
+
+.label {
+	font-size: var(--font-size);
+	font-weight: 500;
+	line-height: 1.2em;
+}
+
+.textarea {
+	padding: 1rem;
+
+	font-size: var(--textarea-font-size);
+	border-radius: 10px;
+	border-color: rgba(162, 179, 207, 0.2);
+
+	resize: none;
+}
+
+.textarea::placeholder {
+	font-size: var(--textarea-font-size);
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.textarea:hover {
+	box-shadow: var(--shadow) 0px 2px 8px 0px;
+}
+
+.textarea:focus-visible {
+	outline: var(--violet) solid 2px;
+}
+
+@media (min-width: 600px) {
+	.label {
+		--font-size: 16px;
+	}
+	.textarea {
+		--textarea-font-size: 14px;
+	}
+}
+
+@media (max-width: 600px) {
+	.label {
+		--font-size: 12px;
+	}
+	.textarea {
+		--textarea-font-size: 11px;
+	}
+}

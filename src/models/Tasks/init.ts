@@ -5,6 +5,8 @@ import {
 	$TaskGroups,
 	$Tasks,
 	$TasksProgress,
+	createTask,
+	createTaskFx,
 	loadTaskGroups,
 	loadTaskGroupsFx,
 	loadTasks,
@@ -12,7 +14,12 @@ import {
 	loadTasksProgress,
 	loadTasksProgressFx,
 } from ".";
-import { getTaskGroups, getTasks, getTasksProgress } from "../../api";
+import {
+	getTaskGroups,
+	getTasks,
+	getTasksProgress,
+	createTask as createTaskAPI,
+} from "../../api";
 import {
 	toValidTask,
 	toValidTaskGroup,
@@ -22,6 +29,7 @@ import {
 loadTasksFx.use(getTasks);
 loadTaskGroupsFx.use(getTaskGroups);
 loadTasksProgressFx.use(getTasksProgress);
+createTaskFx.use(createTaskAPI);
 
 guard({
 	clock: loadTasks,
@@ -82,4 +90,52 @@ sample({
 forward({
 	from: [loadTasksFx, loadTasksProgressFx],
 	to: loadTaskGroups,
+});
+
+guard({
+	clock: createTask,
+	filter: sample({
+		clock: createTaskFx.pending,
+		fn: (isLoading) => !isLoading,
+	}),
+	target: createTaskFx,
+});
+
+sample({
+	source: $Tasks,
+	clock: createTaskFx.doneData,
+	fn: (tasks, response) => [...tasks, toValidTask(response.task)],
+	target: $Tasks,
+});
+
+sample({
+	source: $TasksProgress,
+	clock: createTaskFx.doneData,
+	fn: (currentState, { task }) => {
+		let thisGroupWas = false;
+		const isDoneTask = task.status === "Done";
+
+		const tasksProgress = currentState.map((progress) => {
+			if (progress.groupId === task.groupId) {
+				thisGroupWas = true;
+				return {
+					...progress,
+					completedCount: progress.completedCount + +isDoneTask,
+					totalCount: progress.totalCount + 1,
+				};
+			}
+			return progress;
+		});
+
+		if (!thisGroupWas) {
+			tasksProgress.push({
+				groupId: task.groupId,
+				completedCount: +isDoneTask,
+				totalCount: 1,
+			});
+		}
+
+		return tasksProgress;
+	},
+	target: $TasksProgress,
 });

@@ -62,11 +62,27 @@ export const EditMenu: FC<EditMenuComponent> = ({ content, className }) => {
 					className={EditMenuStyle.button}
 					color="monotype"
 					onClick={isOpen ? onClose : onOpen}
-				/>
+				>
+					<svg
+						className={EditMenuStyle.svg}
+						xmlns="http://www.w3.org/2000/svg"
+						xmlnsXlink="http://www.w3.org/1999/xlink"
+					>
+						<circle className={EditMenuStyle.circle} cx="3" cy="3" r="3" />
+						<circle className={EditMenuStyle.circle} cx="10" cy="3" r="3" />
+						<circle className={EditMenuStyle.circle} cx="17" cy="3" r="3" />
+					</svg>
+				</Button>
 			</div>
-			<Popover reference={reference} isOpen={isOpen} onClose={onClose} placement="bottom-end">
+			<Popover
+				reference={reference}
+				isOpen={isOpen}
+				onClose={onClose}
+				placement="bottom-end"
+			>
 				<List
 					className={EditMenuStyle.list}
+					itemClassName={EditMenuStyle.item}
 					items={menuItems}
 					Component={Button}
 					indexedBy="className"

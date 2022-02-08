@@ -1,3 +1,4 @@
+import { TaskRequest } from "./../interfaces/requests";
 import { instance } from "./instance";
 import {
 	TaskGroupsResponse,
@@ -17,6 +18,12 @@ export const getTasksProgress = async (): Promise<TasksProgressResponse> => {
 
 export const getTaskGroups = async (): Promise<TaskGroupsResponse> => {
 	const response = await instance.get("/todos/groups");
+
+	return response.data;
+};
+
+export const createTask = async (createTask: TaskRequest) => {
+	const response = await instance.put("/todos/new", createTask);
 
 	return response.data;
 };

@@ -2,11 +2,13 @@ import { createGroupsMap } from "./../../utils/createGroupsMap";
 import { combine, createDomain } from "effector-logger";
 import { DateType, HEX } from "../../interfaces/common";
 import {
+	CreateTaskResponse,
 	TaskGroupsResponse,
 	TasksProgressResponse,
 	TasksResponse,
 } from "../../interfaces/response";
 import { combineProgressAndGroup, combineTaskAndGroup } from "../../utils";
+import { TaskRequest } from "../../interfaces/requests";
 
 export type TaskStatus = "Done" | "Ready" | "Review" | "In Progress";
 
@@ -130,7 +132,13 @@ export const loadTaskGroupsFx = TasksDomain.createEffect<
 	void,
 	TaskGroupsResponse
 >("loadTaskGroupsFx");
+export const createTaskFx = TasksDomain.createEffect<
+	TaskRequest,
+	CreateTaskResponse
+>("createTaskFx");
 
 export const loadTasks = TasksDomain.createEvent("loadTasks");
 export const loadTasksProgress = TasksDomain.createEvent("loadTasksProgress");
 export const loadTaskGroups = TasksDomain.createEvent("loadTaskGroups");
+export const createTask =
+	TasksDomain.createEvent<TaskRequest>("createTaskEvent");

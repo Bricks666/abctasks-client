@@ -1,12 +1,6 @@
 .button {
-	width: 20px;
-	min-height: 20px;
-
-	background-color: transparent;
-	background-image: url("./dots.svg");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 100%;
+	width: 50px;
+	height: min-content;
 }
 
 .list {
@@ -15,6 +9,15 @@
 	row-gap: 5px;
 
 	background-color: white;
+}
 
-	padding: 10px;
+.item {
+	font-size: 0.85em;
+}
+
+.svg {
+	display: block;
+
+	width: 20px;
+	max-height: 6px;
 }

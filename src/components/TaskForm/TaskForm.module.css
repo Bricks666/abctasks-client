@@ -1,0 +1,16 @@
+.form {
+	display: grid;
+
+	grid-template-columns: repeat(2, 1fr);
+
+	row-gap: 10px;
+  column-gap: 10px;
+}
+
+.textarea {
+	grid-column: span 2;
+}
+
+.button {
+	grid-column: 2;
+}

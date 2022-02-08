@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { FC } from "react";
+import { GET_PARAMS, POPUPS } from "../../const";
 import { usePrepareLink } from "../../hooks";
 import { ClassNameComponent, ExtractProps } from "../../interfaces/common";
 import { EditMenu } from "../../ui/EditMenu";
@@ -16,8 +17,14 @@ type EditMenuContent = ExtractProps<typeof EditMenu>["content"];
 export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	children,
 	className,
+	columnName,
 }) => {
-	const editFormLink = usePrepareLink({});
+	const editFormLink = usePrepareLink({
+		query: {
+			[GET_PARAMS.popup]: POPUPS.task,
+			[GET_PARAMS.taskStatus]: columnName,
+		},
+	});
 	const editMenu: EditMenuContent = [
 		{
 			label: "New Task",

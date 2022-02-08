@@ -46,7 +46,6 @@ export const LoginForm: FC<ClassNameComponent> = ({ className }) => {
 	const onSubmit = useCallback<SubmitHandler<LoginRequest>>(
 		async (values) => {
 			try {
-				debugger;
 				await login(values);
 				const to = state || "/";
 

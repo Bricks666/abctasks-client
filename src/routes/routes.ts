@@ -9,16 +9,16 @@ interface Route {
 
 export const routes: Route[] = [
 	{
-		path: "/",
+		path: "*",
 		Component: HomePage,
 		isOnlyAuth: true,
 	},
 	{
-		path: "/login",
+		path: "login",
 		Component: LoginPage,
 	},
 	{
-		path: "/registration",
+		path: "registration",
 		Component: RegistrationPage,
 	},
 ];

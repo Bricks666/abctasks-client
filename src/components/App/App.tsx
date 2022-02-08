@@ -6,6 +6,7 @@ import { routes } from "../../routes";
 import { LoadingWrapper } from "../../ui/LoadingWrapper";
 import { AuthRoute } from "../AuthRoute";
 import { Header } from "../Header";
+import { Popups } from "../Popups";
 
 export const App: FC = () => {
 	const isAuthorizing = useIsAuthorizing();
@@ -21,22 +22,24 @@ export const App: FC = () => {
 		>
 			<Header />
 			<Routes>
-				{routes.map(({ isOnlyAuth, path, Component }) => (
-					<Route
-						path={path}
-						element={
-							isOnlyAuth ? (
-								<AuthRoute>
+				<Route path="/*" element={<Popups />}>
+					{routes.map(({ isOnlyAuth, path, Component }) => (
+						<Route
+							path={path}
+							element={
+								isOnlyAuth ? (
+									<AuthRoute>
+										<Component />
+									</AuthRoute>
+								) : (
 									<Component />
-								</AuthRoute>
-							) : (
-								<Component />
-							)
-						}
-						key={path}
-					/>
-				))}
-				<Route path="*" element={<Navigate to="/" replace={true} />} />
+								)
+							}
+							key={path}
+						/>
+					))}
+					<Route path="*" element={<Navigate to="/" replace={true} />} />
+				</Route>
 			</Routes>
 		</LoadingWrapper>
 	);

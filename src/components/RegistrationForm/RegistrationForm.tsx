@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { ClassNameComponent } from "../../interfaces/common";
@@ -34,7 +34,7 @@ export const RegistrationForm: FC<ClassNameComponent> = ({ className }) => {
 	const navigate = useNavigate();
 	const state = useLocationState<Location>();
 
-	const onSubmit = useCallback<SubmitHandler<RegistrationRequest>>(
+	const onSubmit = useCallback(
 		async (values) => {
 			try {
 				await registration(values);
@@ -71,7 +71,9 @@ export const RegistrationForm: FC<ClassNameComponent> = ({ className }) => {
 			>
 				Repeat password
 			</Input>
-			<Button disabled={!isDirty || isSubmitting}>Registration</Button>
+			<Button disabled={!isDirty || isSubmitting} buttonType="submit">
+				Registration
+			</Button>
 		</form>
 	);
 };

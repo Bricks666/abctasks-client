@@ -1,28 +1,24 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 
 export const useClickOutside = (
 	reference: HTMLElement | null,
 	onClick: (evt?: MouseEvent) => unknown,
 	...conditions: boolean[]
 ): void => {
-	const listener = useCallback(
-		(evt: globalThis.MouseEvent) => {
+	useEffect(() => {
+		const listener = (evt: globalThis.MouseEvent) => {
 			const target = evt.target as HTMLElement;
 			const isClickOutside =
 				target !== reference &&
-				!reference?.innerHTML.includes(target.innerHTML) &&
+				!reference?.contains(target) &&
 				conditions.every((condition) => condition);
 
 			if (isClickOutside) {
 				onClick(evt);
 			}
-		},
-		[onClick, reference, conditions]
-	);
+		};
+		document.addEventListener("mousedown", listener);
 
-	useEffect(() => {
-		document.addEventListener("click", listener);
-
-		return () => document.removeEventListener("click", listener);
-	}, [listener]);
+		return () => document.removeEventListener("mousedown", listener);
+	}, [reference, onClick, conditions]);
 };

@@ -1,0 +1,29 @@
+.overlay {
+	position: fixed;
+	inset: 0;
+
+	z-index: 1;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: rgba(0, 0, 0, 0.5);
+
+	opacity: 0;
+	transition: opacity 0.15s ease-in-out;
+}
+
+.overlayOpen {
+	opacity: 1;
+
+}
+
+.button {
+	position: absolute;
+	inset: 0;
+
+	z-index: -1;
+
+	cursor: pointer;
+}

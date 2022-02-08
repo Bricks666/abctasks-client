@@ -5,13 +5,13 @@ import {
 	authFx,
 	loginFx,
 	logoutFx,
-	refreshFx,
 	registrationFx,
+	refreshFx,
 	login as loginEv,
 	logout as logoutEv,
-	refresh as refreshEv,
 	registration as registrationEv,
 	auth as authEv,
+	refresh as refreshEv,
 } from ".";
 import { auth, login, logout, refresh, registration } from "../../api";
 
@@ -34,7 +34,7 @@ refreshFx.use(async () => {
 });
 
 forward({
-	from: authFx.pending,
+	from: [authFx.pending, loginFx.pending],
 	to: $Authorizing,
 });
 

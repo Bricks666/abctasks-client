@@ -12,7 +12,7 @@
 	--blacker-violet: #606bbd;
 	--black-violet: #34395c;
 
-	--shadow: rgba(99, 99, 99, 0.3);
+	--shadow: rgba(99, 99, 99, 0.5);
 }
 
 body {
@@ -30,8 +30,8 @@ body {
 	display: inline-block;
 
 	position: absolute;
-	top: -99999;
-	left: -9999;
+	top: -99999px;
+	left: -9999px;
 
 	width: 1px;
 	height: 1px;
