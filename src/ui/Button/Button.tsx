@@ -5,9 +5,9 @@ import { ClassNameComponent } from "../../interfaces/common";
 
 import ButtonStyle from "./Button.module.css";
 
-type ButtonType = "button" | "submit" | "reset" | "link";
+type ButtonType = "button" | "submit" | "reset";
 type Color = "primary" | "secondary" | "monotype";
-type Type = "common" | "listed";
+type Type = "common" | "text";
 
 interface ButtonComponent extends ClassNameComponent {
 	readonly buttonType?: ButtonType;
@@ -35,11 +35,7 @@ export const Button: FC<ButtonComponent> = ({
 		className
 	);
 
-	if (buttonType === "link") {
-		if (!to) {
-			throw new Error();
-		}
-
+	if (to) {
 		return (
 			<Link className={classes} to={to} aria-disabled={disabled}>
 				{children}

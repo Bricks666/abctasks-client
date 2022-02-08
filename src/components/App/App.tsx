@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useIsAuthorizing } from "../../hooks";
 import { auth } from "../../models/User";
 import { routes } from "../../routes";
+import { LoadingIndicator } from "../../ui/LoadingIndicator";
 import { LoadingWrapper } from "../../ui/LoadingWrapper";
 import { AuthRoute } from "../AuthRoute";
 import { Header } from "../Header";
@@ -18,7 +19,7 @@ export const App: FC = () => {
 	return (
 		<LoadingWrapper
 			isLoading={isAuthorizing}
-			loadingIndicator={<h2>Загрузка...</h2>}
+			loadingIndicator={<LoadingIndicator text="Загрузка..." />}
 		>
 			<Header />
 			<Routes>

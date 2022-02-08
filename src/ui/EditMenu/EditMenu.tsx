@@ -17,7 +17,6 @@ type ButtonProps = ExtractProps<typeof Button>;
 
 interface EditMenuContent {
 	readonly label: string;
-	readonly type: "button" | "link";
 	readonly onClick?: MouseEventHandler<HTMLButtonElement>;
 	readonly to?: string | Partial<Path>;
 	readonly disabled?: boolean;
@@ -28,18 +27,15 @@ interface EditMenuComponent extends ClassNameComponent {
 }
 
 const convertToButtonProps = (content: EditMenuContent[]) => {
-	return content?.map<ButtonProps>(
-		({ type, label, onClick, to, disabled }, i) => ({
-			className: i.toString(),
-			buttonType: type,
-			color: "monotype",
-			type: "listed",
-			children: label,
-			disabled,
-			onClick,
-			to,
-		})
-	);
+	return content?.map<ButtonProps>(({ label, onClick, to, disabled }, i) => ({
+		className: i.toString(),
+		color: "monotype",
+		type: "text",
+		children: label,
+		disabled,
+		onClick,
+		to,
+	}));
 };
 
 export const EditMenu: FC<EditMenuComponent> = ({ content, className }) => {

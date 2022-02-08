@@ -28,15 +28,16 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	const editMenu: EditMenuContent = [
 		{
 			label: "New Task",
-			type: "link",
 			to: editFormLink,
 		},
 	];
 
 	return (
-		<header className={classNames(TaskListHeaderStyle.header, className)}>
-			<SectionHeader>{children}</SectionHeader>
-			<EditMenu className={TaskListHeaderStyle.editMenu} content={editMenu} />
-		</header>
+		<>
+			<header className={classNames(TaskListHeaderStyle.header, className)}>
+				<SectionHeader>{children}</SectionHeader>
+				<EditMenu className={TaskListHeaderStyle.editMenu} content={editMenu} />
+			</header>
+		</>
 	);
 };
