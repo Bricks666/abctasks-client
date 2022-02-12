@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import { useGoBack } from "../../hooks";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { MainPopup } from "../../ui/MainPopup";
 import { TaskForm } from "../TaskForm";
 
 import TaskPopupStyle from "./TaskPopup.module.css";
 
-interface TaskPopupComponent extends ClassNameComponent {
+interface TaskPopupComponent extends ClassNameProps {
 	readonly isOpen: boolean;
 }
 

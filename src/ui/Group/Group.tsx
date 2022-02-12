@@ -1,11 +1,11 @@
 import React, { memo, CSSProperties } from "react";
 import classNames from "classnames";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { TaskGroup } from "../../models/Tasks";
 
 import GroupStyle from "./Group.module.css";
 
-interface GroupComponent extends ClassNameComponent, TaskGroup {}
+interface GroupComponent extends ClassNameProps, TaskGroup {}
 
 export const Group = memo(
 	({ className, name, mainColor, secondColor }: GroupComponent) => {

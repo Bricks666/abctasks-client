@@ -5,9 +5,10 @@
 
 	height: min-content;
 
-	padding-left: 1.25rem;
+	padding-left: calc(var(--size) * 1.25);
 
-	font-size: 16px;
+	font-size: 14px;
+	line-height: 1.5em;
 }
 
 .label::before {
@@ -19,19 +20,71 @@
 	top: 50%;
 	left: 0;
 
-	width: 1rem;
-	height: 1rem;
+	width: var(--size);
+	height: var(--size);
 
 	border-radius: 4px;
-	border: 2px solid var(--violet);
+	border: 1px solid var(--color);
+
+	background-image: url("./check.svg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 90%;
 
 	transform: translateY(-50%);
 }
 
 .input:checked + .label::before {
-	background-color: var(--violet);
+	background-color: var(--color);
+}
+
+.input:disabled + .label::before {
+	border-color: var(--grey);
+}
+
+.input:checked:disabled + .label::before {
+	background-color: var(--grey);
 }
 
 .input:focus-visible + .label::before {
-	box-shadow: var(--black-violet) 0 0 0 2px;
+	outline: 1px solid var(--color-darker);
+}
+
+/* COLOR */
+.primary {
+	--color: var(--primary);
+	--color-darker: var(--primary--darker);
+}
+
+.secondary {
+	--color: var(--secondary);
+	--color-darker: var(--secondary--darker);
+}
+
+.success {
+	--color: var(--success);
+	--color-darker: var(--success-darker);
+}
+
+.warning {
+	--color: var(--warning);
+	--color-darker: var(--warning-darker);
+}
+
+.error {
+	--color: var(--error);
+	--color-darker: var(--error-darker);
+}
+
+/* SIZE */
+.small {
+	--size: 12px;
+}
+
+.medium {
+	--size: 16px;
+}
+
+.large {
+	--size: 20px;
 }

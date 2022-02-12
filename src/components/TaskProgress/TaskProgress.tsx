@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { TaskProgressWithGroup } from "../../models/Tasks";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { ProgressBar } from "../../ui/ProgressBar";
 
 interface TaskProgressComponent
-	extends ClassNameComponent,
+	extends ClassNameProps,
 		TaskProgressWithGroup {}
 
 export const TaskProgress: FC<TaskProgressComponent> = ({

@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import React, { FC, MouseEventHandler } from "react";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { Overlay } from "../Overlay";
-import { SectionHeader } from "../SectionHeader";
+import { Text } from "../Text";
 
 import MainPopupStyle from "./MainPopup.module.css";
 
-interface MainPopupComponent extends ClassNameComponent {
+interface MainPopupComponent extends ClassNameProps {
 	readonly isOpen: boolean;
 	readonly onClose: MouseEventHandler;
 	readonly label?: string;
@@ -25,7 +25,7 @@ export const MainPopup: FC<MainPopupComponent> = ({
 			isOpen={isOpen}
 			onClose={onClose}
 		>
-			{label && <SectionHeader className={MainPopupStyle.header}>{label}</SectionHeader>}
+			{label && <Text className={MainPopupStyle.header} component="h2">{label}</Text>}
 			<div>{children}</div>
 		</Overlay>
 	);

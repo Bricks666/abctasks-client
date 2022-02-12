@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import React, { FC, ImgHTMLAttributes, memo } from "react";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 
 import PictureStyle from "./Picture.module.css";
 
 interface PictureComponent
-	extends ClassNameComponent,
+	extends ClassNameProps,
 		Readonly<ImgHTMLAttributes<HTMLImageElement>> {
 	readonly alt: string;
 	readonly src: string;

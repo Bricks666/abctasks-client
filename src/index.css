@@ -7,12 +7,31 @@
 :root {
 	--background: #ebf0f7;
 
-	--grey-violet: #757ba3;
-	--violet: #7784ee;
-	--blacker-violet: #606bbd;
-	--black-violet: #34395c;
-
 	--shadow: rgba(99, 99, 99, 0.5);
+
+	--grey-lighter: rgb(240, 240, 240);
+	--grey: rgb(158, 154, 154);
+
+
+	--warning-lighter: #f7bd77;
+	--warning: #fba63c;
+	--warning-darker: #f38d11;
+
+	--error-lighter: #ff836d;
+	--error: #f86a51;
+	--error-darker: #fa4c2d;
+
+	--success-lighter: #88e0a7;
+	--success: #5dc983;
+	--success-darker: #13854e;
+
+	--primary-lighter: #529cc7;
+	--primary: #2e87ba;
+	--primary-darker: #006ead;
+
+  --secondary-lighter: #ab5db9;
+  --secondary: #a734ba;
+  --secondary-darker: #9900b4;
 }
 
 body {

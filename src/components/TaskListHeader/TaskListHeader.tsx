@@ -2,13 +2,13 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { GET_PARAMS, POPUPS } from "../../const";
 import { usePrepareLink } from "../../hooks";
-import { ClassNameComponent, ExtractProps } from "../../interfaces/common";
+import { ClassNameProps, ExtractProps } from "../../interfaces/common";
 import { EditMenu } from "../../ui/EditMenu";
-import { SectionHeader } from "../../ui/SectionHeader";
+import { Text } from "../../ui/Text";
 
 import TaskListHeaderStyle from "./TaskListHeader.module.css";
 
-interface TaskListHeaderComponent extends ClassNameComponent {
+interface TaskListHeaderComponent extends ClassNameProps {
 	readonly columnName: string;
 }
 
@@ -35,7 +35,7 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	return (
 		<>
 			<header className={classNames(TaskListHeaderStyle.header, className)}>
-				<SectionHeader>{children}</SectionHeader>
+				<Text component="h2">{children}</Text>
 				<EditMenu className={TaskListHeaderStyle.editMenu} content={editMenu} />
 			</header>
 		</>

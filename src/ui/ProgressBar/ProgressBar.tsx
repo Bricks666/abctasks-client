@@ -1,10 +1,10 @@
 import React, { CSSProperties, FC, memo, ReactText } from "react";
 import classNames from "classnames";
-import { HEX, ClassNameComponent } from "../../interfaces/common";
+import { HEX, ClassNameProps } from "../../interfaces/common";
 
 import ProgressBarStyle from "./ProgressBar.module.css";
 
-interface ProgressBarComponent extends ClassNameComponent {
+interface ProgressBarComponent extends ClassNameProps {
 	readonly children: ReactText;
 	readonly maxValue: number;
 	readonly currentValue: number;

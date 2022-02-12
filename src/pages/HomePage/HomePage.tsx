@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-import { ClassNameComponent } from "../../interfaces/common";
-import { SectionHeader } from "../../ui/SectionHeader";
+import { ClassNameProps } from "../../interfaces/common";
+import { Text } from "../../ui/Text";
 import { ContentLayout } from "../../ui/ContentLayout";
 import { Aside } from "../../ui/Aside";
 import { TasksProgress } from "../../components/TasksProgress";
@@ -11,11 +11,13 @@ import HomePageStyle from "./HomePage.module.css";
 
 /* TODO: Вынести сайдбар в отдельный блок(в не страницы), в котором будет по роутингу меняться контент */
 
-export const HomePage: FC<ClassNameComponent> = ({ className }) => {
+export const HomePage: FC<ClassNameProps> = ({ className }) => {
 	return (
 		<main>
 			<ContentLayout className={classNames(HomePageStyle.layout, className)}>
-				<SectionHeader className={HomePageStyle.header}>Homepage</SectionHeader>
+				<Text className={HomePageStyle.header} component="h2" paddings>
+					Homepage
+				</Text>
 				<Tasks className={HomePageStyle.tasks} />
 				<Aside className={HomePageStyle.aside}>
 					<TasksProgress />

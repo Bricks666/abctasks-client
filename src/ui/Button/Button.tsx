@@ -1,21 +1,20 @@
 import classNames from "classnames";
 import React, { FC, MouseEventHandler } from "react";
 import { Link, Path } from "react-router-dom";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
+import { Color, Size } from "../../interfaces/ui";
 
 import ButtonStyle from "./Button.module.css";
 
-type ButtonType = "button" | "submit" | "reset";
-type Color = "primary" | "secondary" | "monotype";
-type Type = "common" | "text";
+type Type = "filed" | "text" | "outline";
 
-interface ButtonComponent extends ClassNameComponent {
-	readonly buttonType?: ButtonType;
+interface ButtonComponent extends ClassNameProps {
 	readonly color?: Color;
 	readonly type?: Type;
 	readonly onClick?: MouseEventHandler<HTMLButtonElement>;
 	readonly disabled?: boolean;
 	readonly to?: string | Partial<Path>;
+	readonly size?: Size;
 }
 
 export const Button: FC<ButtonComponent> = ({
@@ -24,14 +23,15 @@ export const Button: FC<ButtonComponent> = ({
 	disabled,
 	to,
 	onClick,
-	buttonType = "button",
 	color = "primary",
-	type = "common",
+	type = "filed",
+	size = "medium",
 }) => {
 	const classes = classNames(
 		ButtonStyle.button,
-		ButtonStyle[`button--${type}`],
-		ButtonStyle[`button--${color}`],
+		ButtonStyle[type],
+		ButtonStyle[color],
+		ButtonStyle[size],
 		className
 	);
 
@@ -44,12 +44,7 @@ export const Button: FC<ButtonComponent> = ({
 	}
 
 	return (
-		<button
-			className={classes}
-			type={buttonType}
-			disabled={disabled}
-			onClick={onClick}
-		>
+		<button className={classes} disabled={disabled} onClick={onClick}>
 			{children}
 		</button>
 	);

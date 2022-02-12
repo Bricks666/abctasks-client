@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 import { useStatuses, useTasks } from "../../hooks";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { TasksList } from "../TasksList";
 
 import TasksStyle from "./Tasks.module.css";
 
 /* Возможно стоит сделать четкие четыре колонки */
-export const Tasks: FC<ClassNameComponent> = ({ className }) => {
+export const Tasks: FC<ClassNameProps> = ({ className }) => {
 	const tasks = useTasks();
 	const statusesMap = useStatuses();
 

@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import React, { FC } from "react";
 import { LinkProps, Link as ReactLink } from "react-router-dom";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 
 import LinkStyle from "./Link.module.css";
 
 type LinkType = "common" | "react";
 
-interface LinkComponent extends ClassNameComponent, Readonly<LinkProps> {
+interface LinkComponent extends ClassNameProps, Readonly<LinkProps> {
 	readonly type: LinkType;
 	readonly to: string;
 }

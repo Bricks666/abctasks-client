@@ -1,8 +1,9 @@
 import React, { FC, useCallback } from "react";
 import { useForm } from "react-hook-form";
+import classNames from "classnames";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { RegistrationRequest } from "../../interfaces/requests";
 import { Input } from "../../ui/Input";
 import { registration } from "../../models/User";
@@ -11,7 +12,6 @@ import { useLocationState } from "../../hooks";
 import { Button } from "../../ui/Button";
 
 import RegistrationFormStyle from "./RegistrationForm.module.css";
-import classNames from "classnames";
 
 const initialValues: RegistrationRequest = {
 	login: "",
@@ -25,7 +25,7 @@ const validationSchema = Joi.object<RegistrationRequest>({
 	repeatPassword: Joi.string().valid(Joi.ref("password")),
 });
 
-export const RegistrationForm: FC<ClassNameComponent> = ({ className }) => {
+export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 	const { register, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
@@ -35,9 +35,9 @@ export const RegistrationForm: FC<ClassNameComponent> = ({ className }) => {
 	const state = useLocationState<Location>();
 
 	const onSubmit = useCallback(
-		async (values) => {
+		(values) => {
 			try {
-				await registration(values);
+				registration(values);
 				navigate("/login", { replace: true, state });
 			} catch (e) {
 				console.log(e);
@@ -71,7 +71,10 @@ export const RegistrationForm: FC<ClassNameComponent> = ({ className }) => {
 			>
 				Repeat password
 			</Input>
-			<Button disabled={!isDirty || isSubmitting} buttonType="submit">
+			<Button
+				className={RegistrationFormStyle.button}
+				disabled={!isDirty || isSubmitting}
+			>
 				Registration
 			</Button>
 		</form>

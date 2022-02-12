@@ -1,15 +1,27 @@
 import classNames from "classnames";
 import React, { forwardRef, memo } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
+import { Color, Size } from "../../interfaces/ui";
 
 import CheckboxStyle from "./Checkbox.module.css";
 
-interface CheckboxComponent extends ClassNameComponent, UseFormRegisterReturn {}
+interface CheckboxComponent extends ClassNameProps, UseFormRegisterReturn {
+	readonly size?: Size;
+	readonly color?: Color;
+}
 
 export const Checkbox = memo(
 	forwardRef<HTMLInputElement, CheckboxComponent>(
-		({ className, children, ...checkbox }, ref) => {
+		(
+			{ className, children, color = "primary", size = "medium", ...checkbox },
+			ref
+		) => {
+			const classes = classNames(
+				CheckboxStyle.label,
+				CheckboxStyle[color],
+				CheckboxStyle[size]
+			);
 			return (
 				<div className={className}>
 					<input
@@ -19,7 +31,7 @@ export const Checkbox = memo(
 						type="checkbox"
 						ref={ref}
 					/>
-					<label className={CheckboxStyle.label} htmlFor={checkbox.name}>
+					<label className={classes} htmlFor={checkbox.name}>
 						{children}
 					</label>
 				</div>

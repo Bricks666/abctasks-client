@@ -1,10 +1,6 @@
 .bloc {
-	display: inherit;
-	gap: inherit;
-	grid-template: inherit;
-	justify-content: inherit;
-	align-items: inherit;
-	flex: inherit;
+	display: grid;
+	gap: 1rem;
 
 	padding: 3rem 2rem;
 }

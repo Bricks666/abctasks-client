@@ -6,11 +6,11 @@ import React, {
 	ReactText,
 } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 
 import InputStyle from "./Input.module.css";
 
-interface InputComponent extends ClassNameComponent, UseFormRegisterReturn {
+interface InputComponent extends ClassNameProps, UseFormRegisterReturn {
 	readonly type?: HTMLInputTypeAttribute;
 	readonly children?: ReactText;
 }

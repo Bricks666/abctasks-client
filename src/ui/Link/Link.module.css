@@ -1,6 +1,8 @@
 .link {
+  display: inline-block;
+
 	font-size: 15px;
-	color: var(--blacker-violet);
+	color: var(--primary);
 	text-decoration: none;
 }
 

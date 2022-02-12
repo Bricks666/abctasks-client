@@ -4,7 +4,7 @@ export type HEX = `#${string}`;
 /* TODO: Изменить типизацию на более конкретную */
 export type DateType = string;
 
-export interface ClassNameComponent {
+export interface ClassNameProps {
 	readonly className?: string;
 }
 

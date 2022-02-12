@@ -1,16 +1,17 @@
 import classNames from "classnames";
 import React, { DragEventHandler, FC } from "react";
 import { useLoadingTasks } from "../../hooks";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { TaskWithGroup } from "../../models/Tasks";
 import { DropZone } from "../../ui/DropZone";
-import { ListWithLoading } from "../../ui/ListWithLoading";
+import { LoadingIndicator } from "../../ui/LoadingIndicator";
+import { LoadingWrapper } from "../../ui/LoadingWrapper";
 import { TaskCard } from "../TaskCard";
 import { TaskListHeader } from "../TaskListHeader";
 
 import TasksListStyle from "./TasksList.module.css";
 
-interface TasksListComponent extends ClassNameComponent {
+interface TasksListComponent extends ClassNameProps {
 	readonly tasks: TaskWithGroup[];
 	readonly listHeader: string;
 }
@@ -28,14 +29,14 @@ export const TasksList: FC<TasksListComponent> = ({
 		<section className={classNames(TasksListStyle.tasks, className)}>
 			<TaskListHeader columnName={listHeader}>{listHeader}</TaskListHeader>
 			<DropZone onDrop={onDrop} onDragOver={onDragOver}>
-				<ListWithLoading
-					className={TasksListStyle.list}
-					items={tasks}
-					indexedBy="id"
-					Component={TaskCard}
+				<LoadingWrapper
 					isLoading={isLoading}
-					loadingIndicator={<h2>Загрузка...</h2>}
-				/>
+					loadingIndicator={<LoadingIndicator size="small" />}
+				>
+					{tasks.map((task) => (
+						<TaskCard {...task} key={task.id} />
+					))}
+				</LoadingWrapper>
 			</DropZone>
 		</section>
 	);

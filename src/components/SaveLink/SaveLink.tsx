@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { useLocation } from "react-router-dom";
 import { useLocationState } from "../../hooks";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { Link } from "../../ui/Link";
 
-interface SaveLinkComponent extends ClassNameComponent {
+interface SaveLinkComponent extends ClassNameProps {
 	to: string;
 }
 

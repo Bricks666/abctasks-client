@@ -3,3 +3,7 @@
 
 	row-gap: 1rem;
 }
+
+.button {
+	justify-self: end;
+}

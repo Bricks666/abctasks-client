@@ -1,13 +1,13 @@
 import React, { PropsWithChildren, useCallback } from "react";
 import { Control, FieldPath, useController } from "react-hook-form";
 import ReactSelect, { StylesConfig } from "react-select";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 
 export interface SelectValues<T = string | number> {
 	readonly value: T;
 	readonly label: string;
 }
-interface SelectComponentProps<FormValues> extends ClassNameComponent {
+interface SelectComponentProps<FormValues> extends ClassNameProps {
 	readonly options: SelectValues[];
 	readonly styles?: StylesConfig<SelectValues>;
 	readonly control: Control<FormValues>;

@@ -9,7 +9,7 @@ import { Input } from "../../ui/Input";
 import { login } from "../../models/User";
 import { Location, useNavigate } from "react-router-dom";
 import { useLocationState } from "../../hooks";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { Checkbox } from "../../ui/Checkbox";
 
 import LoginFormStyle from "./LoginForm.module.css";
@@ -26,7 +26,7 @@ const validationSchema = Joi.object<LoginRequest>({
 	remember: Joi.boolean(),
 });
 
-export const LoginForm: FC<ClassNameComponent> = ({ className }) => {
+export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 	const { register, handleSubmit, formState, setFocus } = useForm<LoginRequest>(
 		{
 			defaultValues: initialValue,
@@ -44,9 +44,9 @@ export const LoginForm: FC<ClassNameComponent> = ({ className }) => {
 	const { isDirty, isSubmitting } = formState;
 
 	const onSubmit = useCallback<SubmitHandler<LoginRequest>>(
-		async (values) => {
+		(values) => {
 			try {
-				await login(values);
+				login(values);
 				const to = state || "/";
 
 				navigate(to, { replace: true });
@@ -76,7 +76,11 @@ export const LoginForm: FC<ClassNameComponent> = ({ className }) => {
 			>
 				Remember me
 			</Checkbox>
-			<Button disabled={!isDirty || isSubmitting} buttonType="submit">
+			<Button
+				className={LoginFormStyle.button}
+				disabled={!isDirty || isSubmitting}
+				type="filed"
+			>
 				login
 			</Button>
 		</form>

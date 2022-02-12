@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import React, { forwardRef, PropsWithChildren } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 
 import TextareaStyle from "./Textarea.module.css";
 
-interface TextareaComponent extends ClassNameComponent, UseFormRegisterReturn {}
+interface TextareaComponent extends ClassNameProps, UseFormRegisterReturn {}
 
 export const Textarea = forwardRef<
 	HTMLTextAreaElement,

@@ -3,7 +3,7 @@ import React, { FC, useCallback, useMemo } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GET_PARAMS } from "../../const";
 import { useGetParam, useTaskGroups } from "../../hooks";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { createTask, TaskStatus } from "../../models/Tasks";
 import { Button } from "../../ui/Button";
 import { Select, SelectValues } from "../../ui/Select";
@@ -17,7 +17,7 @@ interface TaskFormValues {
 	readonly group: SelectValues<number>;
 }
 
-export const TaskForm: FC<ClassNameComponent> = ({ className }) => {
+export const TaskForm: FC<ClassNameProps> = ({ className }) => {
 	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || "Ready";
 	const groups = useTaskGroups();
 	const groupsOptions = useMemo<SelectValues[]>(() => {
@@ -69,11 +69,7 @@ export const TaskForm: FC<ClassNameComponent> = ({ className }) => {
 			>
 				Task
 			</Textarea>
-			<Button
-				className={TaskFormStyle.button}
-				disabled={disableBUtton}
-				buttonType="submit"
-			>
+			<Button className={TaskFormStyle.button} disabled={disableBUtton}>
 				Add Task
 			</Button>
 		</form>

@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 
 import LoadingIndicatorStyle from "./LoadingIndicator.module.css";
 
 type Size = "small" | "medium" | "large";
 
-interface LoadingIndicatorComponent extends ClassNameComponent {
+interface LoadingIndicatorComponent extends ClassNameProps {
 	readonly size?: Size;
 	readonly text?: string;
 }

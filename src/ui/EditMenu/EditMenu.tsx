@@ -6,7 +6,7 @@ import React, {
 	useCallback,
 } from "react";
 import { Path } from "react-router-dom";
-import { ClassNameComponent, ExtractProps } from "../../interfaces/common";
+import { ClassNameProps, ExtractProps } from "../../interfaces/common";
 import { Button } from "../Button";
 import { List } from "../List";
 import { Popover } from "../Popover";
@@ -22,14 +22,13 @@ interface EditMenuContent {
 	readonly disabled?: boolean;
 }
 
-interface EditMenuComponent extends ClassNameComponent {
+interface EditMenuComponent extends ClassNameProps {
 	readonly content: EditMenuContent[];
 }
 
 const convertToButtonProps = (content: EditMenuContent[]) => {
 	return content?.map<ButtonProps>(({ label, onClick, to, disabled }, i) => ({
 		className: i.toString(),
-		color: "monotype",
 		type: "text",
 		children: label,
 		disabled,
@@ -56,7 +55,6 @@ export const EditMenu: FC<EditMenuComponent> = ({ content, className }) => {
 			<div ref={setReference}>
 				<Button
 					className={EditMenuStyle.button}
-					color="monotype"
 					onClick={isOpen ? onClose : onOpen}
 				>
 					<svg

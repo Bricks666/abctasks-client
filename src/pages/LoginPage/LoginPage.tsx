@@ -1,17 +1,19 @@
 import React, { FC } from "react";
 import { LoginForm } from "../../components/LoginForm";
 import { SaveLink } from "../../components/SaveLink";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { ContentLayout } from "../../ui/ContentLayout";
-import { SectionHeader } from "../../ui/SectionHeader";
+import { Text } from "../../ui/Text";
 
 import LoginPageStyle from "./LoginPage.module.css";
 
-export const LoginPage: FC<ClassNameComponent> = ({ className }) => {
+export const LoginPage: FC<ClassNameProps> = ({ className }) => {
 	return (
 		<main className={className}>
 			<ContentLayout className={LoginPageStyle.layout}>
-				<SectionHeader className={LoginPageStyle.header}>Login</SectionHeader>
+				<Text className={LoginPageStyle.header} component="h2">
+					Login
+				</Text>
 				<LoginForm className={LoginPageStyle.form} />
 				<SaveLink className={LoginPageStyle.link} to="/registration">
 					Registration

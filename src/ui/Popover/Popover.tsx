@@ -1,13 +1,13 @@
 import React, { memo, PropsWithChildren, useState } from "react";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
-import { ClassNameComponent } from "../../interfaces/common";
+import { ClassNameProps } from "../../interfaces/common";
 import { useClickOutside } from "../../hooks";
 import { Portal } from "../Portal";
 
 import PopoverStyle from "./Popover.module.css";
 
-interface PopoverComponent extends ClassNameComponent {
+interface PopoverComponent extends ClassNameProps {
 	readonly reference: HTMLElement | null;
 	readonly isOpen: boolean;
 	readonly onClose: (evt?: MouseEvent) => unknown;
