@@ -1,23 +1,13 @@
 .button {
-	display: inline-block;
-
 	padding: 6px 12px;
 	min-width: 64px;
 	width: max-content;
 
-	font-size: var(--font-size);
-	text-transform: capitalize;
-	text-decoration: none;
-	font-weight: 500;
-
 	border-radius: 8px;
-	border: none;
 
 	transition-property: color, border, background-color, text-decoration;
 	transition-duration: 0.3s;
 	transition-timing-function: ease-out;
-
-	cursor: pointer;
 }
 
 .button:disabled {
@@ -28,10 +18,6 @@
 	background-color: var(--grey-lighter);
 
 	cursor: auto;
-}
-
-.button:focus-visible {
-	outline: none;
 }
 
 /* VARIANT */

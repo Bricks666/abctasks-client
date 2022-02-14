@@ -1,0 +1,29 @@
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--size);
+	height: var(--size);
+
+	padding: calc(var(--size) / 6);
+
+	background-color: white;
+
+	border-radius: 50%;
+}
+
+.small {
+	--size: 24px;
+}
+
+.medium {
+	--size: 32px;
+}
+
+.large {
+	--size: 40px;
+}
+
+.button:hover {
+	background-color: var(--grey-lighter);
+}

@@ -3,8 +3,9 @@ import classNames from "classnames";
 import { HEX, ClassNameProps } from "../../interfaces/common";
 
 import ProgressBarStyle from "./ProgressBar.module.css";
+import { Text } from "../Text";
 
-interface ProgressBarComponent extends ClassNameProps {
+interface ProgressBarProps extends ClassNameProps {
 	readonly children: ReactText;
 	readonly maxValue: number;
 	readonly currentValue: number;
@@ -13,7 +14,7 @@ interface ProgressBarComponent extends ClassNameProps {
 	readonly progressbarBGColor: HEX;
 }
 
-export const ProgressBar: FC<ProgressBarComponent> = memo(
+export const ProgressBar: FC<ProgressBarProps> = memo(
 	({
 		currentValue,
 		maxValue,
@@ -24,19 +25,19 @@ export const ProgressBar: FC<ProgressBarComponent> = memo(
 		progressbarColor,
 	}) => {
 		const progressbarStyle: CSSProperties = {
-			backgroundColor: progressbarBGColor,
+			backgroundColor: progressbarBGColor || "white",
 		};
 		const progress: CSSProperties = {
-			backgroundColor: progressbarColor,
+			backgroundColor: progressbarColor || "blue",
 			width: `${(currentValue / maxValue) * 100}%`,
 		};
 
 		return (
 			<label className={classNames(ProgressBarStyle.label, className)}>
 				{children}
-				<span
+				<Text component="span"
 					className={ProgressBarStyle.progressNumbers}
-				>{`${currentValue}/${maxValue}`}</span>
+				>{`${currentValue}/${maxValue}`}</Text>
 				<div className={ProgressBarStyle.progressbar} style={progressbarStyle}>
 					<div
 						className={ProgressBarStyle.progress}

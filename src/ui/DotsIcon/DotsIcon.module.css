@@ -1,0 +1,15 @@
+.svg {
+	max-height: 6px;
+	width: 20px;
+
+	--bg-color: rgb(99, 99, 99);
+	fill: var(--bg-color);
+
+	transition-property: fill;
+	transition-duration: 100ms;
+	transition-timing-function: ease-in;
+}
+
+.svg:hover {
+	--bg-color: black;
+}

@@ -48,17 +48,18 @@
 
 .input:focus-visible + .label::before {
 	outline: 1px solid var(--color-darker);
+  outline-offset: 1px;
 }
 
 /* COLOR */
 .primary {
 	--color: var(--primary);
-	--color-darker: var(--primary--darker);
+	--color-darker: var(--primary-darker);
 }
 
 .secondary {
 	--color: var(--secondary);
-	--color-darker: var(--secondary--darker);
+	--color-darker: var(--secondary-darker);
 }
 
 .success {

@@ -13,9 +13,11 @@ export const Popups = () => {
 	useEffect(() => {
 		if (mountedPopups.length) {
 			document.body.style.overflow = "hidden";
+			document.body.style.marginRight = "4px";
 
 			return () => {
 				document.body.style.overflow = "";
+				document.body.style.marginRight = "";
 			};
 		}
 	}, [mountedPopups.length]);

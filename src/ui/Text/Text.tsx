@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { createElement, FC } from "react";
+import React, { createElement, CSSProperties, FC } from "react";
 import { ClassNameProps } from "../../interfaces/common";
 
 import TextStyle from "./Text.module.css";
@@ -11,11 +11,13 @@ interface TextProps extends ClassNameProps {
 	readonly style?: Components;
 	readonly paddings?: boolean;
 	readonly margins?: boolean;
+	readonly cssStyles?: CSSProperties;
 }
 
 export const Text: FC<TextProps> = ({
 	children,
 	className,
+	cssStyles,
 	component = "p",
 	style = component,
 	paddings = false,
@@ -32,7 +34,7 @@ export const Text: FC<TextProps> = ({
 		className
 	);
 	return (
-		<element.type className={classes} {...element.props}>
+		<element.type className={classes} {...element.props} style={cssStyles}>
 			{children}
 		</element.type>
 	);

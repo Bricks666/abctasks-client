@@ -1,31 +1,25 @@
 import classNames from "classnames";
-import React, { FC, MouseEventHandler } from "react";
-import { Link, Path } from "react-router-dom";
+import React, { FC } from "react";
 import { ClassNameProps } from "../../interfaces/common";
 import { Color, Size } from "../../interfaces/ui";
+import { BaseButton, BaseButtonProps } from "../BaseButton";
 
 import ButtonStyle from "./Button.module.css";
 
 type Type = "filed" | "text" | "outline";
 
-interface ButtonComponent extends ClassNameProps {
+interface ButtonProps extends ClassNameProps, BaseButtonProps {
 	readonly color?: Color;
 	readonly type?: Type;
-	readonly onClick?: MouseEventHandler<HTMLButtonElement>;
-	readonly disabled?: boolean;
-	readonly to?: string | Partial<Path>;
 	readonly size?: Size;
 }
 
-export const Button: FC<ButtonComponent> = ({
+export const Button: FC<ButtonProps> = ({
 	className,
-	children,
-	disabled,
-	to,
-	onClick,
 	color = "primary",
 	type = "filed",
 	size = "medium",
+	...props
 }) => {
 	const classes = classNames(
 		ButtonStyle.button,
@@ -35,17 +29,5 @@ export const Button: FC<ButtonComponent> = ({
 		className
 	);
 
-	if (to) {
-		return (
-			<Link className={classes} to={to} aria-disabled={disabled}>
-				{children}
-			</Link>
-		);
-	}
-
-	return (
-		<button className={classes} disabled={disabled} onClick={onClick}>
-			{children}
-		</button>
-	);
+	return <BaseButton className={classes} {...props} />;
 };

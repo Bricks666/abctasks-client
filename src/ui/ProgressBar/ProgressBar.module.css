@@ -2,12 +2,13 @@
 	display: grid;
 	grid-template-columns: 1fr min-content;
 
+	width: 100%;
+
 	row-gap: 5px;
 	column-gap: 5px;
 }
 
 .progressNumbers {
-	font-size: 14px;
 	color: rgb(150, 150, 150);
 }
 
@@ -21,7 +22,7 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 
-  border-radius: 10px;
+	border-radius: 10px;
 
 	overflow: hidden;
 }

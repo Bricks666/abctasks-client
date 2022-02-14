@@ -25,8 +25,12 @@ export const MainPopup: FC<MainPopupComponent> = ({
 			isOpen={isOpen}
 			onClose={onClose}
 		>
-			{label && <Text className={MainPopupStyle.header} component="h2">{label}</Text>}
-			<div>{children}</div>
+			{label && (
+				<Text className={MainPopupStyle.header} component="h2">
+					{label}
+				</Text>
+			)}
+			<div className={MainPopupStyle.content}>{children}</div>
 		</Overlay>
 	);
 };

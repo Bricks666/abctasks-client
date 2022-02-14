@@ -2,6 +2,7 @@ import React, { memo, CSSProperties } from "react";
 import classNames from "classnames";
 import { ClassNameProps } from "../../interfaces/common";
 import { TaskGroup } from "../../models/Tasks";
+import { Text } from "../Text";
 
 import GroupStyle from "./Group.module.css";
 
@@ -14,12 +15,13 @@ export const Group = memo(
 			color: mainColor,
 		};
 		return (
-			<span
+			<Text
 				className={classNames(GroupStyle.group, className)}
-				style={groupStyle}
+				cssStyles={groupStyle}
+				component="span"
 			>
 				{name}
-			</span>
+			</Text>
 		);
 	}
 );

@@ -4,6 +4,7 @@ import { ClassNameProps } from "../../interfaces/common";
 import { useTasksProgress, useTasksProgressLoading } from "../../hooks";
 import { TaskProgress } from "../TaskProgress";
 import { ListWithLoading } from "../../ui/ListWithLoading";
+import { ListItem } from "../../ui/ListItem";
 import { Text } from "../../ui/Text";
 
 import TasksProgressStyle from "./TasksProgress.module.css";
@@ -17,12 +18,15 @@ export const TasksProgress: FC<ClassNameProps> = ({ className }) => {
 			<Text component="h3">Tasks Progress</Text>
 			<ListWithLoading
 				className={TasksProgressStyle.list}
-				items={tasks}
-				Component={TaskProgress}
-				indexedBy="id"
 				isLoading={isLoading}
 				loadingIndicator={<h2>Загрузка...</h2>}
-			/>
+			>
+				{tasks.map((task) => (
+					<ListItem key={task.id}>
+						<TaskProgress {...task} />
+					</ListItem>
+				))}
+			</ListWithLoading>
 		</section>
 	);
 };

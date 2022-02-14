@@ -10,10 +10,13 @@ import { ClassNameProps } from "../../interfaces/common";
 
 import InputStyle from "./Input.module.css";
 
+/* Возмодно стоит абстрагировать интерфейс от формы */
 interface InputComponent extends ClassNameProps, UseFormRegisterReturn {
 	readonly type?: HTMLInputTypeAttribute;
 	readonly children?: ReactText;
 }
+
+/* Возможно стоит разделить лабел и поле ввода */
 
 export const Input = memo(
 	forwardRef<HTMLInputElement, InputComponent>(

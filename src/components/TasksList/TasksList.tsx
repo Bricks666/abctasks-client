@@ -4,6 +4,8 @@ import { useLoadingTasks } from "../../hooks";
 import { ClassNameProps } from "../../interfaces/common";
 import { TaskWithGroup } from "../../models/Tasks";
 import { DropZone } from "../../ui/DropZone";
+import { Grid } from "../../ui/Grid";
+import { GridItem } from "../../ui/GridItem";
 import { LoadingIndicator } from "../../ui/LoadingIndicator";
 import { LoadingWrapper } from "../../ui/LoadingWrapper";
 import { TaskCard } from "../TaskCard";
@@ -33,9 +35,13 @@ export const TasksList: FC<TasksListComponent> = ({
 					isLoading={isLoading}
 					loadingIndicator={<LoadingIndicator size="small" />}
 				>
-					{tasks.map((task) => (
-						<TaskCard {...task} key={task.id} />
-					))}
+					<Grid>
+						{tasks.map((task) => (
+							<GridItem key={task.id}>
+								<TaskCard {...task} />
+							</GridItem>
+						))}
+					</Grid>
 				</LoadingWrapper>
 			</DropZone>
 		</section>

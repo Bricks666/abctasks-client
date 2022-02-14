@@ -71,10 +71,10 @@ export const $LoadingTasks = TasksDomain.createStore<boolean>(false, {
 });
 export const $StatusNamesStore = TasksDomain.createStore<StatusNamesStore>(
 	{
-		done: "Done",
+		ready: "Ready",
 		inProgress: "In Progress",
 		needReview: "Review",
-		ready: "Ready",
+		done: "Done",
 	},
 	{ name: "GroupNameStore" }
 );

@@ -1,0 +1,63 @@
+.root {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: var(--size);
+	height: var(--size);
+
+	background-color: var(--color);
+
+	font-weight: 500;
+	color: white;
+
+	border-radius: 50%;
+
+	overflow: hidden;
+}
+
+.avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background-color: transparent;
+
+	font-weight: 500;
+	color: white;
+}
+
+/* SIZES */
+.small {
+	--size: 24px;
+}
+
+.medium {
+	--size: 40px;
+}
+
+.large {
+	--size: 56px;
+}
+
+/* COLORS */
+
+.primary {
+	--color: var(--primary);
+}
+
+.secondary {
+	--color: var(--secondary);
+}
+
+.success {
+	--color: var(--success);
+}
+
+.error {
+	--color: var(--error);
+}
+
+.warning {
+	--color: var(--warning);
+}

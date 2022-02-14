@@ -1,0 +1,11 @@
+.button {
+	padding: 5px 10px;
+
+	background-color: transparent;
+
+	color: inherit;
+}
+
+.button:focus-visible {
+	background-color: var(--grey-lighter);
+}

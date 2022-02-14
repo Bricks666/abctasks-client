@@ -1,6 +1,14 @@
 .list {
+	display: grid;
+
+  row-gap: 12px;
+
 	margin: 0;
-	padding: 0;
+	padding: 5px 0;
 
 	list-style: none;
+
+	background-color: white;
+
+	border: 8px;
 }

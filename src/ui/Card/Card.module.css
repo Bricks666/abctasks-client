@@ -1,0 +1,25 @@
+.card {
+	display: grid;
+
+	min-width: 240px;
+
+	background-color: white;
+
+	border-radius: 8px;
+
+	transition-property: box-shadow, border-color;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-out;
+
+	overflow: hidden;
+}
+
+.shadowAlways {
+	box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+	border-color: rgba(162, 179, 207, 0.2);
+}
+
+.shadowHover:hover {
+	box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+	border-color: rgba(162, 179, 207, 0.2);
+}

@@ -1,39 +1,26 @@
-import React, { ComponentType, ReactElement } from "react";
-import { AnyObject, ClassNameProps } from "../../interfaces/common";
+import React, { FC, ReactElement } from "react";
+import { ClassNameProps } from "../../interfaces/common";
 import { List } from "../List";
 import { LoadingWrapper } from "../LoadingWrapper";
 
-interface ListWithLoadingComponent<T> extends ClassNameProps {
-	readonly items: T[];
-	readonly Component: ComponentType<T>;
+interface ListWithLoadingProps extends ClassNameProps {
 	readonly isLoading: boolean;
 	readonly loadingIndicator: ReactElement;
-	readonly indexedBy: keyof T;
-	readonly itemClassName?: string;
 }
 
-export const ListWithLoading = <T extends AnyObject>({
-	items,
-	Component,
-	indexedBy,
+export const ListWithLoading: FC<ListWithLoadingProps> = ({
 	loadingIndicator,
 	isLoading,
-	itemClassName,
 	className,
-}: ListWithLoadingComponent<T>) => {
+	children,
+}) => {
 	return (
 		<LoadingWrapper
 			className={className}
 			isLoading={isLoading}
 			loadingIndicator={loadingIndicator}
 		>
-			<List
-				className={className}
-				items={items}
-				Component={Component}
-				itemClassName={itemClassName}
-				indexedBy={indexedBy as string | number}
-			/>
+			<List className={className}>{children}</List>
 		</LoadingWrapper>
 	);
 };

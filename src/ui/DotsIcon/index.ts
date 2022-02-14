@@ -1,0 +1,1 @@
+export { DotsIcon } from "./DotsIcon";

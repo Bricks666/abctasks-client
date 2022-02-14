@@ -14,6 +14,8 @@ export type MappedObject<V> = {
 export type AnyObject = MappedObject<any>;
 
 export type ExtractProps<
-	T extends (...args: any[]) => any,
+	T extends AnyFunction,
 	K extends keyof Parameters<T>[0] = never
 > = Omit<Parameters<T>[0], K>;
+
+export type AnyFunction = (...args: any[]) => any

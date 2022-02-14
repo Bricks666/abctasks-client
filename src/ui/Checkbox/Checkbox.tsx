@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { forwardRef, memo } from "react";
+import React, { forwardRef, memo, PropsWithChildren } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { ClassNameProps } from "../../interfaces/common";
 import { Color, Size } from "../../interfaces/ui";
@@ -12,7 +12,7 @@ interface CheckboxComponent extends ClassNameProps, UseFormRegisterReturn {
 }
 
 export const Checkbox = memo(
-	forwardRef<HTMLInputElement, CheckboxComponent>(
+	forwardRef<HTMLInputElement, PropsWithChildren<CheckboxComponent>>(
 		(
 			{ className, children, color = "primary", size = "medium", ...checkbox },
 			ref

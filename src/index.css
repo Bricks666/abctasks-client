@@ -12,7 +12,6 @@
 	--grey-lighter: rgb(240, 240, 240);
 	--grey: rgb(158, 154, 154);
 
-
 	--warning-lighter: #f7bd77;
 	--warning: #fba63c;
 	--warning-darker: #f38d11;
@@ -29,9 +28,9 @@
 	--primary: #2e87ba;
 	--primary-darker: #006ead;
 
-  --secondary-lighter: #ab5db9;
-  --secondary: #a734ba;
-  --secondary-darker: #9900b4;
+	--secondary-lighter: #ab5db9;
+	--secondary: #a734ba;
+	--secondary-darker: #9900b4;
 }
 
 body {
