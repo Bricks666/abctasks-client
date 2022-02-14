@@ -1,14 +1,14 @@
 import classNames from "classnames";
-import React, { FC, useCallback, useMemo } from "react";
+import React, { FC, useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GET_PARAMS } from "../../const";
-import { useGetParam, useTaskGroups } from "../../hooks";
+import { useGetParam } from "../../hooks";
 import { ClassNameProps } from "../../interfaces/common";
 import { createTask, TaskStatus } from "../../models/Tasks";
 import { Button } from "../../ui/Button";
 import { Select, SelectValues } from "../../ui/Select";
-import { Textarea } from "../../ui/Textarea";
-import { useGroupsSelectStyles } from "./useGroupsSelectStyles";
+import { useGroupSelector } from "./useGroupSelector";
+import { TextField } from "../TextField";
 
 import TaskFormStyle from "./TaskForm.module.css";
 
@@ -19,19 +19,15 @@ interface TaskFormValues {
 
 export const TaskForm: FC<ClassNameProps> = ({ className }) => {
 	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || "Ready";
-	const groups = useTaskGroups();
-	const groupsOptions = useMemo<SelectValues[]>(() => {
-		return groups.map((group) => ({ value: group.id, label: group.name }));
-	}, [groups]);
 
-	const styles = useGroupsSelectStyles(groups);
-	const { register, handleSubmit, formState, control, reset } =
-		useForm<TaskFormValues>({
-			defaultValues: {
-				content: "",
-				group: {},
-			},
-		});
+	const { groupsOptions, styles } = useGroupSelector();
+
+	const { handleSubmit, formState, control, reset } = useForm<TaskFormValues>({
+		defaultValues: {
+			content: "",
+			group: {},
+		},
+	});
 
 	const onSubmit = useCallback<SubmitHandler<TaskFormValues>>(
 		({ content, group }) => {
@@ -46,7 +42,7 @@ export const TaskForm: FC<ClassNameProps> = ({ className }) => {
 	);
 
 	const { isDirty, isValid, isSubmitting } = formState;
-	const disableBUtton = !isDirty || !isValid || isSubmitting;
+	const disableButton = !isDirty || !isValid || isSubmitting;
 
 	return (
 		<form
@@ -61,15 +57,16 @@ export const TaskForm: FC<ClassNameProps> = ({ className }) => {
 			>
 				Group
 			</Select>
-			<Textarea
+			<TextField
 				className={TaskFormStyle.textarea}
-				{...register("content")}
+				name="content"
+				control={control}
 				required={true}
 				disabled={isSubmitting}
-			>
-				Task
-			</Textarea>
-			<Button className={TaskFormStyle.button} disabled={disableBUtton}>
+				label="Task"
+				multiline
+			/>
+			<Button className={TaskFormStyle.button} disabled={disableButton}>
 				Add Task
 			</Button>
 		</form>

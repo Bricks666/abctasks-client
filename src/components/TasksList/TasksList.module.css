@@ -1,4 +1,5 @@
 .tasks {
+  position: relative;
 	display: grid;
 
 	grid-template-rows: min-content 1fr;
@@ -10,4 +11,9 @@
 	display: grid;
 
 	row-gap: 1.5rem;
+}
+
+.header {
+  position: sticky;
+  top:0;
 }

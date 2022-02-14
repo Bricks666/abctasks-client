@@ -12,6 +12,7 @@ import { useLocationState } from "../../hooks";
 import { Button } from "../../ui/Button";
 
 import RegistrationFormStyle from "./RegistrationForm.module.css";
+import { TextField } from "../TextField";
 
 const initialValues: RegistrationRequest = {
 	login: "",
@@ -26,7 +27,7 @@ const validationSchema = Joi.object<RegistrationRequest>({
 });
 
 export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
-	const { register, handleSubmit, formState } = useForm<RegistrationRequest>({
+	const { control, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
 	});
@@ -53,24 +54,26 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 			className={classNames(RegistrationFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<Input {...register("login", { required: true, disabled: isSubmitting })}>
-				Login
-			</Input>
-			<Input
-				{...register("password", { required: true, disabled: isSubmitting })}
+			<TextField
+				name="login"
+				control={control}
+				label="Login"
+				disabled={isSubmitting}
+			/>
+			<TextField
+				name="password"
+				control={control}
+				label="Password"
 				type="password"
-			>
-				Password
-			</Input>
-			<Input
-				{...register("repeatPassword", {
-					required: true,
-					disabled: isSubmitting,
-				})}
+				disabled={isSubmitting}
+			/>
+			<TextField
+				name="repeatPassword"
+				control={control}
+				label="Repeat password"
 				type="password"
-			>
-				Repeat password
-			</Input>
+				disabled={isSubmitting}
+			/>
 			<Button
 				className={RegistrationFormStyle.button}
 				disabled={!isDirty || isSubmitting}

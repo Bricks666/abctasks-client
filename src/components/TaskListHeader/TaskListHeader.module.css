@@ -1,13 +1,15 @@
-.header {
+.background {
 	display: grid;
 
 	grid-template-columns: 1fr min-content;
 	column-gap: 20px;
+
+  padding: 1rem;
 }
 
 .editMenu {
 	width: min-content;
 	height: min-content;
 
-  margin-right: 10px;
+	margin-right: 10px;
 }

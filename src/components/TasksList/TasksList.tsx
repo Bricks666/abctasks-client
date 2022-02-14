@@ -29,7 +29,9 @@ export const TasksList: FC<TasksListComponent> = ({
 
 	return (
 		<section className={classNames(TasksListStyle.tasks, className)}>
-			<TaskListHeader columnName={listHeader}>{listHeader}</TaskListHeader>
+			<TaskListHeader className={TasksListStyle.header} columnName={listHeader}>
+				{listHeader}
+			</TaskListHeader>
 			<DropZone onDrop={onDrop} onDragOver={onDragOver}>
 				<LoadingWrapper
 					isLoading={isLoading}

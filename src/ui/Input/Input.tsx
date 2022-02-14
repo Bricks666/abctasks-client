@@ -1,32 +1,32 @@
 import classNames from "classnames";
 import React, {
-	forwardRef,
+	ChangeEventHandler,
 	HTMLInputTypeAttribute,
 	memo,
-	ReactText,
+	FocusEventHandler,
+	forwardRef,
 } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
 import { ClassNameProps } from "../../interfaces/common";
 
 import InputStyle from "./Input.module.css";
 
-/* Возмодно стоит абстрагировать интерфейс от формы */
-interface InputComponent extends ClassNameProps, UseFormRegisterReturn {
+interface InputProps extends ClassNameProps {
+	readonly value: string | number;
+	readonly onChange: ChangeEventHandler;
+	readonly onFocus?: FocusEventHandler;
 	readonly type?: HTMLInputTypeAttribute;
-	readonly children?: ReactText;
+	readonly name?: string;
+	readonly disabled?: boolean;
+	readonly readOnly?: boolean;
+	readonly id?: string;
 }
 
-/* Возможно стоит разделить лабел и поле ввода */
-
 export const Input = memo(
-	forwardRef<HTMLInputElement, InputComponent>(
-		({ children, className, ...input }, ref) => {
-			return (
-				<label className={classNames(InputStyle.label, className)}>
-					{children}
-					<input className={InputStyle.input} {...input} ref={ref} />
-				</label>
-			);
+	forwardRef<HTMLInputElement, InputProps>(
+		({ className, type = "text", ...input }, ref) => {
+			const classes = classNames(InputStyle.input, className);
+
+			return <input className={classes} type={type} {...input} ref={ref} />;
 		}
 	)
 );

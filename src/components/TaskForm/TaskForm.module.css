@@ -4,7 +4,7 @@
 	grid-template-columns: repeat(2, 1fr);
 
 	row-gap: 10px;
-  column-gap: 10px;
+	column-gap: 10px;
 }
 
 .textarea {
@@ -13,4 +13,6 @@
 
 .button {
 	grid-column: 2;
+
+	justify-self: end;
 }

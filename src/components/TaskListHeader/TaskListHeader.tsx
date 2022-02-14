@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { GET_PARAMS, POPUPS } from "../../const";
 import { usePrepareLink } from "../../hooks";
 import { ClassNameProps, ExtractProps } from "../../interfaces/common";
+import { Card } from "../../ui/Card";
 import { EditMenu } from "../../ui/EditMenu";
 import { Text } from "../../ui/Text";
 
@@ -35,8 +36,13 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	return (
 		<>
 			<header className={classNames(TaskListHeaderStyle.header, className)}>
-				<Text component="h2">{children}</Text>
-				<EditMenu className={TaskListHeaderStyle.editMenu} content={editMenu} />
+				<Card className={TaskListHeaderStyle.background} shadowOn="never">
+					<Text component="h2">{children}</Text>
+					<EditMenu
+						className={TaskListHeaderStyle.editMenu}
+						content={editMenu}
+					/>
+				</Card>
 			</header>
 		</>
 	);

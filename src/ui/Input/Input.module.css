@@ -1,43 +1,28 @@
-.label {
-	display: grid;
-
-	height: min-content;
-
-	row-gap: 0.25rem;
-
-	font-size: var(--font-size);
-}
-
 .input {
 	padding: 1rem;
 
 	font-size: var(--input-font-size);
 
 	border-radius: 8px;
-	border-color: rgba(162, 179, 207, 0.2);
+	border-color: rgba(99, 99, 99, 0.2);
 }
 
+
 .input:hover {
-  outline: 2px solid var(--shadow) ;
+	outline: 2px solid var(--shadow);
 }
 
 .input:focus-visible {
-  outline: 2px solid var(--primary);
+	outline: 2px solid var(--primary);
 }
 
 @media (min-width: 600px) {
-  .label {
-    --font-size: 16px;
-  }
-  .input {
-    --input-font-size: 14px;
-  }
+	.input {
+		--input-font-size: 14px;
+	}
 }
 
 @media (max-width: 600px) {
-	.label {
-		--font-size: 12px;
-	}
 	.input {
 		--input-font-size: 11px;
 	}

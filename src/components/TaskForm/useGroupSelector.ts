@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { StylesConfig } from "react-select";
+import { useTaskGroups } from "../../hooks";
 import { TaskGroup } from "../../models/Tasks";
 import { SelectValues } from "../../ui/Select";
 
@@ -55,4 +56,15 @@ export const useGroupsSelectStyles = (groups: TaskGroup[]) => {
 			},
 		};
 	}, [groups]);
+};
+
+export const useGroupSelector = () => {
+	const groups = useTaskGroups();
+	const groupsOptions = useMemo<SelectValues[]>(() => {
+		return groups.map((group) => ({ value: group.id, label: group.name }));
+	}, [groups]);
+
+	const styles = useGroupsSelectStyles(groups);
+
+	return { groupsOptions, styles };
 };

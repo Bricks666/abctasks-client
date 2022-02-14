@@ -1,7 +1,4 @@
-.svg {
-	max-height: 6px;
-	width: 20px;
-
+.icon {
 	--bg-color: rgb(99, 99, 99);
 	fill: var(--bg-color);
 
@@ -10,6 +7,6 @@
 	transition-timing-function: ease-in;
 }
 
-.svg:hover {
+.icon:hover {
 	--bg-color: black;
 }

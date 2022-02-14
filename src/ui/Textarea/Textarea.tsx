@@ -1,27 +1,26 @@
 import classNames from "classnames";
-import React, { forwardRef, PropsWithChildren } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import React, {
+	ChangeEventHandler,
+	FocusEventHandler,
+	forwardRef,
+} from "react";
 import { ClassNameProps } from "../../interfaces/common";
 
 import TextareaStyle from "./Textarea.module.css";
 
-interface TextareaComponent extends ClassNameProps, UseFormRegisterReturn {}
+interface TextareaProps extends ClassNameProps {
+	readonly value: string | number;
+	readonly onChange: ChangeEventHandler;
+	readonly onFocus?: FocusEventHandler;
+	readonly onBlur?: FocusEventHandler;
+	readonly id?: string;
+	readonly disabled?: boolean;
+	readonly readOnly?: boolean;
+}
 
-export const Textarea = forwardRef<
-	HTMLTextAreaElement,
-	PropsWithChildren<TextareaComponent>
->(({ className, children, ...textarea }, ref) => {
-	return (
-		<div className={classNames(TextareaStyle.wrapper, className)}>
-			<label className={TextareaStyle.label} htmlFor={textarea.name}>
-				{children}
-			</label>
-			<textarea
-				className={TextareaStyle.textarea}
-				{...textarea}
-				ref={ref}
-				id={textarea.name}
-			/>
-		</div>
-	);
-});
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+	({ className, ...textarea }, ref) => {
+		const classes = classNames(TextareaStyle.textarea, className);
+		return <textarea className={classes} {...textarea} ref={ref} />;
+	}
+);
