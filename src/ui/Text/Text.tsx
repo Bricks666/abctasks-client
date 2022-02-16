@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { createElement, CSSProperties, FC } from "react";
+import React, { createElement, CSSProperties, FC, memo } from "react";
 import { ClassNameProps } from "../../interfaces/common";
 
 import TextStyle from "./Text.module.css";
@@ -14,28 +14,30 @@ interface TextProps extends ClassNameProps {
 	readonly cssStyles?: CSSProperties;
 }
 
-export const Text: FC<TextProps> = ({
-	children,
-	className,
-	cssStyles,
-	component = "p",
-	style = component,
-	paddings = false,
-	margins = false,
-}) => {
-	const element = createElement(component, {}, {});
-	const classes = classNames(
-		TextStyle.text,
-		TextStyle[style],
-		{
-			[TextStyle.withoutPadding]: !paddings,
-			[TextStyle.withoutMargins]: !margins,
-		},
-		className
-	);
-	return (
-		<element.type className={classes} {...element.props} style={cssStyles}>
-			{children}
-		</element.type>
-	);
-};
+export const Text: FC<TextProps> = memo(
+	({
+		children,
+		className,
+		cssStyles,
+		component = "p",
+		style = component,
+		paddings = false,
+		margins = false,
+	}) => {
+		const element = createElement(component, {}, {});
+		const classes = classNames(
+			TextStyle.text,
+			TextStyle[style],
+			{
+				[TextStyle.withoutPadding]: !paddings,
+				[TextStyle.withoutMargins]: !margins,
+			},
+			className
+		);
+		return (
+			<element.type className={classes} {...element.props} style={cssStyles}>
+				{children}
+			</element.type>
+		);
+	}
+);

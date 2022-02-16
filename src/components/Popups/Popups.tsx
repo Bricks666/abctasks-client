@@ -1,10 +1,13 @@
 import React, { ComponentType, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { POPUPS } from "../../const";
 import { usePopups } from "../../hooks";
-import { TaskPopup } from "../TaskPopup";
+import { CreateTaskPopup } from "../CreateTaskPopup";
+import { EditTaskPopup } from "../EditTaskPopup";
 
 const popupsMap: Record<string, ComponentType<{ readonly isOpen: boolean }>> = {
-	task: TaskPopup,
+	[POPUPS.createTask]: CreateTaskPopup,
+	[POPUPS.editTask]: EditTaskPopup,
 };
 
 export const Popups = () => {
@@ -21,7 +24,6 @@ export const Popups = () => {
 			};
 		}
 	}, [mountedPopups.length]);
-
 	return (
 		<>
 			<Outlet />

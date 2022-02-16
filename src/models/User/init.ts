@@ -7,30 +7,36 @@ import {
 	logoutFx,
 	registrationFx,
 	refreshFx,
-	login as loginEv,
-	logout as logoutEv,
-	registration as registrationEv,
-	auth as authEv,
-	refresh as refreshEv,
+	login,
+	logout,
+	registration,
+	auth,
+	refresh,
 } from ".";
-import { auth, login, logout, refresh, registration } from "../../api";
+import {
+	authApi,
+	loginApi,
+	logoutApi,
+	refreshApi,
+	registrationApi,
+} from "../../api";
 
 authFx.use(async () => {
-	const response = await auth();
+	const response = await authApi();
 	return response.user;
 });
 loginFx.use(async (credentials) => {
-	const response = await login(credentials);
+	const response = await loginApi(credentials);
 	return response.user;
 });
 registrationFx.use(async (credentials) => {
-	await registration(credentials);
+	await registrationApi(credentials);
 });
 logoutFx.use(async () => {
-	await logout();
+	await logoutApi();
 });
 refreshFx.use(async () => {
-	await refresh();
+	await refreshApi();
 });
 
 forward({
@@ -39,7 +45,7 @@ forward({
 });
 
 guard({
-	clock: loginEv,
+	clock: login,
 	filter: sample({
 		clock: loginFx.pending,
 		fn: (isLoading) => !isLoading,
@@ -48,7 +54,7 @@ guard({
 });
 
 guard({
-	clock: authEv,
+	clock: auth,
 	filter: sample({
 		clock: authFx.pending,
 		fn: (isLoading) => !isLoading,
@@ -63,7 +69,7 @@ sample({
 });
 
 guard({
-	clock: logoutEv,
+	clock: logout,
 	filter: sample({
 		clock: logoutFx.pending,
 		fn: (isLoading) => !isLoading,
@@ -72,7 +78,7 @@ guard({
 });
 
 guard({
-	clock: refreshEv,
+	clock: refresh,
 	filter: sample({
 		clock: refreshFx.pending,
 		fn: (isLoading) => !isLoading,
@@ -87,7 +93,7 @@ sample({
 });
 
 guard({
-	clock: registrationEv,
+	clock: registration,
 	filter: sample({
 		clock: registrationFx.pending,
 		fn: (isLoading) => !isLoading,

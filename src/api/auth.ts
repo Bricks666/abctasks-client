@@ -6,8 +6,7 @@ import {
 } from "../interfaces/response";
 import { instance } from "./instance";
 
-export const login = async (credentials: LoginRequest) => {
-
+export const loginApi = async (credentials: LoginRequest) => {
 	const response = await instance.post<UserResponse & TokensResponse>(
 		"/auth/login",
 		credentials
@@ -15,13 +14,13 @@ export const login = async (credentials: LoginRequest) => {
 	return response.data;
 };
 
-export const auth = async () => {
+export const authApi = async () => {
 	const response = await instance.get<UserResponse & TokensResponse>("/auth");
 
 	return response.data;
 };
 
-export const registration = async (credentials: RegistrationRequest) => {
+export const registrationApi = async (credentials: RegistrationRequest) => {
 	const response = await instance.put<VoidResponse>(
 		"/auth/registration",
 		credentials
@@ -30,13 +29,13 @@ export const registration = async (credentials: RegistrationRequest) => {
 	return response.data;
 };
 
-export const logout = async () => {
+export const logoutApi = async () => {
 	const response = await instance.delete<VoidResponse>("/auth/logout");
 
 	return response.data;
 };
 
-export const refresh = async () => {
+export const refreshApi = async () => {
 	const response = await instance.get<TokensResponse>("/auth/refresh");
 
 	return response.data;

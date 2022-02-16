@@ -2,31 +2,27 @@ import classNames from "classnames";
 import React, { FC, useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GET_PARAMS } from "../../const";
-import { useGetParam } from "../../hooks";
+import { useGetParam, useGroupSelector } from "../../hooks";
 import { ClassNameProps } from "../../interfaces/common";
 import { createTask, TaskStatus } from "../../models/Tasks";
 import { Button } from "../../ui/Button";
 import { Select, SelectValues } from "../../ui/Select";
-import { useGroupSelector } from "./useGroupSelector";
 import { TextField } from "../TextField";
 
-import TaskFormStyle from "./TaskForm.module.css";
+import TaskFormStyle from "./CreateTaskForm.module.css";
 
 interface TaskFormValues {
 	readonly content: string;
 	readonly group: SelectValues<number>;
 }
 
-export const TaskForm: FC<ClassNameProps> = ({ className }) => {
+export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || "Ready";
 
 	const { groupsOptions, styles } = useGroupSelector();
 
 	const { handleSubmit, formState, control, reset } = useForm<TaskFormValues>({
-		defaultValues: {
-			content: "",
-			group: {},
-		},
+		defaultValues: { content: "", group: {} },
 	});
 
 	const onSubmit = useCallback<SubmitHandler<TaskFormValues>>(

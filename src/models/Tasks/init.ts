@@ -7,18 +7,22 @@ import {
 	$TasksProgress,
 	createTask,
 	createTaskFx,
+	editTask,
+	editTaskFx,
 	loadTaskGroups,
 	loadTaskGroupsFx,
 	loadTasks,
 	loadTasksFx,
 	loadTasksProgress,
 	loadTasksProgressFx,
+	TaskProgressStructure,
 } from ".";
 import {
-	getTaskGroups,
-	getTasks,
-	getTasksProgress,
-	createTask as createTaskAPI,
+	getTaskGroupsApi,
+	getTasksApi,
+	getTasksProgressApi,
+	createTaskApi,
+	editTaskApi,
 } from "../../api";
 import {
 	toValidTask,
@@ -26,10 +30,11 @@ import {
 	toValidTaskProgress,
 } from "../../utils";
 
-loadTasksFx.use(getTasks);
-loadTaskGroupsFx.use(getTaskGroups);
-loadTasksProgressFx.use(getTasksProgress);
-createTaskFx.use(createTaskAPI);
+loadTasksFx.use(getTasksApi);
+loadTaskGroupsFx.use(getTaskGroupsApi);
+loadTasksProgressFx.use(getTasksProgressApi);
+createTaskFx.use(createTaskApi);
+editTaskFx.use(editTaskApi);
 
 guard({
 	clock: loadTasks,
@@ -136,6 +141,68 @@ sample({
 		}
 
 		return tasksProgress;
+	},
+	target: $TasksProgress,
+});
+
+guard({
+	clock: editTask,
+	filter: sample({
+		source: editTaskFx.pending,
+		fn: (isLoading) => !isLoading,
+	}),
+	target: editTaskFx,
+});
+
+sample({
+	source: $Tasks,
+	clock: editTaskFx.doneData,
+	fn: (tasks, { task }) => {
+		const validTask = toValidTask(task);
+
+		return tasks.map((task) => (task.id === validTask.id ? validTask : task));
+	},
+	target: $Tasks,
+});
+
+sample({
+	source: [$TasksProgress, $Tasks],
+	clock: editTaskFx.done,
+	fn: ([state, tasks], { params, result }) => {
+		const { id } = params;
+		debugger;
+		const prevTask = tasks.find((task) => task.id === id);
+		if (!prevTask) {
+			return state;
+		}
+		const { groupId: prevGroup, status: prevStatus } = prevTask;
+		const { groupId: nextGroup, status: nextStatus } = result.task;
+		if (prevGroup === nextGroup) {
+			return state;
+		}
+
+		const isWasDone = prevStatus === "Done";
+		const isNowDone = nextStatus === "Done";
+
+		return state.map((progress) => {
+			if (progress.groupId === prevGroup) {
+				return {
+					...progress,
+					totalCount: progress.totalCount - 1,
+					completedCount: progress.completedCount - +isWasDone,
+				};
+			}
+
+			if (progress.groupId === nextGroup) {
+				return {
+					...progress,
+					totalCount: progress.totalCount + 1,
+					completedCount: progress.completedCount + +isNowDone,
+				};
+			}
+
+			return progress;
+		});
 	},
 	target: $TasksProgress,
 });

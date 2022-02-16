@@ -13,3 +13,6 @@ export { useTask } from "./useTask";
 export { useGoBack } from "./useGoBack";
 export { usePopups } from "./usePopups";
 export { useTaskGroups } from "./useTaskGroups";
+export { useTasksWithGroups } from "./useTasksWithGroups";
+export { useGroupSelector } from "./useGroupSelector";
+export { useStatusesSelect } from "./useStatusesSelect";

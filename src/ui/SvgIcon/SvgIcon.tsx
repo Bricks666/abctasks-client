@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { ClassNameProps } from "../../interfaces/common";
 
 import SvgIconStyle from "./SvgIcon.module.css";
@@ -8,7 +8,7 @@ interface SvgIconProps extends ClassNameProps {
 	readonly viewBox: string;
 }
 
-export const SvgIcon: FC<SvgIconProps> = ({ children, className, viewBox }) => {
+export const SvgIcon: FC<SvgIconProps> = memo(({ children, className, viewBox }) => {
 	return (
 		<svg
 			className={classNames(SvgIconStyle.icon, className)}
@@ -19,4 +19,4 @@ export const SvgIcon: FC<SvgIconProps> = ({ children, className, viewBox }) => {
 			{children}
 		</svg>
 	);
-};
+});

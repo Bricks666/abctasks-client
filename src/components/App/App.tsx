@@ -9,6 +9,8 @@ import { AuthRoute } from "../AuthRoute";
 import { Header } from "../Header";
 import { Popups } from "../Popups";
 
+import AppStyle from "./App.module.css";
+
 export const App: FC = () => {
 	const isAuthorizing = useIsAuthorizing();
 
@@ -18,6 +20,7 @@ export const App: FC = () => {
 
 	return (
 		<LoadingWrapper
+			className={AppStyle.loading}
 			isLoading={isAuthorizing}
 			loadingIndicator={<LoadingIndicator text="Загрузка..." />}
 		>

@@ -35,7 +35,7 @@ export const EditMenu: FC<EditMenuComponent> = ({ content, className }) => {
 
 	return (
 		<div className={className}>
-			<div ref={setReference}>
+			<div className={EditMenuStyle.container} ref={setReference}>
 				<IconButton
 					className={EditMenuStyle.button}
 					onClick={isOpen ? onClose : onOpen}

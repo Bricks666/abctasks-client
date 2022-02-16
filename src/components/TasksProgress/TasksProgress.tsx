@@ -6,6 +6,7 @@ import { TaskProgress } from "../TaskProgress";
 import { ListWithLoading } from "../../ui/ListWithLoading";
 import { ListItem } from "../../ui/ListItem";
 import { Text } from "../../ui/Text";
+import { LoadingIndicator } from "../../ui/LoadingIndicator";
 
 import TasksProgressStyle from "./TasksProgress.module.css";
 
@@ -19,7 +20,7 @@ export const TasksProgress: FC<ClassNameProps> = ({ className }) => {
 			<ListWithLoading
 				className={TasksProgressStyle.list}
 				isLoading={isLoading}
-				loadingIndicator={<h2>Загрузка...</h2>}
+				loadingIndicator={<LoadingIndicator />}
 			>
 				{tasks.map((task) => (
 					<ListItem key={task.id}>

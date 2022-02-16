@@ -22,7 +22,7 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 }) => {
 	const editFormLink = usePrepareLink({
 		query: {
-			[GET_PARAMS.popup]: POPUPS.task,
+			[GET_PARAMS.popup]: POPUPS.createTask,
 			[GET_PARAMS.taskStatus]: columnName,
 		},
 	});

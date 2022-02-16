@@ -1,17 +1,21 @@
 interface GetParams {
 	readonly popup: string;
 	readonly taskStatus: string;
+	readonly taskId: string;
 }
 
 export const GET_PARAMS: GetParams = {
 	popup: "popup",
 	taskStatus: "task-status",
+	taskId: "task-id",
 };
 
 interface Popups {
-	readonly task: string;
+	readonly createTask: string;
+	readonly editTask: string;
 }
 
 export const POPUPS: Popups = {
-	task: "task",
+	createTask: "create-task",
+	editTask: "edit-task",
 };

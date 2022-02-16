@@ -5,3 +5,7 @@ export interface TaskRequest {
 	readonly groupId: number;
 	readonly status: TaskStatus;
 }
+
+export interface EditTaskRequest extends TaskRequest {
+	readonly id: number;
+}

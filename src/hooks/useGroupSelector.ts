@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { StylesConfig } from "react-select";
-import { useTaskGroups } from "../../hooks";
-import { TaskGroup } from "../../models/Tasks";
-import { SelectValues } from "../../ui/Select";
+import { useTaskGroups } from ".";
+import { TaskGroup } from "../models/Tasks";
+import { SelectValues } from "../ui/Select";
 
 const getGroup = (groups: TaskGroup[], groupId: number | string) =>
 	groups.find((group) => group.id === +groupId);

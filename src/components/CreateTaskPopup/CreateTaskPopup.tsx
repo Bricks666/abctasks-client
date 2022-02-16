@@ -2,15 +2,18 @@ import React, { FC } from "react";
 import { useGoBack } from "../../hooks";
 import { ClassNameProps } from "../../interfaces/common";
 import { MainPopup } from "../../ui/MainPopup";
-import { TaskForm } from "../TaskForm";
+import { CreateTaskForm } from "../CreateTaskForm";
 
-import TaskPopupStyle from "./TaskPopup.module.css";
+import TaskPopupStyle from "./CreateTaskPopup.module.css";
 
-interface TaskPopupComponent extends ClassNameProps {
+interface CreateTaskPopupProps extends ClassNameProps {
 	readonly isOpen: boolean;
 }
 
-export const TaskPopup: FC<TaskPopupComponent> = ({ isOpen, className }) => {
+export const CreateTaskPopup: FC<CreateTaskPopupProps> = ({
+	isOpen,
+	className,
+}) => {
 	const onClose = useGoBack();
 
 	return (
@@ -20,7 +23,7 @@ export const TaskPopup: FC<TaskPopupComponent> = ({ isOpen, className }) => {
 			label="Task form"
 			onClose={onClose}
 		>
-			<TaskForm className={TaskPopupStyle.form} />
+			<CreateTaskForm className={TaskPopupStyle.form} />
 		</MainPopup>
 	);
 };
