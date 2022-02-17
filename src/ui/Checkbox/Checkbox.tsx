@@ -31,6 +31,7 @@ export const Checkbox = memo<PropsWithChildren<CheckboxProps>>(
 		className,
 		children,
 		inputId,
+		inputRef,
 		color = "primary",
 		size = "medium",
 		...checkbox
@@ -50,6 +51,7 @@ export const Checkbox = memo<PropsWithChildren<CheckboxProps>>(
 					{...checkbox}
 					type="checkbox"
 					id={id}
+					ref={inputRef}
 				/>
 				<InputLabel className={classes} HTMLFor={id}>
 					{children}

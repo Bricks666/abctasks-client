@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { FC, useCallback } from "react";
 import Joi from "joi";
 import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -27,15 +27,12 @@ const validationSchema = Joi.object<LoginRequest>({
 });
 
 export const LoginForm: FC<ClassNameProps> = ({ className }) => {
-	const { control, register, handleSubmit, formState, setFocus } =
+	const { control, handleSubmit, formState } =
 		useForm<LoginRequest>({
 			defaultValues: initialValue,
 			resolver: joiResolver(validationSchema),
 		});
 
-	useEffect(() => {
-		setFocus("login");
-	}, [setFocus]);
 
 	const navigate = useNavigate();
 	const state = useLocationState<Location>();
