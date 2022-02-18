@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { FC, MouseEventHandler } from "react";
 import { Link, To } from "react-router-dom";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 
 import BaseButtonStyle from "./BaseButton.module.css";
 

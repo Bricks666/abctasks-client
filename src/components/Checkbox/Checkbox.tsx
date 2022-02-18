@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React from "react";
 import { Control, Path, useController } from "react-hook-form";
-import { ClassNameProps } from "../../interfaces/common";
-import { Checkbox as CheckboxUI } from "../../ui/Checkbox";
+import { ClassNameProps } from "@/interfaces/common";
+import { Checkbox as CheckboxUI } from "@/ui/Checkbox";
 
 interface CheckboxProps<T> extends ClassNameProps {
 	readonly control: Control<T>;

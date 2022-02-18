@@ -1,5 +1,4 @@
-import { TaskStatus } from "../../models/Tasks";
-import { HEX } from "../common";
+import { TaskStatus } from "@/models/Tasks/types";
 
 export interface TasksResponse {
 	readonly tasks: TaskResponse[];

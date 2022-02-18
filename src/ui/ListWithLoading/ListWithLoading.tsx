@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 import { List } from "../List";
 import { LoadingWrapper } from "../LoadingWrapper";
 

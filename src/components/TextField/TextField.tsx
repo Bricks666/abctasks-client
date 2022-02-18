@@ -1,7 +1,7 @@
 import React, { HTMLInputTypeAttribute } from "react";
 import { Control, Path, useController } from "react-hook-form";
-import { AnyObject, ClassNameProps } from "../../interfaces/common";
-import { Field } from "../../ui/Field";
+import { AnyObject, ClassNameProps } from "@/interfaces/common";
+import { Field } from "@/ui/Field";
 
 interface TextFieldProps<T extends AnyObject> extends ClassNameProps {
 	readonly control: Control<T>;

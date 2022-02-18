@@ -1,9 +1,9 @@
-import { LoginRequest, RegistrationRequest } from "../interfaces/requests";
+import { LoginRequest, RegistrationRequest } from "@/interfaces/requests";
 import {
 	TokensResponse,
 	UserResponse,
 	VoidResponse,
-} from "../interfaces/response";
+} from "@/interfaces/response";
 import { instance } from "./instance";
 
 export const loginApi = async (credentials: LoginRequest) => {

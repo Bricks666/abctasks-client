@@ -1,18 +1,24 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable indent */
 import React, { FC, useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { GET_PARAMS } from "../../const";
+import { GET_PARAMS } from "@/const";
 import {
 	useGetParam,
 	useGoBack,
 	useGroupSelector,
 	useStatusesSelect,
 	useTask,
-} from "../../hooks";
-import { ClassNameProps } from "../../interfaces/common";
-import { editTask, TaskStatus, TaskWithGroup } from "../../models/Tasks";
-import { Button } from "../../ui/Button";
-import { Select, SelectValues } from "../../ui/Select";
+} from "@/hooks";
+import { ClassNameProps } from "@/interfaces/common";
+import { editTask } from "@/models/Tasks";
+import { TaskStatus, TaskWithGroup } from "@/models/Tasks/types";
+import { Button } from "@/ui/Button";
+import { Select, SelectValues } from "@/ui/Select";
 import { TextField } from "../TextField";
+
+import EditTaskFromStyle from "./EditTaskForm.module.css";
+import classNames from "classnames";
 
 interface EditTaskFormValues {
 	readonly content: string;
@@ -49,7 +55,7 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const { groupsOptions, styles } = useGroupSelector();
 	const statuses = useStatusesSelect();
 	const goBack = useGoBack();
-	const { control, handleSubmit } = useForm<EditTaskFormValues>({
+	const { control, handleSubmit, formState } = useForm<EditTaskFormValues>({
 		defaultValues: prepareTask(task),
 	});
 
@@ -67,9 +73,13 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 		},
 		[goBack, taskId]
 	);
+	const { isDirty } = formState;
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className={className}>
+		<form
+			className={classNames(EditTaskFromStyle.form, className)}
+			onSubmit={handleSubmit(onSubmit)}
+		>
 			<Select options={statuses} name="status" control={control} />
 			<Select
 				options={groupsOptions}
@@ -78,8 +88,13 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 				control={control}
 			/>
 
-			<TextField name="content" control={control} multiline />
-			<Button>Save edit</Button>
+			<TextField
+				className={EditTaskFromStyle.textarea}
+				name="content"
+				control={control}
+				multiline
+			/>
+			<Button disabled={!isDirty}>Save edit</Button>
 		</form>
 	);
 };

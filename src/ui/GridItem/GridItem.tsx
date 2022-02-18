@@ -1,5 +1,5 @@
 import React, { FC, memo } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 
 interface GridItemProps extends ClassNameProps {
 	readonly columnCount?: number | string;

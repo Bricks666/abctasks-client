@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from "classnames";
 import React, { FC, MouseEventHandler } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 import { Portal } from "../Portal";
 
 import OverlayStyle from "./Overlay.module.css";

@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { RegistrationForm } from "../../components/RegistrationForm";
-import { SaveLink } from "../../components/SaveLink";
-import { ClassNameProps } from "../../interfaces/common";
-import { ContentLayout } from "../../ui/ContentLayout";
-import { Text } from "../../ui/Text";
+import { RegistrationForm } from "@/components/RegistrationForm";
+import { SaveLink } from "@/components/SaveLink";
+import { ClassNameProps } from "@/interfaces/common";
+import { ContentLayout } from "@/ui/ContentLayout";
+import { Text } from "@/ui/Text";
 
 import RegistrationPageStyle from "./RegistrationPage.module.css";
 

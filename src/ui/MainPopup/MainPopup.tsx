@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC, MouseEventHandler } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 import { Overlay } from "../Overlay";
 import { PopupHeader } from "../PopupHeader";
 

@@ -3,13 +3,13 @@ import Joi from "joi";
 import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { LoginRequest } from "../../interfaces/requests";
-import { Button } from "../../ui/Button";
-import { login } from "../../models/User";
+import { LoginRequest } from "@/interfaces/requests";
+import { Button } from "@/ui/Button";
+import { login } from "@/models/User";
 import { Location, useNavigate } from "react-router-dom";
-import { useLocationState } from "../../hooks";
+import { useLocationState } from "@/hooks";
 import { TextField } from "../TextField";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 import { Checkbox } from "../Checkbox";
 
 import LoginFormStyle from "./LoginForm.module.css";

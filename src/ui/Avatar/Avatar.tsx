@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { ClassNameProps } from "../../interfaces/common";
-import { Color, Size } from "../../interfaces/ui";
+import { ClassNameProps } from "@/interfaces/common";
+import { Color, Size } from "@/interfaces/ui";
 import { Picture } from "../Picture";
 
 import AvatarStyle from "./Avatar.module.css";

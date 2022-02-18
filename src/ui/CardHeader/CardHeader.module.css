@@ -1,0 +1,12 @@
+.header {
+	display: grid;
+
+	grid-template-columns: 1fr min-content;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.secondaryAction {
+	min-width: 0px;
+	max-width: 64px;
+}

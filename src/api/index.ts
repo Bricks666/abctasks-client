@@ -4,6 +4,7 @@ export {
 	getTaskGroupsApi,
 	createTaskApi,
 	editTaskApi,
+	deleteTaskApi,
 } from "./tasks";
 export {
 	authApi,

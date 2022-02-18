@@ -1,66 +1,15 @@
-import { createGroupsMap } from "./../../utils/createGroupsMap";
 import { combine, createDomain } from "effector-logger";
-import { DateType, HEX } from "../../interfaces/common";
 import {
-	TaskResponse,
 	TaskGroupsResponse,
 	TasksProgressResponse,
 	TasksResponse,
-} from "../../interfaces/response";
-import { combineProgressAndGroup, combineTaskAndGroup } from "../../utils";
-import { EditTaskRequest, TaskRequest } from "../../interfaces/requests";
-import { CreateTaskResponse } from "../../interfaces/response/CreateTaskResponse";
+	DeleteTaskResponse,
+} from "@/interfaces/response";
+import { EditTaskRequest, TaskRequest } from "@/interfaces/requests";
+import { CreateTaskResponse } from "@/interfaces/response/CreateTaskResponse";
+import { combineProgressAndGroup, combineTaskAndGroup, createGroupsMap } from "./utils";
+import { GroupedByStatusTasksStore, StatusNamesStore, TaskGroup, TaskGroupsMap, TaskProgressStructure, TaskStatus, TaskStructure, TaskWithGroup } from "./types";
 
-export type TaskStatus = "Done" | "Ready" | "Review" | "In Progress";
-
-export interface TaskAuthor {
-	readonly name: string;
-	readonly photo: string | null;
-}
-
-export interface TaskStructure {
-	readonly id: number;
-	readonly groupId: number;
-	readonly status: TaskStatus;
-	readonly content: string;
-	readonly commentCount: number;
-	readonly addedDate: DateType;
-	readonly author: TaskAuthor;
-}
-export interface TaskWithGroup extends Omit<TaskStructure, "groupId"> {
-	readonly group: TaskGroup;
-}
-
-export interface GroupedByStatusTasksStore {
-	readonly ready: TaskWithGroup[];
-	readonly inProgress: TaskWithGroup[];
-	readonly needReview: TaskWithGroup[];
-	readonly done: TaskWithGroup[];
-}
-export interface TaskGroup {
-	readonly id: number;
-	readonly name: string;
-	readonly mainColor: HEX;
-	readonly secondColor: HEX;
-}
-
-export interface TaskGroupsMap {
-	[id: number]: TaskGroup;
-}
-
-export interface TaskProgressStructure {
-	readonly groupId: number;
-	readonly completedCount: number;
-	readonly totalCount: number;
-}
-
-export interface TaskProgressWithGroup
-	extends Omit<TaskProgressStructure, "groupId">,
-		TaskGroup {}
-
-export type StatusNamesStore = {
-	readonly [key in keyof GroupedByStatusTasksStore]: TaskStatus;
-};
 
 export const TasksDomain = createDomain("TasksDomain");
 
@@ -122,6 +71,7 @@ export const $GroupedByStatusTasksStore = combine<
 	needReview: createGrouper("Review")(tasks),
 }));
 
+/* TODO: Сделать валидацию запуска эффектов по их параметрам(чтобы два одинаковых не летели одновременно) */
 export const loadTasksFx = TasksDomain.createEffect<void, TasksResponse>(
 	"loadTasksFx"
 );
@@ -141,6 +91,10 @@ export const editTaskFx = TasksDomain.createEffect<
 	EditTaskRequest,
 	CreateTaskResponse
 >("editTasksFx");
+export const deleteTaskFx = TasksDomain.createEffect<
+	number,
+	DeleteTaskResponse
+>("deleteTaskFx");
 
 export const loadTasks = TasksDomain.createEvent("loadTasks");
 export const loadTasksProgress = TasksDomain.createEvent("loadTasksProgress");
@@ -149,3 +103,4 @@ export const createTask =
 	TasksDomain.createEvent<TaskRequest>("createTaskEvent");
 export const editTask =
 	TasksDomain.createEvent<EditTaskRequest>("editTaskEvent");
+export const deleteTask = TasksDomain.createEvent<number>("deleteTaskEvent");

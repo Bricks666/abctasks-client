@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC, memo, ReactElement } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 
 import LoadingWrapperStyle from "./LoadingWrapper.module.css";
 

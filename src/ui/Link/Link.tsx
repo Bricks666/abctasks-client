@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { FC } from "react";
 import { LinkProps, Link as ReactLink } from "react-router-dom";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 
 import LinkStyle from "./Link.module.css";
 

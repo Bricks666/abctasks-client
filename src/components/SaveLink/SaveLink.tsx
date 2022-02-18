@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { useLocation } from "react-router-dom";
-import { useLocationState } from "../../hooks";
-import { ClassNameProps } from "../../interfaces/common";
-import { Link } from "../../ui/Link";
+import { useLocationState } from "@/hooks";
+import { ClassNameProps } from "@/interfaces/common";
+import { Link } from "@/ui/Link";
 
 interface SaveLinkComponent extends ClassNameProps {
 	to: string;

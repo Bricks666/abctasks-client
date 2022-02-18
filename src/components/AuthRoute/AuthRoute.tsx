@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useIsLogin } from "../../hooks";
+import { useIsLogin } from "@/hooks";
 
 export const AuthRoute: FC = ({ children }) => {
 	const isLogin = useIsLogin();

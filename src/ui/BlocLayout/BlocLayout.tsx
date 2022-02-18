@@ -1,6 +1,6 @@
 import React, { FC, memo } from "react";
 import classNames from "classnames";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 
 import BlocLayoutStyle from "./BlocLayout.module.css";
 

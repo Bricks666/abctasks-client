@@ -1,5 +1,5 @@
 import { createDomain } from "effector-logger";
-import { LoginRequest, RegistrationRequest } from "../../interfaces/requests";
+import { LoginRequest, RegistrationRequest } from "@/interfaces/requests";
 
 export interface User {
 	readonly userId: number;

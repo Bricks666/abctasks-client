@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC, ImgHTMLAttributes, memo } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 
 import PictureStyle from "./Picture.module.css";
 

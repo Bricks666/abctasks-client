@@ -6,7 +6,7 @@ import React, {
 	HTMLInputTypeAttribute,
 	Ref,
 } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 import { Input } from "../Input";
 import { InputLabel } from "../InputLabel";
 import { Textarea } from "../Textarea";

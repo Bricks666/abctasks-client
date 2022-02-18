@@ -7,6 +7,8 @@ import {
 	$TasksProgress,
 	createTask,
 	createTaskFx,
+	deleteTask,
+	deleteTaskFx,
 	editTask,
 	editTaskFx,
 	loadTaskGroups,
@@ -15,7 +17,6 @@ import {
 	loadTasksFx,
 	loadTasksProgress,
 	loadTasksProgressFx,
-	TaskProgressStructure,
 } from ".";
 import {
 	getTaskGroupsApi,
@@ -23,24 +24,29 @@ import {
 	getTasksProgressApi,
 	createTaskApi,
 	editTaskApi,
-} from "../../api";
+	deleteTaskApi,
+} from "@/api";
+import { mayStartFxHandler } from "../handlers";
 import {
-	toValidTask,
-	toValidTaskGroup,
-	toValidTaskProgress,
-} from "../../utils";
+	changeTaskProgressHandler,
+	incrementTaskProgressHandler,
+	editTaskHandler,
+	deleteTaskProgressHandler,
+} from "./handlers";
+import { toValidTask, toValidTaskGroup, toValidTaskProgress } from "./utils";
 
 loadTasksFx.use(getTasksApi);
 loadTaskGroupsFx.use(getTaskGroupsApi);
 loadTasksProgressFx.use(getTasksProgressApi);
 createTaskFx.use(createTaskApi);
 editTaskFx.use(editTaskApi);
+deleteTaskFx.use(deleteTaskApi);
 
 guard({
 	clock: loadTasks,
 	filter: sample({
 		clock: loadTasksFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: loadTasksFx,
 });
@@ -60,7 +66,7 @@ guard({
 	clock: loadTasksProgress,
 	filter: sample({
 		clock: loadTasksProgressFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: loadTasksProgressFx,
 });
@@ -81,7 +87,7 @@ guard({
 	clock: loadTaskGroups,
 	filter: sample({
 		clock: loadTaskGroupsFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: loadTaskGroupsFx,
 });
@@ -101,7 +107,7 @@ guard({
 	clock: createTask,
 	filter: sample({
 		clock: createTaskFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: createTaskFx,
 });
@@ -116,32 +122,7 @@ sample({
 sample({
 	source: $TasksProgress,
 	clock: createTaskFx.doneData,
-	fn: (currentState, { task }) => {
-		let thisGroupWas = false;
-		const isDoneTask = task.status === "Done";
-
-		const tasksProgress = currentState.map((progress) => {
-			if (progress.groupId === task.groupId) {
-				thisGroupWas = true;
-				return {
-					...progress,
-					completedCount: progress.completedCount + +isDoneTask,
-					totalCount: progress.totalCount + 1,
-				};
-			}
-			return progress;
-		});
-
-		if (!thisGroupWas) {
-			tasksProgress.push({
-				groupId: task.groupId,
-				completedCount: +isDoneTask,
-				totalCount: 1,
-			});
-		}
-
-		return tasksProgress;
-	},
+	fn: incrementTaskProgressHandler,
 	target: $TasksProgress,
 });
 
@@ -149,7 +130,7 @@ guard({
 	clock: editTask,
 	filter: sample({
 		source: editTaskFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: editTaskFx,
 });
@@ -157,52 +138,38 @@ guard({
 sample({
 	source: $Tasks,
 	clock: editTaskFx.doneData,
-	fn: (tasks, { task }) => {
-		const validTask = toValidTask(task);
-
-		return tasks.map((task) => (task.id === validTask.id ? validTask : task));
-	},
+	fn: editTaskHandler,
 	target: $Tasks,
 });
 
 sample({
 	source: [$TasksProgress, $Tasks],
-	clock: editTaskFx.done,
-	fn: ([state, tasks], { params, result }) => {
-		const { id } = params;
-		debugger;
-		const prevTask = tasks.find((task) => task.id === id);
-		if (!prevTask) {
-			return state;
-		}
-		const { groupId: prevGroup, status: prevStatus } = prevTask;
-		const { groupId: nextGroup, status: nextStatus } = result.task;
-		if (prevGroup === nextGroup) {
-			return state;
-		}
+	clock: editTaskFx.doneData,
+	fn: changeTaskProgressHandler,
+	target: $TasksProgress,
+});
 
-		const isWasDone = prevStatus === "Done";
-		const isNowDone = nextStatus === "Done";
+guard({
+	clock: deleteTask,
+	filter: sample({
+		source: deleteTaskFx.pending,
+		fn: mayStartFxHandler,
+	}),
+	target: deleteTaskFx,
+});
 
-		return state.map((progress) => {
-			if (progress.groupId === prevGroup) {
-				return {
-					...progress,
-					totalCount: progress.totalCount - 1,
-					completedCount: progress.completedCount - +isWasDone,
-				};
-			}
-
-			if (progress.groupId === nextGroup) {
-				return {
-					...progress,
-					totalCount: progress.totalCount + 1,
-					completedCount: progress.completedCount + +isNowDone,
-				};
-			}
-
-			return progress;
-		});
+sample({
+	source: $Tasks,
+	clock: deleteTaskFx.doneData,
+	fn: (tasks, { taskId }) => {
+		return tasks.filter((task) => task.id !== taskId);
 	},
+	target: $Tasks,
+});
+
+sample({
+	source: [$Tasks, $TasksProgress],
+	clock: deleteTaskFx.doneData,
+	fn: deleteTaskProgressHandler,
 	target: $TasksProgress,
 });

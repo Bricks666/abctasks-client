@@ -2,12 +2,14 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MinCssExtractPlugin = require("mini-css-extract-plugin");
 const CaseSensitivePlugin = require("case-sensitive-paths-webpack-plugin");
+const { TsconfigPathsPlugin } = require("tsconfig-paths-webpack-plugin");
+const paths = require("./paths");
 
 const assetsReg = /\.(svg|png|j(e?)pg)$/;
 
 const plugins = (isDev) => [
 	new HtmlWebpackPlugin({
-		template: "./public/index.html",
+		template: path.join(paths.public, "index.html"),
 		minify: isDev
 			? false
 			: {
@@ -29,7 +31,15 @@ const rules = (isDev) => [
 	{
 		test: /\.ts(x?)$/,
 		exclude: /node_modules/,
-		use: ["babel-loader", "ts-loader"],
+		use: [
+			"babel-loader",
+			{
+				loader: "ts-loader",
+				options: {
+					configFile: path.join(paths.root, "tsconfig.json"),
+				},
+			},
+		],
 	},
 	{
 		test: assetsReg,
@@ -62,15 +72,20 @@ module.exports = (_, args) => {
 
 	/** @type {import('webpack').Configuration} */
 	const config = {
-		entry: path.resolve(__dirname, "..", "src", "index.tsx"),
+		entry: path.join(paths.src, "index.tsx"),
 		output: {
-			path: path.resolve(__dirname, "../dist"),
+			path: paths.build,
 			filename: "[name].js",
 			publicPath: "/",
 			chunkFilename: "[name].js",
 			clean: true,
 		},
 		resolve: {
+			plugins: [
+				new TsconfigPathsPlugin({
+					configFile: path.join(paths.root, "tsconfig.json"),
+				}),
+			],
 			extensions: [".ts", ".tsx", ".js", ".jsx"],
 		},
 		externals: "/node_modules/",

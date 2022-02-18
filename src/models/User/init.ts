@@ -19,7 +19,8 @@ import {
 	logoutApi,
 	refreshApi,
 	registrationApi,
-} from "../../api";
+} from "@/api";
+import { mayStartFxHandler } from "../handlers";
 
 authFx.use(async () => {
 	const response = await authApi();
@@ -48,7 +49,7 @@ guard({
 	clock: login,
 	filter: sample({
 		clock: loginFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: loginFx,
 });
@@ -57,7 +58,7 @@ guard({
 	clock: auth,
 	filter: sample({
 		clock: authFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: authFx,
 });
@@ -72,7 +73,7 @@ guard({
 	clock: logout,
 	filter: sample({
 		clock: logoutFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: logoutFx,
 });
@@ -81,7 +82,7 @@ guard({
 	clock: refresh,
 	filter: sample({
 		clock: refreshFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: refreshFx,
 });
@@ -96,7 +97,7 @@ guard({
 	clock: registration,
 	filter: sample({
 		clock: registrationFx.pending,
-		fn: (isLoading) => !isLoading,
+		fn: mayStartFxHandler,
 	}),
 	target: registrationFx,
 });

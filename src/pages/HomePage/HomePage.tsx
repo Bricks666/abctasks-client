@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-import { ClassNameProps } from "../../interfaces/common";
-import { Text } from "../../ui/Text";
-import { ContentLayout } from "../../ui/ContentLayout";
-import { Aside } from "../../ui/Aside";
-import { TasksProgress } from "../../components/TasksProgress";
-import { Tasks } from "../../components/Tasks";
+import { ClassNameProps } from "@/interfaces/common";
+import { Text } from "@/ui/Text";
+import { ContentLayout } from "@/ui/ContentLayout";
+import { Aside } from "@/ui/Aside";
+import { TasksProgress } from "@/components/TasksProgress";
+import { Tasks } from "@/components/Tasks";
 
 import HomePageStyle from "./HomePage.module.css";
 

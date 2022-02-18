@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC, memo } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 import { SvgIcon } from "../SvgIcon";
 
 import DotsIconStyle from "./DotsIcon.module.css";

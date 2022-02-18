@@ -6,8 +6,8 @@ import React, {
 	PropsWithChildren,
 	Ref,
 } from "react";
-import { ClassNameProps } from "../../interfaces/common";
-import { Color, Size } from "../../interfaces/ui";
+import { ClassNameProps } from "@/interfaces/common";
+import { Color, Size } from "@/interfaces/ui";
 import { InputLabel } from "../InputLabel";
 
 import CheckboxStyle from "./Checkbox.module.css";

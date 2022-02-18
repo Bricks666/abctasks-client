@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { TaskProgressWithGroup } from "../../models/Tasks";
-import { ClassNameProps } from "../../interfaces/common";
-import { ProgressBar } from "../../ui/ProgressBar";
+import { TaskProgressWithGroup } from "@/models/Tasks/types";
+import { ClassNameProps } from "@/interfaces/common";
+import { ProgressBar } from "@/ui/ProgressBar";
 
 interface TaskProgressComponent
 	extends ClassNameProps,

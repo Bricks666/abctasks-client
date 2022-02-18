@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 import { SvgIcon } from "../SvgIcon";
 
 import CrossIconStyle from "./CrossIcon.module.css";

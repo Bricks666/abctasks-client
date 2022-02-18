@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { LoginForm } from "../../components/LoginForm";
-import { SaveLink } from "../../components/SaveLink";
-import { ClassNameProps } from "../../interfaces/common";
-import { ContentLayout } from "../../ui/ContentLayout";
-import { Text } from "../../ui/Text";
+import { LoginForm } from "@/components/LoginForm";
+import { SaveLink } from "@/components/SaveLink";
+import { ClassNameProps } from "@/interfaces/common";
+import { ContentLayout } from "@/ui/ContentLayout";
+import { Text } from "@/ui/Text";
 
 import LoginPageStyle from "./LoginPage.module.css";
 

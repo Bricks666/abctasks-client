@@ -1,6 +1,7 @@
 const path = require("path");
 const { HotModuleReplacementPlugin } = require("webpack");
 const { default: merge } = require("webpack-merge");
+const paths = require("./paths");
 const common = require("./webpack.common");
 
 module.exports = (env, args) => {
@@ -12,10 +13,10 @@ module.exports = (env, args) => {
 		devtool: "source-map",
 		devServer: {
 			static: {
-				directory: path.resolve(__dirname, "..", "dist"),
+				directory: paths.build,
 				publicPath: "/",
 			},
-			port: 9000,
+			port: 3000,
 			open: args.open ?? true,
 			historyApiFallback: true,
 			compress: true,

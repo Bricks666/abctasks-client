@@ -3,16 +3,15 @@ import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { ClassNameProps } from "../../interfaces/common";
-import { RegistrationRequest } from "../../interfaces/requests";
-import { Input } from "../../ui/Input";
-import { registration } from "../../models/User";
+import { ClassNameProps } from "@/interfaces/common";
+import { RegistrationRequest } from "@/interfaces/requests";
+import { registration } from "@/models/User";
 import { Location, useNavigate } from "react-router-dom";
-import { useLocationState } from "../../hooks";
-import { Button } from "../../ui/Button";
+import { useLocationState } from "@/hooks";
+import { Button } from "@/ui/Button";
+import { TextField } from "../TextField";
 
 import RegistrationFormStyle from "./RegistrationForm.module.css";
-import { TextField } from "../TextField";
 
 const initialValues: RegistrationRequest = {
 	login: "",

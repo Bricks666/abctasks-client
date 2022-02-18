@@ -1,7 +1,7 @@
 import React, { memo, CSSProperties } from "react";
 import classNames from "classnames";
-import { ClassNameProps } from "../../interfaces/common";
-import { TaskGroup } from "../../models/Tasks";
+import { ClassNameProps } from "@/interfaces/common";
+import { TaskGroup } from "@/models/Tasks/types";
 import { Text } from "../Text";
 
 import GroupStyle from "./Group.module.css";

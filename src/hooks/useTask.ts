@@ -1,5 +1,5 @@
 import { useTasksWithGroups } from ".";
-import { TaskWithGroup } from "../models/Tasks";
+import { TaskWithGroup } from "@/models/Tasks/types";
 
 export const useTask = (
 	taskId: number | string | null

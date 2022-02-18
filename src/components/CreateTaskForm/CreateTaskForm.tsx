@@ -1,12 +1,13 @@
 import classNames from "classnames";
 import React, { FC, useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { GET_PARAMS } from "../../const";
-import { useGetParam, useGroupSelector } from "../../hooks";
-import { ClassNameProps } from "../../interfaces/common";
-import { createTask, TaskStatus } from "../../models/Tasks";
-import { Button } from "../../ui/Button";
-import { Select, SelectValues } from "../../ui/Select";
+import { GET_PARAMS } from "@/const";
+import { useGetParam, useGroupSelector } from "@/hooks";
+import { ClassNameProps } from "@/interfaces/common";
+import { createTask } from "@/models/Tasks";
+import { TaskStatus } from "@/models/Tasks/types";
+import { Button } from "@/ui/Button";
+import { Select, SelectValues } from "@/ui/Select";
 import { TextField } from "../TextField";
 
 import TaskFormStyle from "./CreateTaskForm.module.css";

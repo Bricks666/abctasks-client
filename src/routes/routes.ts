@@ -1,5 +1,5 @@
 import { ComponentType } from "react";
-import { HomePage, LoginPage, RegistrationPage } from "../pages";
+import { HomePage, LoginPage, RegistrationPage } from "@/pages";
 
 interface Route {
 	readonly path: string;

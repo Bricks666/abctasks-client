@@ -1,7 +1,7 @@
 import React, { ComponentType, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { POPUPS } from "../../const";
-import { usePopups } from "../../hooks";
+import { POPUPS } from "@/const";
+import { usePopups } from "@/hooks";
 import { CreateTaskPopup } from "../CreateTaskPopup";
 import { EditTaskPopup } from "../EditTaskPopup";
 

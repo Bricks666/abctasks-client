@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-import { useStatuses, useTasks } from "../../hooks";
-import { ClassNameProps } from "../../interfaces/common";
+import { useStatuses, useTasks } from "@/hooks";
+import { ClassNameProps } from "@/interfaces/common";
 import { TasksList } from "../TasksList";
 
 import TasksStyle from "./Tasks.module.css";

@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC, memo, ReactText } from "react";
 import classNames from "classnames";
-import { HEX, ClassNameProps } from "../../interfaces/common";
+import { HEX, ClassNameProps } from "@/interfaces/common";
 
 import ProgressBarStyle from "./ProgressBar.module.css";
 import { Text } from "../Text";

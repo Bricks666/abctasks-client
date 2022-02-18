@@ -1,6 +1,7 @@
 import React, { FC, MouseEventHandler, useState, useCallback } from "react";
 import { To } from "react-router-dom";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
+import { Size } from "@/interfaces/ui";
 import { DotsIcon } from "../DotsIcon";
 import { IconButton } from "../IconButton";
 import { List } from "../List";
@@ -20,9 +21,14 @@ interface EditMenuContent {
 
 interface EditMenuComponent extends ClassNameProps {
 	readonly content: EditMenuContent[];
+	readonly size?: Size;
 }
 
-export const EditMenu: FC<EditMenuComponent> = ({ content, className }) => {
+export const EditMenu: FC<EditMenuComponent> = ({
+	content,
+	className,
+	size,
+}) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [reference, setReference] = useState<HTMLElement | null>(null);
 
@@ -39,6 +45,7 @@ export const EditMenu: FC<EditMenuComponent> = ({ content, className }) => {
 				<IconButton
 					className={EditMenuStyle.button}
 					onClick={isOpen ? onClose : onOpen}
+					size={size}
 				>
 					<DotsIcon />
 				</IconButton>

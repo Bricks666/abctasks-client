@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { createElement, CSSProperties, FC, memo } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 
 import TextStyle from "./Text.module.css";
 

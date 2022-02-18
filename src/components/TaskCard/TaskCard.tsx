@@ -1,15 +1,17 @@
 import classNames from "classnames";
 import dayjs from "dayjs";
 import React, { FC, memo } from "react";
-import { GET_PARAMS, POPUPS } from "../../const";
-import { usePrepareLink } from "../../hooks";
-import { ClassNameProps } from "../../interfaces/common";
-import { TaskWithGroup } from "../../models/Tasks";
-import { Avatar } from "../../ui/Avatar";
-import { Card } from "../../ui/Card";
-import { EditMenu } from "../../ui/EditMenu";
-import { Group } from "../../ui/Group";
-import { Text } from "../../ui/Text";
+import { GET_PARAMS, POPUPS } from "@/const";
+import { usePrepareLink } from "@/hooks";
+import { ClassNameProps } from "@/interfaces/common";
+import { deleteTask } from "@/models/Tasks";
+import { TaskWithGroup } from "@/models/Tasks/types";
+import { Avatar } from "@/ui/Avatar";
+import { Card } from "@/ui/Card";
+import { CardHeader } from "@/ui/CardHeader";
+import { EditMenu } from "@/ui/EditMenu";
+import { Group } from "@/ui/Group";
+import { Text } from "@/ui/Text";
 
 import TaskCardStyle from "./TaskCard.module.css";
 
@@ -28,11 +30,19 @@ export const TaskCard: FC<TaskCardComponent> = memo(
 				label: "Edit",
 				to: editLink,
 			},
+			{
+				label: "Delete",
+				onClick: () => deleteTask(id),
+			},
 		];
 		return (
 			<Card className={classNames(TaskCardStyle.card, className)}>
-				<Group {...group} />
-				<EditMenu content={manipulations} />
+				<CardHeader
+					secondaryAction={<EditMenu content={manipulations} size="small" />}
+				>
+					<Group {...group} />
+				</CardHeader>
+
 				<Text className={TaskCardStyle.content}>{content}</Text>
 				{/* Возможно стоит вынести в отдельный компонент */}
 				<div className={TaskCardStyle.additionInfo}>

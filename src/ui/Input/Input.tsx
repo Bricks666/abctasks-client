@@ -6,7 +6,7 @@ import React, {
 	FocusEventHandler,
 	forwardRef,
 } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 
 import InputStyle from "./Input.module.css";
 

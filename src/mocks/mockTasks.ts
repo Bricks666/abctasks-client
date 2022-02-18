@@ -1,4 +1,4 @@
-import { TaskAuthor, TaskStructure } from "../models/Tasks";
+import { TaskAuthor, TaskStructure } from "../models/Tasks/types";
 
 const mockAuthor: TaskAuthor = {
 	name: "John",

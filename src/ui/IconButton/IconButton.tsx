@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { ClassNameProps } from "../../interfaces/common";
-import { Size } from "../../interfaces/ui";
+import { ClassNameProps } from "@/interfaces/common";
+import { Size } from "@/interfaces/ui";
 import { BaseButton, BaseButtonProps } from "../BaseButton";
 
 import IconButtonStyle from "./IconButton.module.css";

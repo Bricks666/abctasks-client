@@ -1,4 +1,4 @@
-import { TaskStatus } from "../../models/Tasks";
+import { TaskStatus } from "@/models/Tasks/types";
 
 export interface TaskRequest {
 	readonly content: string;

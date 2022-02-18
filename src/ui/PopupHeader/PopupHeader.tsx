@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FC, MouseEventHandler, ReactNode } from "react";
-import { ClassNameProps } from "../../interfaces/common";
+import { ClassNameProps } from "@/interfaces/common";
 import { CrossIcon } from "../CrossIcon/CrossIcon";
 import { IconButton } from "../IconButton";
 import { Text } from "../Text";

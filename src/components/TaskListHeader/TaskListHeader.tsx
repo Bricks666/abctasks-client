@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { GET_PARAMS, POPUPS } from "../../const";
-import { usePrepareLink } from "../../hooks";
-import { ClassNameProps, ExtractProps } from "../../interfaces/common";
-import { Card } from "../../ui/Card";
-import { EditMenu } from "../../ui/EditMenu";
-import { Text } from "../../ui/Text";
+import { GET_PARAMS, POPUPS } from "@/const";
+import { usePrepareLink } from "@/hooks";
+import { ClassNameProps, ExtractProps } from "@/interfaces/common";
+import { Card } from "@/ui/Card";
+import { EditMenu } from "@/ui/EditMenu";
+import { Text } from "@/ui/Text";
 
 import TaskListHeaderStyle from "./TaskListHeader.module.css";
 
