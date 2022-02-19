@@ -9,9 +9,10 @@ import { TaskWithGroup } from "@/models/Tasks/types";
 import { Avatar } from "@/ui/Avatar";
 import { Card } from "@/ui/Card";
 import { CardHeader } from "@/ui/CardHeader";
-import { EditMenu } from "@/ui/EditMenu";
+import { EditMenu } from "../EditMenu";
 import { Group } from "@/ui/Group";
 import { Text } from "@/ui/Text";
+import { MenuOption } from "@/ui/Menu";
 
 import TaskCardStyle from "./TaskCard.module.css";
 
@@ -25,7 +26,7 @@ export const TaskCard: FC<TaskCardComponent> = memo(
 				[GET_PARAMS.taskId]: id.toString(),
 			},
 		});
-		const manipulations = [
+		const options: MenuOption[] = [
 			{
 				label: "Edit",
 				to: editLink,
@@ -39,7 +40,7 @@ export const TaskCard: FC<TaskCardComponent> = memo(
 		return (
 			<Card className={classNames(TaskCardStyle.card, className)}>
 				<CardHeader
-					secondaryAction={<EditMenu content={manipulations} size="small" />}
+					secondaryAction={<EditMenu options={options} size="small" />}
 				>
 					<Group {...group} />
 				</CardHeader>

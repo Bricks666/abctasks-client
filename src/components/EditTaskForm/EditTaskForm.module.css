@@ -9,3 +9,8 @@
 .textarea {
 	grid-column: span 2;
 }
+
+.button {
+	grid-column: 2;
+	justify-self: end;
+}

@@ -16,3 +16,5 @@ export { useTaskGroups } from "./useTaskGroups";
 export { useTasksWithGroups } from "./useTasksWithGroups";
 export { useGroupSelector } from "./useGroupSelector";
 export { useStatusesSelect } from "./useStatusesSelect";
+export { usePageTitle } from "./usePageTitle";
+export { useUserInfo } from "./useUserInfo";

@@ -1,31 +1,19 @@
-import React, { FC, MouseEventHandler, useState, useCallback } from "react";
-import { To } from "react-router-dom";
+import React, { FC, useState, useCallback } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 import { Size } from "@/interfaces/ui";
-import { DotsIcon } from "../DotsIcon";
-import { IconButton } from "../IconButton";
-import { List } from "../List";
-import { ListItem } from "../ListItem";
-import { ListItemButton } from "../ListItemButton";
-import { Popover } from "../Popover";
-import { Text } from "../Text";
+import { DotsIcon } from "@/ui/DotsIcon";
+import { IconButton } from "@/ui/IconButton";
+import { Menu, MenuOption } from "@/ui/Menu";
 
 import EditMenuStyle from "./EditMenu.module.css";
 
-interface EditMenuContent {
-	readonly label: string;
-	readonly onClick?: MouseEventHandler<HTMLButtonElement>;
-	readonly to?: To;
-	readonly disabled?: boolean;
-}
-
 interface EditMenuComponent extends ClassNameProps {
-	readonly content: EditMenuContent[];
+	readonly options: MenuOption[];
 	readonly size?: Size;
 }
 
 export const EditMenu: FC<EditMenuComponent> = ({
-	content,
+	options,
 	className,
 	size,
 }) => {
@@ -50,24 +38,13 @@ export const EditMenu: FC<EditMenuComponent> = ({
 					<DotsIcon />
 				</IconButton>
 			</div>
-			<Popover
+			<Menu
 				reference={reference}
 				isOpen={isOpen}
 				onClose={onClose}
+				options={options}
 				placement="bottom-end"
-			>
-				<List className={EditMenuStyle.list}>
-					{content.map(({ label, ...button }, i) => {
-						return (
-							<ListItem key={i}>
-								<ListItemButton {...button}>
-									<Text component="span">{label}</Text>
-								</ListItemButton>
-							</ListItem>
-						);
-					})}
-				</List>
-			</Popover>
+			/>
 		</div>
 	);
 };

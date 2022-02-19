@@ -12,6 +12,7 @@ import {
 	registration,
 	auth,
 	refresh,
+	$User,
 } from ".";
 import {
 	authApi,
@@ -67,6 +68,11 @@ sample({
 	clock: [loginFx.done, authFx.done],
 	fn: () => true,
 	target: $Login,
+});
+
+forward({
+	from: [loginFx.doneData, authFx.doneData],
+	to: $User,
 });
 
 guard({

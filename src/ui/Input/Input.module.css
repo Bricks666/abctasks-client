@@ -1,10 +1,12 @@
 .input {
-	padding: 1rem;
+	padding: 12px;
 
 	font-size: var(--input-font-size);
 
 	border-radius: 8px;
 	border-color: rgba(99, 99, 99, 0.2);
+
+  background-color: white;
 }
 
 
@@ -15,6 +17,7 @@
 .input:focus-visible {
 	outline: 2px solid var(--primary);
 }
+
 
 @media (min-width: 600px) {
 	.input {

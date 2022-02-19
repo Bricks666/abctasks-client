@@ -4,10 +4,12 @@ import { SaveLink } from "@/components/SaveLink";
 import { ClassNameProps } from "@/interfaces/common";
 import { ContentLayout } from "@/ui/ContentLayout";
 import { Text } from "@/ui/Text";
+import { usePageTitle } from "@/hooks";
 
 import RegistrationPageStyle from "./RegistrationPage.module.css";
 
 export const RegistrationPage: FC<ClassNameProps> = ({ className }) => {
+	usePageTitle("Registration");
 	return (
 		<main className={className}>
 			<ContentLayout className={RegistrationPageStyle.layout}>

@@ -1,0 +1,11 @@
+.block {
+	background-color: white;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.square {
+  border-radius: none;
+}

@@ -5,6 +5,8 @@
 	width: var(--size);
 	height: var(--size);
 
+  font-size: var(--size);
+
 	padding: calc(var(--size) / 6);
 
 	background-color: white;

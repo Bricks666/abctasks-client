@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { FC, memo } from "react";
 import { ClassNameProps } from "@/interfaces/common";
+import { Block } from "../Block";
 
 import CardStyle from "./Card.module.css";
 
@@ -18,6 +19,6 @@ export const Card: FC<CardProps> = memo(
 			},
 			className
 		);
-		return <div className={classes}>{children}</div>;
+		return <Block className={classes}>{children}</Block>;
 	}
 );

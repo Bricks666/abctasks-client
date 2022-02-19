@@ -29,13 +29,14 @@ export const ProgressBar: FC<ProgressBarProps> = memo(
 		};
 		const progress: CSSProperties = {
 			backgroundColor: progressbarColor || "blue",
-			width: `${(currentValue / maxValue) * 100}%`,
+			transform: `scaleX(${(currentValue / maxValue) * 100}%)`,
 		};
 
 		return (
 			<label className={classNames(ProgressBarStyle.label, className)}>
 				{children}
-				<Text component="span"
+				<Text
+					component="span"
 					className={ProgressBarStyle.progressNumbers}
 				>{`${currentValue}/${maxValue}`}</Text>
 				<div className={ProgressBarStyle.progressbar} style={progressbarStyle}>
@@ -46,7 +47,7 @@ export const ProgressBar: FC<ProgressBarProps> = memo(
 						aria-valuemin={0}
 						aria-valuemax={maxValue}
 						aria-valuenow={currentValue}
-						aria-valuetext={ariaText}
+						aria-label={ariaText}
 					/>
 				</div>
 			</label>

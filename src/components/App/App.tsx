@@ -24,7 +24,12 @@ export const App: FC = () => {
 			isLoading={isAuthorizing}
 			loadingIndicator={<LoadingIndicator text="Загрузка..." />}
 		>
-			<Header />
+			<Routes>
+				<Route path="/login" element={null} />
+				<Route path="/registration" element={null} />
+				<Route path="*" element={<Header />} />
+			</Routes>
+
 			<Routes>
 				<Route path="/*" element={<Popups />}>
 					{routes.map(({ isOnlyAuth, path, Component }) => (

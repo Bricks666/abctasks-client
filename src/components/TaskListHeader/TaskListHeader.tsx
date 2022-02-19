@@ -2,18 +2,18 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import { GET_PARAMS, POPUPS } from "@/const";
 import { usePrepareLink } from "@/hooks";
-import { ClassNameProps, ExtractProps } from "@/interfaces/common";
-import { Card } from "@/ui/Card";
-import { EditMenu } from "@/ui/EditMenu";
+import { ClassNameProps } from "@/interfaces/common";
+import { EditMenu } from "../EditMenu";
 import { Text } from "@/ui/Text";
+import { Block } from "@/ui/Block";
+import { MenuOption } from "@/ui/Menu";
 
 import TaskListHeaderStyle from "./TaskListHeader.module.css";
+import { DotsIcon } from "@/ui/DotsIcon";
 
 interface TaskListHeaderComponent extends ClassNameProps {
 	readonly columnName: string;
 }
-
-type EditMenuContent = ExtractProps<typeof EditMenu>["content"];
 
 export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	children,
@@ -26,23 +26,24 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 			[GET_PARAMS.taskStatus]: columnName,
 		},
 	});
-	const editMenu: EditMenuContent = [
+	const options: MenuOption[] = [
 		{
 			label: "New Task",
 			to: editFormLink,
+      icon: <DotsIcon />
 		},
 	];
 
 	return (
 		<>
 			<header className={classNames(TaskListHeaderStyle.header, className)}>
-				<Card className={TaskListHeaderStyle.background} shadowOn="never">
+				<Block className={TaskListHeaderStyle.background}>
 					<Text component="h2">{children}</Text>
 					<EditMenu
 						className={TaskListHeaderStyle.editMenu}
-						content={editMenu}
+						options={options}
 					/>
-				</Card>
+				</Block>
 			</header>
 		</>
 	);

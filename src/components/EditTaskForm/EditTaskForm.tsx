@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable indent */
 import React, { FC, useCallback } from "react";
+import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GET_PARAMS } from "@/const";
 import {
@@ -18,7 +19,6 @@ import { Select, SelectValues } from "@/ui/Select";
 import { TextField } from "../TextField";
 
 import EditTaskFromStyle from "./EditTaskForm.module.css";
-import classNames from "classnames";
 
 interface EditTaskFormValues {
 	readonly content: string;
@@ -94,7 +94,9 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 				control={control}
 				multiline
 			/>
-			<Button disabled={!isDirty}>Save edit</Button>
+			<Button className={EditTaskFromStyle.button} disabled={!isDirty}>
+				Save edit
+			</Button>
 		</form>
 	);
 };

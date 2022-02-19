@@ -1,0 +1,9 @@
+.item {
+	color: var(--grey-darker);
+
+	transition: color 100ms ease-in;
+}
+
+.item:hover {
+	color: currentColor;
+}

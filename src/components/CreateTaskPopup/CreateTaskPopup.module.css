@@ -1,3 +1,11 @@
-.form {
-	width: 580px;
+@media (min-width: 600px) {
+	.form {
+		width: 580px;
+	}
+}
+
+@media (max-width: 600px) {
+	.form {
+		width: 100%;
+	}
 }

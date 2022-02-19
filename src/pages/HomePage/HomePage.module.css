@@ -1,36 +1,28 @@
 .layout {
 	display: grid;
 
+	min-height: 100%;
+
 	grid-template-columns: var(--template-columns);
-	grid-template-areas: var(--template-areas);
 	grid-template-rows: min-content 1fr;
-}
-
-.header {
-	grid-area: header;
-
-	padding: 2rem 0;
-}
-
-.tasks {
-	grid-area: tasks;
-}
-
-.aside {
-	grid-area: aside;
-
-	border-left: 1px solid #d9e0e9;
+	column-gap: 1em;
+  row-gap: 1em;
 }
 
 @media (min-width: 1300px) {
 	.layout {
 		--template-columns: 4fr 1fr;
-		--template-areas: "header aside" "tasks aside";
+	}
+
+	.aside {
+		padding: 0 1em;
+
+		border-left: 1px solid #d9e0e9;
 	}
 }
 
 @media (max-width: 1300px) {
 	.layout {
-		--template-areas: "header header" "tasks tasks" "aside aside";
+		--template-columns: 1fr;
 	}
 }

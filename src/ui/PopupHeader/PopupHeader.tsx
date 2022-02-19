@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { FC, MouseEventHandler, ReactNode } from "react";
 import { ClassNameProps } from "@/interfaces/common";
-import { CrossIcon } from "../CrossIcon/CrossIcon";
+import { CrossIcon } from "../CrossIcon";
 import { IconButton } from "../IconButton";
 import { Text } from "../Text";
 
@@ -26,8 +26,8 @@ export const PopupHeader: FC<PopupHeaderProps> = ({
 				</Text>
 			)}
 			{onClose && (
-				<IconButton className={PopupHeaderStyle.button} onClick={onClose}>
-					{closeIcon ?? <CrossIcon />}
+				<IconButton onClick={onClose}>
+					{closeIcon ?? <CrossIcon className={PopupHeaderStyle.icon} />}
 				</IconButton>
 			)}
 		</header>

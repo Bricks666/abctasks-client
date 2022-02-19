@@ -1,13 +1,14 @@
 import classNames from "classnames";
-import React, { FC, MouseEventHandler } from "react";
+import React, { FC, DOMAttributes } from "react";
 import { Link, To } from "react-router-dom";
 import { ClassNameProps } from "@/interfaces/common";
 
 import BaseButtonStyle from "./BaseButton.module.css";
 
 /* Переработать ссылку */
-export interface BaseButtonProps extends ClassNameProps {
-	readonly onClick?: MouseEventHandler;
+export interface BaseButtonProps
+	extends ClassNameProps,
+		DOMAttributes<HTMLButtonElement> {
 	readonly to?: To;
 	readonly disabled?: boolean;
 }
@@ -17,7 +18,7 @@ export const BaseButton: FC<BaseButtonProps> = ({
 	className,
 	disabled,
 	to,
-	onClick,
+	...props
 }) => {
 	const classes = classNames(BaseButtonStyle.button, className);
 	if (to) {
@@ -28,7 +29,7 @@ export const BaseButton: FC<BaseButtonProps> = ({
 		);
 	}
 	return (
-		<button className={classes} onClick={onClick} disabled={disabled}>
+		<button className={classes} disabled={disabled} {...props}>
 			{children}
 		</button>
 	);

@@ -1,0 +1,9 @@
+.layout {
+	display: flex;
+
+  padding: 1rem;
+}
+
+.avatar {
+	margin-left: auto;
+}

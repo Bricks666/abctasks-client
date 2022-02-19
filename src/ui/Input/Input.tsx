@@ -24,7 +24,11 @@ interface InputProps extends ClassNameProps {
 export const Input = memo(
 	forwardRef<HTMLInputElement, InputProps>(
 		({ className, type = "text", ...input }, ref) => {
-			const classes = classNames(InputStyle.input, className);
+			const classes = classNames(
+				InputStyle.input,
+				{ [InputStyle.color]: type === "color" },
+				className
+			);
 
 			return <input className={classes} type={type} {...input} ref={ref} />;
 		}
