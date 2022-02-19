@@ -5,11 +5,27 @@ import {
 	TasksResponse,
 	DeleteTaskResponse,
 } from "@/interfaces/response";
-import { EditTaskRequest, TaskRequest } from "@/interfaces/requests";
+import {
+	EditTaskRequest,
+	MoveTaskRequest,
+	TaskRequest,
+} from "@/interfaces/requests";
 import { CreateTaskResponse } from "@/interfaces/response/CreateTaskResponse";
-import { combineProgressAndGroup, combineTaskAndGroup, createGroupsMap } from "./utils";
-import { GroupedByStatusTasksStore, StatusNamesStore, TaskGroup, TaskGroupsMap, TaskProgressStructure, TaskStatus, TaskStructure, TaskWithGroup } from "./types";
-
+import {
+	combineProgressAndGroup,
+	combineTaskAndGroup,
+	createGroupsMap,
+} from "./utils";
+import {
+	GroupedByStatusTasksStore,
+	StatusNamesStore,
+	TaskGroup,
+	TaskGroupsMap,
+	TaskProgressStructure,
+	TaskStatus,
+	TaskStructure,
+	TaskWithGroup,
+} from "./types";
 
 export const TasksDomain = createDomain("TasksDomain");
 
@@ -104,3 +120,5 @@ export const createTask =
 export const editTask =
 	TasksDomain.createEvent<EditTaskRequest>("editTaskEvent");
 export const deleteTask = TasksDomain.createEvent<number>("deleteTaskEvent");
+export const moveTask =
+	TasksDomain.createEvent<MoveTaskRequest>("modeTaskEvent");

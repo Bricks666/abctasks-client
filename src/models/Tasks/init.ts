@@ -17,6 +17,7 @@ import {
 	loadTasksFx,
 	loadTasksProgress,
 	loadTasksProgressFx,
+	moveTask,
 } from ".";
 import {
 	getTaskGroupsApi,
@@ -172,4 +173,23 @@ sample({
 	clock: deleteTaskFx.doneData,
 	fn: deleteTaskProgressHandler,
 	target: $TasksProgress,
+});
+
+sample({
+	source: $Tasks,
+	clock: moveTask,
+	fn: (tasks, { status, taskId }) => {
+		const task = tasks.find((task) => task.id === taskId);
+		if (!task) {
+			throw new Error();
+		}
+
+		return {
+			status,
+			id: taskId,
+			groupId: task.groupId,
+			content: task.content,
+		};
+	},
+	target: editTask,
 });

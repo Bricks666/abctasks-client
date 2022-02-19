@@ -7,6 +7,36 @@ import { withoutNullValues } from "@/utils";
 import { TaskProgressStructure, TaskStructure } from "./types";
 import { toValidTask } from "./utils";
 
+const changedGroup = (
+	progress: TaskProgressStructure,
+	prevGroup: number,
+	nextGroup: number,
+	isWasDone: boolean,
+	isNowDone: boolean,
+	flags: { isNewGroup: boolean }
+) => {
+	if (progress.groupId === prevGroup) {
+		return progress.totalCount !== 1
+			? {
+					...progress,
+					totalCount: progress.totalCount - 1,
+					completedCount: progress.completedCount - +isWasDone,
+			  }
+			: null;
+	}
+
+	if (progress.groupId === nextGroup) {
+		flags.isNewGroup = false;
+		return {
+			...progress,
+			totalCount: progress.totalCount + 1,
+			completedCount: progress.completedCount + +isNowDone,
+		};
+	}
+
+	return progress;
+};
+
 export const changeTaskProgressHandler = (
 	[state, tasks]: [TaskProgressStructure[], TaskStructure[]],
 	{ task: nextTask }: CreateTaskResponse
@@ -19,48 +49,49 @@ export const changeTaskProgressHandler = (
 	const { groupId: prevGroup, status: prevStatus } = prevTask;
 	const { groupId: nextGroup, status: nextStatus } = nextTask;
 
-	const isSameProgress = prevGroup === nextGroup && prevStatus === nextStatus;
+	const groupChanged = prevGroup !== nextGroup;
+	const statusChanged = prevStatus !== nextStatus;
+	const isSameProgress = !groupChanged && !statusChanged;
+
 	if (isSameProgress) {
 		return state;
 	}
 
 	const isWasDone = prevStatus === "Done";
 	const isNowDone = nextStatus === "Done";
-	let isNewGroup = true;
+	const flags = {
+		isNewGroup: true,
+	};
 
-	const progresses = state.map((progress) => {
-		if (progress.groupId === prevGroup) {
-			if (progress.totalCount === 1) {
-				return null;
-			}
+	const newProgresses = state.map((progress) => {
+		if (!groupChanged && progress.groupId === nextGroup) {
+			flags.isNewGroup = false;
+			const different = isWasDone ? (isNowDone ? 0 : -1) : +isNowDone;
 			return {
 				...progress,
-				totalCount: progress.totalCount - 1,
-				completedCount: progress.completedCount - +isWasDone,
+				completedCount: progress.completedCount + different,
 			};
+		} else {
+			return changedGroup(
+				progress,
+				prevGroup,
+				nextGroup,
+				isWasDone,
+				isNowDone,
+				flags
+			);
 		}
-
-		if (progress.groupId === nextGroup) {
-			isNewGroup = false;
-			return {
-				...progress,
-				totalCount: progress.totalCount + 1,
-				completedCount: progress.completedCount + +isNowDone,
-			};
-		}
-
-		return progress;
 	});
 
-	if (isNewGroup) {
-		progresses.push({
+	if (flags.isNewGroup) {
+		newProgresses.push({
 			groupId: nextTask.groupId,
 			completedCount: +isNowDone,
 			totalCount: 1,
 		});
 	}
 
-	return withoutNullValues(progresses);
+	return withoutNullValues(newProgresses);
 };
 
 export const incrementTaskProgressHandler = (

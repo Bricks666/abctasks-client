@@ -1,24 +1,25 @@
 import classNames from "classnames";
-import React, { DragEventHandler, FC } from "react";
+import React, { DragEventHandler, FC, useCallback } from "react";
 import { useLoadingTasks } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
-import { TaskWithGroup } from "@/models/Tasks/types";
-import { DropZone } from "@/ui/DropZone";
+import { TaskStatus, TaskWithGroup } from "@/models/Tasks/types";
+import { DropZone } from "../DropZone";
 import { Grid } from "@/ui/Grid";
 import { GridItem } from "@/ui/GridItem";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";
 import { LoadingWrapper } from "@/ui/LoadingWrapper";
-import { TaskCard } from "../TaskCard";
 import { TaskListHeader } from "../TaskListHeader";
+import { moveTask } from "@/models/Tasks";
+import { DraggableTaskCard } from "../DraggableTaskCard";
 
 import TasksListStyle from "./TasksList.module.css";
 
 interface TasksListComponent extends ClassNameProps {
 	readonly tasks: TaskWithGroup[];
-	readonly listHeader: string;
+	readonly listHeader: TaskStatus;
 }
-const onDrop: DragEventHandler<HTMLDivElement> = (evt) => console.log(evt);
-const onDragOver: DragEventHandler<HTMLDivElement> = (evt) => console.log(evt);
+const onDragOver: DragEventHandler<HTMLDivElement> = (evt) =>
+	evt.preventDefault();
 
 export const TasksList: FC<TasksListComponent> = ({
 	tasks,
@@ -26,6 +27,16 @@ export const TasksList: FC<TasksListComponent> = ({
 	listHeader,
 }) => {
 	const isLoading = useLoadingTasks();
+	const onDrop = useCallback<DragEventHandler>(
+		(evt) => {
+			const taskId = +evt.dataTransfer.getData("taskId");
+			const status = evt.dataTransfer.getData("status");
+			if (status !== listHeader) {
+				moveTask({ status: listHeader, taskId });
+			}
+		},
+		[listHeader]
+	);
 
 	return (
 		<section className={classNames(TasksListStyle.tasks, className)}>
@@ -40,7 +51,7 @@ export const TasksList: FC<TasksListComponent> = ({
 					<Grid>
 						{tasks.map((task) => (
 							<GridItem key={task.id}>
-								<TaskCard {...task} />
+								<DraggableTaskCard {...task} />
 							</GridItem>
 						))}
 					</Grid>

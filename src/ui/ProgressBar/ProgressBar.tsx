@@ -1,9 +1,9 @@
 import React, { CSSProperties, FC, memo, ReactText } from "react";
 import classNames from "classnames";
 import { HEX, ClassNameProps } from "@/interfaces/common";
+import { Text } from "../Text";
 
 import ProgressBarStyle from "./ProgressBar.module.css";
-import { Text } from "../Text";
 
 interface ProgressBarProps extends ClassNameProps {
 	readonly children: ReactText;

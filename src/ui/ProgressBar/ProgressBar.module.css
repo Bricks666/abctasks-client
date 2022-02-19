@@ -29,4 +29,6 @@
 
 .progress {
 	height: 100%;
+
+	transition: width 200ms ease-in-out;
 }

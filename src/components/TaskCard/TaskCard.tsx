@@ -35,6 +35,7 @@ export const TaskCard: FC<TaskCardComponent> = memo(
 				onClick: () => deleteTask(id),
 			},
 		];
+
 		return (
 			<Card className={classNames(TaskCardStyle.card, className)}>
 				<CardHeader

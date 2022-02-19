@@ -1,0 +1,7 @@
+.card {
+	transition: opacity 200ms ease-out;
+}
+
+.dragging {
+	opacity: 0;
+}
