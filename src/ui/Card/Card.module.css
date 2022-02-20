@@ -3,6 +3,8 @@
 
 	min-width: 240px;
 
+  padding: 10px;
+
 	transition-property: box-shadow, border-color;
 	transition-duration: 0.25s;
 	transition-timing-function: ease-out;

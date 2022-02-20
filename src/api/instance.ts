@@ -1,13 +1,24 @@
 import axios from "axios";
 
+export const baseURL = "http://localhost:5000/";
+export let accessToken = "";
+
 export const instance = axios.create({
-	baseURL: "http://localhost:5000",
+	baseURL,
 	withCredentials: true,
 });
 
-const setAccessToken = (accessToken: string) => {
-	instance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+const setAccessToken = (token: string) => {
+	accessToken = `Bearer ${token}`;
 };
+
+instance.interceptors.request.use((config) => {
+	if (config.headers) {
+		config.headers.Authorization = accessToken;
+	}
+
+	return config;
+});
 
 instance.interceptors.response.use(
 	(response) => {

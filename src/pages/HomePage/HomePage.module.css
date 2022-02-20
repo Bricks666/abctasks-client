@@ -6,8 +6,13 @@
 	grid-template-columns: var(--template-columns);
 	grid-template-rows: min-content 1fr;
 	column-gap: 1em;
-  row-gap: 1em;
+	row-gap: 1em;
 }
+
+.tasks {
+	height: 100%;
+}
+
 
 @media (min-width: 1300px) {
 	.layout {

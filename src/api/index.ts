@@ -13,3 +13,5 @@ export {
 	logoutApi,
 	refreshApi,
 } from "./auth";
+
+export { getActivitiesApi, subscribeNewActivitiesApi } from "./activities";

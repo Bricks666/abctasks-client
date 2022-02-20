@@ -6,3 +6,4 @@ export * from "./TasksProgressResponse";
 export * from "./TaskGRoupsResponse";
 export * from "./CreateTaskResponse";
 export * from "./DeleteTaskResponse";
+export * from "./ActivitiesResponse";

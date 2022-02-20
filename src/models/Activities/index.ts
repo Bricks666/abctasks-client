@@ -1,25 +1,27 @@
-import { createEffect, createEvent, createStore } from "effector-logger";
+import { ActivitiesResponse, ActivityResponse } from "@/interfaces/response";
+import { createDomain } from "effector-logger";
+import { ActivityStructure } from "./types";
 
-export type Activities =
-	| "uploaded"
-	| "left a comment"
-	| "add task"
-	| "change task status";
+export const ActivitiesDomain = createDomain("ActivitiesDomain");
 
-export interface ActivityStructure {
-	readonly id: number;
-	readonly whoDone: string;
-	readonly activity: Activities;
-	readonly documentCount?: number;
-	readonly taskName?: string;
-}
-
-export const $Activities = createStore<ActivityStructure[]>([], {
-	name: "activities",
-});
-
-export const addActivity = createEvent<ActivityStructure>("addActivity");
-
-export const loadActivitiesFx = createEffect<void, ActivityStructure[]>(
-	"loadActivities"
+export const $Activities = ActivitiesDomain.createStore<ActivityStructure[]>(
+	[],
+	{ name: "ActivitiesStore" }
 );
+
+export const loadActivitiesFx = ActivitiesDomain.createEffect<
+	void,
+	ActivitiesResponse
+>("loadActivitiesFx");
+export const subscribeNewActivityFx = ActivitiesDomain.createEffect(
+	"subscribeNewActivityFx"
+);
+
+export const loadActivities = ActivitiesDomain.createEvent<void>(
+	"loadActivitiesEvent"
+);
+export const subscribeNewActivity = ActivitiesDomain.createEvent(
+	"subscribeNewActivityEvent"
+);
+export const addActivity =
+	ActivitiesDomain.createEvent<ActivityResponse>("addActivityEvent");

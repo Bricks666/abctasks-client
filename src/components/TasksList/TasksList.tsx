@@ -4,13 +4,12 @@ import { useLoadingTasks } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { TaskStatus, TaskWithGroup } from "@/models/Tasks/types";
 import { DropZone } from "../DropZone";
-import { Grid } from "@/ui/Grid";
-import { GridItem } from "@/ui/GridItem";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";
 import { LoadingWrapper } from "@/ui/LoadingWrapper";
 import { TaskListHeader } from "../TaskListHeader";
 import { moveTask } from "@/models/Tasks";
 import { DraggableTaskCard } from "../DraggableTaskCard";
+import { Stack } from "@/ui/Stack";
 
 import TasksListStyle from "./TasksList.module.css";
 
@@ -48,13 +47,11 @@ export const TasksList: FC<TasksListComponent> = ({
 					isLoading={isLoading}
 					loadingIndicator={<LoadingIndicator size="small" />}
 				>
-					<Grid>
+					<Stack>
 						{tasks.map((task) => (
-							<GridItem key={task.id}>
-								<DraggableTaskCard {...task} />
-							</GridItem>
+							<DraggableTaskCard {...task} key={task.id} />
 						))}
-					</Grid>
+					</Stack>
 				</LoadingWrapper>
 			</DropZone>
 		</section>
