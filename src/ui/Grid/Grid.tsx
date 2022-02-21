@@ -4,7 +4,10 @@ import { ClassNameProps } from "@/interfaces/common";
 
 import GridStyle from "./Grid.module.css";
 
-export const Grid: FC<ClassNameProps> = memo(({ children, className }) => {
+export const Grid: FC<ClassNameProps> = memo(function Grid({
+	children,
+	className,
+}) {
 	return (
 		<div className={classNames(GridStyle.grid, className)}>{children}</div>
 	);

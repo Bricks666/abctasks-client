@@ -20,7 +20,7 @@ export const ActivitiesList: FC<ClassNameProps> = ({ className }) => {
 				isLoading={isLoading}
 				loadingIndicator={<LoadingIndicator size="small" />}
 			>
-				<Stack>
+				<Stack space="s">
 					{activities.slice(0, 10).map((activity) => (
 						<ActivityCard {...activity} key={activity.id} />
 					))}

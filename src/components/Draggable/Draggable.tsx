@@ -1,4 +1,4 @@
-import React, { DragEventHandler, FC } from "react";
+import React, { DragEventHandler, FC, memo } from "react";
 
 interface DraggableProps {
 	readonly onDragStart?: DragEventHandler;
@@ -7,10 +7,13 @@ interface DraggableProps {
 	readonly onDragLeave?: DragEventHandler;
 }
 
-export const Draggable: FC<DraggableProps> = ({ children, ...handlers }) => {
+export const Draggable: FC<DraggableProps> = memo(function Draggable({
+	children,
+	...handlers
+}) {
 	return (
 		<div draggable {...handlers}>
 			{children}
 		</div>
 	);
-};
+});

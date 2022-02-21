@@ -10,8 +10,6 @@ import { Stack } from "@/ui/Stack";
 
 import HomePageStyle from "./HomePage.module.css";
 
-/* TODO: Вынести сайдбар в отдельный блок(в не страницы), в котором будет по роутингу меняться контент */
-
 export const HomePage: FC<ClassNameProps> = ({ className }) => {
 	usePageTitle("Homepage");
 	return (

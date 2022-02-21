@@ -1,11 +1,7 @@
-import classNames from "classnames";
 import React, { DragEventHandler, FC, useCallback } from "react";
-import { useLoadingTasks } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { TaskStatus, TaskWithGroup } from "@/models/Tasks/types";
 import { DropZone } from "../DropZone";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
 import { TaskListHeader } from "../TaskListHeader";
 import { moveTask } from "@/models/Tasks";
 import { DraggableTaskCard } from "../DraggableTaskCard";
@@ -25,7 +21,6 @@ export const TasksList: FC<TasksListComponent> = ({
 	className,
 	listHeader,
 }) => {
-	const isLoading = useLoadingTasks();
 	const onDrop = useCallback<DragEventHandler>(
 		(evt) => {
 			const taskId = +evt.dataTransfer.getData("taskId");
@@ -38,22 +33,21 @@ export const TasksList: FC<TasksListComponent> = ({
 	);
 
 	return (
-		<section className={classNames(TasksListStyle.tasks, className)}>
+		<Stack className={className} space="l">
 			<TaskListHeader className={TasksListStyle.header} columnName={listHeader}>
 				{listHeader}
 			</TaskListHeader>
-			<DropZone onDrop={onDrop} onDragOver={onDragOver}>
-				<LoadingWrapper
-					isLoading={isLoading}
-					loadingIndicator={<LoadingIndicator size="small" />}
-				>
-					<Stack>
-						{tasks.map((task) => (
-							<DraggableTaskCard {...task} key={task.id} />
-						))}
-					</Stack>
-				</LoadingWrapper>
+			<DropZone
+				className={TasksListStyle.dropZone}
+				onDrop={onDrop}
+				onDragOver={onDragOver}
+			>
+				<Stack>
+					{tasks.map((task) => (
+						<DraggableTaskCard {...task} key={task.id} />
+					))}
+				</Stack>
 			</DropZone>
-		</section>
+		</Stack>
 	);
 };

@@ -14,30 +14,28 @@ interface TextProps extends ClassNameProps {
 	readonly cssStyles?: CSSProperties;
 }
 
-export const Text: FC<TextProps> = memo(
-	({
-		children,
-		className,
-		cssStyles,
-		component = "p",
-		style = component,
-		paddings = false,
-		margins = false,
-	}) => {
-		const element = createElement(component, {}, {});
-		const classes = classNames(
-			TextStyle.text,
-			TextStyle[style],
-			{
-				[TextStyle.withoutPadding]: !paddings,
-				[TextStyle.withoutMargins]: !margins,
-			},
-			className
-		);
-		return (
-			<element.type className={classes} {...element.props} style={cssStyles}>
-				{children}
-			</element.type>
-		);
-	}
-);
+export const Text: FC<TextProps> = memo(function Text({
+	children,
+	className,
+	cssStyles,
+	component = "p",
+	style = component,
+	paddings = false,
+	margins = false,
+}) {
+	const element = createElement(component, {}, {});
+	const classes = classNames(
+		TextStyle.text,
+		TextStyle[style],
+		{
+			[TextStyle.withoutPadding]: !paddings,
+			[TextStyle.withoutMargins]: !margins,
+		},
+		className
+	);
+	return (
+		<element.type className={classes} {...element.props} style={cssStyles}>
+			{children}
+		</element.type>
+	);
+});

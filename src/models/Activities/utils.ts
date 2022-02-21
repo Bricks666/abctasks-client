@@ -8,5 +8,6 @@ export const toValidActivity = (
 		id: activity.activityId,
 		activistId: activity.activistId,
 		activity: activity.activityType,
+		date: activity.addedAt,
 	};
 };

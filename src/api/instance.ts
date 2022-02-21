@@ -1,3 +1,4 @@
+import { SSEListener } from "@/packages/eventSource";
 import axios from "axios";
 
 export const baseURL = "http://localhost:5000/";
@@ -43,3 +44,23 @@ instance.interceptors.response.use(
 		throw err;
 	}
 );
+
+export const sseListener = new SSEListener({
+	baseURL,
+});
+
+sseListener.interceptors.beforeOpening.use((config) => {
+	config.headers.Authorization = accessToken;
+
+	return config;
+});
+
+sseListener.interceptors.beforeError.use(async ({ event, reconnect }) => {
+	if (event.status === 403) {
+		const { data } = await instance.get("/auth/refresh");
+		if ("accessToken" in data) {
+			setAccessToken(data.accessToken);
+		}
+	}
+	return { event, reconnect };
+});

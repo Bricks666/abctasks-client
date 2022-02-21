@@ -6,22 +6,25 @@ import { Text } from "../Text";
 
 import GroupStyle from "./Group.module.css";
 
-interface GroupComponent extends ClassNameProps, TaskGroup {}
+interface GroupProps extends ClassNameProps, TaskGroup {}
 
-export const Group = memo(
-	({ className, name, mainColor, secondColor }: GroupComponent) => {
-		const groupStyle: CSSProperties = {
-			backgroundColor: secondColor,
-			color: mainColor,
-		};
-		return (
-			<Text
-				className={classNames(GroupStyle.group, className)}
-				cssStyles={groupStyle}
-				component="span"
-			>
-				{name}
-			</Text>
-		);
-	}
-);
+export const Group = memo(function Group({
+	className,
+	name,
+	mainColor,
+	secondColor,
+}: GroupProps) {
+	const groupStyle: CSSProperties = {
+		backgroundColor: secondColor,
+		color: mainColor,
+	};
+	return (
+		<Text
+			className={classNames(GroupStyle.group, className)}
+			cssStyles={groupStyle}
+			component="span"
+		>
+			{name}
+		</Text>
+	);
+});

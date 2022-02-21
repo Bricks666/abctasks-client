@@ -1,7 +1,13 @@
+.indicatorContainer {
+	padding: calc(var(--size) / 2);
+}
+
 .circleGroup {
 	display: flex;
+	align-items: end;
+	min-height: calc(var(--size) * 3);
 
-	column-gap: 10px;
+	column-gap: calc(var(--size) / 2);
 }
 
 .circle {
@@ -25,15 +31,15 @@
 	--duration: 0.95s;
 }
 
-.circle--small {
+.small {
 	--size: 20px;
 }
 
-.circle--medium {
+.medium {
 	--size: 30px;
 }
 
-.circle--large {
+.large {
 	--size: 40px;
 }
 
@@ -57,7 +63,6 @@
 
 .circle4 {
 	--background-color: #a734ba;
-
 	--delay: calc(var(--duration) / 4 * 3);
 }
 

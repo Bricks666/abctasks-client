@@ -12,7 +12,9 @@
 	margin: 0;
 }
 
-@media (min-width: 600px) {
+/* Поиграть с размером */
+
+@media (min-width: 900px) {
 	.h1 {
 		--font-size: 42px;
 	}
@@ -22,23 +24,23 @@
 	}
 
 	.h3 {
-		--font-size: 20px;
+		--font-size: 24px;
 	}
 
 	.h4 {
-		--font-size: 16px;
+		--font-size: 22px;
 	}
 
 	.h5 {
-		--font-size: 13px;
+		--font-size: 17px;
 	}
 
 	.h6 {
-		--font-size: 11px;
+		--font-size: 15px;
 	}
 
 	.p {
-		--font-size: 15px;
+		--font-size: 14px;
 	}
 
 	.span {
@@ -46,36 +48,30 @@
 	}
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
 	.h1 {
-		--font-size: 36px;
+		--font-size: 38px;
 	}
 
 	.h2 {
-		--font-size: 25px;
+		--font-size: 28px;
 	}
 
 	.h3 {
-		--font-size: 16px;
+		--font-size: 22px;
 	}
 
 	.h4 {
-		--font-size: 12px;
+		--font-size: 10px;
 	}
 
 	.h5 {
-		--font-size: 12px;
+		--font-size: 16px;
 	}
-
 	.h6 {
-		--font-size: 12px;
+		--font-size: 14px;
 	}
-
 	.p {
-		--font-size: 12px;
-	}
-
-	.span {
-		--font-size: 12px;
+		--font-size: 13px;
 	}
 }

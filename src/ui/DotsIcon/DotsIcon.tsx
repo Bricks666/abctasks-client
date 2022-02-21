@@ -2,12 +2,11 @@ import React, { FC, memo } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 import { SvgIcon } from "../SvgIcon";
 
-export const DotsIcon: FC<ClassNameProps> = memo(({ className }) => {
+export const DotsIcon: FC<ClassNameProps> = memo(function DotsIcon({
+	className,
+}) {
 	return (
-		<SvgIcon
-			className={className}
-			viewBox="0 0 20 6"
-		>
+		<SvgIcon className={className} viewBox="0 0 20 6">
 			<circle cx="3" cy="3" r="3" />
 			<circle cx="10" cy="3" r="3" />
 			<circle cx="17" cy="3" r="3" />

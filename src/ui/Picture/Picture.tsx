@@ -4,22 +4,25 @@ import { ClassNameProps } from "@/interfaces/common";
 
 import PictureStyle from "./Picture.module.css";
 
-interface PictureComponent
+interface PictureProps
 	extends ClassNameProps,
 		Readonly<ImgHTMLAttributes<HTMLImageElement>> {
 	readonly alt: string;
 	readonly src: string;
 }
 
-export const Picture: FC<PictureComponent> = memo(
-	({ className, alt, src, ...props }) => {
-		return (
-			<img
-				className={classNames(PictureStyle.picture, className)}
-				src={src}
-				alt={alt}
-				{...props}
-			/>
-		);
-	}
-);
+export const Picture: FC<PictureProps> = memo(function Picture({
+	className,
+	alt,
+	src,
+	...props
+}) {
+	return (
+		<img
+			className={classNames(PictureStyle.picture, className)}
+			src={src}
+			alt={alt}
+			{...props}
+		/>
+	);
+});

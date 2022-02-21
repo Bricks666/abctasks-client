@@ -4,6 +4,10 @@
 	column-gap: 1.5rem;
 }
 
+.loading {
+  grid-column: 1 / -1;
+}
+
 @media (min-width: 1000px) {
 	.tasks {
 		--template-columns: repeat(4, 1fr);

@@ -1,6 +1,6 @@
 import { ActivitiesResponse, ActivityResponse } from "@/interfaces/response";
-import { SSEListener } from "@/packages/eventSource";
-import { instance, accessToken, baseURL } from "./instance";
+import { ErrorHandlerParams } from "@/packages/eventSource";
+import { instance, sseListener } from "./instance";
 
 export const getActivitiesApi = async (): Promise<ActivitiesResponse> => {
 	const response = await instance.get("/activities/");
@@ -9,16 +9,11 @@ export const getActivitiesApi = async (): Promise<ActivitiesResponse> => {
 };
 
 export const subscribeNewActivitiesApi = async (
-	onNewActivity: (activity: ActivityResponse) => void
+	onNewActivity: (activity: ActivityResponse) => void,
+	onError?: (param: ErrorHandlerParams) => void
 ) => {
-	/* Доделать слушатель, чтобы можно было вынести создание в отдельный файл */
-	const sseListener = new SSEListener({
-		baseURL,
-		headers: {
-			Authorization: accessToken,
-		},
-	});
 	return sseListener.connect<string>("activities/subscribe", {
 		onmessage: (evt) => onNewActivity(JSON.parse(evt.data)),
+		onerror: onError,
 	});
 };

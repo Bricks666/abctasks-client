@@ -1,7 +1,8 @@
 .card {
-	display: flex;
+	grid-template-columns: min-content 1fr;
+  row-gap: 4px;
+}
 
-  align-items: center;
-
-  gap: 10px;;
+.avatar {
+	grid-row: span 2;
 }

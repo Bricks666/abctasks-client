@@ -16,19 +16,40 @@ export const LoadingIndicator: FC<LoadingIndicatorComponent> = ({
 	text,
 	size = "medium",
 }) => {
-	const circle = classNames(
-		LoadingIndicatorStyle.circle,
-		LoadingIndicatorStyle[`circle--${size}`]
+	const classes = classNames(
+		LoadingIndicatorStyle.indicatorContainer,
+		LoadingIndicatorStyle[size]
 	);
+
 	return (
 		<div className={className}>
 			<progress className="visibility-hidden" />
-			<div>
+			<div className={classes}>
 				<div className={LoadingIndicatorStyle.circleGroup}>
-					<span className={classNames(circle, LoadingIndicatorStyle.circle1)} />
-					<span className={classNames(circle, LoadingIndicatorStyle.circle2)} />
-					<span className={classNames(circle, LoadingIndicatorStyle.circle3)} />
-					<span className={classNames(circle, LoadingIndicatorStyle.circle4)} />
+					<span
+						className={classNames(
+							LoadingIndicatorStyle.circle,
+							LoadingIndicatorStyle.circle1
+						)}
+					/>
+					<span
+						className={classNames(
+							LoadingIndicatorStyle.circle,
+							LoadingIndicatorStyle.circle2
+						)}
+					/>
+					<span
+						className={classNames(
+							LoadingIndicatorStyle.circle,
+							LoadingIndicatorStyle.circle3
+						)}
+					/>
+					<span
+						className={classNames(
+							LoadingIndicatorStyle.circle,
+							LoadingIndicatorStyle.circle4
+						)}
+					/>
 				</div>
 				{text && <h2 className={LoadingIndicatorStyle.header}>{text}</h2>}
 			</div>

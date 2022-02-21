@@ -3,3 +3,13 @@
 
 	gap: 1em;
 }
+
+@media (max-width: 1300px) {
+	.container {
+		padding: 1rem;
+
+		border-radius: 8px;
+
+		background-color: white;
+	}
+}

@@ -8,7 +8,11 @@ interface SvgIconProps extends ClassNameProps {
 	readonly viewBox: string;
 }
 
-export const SvgIcon: FC<SvgIconProps> = memo(({ children, className, viewBox }) => {
+export const SvgIcon: FC<SvgIconProps> = memo(function SvgIcon({
+	children,
+	className,
+	viewBox,
+}) {
 	return (
 		<svg
 			className={classNames(SvgIconStyle.icon, className)}

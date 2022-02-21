@@ -13,7 +13,10 @@ import { toValidActivity } from "./utils";
 
 loadActivitiesFx.use(getActivitiesApi);
 subscribeNewActivityFx.use(async () => {
-	subscribeNewActivitiesApi(addActivity);
+	subscribeNewActivitiesApi(addActivity, ({ reconnect }) => {
+		/* TODO:  Сделать работу с возвращаемой функцией, чтобы отключаться при выходе из аккаунта */
+		reconnect();
+	});
 });
 
 guard({

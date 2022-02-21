@@ -10,17 +10,20 @@ interface IconButtonProps extends ClassNameProps, BaseButtonProps {
 	readonly size?: Size;
 }
 
-export const IconButton: FC<IconButtonProps> = memo(
-	({ className, children, size = "medium", ...button }) => {
-		const classes = classNames(
-			IconButtonStyle.button,
-			IconButtonStyle[size],
-			className
-		);
-		return (
-			<BaseButton className={classes} {...button}>
-				{children}
-			</BaseButton>
-		);
-	}
-);
+export const IconButton: FC<IconButtonProps> = memo(function IconBase({
+	className,
+	children,
+	size = "medium",
+	...button
+}) {
+	const classes = classNames(
+		IconButtonStyle.button,
+		IconButtonStyle[size],
+		className
+	);
+	return (
+		<BaseButton className={classes} {...button}>
+			{children}
+		</BaseButton>
+	);
+});

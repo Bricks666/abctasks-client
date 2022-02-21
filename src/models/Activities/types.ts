@@ -4,4 +4,5 @@ export interface ActivityStructure {
 	readonly id: number;
 	readonly activistId: number;
 	readonly activity: Activities;
+	readonly date: string;
 }

@@ -9,7 +9,6 @@ import { Block } from "@/ui/Block";
 import { MenuOption } from "@/ui/Menu";
 
 import TaskListHeaderStyle from "./TaskListHeader.module.css";
-import { DotsIcon } from "@/ui/DotsIcon";
 
 interface TaskListHeaderComponent extends ClassNameProps {
 	readonly columnName: string;
@@ -30,7 +29,6 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 		{
 			label: "New Task",
 			to: editFormLink,
-      icon: <DotsIcon />
 		},
 	];
 

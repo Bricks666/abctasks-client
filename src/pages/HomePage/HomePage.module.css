@@ -13,7 +13,6 @@
 	height: 100%;
 }
 
-
 @media (min-width: 1300px) {
 	.layout {
 		--template-columns: 4fr 1fr;
@@ -27,7 +26,24 @@
 }
 
 @media (max-width: 1300px) {
+	.tasks {
+		grid-column: span 2;
+	}
 	.layout {
 		--template-columns: 1fr;
+	}
+
+	.aside {
+		display: grid;
+
+		grid-template-columns: repeat(2, 1fr);
+
+		gap: 10px;
+	}
+}
+
+@media (max-width: 600px) {
+	.aside {
+		grid-template-columns: 1fr;
 	}
 }

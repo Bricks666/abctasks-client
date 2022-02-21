@@ -1,7 +1,9 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-import { useStatuses, useTasks } from "@/hooks";
+import { useLoadingTasks, useStatuses, useTasks } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
+import { LoadingWrapper } from "@/ui/LoadingWrapper";
+import { LoadingIndicator } from "@/ui/LoadingIndicator";
 import { TasksList } from "../TasksList";
 
 import TasksStyle from "./Tasks.module.css";
@@ -10,6 +12,7 @@ import TasksStyle from "./Tasks.module.css";
 export const Tasks: FC<ClassNameProps> = ({ className }) => {
 	const tasks = useTasks();
 	const statusesMap = useStatuses();
+	const isLoading = useLoadingTasks();
 
 	const lists = Object.entries(tasks).map(([statusName, tasks]) => {
 		return (
@@ -23,7 +26,13 @@ export const Tasks: FC<ClassNameProps> = ({ className }) => {
 
 	return (
 		<section className={classNames(TasksStyle.tasks, className)}>
-			{lists}
+			<LoadingWrapper
+				className={TasksStyle.loading}
+				isLoading={isLoading}
+				loadingIndicator={<LoadingIndicator />}
+			>
+				{lists}
+			</LoadingWrapper>
 		</section>
 	);
 };

@@ -1,17 +1,21 @@
 .wrapper {
 	display: grid;
 	row-gap: 1.5em;
+
+	height: min-content;
 }
 
 .list {
-  background-color: inherit;
+	background-color: inherit;
+
+	min-height: 50px;
 }
 
 @media (max-width: 1300px) {
 	.wrapper {
 		background-color: white;
 
-    padding: 1rem;
+		padding: 1rem;
 		border-radius: 8px;
 	}
 }
