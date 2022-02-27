@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useStore } from "effector-react";
-import { $TasksProgressWithGroups, loadTasksProgress } from "../models/Tasks";
+import { $TasksProgress, loadTasksProgress } from "@/models/Progress";
 
 export const useTasksProgress = () => {
-	const tasksProgress = useStore($TasksProgressWithGroups);
+	const tasksProgress = useStore($TasksProgress);
 
 	useEffect(() => {
 		loadTasksProgress();

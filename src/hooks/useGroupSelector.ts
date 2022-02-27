@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { StylesConfig } from "react-select";
 import { useTaskGroups } from ".";
-import { TaskGroup } from "@/models/Tasks/types";
+import { TaskGroup } from "@/models/Groups/types";
 import { SelectValues } from "@/ui/Select";
 
 const getGroup = (groups: TaskGroup[], groupId: number | string) =>

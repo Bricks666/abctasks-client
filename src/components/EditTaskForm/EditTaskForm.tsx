@@ -13,10 +13,12 @@ import {
 } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { editTask } from "@/models/Tasks";
-import { TaskStatus, TaskWithGroup } from "@/models/Tasks/types";
+import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
+import { TaskGroup } from "@/models/Groups/types";
 import { Button } from "@/ui/Button";
 import { Select, SelectValues } from "@/ui/Select";
 import { TextField } from "../TextField";
+import { useGroup } from "@/hooks/useGroup";
 
 import EditTaskFromStyle from "./EditTaskForm.module.css";
 
@@ -26,13 +28,16 @@ interface EditTaskFormValues {
 	readonly status: SelectValues<TaskStatus>;
 }
 
-const prepareTask = (task: TaskWithGroup | null): EditTaskFormValues => {
-	return task
+const prepareTask = (
+	task: TaskStructure | null,
+	group: TaskGroup | null
+): EditTaskFormValues => {
+	return task && group
 		? {
 				content: task.content,
 				group: {
-					label: task.group?.name,
-					value: task.group?.id,
+					label: group.name,
+					value: group.id,
 				},
 				status: {
 					label: task.status,
@@ -52,11 +57,12 @@ const prepareTask = (task: TaskWithGroup | null): EditTaskFormValues => {
 export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const taskId = useGetParam(GET_PARAMS.taskId);
 	const task = useTask(taskId);
+	const group = useGroup(task?.groupId || null);
 	const { groupsOptions, styles } = useGroupSelector();
 	const statuses = useStatusesSelect();
 	const goBack = useGoBack();
 	const { control, handleSubmit, formState } = useForm<EditTaskFormValues>({
-		defaultValues: prepareTask(task),
+		defaultValues: prepareTask(task, group),
 	});
 
 	const onSubmit = useCallback<SubmitHandler<EditTaskFormValues>>(

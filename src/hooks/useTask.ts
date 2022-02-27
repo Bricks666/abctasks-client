@@ -1,12 +1,11 @@
-import { useTasksWithGroups } from ".";
-import { TaskWithGroup } from "@/models/Tasks/types";
+import { useTasks } from ".";
 
-export const useTask = (
-	taskId: number | string | null
-): TaskWithGroup | null => {
-	const tasks = useTasksWithGroups();
+export const useTask = (taskId: number | string | null) => {
+	const tasks = useTasks();
 
-	return !tasks.length || !taskId
-		? null
-		: tasks.find((task) => task.id === +taskId) || null;
+	if (!taskId || !tasks.length) {
+		return null;
+	}
+
+	return tasks.find((task) => task.id === +taskId) || null;
 };

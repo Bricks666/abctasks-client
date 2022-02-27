@@ -1,6 +1,6 @@
 import { useStore } from "effector-react";
 import { useEffect } from "react";
-import { $TaskGroups, loadTaskGroups } from "../models/Tasks";
+import { $TaskGroups, loadTaskGroups } from "../models/Groups";
 
 export const useTaskGroups = () => {
 	const groups = useStore($TaskGroups);

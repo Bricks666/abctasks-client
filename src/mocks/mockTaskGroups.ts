@@ -1,4 +1,4 @@
-import { TaskGroup } from "../models/Tasks/types";
+import { TaskGroup } from "../models/Groups/types";
 
 export const mockTaskGroups: TaskGroup[] = [
 	{

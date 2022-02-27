@@ -1,6 +1,6 @@
 import React, { DragEventHandler, FC, useCallback } from "react";
 import { ClassNameProps } from "@/interfaces/common";
-import { TaskStatus, TaskWithGroup } from "@/models/Tasks/types";
+import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
 import { DropZone } from "../DropZone";
 import { TaskListHeader } from "../TaskListHeader";
 import { moveTask } from "@/models/Tasks";
@@ -10,7 +10,7 @@ import { Stack } from "@/ui/Stack";
 import TasksListStyle from "./TasksList.module.css";
 
 interface TasksListComponent extends ClassNameProps {
-	readonly tasks: TaskWithGroup[];
+	readonly tasks: TaskStructure[];
 	readonly listHeader: TaskStatus;
 }
 const onDragOver: DragEventHandler<HTMLDivElement> = (evt) =>

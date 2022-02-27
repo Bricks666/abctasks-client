@@ -4,7 +4,7 @@ import { GET_PARAMS, POPUPS } from "@/const";
 import { usePrepareLink } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { deleteTask } from "@/models/Tasks";
-import { TaskWithGroup } from "@/models/Tasks/types";
+import { TaskStructure } from "@/models/Tasks/types";
 import { Avatar } from "@/ui/Avatar";
 import { Card } from "@/ui/Card";
 import { CardHeader } from "@/ui/CardHeader";
@@ -16,11 +16,11 @@ import { DateTime } from "@/ui/DateTime";
 
 import TaskCardStyle from "./TaskCard.module.css";
 
-interface TaskCardComponent extends ClassNameProps, TaskWithGroup {}
+interface TaskCardComponent extends ClassNameProps, TaskStructure {}
 
 export const TaskCard: FC<TaskCardComponent> = ({
 	className,
-	group,
+	groupId,
 	content,
 	commentCount,
 	addedDate,
@@ -47,7 +47,7 @@ export const TaskCard: FC<TaskCardComponent> = ({
 	return (
 		<Card className={classNames(TaskCardStyle.card, className)}>
 			<CardHeader secondaryAction={<EditMenu options={options} size="small" />}>
-				<Group {...group} />
+				<Group groupId={groupId} />
 			</CardHeader>
 
 			<Text className={TaskCardStyle.content}>{content}</Text>

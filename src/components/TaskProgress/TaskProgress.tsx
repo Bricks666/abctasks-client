@@ -1,20 +1,25 @@
 import React, { FC } from "react";
-import { TaskProgressWithGroup } from "@/models/Tasks/types";
+import { TaskProgressStructure } from "@/models/Progress/types";
 import { ClassNameProps } from "@/interfaces/common";
 import { ProgressBar } from "@/ui/ProgressBar";
+import { useGroup } from "@/hooks/useGroup";
 
-interface TaskProgressComponent
-	extends ClassNameProps,
-		TaskProgressWithGroup {}
+interface TaskProgressComponent extends ClassNameProps, TaskProgressStructure {}
 
 export const TaskProgress: FC<TaskProgressComponent> = ({
 	completedCount,
 	totalCount,
 	className,
-	name,
-	mainColor,
-	secondColor,
+	groupId,
 }) => {
+	const group = useGroup(groupId);
+
+	if (!group) {
+		return null;
+	}
+
+	const { mainColor, name, secondColor } = group;
+
 	return (
 		<ProgressBar
 			className={className}

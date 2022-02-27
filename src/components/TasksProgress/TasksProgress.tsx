@@ -23,7 +23,7 @@ export const TasksProgress: FC<ClassNameProps> = ({ className }) => {
 			>
 				<Stack className={TasksProgressStyle.list}>
 					{progresses.map((progress) => (
-						<TaskProgress {...progress} key={progress.id} />
+						<TaskProgress {...progress} key={progress.groupId} />
 					))}
 				</Stack>
 			</LoadingWrapper>

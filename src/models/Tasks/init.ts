@@ -1,44 +1,24 @@
 import { forward, guard, sample } from "effector";
 import {
 	$LoadingTasks,
-	$LoadingTasksProgress,
-	$TaskGroups,
 	$Tasks,
-	$TasksProgress,
 	createTask,
 	createTaskFx,
 	deleteTask,
 	deleteTaskFx,
 	editTask,
 	editTaskFx,
-	loadTaskGroups,
-	loadTaskGroupsFx,
 	loadTasks,
 	loadTasksFx,
-	loadTasksProgress,
-	loadTasksProgressFx,
 	moveTask,
 } from ".";
-import {
-	getTaskGroupsApi,
-	getTasksApi,
-	getTasksProgressApi,
-	createTaskApi,
-	editTaskApi,
-	deleteTaskApi,
-} from "@/api";
+import { getTasksApi, createTaskApi, editTaskApi, deleteTaskApi } from "@/api";
 import { mayStartFxHandler } from "../handlers";
-import {
-	changeTaskProgressHandler,
-	incrementTaskProgressHandler,
-	editTaskHandler,
-	deleteTaskProgressHandler,
-} from "./handlers";
-import { toValidTask, toValidTaskGroup, toValidTaskProgress } from "./utils";
+import { editTaskHandler } from "./handlers";
+import { toValidTask } from "./utils";
 
 loadTasksFx.use(getTasksApi);
-loadTaskGroupsFx.use(getTaskGroupsApi);
-loadTasksProgressFx.use(getTasksProgressApi);
+
 createTaskFx.use(createTaskApi);
 editTaskFx.use(editTaskApi);
 deleteTaskFx.use(deleteTaskApi);
@@ -64,47 +44,6 @@ forward({
 });
 
 guard({
-	clock: loadTasksProgress,
-	filter: sample({
-		clock: loadTasksProgressFx.pending,
-		fn: mayStartFxHandler,
-	}),
-	target: loadTasksProgressFx,
-});
-
-sample({
-	clock: loadTasksProgressFx.doneData,
-	fn: (taskProgressServer) =>
-		taskProgressServer.tasksProgress.map(toValidTaskProgress),
-	target: $TasksProgress,
-});
-
-forward({
-	from: loadTasksProgressFx.pending,
-	to: $LoadingTasksProgress,
-});
-
-guard({
-	clock: loadTaskGroups,
-	filter: sample({
-		clock: loadTaskGroupsFx.pending,
-		fn: mayStartFxHandler,
-	}),
-	target: loadTaskGroupsFx,
-});
-
-sample({
-	clock: loadTaskGroupsFx.doneData,
-	fn: (response) => response.groups.map(toValidTaskGroup),
-	target: $TaskGroups,
-});
-
-forward({
-	from: [loadTasksFx, loadTasksProgressFx],
-	to: loadTaskGroups,
-});
-
-guard({
 	clock: createTask,
 	filter: sample({
 		clock: createTaskFx.pending,
@@ -118,13 +57,6 @@ sample({
 	clock: createTaskFx.doneData,
 	fn: (tasks, response) => [...tasks, toValidTask(response.task)],
 	target: $Tasks,
-});
-
-sample({
-	source: $TasksProgress,
-	clock: createTaskFx.doneData,
-	fn: incrementTaskProgressHandler,
-	target: $TasksProgress,
 });
 
 guard({
@@ -143,13 +75,6 @@ sample({
 	target: $Tasks,
 });
 
-sample({
-	source: [$TasksProgress, $Tasks],
-	clock: editTaskFx.doneData,
-	fn: changeTaskProgressHandler,
-	target: $TasksProgress,
-});
-
 guard({
 	clock: deleteTask,
 	filter: sample({
@@ -166,13 +91,6 @@ sample({
 		return tasks.filter((task) => task.id !== taskId);
 	},
 	target: $Tasks,
-});
-
-sample({
-	source: [$Tasks, $TasksProgress],
-	clock: deleteTaskFx.doneData,
-	fn: deleteTaskProgressHandler,
-	target: $TasksProgress,
 });
 
 sample({

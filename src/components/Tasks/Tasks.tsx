@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-import { useLoadingTasks, useStatuses, useTasks } from "@/hooks";
+import { useGroupedTasks, useLoadingTasks, useStatuses } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { LoadingWrapper } from "@/ui/LoadingWrapper";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";
@@ -10,7 +10,7 @@ import TasksStyle from "./Tasks.module.css";
 
 /* Возможно стоит сделать четкие четыре колонки */
 export const Tasks: FC<ClassNameProps> = ({ className }) => {
-	const tasks = useTasks();
+	const tasks = useGroupedTasks();
 	const statusesMap = useStatuses();
 	const isLoading = useLoadingTasks();
 
