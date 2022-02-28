@@ -7,3 +7,8 @@ export interface TaskProgressResponse {
 export interface TasksProgressResponse {
 	readonly tasksProgress: TaskProgressResponse[];
 }
+
+export interface ChangeProgressResponse {
+	readonly groupId: number;
+	readonly progress: TaskProgressResponse;
+}

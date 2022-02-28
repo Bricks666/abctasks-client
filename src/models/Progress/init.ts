@@ -1,21 +1,21 @@
-import { getTasksProgressApi } from "@/api";
+import { getTasksProgressApi, subscribeChangeProgressApi } from "@/api";
+import { SubscribeChangeProfileProps } from "@/api/progress";
 import { forward, guard, sample } from "effector";
 import {
 	$LoadingTasksProgress,
 	$TasksProgress,
+	changeProgress,
 	loadTasksProgress,
 	loadTasksProgressFx,
+	subscribeChangeProgress,
+	subscribeChangeProgressFx,
 } from ".";
 import { mayStartFxHandler } from "../handlers";
-import { $Tasks, createTaskFx, deleteTaskFx, editTaskFx } from "../Tasks";
-import {
-	changeTaskProgressHandler,
-	deleteTaskProgressHandler,
-	incrementTaskProgressHandler,
-} from "./handler";
+import { changeProgressHandler } from "./handler";
 import { toValidTaskProgress } from "./utils";
 
 loadTasksProgressFx.use(getTasksProgressApi);
+subscribeChangeProgressFx.use(subscribeChangeProgressApi);
 
 guard({
 	clock: loadTasksProgress,
@@ -39,21 +39,19 @@ forward({
 });
 
 sample({
-	source: $TasksProgress,
-	clock: createTaskFx.doneData,
-	fn: incrementTaskProgressHandler,
-	target: $TasksProgress,
+	clock: subscribeChangeProgress,
+	fn: (): SubscribeChangeProfileProps => ({
+		onChangeProgress: changeProgress,
+		onError: ({ reconnect }) => {
+			reconnect();
+		},
+	}),
+	target: subscribeChangeProgressFx,
 });
 
 sample({
-	source: [$TasksProgress, $Tasks],
-	clock: editTaskFx.doneData,
-	fn: changeTaskProgressHandler,
-	target: $TasksProgress,
-});
-sample({
-	source: [$Tasks, $TasksProgress],
-	clock: deleteTaskFx.doneData,
-	fn: deleteTaskProgressHandler,
+	source: $TasksProgress,
+	clock: changeProgress,
+	fn: changeProgressHandler,
 	target: $TasksProgress,
 });

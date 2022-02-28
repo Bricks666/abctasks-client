@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useStore } from "effector-react";
-import { $TasksProgress, loadTasksProgress } from "@/models/Progress";
+import {
+	$TasksProgress,
+	loadTasksProgress,
+	subscribeChangeProgress,
+} from "@/models/Progress";
 
 export const useTasksProgress = () => {
 	const tasksProgress = useStore($TasksProgress);
@@ -8,6 +12,7 @@ export const useTasksProgress = () => {
 	useEffect(() => {
 		if (!tasksProgress.length) {
 			loadTasksProgress();
+			subscribeChangeProgress();
 		}
 	}, [tasksProgress.length]);
 

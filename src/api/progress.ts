@@ -1,5 +1,5 @@
 import {
-	TaskProgressResponse,
+	ChangeProgressResponse,
 	TasksProgressResponse,
 } from "@/interfaces/response";
 import { ErrorHandlerParams } from "@/packages/eventSource";
@@ -10,11 +10,16 @@ export const getTasksProgressApi = async (): Promise<TasksProgressResponse> => {
 	return response.data;
 };
 
-export const subscribeChangeProgressApi = async (
-	onChangeProgress: (progress: TaskProgressResponse[]) => unknown,
-	onError: (param: ErrorHandlerParams) => unknown
-) => {
-	return sseListener.connect<string>("/progress/subscribe", {
+export interface SubscribeChangeProfileProps {
+	readonly onChangeProgress: (progress: ChangeProgressResponse[]) => unknown;
+	readonly onError: (param: ErrorHandlerParams) => unknown;
+}
+
+export const subscribeChangeProgressApi = async ({
+	onChangeProgress,
+	onError,
+}: SubscribeChangeProfileProps) => {
+	return sseListener.connect<string>("progress/subscribe", {
 		onerror: onError,
 		onmessage: (evt) => onChangeProgress(JSON.parse(evt.data)),
 	});
