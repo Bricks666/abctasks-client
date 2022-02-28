@@ -1,7 +1,5 @@
 export {
-	getTasksProgressApi,
 	getTasksApi,
-	getTaskGroupsApi,
 	createTaskApi,
 	editTaskApi,
 	deleteTaskApi,
@@ -15,3 +13,6 @@ export {
 } from "./auth";
 
 export { getActivitiesApi, subscribeNewActivitiesApi } from "./activities";
+
+export { getTaskGroupsApi, createTaskGroupApi } from "./groups";
+export { getTasksProgressApi, subscribeChangeProgressApi } from "./progress";

@@ -10,3 +10,7 @@ export interface TaskGroupResponse {
 export interface TaskGroupsResponse {
 	readonly groups: TaskGroupResponse[];
 }
+
+export interface CreateGroupResponse {
+	readonly group: TaskGroupResponse;
+}

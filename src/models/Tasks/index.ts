@@ -1,11 +1,10 @@
 import { combine, createDomain } from "effector-logger";
-import { TasksResponse, DeleteTaskResponse } from "@/interfaces/response";
+import { TasksResponse, DeleteTaskResponse, CreateTaskResponse } from "@/interfaces/response";
 import {
 	EditTaskRequest,
 	MoveTaskRequest,
 	TaskRequest,
 } from "@/interfaces/requests";
-import { CreateTaskResponse } from "@/interfaces/response/CreateTaskResponse";
 import {
 	GroupedByStatusTasksStore,
 	StatusNamesStore,

@@ -6,8 +6,10 @@ export const useTasksProgress = () => {
 	const tasksProgress = useStore($TasksProgress);
 
 	useEffect(() => {
-		loadTasksProgress();
-	}, []);
+		if (!tasksProgress.length) {
+			loadTasksProgress();
+		}
+	}, [tasksProgress.length]);
 
 	return tasksProgress;
 };

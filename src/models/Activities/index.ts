@@ -1,4 +1,5 @@
 import { ActivitiesResponse, ActivityResponse } from "@/interfaces/response";
+import { CloseConnect } from "@/packages/eventSource";
 import { createDomain } from "effector-logger";
 import { ActivityStructure } from "./types";
 
@@ -13,14 +14,15 @@ export const loadActivitiesFx = ActivitiesDomain.createEffect<
 	void,
 	ActivitiesResponse
 >("loadActivitiesFx");
-export const subscribeNewActivityFx = ActivitiesDomain.createEffect(
-	"subscribeNewActivityFx"
-);
+export const subscribeNewActivityFx = ActivitiesDomain.createEffect<
+	void,
+	void
+>("subscribeNewActivityFx");
 
 export const loadActivities = ActivitiesDomain.createEvent<void>(
 	"loadActivitiesEvent"
 );
-export const subscribeNewActivity = ActivitiesDomain.createEvent(
+export const subscribeNewActivity = ActivitiesDomain.createEvent<void>(
 	"subscribeNewActivityEvent"
 );
 export const addActivity =
