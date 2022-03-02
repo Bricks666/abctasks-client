@@ -3,6 +3,8 @@ import React, { FC, MouseEventHandler } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 import { Overlay } from "../Overlay";
 import { PopupHeader } from "../PopupHeader";
+import { Fade } from "../Fade";
+import { PopupContent } from "../PopupContent";
 
 import MainPopupStyle from "./MainPopup.module.css";
 
@@ -20,13 +22,16 @@ export const MainPopup: FC<MainPopupComponent> = ({
 	label,
 }) => {
 	return (
-		<Overlay
-			className={classNames(MainPopupStyle.overlay, className)}
-			isOpen={isOpen}
-			onClose={onClose}
-		>
-			<PopupHeader onClose={onClose}>{label}</PopupHeader>
-			<div className={MainPopupStyle.content}>{children}</div>
+		<Overlay onClose={onClose}>
+			<Fade
+				open={isOpen}
+				className={classNames(MainPopupStyle.overlay, className)}
+			>
+				<PopupHeader onClose={onClose}>{label}</PopupHeader>
+				<PopupContent className={MainPopupStyle.content}>
+					{children}
+				</PopupContent>
+			</Fade>
 		</Overlay>
 	);
 };

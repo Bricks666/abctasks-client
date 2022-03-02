@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import classNames from "classnames";
 import { ClassNameProps } from "@/interfaces/common";
 import { Block } from "@/ui/Block";
-import { PageTitles } from "../PageTitles";
 import { ContentLayout } from "@/ui/ContentLayout";
 import { ProfileLink } from "./ProfileLink";
 
@@ -13,7 +12,6 @@ export const Header: FC<ClassNameProps> = ({ className }) => {
 		<header className={classNames(HeaderStyle.header, className)}>
 			<ContentLayout>
 				<Block className={HeaderStyle.layout}>
-					<PageTitles />
 					<ProfileLink className={HeaderStyle.avatar} />
 				</Block>
 			</ContentLayout>

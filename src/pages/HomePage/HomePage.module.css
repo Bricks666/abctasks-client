@@ -10,6 +10,8 @@
 }
 
 .tasks {
+	grid-row: 2;
+
 	height: 100%;
 }
 
@@ -18,7 +20,13 @@
 		--template-columns: 4fr 1fr;
 	}
 
+	.tasks {
+		grid-row: 2;
+	}
+
 	.aside {
+		grid-row: 1 / -1;
+
 		padding: 0 1em;
 
 		border-left: 1px solid #d9e0e9;
@@ -29,6 +37,7 @@
 	.tasks {
 		grid-column: span 2;
 	}
+
 	.layout {
 		--template-columns: 1fr;
 	}
@@ -37,6 +46,7 @@
 		display: grid;
 
 		grid-template-columns: repeat(2, 1fr);
+    grid-row: 3;
 
 		gap: 10px;
 	}

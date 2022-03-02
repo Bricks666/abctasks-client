@@ -1,4 +1,4 @@
-.overlay {
+.dialog {
 	position: fixed;
 	inset: 0;
 
@@ -8,21 +8,15 @@
 	justify-content: center;
 	align-items: center;
 
-	background-color: rgba(0, 0, 0, 0.5);
-
-	opacity: 0;
-	transition: opacity 0.15s ease-in-out;
-}
-
-.overlayOpen {
-	opacity: 1;
-
+	height: 100%;
+	width: 100%;
 }
 
 .button {
 	position: absolute;
 	inset: 0;
 
+	background-color: rgba(0, 0, 0, 0.5);
 	z-index: -1;
 
 	cursor: pointer;

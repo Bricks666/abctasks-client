@@ -7,6 +7,7 @@ import { Tasks } from "@/components/Tasks";
 import { usePageTitle } from "@/hooks";
 import { ActivitiesList } from "@/components/ActivitiesList";
 import { Stack } from "@/ui/Stack";
+import { RoomHeader } from "@/components/RoomHeader";
 
 import HomePageStyle from "./HomePage.module.css";
 
@@ -15,6 +16,7 @@ export const HomePage: FC<ClassNameProps> = ({ className }) => {
 	return (
 		<main>
 			<ContentLayout className={classNames(HomePageStyle.layout, className)}>
+				<RoomHeader header="Homepage" />
 				<Tasks className={HomePageStyle.tasks} />
 				<Stack className={HomePageStyle.aside}>
 					<TasksProgress />

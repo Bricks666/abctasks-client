@@ -95,6 +95,12 @@
 	--color-lighter: white;
 }
 
+.dark {
+	--color: var(--grey-darker);
+	--color-darker: black;
+	--color-lighter: white;
+}
+
 /* SIZE */
 .small {
 	min-width: 56px;

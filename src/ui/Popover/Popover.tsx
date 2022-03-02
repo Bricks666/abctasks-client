@@ -3,6 +3,7 @@ import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import { useClickOutside } from "@/hooks";
 import { Portal } from "../Portal";
+import { Block } from "../Block";
 
 import PopoverStyle from "./Popover.module.css";
 
@@ -32,7 +33,7 @@ export const Popover: FC<PopoverProps> = memo(function Popover({
 				{...attributes}
 				ref={setPopover}
 			>
-				{children}
+				<Block className={PopoverStyle.block}>{children}</Block>
 			</div>
 		</Portal>
 	) : null;

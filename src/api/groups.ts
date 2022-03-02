@@ -1,4 +1,4 @@
-import { HEX } from "@/interfaces/common";
+import { CreateGroupRequest } from "@/interfaces/requests";
 import { CreateGroupResponse, TaskGroupsResponse } from "@/interfaces/response";
 import { instance } from "./instance";
 
@@ -8,11 +8,11 @@ export const getTaskGroupsApi = async (): Promise<TaskGroupsResponse> => {
 	return response.data;
 };
 
-export const createTaskGroupApi = async (
-	name: string,
-	mainColor: HEX,
-	secondColor: HEX
-): Promise<CreateGroupResponse> => {
+export const createTaskGroupApi = async ({
+	name,
+	mainColor,
+	secondColor,
+}: CreateGroupRequest): Promise<CreateGroupResponse> => {
 	const response = await instance.put("/groups/new", {
 		name,
 		mainColor,

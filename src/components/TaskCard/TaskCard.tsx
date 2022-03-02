@@ -13,6 +13,7 @@ import { Group } from "@/ui/Group";
 import { Text } from "@/ui/Text";
 import { MenuOption } from "@/ui/Menu";
 import { DateTime } from "@/ui/DateTime";
+import { useGroup } from "@/hooks/useGroup";
 
 import TaskCardStyle from "./TaskCard.module.css";
 
@@ -43,11 +44,15 @@ export const TaskCard: FC<TaskCardComponent> = ({
 			onClick: () => deleteTask(id),
 		},
 	];
+	const group = useGroup(groupId);
+	if (!group) {
+		return null;
+	}
 
 	return (
 		<Card className={classNames(TaskCardStyle.card, className)}>
 			<CardHeader secondaryAction={<EditMenu options={options} size="small" />}>
-				<Group groupId={groupId} />
+				<Group {...group} />
 			</CardHeader>
 
 			<Text className={TaskCardStyle.content}>{content}</Text>

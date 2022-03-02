@@ -13,9 +13,9 @@ export const changeProgressHandler = (
 	state.forEach((progress) => {
 		const change = idsMap[progress.groupId];
 		if (change) {
-			const progress = change.progress;
-			if (progress) {
-				newState.push(toValidTaskProgress(progress));
+			const changedProgress = change.progress;
+			if (changedProgress) {
+				newState.push(toValidTaskProgress(changedProgress));
 			}
 			delete idsMap[progress.groupId];
 			return;
