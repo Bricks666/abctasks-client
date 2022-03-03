@@ -1,5 +1,5 @@
-import { ClassNameProps } from "@/interfaces/common";
 import classNames from "classnames";
+import { ClassNameProps } from "@/interfaces/common";
 import React, { FC } from "react";
 import { Block } from "../Block";
 import { Collapse } from "../Collapse";
@@ -26,9 +26,13 @@ export const FullScreenPopup: FC<FillScreenPopupProps> = ({
 		<Portal>
 			<div className={FullScreenPopupStyle.container}>
 				<Collapse origin="bottom" open={isOpen} duration={300}>
-					<Block className={classNames(FullScreenPopupStyle.block, className)}>
+					<Block className={FullScreenPopupStyle.block}>
 						<PopupHeader onClose={onClose}>{header}</PopupHeader>
-						<PopupContent>{children}</PopupContent>
+						<PopupContent
+							className={classNames(FullScreenPopupStyle.content, className)}
+						>
+							{children}
+						</PopupContent>
 					</Block>
 				</Collapse>
 			</div>

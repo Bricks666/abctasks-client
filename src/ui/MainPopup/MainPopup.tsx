@@ -11,7 +11,7 @@ import MainPopupStyle from "./MainPopup.module.css";
 interface MainPopupComponent extends ClassNameProps {
 	readonly isOpen: boolean;
 	readonly onClose: MouseEventHandler;
-	readonly label?: string;
+	readonly header?: string;
 }
 
 export const MainPopup: FC<MainPopupComponent> = ({
@@ -19,16 +19,13 @@ export const MainPopup: FC<MainPopupComponent> = ({
 	onClose,
 	children,
 	className,
-	label,
+	header,
 }) => {
 	return (
 		<Overlay onClose={onClose}>
-			<Fade
-				open={isOpen}
-				className={classNames(MainPopupStyle.overlay, className)}
-			>
-				<PopupHeader onClose={onClose}>{label}</PopupHeader>
-				<PopupContent className={MainPopupStyle.content}>
+			<Fade open={isOpen} className={MainPopupStyle.overlay}>
+				<PopupHeader onClose={onClose}>{header}</PopupHeader>
+				<PopupContent className={classNames(MainPopupStyle.content, className)}>
 					{children}
 				</PopupContent>
 			</Fade>

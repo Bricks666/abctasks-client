@@ -12,6 +12,7 @@ interface AvatarProps extends ClassNameProps, DOMAttributes<HTMLImageElement> {
 	readonly size?: Size;
 	readonly color?: Color;
 	readonly children?: string;
+  readonly tabIndex?: number
 }
 
 const createAlt = (alt: string) => alt[0]?.toUpperCase();

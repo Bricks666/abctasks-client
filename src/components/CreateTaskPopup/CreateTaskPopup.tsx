@@ -20,7 +20,7 @@ export const CreateTaskPopup: FC<CreateTaskPopupProps> = ({
 		<MainPopup
 			className={className}
 			isOpen={isOpen}
-			label="Create task"
+			header="Create task"
 			onClose={onClose}
 		>
 			<CreateTaskForm className={TaskPopupStyle.form} />

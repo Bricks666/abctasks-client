@@ -28,7 +28,7 @@ export const usePrepareLink = ({
 		const query = newQuery.get(key);
 		const currentValues = query?.split(",") || null;
 		const newValue = currentValues
-			? `${currentValues.join(",")}, ${value}`
+			? `${currentValues.join(",")},${value}`
 			: value;
 		newQuery.set(key, newValue);
 	});

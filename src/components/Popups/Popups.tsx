@@ -5,11 +5,14 @@ import { usePopups } from "@/hooks";
 import { CreateTaskPopup } from "../CreateTaskPopup";
 import { EditTaskPopup } from "../EditTaskPopup";
 import { GroupsPopup } from "../GroupsPopup";
+import { GroupPopup } from "../GroupPopup";
 
 const popupsMap: Record<string, ComponentType<{ readonly isOpen: boolean }>> = {
 	[POPUPS.createTask]: CreateTaskPopup,
 	[POPUPS.editTask]: EditTaskPopup,
 	[POPUPS.groups]: GroupsPopup,
+	[POPUPS.createGroup]: GroupPopup,
+	[POPUPS.editGroup]: GroupPopup,
 };
 
 export const Popups = () => {

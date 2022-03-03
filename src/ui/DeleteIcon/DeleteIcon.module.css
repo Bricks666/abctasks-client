@@ -1,0 +1,9 @@
+.icon {
+	fill: var(--grey-darker);
+  transition: fill ease-in 0.195ms;
+}
+
+.icon:hover {
+	fill: black;
+
+}

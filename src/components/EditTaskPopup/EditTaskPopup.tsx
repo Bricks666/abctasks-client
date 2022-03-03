@@ -14,7 +14,7 @@ export const EditTaskPopup: FC<EditTaskPopupProps> = ({ isOpen }) => {
 	const onClose = useGoBack();
 
 	return (
-		<MainPopup isOpen={isOpen} onClose={onClose} label="Edit task">
+		<MainPopup isOpen={isOpen} onClose={onClose} header="Edit task">
 			<EditTaskForm className={EditTaskPopupStyle.form} />
 		</MainPopup>
 	);

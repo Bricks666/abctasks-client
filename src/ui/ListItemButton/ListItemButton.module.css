@@ -1,7 +1,12 @@
 .button {
-	padding: 5px 10px;
+	display: flex;
+	align-items: center;
+
+	width: 100%;
 
 	background-color: transparent;
+
+	text-align: left;
 
 	color: inherit;
 }

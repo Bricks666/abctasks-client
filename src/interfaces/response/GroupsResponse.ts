@@ -14,3 +14,11 @@ export interface TaskGroupsResponse {
 export interface CreateGroupResponse {
 	readonly group: TaskGroupResponse;
 }
+
+export interface DeleteGroupResponse {
+	readonly groupId: number;
+}
+
+export interface EditGroupResponse {
+	readonly group: TaskGroupResponse;
+}

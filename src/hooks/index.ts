@@ -18,3 +18,4 @@ export { useStatusesSelect } from "./useStatusesSelect";
 export { usePageTitle } from "./usePageTitle";
 export { useUserInfo } from "./useUserInfo";
 export { useGroupedTasks } from "./useGroupedTasks";
+export { useGroup } from "./useGroup";

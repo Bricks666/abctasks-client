@@ -25,7 +25,7 @@ interface MenuProps extends ClassNameProps, ExtractProps<typeof Popover> {
 export const Menu: FC<MenuProps> = ({ options, className, ...props }) => {
 	return (
 		<Popover {...props}>
-			<List className={className}>
+			<List className={className} dense>
 				{options.map(({ label, icon, ...button }) => (
 					<ListItem className={MenuStyle.item} key={label}>
 						<ListItemButton {...button}>

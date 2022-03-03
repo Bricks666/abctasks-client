@@ -27,6 +27,7 @@ export const ProfileLink: FC<ClassNameProps> = ({ className }) => {
 				alt={login}
 				ref={setReference}
 				onClick={isOpen ? close : open}
+				tabIndex={0}
 			/>
 			<Menu
 				reference={reference}

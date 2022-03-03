@@ -14,5 +14,10 @@ export {
 
 export { getActivitiesApi, subscribeNewActivitiesApi } from "./activities";
 
-export { getTaskGroupsApi, createTaskGroupApi } from "./groups";
+export {
+	getTaskGroupsApi,
+	createTaskGroupApi,
+	deleteGroupApi,
+	editGroupApi,
+} from "./groups";
 export { getTasksProgressApi, subscribeChangeProgressApi } from "./progress";

@@ -2,9 +2,9 @@ import React, { memo, CSSProperties } from "react";
 import classNames from "classnames";
 import { ClassNameProps } from "@/interfaces/common";
 import { Text } from "../Text";
+import { TaskGroup } from "@/models/Groups/types";
 
 import GroupStyle from "./Group.module.css";
-import { TaskGroup } from "@/models/Groups/types";
 
 interface GroupProps extends ClassNameProps, TaskGroup {}
 

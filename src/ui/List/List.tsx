@@ -4,6 +4,17 @@ import { ClassNameProps } from "@/interfaces/common";
 
 import ListStyle from "./List.module.css";
 
-export const List: FC<ClassNameProps> = ({ className, children }) => {
-	return <ul className={classNames(ListStyle.list, className)}>{children}</ul>;
+interface ListProps extends ClassNameProps {
+	readonly dense?: boolean;
+}
+
+export const List: FC<ListProps> = ({ className, dense, children }) => {
+	const classes = classNames(
+		ListStyle.list,
+		{
+			[ListStyle.dense]: dense,
+		},
+		className
+	);
+	return <ul className={classes}>{children}</ul>;
 };

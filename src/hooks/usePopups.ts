@@ -9,19 +9,14 @@ const parsePopups = (popups: string | null) => {
 let timeoutId: null | NodeJS.Timeout = null;
 
 export const usePopups = () => {
-
 	const rawPopups = useGetParam(GET_PARAMS.popup);
 	const [mountedPopups, setMountedPopups] = useState<string[]>(
 		parsePopups(rawPopups)
 	);
 
 	useEffect(() => {
-		if (rawPopups) {
-			timeoutId && clearTimeout(timeoutId);
-			setMountedPopups(parsePopups(rawPopups));
-		} else {
-			timeoutId = setTimeout(() => setMountedPopups([]), 300);
-		}
+		timeoutId && clearTimeout(timeoutId);
+		timeoutId = setTimeout(() => setMountedPopups(parsePopups(rawPopups)), 210);
 	}, [rawPopups]);
 
 	const popups = useMemo(() => parsePopups(rawPopups), [rawPopups]);

@@ -18,7 +18,7 @@ export const CreateGroupPopup: FC<CreateGroupPopupProps> = ({
 			className={className}
 			onClose={onClose}
 			isOpen={isOpen}
-			label="Create group"
+			header="Create group"
 		>
 			<CreateGroupForm />
 		</MainPopup>

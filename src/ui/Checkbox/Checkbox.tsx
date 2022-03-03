@@ -44,7 +44,7 @@ export const Checkbox: FC<CheckboxProps> = memo(function Checkbox({
 	const id = inputId || checkbox.name;
 
 	return (
-		<div className={className}>
+		<div className={classNames(CheckboxStyle.container, className)}>
 			<input
 				className={classNames(CheckboxStyle.input, "visibility-hidden")}
 				{...checkbox}

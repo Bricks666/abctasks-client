@@ -3,9 +3,10 @@ import React, { FC } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 import { Block } from "@/ui/Block";
 import { Text } from "@/ui/Text";
-import { Button } from "@/ui/Button";
 import { usePrepareLink } from "@/hooks";
 import { GET_PARAMS, POPUPS } from "@/const";
+import { EditMenu } from "../EditMenu";
+import { MenuOption } from "@/ui/Menu";
 
 import RoomHeaderStyle from "./RoomHeader.module.css";
 
@@ -14,19 +15,23 @@ interface RoomHeaderProps extends ClassNameProps {
 }
 
 export const RoomHeader: FC<RoomHeaderProps> = ({ header, className }) => {
-	const addGroupLink = usePrepareLink({
+	const groupsLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.groups,
 		},
 	});
+	const options: MenuOption[] = [
+		{
+			label: "Groups",
+			to: groupsLink,
+		},
+	];
 	return (
 		<Block className={classNames(RoomHeaderStyle.block, className)}>
 			<Text className={RoomHeaderStyle.header} component="h2">
 				{header}
 			</Text>
-			<Button type="text" size="small" color="dark" to={addGroupLink}>
-				Groups
-			</Button>
+			<EditMenu options={options} />
 		</Block>
 	);
 };

@@ -1,5 +1,10 @@
-import { CreateGroupRequest } from "@/interfaces/requests";
-import { CreateGroupResponse, TaskGroupsResponse } from "@/interfaces/response";
+import { CreateEditGroupRequest } from "@/interfaces/requests";
+import {
+	CreateGroupResponse,
+	DeleteGroupResponse,
+	EditGroupResponse,
+	TaskGroupsResponse,
+} from "@/interfaces/response";
 import { combine } from "effector";
 import { createDomain } from "effector-logger";
 import { TaskGroup, TaskGroupsMap } from "./types";
@@ -19,10 +24,21 @@ export const loadTaskGroupsFx = GroupsDomain.createEffect<
 	TaskGroupsResponse
 >("loadTaskGroupsFx");
 export const createGroupFx = GroupsDomain.createEffect<
-	CreateGroupRequest,
+CreateEditGroupRequest,
 	CreateGroupResponse
 >("createGroupFx");
+export const deleteGroupFx = GroupsDomain.createEffect<
+	number,
+	DeleteGroupResponse
+>("deleteGroupFx");
+export const editGroupFx = GroupsDomain.createEffect<
+CreateEditGroupRequest,
+	EditGroupResponse
+>("editGroupFx");
 
 export const loadTaskGroups = GroupsDomain.createEvent("loadTaskGroups");
 export const createGroup =
-	GroupsDomain.createEvent<CreateGroupRequest>("createGroupEvent");
+	GroupsDomain.createEvent<CreateEditGroupRequest>("createGroupEvent");
+export const deleteGroup = GroupsDomain.createEvent<number>("deleteGroupEvent");
+export const editGroup =
+	GroupsDomain.createEvent<CreateEditGroupRequest>("editGroupEvent");
