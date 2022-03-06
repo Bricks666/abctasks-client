@@ -18,13 +18,13 @@ export type MenuOption = {
 /* TODO: Добавить разделитель */
 /* | "divisor"; */
 
-interface MenuProps extends ClassNameProps, ExtractProps<typeof Popover> {
+interface MenuProps extends ClassNameProps, ExtractProps<typeof Popover, "className"> {
 	readonly options: MenuOption[];
 }
 
 export const Menu: FC<MenuProps> = ({ options, className, ...props }) => {
 	return (
-		<Popover {...props}>
+		<Popover {...props} role="menu">
 			<List className={className} dense>
 				{options.map(({ label, icon, ...button }) => (
 					<ListItem className={MenuStyle.item} key={label}>

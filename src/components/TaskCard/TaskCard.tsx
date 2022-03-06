@@ -51,7 +51,15 @@ export const TaskCard: FC<TaskCardComponent> = ({
 
 	return (
 		<Card className={classNames(TaskCardStyle.card, className)}>
-			<CardHeader secondaryAction={<EditMenu options={options} size="small" />}>
+			<CardHeader
+				secondaryAction={
+					<EditMenu
+						options={options}
+						size="small"
+						alt="Open task's edit menu "
+					/>
+				}
+			>
 				<Group {...group} />
 			</CardHeader>
 
@@ -64,7 +72,9 @@ export const TaskCard: FC<TaskCardComponent> = ({
 					size="small"
 					src={author.photo}
 					alt={author.name}
-				/>
+				>
+					{author.name[0]?.toUpperCase()}
+				</Avatar>
 			</div>
 		</Card>
 	);

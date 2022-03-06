@@ -12,6 +12,7 @@ export const DotsIcon: FC<ClassNameProps> = memo(function DotsIcon({
 		<SvgIcon
 			className={classNames(DotsIconStyle.icon, className)}
 			viewBox="0 0 20 6"
+			title="Three dots"
 		>
 			<circle cx="3" cy="3" r="3" />
 			<circle cx="10" cy="3" r="3" />

@@ -8,6 +8,7 @@ import { Menu, MenuOption } from "@/ui/Menu";
 import EditMenuStyle from "./EditMenu.module.css";
 
 interface EditMenuComponent extends ClassNameProps {
+	readonly alt?: string;
 	readonly options: MenuOption[];
 	readonly size?: Size;
 }
@@ -16,6 +17,7 @@ export const EditMenu: FC<EditMenuComponent> = ({
 	options,
 	className,
 	size,
+	alt,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [reference, setReference] = useState<HTMLElement | null>(null);
@@ -34,6 +36,8 @@ export const EditMenu: FC<EditMenuComponent> = ({
 					className={EditMenuStyle.button}
 					onClick={isOpen ? onClose : onOpen}
 					size={size}
+					tabIndex={0}
+					title={alt}
 				>
 					<DotsIcon />
 				</IconButton>

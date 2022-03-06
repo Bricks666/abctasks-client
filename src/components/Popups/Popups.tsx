@@ -5,14 +5,15 @@ import { usePopups } from "@/hooks";
 import { CreateTaskPopup } from "../CreateTaskPopup";
 import { EditTaskPopup } from "../EditTaskPopup";
 import { GroupsPopup } from "../GroupsPopup";
-import { GroupPopup } from "../GroupPopup";
+import { EditGroupPopup } from "../EditGroupPopup";
+import { CreateGroupPopup } from "../CreateGroupPopup";
 
 const popupsMap: Record<string, ComponentType<{ readonly isOpen: boolean }>> = {
 	[POPUPS.createTask]: CreateTaskPopup,
 	[POPUPS.editTask]: EditTaskPopup,
 	[POPUPS.groups]: GroupsPopup,
-	[POPUPS.createGroup]: GroupPopup,
-	[POPUPS.editGroup]: GroupPopup,
+	[POPUPS.createGroup]: CreateGroupPopup,
+	[POPUPS.editGroup]: EditGroupPopup,
 };
 
 export const Popups = () => {
@@ -20,12 +21,9 @@ export const Popups = () => {
 
 	useEffect(() => {
 		if (mountedPopups.length) {
-			document.body.style.overflow = "hidden";
-			document.body.style.paddingRight = "12px";
-
+			document.body.classList.add("popup_open");
 			return () => {
-				document.body.style.overflow = "";
-				document.body.style.paddingRight = "";
+				document.body.classList.remove("popup_open");
 			};
 		}
 	}, [mountedPopups.length]);

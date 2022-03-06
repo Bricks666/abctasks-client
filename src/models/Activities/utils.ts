@@ -6,8 +6,9 @@ export const toValidActivity = (
 ): ActivityStructure => {
 	return {
 		id: activity.activityId,
-		activistId: activity.activistId,
+		activist: activity.login,
 		activity: activity.activityType,
-		date: activity.addedAt,
+		sphere: activity.activitySphere,
+		date: activity.date,
 	};
 };

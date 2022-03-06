@@ -31,7 +31,7 @@ export const RoomHeader: FC<RoomHeaderProps> = ({ header, className }) => {
 			<Text className={RoomHeaderStyle.header} component="h2">
 				{header}
 			</Text>
-			<EditMenu options={options} />
+			<EditMenu options={options} alt="Open room edit menu" />
 		</Block>
 	);
 };

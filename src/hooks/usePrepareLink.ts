@@ -6,7 +6,7 @@ interface UsePrepareLinkParams {
 	readonly addQuery?: Record<string, string>;
 }
 
-interface UsePrepareLinkResponse {
+export interface UsePrepareLinkResponse {
 	readonly pathname: string;
 	readonly search: string;
 	readonly hash: string;

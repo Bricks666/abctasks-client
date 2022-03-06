@@ -1,21 +1,20 @@
 import classNames from "classnames";
-import React, { DOMAttributes, forwardRef, memo } from "react";
+import React, { forwardRef, HTMLAttributes, memo } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 import { Color, Size } from "@/interfaces/ui";
 import { Picture } from "../Picture";
 
 import AvatarStyle from "./Avatar.module.css";
 
-interface AvatarProps extends ClassNameProps, DOMAttributes<HTMLImageElement> {
+interface AvatarProps
+	extends ClassNameProps,
+		Omit<HTMLAttributes<HTMLDivElement>, "className"> {
 	readonly alt: string;
 	readonly src?: string | null;
 	readonly size?: Size;
 	readonly color?: Color;
-	readonly children?: string;
-  readonly tabIndex?: number
+	readonly tabIndex?: number;
 }
-
-const createAlt = (alt: string) => alt[0]?.toUpperCase();
 
 export const Avatar = memo(
 	forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
@@ -37,12 +36,10 @@ export const Avatar = memo(
 			className
 		);
 
-		const fallback = alt ? alt : children || "A";
-
 		const content = src ? (
-			<Picture className={AvatarStyle.avatar} src={src} alt={fallback} />
+			<Picture className={AvatarStyle.avatar} src={src} alt={alt} />
 		) : (
-			createAlt(fallback)
+			children
 		);
 
 		return (

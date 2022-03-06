@@ -1,25 +1,47 @@
 import classNames from "classnames";
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import { Card } from "@/ui/Card";
 import { Avatar } from "@/ui/Avatar";
 import { ClassNameProps } from "@/interfaces/common";
-import { Activities, ActivityStructure } from "@/models/Activities/types";
+import {
+	Activities,
+	ActivitySphere,
+	ActivityStructure,
+} from "@/models/Activities/types";
 import { Color } from "@/interfaces/ui";
 import { Text } from "@/ui/Text";
 import { DateTime } from "@/ui/DateTime";
+import { DeleteIcon } from "@/ui/DeleteIcon";
+import { EditIcon } from "@/ui/EditIcon";
 
 import ActivityCardStyle from "./ActivityCard.module.css";
 
 interface ActivityCardProps extends ClassNameProps, ActivityStructure {}
 
 const colorMap: Record<Activities, Color> = {
-	Creating: "success",
-	Deleting: "error",
-	Editing: "warning",
+	Created: "success",
+	Deleted: "error",
+	Edited: "warning",
+};
+
+const iconMap: Record<Activities, ReactNode> = {
+	Created: null,
+	Deleted: <DeleteIcon className={ActivityCardStyle.icon} />,
+	Edited: <EditIcon className={ActivityCardStyle.icon} />,
+};
+
+const generateText = (
+	activist: string,
+	sphere: ActivitySphere,
+	activity: Activities
+) => {
+	return `${activist} has ${activity.toLowerCase()} ${sphere.toLowerCase()}`;
 };
 
 export const ActivityCard: FC<ActivityCardProps> = ({
 	activity,
+	sphere,
+	activist,
 	className,
 	date,
 }) => {
@@ -30,10 +52,10 @@ export const ActivityCard: FC<ActivityCardProps> = ({
 				size="medium"
 				alt={activity}
 				color={colorMap[activity]}
-			/>
-			<Text component="p">
-				Task had been <b>{activity}</b>
-			</Text>
+			>
+				{iconMap[activity]}
+			</Avatar>
+			<Text component="p">{generateText(activist, sphere, activity)}</Text>
 
 			<DateTime date={date} format="MMM DD" />
 		</Card>

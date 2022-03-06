@@ -20,15 +20,22 @@ export const ProfileLink: FC<ClassNameProps> = ({ className }) => {
 	const close = useCallback(() => setIsOpen(false), []);
 	const open = useCallback(() => setIsOpen(true), []);
 
+	const handler = isOpen ? close : open;
+
 	return (
 		<div className={className} ref={setReference}>
 			<Avatar
 				src={photo}
 				alt={login}
 				ref={setReference}
-				onClick={isOpen ? close : open}
+				onClick={handler}
+				onKeyDown={handler}
 				tabIndex={0}
-			/>
+				aria-haspopup="menu"
+				role="button"
+			>
+				{login[0]?.toUpperCase()}
+			</Avatar>
 			<Menu
 				reference={reference}
 				options={options}

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FC, DOMAttributes } from "react";
+import React, { FC, DOMAttributes, HTMLAttributes } from "react";
 import { Link, To } from "react-router-dom";
 import { ClassNameProps } from "@/interfaces/common";
 
@@ -8,7 +8,8 @@ import BaseButtonStyle from "./BaseButton.module.css";
 /* Переработать ссылку */
 export interface BaseButtonProps
 	extends ClassNameProps,
-		DOMAttributes<HTMLButtonElement> {
+		DOMAttributes<HTMLButtonElement>,
+		Omit<HTMLAttributes<HTMLButtonElement>, "className"> {
 	readonly to?: To;
 	readonly disabled?: boolean;
 }

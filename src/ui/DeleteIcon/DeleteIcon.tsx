@@ -10,6 +10,7 @@ export const DeleteIcon: FC<ClassNameProps> = ({ className }) => {
 		<SvgIcon
 			className={classNames(DeleteIconStyle.icon, className)}
 			viewBox="0 0 6.35 6.35"
+			title="trash basket"
 		>
 			<g transform="matrix(.95694 0 0 .95694 .127 -.256)">
 				<path

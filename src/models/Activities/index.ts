@@ -1,5 +1,4 @@
 import { ActivitiesResponse, ActivityResponse } from "@/interfaces/response";
-import { CloseConnect } from "@/packages/eventSource";
 import { createDomain } from "effector-logger";
 import { ActivityStructure } from "./types";
 

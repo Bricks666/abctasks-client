@@ -36,10 +36,11 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 		<>
 			<header className={classNames(TaskListHeaderStyle.header, className)}>
 				<Block className={TaskListHeaderStyle.background}>
-					<Text component="h2">{children}</Text>
+					<Text component="h3">{children}</Text>
 					<EditMenu
 						className={TaskListHeaderStyle.editMenu}
 						options={options}
+						alt="Open tasks list's edit menu"
 					/>
 				</Block>
 			</header>

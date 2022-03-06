@@ -14,6 +14,7 @@ interface GroupFormProps extends ClassNameProps {
 	readonly defaultState?: CreateEditGroupRequest | null;
 	readonly afterSubmit?: VoidFunction;
 	readonly submitHandler: (values: CreateEditGroupRequest) => unknown;
+	readonly buttonText: string;
 }
 
 export const GroupForm: FC<GroupFormProps> = ({
@@ -21,6 +22,7 @@ export const GroupForm: FC<GroupFormProps> = ({
 	submitHandler,
 	className,
 	defaultState,
+	buttonText,
 }) => {
 	const { control, handleSubmit, watch } = useForm<CreateEditGroupRequest>({
 		defaultValues: defaultState || {},
@@ -37,31 +39,32 @@ export const GroupForm: FC<GroupFormProps> = ({
 			className={classNames(GroupFormStyle.block, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<Stack>
+			<Stack className={GroupFormStyle.fields}>
 				<TextField
 					className={GroupFormStyle.input}
 					name="name"
 					control={control}
 					type="text"
+					label="Group name"
 				/>
-				<Stack direction="row">
-					<TextField
-						className={GroupFormStyle.color}
-						name="mainColor"
-						control={control}
-						type="color"
-					/>
-					<TextField
-						className={GroupFormStyle.color}
-						name="secondColor"
-						control={control}
-						type="color"
-					/>
-				</Stack>
+				<TextField
+					className={GroupFormStyle.color}
+					name="mainColor"
+					control={control}
+					type="color"
+					label="Main color"
+				/>
+				<TextField
+					className={GroupFormStyle.color}
+					name="secondColor"
+					control={control}
+					type="color"
+					label="Second color"
+				/>
 			</Stack>
 			<div>{state.name && <Group {...state} />}</div>
 
-			<Button>{defaultState ? "Save group" : "Add group"}</Button>
+			<Button>{buttonText}</Button>
 		</form>
 	);
 };

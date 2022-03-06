@@ -13,12 +13,20 @@ import { GET_PARAMS, POPUPS } from "@/const";
 import { MainPopup } from "@/ui/MainPopup";
 import { EditIcon } from "@/ui/EditIcon";
 import { Stack } from "@/ui/Stack";
+import { UsePrepareLinkResponse } from "@/hooks/usePrepareLink";
 
 import GroupsPopupStyle from "./GroupsPopup.module.css";
 
 interface GroupsPopup extends ClassNameProps {
 	readonly isOpen: boolean;
 }
+
+const createEditLink = (params: UsePrepareLinkResponse, groupId: number) => {
+	return {
+		...params,
+		search: params.search + `&${GET_PARAMS.groupId}=${groupId}`,
+	};
+};
 
 export const GroupsPopup: FC<GroupsPopup> = ({ isOpen }) => {
 	const onClose = useGoBack();
@@ -42,6 +50,7 @@ export const GroupsPopup: FC<GroupsPopup> = ({ isOpen }) => {
 			isOpen={isOpen}
 			onClose={onClose}
 			header="Task groups"
+			alt="Groups"
 		>
 			<Stack>
 				<Button
@@ -51,27 +60,20 @@ export const GroupsPopup: FC<GroupsPopup> = ({ isOpen }) => {
 				>
 					Add group
 				</Button>
-				<List>
-					{groups.map((group) => {
-						const editLink = {
-							...editGroupLink,
-							search:
-								editGroupLink.search + `&${GET_PARAMS.groupId}=${group.id}`,
-						};
-						return (
-							<ListItem key={group.id}>
-								<Group {...group} />
-								<ListItemSecondaryAction>
-									<IconButton to={editLink}>
-										<EditIcon />
-									</IconButton>
-									<IconButton onClick={() => deleteGroup(group.id)}>
-										<DeleteIcon />
-									</IconButton>
-								</ListItemSecondaryAction>
-							</ListItem>
-						);
-					})}
+				<List className={GroupsPopupStyle.list}>
+					{groups.map((group) => (
+						<ListItem key={group.id}>
+							<Group {...group} />
+							<ListItemSecondaryAction>
+								<IconButton to={createEditLink(editGroupLink, group.id)}>
+									<EditIcon />
+								</IconButton>
+								<IconButton onClick={() => deleteGroup(group.id)}>
+									<DeleteIcon />
+								</IconButton>
+							</ListItemSecondaryAction>
+						</ListItem>
+					))}
 				</List>
 			</Stack>
 		</MainPopup>

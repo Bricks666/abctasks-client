@@ -1,10 +1,11 @@
-import { Activities } from "@/models/Activities/types";
+import { Activities, ActivitySphere } from "@/models/Activities/types";
 
 export interface ActivityResponse {
 	readonly activityId: number;
-	readonly activistId: number;
+	readonly login: string;
 	readonly activityType: Activities;
-	readonly addedAt: string;
+	readonly activitySphere: ActivitySphere;
+	readonly date: string;
 }
 
 export interface ActivitiesResponse {
