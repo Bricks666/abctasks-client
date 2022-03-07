@@ -53,6 +53,7 @@ export const GroupForm: FC<GroupFormProps> = ({
 					control={control}
 					type="color"
 					label="Main color"
+					inputClassName={GroupFormStyle.color_input}
 				/>
 				<TextField
 					className={GroupFormStyle.color}
@@ -60,6 +61,7 @@ export const GroupForm: FC<GroupFormProps> = ({
 					control={control}
 					type="color"
 					label="Second color"
+					inputClassName={GroupFormStyle.color_input}
 				/>
 			</Stack>
 			<div>{state.name && <Group {...state} />}</div>

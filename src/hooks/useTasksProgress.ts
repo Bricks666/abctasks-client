@@ -10,11 +10,9 @@ export const useTasksProgress = () => {
 	const tasksProgress = useStore($TasksProgress);
 
 	useEffect(() => {
-		if (!tasksProgress.length) {
-			loadTasksProgress();
-			subscribeChangeProgress();
-		}
-	}, [tasksProgress.length]);
+		loadTasksProgress();
+		subscribeChangeProgress();
+	}, []);
 
 	return tasksProgress;
 };

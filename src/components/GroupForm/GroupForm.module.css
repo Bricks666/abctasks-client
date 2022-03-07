@@ -16,3 +16,7 @@
 .input {
 	grid-column: span 2;
 }
+
+.color_input {
+  height: 50px;;
+}

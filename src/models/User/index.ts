@@ -7,13 +7,12 @@ export interface User {
 	readonly photo: string | null;
 }
 
+export const initialUser = { userId: 0, login: "", photo: null };
+
 export const Auth = createDomain("AuthDomain");
 
 export const $Login = Auth.createStore<boolean>(false, { name: "Login" });
-export const $User = Auth.createStore<User>(
-	{ userId: 0, login: "", photo: null },
-	{ name: "User" }
-);
+export const $User = Auth.createStore<User>(initialUser, { name: "User" });
 export const $Authorizing = Auth.createStore<boolean>(true, {
 	name: "Authorizing",
 });

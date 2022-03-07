@@ -24,6 +24,7 @@ export interface FieldProps extends ClassNameProps {
 	readonly type?: HTMLInputTypeAttribute;
 	readonly inputRef?: Ref<HTMLInputElement | HTMLTextAreaElement>;
 	readonly multiline?: boolean;
+	readonly inputClassName?: string;
 }
 
 export const Field: FC<FieldProps> = ({
@@ -33,6 +34,7 @@ export const Field: FC<FieldProps> = ({
 	name,
 	inputRef,
 	multiline,
+	inputClassName,
 	...input
 }) => {
 	const id = inputId || name;
@@ -42,9 +44,19 @@ export const Field: FC<FieldProps> = ({
 	) : null;
 
 	const control = multiline ? (
-		<Textarea {...input} id={id} ref={inputRef as Ref<HTMLTextAreaElement>} />
+		<Textarea
+			className={inputClassName}
+			{...input}
+			id={id}
+			ref={inputRef as Ref<HTMLTextAreaElement>}
+		/>
 	) : (
-		<Input {...input} id={id} ref={inputRef as Ref<HTMLInputElement>} />
+		<Input
+			className={inputClassName}
+			{...input}
+			id={id}
+			ref={inputRef as Ref<HTMLInputElement>}
+		/>
 	);
 
 	return (

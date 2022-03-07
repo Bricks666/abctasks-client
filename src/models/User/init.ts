@@ -13,6 +13,7 @@ import {
 	auth,
 	refresh,
 	$User,
+	initialUser,
 } from ".";
 import {
 	authApi,
@@ -106,4 +107,9 @@ guard({
 		fn: mayStartFxHandler,
 	}),
 	target: registrationFx,
+});
+sample({
+	clock: logoutFx.done,
+	fn: () => initialUser,
+	target: $User,
 });

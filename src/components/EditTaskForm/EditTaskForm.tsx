@@ -4,13 +4,7 @@ import React, { FC, useCallback } from "react";
 import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GET_PARAMS } from "@/const";
-import {
-	useGetParam,
-	useGoBack,
-	useGroupSelector,
-	useStatusesSelect,
-	useTask,
-} from "@/hooks";
+import { useGetParam, useGoBack, useGroupSelector, useTask } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { editTask } from "@/models/Tasks";
 import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
@@ -54,12 +48,30 @@ const prepareTask = (
 		  };
 };
 
+const statuses = [
+	{
+		label: "Ready",
+		value: "Ready",
+	},
+	{
+		label: "In Progress",
+		value: "In Progress",
+	},
+	{
+		label: "Review",
+		value: "Review",
+	},
+	{
+		label: "Done",
+		value: "Done",
+	},
+];
+
 export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const taskId = useGetParam(GET_PARAMS.taskId);
 	const task = useTask(taskId);
 	const group = useGroup(task?.groupId || null);
 	const { groupsOptions, styles } = useGroupSelector();
-	const statuses = useStatusesSelect();
 	const goBack = useGoBack();
 	const { control, handleSubmit, formState } = useForm<EditTaskFormValues>({
 		defaultValues: prepareTask(task, group),

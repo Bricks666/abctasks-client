@@ -12,6 +12,7 @@ interface TextFieldProps<T extends AnyObject> extends ClassNameProps {
 	readonly type?: HTMLInputTypeAttribute;
 	readonly multiline?: boolean;
 	readonly required?: boolean;
+	readonly inputClassName?: string;
 }
 
 export const TextField = <T,>({

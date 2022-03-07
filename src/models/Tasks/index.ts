@@ -7,7 +7,6 @@ import {
 } from "@/interfaces/requests";
 import {
 	GroupedByStatusTasksStore,
-	StatusNamesStore,
 	TaskStatus,
 	TaskStructure,
 } from "./types";
@@ -20,15 +19,6 @@ export const $Tasks = TasksDomain.createStore<TaskStructure[]>([], {
 export const $LoadingTasks = TasksDomain.createStore<boolean>(false, {
 	name: "LoadingTasks",
 });
-export const $StatusNamesStore = TasksDomain.createStore<StatusNamesStore>(
-	{
-		ready: "Ready",
-		inProgress: "In Progress",
-		needReview: "Review",
-		done: "Done",
-	},
-	{ name: "GroupNameStore" }
-);
 
 const createGrouper = (status: TaskStatus) => {
 	return (state: TaskStructure[]) => {

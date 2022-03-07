@@ -13,6 +13,7 @@ import { Text } from "@/ui/Text";
 import { DateTime } from "@/ui/DateTime";
 import { DeleteIcon } from "@/ui/DeleteIcon";
 import { EditIcon } from "@/ui/EditIcon";
+import { PlusIcon } from "@/ui/PlusIcon";
 
 import ActivityCardStyle from "./ActivityCard.module.css";
 
@@ -25,7 +26,7 @@ const colorMap: Record<Activities, Color> = {
 };
 
 const iconMap: Record<Activities, ReactNode> = {
-	Created: null,
+	Created: <PlusIcon className={ActivityCardStyle.icon} />,
 	Deleted: <DeleteIcon className={ActivityCardStyle.icon} />,
 	Edited: <EditIcon className={ActivityCardStyle.icon} />,
 };

@@ -12,6 +12,7 @@ import TasksListStyle from "./TasksList.module.css";
 interface TasksListComponent extends ClassNameProps {
 	readonly tasks: TaskStructure[];
 	readonly listHeader: TaskStatus;
+	readonly header?: string;
 }
 const onDragOver: DragEventHandler<HTMLDivElement> = (evt) =>
 	evt.preventDefault();
@@ -20,6 +21,7 @@ export const TasksList: FC<TasksListComponent> = ({
 	tasks,
 	className,
 	listHeader,
+	header = listHeader,
 }) => {
 	const onDrop = useCallback<DragEventHandler>(
 		(evt) => {
@@ -35,7 +37,7 @@ export const TasksList: FC<TasksListComponent> = ({
 	return (
 		<Stack className={className} space="l">
 			<TaskListHeader className={TasksListStyle.header} columnName={listHeader}>
-				{listHeader}
+				{header}
 			</TaskListHeader>
 			<DropZone
 				className={TasksListStyle.dropZone}
