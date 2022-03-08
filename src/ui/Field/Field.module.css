@@ -3,3 +3,9 @@
 
 	row-gap: 5px;
 }
+
+.error {
+	--outline: var(--error);
+	--border: var(--error-lighter);
+	--text: var(--error-lighter);
+}

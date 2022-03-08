@@ -14,6 +14,10 @@ import {
 	refresh,
 	$User,
 	initialUser,
+	$LoginError,
+	$RegistrationError,
+	clearLoginError,
+	clearRegistrationError,
 } from ".";
 import {
 	authApi,
@@ -43,7 +47,7 @@ refreshFx.use(async () => {
 });
 
 forward({
-	from: [authFx.pending, loginFx.pending],
+	from: [authFx.pending],
 	to: $Authorizing,
 });
 
@@ -112,4 +116,27 @@ sample({
 	clock: logoutFx.done,
 	fn: () => initialUser,
 	target: $User,
+});
+
+sample({
+	clock: loginFx.failData,
+	fn: (data) => data,
+	target: $LoginError,
+});
+sample({
+	clock: registrationFx.failData,
+	fn: (data) => data,
+	target: $RegistrationError,
+});
+
+sample({
+	clock: [loginFx.done, authFx.done, clearLoginError],
+	fn: () => null,
+	target: $LoginError,
+});
+
+sample({
+	clock: [registrationFx.done, clearRegistrationError],
+	fn: () => null,
+	target: $RegistrationError,
 });

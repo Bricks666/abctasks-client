@@ -20,13 +20,14 @@ export const TextField = <T,>({
 	name,
 	...props
 }: TextFieldProps<T>) => {
-	const { field } = useController({
+	const { field, fieldState } = useController({
 		name,
 		control,
 	});
 
 	const { onBlur, onChange, ref, value } = field;
-
+	const { error } = fieldState;
+	console.log(error);
 	return (
 		<Field
 			name={name}
@@ -34,6 +35,7 @@ export const TextField = <T,>({
 			onChange={onChange}
 			onBlur={onBlur}
 			inputRef={ref}
+			error={error?.message}
 			{...props}
 		/>
 	);

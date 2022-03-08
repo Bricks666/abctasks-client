@@ -1,0 +1,1 @@
+export { useRegistrationError } from "./useRegistrationError";

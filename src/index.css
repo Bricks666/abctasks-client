@@ -13,22 +13,27 @@
 	--grey: rgb(158, 154, 154);
 	--grey-darker: rgb(99 99 99);
 
+	--warning-lightest: #ffebd3;
 	--warning-lighter: #f7bd77;
 	--warning: #fba63c;
 	--warning-darker: #f38d11;
 
-	--error-lighter: #ff836d;
+	--error-lightest: #ffd2ca;
+	--error-lighter: #fc917e;
 	--error: #f86a51;
 	--error-darker: #fa4c2d;
 
+	--success-lightest: #b9e2c7;
 	--success-lighter: #88e0a7;
 	--success: #5dc983;
 	--success-darker: #13854e;
 
-	--primary-lighter: #529cc7;
+	--primary-lightest: #cce3f1;
+	--primary-lighter: #6ac8ff;
 	--primary: #2e87ba;
 	--primary-darker: #006ead;
 
+	--secondary-lightest: #b9a1bd;
 	--secondary-lighter: #ab5db9;
 	--secondary: #a734ba;
 	--secondary-darker: #9900b4;

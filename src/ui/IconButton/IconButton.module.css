@@ -2,20 +2,22 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
 	width: var(--size);
 	height: var(--size);
 
-  font-size: var(--size);
-
 	padding: calc(var(--size) / 6);
 
-	background-color: white;
+	background-color: transparent;
+
+	font-size: var(--size);
+	color: inherit;
 
 	border-radius: 50%;
 }
 
 .button:focus-visible {
-  box-shadow: var(--grey-darker) 0 0 8px;
+	box-shadow: var(--grey-darker) 0 0 8px;
 }
 
 .small {
@@ -28,8 +30,4 @@
 
 .large {
 	--size: 40px;
-}
-
-.button:hover {
-	background-color: var(--grey-lighter);
 }

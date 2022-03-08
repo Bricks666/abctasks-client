@@ -16,6 +16,12 @@ export const $User = Auth.createStore<User>(initialUser, { name: "User" });
 export const $Authorizing = Auth.createStore<boolean>(true, {
 	name: "Authorizing",
 });
+export const $LoginError = Auth.createStore<object | null>(null, {
+	name: "LoginError",
+});
+export const $RegistrationError = Auth.createStore<object | null>(null, {
+	name: "RegistrationError",
+});
 
 export const loginFx = Auth.createEffect<LoginRequest, User>("loginFx");
 export const authFx = Auth.createEffect<void, User>("authFx");
@@ -31,3 +37,7 @@ export const registration =
 	Auth.createEvent<RegistrationRequest>("registrationEvent");
 export const logout = Auth.createEvent("logoutEvent");
 export const refresh = Auth.createEvent<void>("refreshEvent");
+export const clearLoginError = Auth.createEvent<void>("clearLoginError");
+export const clearRegistrationError = Auth.createEvent<void>(
+	"clearRegistrationError"
+);

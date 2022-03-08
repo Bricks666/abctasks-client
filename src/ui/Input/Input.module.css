@@ -5,19 +5,20 @@
 	padding: 12px;
 
 	font-size: var(--input-font-size);
+	font-family: inherit;
 
 	border-radius: 8px;
-	border-color: rgba(99, 99, 99, 0.2);
+	border-color: var(--border, rgba(99, 99, 99, 0.2));
 
 	background-color: white;
 }
 
 .input:hover {
-	outline: 2px solid var(--shadow);
+	outline: 2px solid var(--border, var(--shadow));
 }
 
 .input:focus-visible {
-	outline: 2px solid var(--primary);
+	outline: 2px solid var(--outline, var(--primary));
 }
 
 @media (min-width: 600px) {

@@ -1,0 +1,64 @@
+.root {
+	display: flex;
+
+	gap: 16px;
+
+	height: max-content;
+
+	padding: 10px 15px;
+}
+
+.icon {
+	padding: 6px 0;
+
+	font-size: 18px;
+}
+
+.content {
+	padding: 5px 0;
+
+	font-size: 0.875em;
+}
+
+.action {
+	padding: 5px 0;
+	margin-left: auto;
+
+	background-color: transparent;
+}
+
+.primary {
+	--main: var(--primary-darker);
+	--second: var(--primary-lightest);
+}
+
+.success {
+	--main: var(--success-darker);
+	--second: var(--success-lightest);
+}
+
+.warning {
+	--main: var(--warning-darker);
+	--second: var(--warning-lightest);
+}
+
+.error {
+	--main: var(--error-darker);
+	--second: var(--error-lightest);
+}
+
+.filed {
+	background-color: var(--main);
+	color: white;
+}
+
+.outline {
+	color: var(--main);
+	background-color: transparent;
+	border: 1px solid var(--main);
+}
+
+.standard {
+	background-color: var(--second);
+	color: var(--main);
+}

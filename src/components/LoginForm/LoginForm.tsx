@@ -1,16 +1,19 @@
 import React, { FC, useCallback } from "react";
-import Joi from "joi";
+import { Location, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { LoginRequest } from "@/interfaces/requests";
 import { Button } from "@/ui/Button";
-import { login } from "@/models/User";
-import { Location, useNavigate } from "react-router-dom";
+import { clearLoginError, loginFx } from "@/models/User";
 import { useLocationState } from "@/hooks";
 import { TextField } from "../TextField";
 import { ClassNameProps } from "@/interfaces/common";
 import { Checkbox } from "../Checkbox";
+import { validationSchema } from "./validator";
+import { Alert } from "@/ui/Alert";
+import { AlertTitle } from "@/ui/AlertTitle";
+import { useLoginError } from "./hooks";
 
 import LoginFormStyle from "./LoginForm.module.css";
 
@@ -20,44 +23,36 @@ const initialValue: LoginRequest = {
 	remember: false,
 };
 
-const validationSchema = Joi.object<LoginRequest>({
-	login: Joi.string().required(),
-	password: Joi.string().required(),
-	remember: Joi.boolean(),
-});
-
 export const LoginForm: FC<ClassNameProps> = ({ className }) => {
-	const { control, handleSubmit, formState } =
-		useForm<LoginRequest>({
-			defaultValues: initialValue,
-			resolver: joiResolver(validationSchema),
-		});
-
-
+	const { control, handleSubmit, formState } = useForm<LoginRequest>({
+		defaultValues: initialValue,
+		resolver: joiResolver(validationSchema),
+	});
 	const navigate = useNavigate();
 	const state = useLocationState<Location>();
-
 	const { isDirty, isSubmitting } = formState;
-
 	const onSubmit = useCallback<SubmitHandler<LoginRequest>>(
-		(values) => {
-			try {
-				login(values);
-				const to = state || "/";
+		async (values) => {
+			await loginFx(values);
+			const to = state || "/";
 
-				navigate(to, { replace: true });
-			} catch (e) {
-				console.log(e);
-			}
+			navigate(to, { replace: true });
 		},
 		[navigate, state]
 	);
+	const error = useLoginError();
 
 	return (
 		<form
 			className={classNames(LoginFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
+			{error && (
+				<Alert color="error" type="outline" onClose={() => clearLoginError()}>
+					<AlertTitle>Authorization error</AlertTitle>
+					Incorrect login or password
+				</Alert>
+			)}
 			<TextField
 				name="login"
 				control={control}

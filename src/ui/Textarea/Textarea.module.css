@@ -4,7 +4,7 @@
 	font-size: var(--textarea-font-size);
 
 	border-radius: 8px;
-	border-color: rgba(162, 179, 207, 0.2);
+	border-color: var(--border, rgba(162, 179, 207, 0.2));
 
 	resize: none;
 }
@@ -15,11 +15,11 @@
 }
 
 .textarea:hover {
-	outline: 2px solid var(--shadow);
+	outline: 2px solid var(var(--border), var(--shadow));
 }
 
 .textarea:focus-visible {
-	outline: 2px solid var(--primary);
+	outline: 2px solid var(--outline, var(--primary));
 }
 
 @media (min-width: 600px) {

@@ -5,13 +5,17 @@ import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { ClassNameProps } from "@/interfaces/common";
 import { RegistrationRequest } from "@/interfaces/requests";
-import { registration } from "@/models/User";
+import { clearRegistrationError, registrationFx } from "@/models/User";
 import { Location, useNavigate } from "react-router-dom";
 import { useLocationState } from "@/hooks";
 import { Button } from "@/ui/Button";
 import { TextField } from "../TextField";
+import { validationSchema } from "./validator";
 
 import RegistrationFormStyle from "./RegistrationForm.module.css";
+import { useRegistrationError } from "./hooks";
+import { Alert } from "@/ui/Alert";
+import { AlertTitle } from "@/ui/AlertTitle";
 
 const initialValues: RegistrationRequest = {
 	login: "",
@@ -19,40 +23,38 @@ const initialValues: RegistrationRequest = {
 	repeatPassword: "",
 };
 
-const validationSchema = Joi.object<RegistrationRequest>({
-	login: Joi.string().required(),
-	password: Joi.string().required(),
-	repeatPassword: Joi.string().valid(Joi.ref("password")),
-});
-
 export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 	const { control, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
 	});
-
 	const navigate = useNavigate();
 	const state = useLocationState<Location>();
-
 	const onSubmit = useCallback(
-		(values) => {
-			try {
-				registration(values);
-				navigate("/login", { replace: true, state });
-			} catch (e) {
-				console.log(e);
-			}
+		async (values) => {
+			await registrationFx(values);
+			navigate("/login", { replace: true, state });
 		},
 		[navigate, state]
 	);
-
 	const { isSubmitting, isDirty } = formState;
+	const error = useRegistrationError();
 
 	return (
 		<form
 			className={classNames(RegistrationFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
+			{error && (
+				<Alert
+					type="outline"
+					color="error"
+					onClose={() => clearRegistrationError()}
+				>
+					<AlertTitle>Registration error</AlertTitle>
+					This user already registered
+				</Alert>
+			)}
 			<TextField
 				name="login"
 				control={control}
