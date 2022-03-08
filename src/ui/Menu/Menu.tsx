@@ -1,39 +1,25 @@
 import { ClassNameProps, ExtractProps } from "@/interfaces/common";
-import React, { FC, MouseEventHandler } from "react";
-import { Path } from "react-router-dom";
+import React, { AriaRole, CSSProperties, FC } from "react";
 import { List } from "../List";
-import { ListItem } from "../ListItem";
-import { ListItemButton } from "../ListItemButton";
 import { Popover } from "../Popover";
-import { Text } from "../Text";
 
-import MenuStyle from "./Menu.module.css";
-
-export type MenuOption = {
-	readonly label: string;
-	readonly onClick?: MouseEventHandler;
-	readonly to?: Path;
-	readonly icon?: JSX.Element;
-};
-/* TODO: Добавить разделитель */
-/* | "divisor"; */
-
-interface MenuProps extends ClassNameProps, ExtractProps<typeof Popover, "className"> {
-	readonly options: MenuOption[];
+interface MenuProps
+	extends ClassNameProps,
+		ExtractProps<typeof Popover, "className"> {
+	readonly role?: AriaRole;
+	readonly style?: CSSProperties;
 }
 
-export const Menu: FC<MenuProps> = ({ options, className, ...props }) => {
+export const Menu: FC<MenuProps> = ({
+	children,
+	className,
+	role = "menu",
+	...props
+}) => {
 	return (
-		<Popover {...props} role="menu">
+		<Popover {...props} role={role}>
 			<List className={className} dense>
-				{options.map(({ label, icon, ...button }) => (
-					<ListItem className={MenuStyle.item} key={label}>
-						<ListItemButton {...button}>
-							{icon}
-							<Text component="span">{label}</Text>
-						</ListItemButton>
-					</ListItem>
-				))}
+				{children}
 			</List>
 		</Popover>
 	);

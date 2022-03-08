@@ -1,11 +1,21 @@
 import classNames from "classnames";
-import React, { FC } from "react";
+import React, { AriaRole, FC } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 
 import ListItemStyle from "./ListItem.module.css";
 
-export const ListItem: FC<ClassNameProps> = ({ children, className }) => {
+interface ListItemProps extends ClassNameProps {
+	readonly role?: AriaRole;
+}
+
+export const ListItem: FC<ListItemProps> = ({
+	children,
+	className,
+	...props
+}) => {
 	return (
-		<li className={classNames(ListItemStyle.item, className)}>{children}</li>
+		<li className={classNames(ListItemStyle.item, className)} {...props}>
+			{children}
+		</li>
 	);
 };

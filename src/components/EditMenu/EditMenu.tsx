@@ -3,7 +3,8 @@ import { ClassNameProps } from "@/interfaces/common";
 import { Size } from "@/interfaces/ui";
 import { DotsIcon } from "@/ui/DotsIcon";
 import { IconButton } from "@/ui/IconButton";
-import { Menu, MenuOption } from "@/ui/Menu";
+import { Menu } from "@/ui/Menu";
+import { MenuItem, MenuOption } from "@/ui/MenuItem";
 
 import EditMenuStyle from "./EditMenu.module.css";
 
@@ -46,9 +47,12 @@ export const EditMenu: FC<EditMenuComponent> = ({
 				reference={reference}
 				isOpen={isOpen}
 				onClose={onClose}
-				options={options}
 				placement="bottom-end"
-			/>
+			>
+				{options.map((option) => (
+					<MenuItem {...option} key={option.label} />
+				))}
+			</Menu>
 		</div>
 	);
 };

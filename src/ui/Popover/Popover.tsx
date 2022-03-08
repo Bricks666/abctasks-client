@@ -26,6 +26,7 @@ export const Popover: FC<PopoverProps> = memo(function Popover({
 	placement,
 	onClose,
 	children,
+	style,
 	...props
 }) {
 	const [popover, setPopover] = useState<HTMLElement | null>(null);
@@ -35,7 +36,7 @@ export const Popover: FC<PopoverProps> = memo(function Popover({
 		<Portal>
 			<div
 				className={PopoverStyle.popover}
-				style={styles.popper}
+				style={{ ...styles.popper, ...style }}
 				{...attributes}
 				ref={setPopover}
 				{...props}

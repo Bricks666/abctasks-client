@@ -3,7 +3,8 @@ import { useUserInfo } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { Avatar } from "@/ui/Avatar";
 import { logout } from "@/models/User";
-import { Menu, MenuOption } from "@/ui/Menu";
+import { Menu } from "@/ui/Menu";
+import { MenuItem, MenuOption } from "@/ui/MenuItem";
 
 const options: MenuOption[] = [
 	{
@@ -38,11 +39,14 @@ export const ProfileLink: FC<ClassNameProps> = ({ className }) => {
 			</Avatar>
 			<Menu
 				reference={reference}
-				options={options}
 				isOpen={isOpen}
 				onClose={close}
 				placement="bottom-end"
-			/>
+			>
+				{options.map((option) => (
+					<MenuItem {...option} key={option.label} />
+				))}
+			</Menu>
 		</div>
 	);
 };

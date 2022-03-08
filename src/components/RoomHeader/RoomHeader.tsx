@@ -6,7 +6,7 @@ import { Text } from "@/ui/Text";
 import { usePrepareLink } from "@/hooks";
 import { GET_PARAMS, POPUPS } from "@/const";
 import { EditMenu } from "../EditMenu";
-import { MenuOption } from "@/ui/Menu";
+import { MenuOption } from "@/ui/MenuItem";
 
 import RoomHeaderStyle from "./RoomHeader.module.css";
 

@@ -11,7 +11,7 @@ import { CardHeader } from "@/ui/CardHeader";
 import { EditMenu } from "../EditMenu";
 import { Group } from "@/ui/Group";
 import { Text } from "@/ui/Text";
-import { MenuOption } from "@/ui/Menu";
+import { MenuOption } from "@/ui/MenuItem";
 import { DateTime } from "@/ui/DateTime";
 import { useGroup } from "@/hooks/useGroup";
 

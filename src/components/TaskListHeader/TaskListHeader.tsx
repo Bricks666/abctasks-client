@@ -6,7 +6,7 @@ import { ClassNameProps } from "@/interfaces/common";
 import { EditMenu } from "../EditMenu";
 import { Text } from "@/ui/Text";
 import { Block } from "@/ui/Block";
-import { MenuOption } from "@/ui/Menu";
+import { MenuOption } from "@/ui/MenuItem";
 
 import TaskListHeaderStyle from "./TaskListHeader.module.css";
 

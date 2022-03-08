@@ -27,7 +27,6 @@ export const TextField = <T,>({
 
 	const { onBlur, onChange, ref, value } = field;
 	const { error } = fieldState;
-	console.log(error);
 	return (
 		<Field
 			name={name}
