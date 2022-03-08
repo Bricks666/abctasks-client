@@ -9,10 +9,12 @@ import { TaskStatus } from "@/models/Tasks/types";
 import { Button } from "@/ui/Button";
 import { Select, SelectValues } from "@/ui/Select";
 import { TextField } from "../TextField";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { validationScheme } from "./validator";
 
 import TaskFormStyle from "./CreateTaskForm.module.css";
 
-interface TaskFormValues {
+export interface TaskFormValues {
 	readonly content: string;
 	readonly group: SelectValues<number>;
 }
@@ -24,6 +26,7 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 
 	const { handleSubmit, formState, control, reset } = useForm<TaskFormValues>({
 		defaultValues: { content: "", group: {} },
+		resolver: joiResolver(validationScheme),
 	});
 
 	const onSubmit = useCallback<SubmitHandler<TaskFormValues>>(
@@ -38,8 +41,8 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 		[status, reset]
 	);
 
-	const { isDirty, isValid, isSubmitting } = formState;
-	const disableButton = !isDirty || !isValid || isSubmitting;
+	const { isDirty, isSubmitting } = formState;
+	const disableButton = !isDirty || isSubmitting;
 
 	return (
 		<form
@@ -58,7 +61,6 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 				className={TaskFormStyle.textarea}
 				name="content"
 				control={control}
-				required={true}
 				disabled={isSubmitting}
 				label="Task"
 				multiline

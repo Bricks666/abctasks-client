@@ -1,5 +1,5 @@
-import React, { FC, useCallback, useState } from "react";
-import { useUserInfo } from "@/hooks";
+import React, { FC, useState } from "react";
+import { useToggle, useUserInfo } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { Avatar } from "@/ui/Avatar";
 import { logout } from "@/models/User";
@@ -15,13 +15,8 @@ const options: MenuOption[] = [
 
 export const ProfileLink: FC<ClassNameProps> = ({ className }) => {
 	const { login, photo } = useUserInfo();
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = useState<HTMLElement | null>(null);
-
-	const close = useCallback(() => setIsOpen(false), []);
-	const open = useCallback(() => setIsOpen(true), []);
-
-	const handler = isOpen ? close : open;
 
 	return (
 		<div className={className} ref={setReference}>
@@ -29,8 +24,8 @@ export const ProfileLink: FC<ClassNameProps> = ({ className }) => {
 				src={photo}
 				alt={login}
 				ref={setReference}
-				onClick={handler}
-				onKeyDown={handler}
+				onClick={toggle}
+				onKeyDown={toggle}
 				tabIndex={0}
 				aria-haspopup="menu"
 				role="button"

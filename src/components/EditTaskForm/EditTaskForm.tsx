@@ -15,8 +15,10 @@ import { TextField } from "../TextField";
 import { useGroup } from "@/hooks/useGroup";
 
 import EditTaskFromStyle from "./EditTaskForm.module.css";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { validatingScheme } from "./validator";
 
-interface EditTaskFormValues {
+export interface EditTaskFormValues {
 	readonly content: string;
 	readonly group: SelectValues<number>;
 	readonly status: SelectValues<TaskStatus>;
@@ -75,10 +77,12 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const goBack = useGoBack();
 	const { control, handleSubmit, formState } = useForm<EditTaskFormValues>({
 		defaultValues: prepareTask(task, group),
+		resolver: joiResolver(validatingScheme),
 	});
 
 	const onSubmit = useCallback<SubmitHandler<EditTaskFormValues>>(
 		({ group, status, ...values }) => {
+			debugger;
 			const groupId = group.value;
 			const statusName = status.value;
 			editTask({
@@ -91,20 +95,21 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 		},
 		[goBack, taskId]
 	);
-	const { isDirty } = formState;
+	const { isDirty, errors } = formState;
+	console.log(errors);
 
 	return (
 		<form
 			className={classNames(EditTaskFromStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<Select options={statuses} name="status" control={control} />
 			<Select
 				options={groupsOptions}
 				styles={styles}
 				name="group"
 				control={control}
 			/>
+			<Select options={statuses} name="status" control={control} />
 
 			<TextField
 				className={EditTaskFromStyle.textarea}

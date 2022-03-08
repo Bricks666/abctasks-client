@@ -7,6 +7,7 @@ import { Menu } from "@/ui/Menu";
 import { MenuItem, MenuOption } from "@/ui/MenuItem";
 
 import EditMenuStyle from "./EditMenu.module.css";
+import { useToggle } from "@/hooks";
 
 interface EditMenuComponent extends ClassNameProps {
 	readonly alt?: string;
@@ -20,22 +21,15 @@ export const EditMenu: FC<EditMenuComponent> = ({
 	size,
 	alt,
 }) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, toggle] = useToggle();
 	const [reference, setReference] = useState<HTMLElement | null>(null);
-
-	const onClose = useCallback(() => {
-		setIsOpen(false);
-	}, []);
-	const onOpen = useCallback(() => {
-		setIsOpen(true);
-	}, []);
 
 	return (
 		<div className={className}>
 			<div className={EditMenuStyle.container} ref={setReference}>
 				<IconButton
 					className={EditMenuStyle.button}
-					onClick={isOpen ? onClose : onOpen}
+					onClick={toggle}
 					size={size}
 					tabIndex={0}
 					title={alt}
@@ -46,7 +40,7 @@ export const EditMenu: FC<EditMenuComponent> = ({
 			<Menu
 				reference={reference}
 				isOpen={isOpen}
-				onClose={onClose}
+				onClose={toggle}
 				placement="bottom-end"
 			>
 				{options.map((option) => (

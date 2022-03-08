@@ -9,6 +9,8 @@ import { ClassNameProps } from "@/interfaces/common";
 import { Stack } from "@/ui/Stack";
 
 import GroupFormStyle from "./GroupForm.module.css";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { validatingScheme } from "./validator";
 
 interface GroupFormProps extends ClassNameProps {
 	readonly defaultState?: CreateEditGroupRequest | null;
@@ -26,6 +28,7 @@ export const GroupForm: FC<GroupFormProps> = ({
 }) => {
 	const { control, handleSubmit, watch } = useForm<CreateEditGroupRequest>({
 		defaultValues: defaultState || {},
+		resolver: joiResolver(validatingScheme),
 	});
 
 	const state = watch();
