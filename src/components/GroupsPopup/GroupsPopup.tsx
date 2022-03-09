@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useGoBack, usePrepareLink, useTaskGroups } from "@/hooks";
-import { ClassNameProps } from "@/interfaces/common";
+import { BasePopup, ClassNameProps } from "@/interfaces/common";
 import { Group } from "@/ui/Group";
 import { List } from "@/ui/List";
 import { ListItem } from "@/ui/ListItem";
@@ -17,9 +17,7 @@ import { UsePrepareLinkResponse } from "@/hooks/usePrepareLink";
 
 import GroupsPopupStyle from "./GroupsPopup.module.css";
 
-interface GroupsPopup extends ClassNameProps {
-	readonly isOpen: boolean;
-}
+interface GroupsPopup extends ClassNameProps, BasePopup {}
 
 const createEditLink = (params: UsePrepareLinkResponse, groupId: number) => {
 	return {
@@ -28,7 +26,7 @@ const createEditLink = (params: UsePrepareLinkResponse, groupId: number) => {
 	};
 };
 
-export const GroupsPopup: FC<GroupsPopup> = ({ isOpen }) => {
+export const GroupsPopup: FC<GroupsPopup> = (props) => {
 	const onClose = useGoBack();
 	const groups = useTaskGroups();
 	const addGroupLink = usePrepareLink({
@@ -46,8 +44,8 @@ export const GroupsPopup: FC<GroupsPopup> = ({ isOpen }) => {
 
 	return (
 		<MainPopup
+			{...props}
 			className={GroupsPopupStyle.content}
-			isOpen={isOpen}
 			onClose={onClose}
 			header="Task groups"
 			alt="Groups"

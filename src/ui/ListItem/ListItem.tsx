@@ -6,6 +6,7 @@ import ListItemStyle from "./ListItem.module.css";
 
 interface ListItemProps extends ClassNameProps {
 	readonly role?: AriaRole;
+	readonly tabIndex?: number;
 }
 
 export const ListItem: FC<ListItemProps> = ({

@@ -18,9 +18,7 @@ export const Menu: FC<MenuProps> = ({
 }) => {
 	return (
 		<Popover {...props} role={role}>
-			<List className={className} dense>
-				{children}
-			</List>
+			<List className={className}>{children}</List>
 		</Popover>
 	);
 };

@@ -1,13 +1,13 @@
-import React, { FC, useState, useCallback } from "react";
+import React, { FC, useState } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 import { Size } from "@/interfaces/ui";
 import { DotsIcon } from "@/ui/DotsIcon";
 import { IconButton } from "@/ui/IconButton";
 import { Menu } from "@/ui/Menu";
 import { MenuItem, MenuOption } from "@/ui/MenuItem";
+import { useAnyPopupOpen, useToggle } from "@/hooks";
 
 import EditMenuStyle from "./EditMenu.module.css";
-import { useToggle } from "@/hooks";
 
 interface EditMenuComponent extends ClassNameProps {
 	readonly alt?: string;
@@ -23,7 +23,7 @@ export const EditMenu: FC<EditMenuComponent> = ({
 }) => {
 	const [isOpen, toggle] = useToggle();
 	const [reference, setReference] = useState<HTMLElement | null>(null);
-
+	const anyPopupOpen = useAnyPopupOpen();
 	return (
 		<div className={className}>
 			<div className={EditMenuStyle.container} ref={setReference}>
@@ -42,6 +42,7 @@ export const EditMenu: FC<EditMenuComponent> = ({
 				isOpen={isOpen}
 				onClose={toggle}
 				placement="bottom-end"
+				isFocus={!anyPopupOpen}
 			>
 				{options.map((option) => (
 					<MenuItem {...option} key={option.label} />

@@ -6,6 +6,7 @@ import { PopupHeader } from "../PopupHeader";
 import { Fade } from "../Fade";
 import { PopupContent } from "../PopupContent";
 import { useKeyListener } from "../hooks";
+import { FocusTrap } from "../FocusTrap";
 
 import MainPopupStyle from "./MainPopup.module.css";
 
@@ -15,6 +16,7 @@ interface MainPopupComponent extends ClassNameProps {
 	readonly header?: string;
 	readonly closeOnEsc?: boolean;
 	readonly alt?: string;
+	readonly isFocus?: boolean;
 }
 
 export const MainPopup: FC<MainPopupComponent> = ({
@@ -25,16 +27,21 @@ export const MainPopup: FC<MainPopupComponent> = ({
 	header,
 	alt,
 	closeOnEsc = true,
+	isFocus = isOpen,
 }) => {
-	useKeyListener("Escape", onClose, closeOnEsc);
+	useKeyListener("Escape", onClose, closeOnEsc && isFocus);
 	return (
 		<Overlay onClose={onClose} alt={alt}>
-			<Fade open={isOpen} className={MainPopupStyle.overlay}>
-				<PopupHeader onClose={onClose}>{header}</PopupHeader>
-				<PopupContent className={classNames(MainPopupStyle.content, className)}>
-					{children}
-				</PopupContent>
-			</Fade>
+			<FocusTrap open={isFocus}>
+				<Fade open={isOpen} className={MainPopupStyle.overlay}>
+					<PopupHeader onClose={onClose}>{header}</PopupHeader>
+					<PopupContent
+						className={classNames(MainPopupStyle.content, className)}
+					>
+						{children}
+					</PopupContent>
+				</Fade>
+			</FocusTrap>
 		</Overlay>
 	);
 };

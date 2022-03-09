@@ -1,3 +1,5 @@
+import { boolean } from "joi";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type HEX = `#${string}`;
 
@@ -18,4 +20,9 @@ export type ExtractProps<
 	K extends keyof Parameters<T>[0] = never
 > = Omit<Parameters<T>[0], K>;
 
-export type AnyFunction = (...args: any[]) => any
+export type AnyFunction = (...args: any[]) => any;
+
+export interface BasePopup {
+	readonly isOpen: boolean;
+	readonly isFocus?: boolean;
+}

@@ -1,13 +1,9 @@
 .popover {
 	z-index: 1;
-
-	border-radius: 8px;
 }
 
 .block {
-	padding: 5px;
-
-	border-radius: inherit;
+	border-radius: 8px;
 
 	filter: drop-shadow(rgba(99, 99, 99, 0.5) 0 2px 8px);
 	border-color: rgba(162, 179, 207, 0.2);

@@ -82,7 +82,7 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 
 	const onSubmit = useCallback<SubmitHandler<EditTaskFormValues>>(
 		({ group, status, ...values }) => {
-			debugger;
+
 			const groupId = group.value;
 			const statusName = status.value;
 			editTask({
@@ -96,7 +96,6 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 		[goBack, taskId]
 	);
 	const { isDirty, errors } = formState;
-	console.log(errors);
 
 	return (
 		<form

@@ -3,15 +3,13 @@ import { useEffect } from "react";
 export const useClickOutside = (
 	reference: HTMLElement | null,
 	onClick: (evt?: MouseEvent) => unknown,
-	...conditions: boolean[]
+	condition: boolean
 ): void => {
 	useEffect(() => {
 		const listener = (evt: globalThis.MouseEvent) => {
 			const target = evt.target as HTMLElement;
 			const isClickOutside =
-				target !== reference &&
-				!reference?.contains(target) &&
-				conditions.every((condition) => condition);
+				target !== reference && !reference?.contains(target) && condition;
 
 			if (isClickOutside) {
 				onClick(evt);
@@ -20,5 +18,5 @@ export const useClickOutside = (
 		document.addEventListener("mousedown", listener);
 
 		return () => document.removeEventListener("mousedown", listener);
-	}, [reference, onClick, conditions]);
+	}, [reference, onClick, condition]);
 };

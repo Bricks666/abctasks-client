@@ -3,7 +3,7 @@
 
 	display: grid;
 
-	row-gap: 12px;
+  gap: 10px;
 
 	margin: 0;
 	padding: 5px 0;

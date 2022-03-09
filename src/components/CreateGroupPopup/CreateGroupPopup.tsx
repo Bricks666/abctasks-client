@@ -1,23 +1,17 @@
 import React, { FC } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import { BasePopup, ClassNameProps } from "@/interfaces/common";
 import { MainPopup } from "@/ui/MainPopup";
 import { useGoBack } from "@/hooks";
 import { GroupForm } from "../GroupForm";
 import { createGroup } from "@/models/Groups";
 
-interface CreateGroupPopupProps extends ClassNameProps {
-	readonly isOpen: boolean;
-}
+interface CreateGroupPopupProps extends ClassNameProps, BasePopup {}
 
-export const CreateGroupPopup: FC<CreateGroupPopupProps> = ({
-	isOpen,
-	className,
-}) => {
+export const CreateGroupPopup: FC<CreateGroupPopupProps> = (props) => {
 	const onClose = useGoBack();
 	return (
 		<MainPopup
-			className={className}
-			isOpen={isOpen}
+			{...props}
 			onClose={onClose}
 			header="Create group"
 			alt="Create group popup"

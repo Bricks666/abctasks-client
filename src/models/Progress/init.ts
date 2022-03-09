@@ -3,14 +3,17 @@ import { SubscribeChangeProfileProps } from "@/api/progress";
 import { forward, guard, sample } from "effector";
 import {
 	$LoadingTasksProgress,
+	$ProgressSubscribe,
 	$TasksProgress,
 	changeProgress,
 	loadTasksProgress,
 	loadTasksProgressFx,
+	setUnsubscribe,
 	subscribeChangeProgress,
 	subscribeChangeProgressFx,
 } from ".";
 import { mayStartFxHandler } from "../handlers";
+import { logoutFx } from "../User";
 import { changeProgressHandler } from "./handler";
 import { toValidTaskProgress } from "./utils";
 
@@ -42,8 +45,9 @@ sample({
 	clock: subscribeChangeProgress,
 	fn: (): SubscribeChangeProfileProps => ({
 		onChangeProgress: changeProgress,
-		onError: ({ reconnect }) => {
-			reconnect();
+		onError: async ({ reconnect }) => {
+			const close = await reconnect();
+			setUnsubscribe(close);
 		},
 	}),
 	target: subscribeChangeProgressFx,
@@ -54,4 +58,19 @@ sample({
 	clock: changeProgress,
 	fn: changeProgressHandler,
 	target: $TasksProgress,
+});
+
+forward({
+	from: [setUnsubscribe, subscribeChangeProgressFx.doneData],
+	to: $ProgressSubscribe,
+});
+
+sample({
+	source: $ProgressSubscribe,
+	clock: logoutFx.done,
+	fn: (close) => {
+		close && close();
+		return null;
+	},
+	target: $ProgressSubscribe,
 });

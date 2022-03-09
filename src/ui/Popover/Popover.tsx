@@ -10,14 +10,18 @@ import { Placement } from "@popperjs/core";
 import { useClickOutside } from "@/hooks";
 import { Portal } from "../Portal";
 import { Block } from "../Block";
+import { FocusTrap } from "../FocusTrap";
 
 import PopoverStyle from "./Popover.module.css";
+import { useKeyListener } from "../hooks";
 
 interface PopoverProps extends AriaAttributes, HTMLAttributes<HTMLDivElement> {
 	readonly reference: HTMLElement | null;
 	readonly isOpen: boolean;
 	readonly onClose: (evt?: MouseEvent) => unknown;
 	readonly placement?: Placement;
+	readonly isFocus?: boolean;
+	readonly closeOnEsc?: boolean;
 }
 
 export const Popover: FC<PopoverProps> = memo(function Popover({
@@ -27,11 +31,15 @@ export const Popover: FC<PopoverProps> = memo(function Popover({
 	onClose,
 	children,
 	style,
+	isFocus = isOpen,
+	closeOnEsc = true,
 	...props
 }) {
 	const [popover, setPopover] = useState<HTMLElement | null>(null);
 	const { styles, attributes } = usePopper(reference, popover, { placement });
 	useClickOutside(popover, onClose, isOpen);
+	useKeyListener("Escape", onClose, closeOnEsc);
+
 	return isOpen ? (
 		<Portal>
 			<div
@@ -41,7 +49,9 @@ export const Popover: FC<PopoverProps> = memo(function Popover({
 				ref={setPopover}
 				{...props}
 			>
-				<Block className={PopoverStyle.block}>{children}</Block>
+				<FocusTrap open={isFocus}>
+					<Block className={PopoverStyle.block}>{children}</Block>
+				</FocusTrap>
 			</div>
 		</Portal>
 	) : null;

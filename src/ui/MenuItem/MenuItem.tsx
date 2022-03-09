@@ -35,7 +35,7 @@ export const MenuItem: FC<MenuItemProps> = ({
 }) => {
 	return (
 		<ListItem className={MenuItemStyle.item} role={role} {...props}>
-			<ListItemButton onClick={onClick} to={to}>
+			<ListItemButton onClick={onClick} to={to} tabIndex={0}>
 				{icon}
 				<Text component="span">{label}</Text>
 			</ListItemButton>

@@ -4,10 +4,15 @@
 
 	width: 100%;
 
+	padding: calc(8px * var(--multiplier)) calc(16px * var(--multiplier));
+
 	background-color: transparent;
 	color: inherit;
+
+	transition: background-color 150ms ease-in-out;
 }
 
-.button:focus-visible {
+.button:focus-visible,
+.button:hover {
 	background-color: var(--grey-lighter);
 }

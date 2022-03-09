@@ -3,10 +3,10 @@ import { useEffect } from "react";
 export const useKeyListener = (
 	key: string,
 	callback: VoidFunction,
-	...condition: unknown[]
+	condition: boolean
 ) => {
 	useEffect(() => {
-		if (condition.every(Boolean)) {
+		if (condition) {
 			document.onkeydown = (evt) => {
 				if (evt.key === key) {
 					callback();

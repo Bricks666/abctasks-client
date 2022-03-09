@@ -9,8 +9,6 @@ import { TaskProgressStructure } from "./types";
 
 export const ProgressDomain = createDomain("ProgressDomain");
 
-/* TODO: Сделать обновление прогресса по событиям на сервере */
-
 export const $TasksProgress = ProgressDomain.createStore<
 	TaskProgressStructure[]
 >([], {
@@ -22,6 +20,10 @@ export const $LoadingTasksProgress = ProgressDomain.createStore<boolean>(
 		name: "LoadingTasksProgress",
 	}
 );
+export const $ProgressSubscribe =
+	ProgressDomain.createStore<CloseConnect | null>(null, {
+		name: "ProgressSubscribe",
+	});
 
 export const loadTasksProgressFx = ProgressDomain.createEffect<
 	void,
@@ -40,3 +42,5 @@ export const subscribeChangeProgress = ProgressDomain.createEvent<void>(
 export const changeProgress = ProgressDomain.createEvent<
 	ChangeProgressResponse[]
 >("changeProgressEvent");
+export const setUnsubscribe =
+	ProgressDomain.createEvent<CloseConnect>("setUnsubscribe");

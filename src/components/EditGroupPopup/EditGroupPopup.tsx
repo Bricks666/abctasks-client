@@ -1,23 +1,20 @@
 import React, { FC } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import { BasePopup, ClassNameProps } from "@/interfaces/common";
 import { MainPopup } from "@/ui/MainPopup";
 import { useGetParam, useGoBack, useGroup } from "@/hooks";
 import { GroupForm } from "../GroupForm";
 import { GET_PARAMS } from "@/const";
 import { editGroup } from "@/models/Groups";
 
-interface EditGroupPopupProps extends ClassNameProps {
-	readonly isOpen: boolean;
-}
+interface EditGroupPopupProps extends ClassNameProps, BasePopup {}
 
-export const EditGroupPopup: FC<EditGroupPopupProps> = ({ isOpen, className }) => {
+export const EditGroupPopup: FC<EditGroupPopupProps> = (props) => {
 	const onClose = useGoBack();
 	const id = useGetParam(GET_PARAMS.groupId);
 	const group = useGroup(id ? +id : null);
 	return (
 		<MainPopup
-			className={className}
-			isOpen={isOpen}
+			{...props}
 			onClose={onClose}
 			header="Edit group"
 			alt="Edit group popup"

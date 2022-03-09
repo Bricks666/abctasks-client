@@ -4,8 +4,6 @@
 	display: flex;
 	align-items: center;
 
-	padding: calc(8px * var(--multiplier)) calc(16px * var(--multiplier));
-
 	width: 100%;
 }
 .start {

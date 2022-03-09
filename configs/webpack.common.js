@@ -30,7 +30,7 @@ const rules = (isDev) => [
 	},
 	{
 		test: /\.ts(x?)$/,
-		exclude: /node_modules/,
+		exclude: [/node_modules/, /mocks/],
 		use: [
 			"babel-loader",
 			{

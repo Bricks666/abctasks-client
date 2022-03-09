@@ -7,8 +7,9 @@ import { EditTaskPopup } from "../EditTaskPopup";
 import { GroupsPopup } from "../GroupsPopup";
 import { EditGroupPopup } from "../EditGroupPopup";
 import { CreateGroupPopup } from "../CreateGroupPopup";
+import { BasePopup } from "@/interfaces/common";
 
-const popupsMap: Record<string, ComponentType<{ readonly isOpen: boolean }>> = {
+const popupsMap: Record<string, ComponentType<BasePopup>> = {
 	[POPUPS.createTask]: CreateTaskPopup,
 	[POPUPS.editTask]: EditTaskPopup,
 	[POPUPS.groups]: GroupsPopup,
@@ -30,16 +31,18 @@ export const Popups = () => {
 	return (
 		<>
 			<Outlet />
-			{mountedPopups.map((mountedPopup) => {
+			{mountedPopups.map((mountedPopup, index) => {
 				const Component = popupsMap[mountedPopup];
 
 				if (!Component) {
 					return null;
 				}
+				const isUp = mountedPopups.length - 1 === index;
 
 				return (
 					<Component
 						isOpen={popups.includes(mountedPopup)}
+						isFocus={isUp}
 						key={mountedPopup}
 					/>
 				);

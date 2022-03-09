@@ -16,6 +16,7 @@ import { AlertTitle } from "@/ui/AlertTitle";
 import { useLoginError } from "./hooks";
 
 import LoginFormStyle from "./LoginForm.module.css";
+import { FocusTrap } from "@/ui/FocusTrap";
 
 const initialValue: LoginRequest = {
 	login: "",
@@ -59,6 +60,7 @@ export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 				label="Login"
 				disabled={isSubmitting}
 			/>
+
 			<TextField
 				name="password"
 				control={control}
