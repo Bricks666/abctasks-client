@@ -2,12 +2,11 @@ import classNames from "classnames";
 import React, { FC, useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GET_PARAMS } from "@/const";
-import { useGetParam, useGroupSelector } from "@/hooks";
+import { useGetParam, useTaskGroups } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { createTask } from "@/models/Tasks";
 import { TaskStatus } from "@/models/Tasks/types";
 import { Button } from "@/ui/Button";
-import { Select, SelectValues } from "@/ui/Select";
 import { TextField } from "../TextField";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validationScheme } from "./validator";
@@ -16,24 +15,23 @@ import TaskFormStyle from "./CreateTaskForm.module.css";
 
 export interface TaskFormValues {
 	readonly content: string;
-	readonly group: SelectValues<number>;
+	readonly groupId: number;
 }
 
 export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || "Ready";
-
-	const { groupsOptions, styles } = useGroupSelector();
+	const groups = useTaskGroups();
 
 	const { handleSubmit, formState, control, reset } = useForm<TaskFormValues>({
-		defaultValues: { content: "", group: {} },
+		defaultValues: { content: "", groupId: 0 },
 		resolver: joiResolver(validationScheme),
 	});
 
 	const onSubmit = useCallback<SubmitHandler<TaskFormValues>>(
-		({ content, group }) => {
+		({ content, groupId }) => {
 			createTask({
 				content: content,
-				groupId: group.value,
+				groupId: groupId,
 				status,
 			});
 			reset();
@@ -49,14 +47,13 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 			className={classNames(TaskFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<Select<TaskFormValues>
-				options={groupsOptions}
-				styles={styles}
-				control={control}
-				name="group"
-			>
-				Group
-			</Select>
+			<TextField control={control} name="groupId" select>
+				{groups.map(({ id, name }) => (
+					<option value={id} key={id}>
+						{name}
+					</option>
+				))}
+			</TextField>
 			<TextField
 				className={TaskFormStyle.textarea}
 				name="content"

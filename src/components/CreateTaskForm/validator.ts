@@ -13,7 +13,7 @@ export const validationScheme = Joi.object<TaskFormValues>({
 			"string.pattern.base":
 				"Content can only contain latins alphas, numeric and !, *, (, ), _, +",
 		}),
-	group: Joi.object().required().messages({
-		"object.empty": "Group must be choose",
+	groupId: Joi.number().required().messages({
+		"number.empty": "Group must be choose",
 	}),
 });

@@ -12,7 +12,6 @@ export { useTask } from "./useTask";
 export { useGoBack } from "./useGoBack";
 export { usePopups } from "./usePopups";
 export { useTaskGroups } from "./useTaskGroups";
-export { useGroupSelector } from "./useGroupSelector";
 export { usePageTitle } from "./usePageTitle";
 export { useUserInfo } from "./useUserInfo";
 export { useGroupedTasks } from "./useGroupedTasks";

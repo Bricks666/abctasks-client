@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute } from "react";
+import React, { HTMLInputTypeAttribute, PropsWithChildren } from "react";
 import { Control, Path, useController } from "react-hook-form";
 import { AnyObject, ClassNameProps } from "@/interfaces/common";
 import { Field } from "@/ui/Field";
@@ -13,13 +13,14 @@ interface TextFieldProps<T extends AnyObject> extends ClassNameProps {
 	readonly multiline?: boolean;
 	readonly required?: boolean;
 	readonly inputClassName?: string;
+	readonly select?: boolean;
 }
 
 export const TextField = <T,>({
 	control,
 	name,
 	...props
-}: TextFieldProps<T>) => {
+}: PropsWithChildren<TextFieldProps<T>>) => {
 	const { field, fieldState } = useController({
 		name,
 		control,

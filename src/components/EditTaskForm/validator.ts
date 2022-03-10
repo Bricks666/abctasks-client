@@ -6,10 +6,10 @@ export const validatingScheme = Joi.object<EditTaskFormValues>({
 		"string.empty": "Content can't be empty",
 		"string.max": "Content must be less than 128",
 	}),
-	group: Joi.object().required().messages({
-		"object.empty": "Group must be choose",
+	groupId: Joi.number().required().messages({
+		"number.empty": "Group must be choose",
 	}),
-	status: Joi.object().required().messages({
-		"object.empty": "Status must be choose",
+	status: Joi.string().required().messages({
+		"string.empty": "Status must be choose",
 	}),
 });

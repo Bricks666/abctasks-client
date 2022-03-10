@@ -4,24 +4,23 @@ import React, { FC, useCallback } from "react";
 import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GET_PARAMS } from "@/const";
-import { useGetParam, useGoBack, useGroupSelector, useTask } from "@/hooks";
+import { useGetParam, useGoBack, useTask, useTaskGroups } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { editTask } from "@/models/Tasks";
 import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
 import { TaskGroup } from "@/models/Groups/types";
 import { Button } from "@/ui/Button";
-import { Select, SelectValues } from "@/ui/Select";
 import { TextField } from "../TextField";
 import { useGroup } from "@/hooks/useGroup";
-
-import EditTaskFromStyle from "./EditTaskForm.module.css";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validatingScheme } from "./validator";
 
+import EditTaskFromStyle from "./EditTaskForm.module.css";
+
 export interface EditTaskFormValues {
 	readonly content: string;
-	readonly group: SelectValues<number>;
-	readonly status: SelectValues<TaskStatus>;
+	readonly groupId: number;
+	readonly status: TaskStatus;
 }
 
 const prepareTask = (
@@ -31,49 +30,23 @@ const prepareTask = (
 	return task && group
 		? {
 				content: task.content,
-				group: {
-					label: group.name,
-					value: group.id,
-				},
-				status: {
-					label: task.status,
-					value: task.status,
-				},
+				groupId: group.id,
+				status: task.status,
 		  }
 		: {
 				content: "",
-				group: {
-					label: "",
-					value: 0,
-				},
-				status: { label: "Ready", value: "Ready" },
+				groupId: 0,
+				status: "Ready",
 		  };
 };
 
-const statuses = [
-	{
-		label: "Ready",
-		value: "Ready",
-	},
-	{
-		label: "In Progress",
-		value: "In Progress",
-	},
-	{
-		label: "Review",
-		value: "Review",
-	},
-	{
-		label: "Done",
-		value: "Done",
-	},
-];
+const statuses = ["Ready", "In Progress", "Review", "Done"];
 
 export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const taskId = useGetParam(GET_PARAMS.taskId);
 	const task = useTask(taskId);
 	const group = useGroup(task?.groupId || null);
-	const { groupsOptions, styles } = useGroupSelector();
+	const groups = useTaskGroups();
 	const goBack = useGoBack();
 	const { control, handleSubmit, formState } = useForm<EditTaskFormValues>({
 		defaultValues: prepareTask(task, group),
@@ -81,34 +54,38 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	});
 
 	const onSubmit = useCallback<SubmitHandler<EditTaskFormValues>>(
-		({ group, status, ...values }) => {
-
-			const groupId = group.value;
-			const statusName = status.value;
+		({ groupId, status, ...values }) => {
 			editTask({
 				...values,
 				id: +(taskId as unknown as number),
-				status: statusName,
+				status,
 				groupId,
 			});
 			goBack();
 		},
 		[goBack, taskId]
 	);
-	const { isDirty, errors } = formState;
+	const { isDirty } = formState;
 
 	return (
 		<form
 			className={classNames(EditTaskFromStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<Select
-				options={groupsOptions}
-				styles={styles}
-				name="group"
-				control={control}
-			/>
-			<Select options={statuses} name="status" control={control} />
+			<TextField control={control} name="groupId" select>
+				{groups.map(({ id, name }) => (
+					<option value={id} key={id}>
+						{name}
+					</option>
+				))}
+			</TextField>
+			<TextField control={control} name="status" select>
+				{statuses.map((status) => (
+					<option value={status} key={status}>
+						{status}
+					</option>
+				))}
+			</TextField>
 
 			<TextField
 				className={EditTaskFromStyle.textarea}

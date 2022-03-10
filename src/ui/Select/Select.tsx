@@ -1,43 +1,30 @@
-import React, { PropsWithChildren } from "react";
-import { Control, FieldPath, useController } from "react-hook-form";
-import ReactSelect, { StylesConfig } from "react-select";
+import React, {
+	ChangeEventHandler,
+	FocusEventHandler,
+	forwardRef,
+} from "react";
 import { ClassNameProps } from "@/interfaces/common";
 
-export interface SelectValues<T = string | number> {
-	readonly value: T;
-	readonly label: string;
-}
-interface SelectComponentProps<FormValues> extends ClassNameProps {
-	readonly options: SelectValues[];
-	readonly styles?: StylesConfig<SelectValues>;
-	readonly control: Control<FormValues>;
-	readonly name: FieldPath<FormValues>;
+import SelectStyle from "./Select.module.css";
+import classNames from "classnames";
+
+interface SelectProps extends ClassNameProps {
+	readonly value: number | string;
+	readonly onChange?: ChangeEventHandler;
+	readonly onFocus?: FocusEventHandler;
+	readonly onBlur?: FocusEventHandler;
 }
 
-export const Select = <FormValues,>({
-	className,
-	options,
-	styles,
-	children,
-	control,
-	name,
-}: PropsWithChildren<SelectComponentProps<FormValues>>) => {
-	const { field, formState } = useController({
-		control,
-		name,
-	});
-	const { isSubmitting } = formState;
-	return (
-		<label>
-			{children}
-			{/* TODO: Исправить типизацию, там какая то очень длинная ошибка */}
-			<ReactSelect
-				options={options as unknown[]}
-				styles={styles as StylesConfig<unknown>}
-				className={className}
-				isDisabled={isSubmitting}
-				{...field}
-			/>
-		</label>
-	);
-};
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+	function Select({ className, children, ...select }, ref) {
+		return (
+			<select
+				className={classNames(SelectStyle.select, className)}
+				{...select}
+				ref={ref}
+			>
+				{children}
+			</select>
+		);
+	}
+);

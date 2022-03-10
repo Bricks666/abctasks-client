@@ -13,6 +13,7 @@ import { Textarea } from "../Textarea";
 import { SubtextInput } from "../SubtextInput";
 
 import FieldStyle from "./Field.module.css";
+import { Select } from "../Select";
 
 export interface FieldProps extends ClassNameProps {
 	readonly value: string | number;
@@ -23,10 +24,13 @@ export interface FieldProps extends ClassNameProps {
 	readonly onBlur?: FocusEventHandler;
 	readonly onFocus?: FocusEventHandler;
 	readonly type?: HTMLInputTypeAttribute;
-	readonly inputRef?: Ref<HTMLInputElement | HTMLTextAreaElement>;
+	readonly inputRef?: Ref<
+		HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+	>;
 	readonly multiline?: boolean;
 	readonly inputClassName?: string;
 	readonly error?: string;
+	readonly select?: boolean;
 }
 
 export const Field: FC<FieldProps> = ({
@@ -38,6 +42,7 @@ export const Field: FC<FieldProps> = ({
 	multiline,
 	inputClassName,
 	error,
+	select,
 	...input
 }) => {
 	const id = inputId || name;
@@ -52,7 +57,9 @@ export const Field: FC<FieldProps> = ({
 		<InputLabel HTMLFor={id}>{label}</InputLabel>
 	) : null;
 
-	const control = multiline ? (
+	const control = select ? (
+		<Select className={inputClassName} {...input} />
+	) : multiline ? (
 		<Textarea
 			className={inputClassName}
 			{...input}
