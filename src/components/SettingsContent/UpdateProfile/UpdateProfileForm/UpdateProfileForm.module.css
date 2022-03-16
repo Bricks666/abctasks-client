@@ -1,0 +1,13 @@
+.form {
+	display: grid;
+
+	grid-template-columns: max-content 1fr;
+  gap: 20px;
+}
+
+.picture {
+	width: 600px;
+	height: 600px;
+
+	grid-row: span 3;
+}

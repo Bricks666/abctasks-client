@@ -10,6 +10,7 @@ interface Route {
 
 const Login = lazy(() => import("@/pages/LoginPage"));
 const Registration = lazy(() => import("@/pages/RegistrationPage"));
+const Settings = lazy(() => import("@/pages/SettingsPage"));
 
 export const routes: Route[] = [
 	{

@@ -1,0 +1,19 @@
+.page {
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-template-rows: max-content auto;
+  row-gap: 10px;
+	column-gap: 20px;
+
+	min-height: 100vh;
+}
+
+.header {
+	grid-column: span 2;
+
+	padding: 10px;
+}
+
+.navigation {
+	height: 100%;
+}

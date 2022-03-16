@@ -32,4 +32,6 @@ export const ROUTES = {
 	HOMEPAGE: "*",
 	LOGIN: "login",
 	REGISTRATION: "registration",
+	SETTINGS: "settings/*",
+	SETTINGS_PROFILE: "profile",
 };
