@@ -1,4 +1,4 @@
-import { logoutFx } from "./../User/index";
+import { logoutFx } from "./../Auth";
 import { getActivitiesApi, subscribeNewActivitiesApi } from "@/api";
 import { forward, guard, sample } from "effector";
 import {

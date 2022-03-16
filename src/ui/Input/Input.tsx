@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params */
 import classNames from "classnames";
 import React, {
 	ChangeEventHandler,
@@ -11,8 +12,8 @@ import { ClassNameProps } from "@/interfaces/common";
 import InputStyle from "./Input.module.css";
 
 interface InputProps extends ClassNameProps {
-	readonly value: string | number;
-	readonly onChange: ChangeEventHandler;
+	readonly value?: string | number;
+	readonly onChange?: ChangeEventHandler;
 	readonly onFocus?: FocusEventHandler;
 	readonly type?: HTMLInputTypeAttribute;
 	readonly name?: string;
@@ -31,7 +32,6 @@ export const Input = memo(
 			{ [InputStyle.color]: type === "color" },
 			className
 		);
-
 		return <input className={classes} type={type} {...input} ref={ref} />;
 	})
 );

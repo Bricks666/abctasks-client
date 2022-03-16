@@ -1,4 +1,4 @@
-import { $Login } from "../models/User";
+import { $Login } from "../models/Auth";
 import { useStore } from "effector-react";
 
 export const useIsLogin = () => {

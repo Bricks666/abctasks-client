@@ -1,5 +1,3 @@
-import { boolean } from "joi";
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type HEX = `#${string}`;
 

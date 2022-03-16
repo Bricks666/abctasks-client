@@ -22,7 +22,7 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || "Ready";
 	const groups = useTaskGroups();
 
-	const { handleSubmit, formState, control, reset } = useForm<TaskFormValues>({
+	const { handleSubmit, formState, register, reset } = useForm<TaskFormValues>({
 		defaultValues: { content: "", groupId: 0 },
 		resolver: joiResolver(validationScheme),
 	});
@@ -47,7 +47,11 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 			className={classNames(TaskFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<TextField control={control} name="groupId" select>
+			<TextField
+				{...register("groupId", { disabled: isSubmitting })}
+				select
+				label="groupId"
+			>
 				{groups.map(({ id, name }) => (
 					<option value={id} key={id}>
 						{name}
@@ -56,9 +60,7 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 			</TextField>
 			<TextField
 				className={TaskFormStyle.textarea}
-				name="content"
-				control={control}
-				disabled={isSubmitting}
+				{...register("content", { disabled: isSubmitting })}
 				label="Task"
 				multiline
 			/>

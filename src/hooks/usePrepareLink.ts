@@ -4,6 +4,7 @@ interface UsePrepareLinkParams {
 	readonly query?: Record<string, string>;
 	readonly saveQuery?: boolean;
 	readonly addQuery?: Record<string, string>;
+	readonly to?: string;
 }
 
 export interface UsePrepareLinkResponse {
@@ -13,14 +14,16 @@ export interface UsePrepareLinkResponse {
 }
 
 export const usePrepareLink = ({
+	to,
 	addQuery = {},
 	query = {},
 	saveQuery = false,
 }: UsePrepareLinkParams): UsePrepareLinkResponse => {
-	const { hash, pathname, search } = useLocation();
+	const location = useLocation();
+	const pathname = to || location.pathname;
 
 	const newQuery = saveQuery
-		? new URLSearchParams(search)
+		? new URLSearchParams(location.search)
 		: new URLSearchParams();
 
 	Object.entries(query).forEach(([key, value]) => newQuery.set(key, value));
@@ -36,6 +39,6 @@ export const usePrepareLink = ({
 	return {
 		pathname,
 		search: newQuery.toString() || "",
-		hash,
+		hash: location.hash,
 	};
 };

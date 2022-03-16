@@ -1,11 +1,13 @@
 .block {
 	background-color: white;
+
+	overflow: hidden;
 }
 
 .rounded {
-  border-radius: 8px;
+	border-radius: 8px;
 }
 
 .square {
-  border-radius: none;
+	border-radius: none;
 }

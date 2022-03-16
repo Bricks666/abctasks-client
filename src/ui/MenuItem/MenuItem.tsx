@@ -16,7 +16,7 @@ import MenuItemStyle from "./MenuItem.module.css";
 export type MenuOption = {
 	readonly label: string;
 	readonly onClick?: MouseEventHandler;
-	readonly to?: Path;
+	readonly to?: Path | string;
 	readonly icon?: JSX.Element;
 };
 

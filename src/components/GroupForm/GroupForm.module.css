@@ -18,5 +18,11 @@
 }
 
 .color_input {
-  height: 50px;;
+	height: 50px;
+
+	align-self: end;
+}
+
+.button {
+	grid-row: 2;
 }

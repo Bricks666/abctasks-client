@@ -1,5 +1,4 @@
 import { createDomain } from "effector-logger";
-import { LoginRequest, RegistrationRequest } from "@/interfaces/requests";
 
 export interface User {
 	readonly userId: number;
@@ -9,35 +8,14 @@ export interface User {
 
 export const initialUser = { userId: 0, login: "", photo: null };
 
-export const Auth = createDomain("AuthDomain");
+export const UserDomain = createDomain("UserDomain");
 
-export const $Login = Auth.createStore<boolean>(false, { name: "Login" });
-export const $User = Auth.createStore<User>(initialUser, { name: "User" });
-export const $Authorizing = Auth.createStore<boolean>(true, {
-	name: "Authorizing",
-});
-export const $LoginError = Auth.createStore<object | null>(null, {
-	name: "LoginError",
-});
-export const $RegistrationError = Auth.createStore<object | null>(null, {
-	name: "RegistrationError",
+export const $User = UserDomain.createStore<User>(initialUser, {
+	name: "User",
 });
 
-export const loginFx = Auth.createEffect<LoginRequest, User>("loginFx");
-export const authFx = Auth.createEffect<void, User>("authFx");
-export const registrationFx = Auth.createEffect<RegistrationRequest, void>(
-	"registrationFx"
-);
-export const logoutFx = Auth.createEffect<void, void>("logoutFx");
-export const refreshFx = Auth.createEffect<void, void>("refreshFx");
+export const loadUserFx = UserDomain.createEffect<void, User>("loadUserFx");
+export const updateUserFx = UserDomain.createEffect<void, User>("updateUserFx");
 
-export const login = Auth.createEvent<LoginRequest>("loginEvent");
-export const auth = Auth.createEvent<void>("authEvent");
-export const registration =
-	Auth.createEvent<RegistrationRequest>("registrationEvent");
-export const logout = Auth.createEvent("logoutEvent");
-export const refresh = Auth.createEvent<void>("refreshEvent");
-export const clearLoginError = Auth.createEvent<void>("clearLoginError");
-export const clearRegistrationError = Auth.createEvent<void>(
-	"clearRegistrationError"
-);
+export const loadUser = UserDomain.createEvent<void>("loadUserEvent");
+export const updateUser = UserDomain.createEvent<void>("updateUserEvent");

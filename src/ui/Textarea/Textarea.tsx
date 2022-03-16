@@ -9,8 +9,8 @@ import { ClassNameProps } from "@/interfaces/common";
 import TextareaStyle from "./Textarea.module.css";
 
 interface TextareaProps extends ClassNameProps {
-	readonly value: string | number;
-	readonly onChange: ChangeEventHandler;
+	readonly value?: string | number;
+	readonly onChange?: ChangeEventHandler;
 	readonly onFocus?: FocusEventHandler;
 	readonly onBlur?: FocusEventHandler;
 	readonly id?: string;

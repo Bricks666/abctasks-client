@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 import { ClassNameProps } from "@/interfaces/common";
-import { useTasksProgress, useTasksProgressLoading } from "@/hooks";
+import { useTasksProgress, useTasksProgressLoading } from "./hooks";
 import { TaskProgress } from "../TaskProgress";
 import { Text } from "@/ui/Text";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";

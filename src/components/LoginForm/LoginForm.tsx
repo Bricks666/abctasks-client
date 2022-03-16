@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { LoginRequest } from "@/interfaces/requests";
 import { Button } from "@/ui/Button";
-import { clearLoginError, loginFx } from "@/models/User";
+import { clearLoginError, loginFx } from "@/models/Auth";
 import { useLocationState } from "@/hooks";
 import { TextField } from "../TextField";
 import { ClassNameProps } from "@/interfaces/common";
@@ -24,7 +24,7 @@ const initialValue: LoginRequest = {
 };
 
 export const LoginForm: FC<ClassNameProps> = ({ className }) => {
-	const { control, handleSubmit, formState } = useForm<LoginRequest>({
+	const { register, handleSubmit, formState } = useForm<LoginRequest>({
 		defaultValues: initialValue,
 		resolver: joiResolver(validationSchema),
 	});
@@ -53,21 +53,15 @@ export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 					Incorrect login or password
 				</Alert>
 			)}
-			<TextField
-				name="login"
-				control={control}
-				label="Login"
-				disabled={isSubmitting}
-			/>
+			<TextField {...register("login")} label="Login" disabled={isSubmitting} />
 
 			<TextField
-				name="password"
-				control={control}
+				{...register("password")}
 				label="Password"
 				type="password"
 				disabled={isSubmitting}
 			/>
-			<Checkbox name="remember" control={control} label="Remember me" />
+			<Checkbox {...register("remember")} label="Remember me" />
 			<Button
 				className={LoginFormStyle.button}
 				disabled={!isDirty || isSubmitting}

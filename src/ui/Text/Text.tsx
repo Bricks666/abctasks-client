@@ -12,6 +12,7 @@ interface TextProps extends ClassNameProps {
 	readonly paddings?: boolean;
 	readonly margins?: boolean;
 	readonly cssStyles?: CSSProperties;
+	readonly align?: "start" | "center" | "end" | "justify";
 }
 
 export const Text: FC<TextProps> = memo(function Text({
@@ -22,11 +23,13 @@ export const Text: FC<TextProps> = memo(function Text({
 	style = component,
 	paddings = false,
 	margins = false,
+	align = "start",
 }) {
 	const element = createElement(component, {}, {});
 	const classes = classNames(
 		TextStyle.text,
 		TextStyle[style],
+		TextStyle[align],
 		{
 			[TextStyle.withoutPadding]: !paddings,
 			[TextStyle.withoutMargins]: !margins,

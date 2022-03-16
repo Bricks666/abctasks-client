@@ -4,6 +4,7 @@ import React, {
 	FC,
 	FocusEventHandler,
 	HTMLInputTypeAttribute,
+	ReactNode,
 	Ref,
 } from "react";
 import { ClassNameProps } from "@/interfaces/common";
@@ -11,15 +12,16 @@ import { Input } from "../Input";
 import { InputLabel } from "../InputLabel";
 import { Textarea } from "../Textarea";
 import { SubtextInput } from "../SubtextInput";
-
-import FieldStyle from "./Field.module.css";
 import { Select } from "../Select";
 
+import FieldStyle from "./Field.module.css";
+
 export interface FieldProps extends ClassNameProps {
-	readonly value: string | number;
 	readonly name: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	readonly value?: any;
 	readonly inputId?: string;
-	readonly label?: string;
+	readonly label?: ReactNode;
 	readonly onChange: ChangeEventHandler;
 	readonly onBlur?: FocusEventHandler;
 	readonly onFocus?: FocusEventHandler;
@@ -37,15 +39,13 @@ export const Field: FC<FieldProps> = ({
 	className,
 	label,
 	inputId,
-	name,
 	inputRef,
 	multiline,
-	inputClassName,
 	error,
 	select,
 	...input
 }) => {
-	const id = inputId || name;
+	const id = inputId || input.name;
 	const rootClasses = classNames(
 		FieldStyle.field,
 		{
@@ -58,21 +58,11 @@ export const Field: FC<FieldProps> = ({
 	) : null;
 
 	const control = select ? (
-		<Select className={inputClassName} {...input} />
+		<Select {...input} id={id} />
 	) : multiline ? (
-		<Textarea
-			className={inputClassName}
-			{...input}
-			id={id}
-			ref={inputRef as Ref<HTMLTextAreaElement>}
-		/>
+		<Textarea {...input} id={id} ref={inputRef as Ref<HTMLTextAreaElement>} />
 	) : (
-		<Input
-			className={inputClassName}
-			{...input}
-			id={id}
-			ref={inputRef as Ref<HTMLInputElement>}
-		/>
+		<Input {...input} id={id} ref={inputRef as Ref<HTMLInputElement>} />
 	);
 
 	const helpText = error ? <SubtextInput>{error}</SubtextInput> : null;

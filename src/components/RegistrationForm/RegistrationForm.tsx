@@ -1,21 +1,20 @@
 import React, { FC, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
-import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { ClassNameProps } from "@/interfaces/common";
 import { RegistrationRequest } from "@/interfaces/requests";
-import { clearRegistrationError, registrationFx } from "@/models/User";
+import { clearRegistrationError, registrationFx } from "@/models/Auth";
 import { Location, useNavigate } from "react-router-dom";
 import { useLocationState } from "@/hooks";
 import { Button } from "@/ui/Button";
 import { TextField } from "../TextField";
 import { validationSchema } from "./validator";
-
-import RegistrationFormStyle from "./RegistrationForm.module.css";
 import { useRegistrationError } from "./hooks";
 import { Alert } from "@/ui/Alert";
 import { AlertTitle } from "@/ui/AlertTitle";
+
+import RegistrationFormStyle from "./RegistrationForm.module.css";
 
 const initialValues: RegistrationRequest = {
 	login: "",
@@ -24,7 +23,7 @@ const initialValues: RegistrationRequest = {
 };
 
 export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
-	const { control, handleSubmit, formState } = useForm<RegistrationRequest>({
+	const { register, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
 	});
@@ -55,22 +54,15 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 					This user already registered
 				</Alert>
 			)}
+			<TextField {...register("login")} label="Login" disabled={isSubmitting} />
 			<TextField
-				name="login"
-				control={control}
-				label="Login"
-				disabled={isSubmitting}
-			/>
-			<TextField
-				name="password"
-				control={control}
+				{...register("login")}
 				label="Password"
 				type="password"
 				disabled={isSubmitting}
 			/>
 			<TextField
-				name="repeatPassword"
-				control={control}
+				{...register("repeatPassword")}
 				label="Repeat password"
 				type="password"
 				disabled={isSubmitting}

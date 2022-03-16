@@ -14,8 +14,8 @@ import CheckboxStyle from "./Checkbox.module.css";
 
 export interface CheckboxProps extends ClassNameProps {
 	readonly name: string;
-	readonly checked: boolean;
-	readonly onChange: ChangeEventHandler;
+	readonly checked?: boolean;
+	readonly onChange?: ChangeEventHandler;
 	readonly onFocus?: FocusEventHandler;
 	readonly onBlur?: FocusEventHandler;
 	readonly require?: boolean;

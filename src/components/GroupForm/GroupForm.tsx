@@ -7,10 +7,10 @@ import { CreateEditGroupRequest } from "@/interfaces/requests";
 import { Group } from "@/ui/Group";
 import { ClassNameProps } from "@/interfaces/common";
 import { Stack } from "@/ui/Stack";
-
-import GroupFormStyle from "./GroupForm.module.css";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validatingScheme } from "./validator";
+
+import GroupFormStyle from "./GroupForm.module.css";
 
 interface GroupFormProps extends ClassNameProps {
 	readonly defaultState?: CreateEditGroupRequest | null;
@@ -26,7 +26,7 @@ export const GroupForm: FC<GroupFormProps> = ({
 	defaultState,
 	buttonText,
 }) => {
-	const { control, handleSubmit, watch } = useForm<CreateEditGroupRequest>({
+	const { register, handleSubmit, watch } = useForm<CreateEditGroupRequest>({
 		defaultValues: defaultState || {},
 		resolver: joiResolver(validatingScheme),
 	});
@@ -45,31 +45,25 @@ export const GroupForm: FC<GroupFormProps> = ({
 			<Stack className={GroupFormStyle.fields}>
 				<TextField
 					className={GroupFormStyle.input}
-					name="name"
-					control={control}
-					type="text"
+					{...register("name")}
 					label="Group name"
 				/>
 				<TextField
 					className={GroupFormStyle.color}
-					name="mainColor"
-					control={control}
-					type="color"
-					label="Main color"
+					{...register("mainColor")}
 					inputClassName={GroupFormStyle.color_input}
+					label="Main color"
 				/>
 				<TextField
 					className={GroupFormStyle.color}
-					name="secondColor"
-					control={control}
-					type="color"
-					label="Second color"
+					{...register("secondColor")}
 					inputClassName={GroupFormStyle.color_input}
+					label="Second color"
 				/>
 			</Stack>
-			<div>{state.name && <Group {...state} />}</div>
+			{state.name && <Group {...state} />}
 
-			<Button>{buttonText}</Button>
+			<Button className={GroupFormStyle.button}>{buttonText}</Button>
 		</form>
 	);
 };

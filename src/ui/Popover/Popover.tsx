@@ -38,7 +38,7 @@ export const Popover: FC<PopoverProps> = memo(function Popover({
 	const [popover, setPopover] = useState<HTMLElement | null>(null);
 	const { styles, attributes } = usePopper(reference, popover, { placement });
 	useClickOutside(popover, onClose, isOpen);
-	useKeyListener("Escape", onClose, closeOnEsc);
+	useKeyListener("Escape", onClose, closeOnEsc && isOpen);
 
 	return isOpen ? (
 		<Portal>

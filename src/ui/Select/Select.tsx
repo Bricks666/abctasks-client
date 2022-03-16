@@ -9,7 +9,8 @@ import SelectStyle from "./Select.module.css";
 import classNames from "classnames";
 
 interface SelectProps extends ClassNameProps {
-	readonly value: number | string;
+	readonly id?: string;
+	readonly value?: number | string;
 	readonly onChange?: ChangeEventHandler;
 	readonly onFocus?: FocusEventHandler;
 	readonly onBlur?: FocusEventHandler;

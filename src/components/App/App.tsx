@@ -1,7 +1,7 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, Suspense, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useIsAuthorizing } from "@/hooks";
-import { auth } from "@/models/User";
+import { auth } from "@/models/Auth";
 import { routes } from "@/routes";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";
 import { LoadingWrapper } from "@/ui/LoadingWrapper";
@@ -36,13 +36,23 @@ export const App: FC = () => {
 						<Route
 							path={path}
 							element={
-								isOnlyAuth ? (
-									<AuthRoute>
+								<Suspense
+									fallback={
+										<LoadingWrapper
+											className={AppStyle.loading}
+											loadingIndicator={<LoadingIndicator text="Загрузка..." />}
+											isLoading
+										/>
+									}
+								>
+									{isOnlyAuth ? (
+										<AuthRoute>
+											<Component />
+										</AuthRoute>
+									) : (
 										<Component />
-									</AuthRoute>
-								) : (
-									<Component />
-								)
+									)}
+								</Suspense>
 							}
 							key={path}
 						/>

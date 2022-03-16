@@ -2,11 +2,16 @@ import React, { FC, useState } from "react";
 import { useAnyPopupOpen, useToggle, useUserInfo } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { Avatar } from "@/ui/Avatar";
-import { logout } from "@/models/User";
+import { logout } from "@/models/Auth";
 import { Menu } from "@/ui/Menu";
 import { MenuItem, MenuOption } from "@/ui/MenuItem";
+import { ROUTES } from "@/const";
 
 const options: MenuOption[] = [
+	{
+		label: "Settings",
+		to: ROUTES.SETTINGS.slice(0, -2),
+	},
 	{
 		label: "Logout",
 		onClick: () => logout(),
@@ -18,9 +23,8 @@ export const ProfileLink: FC<ClassNameProps> = ({ className }) => {
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = useState<HTMLElement | null>(null);
 	const anyPopupOpen = useAnyPopupOpen();
-
 	return (
-		<div className={className} ref={setReference}>
+		<div className={className}>
 			<Avatar
 				src={photo}
 				alt={login}

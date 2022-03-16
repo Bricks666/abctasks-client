@@ -1,7 +1,12 @@
 .text {
+	display: inline-block;
+
 	height: min-content;
 
 	font-size: var(--font-size);
+	word-wrap: break-word;
+	text-align: var(--align);
+	line-height: 1.5em;
 }
 
 .withoutPaddings {
@@ -12,66 +17,47 @@
 	margin: 0;
 }
 
-/* Поиграть с размером */
-
-@media (min-width: 900px) {
-	.h1 {
-		--font-size: 42px;
-	}
-
-	.h2 {
-		--font-size: 30px;
-	}
-
-	.h3 {
-		--font-size: 24px;
-	}
-
-	.h4 {
-		--font-size: 22px;
-	}
-
-	.h5 {
-		--font-size: 17px;
-	}
-
-	.h6 {
-		--font-size: 15px;
-	}
-
-	.p {
-		--font-size: 14px;
-	}
-
-	.span {
-		--font-size: 13px;
-	}
+.h1 {
+	--font-size: 42px;
 }
 
-@media (max-width: 900px) {
-	.h1 {
-		--font-size: 38px;
-	}
+.h2 {
+	--font-size: 30px;
+}
 
-	.h2 {
-		--font-size: 28px;
-	}
+.h3 {
+	--font-size: 24px;
+}
 
-	.h3 {
-		--font-size: 22px;
-	}
+.h4 {
+	--font-size: 22px;
+}
 
-	.h4 {
-		--font-size: 10px;
-	}
+.h5 {
+	--font-size: 17px;
+}
 
-	.h5 {
-		--font-size: 16px;
-	}
-	.h6 {
-		--font-size: 14px;
-	}
-	.p {
-		--font-size: 13px;
-	}
+.h6 {
+	--font-size: 15px;
+}
+
+.p {
+	--font-size: 14px;
+}
+
+.span {
+	--font-size: 13px;
+}
+
+.start {
+	--align: start;
+}
+.center {
+	--align: center;
+}
+.end {
+	--align: end;
+}
+.justify {
+	--align: justify;
 }

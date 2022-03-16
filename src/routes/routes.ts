@@ -1,5 +1,6 @@
-import { ComponentType } from "react";
-import { HomePage, LoginPage, RegistrationPage } from "@/pages";
+import { ComponentType, lazy } from "react";
+import { HomePage } from "@/pages";
+import { ROUTES } from "@/const";
 
 interface Route {
 	readonly path: string;
@@ -7,18 +8,26 @@ interface Route {
 	readonly isOnlyAuth?: true;
 }
 
+const Login = lazy(() => import("@/pages/LoginPage"));
+const Registration = lazy(() => import("@/pages/RegistrationPage"));
+
 export const routes: Route[] = [
 	{
-		path: "*",
+		path: ROUTES.HOMEPAGE,
 		Component: HomePage,
 		isOnlyAuth: true,
 	},
 	{
-		path: "login",
-		Component: LoginPage,
+		path: ROUTES.LOGIN,
+		Component: Login,
 	},
 	{
-		path: "registration",
-		Component: RegistrationPage,
+		path: ROUTES.REGISTRATION,
+		Component: Registration,
+	},
+	{
+		path: ROUTES.SETTINGS,
+		Component: Settings,
+		isOnlyAuth: true,
 	},
 ];

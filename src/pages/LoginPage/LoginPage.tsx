@@ -13,7 +13,7 @@ export const LoginPage: FC<ClassNameProps> = ({ className }) => {
 	return (
 		<main className={className}>
 			<ContentLayout className={LoginPageStyle.layout}>
-				<Text className={LoginPageStyle.header} component="h2">
+				<Text className={LoginPageStyle.header} component="h2" align="center">
 					Login
 				</Text>
 				<LoginForm className={LoginPageStyle.form} />

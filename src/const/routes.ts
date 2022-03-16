@@ -27,3 +27,9 @@ export const POPUPS: Popups = {
 	createGroup: "create-group",
 	editGroup: "edit-group",
 };
+
+export const ROUTES = {
+	HOMEPAGE: "*",
+	LOGIN: "login",
+	REGISTRATION: "registration",
+};

@@ -6,6 +6,10 @@
 	row-gap: 1.5rem;
 }
 
+.header {
+	justify-self: center;
+}
+
 @media (min-width: 600px) {
 	.layout {
 		--template-columns: 1fr 600px 1fr;

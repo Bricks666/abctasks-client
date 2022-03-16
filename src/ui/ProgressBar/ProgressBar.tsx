@@ -9,9 +9,9 @@ interface ProgressBarProps extends ClassNameProps {
 	readonly children: ReactText;
 	readonly maxValue: number;
 	readonly currentValue: number;
-	readonly ariaText: string;
-	readonly progressbarColor: HEX;
-	readonly progressbarBGColor: HEX;
+	readonly ariaText?: string;
+	readonly progressbarColor?: HEX;
+	readonly progressbarBGColor?: HEX;
 }
 
 export const ProgressBar: FC<ProgressBarProps> = memo(function ProgressBar({

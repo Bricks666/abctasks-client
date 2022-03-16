@@ -48,7 +48,7 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const group = useGroup(task?.groupId || null);
 	const groups = useTaskGroups();
 	const goBack = useGoBack();
-	const { control, handleSubmit, formState } = useForm<EditTaskFormValues>({
+	const { register, handleSubmit, formState } = useForm<EditTaskFormValues>({
 		defaultValues: prepareTask(task, group),
 		resolver: joiResolver(validatingScheme),
 	});
@@ -72,14 +72,14 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 			className={classNames(EditTaskFromStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<TextField control={control} name="groupId" select>
+			<TextField {...register("groupId")} select label="Group">
 				{groups.map(({ id, name }) => (
 					<option value={id} key={id}>
 						{name}
 					</option>
 				))}
 			</TextField>
-			<TextField control={control} name="status" select>
+			<TextField {...register("status")} select label="Status">
 				{statuses.map((status) => (
 					<option value={status} key={status}>
 						{status}
@@ -89,9 +89,9 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 
 			<TextField
 				className={EditTaskFromStyle.textarea}
-				name="content"
-				control={control}
+				{...register("content")}
 				multiline
+				label="Content"
 			/>
 			<Button className={EditTaskFromStyle.button} disabled={!isDirty}>
 				Save edit

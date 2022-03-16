@@ -13,7 +13,7 @@ import {
 	subscribeChangeProgressFx,
 } from ".";
 import { mayStartFxHandler } from "../handlers";
-import { logoutFx } from "../User";
+import { logoutFx } from "../Auth";
 import { changeProgressHandler } from "./handler";
 import { toValidTaskProgress } from "./utils";
 
