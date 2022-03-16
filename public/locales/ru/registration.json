@@ -1,0 +1,14 @@
+{
+	"title": "Регистрация",
+	"fields": {
+		"login": "Логин",
+		"password": "Пароль",
+		"passwordRepeat": "Повторите пароль"
+	},
+	"buttons": {
+		"submit": "Регистрация"
+	},
+	"links": {
+		"login": "Войти"
+	}
+}

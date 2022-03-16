@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { FC, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/ui/Card";
 import { Avatar } from "@/ui/Avatar";
 import { ClassNameProps } from "@/interfaces/common";
@@ -31,14 +32,6 @@ const iconMap: Record<Activities, ReactNode> = {
 	Edited: <EditIcon className={ActivityCardStyle.icon} />,
 };
 
-const generateText = (
-	activist: string,
-	sphere: ActivitySphere,
-	activity: Activities
-) => {
-	return `${activist} has ${activity.toLowerCase()} ${sphere.toLowerCase()}`;
-};
-
 export const ActivityCard: FC<ActivityCardProps> = ({
 	activity,
 	sphere,
@@ -46,17 +39,24 @@ export const ActivityCard: FC<ActivityCardProps> = ({
 	className,
 	date,
 }) => {
+	const { t } = useTranslation("homepage");
 	return (
 		<Card className={classNames(ActivityCardStyle.card, className)}>
 			<Avatar
 				className={ActivityCardStyle.avatar}
 				size="medium"
-				alt={activity}
+				alt={t(`activities.activityType.${activity}`)}
 				color={colorMap[activity]}
 			>
 				{iconMap[activity]}
 			</Avatar>
-			<Text component="p">{generateText(activist, sphere, activity)}</Text>
+			<Text component="p">
+				{t("activities.text", {
+					activist: activist,
+					activity: t(`activities.activityType.${activity}`),
+					sphere: t(`activities.spheres.${sphere}`),
+				})}
+			</Text>
 
 			<DateTime date={date} format="MMM DD" />
 		</Card>

@@ -1,0 +1,26 @@
+{
+	"title": "Homepage",
+	"statuses": {
+		"ready": "Ready",
+		"inProgress": "In progress",
+		"review": "Review",
+		"done": "Done"
+	},
+	"taskProgress": {
+		"title": "Tasks Progress",
+		"progressAria": "Progress of {{name}} tasks is {{completed}}"
+	},
+	"activities": {
+		"title": "Activities",
+		"text": "{{activist}} has {{activity}} {{sphere}}",
+		"spheres": {
+			"Task": "task",
+			"Group": "group"
+		},
+		"activityType": {
+			"Edited": "edited",
+			"Deleted": "deleted",
+			"Created": "created"
+		}
+	}
+}

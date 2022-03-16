@@ -1,0 +1,26 @@
+{
+	"title": "Домашняя страница",
+	"statuses": {
+		"ready": "В ожидании",
+		"inProgress": "В прогрессе",
+		"review": "Проверка",
+		"done": "Выполнено"
+	},
+	"taskProgress": {
+		"title": "Прогресс",
+		"progressAria": "Прогресс задач группы {{name}}, выполнено {{completed}}"
+	},
+	"activities": {
+		"title": "Активности",
+		"text": "Пользователь {{activist}} {{activity}} {{sphere}}",
+		"spheres": {
+			"Task": "задачу",
+			"Group": "группу"
+		},
+		"activityType": {
+			"Edited": "изменил",
+			"Deleted": "удалил",
+			"Created": "создал"
+		}
+	}
+}

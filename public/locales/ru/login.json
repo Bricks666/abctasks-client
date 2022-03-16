@@ -1,0 +1,14 @@
+{
+	"title": "Вход",
+	"fields": {
+		"login": "Логин",
+		"password": "Пароль",
+		"remember": "Запомнить меня"
+	},
+	"buttons": {
+		"submit": "Войти"
+	},
+	"links": {
+		"registration": "Зарегистрироваться"
+	}
+}

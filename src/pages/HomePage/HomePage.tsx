@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import { ClassNameProps } from "@/interfaces/common";
 import { ContentLayout } from "@/ui/ContentLayout";
 import { TasksProgress } from "@/components/TasksProgress";
@@ -12,11 +13,12 @@ import { RoomHeader } from "@/components/RoomHeader";
 import HomePageStyle from "./HomePage.module.css";
 
 export const HomePage: FC<ClassNameProps> = ({ className }) => {
-	usePageTitle("Homepage");
+	const { t } = useTranslation("homepage");
+	usePageTitle(t("title"));
 	return (
 		<main>
 			<ContentLayout className={classNames(HomePageStyle.layout, className)}>
-				<RoomHeader header="Homepage" />
+				<RoomHeader header={t("title")} />
 				<Tasks className={HomePageStyle.tasks} />
 				<Stack className={HomePageStyle.aside}>
 					<TasksProgress />
