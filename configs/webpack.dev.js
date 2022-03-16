@@ -13,7 +13,7 @@ module.exports = (env, args) => {
 		devtool: "source-map",
 		devServer: {
 			static: {
-				directory: paths.build,
+				directory: paths.public,
 				publicPath: "/",
 			},
 			port: 3000,

@@ -1,0 +1,14 @@
+{
+	"title": "Registration",
+	"fields": {
+		"login": "Login",
+		"password": "Password",
+		"passwordRepeat": "Password Repeat"
+	},
+	"buttons": {
+		"submit": "Registration"
+	},
+	"links": {
+		"login": "Login"
+	}
+}

@@ -1,7 +1,8 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useTranslation } from "react-i18next";
 import { ClassNameProps } from "@/interfaces/common";
 import { RegistrationRequest } from "@/interfaces/requests";
 import { clearRegistrationError, registrationFx } from "@/models/Auth";
@@ -23,6 +24,7 @@ const initialValues: RegistrationRequest = {
 };
 
 export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
+	const { t } = useTranslation("registration");
 	const { register, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
@@ -39,6 +41,12 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 	const { isSubmitting, isDirty } = formState;
 	const error = useRegistrationError();
 
+	useEffect(() => {
+		return () => {
+			clearRegistrationError();
+		};
+	}, []);
+
 	return (
 		<form
 			className={classNames(RegistrationFormStyle.form, className)}
@@ -54,16 +62,20 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 					This user already registered
 				</Alert>
 			)}
-			<TextField {...register("login")} label="Login" disabled={isSubmitting} />
 			<TextField
 				{...register("login")}
-				label="Password"
+				label={t("fields.login")}
+				disabled={isSubmitting}
+			/>
+			<TextField
+				{...register("login")}
+				label={t("fields.password")}
 				type="password"
 				disabled={isSubmitting}
 			/>
 			<TextField
 				{...register("repeatPassword")}
-				label="Repeat password"
+				label={t("fields.passwordRepeat")}
 				type="password"
 				disabled={isSubmitting}
 			/>
@@ -71,7 +83,7 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 				className={RegistrationFormStyle.button}
 				disabled={!isDirty || isSubmitting}
 			>
-				Registration
+				{t("buttons.submit")}
 			</Button>
 		</form>
 	);

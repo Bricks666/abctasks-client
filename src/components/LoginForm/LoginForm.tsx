@@ -1,8 +1,9 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { Location, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useTranslation } from "react-i18next";
 import { LoginRequest } from "@/interfaces/requests";
 import { Button } from "@/ui/Button";
 import { clearLoginError, loginFx } from "@/models/Auth";
@@ -24,6 +25,7 @@ const initialValue: LoginRequest = {
 };
 
 export const LoginForm: FC<ClassNameProps> = ({ className }) => {
+	const { t } = useTranslation("login");
 	const { register, handleSubmit, formState } = useForm<LoginRequest>({
 		defaultValues: initialValue,
 		resolver: joiResolver(validationSchema),
@@ -40,7 +42,13 @@ export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 		},
 		[navigate, state]
 	);
+	/* TODO: Make error typing */
 	const error = useLoginError();
+	useEffect(() => {
+		return () => {
+			clearLoginError();
+		};
+	}, []);
 
 	return (
 		<form
@@ -53,21 +61,25 @@ export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 					Incorrect login or password
 				</Alert>
 			)}
-			<TextField {...register("login")} label="Login" disabled={isSubmitting} />
+			<TextField
+				{...register("login")}
+				label={t("fields.login")}
+				disabled={isSubmitting}
+			/>
 
 			<TextField
 				{...register("password")}
-				label="Password"
+				label={t("fields.password")}
 				type="password"
 				disabled={isSubmitting}
 			/>
-			<Checkbox {...register("remember")} label="Remember me" />
+			<Checkbox {...register("remember")} label={t("fields.remember")} />
 			<Button
 				className={LoginFormStyle.button}
 				disabled={!isDirty || isSubmitting}
 				type="filed"
 			>
-				login
+				{t("buttons.submit")}
 			</Button>
 		</form>
 	);
