@@ -10,7 +10,7 @@ import { TasksList } from "../TasksList";
 import TasksStyle from "./Tasks.module.css";
 
 export const Tasks: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("homepage");
+	const { t } = useTranslation("room");
 	const tasks = useGroupedTasks();
 	const isLoading = useLoadingTasks();
 

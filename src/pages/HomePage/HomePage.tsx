@@ -13,7 +13,7 @@ import { RoomHeader } from "@/components/RoomHeader";
 import HomePageStyle from "./HomePage.module.css";
 
 export const HomePage: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("homepage");
+	const { t } = useTranslation("room");
 	usePageTitle(t("title"));
 	return (
 		<main>

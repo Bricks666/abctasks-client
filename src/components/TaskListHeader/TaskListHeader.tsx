@@ -7,6 +7,7 @@ import { EditMenu } from "../EditMenu";
 import { Text } from "@/ui/Text";
 import { Block } from "@/ui/Block";
 import { MenuOption } from "@/ui/MenuItem";
+import { useTranslation } from "react-i18next";
 
 import TaskListHeaderStyle from "./TaskListHeader.module.css";
 
@@ -19,6 +20,7 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	className,
 	columnName,
 }) => {
+	const { t } = useTranslation("room");
 	const editFormLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.createTask,
@@ -27,7 +29,7 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	});
 	const options: MenuOption[] = [
 		{
-			label: "New Task",
+			label: t("menus.addTask"),
 			to: editFormLink,
 		},
 	];

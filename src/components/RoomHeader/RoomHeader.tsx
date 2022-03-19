@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { ClassNameProps } from "@/interfaces/common";
 import { Block } from "@/ui/Block";
 import { Text } from "@/ui/Text";
@@ -15,6 +16,7 @@ interface RoomHeaderProps extends ClassNameProps {
 }
 
 export const RoomHeader: FC<RoomHeaderProps> = ({ header, className }) => {
+	const { t } = useTranslation("room");
 	const groupsLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.groups,
@@ -22,7 +24,7 @@ export const RoomHeader: FC<RoomHeaderProps> = ({ header, className }) => {
 	});
 	const options: MenuOption[] = [
 		{
-			label: "Groups",
+			label: t("menus.groups"),
 			to: groupsLink,
 		},
 	];

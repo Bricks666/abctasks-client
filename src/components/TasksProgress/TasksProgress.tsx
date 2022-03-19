@@ -12,7 +12,7 @@ import { LoadingWrapper } from "@/ui/LoadingWrapper";
 import TasksProgressStyle from "./TasksProgress.module.css";
 
 export const TasksProgress: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("homepage");
+	const { t } = useTranslation("room");
 	const progresses = useTasksProgress();
 	const isLoading = useTasksProgressLoading();
 

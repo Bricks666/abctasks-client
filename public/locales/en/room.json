@@ -1,5 +1,5 @@
 {
-	"title": "Homepage",
+	"title": "Room",
 	"statuses": {
 		"ready": "Ready",
 		"inProgress": "In progress",
@@ -22,5 +22,11 @@
 			"Deleted": "deleted",
 			"Created": "created"
 		}
+	},
+	"menus": {
+		"groups": "GRoups",
+		"addTask": "Add task",
+		"editTask": "Edit",
+		"deleteTask": "Delete"
 	}
 }

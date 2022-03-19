@@ -14,6 +14,7 @@ import { Text } from "@/ui/Text";
 import { MenuOption } from "@/ui/MenuItem";
 import { DateTime } from "@/ui/DateTime";
 import { useGroup } from "@/hooks/useGroup";
+import { useTranslation } from "react-i18next";
 
 import TaskCardStyle from "./TaskCard.module.css";
 
@@ -28,6 +29,7 @@ export const TaskCard: FC<TaskCardComponent> = ({
 	author,
 	id,
 }) => {
+	const { t } = useTranslation("room");
 	const editLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.editTask,
@@ -36,11 +38,11 @@ export const TaskCard: FC<TaskCardComponent> = ({
 	});
 	const options: MenuOption[] = [
 		{
-			label: "Edit",
+			label: t("menus.editTask"),
 			to: editLink,
 		},
 		{
-			label: "Delete",
+			label: t("menus.deleteTask"),
 			onClick: () => deleteTask(id),
 		},
 	];

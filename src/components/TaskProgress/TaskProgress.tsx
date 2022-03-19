@@ -13,7 +13,7 @@ export const TaskProgress: FC<TaskProgressComponent> = ({
 	className,
 	groupId,
 }) => {
-	const { t } = useTranslation("homepage");
+	const { t } = useTranslation("room");
 	const group = useGroup(groupId);
 
 	if (!group) {

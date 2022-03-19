@@ -4,11 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Card } from "@/ui/Card";
 import { Avatar } from "@/ui/Avatar";
 import { ClassNameProps } from "@/interfaces/common";
-import {
-	Activities,
-	ActivitySphere,
-	ActivityStructure,
-} from "@/models/Activities/types";
+import { Activities, ActivityStructure } from "@/models/Activities/types";
 import { Color } from "@/interfaces/ui";
 import { Text } from "@/ui/Text";
 import { DateTime } from "@/ui/DateTime";
@@ -39,7 +35,7 @@ export const ActivityCard: FC<ActivityCardProps> = ({
 	className,
 	date,
 }) => {
-	const { t } = useTranslation("homepage");
+	const { t } = useTranslation("room");
 	return (
 		<Card className={classNames(ActivityCardStyle.card, className)}>
 			<Avatar

@@ -12,7 +12,7 @@ import { ClassNameProps } from "@/interfaces/common";
 import ActivitiesListStyle from "./ActivitiesList.module.css";
 
 export const ActivitiesList: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("homepage");
+	const { t } = useTranslation("room");
 	const activities = useActivities();
 	const isLoading = useLoadingActivities();
 	return (
