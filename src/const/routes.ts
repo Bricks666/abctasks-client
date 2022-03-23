@@ -34,4 +34,5 @@ export const ROUTES = {
 	REGISTRATION: "registration",
 	SETTINGS: "settings/*",
 	SETTINGS_PROFILE: "profile",
+	SETTINGS_GENERIC: "generic",
 };

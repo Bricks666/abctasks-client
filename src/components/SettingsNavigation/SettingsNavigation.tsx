@@ -1,4 +1,5 @@
 import { ROUTES } from "@/const";
+import { i18n } from "@/i18n";
 import { ClassNameProps } from "@/interfaces/common";
 import { Block } from "@/ui/Block";
 import { List } from "@/ui/List";
@@ -8,7 +9,11 @@ import React, { FC } from "react";
 
 const navigation = [
 	{
-		label: "Profile",
+		label: i18n.t("navigation.generic", { ns: "settings" }),
+		to: ROUTES.SETTINGS_GENERIC,
+	},
+	{
+		label: i18n.t("navigation.profile", { ns: "settings" }),
 		to: ROUTES.SETTINGS_PROFILE,
 	},
 ];

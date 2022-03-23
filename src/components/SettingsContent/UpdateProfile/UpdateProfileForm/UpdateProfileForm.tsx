@@ -1,43 +1,56 @@
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import { TextField } from "@/components/TextField";
-import { useUserInfo } from "@/hooks";
+import { useImageURL, useUserInfo } from "@/hooks";
 import { Button } from "@/ui/Button";
 import { Picture } from "@/ui/Picture";
+import { updateProfile } from "@/models/User";
+import { UpdateProfileRequest } from "@/interfaces/requests";
 
-import ChangeProfileFormStyle from "./UpdateProfileForm.module.css";
-
-interface UpdateProfileFormValues {
-	readonly photo: FileList | string | null;
-	readonly login: string;
-}
+import UpdateProfileFormStyle from "./UpdateProfileForm.module.css";
 
 export const UpdateProfileForm: FC = () => {
 	const userInfo = useUserInfo();
-	const { watch, handleSubmit, register } = useForm<UpdateProfileFormValues>({
-		defaultValues: userInfo,
-	});
+	const { watch, handleSubmit, register, formState } =
+		useForm<UpdateProfileRequest>({
+			defaultValues: userInfo,
+		});
 
 	const photo = watch("photo");
-	const showedPhoto = photo
-		? typeof photo === "string"
-			? photo
-			: photo[0] && URL.createObjectURL(photo[0])
-		: null;
-	const onSubmit = (values: UpdateProfileFormValues) => {};
+	const showedPhoto = useImageURL(photo);
+	const onSubmit = (values: UpdateProfileRequest) => {
+		updateProfile(values);
+	};
+	const { errors, isDirty, isSubmitting } = formState;
 	return (
 		<form
-			className={ChangeProfileFormStyle.form}
+			className={UpdateProfileFormStyle.form}
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<Picture
-				className={ChangeProfileFormStyle.picture}
+				className={UpdateProfileFormStyle.picture}
 				alt={userInfo.login}
 				src={showedPhoto || ""}
 			/>
-			<TextField {...register("photo")} type="file" label="Photo" />
-			<TextField {...register("login")} label="Login" />
-			<Button>Save</Button>
+			<TextField
+				inputClassName="visibility-hidden"
+				{...register("photo")}
+				type="file"
+				accept="image/*"
+				error={errors.photo?.message}
+			/>
+			<TextField
+				className={UpdateProfileFormStyle.input}
+				{...register("login")}
+				label="Login"
+				error={errors.login?.message}
+			/>
+			<Button
+				className={UpdateProfileFormStyle.button}
+				disabled={!isDirty || isSubmitting}
+			>
+				Save
+			</Button>
 		</form>
 	);
 };

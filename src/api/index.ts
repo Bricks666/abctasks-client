@@ -21,3 +21,5 @@ export {
 	editGroupApi,
 } from "./groups";
 export { getTasksProgressApi, subscribeChangeProgressApi } from "./progress";
+
+export { updateProfileApi, getProfileApi } from "./profile";

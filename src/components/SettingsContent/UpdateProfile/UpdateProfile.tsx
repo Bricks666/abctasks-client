@@ -3,12 +3,12 @@ import { Block } from "@/ui/Block";
 import { Text } from "@/ui/Text";
 import { ClassNameProps } from "@/interfaces/common";
 import { UpdateProfileForm } from "./UpdateProfileForm";
-import { useIsAuthorizing } from "@/hooks";
+import { useProfileLoading } from "@/hooks";
 import { LoadingWrapper } from "@/ui/LoadingWrapper";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";
 
 export const UpdateProfile: FC<ClassNameProps> = ({ className }) => {
-	const isLoading = useIsAuthorizing();
+	const isLoading = useProfileLoading();
 	return (
 		<LoadingWrapper
 			isLoading={isLoading}

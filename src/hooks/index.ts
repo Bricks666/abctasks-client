@@ -17,3 +17,4 @@ export { useGroup } from "./useGroup";
 export { useToggle } from "./useToggle";
 export { useAnyPopupOpen } from "./useAnyPopupOpen";
 export { useImageURL } from "./useImageURL";
+export { useProfileLoading } from "./useProfileLoading";

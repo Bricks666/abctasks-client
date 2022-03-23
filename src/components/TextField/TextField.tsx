@@ -15,6 +15,7 @@ interface TextFieldProps extends ClassNameProps, UseFormRegisterReturn {
 	readonly type?: HTMLInputTypeAttribute;
 	readonly inputClassName?: string;
 	readonly label?: ReactNode;
+	readonly accept?: string;
 }
 
 export const TextField = forwardRef<

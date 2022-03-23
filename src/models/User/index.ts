@@ -1,3 +1,5 @@
+import { UpdateProfileRequest } from "@/interfaces/requests";
+import { UserResponse } from "@/interfaces/response";
 import { createDomain } from "effector-logger";
 
 export interface User {
@@ -14,8 +16,14 @@ export const $User = UserDomain.createStore<User>(initialUser, {
 	name: "User",
 });
 
-export const loadUserFx = UserDomain.createEffect<void, User>("loadUserFx");
-export const updateUserFx = UserDomain.createEffect<void, User>("updateUserFx");
+export const loadUserFx = UserDomain.createEffect<void, UserResponse>(
+	"loadUserFx"
+);
+export const updateProfileFx = UserDomain.createEffect<
+	UpdateProfileRequest,
+	UserResponse
+>("updateProfileFx");
 
 export const loadUser = UserDomain.createEvent<void>("loadUserEvent");
-export const updateUser = UserDomain.createEvent<void>("updateUserEvent");
+export const updateProfile =
+	UserDomain.createEvent<UpdateProfileRequest>("updateProfileEvent");

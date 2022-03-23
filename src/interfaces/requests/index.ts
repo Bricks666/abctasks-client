@@ -3,3 +3,4 @@ export * from "./RegistrationRequest";
 export * from "./TaskRequest";
 export * from "./MoveTaskRequest";
 export * from "./CreateGroupRequest";
+export * from "./UpdateProfileRequest";
