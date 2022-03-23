@@ -1,4 +1,4 @@
-import React, { ComponentType, useEffect } from "react";
+import React, { ComponentType, Suspense, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { POPUPS } from "@/const";
 import { usePopups } from "@/hooks";
@@ -8,6 +8,7 @@ import { GroupsPopup } from "../GroupsPopup";
 import { EditGroupPopup } from "../EditGroupPopup";
 import { CreateGroupPopup } from "../CreateGroupPopup";
 import { BasePopup } from "@/interfaces/common";
+import { LoadingIndicator } from "@/ui/LoadingIndicator";
 
 const popupsMap: Record<string, ComponentType<BasePopup>> = {
 	[POPUPS.createTask]: CreateTaskPopup,
@@ -31,22 +32,24 @@ export const Popups = () => {
 	return (
 		<>
 			<Outlet />
-			{mountedPopups.map((mountedPopup, index) => {
-				const Component = popupsMap[mountedPopup];
+			<Suspense fallback={<LoadingIndicator />}>
+				{mountedPopups.map((mountedPopup, index) => {
+					const Component = popupsMap[mountedPopup];
 
-				if (!Component) {
-					return null;
-				}
-				const isUp = mountedPopups.length - 1 === index;
+					if (!Component) {
+						return null;
+					}
+					const isUp = mountedPopups.length - 1 === index;
 
-				return (
-					<Component
-						isOpen={popups.includes(mountedPopup)}
-						isFocus={isUp}
-						key={mountedPopup}
-					/>
-				);
-			})}
+					return (
+						<Component
+							isOpen={popups.includes(mountedPopup)}
+							isFocus={isUp}
+							key={mountedPopup}
+						/>
+					);
+				})}
+			</Suspense>
 		</>
 	);
 };

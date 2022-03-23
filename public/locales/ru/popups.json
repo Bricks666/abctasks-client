@@ -1,0 +1,32 @@
+{
+	"add_task": {
+		"title": "Добавить задачу",
+		"group": "Группа",
+		"content": "Содержание",
+		"button": "Добавить"
+	},
+	"edit_task": {
+		"title": "Добавить задачу",
+		"group": "Группа",
+		"status": "Статус",
+		"content": "Содержание",
+		"button": "Сохранить"
+	},
+	"groups": {
+		"title": "Группы",
+		"add_group": "Добавить"
+	},
+	"add_group": {
+		"title": "Добавить группу",
+		"button": "Добавить"
+	},
+	"edit_group": {
+		"title": "Изменить группу",
+		"button": "Сохранить"
+	},
+	"group_form": {
+		"name": "Название",
+		"main_color": "Основной цвет",
+		"secondary_color": "Дополнительный цвет"
+	}
+}

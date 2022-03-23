@@ -16,6 +16,7 @@ import { Stack } from "@/ui/Stack";
 import { UsePrepareLinkResponse } from "@/hooks/usePrepareLink";
 
 import GroupsPopupStyle from "./GroupsPopup.module.css";
+import { useTranslation } from "react-i18next";
 
 interface GroupsPopup extends ClassNameProps, BasePopup {}
 
@@ -29,6 +30,7 @@ const createEditLink = (params: UsePrepareLinkResponse, groupId: number) => {
 export const GroupsPopup: FC<GroupsPopup> = (props) => {
 	const onClose = useGoBack();
 	const groups = useTaskGroups();
+	const { t } = useTranslation("popups");
 	const addGroupLink = usePrepareLink({
 		addQuery: {
 			[GET_PARAMS.popup]: POPUPS.createGroup,
@@ -47,8 +49,8 @@ export const GroupsPopup: FC<GroupsPopup> = (props) => {
 			{...props}
 			className={GroupsPopupStyle.content}
 			onClose={onClose}
-			header="Task groups"
-			alt="Groups"
+			header={t("groups.title")}
+			alt={t("groups.title")}
 		>
 			<Stack>
 				<Button
@@ -56,7 +58,7 @@ export const GroupsPopup: FC<GroupsPopup> = (props) => {
 					to={addGroupLink}
 					type="text"
 				>
-					Add group
+					{t("groups.add_group")}
 				</Button>
 				<List className={GroupsPopupStyle.list}>
 					{groups.map((group) => (

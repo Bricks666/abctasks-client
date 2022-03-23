@@ -12,7 +12,7 @@
 	},
 	"activities": {
 		"title": "Activities",
-		"text": "{{activist}} has {{activity}} {{sphere}}",
+		"text": "{{activist}} has $t(activities.activityType.{{activity}}) $t(activities.spheres.{{sphere}})",
 		"spheres": {
 			"Task": "task",
 			"Group": "group"

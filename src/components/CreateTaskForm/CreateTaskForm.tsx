@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { FC, useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { GET_PARAMS } from "@/const";
 import { useGetParam, useTaskGroups } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
@@ -21,17 +22,17 @@ export interface TaskFormValues {
 export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || "Ready";
 	const groups = useTaskGroups();
+	const { t } = useTranslation("popups");
 
 	const { handleSubmit, formState, register, reset } = useForm<TaskFormValues>({
-		defaultValues: { content: "", groupId: 0 },
+		defaultValues: { content: "", groupId: -1 },
 		resolver: joiResolver(validationScheme),
 	});
 
 	const onSubmit = useCallback<SubmitHandler<TaskFormValues>>(
-		({ content, groupId }) => {
+		(values) => {
 			createTask({
-				content: content,
-				groupId: groupId,
+				...values,
 				status,
 			});
 			reset();
@@ -39,7 +40,7 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 		[status, reset]
 	);
 
-	const { isDirty, isSubmitting } = formState;
+	const { isDirty, isSubmitting, errors } = formState;
 	const disableButton = !isDirty || isSubmitting;
 
 	return (
@@ -50,8 +51,10 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 			<TextField
 				{...register("groupId", { disabled: isSubmitting })}
 				select
-				label="groupId"
+				label={t("add_task.group")}
+				error={errors.groupId?.message}
 			>
+				<option value={-1} />
 				{groups.map(({ id, name }) => (
 					<option value={id} key={id}>
 						{name}
@@ -61,11 +64,12 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 			<TextField
 				className={TaskFormStyle.textarea}
 				{...register("content", { disabled: isSubmitting })}
-				label="Task"
+				label={t("add_task.content")}
 				multiline
+				error={errors.content?.message}
 			/>
 			<Button className={TaskFormStyle.button} disabled={disableButton}>
-				Add Task
+				{t("add_task.button")}
 			</Button>
 		</form>
 	);

@@ -43,6 +43,7 @@ export const Field: FC<FieldProps> = ({
 	multiline,
 	error,
 	select,
+	inputClassName,
 	...input
 }) => {
 	const id = inputId || input.name;
@@ -58,11 +59,26 @@ export const Field: FC<FieldProps> = ({
 	) : null;
 
 	const control = select ? (
-		<Select {...input} id={id} />
+		<Select
+			className={inputClassName}
+			{...input}
+			id={id}
+			ref={inputRef as Ref<HTMLSelectElement>}
+		/>
 	) : multiline ? (
-		<Textarea {...input} id={id} ref={inputRef as Ref<HTMLTextAreaElement>} />
+		<Textarea
+			className={inputClassName}
+			{...input}
+			id={id}
+			ref={inputRef as Ref<HTMLTextAreaElement>}
+		/>
 	) : (
-		<Input {...input} id={id} ref={inputRef as Ref<HTMLInputElement>} />
+		<Input
+			className={inputClassName}
+			{...input}
+			id={id}
+			ref={inputRef as Ref<HTMLInputElement>}
+		/>
 	);
 
 	const helpText = error ? <SubtextInput>{error}</SubtextInput> : null;

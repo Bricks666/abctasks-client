@@ -1,4 +1,8 @@
 .button {
+	display: inline-flex;
+	gap: 8px;
+	align-items: baseline;
+
 	padding: 6px 12px;
 	min-width: 64px;
 	width: max-content;
@@ -127,4 +131,12 @@
 	.button {
 		--font-size: 12px;
 	}
+}
+
+.icon--start {
+	order: -1;
+}
+
+.icon--end {
+	order: 2;
 }

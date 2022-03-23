@@ -18,8 +18,6 @@ export const SvgIcon: FC<SvgIconProps> = memo(function SvgIcon({
 	return (
 		<svg
 			className={classNames(SvgIconStyle.icon, className)}
-			xmlns="http://www.w3.org/2000/svg"
-			xmlnsXlink="http://www.w3.org/1999/xlink"
 			viewBox={viewBox}
 			aria-label={title}
 		>

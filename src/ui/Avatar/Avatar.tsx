@@ -3,6 +3,7 @@ import React, { forwardRef, HTMLAttributes, memo } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 import { Color, Size } from "@/interfaces/ui";
 import { Picture } from "../Picture";
+import { useLoadImage } from "./useLoadImage";
 
 import AvatarStyle from "./Avatar.module.css";
 
@@ -35,8 +36,10 @@ export const Avatar = memo(
 			AvatarStyle[color],
 			className
 		);
+		const status = useLoadImage(src);
+		const imageLoadedNotFalling = src && status === "loaded";
 
-		const content = src ? (
+		const content = imageLoadedNotFalling ? (
 			<Picture className={AvatarStyle.avatar} src={src} alt={alt} />
 		) : (
 			children

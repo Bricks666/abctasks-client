@@ -1,13 +1,9 @@
 import { LoginRequest, RegistrationRequest } from "@/interfaces/requests";
-import {
-	TokensResponse,
-	UserResponse,
-	VoidResponse,
-} from "@/interfaces/response";
+import { TokensResponse, VoidResponse } from "@/interfaces/response";
 import { instance } from "./instance";
 
 export const loginApi = async (credentials: LoginRequest) => {
-	const response = await instance.post<UserResponse & TokensResponse>(
+	const response = await instance.post<TokensResponse>(
 		"/auth/login",
 		credentials
 	);
@@ -15,7 +11,7 @@ export const loginApi = async (credentials: LoginRequest) => {
 };
 
 export const authApi = async () => {
-	const response = await instance.get<UserResponse & TokensResponse>("/auth");
+	const response = await instance.get<TokensResponse>("/auth");
 
 	return response.data;
 };

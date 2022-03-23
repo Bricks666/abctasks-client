@@ -12,6 +12,7 @@ export interface BaseButtonProps
 		Omit<HTMLAttributes<HTMLButtonElement>, "className"> {
 	readonly to?: To;
 	readonly disabled?: boolean;
+	readonly buttonType?: "button" | "submit" | "reset";
 }
 
 export const BaseButton: FC<BaseButtonProps> = ({
@@ -19,6 +20,7 @@ export const BaseButton: FC<BaseButtonProps> = ({
 	className,
 	disabled,
 	to,
+	buttonType,
 	...props
 }) => {
 	const classes = classNames(BaseButtonStyle.button, className);
@@ -30,7 +32,12 @@ export const BaseButton: FC<BaseButtonProps> = ({
 		);
 	}
 	return (
-		<button className={classes} disabled={disabled} {...props}>
+		<button
+			className={classes}
+			disabled={disabled}
+			{...props}
+			type={buttonType}
+		>
 			{children}
 		</button>
 	);

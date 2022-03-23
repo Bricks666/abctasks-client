@@ -49,19 +49,13 @@ forward({
 
 guard({
 	clock: login,
-	filter: sample({
-		clock: loginFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(loginFx.pending),
 	target: loginFx,
 });
 
 guard({
 	clock: auth,
-	filter: sample({
-		clock: authFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(authFx.pending),
 	target: authFx,
 });
 
@@ -73,19 +67,13 @@ sample({
 
 guard({
 	clock: logout,
-	filter: sample({
-		clock: logoutFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(logoutFx.pending),
 	target: logoutFx,
 });
 
 guard({
 	clock: refresh,
-	filter: sample({
-		clock: refreshFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(refreshFx.pending),
 	target: refreshFx,
 });
 
@@ -97,10 +85,7 @@ sample({
 
 guard({
 	clock: registration,
-	filter: sample({
-		clock: registrationFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(registrationFx.pending),
 	target: registrationFx,
 });
 

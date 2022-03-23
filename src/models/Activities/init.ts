@@ -28,10 +28,7 @@ subscribeNewActivityFx.use(async () => {
 
 guard({
 	clock: loadActivities,
-	filter: sample({
-		source: loadActivitiesFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(loadActivitiesFx.pending),
 	target: loadActivitiesFx,
 });
 
@@ -43,10 +40,7 @@ sample({
 
 guard({
 	clock: subscribeNewActivity,
-	filter: sample({
-		source: subscribeNewActivityFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(subscribeNewActivityFx.pending),
 	target: subscribeNewActivityFx,
 });
 forward({

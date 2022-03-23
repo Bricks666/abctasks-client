@@ -22,10 +22,7 @@ subscribeChangeProgressFx.use(subscribeChangeProgressApi);
 
 guard({
 	clock: loadTasksProgress,
-	filter: sample({
-		clock: loadTasksProgressFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(loadTasksProgressFx.pending),
 	target: loadTasksProgressFx,
 });
 

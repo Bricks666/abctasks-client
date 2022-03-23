@@ -17,7 +17,6 @@ export const updateProfileApi = async ({
 		typeof photo === "string" ? photo : photo && photo[0] ? photo[0] : "";
 	photoData.set("photo", validPhoto);
 	photoData.set("login", values.login);
-	console.log(photoData.get("photo"));
 
 	const response = await instance.post<UserResponse>(
 		"profile/update",

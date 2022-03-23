@@ -25,10 +25,7 @@ deleteTaskFx.use(deleteTaskApi);
 
 guard({
 	clock: loadTasks,
-	filter: sample({
-		clock: loadTasksFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(loadTasksFx.pending),
 	target: loadTasksFx,
 });
 
@@ -45,10 +42,7 @@ forward({
 
 guard({
 	clock: createTask,
-	filter: sample({
-		clock: createTaskFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(createTaskFx.pending),
 	target: createTaskFx,
 });
 
@@ -61,10 +55,7 @@ sample({
 
 guard({
 	clock: editTask,
-	filter: sample({
-		source: editTaskFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(editTaskFx.pending),
 	target: editTaskFx,
 });
 
@@ -77,10 +68,7 @@ sample({
 
 guard({
 	clock: deleteTask,
-	filter: sample({
-		source: deleteTaskFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(deleteTaskFx.pending),
 	target: deleteTaskFx,
 });
 

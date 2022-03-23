@@ -12,7 +12,7 @@
 	},
 	"activities": {
 		"title": "Активности",
-		"text": "Пользователь {{activist}} {{activity}} {{sphere}}",
+		"text": "Пользователь {{activist}} $t(activities.activityType.{{activity}}) $t(activities.spheres.{{sphere}})",
 		"spheres": {
 			"Task": "задачу",
 			"Group": "группу"

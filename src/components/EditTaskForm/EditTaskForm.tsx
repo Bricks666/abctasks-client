@@ -14,6 +14,7 @@ import { TextField } from "../TextField";
 import { useGroup } from "@/hooks/useGroup";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validatingScheme } from "./validator";
+import { useTranslation } from "react-i18next";
 
 import EditTaskFromStyle from "./EditTaskForm.module.css";
 
@@ -40,7 +41,12 @@ const prepareTask = (
 		  };
 };
 
-const statuses = ["Ready", "In Progress", "Review", "Done"];
+const statuses = {
+	ready: "Ready",
+	inProgress: "In Progress",
+	review: "Review",
+	done: "Done",
+};
 
 export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const taskId = useGetParam(GET_PARAMS.taskId);
@@ -48,6 +54,7 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const group = useGroup(task?.groupId || null);
 	const groups = useTaskGroups();
 	const goBack = useGoBack();
+	const { t } = useTranslation(["popups", "room"]);
 	const { register, handleSubmit, formState } = useForm<EditTaskFormValues>({
 		defaultValues: prepareTask(task, group),
 		resolver: joiResolver(validatingScheme),
@@ -72,17 +79,17 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 			className={classNames(EditTaskFromStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<TextField {...register("groupId")} select label="Group">
+			<TextField {...register("groupId")} select label={t("edit_task.group")}>
 				{groups.map(({ id, name }) => (
 					<option value={id} key={id}>
 						{name}
 					</option>
 				))}
 			</TextField>
-			<TextField {...register("status")} select label="Status">
-				{statuses.map((status) => (
-					<option value={status} key={status}>
-						{status}
+			<TextField {...register("status")} select label={t("edit_task.status")}>
+				{Object.entries(statuses).map(([key, value]) => (
+					<option value={value} key={value}>
+						{t(`statuses.${key}`, { ns: "room" })}
 					</option>
 				))}
 			</TextField>
@@ -91,10 +98,10 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 				className={EditTaskFromStyle.textarea}
 				{...register("content")}
 				multiline
-				label="Content"
+				label={t("edit_task.content")}
 			/>
 			<Button className={EditTaskFromStyle.button} disabled={!isDirty}>
-				Save edit
+				{t("edit_task.button")}
 			</Button>
 		</form>
 	);

@@ -48,9 +48,9 @@ export const ActivityCard: FC<ActivityCardProps> = ({
 			</Avatar>
 			<Text component="p">
 				{t("activities.text", {
-					activist: activist,
-					activity: t(`activities.activityType.${activity}`),
-					sphere: t(`activities.spheres.${sphere}`),
+					activist,
+					activity,
+					sphere,
 				})}
 			</Text>
 

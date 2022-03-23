@@ -26,10 +26,7 @@ editGroupFx.use(editGroupApi);
 
 guard({
 	clock: loadTaskGroups,
-	filter: sample({
-		source: loadTaskGroupsFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(loadTaskGroupsFx.pending),
 	target: loadTaskGroupsFx,
 });
 
@@ -41,10 +38,7 @@ sample({
 
 guard({
 	clock: createGroup,
-	filter: sample({
-		source: createGroupFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(createGroupFx.pending),
 	target: createGroupFx,
 });
 
@@ -57,10 +51,7 @@ sample({
 
 guard({
 	clock: deleteGroup,
-	filter: sample({
-		source: deleteGroupFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(deleteGroupFx.pending),
 	target: deleteGroupFx,
 });
 
@@ -73,10 +64,7 @@ sample({
 
 guard({
 	clock: editGroup,
-	filter: sample({
-		source: editGroupFx.pending,
-		fn: mayStartFxHandler,
-	}),
+	filter: mayStartFxHandler(editGroupFx.pending),
 	target: editGroupFx,
 });
 

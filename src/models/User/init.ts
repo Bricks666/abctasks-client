@@ -1,40 +1,50 @@
+import { getProfileApi, updateProfileApi } from "@/api";
 import { forward, guard, sample } from "effector";
 import {
 	$User,
 	initialUser,
 	loadUser,
 	loadUserFx,
-	updateUser,
-	updateUserFx,
+	updateProfile,
+	updateProfileFx,
 } from ".";
-import { logoutFx } from "../Auth";
+import { authFx, loginFx, logoutFx } from "../Auth";
 import { mayStartFxHandler } from "../handlers";
 
+loadUserFx.use(getProfileApi);
+updateProfileFx.use(updateProfileApi);
+
+sample({
+	clock: [updateProfileFx.doneData],
+	fn: (response) => response.user,
+	target: $User,
+});
+
 forward({
-	from: [loadUserFx.doneData, updateUserFx.doneData],
-	to: $User,
+	from: [authFx.doneData, loginFx.doneData],
+	to: loadUser,
+});
+
+guard({
+	clock: loadUser,
+	filter: mayStartFxHandler(loadUserFx.pending),
+	target: loadUserFx,
 });
 
 sample({
-	clock: logoutFx.done,
+	clock: loadUserFx.doneData,
+	fn: (response) => response.user,
+	target: $User,
+});
+
+sample({
+	clock: logoutFx.doneData,
 	fn: () => initialUser,
 	target: $User,
 });
 
 guard({
-	clock: loadUser,
-	filter: sample({
-		source: loadUserFx.pending,
-		fn: mayStartFxHandler,
-	}),
-	target: loadUserFx,
-});
-
-guard({
-	clock: updateUser,
-	filter: sample({
-		source: updateUserFx.pending,
-		fn: mayStartFxHandler,
-	}),
-	target: updateUserFx,
+	clock: updateProfile,
+	filter: mayStartFxHandler(updateProfileFx.pending),
+	target: updateProfileFx,
 });
