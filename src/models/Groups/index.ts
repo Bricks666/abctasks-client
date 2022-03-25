@@ -1,4 +1,8 @@
-import { CreateEditGroupRequest } from "@/interfaces/requests";
+import { ID } from "@/interfaces/common";
+import {
+	CreateEditGroupRequest,
+	DeleteGroupRequest,
+} from "@/interfaces/requests";
 import {
 	CreateGroupResponse,
 	DeleteGroupResponse,
@@ -11,7 +15,7 @@ import { TaskGroup, TaskGroupsMap } from "./types";
 import { createGroupsMap } from "./utils";
 
 export const GroupsDomain = createDomain("GroupsDomain");
-export const $TaskGroups = GroupsDomain.createStore<TaskGroup[]>([], {
+export const $TaskGroups = GroupsDomain.store<TaskGroup[]>([], {
 	name: "TaskGroups",
 });
 export const $TaskGroupsMap = combine<TaskGroup[], TaskGroupsMap>(
@@ -19,26 +23,26 @@ export const $TaskGroupsMap = combine<TaskGroup[], TaskGroupsMap>(
 	createGroupsMap
 );
 
-export const loadTaskGroupsFx = GroupsDomain.createEffect<
-	void,
-	TaskGroupsResponse
->("loadTaskGroupsFx");
-export const createGroupFx = GroupsDomain.createEffect<
-CreateEditGroupRequest,
+export const loadTaskGroupsFx = GroupsDomain.effect<ID, TaskGroupsResponse>(
+	"loadTaskGroupsFx"
+);
+export const createGroupFx = GroupsDomain.effect<
+	CreateEditGroupRequest,
 	CreateGroupResponse
 >("createGroupFx");
-export const deleteGroupFx = GroupsDomain.createEffect<
-	number,
+export const deleteGroupFx = GroupsDomain.effect<
+	DeleteGroupRequest,
 	DeleteGroupResponse
 >("deleteGroupFx");
-export const editGroupFx = GroupsDomain.createEffect<
-CreateEditGroupRequest,
+export const editGroupFx = GroupsDomain.effect<
+	CreateEditGroupRequest,
 	EditGroupResponse
 >("editGroupFx");
 
-export const loadTaskGroups = GroupsDomain.createEvent("loadTaskGroups");
+export const loadTaskGroups = GroupsDomain.event<ID>("loadTaskGroups");
 export const createGroup =
-	GroupsDomain.createEvent<CreateEditGroupRequest>("createGroupEvent");
-export const deleteGroup = GroupsDomain.createEvent<number>("deleteGroupEvent");
+	GroupsDomain.event<CreateEditGroupRequest>("createGroupEvent");
+export const deleteGroup =
+	GroupsDomain.event<DeleteGroupRequest>("deleteGroupEvent");
 export const editGroup =
-	GroupsDomain.createEvent<CreateEditGroupRequest>("editGroupEvent");
+	GroupsDomain.event<CreateEditGroupRequest>("editGroupEvent");

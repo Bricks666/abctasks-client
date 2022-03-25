@@ -1,5 +1,7 @@
+import { ID } from "../common";
+
 export interface TaskProgressResponse {
-	readonly groupId: number;
+	readonly groupId: ID;
 	readonly totalCount: number;
 	readonly doneCount: number;
 }
@@ -9,6 +11,6 @@ export interface TasksProgressResponse {
 }
 
 export interface ChangeProgressResponse {
-	readonly groupId: number;
+	readonly groupId: ID;
 	readonly progress: TaskProgressResponse;
 }

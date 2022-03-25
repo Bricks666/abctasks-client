@@ -4,3 +4,4 @@ import "./User/init";
 import "./Groups/init";
 import "./Progress/init";
 import "./Auth/init";
+import "./Rooms/init";

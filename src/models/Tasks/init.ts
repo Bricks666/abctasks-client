@@ -84,7 +84,7 @@ sample({
 sample({
 	source: $Tasks,
 	clock: moveTask,
-	fn: (tasks, { status, taskId }) => {
+	fn: (tasks, { status, taskId, roomId }) => {
 		const task = tasks.find((task) => task.id === taskId);
 		if (!task) {
 			throw new Error();
@@ -93,6 +93,7 @@ sample({
 		return {
 			status,
 			id: taskId,
+			roomId: roomId,
 			groupId: task.groupId,
 			content: task.content,
 		};

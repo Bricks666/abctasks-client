@@ -29,7 +29,8 @@ export const POPUPS: Popups = {
 };
 
 export const ROUTES = {
-	HOMEPAGE: "*",
+	ROOMS: "*",
+	ROOM: "room/:id",
 	LOGIN: "login",
 	REGISTRATION: "registration",
 	SETTINGS: "settings/*",

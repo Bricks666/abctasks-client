@@ -1,4 +1,5 @@
 import { SubscribeChangeProfileProps } from "@/api/progress";
+import { ID } from "@/interfaces/common";
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
@@ -9,38 +10,37 @@ import { TaskProgressStructure } from "./types";
 
 export const ProgressDomain = createDomain("ProgressDomain");
 
-export const $TasksProgress = ProgressDomain.createStore<
-	TaskProgressStructure[]
->([], {
-	name: "TasksProgress",
-});
-export const $LoadingTasksProgress = ProgressDomain.createStore<boolean>(
-	false,
+export const $TasksProgress = ProgressDomain.store<TaskProgressStructure[]>(
+	[],
 	{
-		name: "LoadingTasksProgress",
+		name: "TasksProgress",
 	}
 );
-export const $ProgressSubscribe =
-	ProgressDomain.createStore<CloseConnect | null>(null, {
+export const $LoadingTasksProgress = ProgressDomain.store<boolean>(false, {
+	name: "LoadingTasksProgress",
+});
+export const $ProgressSubscribe = ProgressDomain.store<CloseConnect | null>(
+	null,
+	{
 		name: "ProgressSubscribe",
-	});
+	}
+);
 
-export const loadTasksProgressFx = ProgressDomain.createEffect<
-	void,
+export const loadTasksProgressFx = ProgressDomain.effect<
+	ID,
 	TasksProgressResponse
 >("loadTasksProgress");
-export const subscribeChangeProgressFx = ProgressDomain.createEffect<
+export const subscribeChangeProgressFx = ProgressDomain.effect<
 	SubscribeChangeProfileProps,
 	CloseConnect
 >("subscribeChangeProgressFx");
 
-export const loadTasksProgress =
-	ProgressDomain.createEvent("loadTasksProgress");
-export const subscribeChangeProgress = ProgressDomain.createEvent<void>(
+export const loadTasksProgress = ProgressDomain.event<ID>("loadTasksProgress");
+export const subscribeChangeProgress = ProgressDomain.event<ID>(
 	"subscribeChangeProgressEvent"
 );
-export const changeProgress = ProgressDomain.createEvent<
-	ChangeProgressResponse[]
->("changeProgressEvent");
+export const changeProgress = ProgressDomain.event<ChangeProgressResponse[]>(
+	"changeProgressEvent"
+);
 export const setUnsubscribe =
-	ProgressDomain.createEvent<CloseConnect>("setUnsubscribe");
+	ProgressDomain.event<CloseConnect>("setUnsubscribe");

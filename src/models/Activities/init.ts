@@ -15,14 +15,15 @@ import { mayStartFxHandler } from "../handlers";
 import { toValidActivity } from "./utils";
 
 loadActivitiesFx.use(getActivitiesApi);
-subscribeNewActivityFx.use(async () => {
-	const close = await subscribeNewActivitiesApi(
-		addActivity,
-		async ({ reconnect }) => {
+subscribeNewActivityFx.use(async (roomId) => {
+	const close = await subscribeNewActivitiesApi({
+		onNewActivity: addActivity,
+		onError: async ({ reconnect }) => {
 			const close = await reconnect();
 			setUnsubscribe(close);
-		}
-	);
+		},
+		roomId,
+	});
 	setUnsubscribe(close);
 });
 

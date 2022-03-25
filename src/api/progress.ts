@@ -1,3 +1,4 @@
+import { ID } from "@/interfaces/common";
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
@@ -5,21 +6,25 @@ import {
 import { ErrorHandlerParams } from "@/packages/eventSource";
 import { instance, sseListener } from "./instance";
 
-export const getTasksProgressApi = async (): Promise<TasksProgressResponse> => {
-	const response = await instance.get("/progress");
+export const getTasksProgressApi = async (
+	roomId: ID
+): Promise<TasksProgressResponse> => {
+	const response = await instance.get(`/progress/${roomId}`);
 	return response.data;
 };
 
 export interface SubscribeChangeProfileProps {
+	readonly roomId: ID;
 	readonly onChangeProgress: (progress: ChangeProgressResponse[]) => unknown;
-	readonly onError: (param: ErrorHandlerParams) => unknown;
+	readonly onError?: (param: ErrorHandlerParams) => unknown;
 }
 
 export const subscribeChangeProgressApi = async ({
 	onChangeProgress,
 	onError,
+	roomId,
 }: SubscribeChangeProfileProps) => {
-	return sseListener.connect<string>("progress/subscribe", {
+	return sseListener.connect<string>(`progress/${roomId}/subscribe`, {
 		onerror: onError,
 		onmessage: (evt) => onChangeProgress(JSON.parse(evt.data)),
 	});

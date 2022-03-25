@@ -5,14 +5,18 @@ import {
 	loadTasksProgress,
 	subscribeChangeProgress,
 } from "@/models/Progress";
+import { useParams } from "react-router-dom";
 
 export const useTasksProgress = () => {
 	const tasksProgress = useStore($TasksProgress);
+	const { id: roomId } = useParams();
 
 	useEffect(() => {
-		loadTasksProgress();
-		subscribeChangeProgress();
-	}, []);
+		if (roomId) {
+			loadTasksProgress(roomId);
+			subscribeChangeProgress(roomId);
+		}
+	}, [roomId]);
 
 	return tasksProgress;
 };

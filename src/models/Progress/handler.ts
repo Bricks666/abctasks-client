@@ -1,3 +1,4 @@
+import { ID } from "@/interfaces/common";
 import { ChangeProgressResponse } from "@/interfaces/response";
 import { TaskProgressStructure } from "./types";
 import { toValidTaskProgress } from "./utils";
@@ -8,7 +9,7 @@ export const changeProgressHandler = (
 ) => {
 	const newState: TaskProgressStructure[] = [];
 	const idsMap = Object.values(changes).reduce<
-		Record<number, ChangeProgressResponse>
+		Record<ID, ChangeProgressResponse>
 	>((acc, change) => ((acc[change.groupId] = change), acc), {});
 	state.forEach((progress) => {
 		const change = idsMap[progress.groupId];

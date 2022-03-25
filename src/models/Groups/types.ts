@@ -1,12 +1,12 @@
-import { HEX } from "@/interfaces/common";
+import { HEX, ID } from "@/interfaces/common";
 
 export interface TaskGroup {
-	readonly id: number;
+	readonly id: ID;
 	readonly name: string;
 	readonly mainColor: HEX;
 	readonly secondColor: HEX;
 }
 
 export interface TaskGroupsMap {
-	[id: number]: TaskGroup;
+	[id: ID]: TaskGroup;
 }

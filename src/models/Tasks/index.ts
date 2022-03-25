@@ -1,22 +1,24 @@
 import { combine, createDomain } from "effector-logger";
-import { TasksResponse, DeleteTaskResponse, CreateTaskResponse } from "@/interfaces/response";
 import {
+	TasksResponse,
+	DeleteTaskResponse,
+	CreateTaskResponse,
+} from "@/interfaces/response";
+import {
+	DeleteTaskRequest,
 	EditTaskRequest,
 	MoveTaskRequest,
 	TaskRequest,
 } from "@/interfaces/requests";
-import {
-	GroupedByStatusTasksStore,
-	TaskStatus,
-	TaskStructure,
-} from "./types";
+import { GroupedByStatusTasksStore, TaskStatus, TaskStructure } from "./types";
+import { ID } from "@/interfaces/common";
 
 export const TasksDomain = createDomain("TasksDomain");
 
-export const $Tasks = TasksDomain.createStore<TaskStructure[]>([], {
+export const $Tasks = TasksDomain.store<TaskStructure[]>([], {
 	name: "Tasks",
 });
-export const $LoadingTasks = TasksDomain.createStore<boolean>(false, {
+export const $LoadingTasks = TasksDomain.store<boolean>(false, {
 	name: "LoadingTasks",
 });
 
@@ -36,29 +38,23 @@ export const $GroupedByStatusTasksStore = combine<
 	needReview: createGrouper("Review")(tasks),
 }));
 
-/* TODO: Сделать валидацию запуска эффектов по их параметрам(чтобы два одинаковых не летели одновременно) */
-export const loadTasksFx = TasksDomain.createEffect<void, TasksResponse>(
-	"loadTasksFx"
-);
+export const loadTasksFx = TasksDomain.effect<ID, TasksResponse>("loadTasksFx");
 
-export const createTaskFx = TasksDomain.createEffect<
-	TaskRequest,
-	CreateTaskResponse
->("createTaskFx");
-export const editTaskFx = TasksDomain.createEffect<
+export const createTaskFx = TasksDomain.effect<TaskRequest, CreateTaskResponse>(
+	"createTaskFx"
+);
+export const editTaskFx = TasksDomain.effect<
 	EditTaskRequest,
 	CreateTaskResponse
 >("editTasksFx");
-export const deleteTaskFx = TasksDomain.createEffect<
-	number,
+export const deleteTaskFx = TasksDomain.effect<
+	DeleteTaskRequest,
 	DeleteTaskResponse
 >("deleteTaskFx");
 
-export const loadTasks = TasksDomain.createEvent("loadTasks");
-export const createTask =
-	TasksDomain.createEvent<TaskRequest>("createTaskEvent");
-export const editTask =
-	TasksDomain.createEvent<EditTaskRequest>("editTaskEvent");
-export const deleteTask = TasksDomain.createEvent<number>("deleteTaskEvent");
-export const moveTask =
-	TasksDomain.createEvent<MoveTaskRequest>("modeTaskEvent");
+export const loadTasks = TasksDomain.event<ID>("loadTasks");
+export const createTask = TasksDomain.event<TaskRequest>("createTaskEvent");
+export const editTask = TasksDomain.event<EditTaskRequest>("editTaskEvent");
+export const deleteTask =
+	TasksDomain.event<DeleteTaskRequest>("deleteTaskEvent");
+export const moveTask = TasksDomain.event<MoveTaskRequest>("modeTaskEvent");

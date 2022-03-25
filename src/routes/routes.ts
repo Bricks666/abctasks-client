@@ -1,5 +1,5 @@
 import { ComponentType, lazy } from "react";
-import { HomePage } from "@/pages";
+import { RoomPage, RoomsPage } from "@/pages";
 import { ROUTES } from "@/const";
 
 interface Route {
@@ -14,8 +14,13 @@ const Settings = lazy(() => import("@/pages/SettingsPage"));
 
 export const routes: Route[] = [
 	{
-		path: ROUTES.HOMEPAGE,
-		Component: HomePage,
+		path: ROUTES.ROOMS,
+		Component: RoomsPage,
+		isOnlyAuth: true,
+	},
+	{
+		path: ROUTES.ROOM,
+		Component: RoomPage,
 		isOnlyAuth: true,
 	},
 	{

@@ -1,4 +1,8 @@
-import { CreateEditGroupRequest } from "@/interfaces/requests";
+import { ID } from "@/interfaces/common";
+import {
+	CreateEditGroupRequest,
+	DeleteGroupRequest,
+} from "@/interfaces/requests";
 import {
 	CreateGroupResponse,
 	DeleteGroupResponse,
@@ -7,18 +11,21 @@ import {
 } from "@/interfaces/response";
 import { instance } from "./instance";
 
-export const getTaskGroupsApi = async (): Promise<TaskGroupsResponse> => {
-	const response = await instance.get("/groups");
+export const getTaskGroupsApi = async (
+	roomId: ID
+): Promise<TaskGroupsResponse> => {
+	const response = await instance.get(`/groups/${roomId}`);
 
 	return response.data;
 };
 
 export const createTaskGroupApi = async ({
 	name,
+	roomId,
 	mainColor,
 	secondColor,
 }: CreateEditGroupRequest): Promise<CreateGroupResponse> => {
-	const response = await instance.put("/groups/new", {
+	const response = await instance.put(`/groups/${roomId}/new`, {
 		name,
 		mainColor,
 		secondColor,
@@ -27,17 +34,19 @@ export const createTaskGroupApi = async ({
 	return response.data;
 };
 
-export const deleteGroupApi = async (
-	groupId: number
-): Promise<DeleteGroupResponse> => {
-	const response = await instance.delete(`/groups/${groupId}/delete`);
+export const deleteGroupApi = async ({
+	roomId,
+	id,
+}: DeleteGroupRequest): Promise<DeleteGroupResponse> => {
+	const response = await instance.delete(`/groups/${roomId}/${id}/delete`);
 	return response.data;
 };
 
 export const editGroupApi = async ({
 	id,
+	roomId,
 	...data
 }: CreateEditGroupRequest): Promise<EditGroupResponse> => {
-	const response = await instance.post(`/groups/${id}/edit`, data);
+	const response = await instance.post(`/groups/${roomId}/${id}/edit`, data);
 	return response.data;
 };

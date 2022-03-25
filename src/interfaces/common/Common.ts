@@ -24,3 +24,5 @@ export interface BasePopup {
 	readonly isOpen: boolean;
 	readonly isFocus?: boolean;
 }
+
+export type ID = string | number;

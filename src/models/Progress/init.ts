@@ -40,12 +40,13 @@ forward({
 
 sample({
 	clock: subscribeChangeProgress,
-	fn: (): SubscribeChangeProfileProps => ({
+	fn: (roomId): SubscribeChangeProfileProps => ({
 		onChangeProgress: changeProgress,
 		onError: async ({ reconnect }) => {
 			const close = await reconnect();
 			setUnsubscribe(close);
 		},
+		roomId,
 	}),
 	target: subscribeChangeProgressFx,
 });

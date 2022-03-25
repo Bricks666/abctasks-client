@@ -1,4 +1,4 @@
-import { DateType } from "@/interfaces/common";
+import { DateType, ID } from "@/interfaces/common";
 
 export type TaskStatus = "Done" | "Ready" | "Review" | "In Progress";
 
@@ -8,8 +8,9 @@ export interface TaskAuthor {
 }
 
 export interface TaskStructure {
-	readonly id: number;
-	readonly groupId: number;
+	readonly id: ID;
+	readonly groupId: ID;
+	readonly roomId: ID;
 	readonly status: TaskStatus;
 	readonly content: string;
 	readonly commentCount: number;

@@ -10,9 +10,9 @@ import { ActivitiesList } from "@/components/ActivitiesList";
 import { Stack } from "@/ui/Stack";
 import { RoomHeader } from "@/components/RoomHeader";
 
-import HomePageStyle from "./HomePage.module.css";
+import HomePageStyle from "./RoomPage.module.css";
 
-export const HomePage: FC<ClassNameProps> = ({ className }) => {
+export const RoomPage: FC<ClassNameProps> = ({ className }) => {
 	const { t } = useTranslation("room");
 	usePageTitle(t("title"));
 	return (
