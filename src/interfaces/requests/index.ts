@@ -1,5 +1,6 @@
 export * from "./LoginRequest";
 export * from "./RegistrationRequest";
 export * from "./TaskRequest";
-export * from "./CreateGroupRequest";
+export * from "./GroupRequests";
 export * from "./UpdateProfileRequest";
+export * from "./RoomsRequest";

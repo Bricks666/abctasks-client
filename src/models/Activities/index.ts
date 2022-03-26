@@ -9,8 +9,8 @@ export const ActivitiesDomain = createDomain("ActivitiesDomain");
 export const $Activities = ActivitiesDomain.store<ActivityStructure[]>([], {
 	name: "ActivitiesStore",
 });
-export const $ActivitySubscribe = ActivitiesDomain.store<null | CloseConnect>(
-	null,
+export const $ActivitySubscribe = ActivitiesDomain.store<false | CloseConnect>(
+	false,
 	{
 		name: "ActivitySubscribe",
 	}
@@ -31,3 +31,6 @@ export const addActivity =
 	ActivitiesDomain.event<ActivityResponse>("addActivityEvent");
 export const setUnsubscribe =
 	ActivitiesDomain.event<CloseConnect>("setUnsubscribe");
+export const unsubscribeNewActivity = ActivitiesDomain.event(
+	"unsubscribeNewActivityEvent"
+);

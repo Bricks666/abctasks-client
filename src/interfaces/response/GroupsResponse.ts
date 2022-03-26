@@ -1,7 +1,8 @@
-import { HEX } from "../common";
+import { HEX, ID } from "../common";
 
 export interface TaskGroupResponse {
-	readonly groupId: number;
+	readonly groupId: ID;
+	readonly roomId: ID;
 	readonly groupName: string;
 	readonly groupMainColor: HEX;
 	readonly groupSecondColor: HEX;
@@ -16,7 +17,7 @@ export interface CreateGroupResponse {
 }
 
 export interface DeleteGroupResponse {
-	readonly groupId: number;
+	readonly groupId: ID;
 }
 
 export interface EditGroupResponse {

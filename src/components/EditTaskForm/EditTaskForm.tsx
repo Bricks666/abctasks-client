@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GET_PARAMS } from "@/const";
 import { useGetParam, useGoBack, useTask, useTaskGroups } from "@/hooks";
-import { ClassNameProps } from "@/interfaces/common";
+import { ClassNameProps, ID } from "@/interfaces/common";
 import { editTask } from "@/models/Tasks";
 import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
 import { TaskGroup } from "@/models/Groups/types";
@@ -20,7 +20,7 @@ import EditTaskFromStyle from "./EditTaskForm.module.css";
 
 export interface EditTaskFormValues {
 	readonly content: string;
-	readonly groupId: number;
+	readonly groupId: ID;
 	readonly status: TaskStatus;
 }
 
@@ -67,10 +67,11 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 				id: +(taskId as unknown as number),
 				status,
 				groupId,
+				roomId: task?.roomId || 0,
 			});
 			goBack();
 		},
-		[goBack, taskId]
+		[goBack, taskId, task?.roomId]
 	);
 	const { isDirty } = formState;
 

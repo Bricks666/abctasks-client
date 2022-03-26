@@ -1,6 +1,10 @@
+import { getRoomsApi } from "@/api";
 import { guard, sample } from "effector";
 import { $Rooms, loadRooms, loadRoomsFx } from ".";
 import { mayStartFxHandler } from "../handlers";
+import { toValidRoom } from "./utils";
+
+loadRoomsFx.use(getRoomsApi);
 
 guard({
 	clock: loadRooms,
@@ -10,6 +14,6 @@ guard({
 
 sample({
 	clock: loadRoomsFx.doneData,
-	fn: () => [],
+	fn: ({ rooms }) => rooms.map(toValidRoom),
 	target: $Rooms,
 });

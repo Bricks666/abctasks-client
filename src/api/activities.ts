@@ -22,7 +22,7 @@ export const subscribeNewActivitiesApi = async ({
 	onNewActivity,
 	roomId,
 }: SubscribeNewActivitiesApiParams) => {
-	return sseListener.connect<string>(`activities/${roomId}/subscribe`, {
+	return await sseListener.connect<string>(`activities/${roomId}/subscribe`, {
 		onmessage: (evt) => onNewActivity(JSON.parse(evt.data)),
 		onerror: onError,
 	});

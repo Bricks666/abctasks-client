@@ -1,4 +1,5 @@
 import React, { DragEventHandler, FC, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import { ClassNameProps } from "@/interfaces/common";
 import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
 import { DropZone } from "../DropZone";
@@ -23,15 +24,16 @@ export const TasksList: FC<TasksListComponent> = ({
 	listHeader,
 	header = listHeader,
 }) => {
+	const { id: roomId } = useParams();
 	const onDrop = useCallback<DragEventHandler>(
 		(evt) => {
 			const taskId = +evt.dataTransfer.getData("taskId");
 			const status = evt.dataTransfer.getData("status");
-			if (status !== listHeader) {
-				moveTask({ status: listHeader, taskId });
+			if (status !== listHeader && roomId != null) {
+				moveTask({ status: listHeader, taskId, roomId });
 			}
 		},
-		[listHeader]
+		[listHeader, roomId]
 	);
 
 	return (

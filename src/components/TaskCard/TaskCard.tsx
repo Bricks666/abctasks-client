@@ -28,6 +28,7 @@ export const TaskCard: FC<TaskCardComponent> = ({
 	addedDate,
 	author,
 	id,
+	roomId,
 }) => {
 	const { t } = useTranslation("room");
 	const editLink = usePrepareLink({
@@ -43,7 +44,7 @@ export const TaskCard: FC<TaskCardComponent> = ({
 		},
 		{
 			label: t("menus.deleteTask"),
-			onClick: () => deleteTask(id),
+			onClick: () => deleteTask({ id, roomId }),
 		},
 	];
 	const group = useGroup(groupId);

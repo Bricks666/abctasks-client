@@ -32,7 +32,7 @@ export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 	});
 	const navigate = useNavigate();
 	const state = useLocationState<Location>();
-	const { isDirty, isSubmitting } = formState;
+	const { isDirty, isSubmitting, errors } = formState;
 	const onSubmit = useCallback<SubmitHandler<LoginRequest>>(
 		async (values) => {
 			await loginFx(values);
@@ -65,6 +65,7 @@ export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 				{...register("login")}
 				label={t("fields.login")}
 				disabled={isSubmitting}
+				error={errors.login?.message}
 			/>
 
 			<TextField
@@ -72,6 +73,7 @@ export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 				label={t("fields.password")}
 				type="password"
 				disabled={isSubmitting}
+				error={errors.password?.message}
 			/>
 			<Checkbox {...register("remember")} label={t("fields.remember")} />
 			<Button

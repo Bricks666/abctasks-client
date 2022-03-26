@@ -1,4 +1,3 @@
-import { logoutFx } from "./../Auth";
 import { getActivitiesApi, subscribeNewActivitiesApi } from "@/api";
 import { forward, guard, sample } from "effector";
 import {
@@ -10,6 +9,7 @@ import {
 	setUnsubscribe,
 	subscribeNewActivity,
 	subscribeNewActivityFx,
+	unsubscribeNewActivity,
 } from ".";
 import { mayStartFxHandler } from "../handlers";
 import { toValidActivity } from "./utils";
@@ -18,12 +18,10 @@ loadActivitiesFx.use(getActivitiesApi);
 subscribeNewActivityFx.use(async (roomId) => {
 	const close = await subscribeNewActivitiesApi({
 		onNewActivity: addActivity,
-		onError: async ({ reconnect }) => {
-			const close = await reconnect();
-			setUnsubscribe(close);
-		},
+		onError: () => subscribeNewActivity(roomId),
 		roomId,
 	});
+
 	setUnsubscribe(close);
 });
 
@@ -49,11 +47,6 @@ forward({
 	to: $ActivitySubscribe,
 });
 
-forward({
-	from: loadActivitiesFx,
-	to: subscribeNewActivity,
-});
-
 sample({
 	source: $Activities,
 	clock: addActivity,
@@ -63,10 +56,12 @@ sample({
 
 sample({
 	source: $ActivitySubscribe,
-	clock: logoutFx.done,
+	clock: unsubscribeNewActivity,
 	fn: (close) => {
 		close && close();
-		return null;
+		return false as const;
 	},
 	target: $ActivitySubscribe,
 });
+
+$ActivitySubscribe.watch((close) => console.debug(close));

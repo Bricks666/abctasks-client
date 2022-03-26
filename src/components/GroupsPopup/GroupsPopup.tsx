@@ -1,6 +1,7 @@
 import React, { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useGoBack, usePrepareLink, useTaskGroups } from "@/hooks";
-import { BasePopup, ClassNameProps } from "@/interfaces/common";
+import { BasePopup, ClassNameProps, ID } from "@/interfaces/common";
 import { Group } from "@/ui/Group";
 import { List } from "@/ui/List";
 import { ListItem } from "@/ui/ListItem";
@@ -16,11 +17,10 @@ import { Stack } from "@/ui/Stack";
 import { UsePrepareLinkResponse } from "@/hooks/usePrepareLink";
 
 import GroupsPopupStyle from "./GroupsPopup.module.css";
-import { useTranslation } from "react-i18next";
 
 interface GroupsPopup extends ClassNameProps, BasePopup {}
 
-const createEditLink = (params: UsePrepareLinkResponse, groupId: number) => {
+const createEditLink = (params: UsePrepareLinkResponse, groupId: ID) => {
 	return {
 		...params,
 		search: params.search + `&${GET_PARAMS.groupId}=${groupId}`,
@@ -68,7 +68,11 @@ export const GroupsPopup: FC<GroupsPopup> = (props) => {
 								<IconButton to={createEditLink(editGroupLink, group.id)}>
 									<EditIcon />
 								</IconButton>
-								<IconButton onClick={() => deleteGroup(group.id)}>
+								<IconButton
+									onClick={() =>
+										deleteGroup({ id: group.id, roomId: group.roomId })
+									}
+								>
 									<DeleteIcon />
 								</IconButton>
 							</ListItemSecondaryAction>

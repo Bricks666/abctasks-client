@@ -11,6 +11,7 @@ export const createGroupsMap = (groups: TaskGroup[]): TaskGroupsMap => {
 export const toValidTaskGroup = (taskGroup: TaskGroupResponse): TaskGroup => {
 	return {
 		id: taskGroup.groupId,
+		roomId: taskGroup.roomId,
 		name: taskGroup.groupName,
 		mainColor: taskGroup.groupMainColor,
 		secondColor: taskGroup.groupSecondColor,

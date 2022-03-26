@@ -8,6 +8,7 @@ const mockAuthor: TaskAuthor = {
 export const mockTasks: TaskStructure[] = [
 	{
 		id: 1,
+		roomId: 1,
 		author: mockAuthor,
 		status: "Ready",
 		groupId: 1,
@@ -17,6 +18,7 @@ export const mockTasks: TaskStructure[] = [
 	},
 	{
 		id: 2,
+		roomId: 1,
 		author: mockAuthor,
 		status: "Review",
 		groupId: 1,
@@ -26,6 +28,7 @@ export const mockTasks: TaskStructure[] = [
 	},
 	{
 		id: 4,
+		roomId: 1,
 		author: mockAuthor,
 		status: "Done",
 		groupId: 1,
@@ -35,6 +38,7 @@ export const mockTasks: TaskStructure[] = [
 	},
 	{
 		id: 6,
+		roomId: 1,
 		author: mockAuthor,
 		status: "In Progress",
 		groupId: 1,
@@ -44,6 +48,7 @@ export const mockTasks: TaskStructure[] = [
 	},
 	{
 		id: 11,
+		roomId: 1,
 		author: mockAuthor,
 		status: "Ready",
 		groupId: 2,
@@ -53,6 +58,7 @@ export const mockTasks: TaskStructure[] = [
 	},
 	{
 		id: 21,
+		roomId: 1,
 		author: mockAuthor,
 		status: "Review",
 		groupId: 2,
@@ -63,6 +69,7 @@ export const mockTasks: TaskStructure[] = [
 	},
 	{
 		id: 41,
+		roomId: 1,
 		author: mockAuthor,
 		status: "Done",
 		groupId: 2,
@@ -72,6 +79,7 @@ export const mockTasks: TaskStructure[] = [
 	},
 	{
 		id: 61,
+		roomId: 1,
 		author: mockAuthor,
 		status: "In Progress",
 		groupId: 2,

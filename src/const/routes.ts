@@ -30,7 +30,7 @@ export const POPUPS: Popups = {
 
 export const ROUTES = {
 	ROOMS: "*",
-	ROOM: "room/:id",
+	ROOM: "rooms/:id",
 	LOGIN: "login",
 	REGISTRATION: "registration",
 	SETTINGS: "settings/*",

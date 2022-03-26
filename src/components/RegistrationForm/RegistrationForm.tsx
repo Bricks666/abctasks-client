@@ -38,7 +38,7 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 		},
 		[navigate, state]
 	);
-	const { isSubmitting, isDirty } = formState;
+	const { isSubmitting, isDirty, errors } = formState;
 	const error = useRegistrationError();
 
 	useEffect(() => {
@@ -66,18 +66,21 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 				{...register("login")}
 				label={t("fields.login")}
 				disabled={isSubmitting}
+				error={errors.login?.message}
 			/>
 			<TextField
-				{...register("login")}
+				{...register("password")}
 				label={t("fields.password")}
 				type="password"
 				disabled={isSubmitting}
+				error={errors.password?.message}
 			/>
 			<TextField
 				{...register("repeatPassword")}
 				label={t("fields.passwordRepeat")}
 				type="password"
 				disabled={isSubmitting}
+				error={errors.repeatPassword?.message}
 			/>
 			<Button
 				className={RegistrationFormStyle.button}

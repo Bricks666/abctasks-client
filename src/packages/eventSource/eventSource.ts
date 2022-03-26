@@ -80,7 +80,7 @@ export class SSEListener {
 		ee.onmessage = this.#onMessage(onmessage);
 		ee.onerror = this.#onError(url, handlers, options, onerror);
 
-		return ee.close.bind(ee);
+		return () => ee.close();
 	}
 
 	changeConfig(options: Partial<InstanceConfig>) {

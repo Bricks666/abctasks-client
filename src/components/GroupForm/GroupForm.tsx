@@ -1,11 +1,12 @@
 import React, { FC } from "react";
+import { useParams } from "react-router-dom";
 import classNames from "classnames";
 import { useForm } from "react-hook-form";
 import { TextField } from "@/components/TextField";
 import { Button } from "@/ui/Button";
 import { CreateEditGroupRequest } from "@/interfaces/requests";
 import { Group } from "@/ui/Group";
-import { ClassNameProps } from "@/interfaces/common";
+import { ClassNameProps, ID } from "@/interfaces/common";
 import { Stack } from "@/ui/Stack";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validatingScheme } from "./validator";
@@ -20,11 +21,14 @@ interface GroupFormProps extends ClassNameProps {
 	readonly buttonText: string;
 }
 
-const initialState: CreateEditGroupRequest = {
-	id: 0,
-	mainColor: "#000",
-	secondColor: "#fff",
-	name: "",
+const createInitialState = (roomId: ID): CreateEditGroupRequest => {
+	return {
+		id: 0,
+		mainColor: "#000",
+		secondColor: "#fff",
+		name: "",
+		roomId: roomId,
+	};
 };
 
 export const GroupForm: FC<GroupFormProps> = ({
@@ -34,9 +38,10 @@ export const GroupForm: FC<GroupFormProps> = ({
 	defaultState,
 	buttonText,
 }) => {
+	const { id: roomId } = useParams();
 	const { register, handleSubmit, watch, formState } =
 		useForm<CreateEditGroupRequest>({
-			defaultValues: defaultState || initialState,
+			defaultValues: defaultState || createInitialState(roomId!),
 			resolver: joiResolver(validatingScheme),
 		});
 	const state = watch();

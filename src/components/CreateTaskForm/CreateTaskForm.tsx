@@ -13,6 +13,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import { validationScheme } from "./validator";
 
 import TaskFormStyle from "./CreateTaskForm.module.css";
+import { useParams } from "react-router-dom";
 
 export interface TaskFormValues {
 	readonly content: string;
@@ -21,6 +22,7 @@ export interface TaskFormValues {
 
 export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || "Ready";
+	const { id: roomId } = useParams();
 	const groups = useTaskGroups();
 	const { t } = useTranslation("popups");
 
@@ -34,10 +36,11 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 			createTask({
 				...values,
 				status,
+				roomId: roomId!,
 			});
 			reset();
 		},
-		[status, reset]
+		[status, reset, roomId]
 	);
 
 	const { isDirty, isSubmitting, errors } = formState;
