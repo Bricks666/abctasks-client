@@ -18,7 +18,7 @@ export const RoomPage: FC<ClassNameProps> = ({ className }) => {
 	return (
 		<main>
 			<ContentLayout className={classNames(HomePageStyle.layout, className)}>
-				<RoomHeader header={t("title")} />
+				<RoomHeader />
 				<Tasks className={HomePageStyle.tasks} />
 				<Stack className={HomePageStyle.aside}>
 					<TasksProgress />

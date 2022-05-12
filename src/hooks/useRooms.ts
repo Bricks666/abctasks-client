@@ -1,4 +1,4 @@
-import { $Rooms, loadRooms, loadRoomsFx } from "@/models/Rooms";
+import { $Rooms, loadRooms, loadRoomsFx, resetRooms } from "@/models/Rooms";
 import { useStore } from "effector-react";
 import { useEffect } from "react";
 
@@ -11,6 +11,11 @@ export const useRooms = () => {
 			loadRooms();
 		}
 	}, [rooms.length]);
+	useEffect(() => {
+		return () => {
+			resetRooms();
+		};
+	}, []);
 
 	return { rooms, isLoading };
 };

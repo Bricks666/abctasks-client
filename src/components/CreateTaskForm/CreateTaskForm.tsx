@@ -11,9 +11,9 @@ import { Button } from "@/ui/Button";
 import { TextField } from "../TextField";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validationScheme } from "./validator";
+import { useParams } from "react-router-dom";
 
 import TaskFormStyle from "./CreateTaskForm.module.css";
-import { useParams } from "react-router-dom";
 
 export interface TaskFormValues {
 	readonly content: string;
@@ -21,7 +21,8 @@ export interface TaskFormValues {
 }
 
 export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
-	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || "Ready";
+	const status =
+		useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || TaskStatus.READY;
 	const { id: roomId } = useParams();
 	const groups = useTaskGroups();
 	const { t } = useTranslation("popups");

@@ -55,6 +55,7 @@ export const TaskCard: FC<TaskCardComponent> = ({
 	return (
 		<Card className={classNames(TaskCardStyle.card, className)}>
 			<CardHeader
+				className={TaskCardStyle.header}
 				secondaryAction={
 					<EditMenu
 						options={options}

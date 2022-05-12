@@ -11,7 +11,7 @@ export const getActivitiesApi = async (
 	return response.data;
 };
 
-interface SubscribeNewActivitiesApiParams {
+export interface SubscribeNewActivitiesApiParams {
 	roomId: ID;
 	onNewActivity: (activity: ActivityResponse) => void;
 	onError?: (param: ErrorHandlerParams) => void;

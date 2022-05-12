@@ -1,7 +1,14 @@
 import { ID } from "@/interfaces/common";
 
-export type Activities = "Edited" | "Deleted" | "Created";
-export type ActivitySphere = "Task" | "Group";
+export enum Activities {
+	EDIT,
+	CREATE,
+	DELETE,
+}
+export enum ActivitySphere {
+	TASK,
+	GROUP,
+}
 
 export interface ActivityStructure {
 	readonly id: ID;

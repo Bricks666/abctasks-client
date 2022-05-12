@@ -3,14 +3,18 @@
 
 	align-items: center;
 	column-gap: 10px;
+
+	height: max-content;
 }
 
-.content {
-	display: contents;
+.head {
+  display: grid;
+  align-items: center;
+	width: 100%;
 }
 
 .secondaryAction {
-  margin-left: auto;
+	margin-left: auto;
 	min-width: 0px;
 	max-width: 64px;
 }

@@ -1,6 +1,6 @@
 import { useStore } from "effector-react";
 import { useEffect } from "react";
-import { $Tasks, loadTasks } from "@/models/Tasks/";
+import { $Tasks, loadTasks, resetTasks } from "@/models/Tasks/";
 import { useParams } from "react-router-dom";
 
 export const useTasks = () => {
@@ -12,6 +12,12 @@ export const useTasks = () => {
 			loadTasks(roomId);
 		}
 	}, [tasks.length, roomId]);
+
+	useEffect(() => {
+		return () => {
+			resetTasks();
+		};
+	}, []);
 
 	return tasks;
 };

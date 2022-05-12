@@ -14,13 +14,13 @@
 		"title": "Активности",
 		"text": "Пользователь {{activist}} $t(activities.activityType.{{activity}}) $t(activities.spheres.{{sphere}})",
 		"spheres": {
-			"Task": "задачу",
-			"Group": "группу"
+			"0": "задачу",
+			"1": "группу"
 		},
 		"activityType": {
-			"Edited": "изменил",
-			"Deleted": "удалил",
-			"Created": "создал"
+			"0": "изменил",
+			"1": "создал",
+			"2": "удалил"
 		}
 	},
 	"menus": {

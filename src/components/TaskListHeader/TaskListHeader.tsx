@@ -8,23 +8,24 @@ import { Text } from "@/ui/Text";
 import { Block } from "@/ui/Block";
 import { MenuOption } from "@/ui/MenuItem";
 import { useTranslation } from "react-i18next";
+import { TaskStatus } from "@/models/Tasks/types";
 
 import TaskListHeaderStyle from "./TaskListHeader.module.css";
 
 interface TaskListHeaderComponent extends ClassNameProps {
-	readonly columnName: string;
+	readonly columnStatus: TaskStatus;
 }
 
 export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	children,
 	className,
-	columnName,
+	columnStatus,
 }) => {
 	const { t } = useTranslation("room");
 	const editFormLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.createTask,
-			[GET_PARAMS.taskStatus]: columnName,
+			[GET_PARAMS.taskStatus]: columnStatus.toString(),
 		},
 	});
 	const options: MenuOption[] = [

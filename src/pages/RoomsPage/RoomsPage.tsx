@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next";
 import { RoomList } from "@/components/RoomList";
 import { usePageTitle } from "@/hooks";
 import { ContentLayout } from "@/ui/ContentLayout";
-import { Text } from "@/ui/Text";
+import { RoomsHeader } from "@/components/RoomsHeader";
+
+import RoomsPageStyle from "./RoomsPage.module.css";
 
 export const RoomsPage: FC = () => {
 	const { t } = useTranslation("rooms");
@@ -11,7 +13,7 @@ export const RoomsPage: FC = () => {
 	return (
 		<main>
 			<ContentLayout>
-				<Text>{t("title")}</Text>
+				<RoomsHeader />
 				<RoomList />
 			</ContentLayout>
 		</main>

@@ -9,6 +9,7 @@ import { EditGroupPopup } from "../EditGroupPopup";
 import { CreateGroupPopup } from "../CreateGroupPopup";
 import { BasePopup } from "@/interfaces/common";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";
+import { CreateRoomPopup } from "../CreateRoomPopup";
 
 const popupsMap: Record<string, ComponentType<BasePopup>> = {
 	[POPUPS.createTask]: CreateTaskPopup,
@@ -16,6 +17,7 @@ const popupsMap: Record<string, ComponentType<BasePopup>> = {
 	[POPUPS.groups]: GroupsPopup,
 	[POPUPS.createGroup]: CreateGroupPopup,
 	[POPUPS.editGroup]: EditGroupPopup,
+	[POPUPS.createRoom]: CreateRoomPopup,
 };
 
 export const Popups = () => {

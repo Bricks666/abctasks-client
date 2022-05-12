@@ -17,7 +17,7 @@ export const DraggableTaskCard: FC<ExtractProps<typeof TaskCard>> = ({
 	const onDragStart = useCallback<DragEventHandler>(
 		(evt) => {
 			evt.dataTransfer.clearData();
-			evt.dataTransfer.setData("status", status);
+			evt.dataTransfer.setData("status", status.toString());
 			evt.dataTransfer.setData("taskId", id.toString());
 			setIsDrag(true);
 		},

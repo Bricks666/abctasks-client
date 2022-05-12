@@ -1,24 +1,23 @@
 import { getTasksProgressApi, subscribeChangeProgressApi } from "@/api";
-import { SubscribeChangeProfileProps } from "@/api/progress";
 import { forward, guard, sample } from "effector";
 import {
 	$LoadingTasksProgress,
-	$ProgressSubscribe,
 	$TasksProgress,
 	changeProgress,
 	loadTasksProgress,
 	loadTasksProgressFx,
-	setUnsubscribe,
+	resetProgress,
 	subscribeChangeProgress,
 	subscribeChangeProgressFx,
 } from ".";
 import { mayStartFxHandler } from "../handlers";
-import { logoutFx } from "../Auth";
 import { changeProgressHandler } from "./handler";
 import { toValidTaskProgress } from "./utils";
 
 loadTasksProgressFx.use(getTasksProgressApi);
-subscribeChangeProgressFx.use(subscribeChangeProgressApi);
+subscribeChangeProgressFx.use(async ({ closeRef, ...config }) => {
+	closeRef.current = await subscribeChangeProgressApi(config);
+});
 
 guard({
 	clock: loadTasksProgress,
@@ -40,13 +39,10 @@ forward({
 
 sample({
 	clock: subscribeChangeProgress,
-	fn: (roomId): SubscribeChangeProfileProps => ({
+	fn: (data) => ({
 		onChangeProgress: changeProgress,
-		onError: async ({ reconnect }) => {
-			const close = await reconnect();
-			setUnsubscribe(close);
-		},
-		roomId,
+		onError: () => subscribeChangeProgress(data),
+		...data,
 	}),
 	target: subscribeChangeProgressFx,
 });
@@ -58,17 +54,8 @@ sample({
 	target: $TasksProgress,
 });
 
-forward({
-	from: [setUnsubscribe, subscribeChangeProgressFx.doneData],
-	to: $ProgressSubscribe,
-});
-
 sample({
-	source: $ProgressSubscribe,
-	clock: logoutFx.done,
-	fn: (close) => {
-		close && close();
-		return null;
-	},
-	target: $ProgressSubscribe,
+	clock: resetProgress,
+	fn: () => [],
+	target: $TasksProgress,
 });

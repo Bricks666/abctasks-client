@@ -13,7 +13,7 @@ export const getTasksProgressApi = async (
 	return response.data;
 };
 
-export interface SubscribeChangeProfileProps {
+export interface SubscribeChangeProgressProps {
 	readonly roomId: ID;
 	readonly onChangeProgress: (progress: ChangeProgressResponse[]) => unknown;
 	readonly onError?: (param: ErrorHandlerParams) => unknown;
@@ -23,7 +23,7 @@ export const subscribeChangeProgressApi = async ({
 	onChangeProgress,
 	onError,
 	roomId,
-}: SubscribeChangeProfileProps) => {
+}: SubscribeChangeProgressProps) => {
 	return sseListener.connect<string>(`progress/${roomId}/subscribe`, {
 		onerror: onError,
 		onmessage: (evt) => onChangeProgress(JSON.parse(evt.data)),

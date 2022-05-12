@@ -23,4 +23,9 @@ export {
 export { getTasksProgressApi, subscribeChangeProgressApi } from "./progress";
 
 export { updateProfileApi, getProfileApi } from "./profile";
-export { addRoomApi, deleteRoomApi, editRoomApi, getRoomsApi } from "./rooms";
+export {
+	createRoomApi,
+	deleteRoomApi,
+	editRoomApi,
+	getRoomsApi,
+} from "./rooms";

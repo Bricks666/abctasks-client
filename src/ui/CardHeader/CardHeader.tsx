@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { FC, memo } from "react";
 import { ClassNameProps } from "@/interfaces/common";
+import { Text } from "../Text";
 
 import CardHeaderStyle from "./CardHeader.module.css";
 
@@ -15,7 +16,9 @@ export const CardHeader: FC<CardHeaderProps> = memo(function CardHeader({
 }) {
 	return (
 		<header className={classNames(CardHeaderStyle.header, className)}>
-			<div className={CardHeaderStyle.content}>{children}</div>
+			<Text className={CardHeaderStyle.head} component="p" style="h3">
+				{children}
+			</Text>
 			{secondaryAction && (
 				<div className={CardHeaderStyle.secondaryAction}>{secondaryAction}</div>
 			)}

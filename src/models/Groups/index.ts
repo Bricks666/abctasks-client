@@ -46,3 +46,4 @@ export const deleteGroup =
 	GroupsDomain.event<DeleteGroupRequest>("deleteGroupEvent");
 export const editGroup =
 	GroupsDomain.event<CreateEditGroupRequest>("editGroupEvent");
+export const resetGroups = GroupsDomain.event("resetGroups");

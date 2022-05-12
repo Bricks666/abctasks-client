@@ -10,6 +10,7 @@ import { Header } from "../Header";
 import { Popups } from "../Popups";
 
 import AppStyle from "./App.module.css";
+import { ROUTES } from "@/const";
 
 export const App: FC = () => {
 	const isAuthorizing = useIsAuthorizing();
@@ -57,7 +58,10 @@ export const App: FC = () => {
 							key={path}
 						/>
 					))}
-					<Route path="*" element={<Navigate to="/" replace={true} />} />
+					<Route
+						path="*"
+						element={<Navigate to={ROUTES.ROOMS} replace={true} />}
+					/>
 				</Route>
 			</Routes>
 		</LoadingWrapper>

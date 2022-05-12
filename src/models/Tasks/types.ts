@@ -1,6 +1,11 @@
 import { DateType, ID } from "@/interfaces/common";
 
-export type TaskStatus = "Done" | "Ready" | "Review" | "In Progress";
+export enum TaskStatus {
+	DONE,
+	IN_PROGRESS,
+	REVIEW,
+	READY,
+}
 
 export interface TaskAuthor {
 	readonly name: string;

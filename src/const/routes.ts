@@ -3,6 +3,7 @@ interface GetParams {
 	readonly taskStatus: string;
 	readonly taskId: string;
 	readonly groupId: string;
+	readonly roomId: string;
 }
 
 export const GET_PARAMS: GetParams = {
@@ -10,6 +11,7 @@ export const GET_PARAMS: GetParams = {
 	taskStatus: "task-status",
 	taskId: "task-id",
 	groupId: "group-id",
+	roomId: "room-id",
 };
 
 interface Popups {
@@ -18,6 +20,8 @@ interface Popups {
 	readonly groups: string;
 	readonly createGroup: string;
 	readonly editGroup: string;
+	readonly createRoom: string;
+	readonly editRoom: string;
 }
 
 export const POPUPS: Popups = {
@@ -26,10 +30,12 @@ export const POPUPS: Popups = {
 	groups: "groups",
 	createGroup: "create-group",
 	editGroup: "edit-group",
+	createRoom: "create-room",
+	editRoom: "edit-room",
 };
 
 export const ROUTES = {
-	ROOMS: "*",
+	ROOMS: "rooms",
 	ROOM: "rooms/:id",
 	LOGIN: "login",
 	REGISTRATION: "registration",

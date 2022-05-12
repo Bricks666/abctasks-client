@@ -1,3 +1,15 @@
+.card {
+	min-height: 200px;
+}
+
 .link {
-	display: contents;
+	color: inherit;
+}
+
+.link:hover {
+	text-decoration: none;
+}
+
+.header {
+	text-transform: uppercase;
 }

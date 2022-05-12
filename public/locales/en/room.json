@@ -1,10 +1,10 @@
 {
 	"title": "Room",
 	"statuses": {
-		"ready": "Ready",
-		"inProgress": "In progress",
-		"review": "Review",
-		"done": "Done"
+		"3": "Ready",
+		"1": "In progress",
+		"2": "Review",
+		"0": "Done"
 	},
 	"taskProgress": {
 		"title": "Tasks Progress",
@@ -14,13 +14,13 @@
 		"title": "Activities",
 		"text": "{{activist}} has $t(activities.activityType.{{activity}}) $t(activities.spheres.{{sphere}})",
 		"spheres": {
-			"Task": "task",
-			"Group": "group"
+			"0": "task",
+			"1": "group"
 		},
 		"activityType": {
-			"Edited": "edited",
-			"Deleted": "deleted",
-			"Created": "created"
+			"0": "edited",
+			"1": "created",
+			"2": "deleted"
 		}
 	},
 	"menus": {

@@ -47,6 +47,7 @@ instance.interceptors.response.use(
 
 export const sseListener = new SSEListener({
 	baseURL,
+	withCredentials: true,
 });
 
 sseListener.interceptors.beforeOpening.use((config) => {

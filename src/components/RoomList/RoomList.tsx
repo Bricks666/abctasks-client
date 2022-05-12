@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";
 import { LoadingWrapper } from "@/ui/LoadingWrapper";
-import { useRooms } from "./hooks";
+import { useRooms } from "@/hooks";
 import { Stack } from "@/ui/Stack";
 import { RoomCard } from "./RoomCard";
 

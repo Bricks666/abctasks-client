@@ -1,3 +1,5 @@
+import { CloseConnect } from "@/packages/eventSource";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type HEX = `#${string}`;
 
@@ -26,3 +28,5 @@ export interface BasePopup {
 }
 
 export type ID = string | number;
+
+export type WithCloseRef = { closeRef: { current: CloseConnect | null } };

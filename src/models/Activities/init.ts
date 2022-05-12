@@ -1,28 +1,19 @@
 import { getActivitiesApi, subscribeNewActivitiesApi } from "@/api";
-import { forward, guard, sample } from "effector";
+import { guard, sample } from "effector";
 import {
 	$Activities,
-	$ActivitySubscribe,
 	addActivity,
 	loadActivities,
 	loadActivitiesFx,
-	setUnsubscribe,
 	subscribeNewActivity,
 	subscribeNewActivityFx,
-	unsubscribeNewActivity,
 } from ".";
 import { mayStartFxHandler } from "../handlers";
 import { toValidActivity } from "./utils";
 
 loadActivitiesFx.use(getActivitiesApi);
-subscribeNewActivityFx.use(async (roomId) => {
-	const close = await subscribeNewActivitiesApi({
-		onNewActivity: addActivity,
-		onError: () => subscribeNewActivity(roomId),
-		roomId,
-	});
-
-	setUnsubscribe(close);
+subscribeNewActivityFx.use(async ({ closeRef, ...config }) => {
+	closeRef.current = await subscribeNewActivitiesApi(config);
 });
 
 guard({
@@ -37,14 +28,15 @@ sample({
 	target: $Activities,
 });
 
-guard({
+sample({
 	clock: subscribeNewActivity,
 	filter: mayStartFxHandler(subscribeNewActivityFx.pending),
+	fn: (data) => ({
+		onNewActivity: addActivity,
+		onError: () => subscribeNewActivity(data),
+		...data,
+	}),
 	target: subscribeNewActivityFx,
-});
-forward({
-	from: setUnsubscribe,
-	to: $ActivitySubscribe,
 });
 
 sample({
@@ -53,15 +45,3 @@ sample({
 	fn: (state, activity) => [toValidActivity(activity), ...state],
 	target: $Activities,
 });
-
-sample({
-	source: $ActivitySubscribe,
-	clock: unsubscribeNewActivity,
-	fn: (close) => {
-		close && close();
-		return false as const;
-	},
-	target: $ActivitySubscribe,
-});
-
-$ActivitySubscribe.watch((close) => console.debug(close));

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useParams } from "react-router-dom";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { ClassNameProps } from "@/interfaces/common";
@@ -8,14 +9,11 @@ import { usePrepareLink } from "@/hooks";
 import { GET_PARAMS, POPUPS } from "@/const";
 import { EditMenu } from "../EditMenu";
 import { MenuOption } from "@/ui/MenuItem";
+import { useRoom } from "./hooks";
 
 import RoomHeaderStyle from "./RoomHeader.module.css";
 
-interface RoomHeaderProps extends ClassNameProps {
-	readonly header: string;
-}
-
-export const RoomHeader: FC<RoomHeaderProps> = ({ header, className }) => {
+export const RoomHeader: FC<ClassNameProps> = ({ className }) => {
 	const { t } = useTranslation("room");
 	const groupsLink = usePrepareLink({
 		query: {
@@ -28,10 +26,12 @@ export const RoomHeader: FC<RoomHeaderProps> = ({ header, className }) => {
 			to: groupsLink,
 		},
 	];
+	const { id: roomId } = useParams();
+	const room = useRoom(roomId);
 	return (
 		<Block className={classNames(RoomHeaderStyle.block, className)}>
 			<Text className={RoomHeaderStyle.header} component="h2">
-				{header}
+				{room?.name}
 			</Text>
 			<EditMenu options={options} alt="Open room edit menu" />
 		</Block>

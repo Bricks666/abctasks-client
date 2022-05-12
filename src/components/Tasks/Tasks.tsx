@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useGroupedTasks, useLoadingTasks } from "@/hooks";
@@ -6,13 +6,46 @@ import { ClassNameProps } from "@/interfaces/common";
 import { LoadingWrapper } from "@/ui/LoadingWrapper";
 import { LoadingIndicator } from "@/ui/LoadingIndicator";
 import { TasksList } from "../TasksList";
+import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
 
 import TasksStyle from "./Tasks.module.css";
+
+interface Column {
+	readonly headerCode: string;
+	readonly tasks: TaskStructure[];
+	readonly status: TaskStatus;
+}
 
 export const Tasks: FC<ClassNameProps> = ({ className }) => {
 	const { t } = useTranslation("room");
 	const tasks = useGroupedTasks();
 	const isLoading = useLoadingTasks();
+
+	const columns = useMemo<Column[]>(
+		() => [
+			{
+				headerCode: "ready",
+				tasks: tasks["ready"],
+				status: TaskStatus.READY,
+			},
+			{
+				headerCode: "inProgress",
+				tasks: tasks["inProgress"],
+				status: TaskStatus.IN_PROGRESS,
+			},
+			{
+				headerCode: "review",
+				tasks: tasks["needReview"],
+				status: TaskStatus.REVIEW,
+			},
+			{
+				headerCode: "done",
+				tasks: tasks["done"],
+				status: TaskStatus.DONE,
+			},
+		],
+		[tasks]
+	);
 
 	return (
 		<section className={classNames(TasksStyle.tasks, className)}>
@@ -21,30 +54,14 @@ export const Tasks: FC<ClassNameProps> = ({ className }) => {
 				isLoading={isLoading}
 				loadingIndicator={<LoadingIndicator />}
 			>
-				<TasksList
-					listHeader="Ready"
-					header={t("statuses.ready")}
-					tasks={tasks["ready"]}
-					key="Ready"
-				/>
-				<TasksList
-					listHeader="In Progress"
-					header={t("statuses.inProgress")}
-					tasks={tasks["inProgress"]}
-					key="In progress"
-				/>
-				<TasksList
-					listHeader="Review"
-					header={t("statuses.review")}
-					tasks={tasks["needReview"]}
-					key="Review"
-				/>
-				<TasksList
-					listHeader="Done"
-					header={t("statuses.done")}
-					tasks={tasks["done"]}
-					key="Done"
-				/>
+				{columns.map(({ headerCode, status, tasks }) => (
+					<TasksList
+						tasks={tasks}
+						columnStatus={status}
+						header={t(`statuses.${headerCode}`)}
+						key={headerCode}
+					/>
+				))}
 			</LoadingWrapper>
 		</section>
 	);

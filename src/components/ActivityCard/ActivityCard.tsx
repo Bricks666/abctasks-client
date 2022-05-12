@@ -17,15 +17,15 @@ import ActivityCardStyle from "./ActivityCard.module.css";
 interface ActivityCardProps extends ClassNameProps, ActivityStructure {}
 
 const colorMap: Record<Activities, Color> = {
-	Created: "success",
-	Deleted: "error",
-	Edited: "warning",
+	[Activities.CREATE]: "success",
+	[Activities.DELETE]: "error",
+	[Activities.EDIT]: "warning",
 };
 
 const iconMap: Record<Activities, ReactNode> = {
-	Created: <PlusIcon className={ActivityCardStyle.icon} />,
-	Deleted: <DeleteIcon className={ActivityCardStyle.icon} />,
-	Edited: <EditIcon className={ActivityCardStyle.icon} />,
+	[Activities.CREATE]: <PlusIcon className={ActivityCardStyle.icon} />,
+	[Activities.DELETE]: <DeleteIcon className={ActivityCardStyle.icon} />,
+	[Activities.EDIT]: <EditIcon className={ActivityCardStyle.icon} />,
 };
 
 export const ActivityCard: FC<ActivityCardProps> = ({

@@ -15,6 +15,7 @@ import {
 	editGroupFx,
 	loadTaskGroups,
 	loadTaskGroupsFx,
+	resetGroups,
 } from ".";
 import { mayStartFxHandler } from "../handlers";
 import { toValidTaskGroup } from "./utils";
@@ -75,5 +76,11 @@ sample({
 		state.map((currentGroup) =>
 			currentGroup.id === group.groupId ? toValidTaskGroup(group) : currentGroup
 		),
+	target: $TaskGroups,
+});
+
+sample({
+	clock: resetGroups,
+	fn: () => [],
 	target: $TaskGroups,
 });

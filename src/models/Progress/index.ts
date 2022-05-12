@@ -1,10 +1,9 @@
-import { SubscribeChangeProfileProps } from "@/api/progress";
-import { ID } from "@/interfaces/common";
+import { SubscribeChangeProgressProps } from "@/api/progress";
+import { ID, WithCloseRef } from "@/interfaces/common";
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
 } from "@/interfaces/response";
-import { CloseConnect } from "@/packages/eventSource";
 import { createDomain } from "effector-logger";
 import { TaskProgressStructure } from "./types";
 
@@ -19,28 +18,23 @@ export const $TasksProgress = ProgressDomain.store<TaskProgressStructure[]>(
 export const $LoadingTasksProgress = ProgressDomain.store<boolean>(false, {
 	name: "LoadingTasksProgress",
 });
-export const $ProgressSubscribe = ProgressDomain.store<CloseConnect | null>(
-	null,
-	{
-		name: "ProgressSubscribe",
-	}
-);
 
 export const loadTasksProgressFx = ProgressDomain.effect<
 	ID,
 	TasksProgressResponse
 >("loadTasksProgress");
 export const subscribeChangeProgressFx = ProgressDomain.effect<
-	SubscribeChangeProfileProps,
-	CloseConnect
+	SubscribeChangeProgressProps & WithCloseRef,
+	void
 >("subscribeChangeProgressFx");
 
 export const loadTasksProgress = ProgressDomain.event<ID>("loadTasksProgress");
-export const subscribeChangeProgress = ProgressDomain.event<ID>(
-	"subscribeChangeProgressEvent"
-);
+export const subscribeChangeProgress = ProgressDomain.event<
+	{
+		roomId: ID;
+	} & WithCloseRef
+>("subscribeChangeProgressEvent");
 export const changeProgress = ProgressDomain.event<ChangeProgressResponse[]>(
 	"changeProgressEvent"
 );
-export const setUnsubscribe =
-	ProgressDomain.event<CloseConnect>("setUnsubscribe");
+export const resetProgress = ProgressDomain.event("resetProgress");

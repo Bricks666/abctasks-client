@@ -11,6 +11,7 @@ import {
 	loadTasks,
 	loadTasksFx,
 	moveTask,
+	resetTasks,
 } from ".";
 import { getTasksApi, createTaskApi, editTaskApi, deleteTaskApi } from "@/api";
 import { mayStartFxHandler } from "../handlers";
@@ -99,4 +100,10 @@ sample({
 		};
 	},
 	target: editTask,
+});
+
+sample({
+	clock: resetTasks,
+	fn: () => [],
+	target: $Tasks,
 });

@@ -37,15 +37,15 @@ const prepareTask = (
 		: {
 				content: "",
 				groupId: 0,
-				status: "Ready",
+				status: TaskStatus.READY,
 		  };
 };
 
 const statuses = {
-	ready: "Ready",
-	inProgress: "In Progress",
-	review: "Review",
-	done: "Done",
+	[TaskStatus.READY]: "ready",
+	[TaskStatus.IN_PROGRESS]: "inProgress",
+	[TaskStatus.REVIEW]: "review",
+	[TaskStatus.DONE]: "done",
 };
 
 export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
@@ -88,9 +88,9 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 				))}
 			</TextField>
 			<TextField {...register("status")} select label={t("edit_task.status")}>
-				{Object.entries(statuses).map(([key, value]) => (
-					<option value={value} key={value}>
-						{t(`statuses.${key}`, { ns: "room" })}
+				{Object.entries(statuses).map(([code, name]) => (
+					<option value={code} key={code}>
+						{t(`statuses.${name}`, { ns: "room" })}
 					</option>
 				))}
 			</TextField>

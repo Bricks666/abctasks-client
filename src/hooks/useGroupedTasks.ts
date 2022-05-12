@@ -1,17 +1,27 @@
-import { $GroupedByStatusTasksStore, loadTasks } from "@/models/Tasks";
-import { useStore } from "effector-react";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import {
+	GroupedByStatusTasksStore,
+	TaskStatus,
+	TaskStructure,
+} from "@/models/Tasks/types";
+import { useMemo } from "react";
+import { useTasks } from "./useTasks";
+
+const createGrouper = (status: TaskStatus) => {
+	return (state: TaskStructure[]) => {
+		return state.filter((task) => task.status === status);
+	};
+};
 
 export const useGroupedTasks = () => {
-	const tasks = useStore($GroupedByStatusTasksStore);
-	const { id: roomId } = useParams();
+	const tasks = useTasks();
 
-	useEffect(() => {
-		if (roomId) {
-			loadTasks(roomId);
-		}
-	}, [roomId]);
-
-	return tasks;
+	return useMemo<GroupedByStatusTasksStore>(
+		() => ({
+			ready: createGrouper(TaskStatus.READY)(tasks),
+			done: createGrouper(TaskStatus.DONE)(tasks),
+			inProgress: createGrouper(TaskStatus.IN_PROGRESS)(tasks),
+			needReview: createGrouper(TaskStatus.REVIEW)(tasks),
+		}),
+		[tasks]
+	);
 };
