@@ -7,13 +7,14 @@ import { useGetParam, useTaskGroups } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { createTask } from "@/models/Tasks";
 import { TaskStatus } from "@/models/Tasks/types";
-import { Button } from "@/ui/Button";
-import { TextField } from "../TextField";
+import { Field } from "../Field";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validationScheme } from "./validator";
 import { useParams } from "react-router-dom";
+import { Button, MenuItem } from "@mui/material";
 
 import TaskFormStyle from "./CreateTaskForm.module.css";
+import { Select } from "../Select";
 
 export interface TaskFormValues {
 	readonly content: string;
@@ -27,10 +28,11 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const groups = useTaskGroups();
 	const { t } = useTranslation("popups");
 
-	const { handleSubmit, formState, register, reset } = useForm<TaskFormValues>({
-		defaultValues: { content: "", groupId: -1 },
-		resolver: joiResolver(validationScheme),
-	});
+	const { handleSubmit, formState, register, reset, control } =
+		useForm<TaskFormValues>({
+			defaultValues: { content: "", groupId: -1 },
+			resolver: joiResolver(validationScheme),
+		});
 
 	const onSubmit = useCallback<SubmitHandler<TaskFormValues>>(
 		(values) => {
@@ -52,27 +54,28 @@ export const CreateTaskForm: FC<ClassNameProps> = ({ className }) => {
 			className={classNames(TaskFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<TextField
-				{...register("groupId", { disabled: isSubmitting })}
-				select
-				label={t("add_task.group")}
-				error={errors.groupId?.message}
-			>
-				<option value={-1} />
+			<Select control={control} name="groupId" label={t("add_task.group")}>
+				<MenuItem value={-1} />
 				{groups.map(({ id, name }) => (
-					<option value={id} key={id}>
+					<MenuItem value={id} key={id}>
 						{name}
-					</option>
+					</MenuItem>
 				))}
-			</TextField>
-			<TextField
+			</Select>
+			<Field
 				className={TaskFormStyle.textarea}
 				{...register("content", { disabled: isSubmitting })}
 				label={t("add_task.content")}
 				multiline
-				error={errors.content?.message}
+				error={!!errors.content?.message}
+				helperText={errors.content?.message}
 			/>
-			<Button className={TaskFormStyle.button} disabled={disableButton}>
+			<Button
+				className={TaskFormStyle.button}
+				disabled={disableButton}
+				type="submit"
+				variant="contained"
+			>
 				{t("add_task.button")}
 			</Button>
 		</form>

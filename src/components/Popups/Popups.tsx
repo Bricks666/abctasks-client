@@ -8,7 +8,7 @@ import { GroupsPopup } from "../GroupsPopup";
 import { EditGroupPopup } from "../EditGroupPopup";
 import { CreateGroupPopup } from "../CreateGroupPopup";
 import { BasePopup } from "@/interfaces/common";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { CreateRoomPopup } from "../CreateRoomPopup";
 
 const popupsMap: Record<string, ComponentType<BasePopup>> = {
@@ -35,18 +35,15 @@ export const Popups = () => {
 		<>
 			<Outlet />
 			<Suspense fallback={<LoadingIndicator />}>
-				{mountedPopups.map((mountedPopup, index) => {
+				{mountedPopups.map((mountedPopup) => {
 					const Component = popupsMap[mountedPopup];
 
 					if (!Component) {
 						return null;
 					}
-					const isUp = mountedPopups.length - 1 === index;
-
 					return (
 						<Component
-							isOpen={popups.includes(mountedPopup)}
-							isFocus={isUp}
+							open={popups.includes(mountedPopup)}
 							key={mountedPopup}
 						/>
 					);

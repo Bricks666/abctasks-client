@@ -1,11 +1,10 @@
 import React, { FC, useState } from "react";
-import { useAnyPopupOpen, useToggle, useUserInfo } from "@/hooks";
+import { useToggle, useUserInfo } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
-import { Avatar } from "@/ui/Avatar";
 import { logout } from "@/models/Auth";
-import { Menu } from "@/ui/Menu";
-import { MenuItem, MenuOption } from "@/ui/MenuItem";
 import { ROUTES } from "@/const";
+import { Avatar, Menu } from "@mui/material";
+import { MenuItemList, MenuOption } from "@/components/MenuItemList";
 
 const options: MenuOption[] = [
 	{
@@ -22,30 +21,20 @@ export const ProfileLink: FC<ClassNameProps> = ({ className }) => {
 	const { login, photo } = useUserInfo();
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = useState<HTMLElement | null>(null);
-	const anyPopupOpen = useAnyPopupOpen();
+	const shortName = login[0]?.toUpperCase();
 	return (
 		<div className={className}>
 			<Avatar
-				src={photo}
-				alt={login}
+				src={photo || ""}
+				alt={shortName}
 				ref={setReference}
 				onClick={toggle}
 				tabIndex={0}
 				aria-haspopup="menu"
 				role="button"
-			>
-				{login[0]?.toUpperCase()}
-			</Avatar>
-			<Menu
-				reference={reference}
-				isOpen={isOpen}
-				onClose={toggle}
-				placement="bottom-end"
-				isFocus={!anyPopupOpen}
-			>
-				{options.map((option) => (
-					<MenuItem {...option} key={option.label} />
-				))}
+			/>
+			<Menu anchorEl={reference} open={isOpen} onClose={toggle}>
+				<MenuItemList options={options} />
 			</Menu>
 		</div>
 	);

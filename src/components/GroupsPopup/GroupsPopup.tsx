@@ -3,18 +3,21 @@ import { useTranslation } from "react-i18next";
 import { useGoBack, usePrepareLink, useTaskGroups } from "@/hooks";
 import { BasePopup, ClassNameProps, ID } from "@/interfaces/common";
 import { Group } from "@/ui/Group";
-import { List } from "@/ui/List";
-import { ListItem } from "@/ui/ListItem";
-import { ListItemSecondaryAction } from "@/ui/ListItemSecondaryAction";
-import { Button } from "@/ui/Button";
 import { deleteGroup } from "@/models/Groups";
-import { IconButton } from "@/ui/IconButton";
-import { DeleteIcon } from "@/ui/DeleteIcon";
 import { GET_PARAMS, POPUPS } from "@/const";
-import { MainPopup } from "@/ui/MainPopup";
-import { EditIcon } from "@/ui/EditIcon";
-import { Stack } from "@/ui/Stack";
+import { MainPopup } from "@/components/MainPopup";
 import { UsePrepareLinkResponse } from "@/hooks/usePrepareLink";
+import {
+	Button,
+	IconButton,
+	List,
+	ListItem,
+	ListItemSecondaryAction,
+	ListItemText,
+	Stack,
+} from "@mui/material";
+import { Edit, Delete } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 import GroupsPopupStyle from "./GroupsPopup.module.css";
 
@@ -47,33 +50,33 @@ export const GroupsPopup: FC<GroupsPopup> = (props) => {
 	return (
 		<MainPopup
 			{...props}
-			className={GroupsPopupStyle.content}
 			onClose={onClose}
 			header={t("groups.title")}
 			alt={t("groups.title")}
 		>
-			<Stack>
-				<Button
-					className={GroupsPopupStyle.add_button}
-					to={addGroupLink}
-					type="text"
-				>
+			<Stack spacing={1}>
+				<Button to={addGroupLink} component={Link}>
 					{t("groups.add_group")}
 				</Button>
 				<List className={GroupsPopupStyle.list}>
 					{groups.map((group) => (
 						<ListItem key={group.id}>
-							<Group {...group} />
+							<ListItemText>
+								<Group {...group} />
+							</ListItemText>
 							<ListItemSecondaryAction>
-								<IconButton to={createEditLink(editGroupLink, group.id)}>
-									<EditIcon />
+								<IconButton
+									to={createEditLink(editGroupLink, group.id)}
+									component={Link}
+								>
+									<Edit />
 								</IconButton>
 								<IconButton
 									onClick={() =>
 										deleteGroup({ id: group.id, roomId: group.roomId })
 									}
 								>
-									<DeleteIcon />
+									<Delete />
 								</IconButton>
 							</ListItemSecondaryAction>
 						</ListItem>

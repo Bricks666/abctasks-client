@@ -7,10 +7,10 @@ import { TasksProgress } from "@/components/TasksProgress";
 import { Tasks } from "@/components/Tasks";
 import { usePageTitle } from "@/hooks";
 import { ActivitiesList } from "@/components/ActivitiesList";
-import { Stack } from "@/ui/Stack";
 import { RoomHeader } from "@/components/RoomHeader";
 
 import HomePageStyle from "./RoomPage.module.css";
+import { Stack } from "@mui/material";
 
 export const RoomPage: FC<ClassNameProps> = ({ className }) => {
 	const { t } = useTranslation("room");

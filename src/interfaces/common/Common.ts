@@ -23,8 +23,7 @@ export type ExtractProps<
 export type AnyFunction = (...args: any[]) => any;
 
 export interface BasePopup {
-	readonly isOpen: boolean;
-	readonly isFocus?: boolean;
+	readonly open: boolean;
 }
 
 export type ID = string | number;

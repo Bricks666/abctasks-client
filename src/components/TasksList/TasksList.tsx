@@ -6,10 +6,9 @@ import { DropZone } from "../DropZone";
 import { TaskListHeader } from "../TaskListHeader";
 import { moveTask } from "@/models/Tasks";
 import { DraggableTaskCard } from "../DraggableTaskCard";
-import { Stack } from "@/ui/Stack";
+import { Stack } from "@mui/material";
 
 import TasksListStyle from "./TasksList.module.css";
-import classNames from "classnames";
 
 interface TasksListComponent extends ClassNameProps {
 	readonly tasks: TaskStructure[];
@@ -42,19 +41,15 @@ export const TasksList: FC<TasksListComponent> = ({
 	);
 
 	return (
-		<DropZone
-			className={classNames(TasksListStyle.dropZone, className)}
-			onDrop={onDrop}
-			onDragOver={onDragOver}
-		>
-			<Stack space="l">
+		<DropZone className={className} onDrop={onDrop} onDragOver={onDragOver}>
+			<Stack spacing={1.5}>
 				<TaskListHeader
 					className={TasksListStyle.header}
 					columnStatus={columnStatus}
 				>
 					{header}
 				</TaskListHeader>
-				<Stack>
+				<Stack spacing={1}>
 					{tasks.map((task) => (
 						<DraggableTaskCard {...task} key={task.id} />
 					))}

@@ -5,7 +5,6 @@ import { usePageTitle } from "@/hooks";
 import { ContentLayout } from "@/ui/ContentLayout";
 import { RoomsHeader } from "@/components/RoomsHeader";
 
-import RoomsPageStyle from "./RoomsPage.module.css";
 
 export const RoomsPage: FC = () => {
 	const { t } = useTranslation("rooms");

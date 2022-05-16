@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from "react";
 import { ClassNameProps } from "@/interfaces/common";
-import { TextField } from "../TextField";
+import { Field } from "../Field";
 import { Button } from "@/ui/Button";
 import { useForm } from "react-hook-form";
 import { CreateEditRoomRequest, EditRoomRequest } from "@/interfaces/requests";
@@ -45,14 +45,16 @@ export const RoomForm: FC<RoomFormProps> = ({
 	);
 	return (
 		<form className={className} onSubmit={handleSubmit(onSubmit)}>
-			<TextField
+			<Field
 				{...register("roomName")}
-				error={roomName?.message}
+				error={!!roomName?.message}
+				helperText={roomName?.message}
 				label="Room name"
 			/>
-			<TextField
+			<Field
 				{...register("roomDescription")}
-				error={roomDescription?.message}
+				error={!!roomDescription?.message}
+				helperText={roomDescription?.message}
 				label="Room description"
 			/>
 			<Button disabled={disabled}>{buttonText}</Button>

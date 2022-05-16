@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
+import { LoadingWrapper } from "@/components/LoadingWrapper";
 import { useRooms } from "@/hooks";
-import { Stack } from "@/ui/Stack";
 import { RoomCard } from "./RoomCard";
+import { Stack } from "@mui/material";
 
 export const RoomList: FC = () => {
 	const { isLoading, rooms } = useRooms();
@@ -12,7 +12,7 @@ export const RoomList: FC = () => {
 			isLoading={isLoading}
 			loadingIndicator={<LoadingIndicator />}
 		>
-			<Stack direction="row">
+			<Stack direction="row" spacing={2}>
 				{rooms.map((room) => (
 					<RoomCard {...room} key={room.id} />
 				))}

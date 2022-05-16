@@ -1,8 +1,8 @@
-import React, { memo, CSSProperties } from "react";
+import React, { memo } from "react";
 import classNames from "classnames";
 import { ClassNameProps } from "@/interfaces/common";
-import { Text } from "../Text";
 import { TaskGroup } from "@/models/Groups/types";
+import { Typography } from "@mui/material";
 
 import GroupStyle from "./Group.module.css";
 
@@ -14,17 +14,17 @@ export const Group = memo(function Group({
 	name,
 	secondColor,
 }: GroupProps) {
-	const groupStyle: CSSProperties = {
-		backgroundColor: secondColor,
+	const groupStyle = {
+		bgcolor: secondColor,
 		color: mainColor,
 	};
 	return (
-		<Text
+		<Typography
 			className={classNames(GroupStyle.group, className)}
-			cssStyles={groupStyle}
+			sx={groupStyle}
 			component="span"
 		>
 			{name}
-		</Text>
+		</Typography>
 	);
 });

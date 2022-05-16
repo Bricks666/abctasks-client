@@ -1,7 +1,7 @@
 import React, { CSSProperties, FC, memo, ReactText } from "react";
 import classNames from "classnames";
 import { HEX, ClassNameProps } from "@/interfaces/common";
-import { Text } from "../Text";
+import { Typography } from "@mui/material";
 
 import ProgressBarStyle from "./ProgressBar.module.css";
 
@@ -34,10 +34,11 @@ export const ProgressBar: FC<ProgressBarProps> = memo(function ProgressBar({
 	return (
 		<label className={classNames(ProgressBarStyle.label, className)}>
 			{children}
-			<Text
+			<Typography
 				component="span"
+				variant="body2"
 				className={ProgressBarStyle.progressNumbers}
-			>{`${currentValue}/${maxValue}`}</Text>
+			>{`${currentValue}/${maxValue}`}</Typography>
 			<div className={ProgressBarStyle.progressbar} style={progressbarStyle}>
 				<div
 					className={ProgressBarStyle.progress}

@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import classNames from "classnames";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useTranslation } from "react-i18next";
 import { ClassNameProps } from "@/interfaces/common";
@@ -8,14 +7,10 @@ import { RegistrationRequest } from "@/interfaces/requests";
 import { clearRegistrationError, registrationFx } from "@/models/Auth";
 import { Location, useNavigate } from "react-router-dom";
 import { useLocationState } from "@/hooks";
-import { Button } from "@/ui/Button";
-import { TextField } from "../TextField";
+import { Field } from "../Field";
 import { validationSchema } from "./validator";
 import { useRegistrationError } from "./hooks";
-import { Alert } from "@/ui/Alert";
-import { AlertTitle } from "@/ui/AlertTitle";
-
-import RegistrationFormStyle from "./RegistrationForm.module.css";
+import { Alert, AlertTitle, Button, Stack } from "@mui/material";
 
 const initialValues: RegistrationRequest = {
 	login: "",
@@ -48,13 +43,15 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 	}, []);
 
 	return (
-		<form
-			className={classNames(RegistrationFormStyle.form, className)}
+		<Stack
+			className={className}
+			spacing={2}
 			onSubmit={handleSubmit(onSubmit)}
+			component="form"
 		>
 			{error && (
 				<Alert
-					type="outline"
+					variant="outlined"
 					color="error"
 					onClose={() => clearRegistrationError()}
 				>
@@ -62,32 +59,36 @@ export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
 					This user already registered
 				</Alert>
 			)}
-			<TextField
+			<Field
 				{...register("login")}
 				label={t("fields.login")}
 				disabled={isSubmitting}
-				error={errors.login?.message}
+				error={!!errors.login?.message}
+				helperText={errors.login?.message}
 			/>
-			<TextField
+			<Field
 				{...register("password")}
 				label={t("fields.password")}
 				type="password"
 				disabled={isSubmitting}
-				error={errors.password?.message}
+				error={!!errors.password?.message}
+				helperText={errors.password?.message}
 			/>
-			<TextField
+			<Field
 				{...register("repeatPassword")}
 				label={t("fields.passwordRepeat")}
 				type="password"
 				disabled={isSubmitting}
-				error={errors.repeatPassword?.message}
+				error={!!errors.repeatPassword?.message}
+				helperText={errors.repeatPassword?.message}
 			/>
 			<Button
-				className={RegistrationFormStyle.button}
 				disabled={!isDirty || isSubmitting}
+				variant="contained"
+				type="submit"
 			>
 				{t("buttons.submit")}
 			</Button>
-		</form>
+		</Stack>
 	);
 };

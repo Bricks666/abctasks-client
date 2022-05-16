@@ -4,11 +4,10 @@ import { GET_PARAMS, POPUPS } from "@/const";
 import { usePrepareLink } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { EditMenu } from "../EditMenu";
-import { Text } from "@/ui/Text";
-import { Block } from "@/ui/Block";
-import { MenuOption } from "@/ui/MenuItem";
+import { MenuOption } from "@/ui/MenuItemList";
 import { useTranslation } from "react-i18next";
 import { TaskStatus } from "@/models/Tasks/types";
+import { Paper, Typography } from "@mui/material";
 
 import TaskListHeaderStyle from "./TaskListHeader.module.css";
 
@@ -36,17 +35,15 @@ export const TaskListHeader: FC<TaskListHeaderComponent> = ({
 	];
 
 	return (
-		<>
-			<header className={classNames(TaskListHeaderStyle.header, className)}>
-				<Block className={TaskListHeaderStyle.background}>
-					<Text component="h3">{children}</Text>
-					<EditMenu
-						className={TaskListHeaderStyle.editMenu}
-						options={options}
-						alt="Open tasks list's edit menu"
-					/>
-				</Block>
-			</header>
-		</>
+		<Paper
+			className={classNames(TaskListHeaderStyle.header, className)}
+			component="header"
+			elevation={0}
+		>
+			<Typography component="h3" variant="h5">
+				{children}
+			</Typography>
+			<EditMenu options={options} alt="Open tasks list's edit menu" />
+		</Paper>
 	);
 };

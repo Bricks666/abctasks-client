@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React, { DragEventHandler, FC, memo } from "react";
 
 interface DraggableProps {
@@ -12,8 +13,8 @@ export const Draggable: FC<DraggableProps> = memo(function Draggable({
 	...handlers
 }) {
 	return (
-		<div draggable {...handlers}>
+		<Box draggable {...handlers}>
 			{children}
-		</div>
+		</Box>
 	);
 });

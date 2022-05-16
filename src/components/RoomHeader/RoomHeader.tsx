@@ -3,13 +3,12 @@ import { useParams } from "react-router-dom";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { ClassNameProps } from "@/interfaces/common";
-import { Block } from "@/ui/Block";
-import { Text } from "@/ui/Text";
 import { usePrepareLink } from "@/hooks";
 import { GET_PARAMS, POPUPS } from "@/const";
 import { EditMenu } from "../EditMenu";
-import { MenuOption } from "@/ui/MenuItem";
+import { MenuOption } from "@/ui/MenuItemList";
 import { useRoom } from "./hooks";
+import { Box, Typography } from "@mui/material";
 
 import RoomHeaderStyle from "./RoomHeader.module.css";
 
@@ -29,11 +28,11 @@ export const RoomHeader: FC<ClassNameProps> = ({ className }) => {
 	const { id: roomId } = useParams();
 	const room = useRoom(roomId);
 	return (
-		<Block className={classNames(RoomHeaderStyle.block, className)}>
-			<Text className={RoomHeaderStyle.header} component="h2">
+		<Box className={classNames(RoomHeaderStyle.block, className)}>
+			<Typography sx={{ marginRight: "auto" }} component="h2" variant="h3">
 				{room?.name}
-			</Text>
+			</Typography>
 			<EditMenu options={options} alt="Open room edit menu" />
-		</Block>
+		</Box>
 	);
 };

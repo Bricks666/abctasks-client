@@ -1,22 +1,17 @@
 import React, { FC, useCallback, useEffect } from "react";
 import { Location, useNavigate } from "react-router-dom";
-import classNames from "classnames";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useTranslation } from "react-i18next";
 import { LoginRequest } from "@/interfaces/requests";
-import { Button } from "@/ui/Button";
 import { clearLoginError, loginFx } from "@/models/Auth";
 import { useLocationState } from "@/hooks";
-import { TextField } from "../TextField";
+import { Field } from "../Field";
 import { ClassNameProps } from "@/interfaces/common";
 import { Checkbox } from "../Checkbox";
 import { validationSchema } from "./validator";
-import { Alert } from "@/ui/Alert";
-import { AlertTitle } from "@/ui/AlertTitle";
 import { useLoginError } from "./hooks";
-
-import LoginFormStyle from "./LoginForm.module.css";
+import { Alert, AlertTitle, Button, Stack } from "@mui/material";
 
 const initialValue: LoginRequest = {
 	login: "",
@@ -51,38 +46,46 @@ export const LoginForm: FC<ClassNameProps> = ({ className }) => {
 	}, []);
 
 	return (
-		<form
-			className={classNames(LoginFormStyle.form, className)}
+		<Stack
+			className={className}
 			onSubmit={handleSubmit(onSubmit)}
+			spacing={2}
+			component="form"
 		>
 			{error && (
-				<Alert color="error" type="outline" onClose={() => clearLoginError()}>
+				<Alert
+					color="error"
+					variant="outlined"
+					onClose={() => clearLoginError()}
+				>
 					<AlertTitle>Authorization error</AlertTitle>
 					Incorrect login or password
 				</Alert>
 			)}
-			<TextField
+			<Field
 				{...register("login")}
 				label={t("fields.login")}
 				disabled={isSubmitting}
-				error={errors.login?.message}
+				error={!!errors.login?.message}
+				helperText={errors.login?.message}
 			/>
 
-			<TextField
+			<Field
 				{...register("password")}
 				label={t("fields.password")}
 				type="password"
 				disabled={isSubmitting}
-				error={errors.password?.message}
+				error={!!errors.password?.message}
+				helperText={errors.password?.message}
 			/>
 			<Checkbox {...register("remember")} label={t("fields.remember")} />
 			<Button
-				className={LoginFormStyle.button}
 				disabled={!isDirty || isSubmitting}
-				type="filed"
+				variant="contained"
+				type="submit"
 			>
 				{t("buttons.submit")}
 			</Button>
-		</form>
+		</Stack>
 	);
 };

@@ -1,33 +1,25 @@
-import classNames from "classnames";
 import React, { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Card } from "@/ui/Card";
-import { Avatar } from "@/ui/Avatar";
 import { ClassNameProps } from "@/interfaces/common";
 import { Activities, ActivityStructure } from "@/models/Activities/types";
-import { Color } from "@/interfaces/ui";
-import { Text } from "@/ui/Text";
 import { DateTime } from "@/ui/DateTime";
-import { DeleteIcon } from "@/ui/DeleteIcon";
-import { EditIcon } from "@/ui/EditIcon";
-import { PlusIcon } from "@/ui/PlusIcon";
-
-import ActivityCardStyle from "./ActivityCard.module.css";
+import { Delete, Edit, Add } from "@mui/icons-material";
+import { Avatar, Stack, Typography } from "@mui/material";
 
 interface ActivityCardProps extends ClassNameProps, ActivityStructure {}
 
-const colorMap: Record<Activities, Color> = {
-	[Activities.CREATE]: "success",
-	[Activities.DELETE]: "error",
-	[Activities.EDIT]: "warning",
+const colorMap: Record<Activities, string> = {
+	[Activities.CREATE]: "var(--success)",
+	[Activities.DELETE]: "var(--error)",
+	[Activities.EDIT]: "var(--warning)",
 };
 
 const iconMap: Record<Activities, ReactNode> = {
-	[Activities.CREATE]: <PlusIcon className={ActivityCardStyle.icon} />,
-	[Activities.DELETE]: <DeleteIcon className={ActivityCardStyle.icon} />,
-	[Activities.EDIT]: <EditIcon className={ActivityCardStyle.icon} />,
+	[Activities.CREATE]: <Add />,
+	[Activities.DELETE]: <Delete />,
+	[Activities.EDIT]: <Edit />,
 };
-
 export const ActivityCard: FC<ActivityCardProps> = ({
 	activity,
 	sphere,
@@ -37,23 +29,22 @@ export const ActivityCard: FC<ActivityCardProps> = ({
 }) => {
 	const { t } = useTranslation("room");
 	return (
-		<Card className={classNames(ActivityCardStyle.card, className)}>
-			<Avatar
-				className={ActivityCardStyle.avatar}
-				size="medium"
-				alt={t(`activities.activityType.${activity}`)}
-				color={colorMap[activity]}
-			>
-				{iconMap[activity]}
-			</Avatar>
-			<Text component="p">
-				{t("activities.text", {
-					activist,
-					activity,
-					sphere,
-				})}
-			</Text>
-
+		<Card className={className}>
+			<Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+				<Avatar
+					alt={t(`activities.activityType.${activity}`)}
+					sx={{ bgcolor: colorMap[activity] }}
+				>
+					{iconMap[activity]}
+				</Avatar>
+				<Typography component="p" variant="body2">
+					{t("activities.text", {
+						activist,
+						activity,
+						sphere,
+					})}
+				</Typography>
+			</Stack>
 			<DateTime date={date} format="MMM DD" />
 		</Card>
 	);

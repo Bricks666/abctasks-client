@@ -8,15 +8,14 @@ import { useGetParam, useGoBack, useTask, useTaskGroups } from "@/hooks";
 import { ClassNameProps, ID } from "@/interfaces/common";
 import { editTask } from "@/models/Tasks";
 import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
-import { TaskGroup } from "@/models/Groups/types";
-import { Button } from "@/ui/Button";
-import { TextField } from "../TextField";
-import { useGroup } from "@/hooks/useGroup";
+import { Field } from "../Field";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validatingScheme } from "./validator";
 import { useTranslation } from "react-i18next";
+import { Button, MenuItem } from "@mui/material";
 
 import EditTaskFromStyle from "./EditTaskForm.module.css";
+import { Select } from "../Select";
 
 export interface EditTaskFormValues {
 	readonly content: string;
@@ -24,14 +23,11 @@ export interface EditTaskFormValues {
 	readonly status: TaskStatus;
 }
 
-const prepareTask = (
-	task: TaskStructure | null,
-	group: TaskGroup | null
-): EditTaskFormValues => {
-	return task && group
+const prepareTask = (task: TaskStructure | null): EditTaskFormValues => {
+	return task
 		? {
 				content: task.content,
-				groupId: group.id,
+				groupId: task.groupId,
 				status: task.status,
 		  }
 		: {
@@ -51,20 +47,20 @@ const statuses = {
 export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 	const taskId = useGetParam(GET_PARAMS.taskId);
 	const task = useTask(taskId);
-	const group = useGroup(task?.groupId || null);
 	const groups = useTaskGroups();
 	const goBack = useGoBack();
 	const { t } = useTranslation(["popups", "room"]);
-	const { register, handleSubmit, formState } = useForm<EditTaskFormValues>({
-		defaultValues: prepareTask(task, group),
-		resolver: joiResolver(validatingScheme),
-	});
+	const { register, handleSubmit, formState, control } =
+		useForm<EditTaskFormValues>({
+			defaultValues: prepareTask(task),
+			resolver: joiResolver(validatingScheme),
+		});
 
 	const onSubmit = useCallback<SubmitHandler<EditTaskFormValues>>(
 		({ groupId, status, ...values }) => {
 			editTask({
 				...values,
-				id: +(taskId as unknown as number),
+				id: +taskId!,
 				status,
 				groupId,
 				roomId: task?.roomId || 0,
@@ -74,34 +70,37 @@ export const EditTaskForm: FC<ClassNameProps> = ({ className }) => {
 		[goBack, taskId, task?.roomId]
 	);
 	const { isDirty } = formState;
-
 	return (
 		<form
 			className={classNames(EditTaskFromStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<TextField {...register("groupId")} select label={t("edit_task.group")}>
+			<Select control={control} name="groupId" label={t("edit_task.group")}>
 				{groups.map(({ id, name }) => (
-					<option value={id} key={id}>
+					<MenuItem value={id} key={id}>
 						{name}
-					</option>
+					</MenuItem>
 				))}
-			</TextField>
-			<TextField {...register("status")} select label={t("edit_task.status")}>
+			</Select>
+			<Select control={control} name="status" label={t("edit_task.status")}>
 				{Object.entries(statuses).map(([code, name]) => (
-					<option value={code} key={code}>
+					<MenuItem value={code} key={code}>
 						{t(`statuses.${name}`, { ns: "room" })}
-					</option>
+					</MenuItem>
 				))}
-			</TextField>
+			</Select>
 
-			<TextField
+			<Field
 				className={EditTaskFromStyle.textarea}
 				{...register("content")}
 				multiline
 				label={t("edit_task.content")}
 			/>
-			<Button className={EditTaskFromStyle.button} disabled={!isDirty}>
+			<Button
+				className={EditTaskFromStyle.button}
+				disabled={!isDirty}
+				type="submit"
+			>
 				{t("edit_task.button")}
 			</Button>
 		</form>

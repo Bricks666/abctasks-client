@@ -1,13 +1,12 @@
 import React, { FC, useMemo } from "react";
-import { Block } from "@/ui/Block";
-import { Text } from "@/ui/Text";
 import { EditMenu } from "../EditMenu";
 import { ClassNameProps } from "@/interfaces/common";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { MenuOption } from "@/ui/MenuItem";
+import { MenuOption } from "@/ui/MenuItemList";
 import { usePrepareLink } from "@/hooks";
 import { GET_PARAMS, POPUPS } from "@/const";
+import { Box, Typography } from "@mui/material";
 
 import RoomsHeaderStyle from "./RoomsHeader.module.css";
 
@@ -28,9 +27,12 @@ export const RoomsHeader: FC<ClassNameProps> = ({ className }) => {
 		[createLink]
 	);
 	return (
-		<Block className={classNames(RoomsHeaderStyle.header, className)}>
-			<Text component="h2">{t("title")}</Text>
+		<Box
+			className={classNames(RoomsHeaderStyle.header, className)}
+			component="header"
+		>
+			<Typography component="h2" variant="h3">{t("title")}</Typography>
 			<EditMenu options={options} />
-		</Block>
+		</Box>
 	);
 };

@@ -1,22 +1,27 @@
-import classNames from "classnames";
 import React, { FC } from "react";
 import { GET_PARAMS, POPUPS } from "@/const";
 import { usePrepareLink } from "@/hooks";
 import { ClassNameProps } from "@/interfaces/common";
 import { deleteTask } from "@/models/Tasks";
 import { TaskStructure } from "@/models/Tasks/types";
-import { Avatar } from "@/ui/Avatar";
-import { Card } from "@/ui/Card";
-import { CardHeader } from "@/ui/CardHeader";
 import { EditMenu } from "../EditMenu";
 import { Group } from "@/ui/Group";
-import { Text } from "@/ui/Text";
-import { MenuOption } from "@/ui/MenuItem";
+import { MenuOption } from "@/ui/MenuItemList";
 import { DateTime } from "@/ui/DateTime";
 import { useGroup } from "@/hooks/useGroup";
 import { useTranslation } from "react-i18next";
 
 import TaskCardStyle from "./TaskCard.module.css";
+import {
+	Avatar,
+	Box,
+	CardContent,
+	CardHeader,
+	SxProps,
+	Typography,
+} from "@mui/material";
+import { Block } from "@/ui/Block";
+import { Card } from "@/ui/Card";
 
 interface TaskCardComponent extends ClassNameProps, TaskStructure {}
 
@@ -53,33 +58,59 @@ export const TaskCard: FC<TaskCardComponent> = ({
 	}
 
 	return (
-		<Card className={classNames(TaskCardStyle.card, className)}>
+		<Card className={className}>
 			<CardHeader
 				className={TaskCardStyle.header}
-				secondaryAction={
+				action={
 					<EditMenu
 						options={options}
 						size="small"
 						alt="Open task's edit menu "
 					/>
 				}
-			>
-				<Group {...group} />
-			</CardHeader>
+				titleTypographyProps={{
+					component: Group,
+					...group,
+					fontSize: "inherit",
+				}}
+				title={""}
+				component="header"
+			/>
 
-			<Text className={TaskCardStyle.content}>{content}</Text>
-			<div className={TaskCardStyle.additionInfo}>
+			<CardContent component="main">
+				<Typography sx={contentSx}>{content}</Typography>
+			</CardContent>
+			<Box component="footer" sx={cardAdditionInfo}>
 				<DateTime date={addedDate} format={"MMM DD"} />
-				<Text component="span">{commentCount}</Text>
+				<Typography component="span" variant="body2">
+					{commentCount}
+				</Typography>
 				<Avatar
-					className={TaskCardStyle.avatar}
-					size="small"
-					src={author.photo}
+					src={author.photo || ""}
 					alt={author.name}
+					component="div"
+					sx={avatar}
 				>
 					{author.name[0]?.toUpperCase()}
 				</Avatar>
-			</div>
+			</Box>
 		</Card>
 	);
+};
+
+const cardAdditionInfo: SxProps = {
+	display: "flex",
+	columnGap: "1rem",
+	color: "#636568",
+	fontSize: "12px",
+	alignItems: "center",
+};
+const avatar: SxProps = {
+	marginLeft: "auto",
+	width: "24px",
+	height: "24px",
+};
+
+const contentSx: SxProps = {
+	wordBreak: "break-all",
 };

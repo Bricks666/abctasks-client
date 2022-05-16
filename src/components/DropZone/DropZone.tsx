@@ -1,5 +1,6 @@
 import React, { DragEventHandler, FC, memo } from "react";
 import { ClassNameProps } from "@/interfaces/common";
+import { Box } from "@mui/material";
 
 interface DropZoneProps extends ClassNameProps {
 	onDrop: DragEventHandler<HTMLDivElement>;
@@ -13,8 +14,8 @@ export const DropZone: FC<DropZoneProps> = memo(function DropZone({
 	className,
 }) {
 	return (
-		<div className={className} onDrop={onDrop} onDragOver={onDragOver}>
+		<Box className={className} onDrop={onDrop} onDragOver={onDragOver}>
 			{children}
-		</div>
+		</Box>
 	);
 });

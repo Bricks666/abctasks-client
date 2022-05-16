@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import { TextField } from "@/components/TextField";
+import { Field } from "@/components/Field";
 import { useImageURL, useUserInfo } from "@/hooks";
 import { Button } from "@/ui/Button";
 import { Picture } from "@/ui/Picture";
@@ -32,18 +32,19 @@ export const UpdateProfileForm: FC = () => {
 				alt={userInfo.login}
 				src={showedPhoto || ""}
 			/>
-			<TextField
-				inputClassName="visibility-hidden"
+			<Field
 				{...register("photo")}
 				type="file"
 				accept="image/*"
-				error={errors.photo?.message}
+				error={!!errors.photo?.message}
+				helperText={errors.photo?.message}
 			/>
-			<TextField
+			<Field
 				className={UpdateProfileFormStyle.input}
 				{...register("login")}
 				label="Login"
-				error={errors.login?.message}
+				error={!!errors.login?.message}
+				helperText={errors.login?.message}
 			/>
 			<Button
 				className={UpdateProfileFormStyle.button}

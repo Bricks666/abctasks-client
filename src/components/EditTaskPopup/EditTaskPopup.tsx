@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useGoBack } from "@/hooks";
 import { BasePopup, ClassNameProps } from "@/interfaces/common";
-import { MainPopup } from "@/ui/MainPopup";
+import { MainPopup } from "@/components/MainPopup";
 import { EditTaskForm } from "../EditTaskForm";
 import { useTranslation } from "react-i18next";
 

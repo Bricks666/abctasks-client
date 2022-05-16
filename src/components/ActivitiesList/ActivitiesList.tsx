@@ -1,13 +1,12 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { Stack } from "@/ui/Stack";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
+import { LoadingWrapper } from "@/components/LoadingWrapper";
 import { useActivities, useLoadingActivities } from "./hooks";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { ActivityCard } from "../ActivityCard";
-import { Text } from "@/ui/Text";
 import { ClassNameProps } from "@/interfaces/common";
+import { Stack, Typography } from "@mui/material";
 
 import ActivitiesListStyle from "./ActivitiesList.module.css";
 
@@ -16,18 +15,20 @@ export const ActivitiesList: FC<ClassNameProps> = ({ className }) => {
 	const activities = useActivities();
 	const isLoading = useLoadingActivities();
 	return (
-		<section className={classNames(ActivitiesListStyle.container, className)}>
-			<Text component="h3">{t("activities.title")}</Text>
+		<Stack className={classNames(ActivitiesListStyle.container, className)}>
+			<Typography component="h3" variant="h5">
+				{t("activities.title")}
+			</Typography>
 			<LoadingWrapper
 				isLoading={isLoading}
 				loadingIndicator={<LoadingIndicator size="small" />}
 			>
-				<Stack space="s">
+				<Stack spacing={1}>
 					{activities.slice(0, 10).map((activity) => (
 						<ActivityCard {...activity} key={activity.id} />
 					))}
 				</Stack>
 			</LoadingWrapper>
-		</section>
+		</Stack>
 	);
 };

@@ -1,7 +1,7 @@
 import React, { FC, memo } from "react";
 import { ClassNameProps } from "@/interfaces/common";
 import dayjs from "dayjs";
-import { Text } from "../Text";
+import { Typography } from "@mui/material";
 
 interface DateTimeProps extends ClassNameProps {
 	readonly date: string | number | Date;
@@ -17,7 +17,9 @@ export const DateTime: FC<DateTimeProps> = memo(function Datetime({
 	const showDate = dayjs(jsDate).format(format);
 	return (
 		<time className={className} dateTime={jsDate}>
-			<Text component="span">{showDate}</Text>
+			<Typography component="span" variant="body2">
+				{showDate}
+			</Typography>
 		</time>
 	);
 });

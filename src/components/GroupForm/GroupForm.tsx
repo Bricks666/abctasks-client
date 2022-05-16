@@ -2,17 +2,16 @@ import React, { FC } from "react";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
 import { useForm } from "react-hook-form";
-import { TextField } from "@/components/TextField";
-import { Button } from "@/ui/Button";
+import { Field } from "@/components/Field";
 import { CreateEditGroupRequest } from "@/interfaces/requests";
 import { Group } from "@/ui/Group";
 import { ClassNameProps, ID } from "@/interfaces/common";
-import { Stack } from "@/ui/Stack";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { validatingScheme } from "./validator";
 import { useTranslation } from "react-i18next";
 
 import GroupFormStyle from "./GroupForm.module.css";
+import { Button, Stack } from "@mui/material";
 
 interface GroupFormProps extends ClassNameProps {
 	readonly defaultState?: CreateEditGroupRequest | null;
@@ -52,32 +51,35 @@ export const GroupForm: FC<GroupFormProps> = ({
 	const { t } = useTranslation("popups");
 	const { isDirty, isSubmitting, errors } = formState;
 	return (
-		<form
+		<Stack
 			className={classNames(GroupFormStyle.block, className)}
 			onSubmit={handleSubmit(onSubmit)}
+			component="form"
+			spacing={2}
 		>
 			<Stack className={GroupFormStyle.fields}>
-				<TextField
+				<Field
 					className={GroupFormStyle.input}
 					{...register("name")}
 					label={t("group_form.name")}
-					error={errors.name?.message}
+					error={!!errors.name?.message}
+					helperText={errors.name?.message}
 				/>
-				<TextField
+				<Field
 					className={GroupFormStyle.color}
 					{...register("mainColor")}
-					inputClassName={GroupFormStyle.color_input}
 					label={t("group_form.main_color")}
 					type="color"
-					error={errors.mainColor?.message}
+					error={!!errors.mainColor?.message}
+					helperText={errors.mainColor?.message}
 				/>
-				<TextField
+				<Field
 					className={GroupFormStyle.color}
 					{...register("secondColor")}
-					inputClassName={GroupFormStyle.color_input}
 					label={t("group_form.secondary_color")}
 					type="color"
-					error={errors.secondColor?.message}
+					error={!!errors.secondColor?.message}
+					helperText={errors.secondColor?.message}
 				/>
 			</Stack>
 			{state.name && <Group {...state} />}
@@ -85,9 +87,10 @@ export const GroupForm: FC<GroupFormProps> = ({
 			<Button
 				className={GroupFormStyle.button}
 				disabled={!isDirty || isSubmitting}
+				type="submit"
 			>
 				{buttonText}
 			</Button>
-		</form>
+		</Stack>
 	);
 };

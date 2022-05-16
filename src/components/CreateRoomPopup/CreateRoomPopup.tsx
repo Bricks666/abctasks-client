@@ -1,15 +1,18 @@
 import React, { FC } from "react";
 import { BasePopup } from "@/interfaces/common";
-import { MainPopup } from "@/ui/MainPopup";
+import { MainPopup } from "@/components/MainPopup";
 import { useGoBack } from "@/hooks";
 import { RoomForm } from "../RoomForm";
 import { createRoom } from "@/models/Rooms";
 
-export const CreateRoomPopup: FC<BasePopup> = ({ isOpen, isFocus }) => {
+import CreateRoomPopupStyle from "./CreateRoomPopup.module.css";
+
+export const CreateRoomPopup: FC<BasePopup> = (props) => {
 	const onClose = useGoBack();
 	return (
-		<MainPopup isOpen={isOpen} isFocus={isFocus} onClose={onClose}>
+		<MainPopup {...props} onClose={onClose}>
 			<RoomForm
+				className={CreateRoomPopupStyle.form}
 				submitHandler={createRoom}
 				afterSubmit={onClose}
 				buttonText="Add"

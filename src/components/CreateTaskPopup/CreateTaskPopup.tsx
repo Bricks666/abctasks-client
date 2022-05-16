@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { useGoBack } from "@/hooks";
 import { BasePopup, ClassNameProps } from "@/interfaces/common";
-import { MainPopup } from "@/ui/MainPopup";
+import { MainPopup } from "@/components/MainPopup";
 import { CreateTaskForm } from "../CreateTaskForm";
 import { useTranslation } from "react-i18next";
 
-import TaskPopupStyle from "./CreateTaskPopup.module.css";
+import CreateTaskPopupStyle from "./CreateTaskPopup.module.css";
 
 interface CreateTaskPopupProps extends ClassNameProps, BasePopup {}
 
@@ -15,7 +15,7 @@ export const CreateTaskPopup: FC<CreateTaskPopupProps> = (props) => {
 
 	return (
 		<MainPopup {...props} header={t("add_task.title")} onClose={onClose}>
-			<CreateTaskForm className={TaskPopupStyle.form} />
+			<CreateTaskForm className={CreateTaskPopupStyle.form} />
 		</MainPopup>
 	);
 };
