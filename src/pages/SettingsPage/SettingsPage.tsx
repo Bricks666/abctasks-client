@@ -8,7 +8,7 @@ import { SettingsContent } from '@/components/SettingsContent';
 
 import SettingsPageNavigation from './SettingsPage.module.css';
 
-export const SettingsPage: React.FC = () => {
+const SettingsPage: React.FC = () => {
 	usePageTitle('Settings');
 	return (
 		<main>
@@ -22,3 +22,5 @@ export const SettingsPage: React.FC = () => {
 		</main>
 	);
 };
+
+export default SettingsPage;

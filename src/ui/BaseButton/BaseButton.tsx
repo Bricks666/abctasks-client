@@ -1,5 +1,5 @@
 /* eslint-disable react/button-has-type */
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { Link, To } from 'react-router-dom';
 import { CommonProps } from '@/interfaces/common';
@@ -24,7 +24,7 @@ export const BaseButton: React.FC<BaseButtonProps> = ({
 	buttonType,
 	...props
 }) => {
-	const classes = classNames(BaseButtonStyle.button, className);
+	const classes = cn(BaseButtonStyle.button, className);
 	if (to) {
 		return (
 			<Link className={classes} to={to}>

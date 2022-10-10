@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import { CommonProps, VoidFunction } from '@/interfaces/common';
 import { Overlay } from '../Overlay';
 import { PopupHeader } from '../PopupHeader';
@@ -35,10 +34,7 @@ export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = ({
 			<FocusTrap open={isFocus}>
 				<Fade open={isOpen} className={MainPopupStyle.overlay}>
 					<PopupHeader onClose={onClose}>{header}</PopupHeader>
-					<PopupContent
-						className={classNames(MainPopupStyle.content, className)}>
-						{children}
-					</PopupContent>
+					<PopupContent className={className}>{children}</PopupContent>
 				</Fade>
 			</FocusTrap>
 		</Overlay>

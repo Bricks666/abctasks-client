@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { Color, Size } from '@/interfaces/ui';
@@ -27,7 +27,7 @@ export const Button: React.FC<ButtonProps> = ({
 	children,
 	...props
 }) => {
-	const classes = classNames(
+	const classes = cn(
 		ButtonStyle.button,
 		ButtonStyle[type],
 		ButtonStyle[color],

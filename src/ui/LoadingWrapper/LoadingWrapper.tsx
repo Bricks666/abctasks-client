@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
 import LoadingWrapperStyle from './LoadingWrapper.module.css';
@@ -18,7 +18,7 @@ export const LoadingWrapper: React.FC<
 	children,
 }) {
 	return isLoading ? (
-		<div className={classNames(LoadingWrapperStyle.wrapper, className)}>
+		<div className={cn(LoadingWrapperStyle.wrapper, className)}>
 			{loadingIndicator}
 		</div>
 	) : (

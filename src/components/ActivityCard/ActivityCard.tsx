@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@/ui/Avatar';
 import { Activities, ActivityStructure } from '@/models/Activities/types';
@@ -37,7 +37,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
 }) => {
 	const { t } = useTranslation('room');
 	return (
-		<Card className={classNames(ActivityCardStyle.card, className)}>
+		<Card className={cn(ActivityCardStyle.card, className)}>
 			<Avatar
 				className={ActivityCardStyle.avatar}
 				size='medium'

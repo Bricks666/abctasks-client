@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
 import BlockStyle from './Block.module.css';
@@ -18,7 +18,7 @@ export const Block: React.FC<BlockProps> = React.memo(function Block({
 	type = 'rounded',
 	...props
 }) {
-	const classes = classNames(BlockStyle.block, BlockStyle[type], className);
+	const classes = cn(BlockStyle.block, BlockStyle[type], className);
 	return (
 		<div className={classes} {...props}>
 			{children}

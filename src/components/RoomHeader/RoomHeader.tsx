@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Block } from '@/ui/Block';
@@ -29,7 +29,7 @@ export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { id: roomId } = useParams();
 	const room = useRoom(roomId);
 	return (
-		<Block className={classNames(RoomHeaderStyle.block, className)}>
+		<Block className={cn(RoomHeaderStyle.block, className)}>
 			<Text className={RoomHeaderStyle.header} component='h2'>
 				{room?.name}
 			</Text>

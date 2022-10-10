@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { Color, Size } from '@/interfaces/ui';
 import { Picture } from '../Picture';
@@ -30,7 +30,7 @@ export const Avatar = React.memo(
 		},
 		ref
 	) {
-		const classes = classNames(
+		const classes = cn(
 			AvatarStyle.root,
 			AvatarStyle[size],
 			AvatarStyle[color as keyof typeof AvatarStyle],

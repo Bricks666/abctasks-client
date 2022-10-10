@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
@@ -54,7 +54,7 @@ export const GroupForm: React.FC<GroupFormProps> = ({
 	const { isDirty, isSubmitting, errors } = formState;
 	return (
 		<form
-			className={classNames(GroupFormStyle.block, className)}
+			className={cn(GroupFormStyle.block, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			<Stack className={GroupFormStyle.fields}>
 				<TextField
@@ -64,7 +64,6 @@ export const GroupForm: React.FC<GroupFormProps> = ({
 					error={errors.name?.message}
 				/>
 				<TextField
-					className={GroupFormStyle.color}
 					{...register('mainColor')}
 					inputClassName={GroupFormStyle.color_input}
 					label={t('group_form.main_color')}
@@ -72,7 +71,6 @@ export const GroupForm: React.FC<GroupFormProps> = ({
 					error={errors.mainColor?.message}
 				/>
 				<TextField
-					className={GroupFormStyle.color}
 					{...register('secondColor')}
 					inputClassName={GroupFormStyle.color_input}
 					label={t('group_form.secondary_color')}

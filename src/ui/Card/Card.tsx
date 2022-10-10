@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { Block } from '../Block';
 import { CommonProps } from '@/interfaces/common';
 
@@ -14,7 +14,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({
 	children,
 	shadowOn = 'hover',
 }) => {
-	const classes = classNames(
+	const classes = cn(
 		CardStyle.card,
 		{
 			[CardStyle.shadowAlways]: shadowOn === 'always',

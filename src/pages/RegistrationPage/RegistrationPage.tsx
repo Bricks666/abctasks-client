@@ -9,7 +9,7 @@ import { usePageTitle } from '@/hooks';
 
 import RegistrationPageStyle from './RegistrationPage.module.css';
 
-export const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
+const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('registration');
 	usePageTitle(t('title'));
 	return (
@@ -26,3 +26,5 @@ export const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 		</main>
 	);
 };
+
+export default RegistrationPage;

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import {
 	LinkProps as ReactLinkProps,
@@ -25,7 +25,7 @@ export const Link: React.FC<LinkProps> = ({
 	children,
 	...link
 }) => {
-	const classes = classNames(LinkStyle.link, className);
+	const classes = cn(LinkStyle.link, className);
 	if (type === 'common') {
 		return (
 			<a className={classes} href={to} {...link}>

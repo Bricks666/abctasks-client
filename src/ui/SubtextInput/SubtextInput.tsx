@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { Text } from '../Text';
 
@@ -10,9 +10,7 @@ export const SubtextInput: React.FC<React.PropsWithChildren<CommonProps>> = ({
 	children,
 }) => {
 	return (
-		<Text
-			className={classNames(SubtextInputStyle.text, className)}
-			component='span'>
+		<Text className={cn(SubtextInputStyle.text, className)} component='span'>
 			{children}
 		</Text>
 	);

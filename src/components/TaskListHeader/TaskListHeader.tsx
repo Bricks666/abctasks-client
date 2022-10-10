@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { usePrepareLink } from '@/hooks';
@@ -34,7 +33,7 @@ export const TaskListHeader: React.FC<
 	];
 
 	return (
-		<header className={classNames(TaskListHeaderStyle.header, className)}>
+		<header className={className}>
 			<Block className={TaskListHeaderStyle.background}>
 				<Text component='h3'>{children}</Text>
 				<EditMenu

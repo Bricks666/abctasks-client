@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { SvgIcon } from '../SvgIcon';
@@ -10,7 +10,7 @@ export const DotsIcon: React.FC<CommonProps> = React.memo(function DotsIcon({
 }) {
 	return (
 		<SvgIcon
-			className={classNames(DotsIconStyle.icon, className)}
+			className={cn(DotsIconStyle.icon, className)}
 			viewBox='0 0 20 6'
 			title='Three dots'>
 			<circle cx='3' cy='3' r='3' />

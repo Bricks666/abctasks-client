@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Location, useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
@@ -52,7 +52,7 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 
 	return (
 		<form
-			className={classNames(LoginFormStyle.form, className)}
+			className={cn(LoginFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			{error && (
 				<Alert color='error' type='outline' onClose={() => clearLoginError()}>

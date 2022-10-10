@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
 export interface TransitionPair<T> {
@@ -53,7 +53,7 @@ export const Transition: React.FC<React.PropsWithChildren<TransitionProps>> = ({
 	React.useEffect(() => {
 		setTimeout(() => setIsOpen(open));
 	}, [open]);
-	const classesNames = classNames(
+	const classesNames = cn(
 		{
 			[entering]: open,
 			[exiting]: !open,

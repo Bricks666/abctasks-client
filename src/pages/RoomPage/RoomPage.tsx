@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { CommonProps } from '@/interfaces/common';
 import { ContentLayout } from '@/ui/ContentLayout';
@@ -12,12 +12,12 @@ import { RoomHeader } from '@/components/RoomHeader';
 
 import HomePageStyle from './RoomPage.module.css';
 
-export const RoomPage: React.FC<CommonProps> = ({ className }) => {
+const RoomPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
 	usePageTitle(t('title'));
 	return (
 		<main>
-			<ContentLayout className={classNames(HomePageStyle.layout, className)}>
+			<ContentLayout className={cn(HomePageStyle.layout, className)}>
 				<RoomHeader />
 				<Tasks className={HomePageStyle.tasks} />
 				<Stack className={HomePageStyle.aside}>
@@ -28,3 +28,5 @@ export const RoomPage: React.FC<CommonProps> = ({ className }) => {
 		</main>
 	);
 };
+
+export default RoomPage;

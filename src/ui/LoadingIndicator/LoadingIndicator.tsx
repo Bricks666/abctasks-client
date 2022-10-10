@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 
@@ -16,7 +16,7 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
 	text,
 	size = 'medium',
 }) => {
-	const classes = classNames(
+	const classes = cn(
 		LoadingIndicatorStyle.indicatorContainer,
 		LoadingIndicatorStyle[size]
 	);
@@ -27,25 +27,25 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
 			<div className={classes}>
 				<div className={LoadingIndicatorStyle.circleGroup}>
 					<span
-						className={classNames(
+						className={cn(
 							LoadingIndicatorStyle.circle,
 							LoadingIndicatorStyle.circle1
 						)}
 					/>
 					<span
-						className={classNames(
+						className={cn(
 							LoadingIndicatorStyle.circle,
 							LoadingIndicatorStyle.circle2
 						)}
 					/>
 					<span
-						className={classNames(
+						className={cn(
 							LoadingIndicatorStyle.circle,
 							LoadingIndicatorStyle.circle3
 						)}
 					/>
 					<span
-						className={classNames(
+						className={cn(
 							LoadingIndicatorStyle.circle,
 							LoadingIndicatorStyle.circle4
 						)}

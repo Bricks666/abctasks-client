@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -51,7 +51,7 @@ export const CreateTaskForm: React.FC<React.PropsWithChildren<CommonProps>> = ({
 
 	return (
 		<form
-			className={classNames(TaskFormStyle.form, className)}
+			className={cn(TaskFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			<TextField
 				{...register('groupId', { disabled: isSubmitting })}

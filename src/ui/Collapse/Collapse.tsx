@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { Transition, TransitionProps } from '../Transition';
 
@@ -9,13 +9,13 @@ export interface CollapseProps extends Omit<TransitionProps, 'classes'> {
 	readonly origin?: 'top' | 'bottom' | 'right' | 'left';
 }
 
-export const Collapse: React.FC<CollapseProps> = ({
+export const Collapse: React.FC<React.PropsWithChildren<CollapseProps>> = ({
 	className,
 	direction = 'vertical',
 	origin = 'top',
 	...props
 }) => {
-	const classes = classNames(
+	const classes = cn(
 		CollapseStyle.collapse,
 		CollapseStyle[direction],
 		CollapseStyle[origin],

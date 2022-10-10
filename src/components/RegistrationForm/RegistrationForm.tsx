@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Location, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -49,7 +49,7 @@ export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 
 	return (
 		<form
-			className={classNames(RegistrationFormStyle.form, className)}
+			className={cn(RegistrationFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			{error && (
 				<Alert

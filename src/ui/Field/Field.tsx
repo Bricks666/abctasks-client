@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { Input } from '../Input';
 import { InputLabel } from '../InputLabel';
@@ -40,7 +40,7 @@ export const Field: React.FC<FieldProps> = ({
 	...input
 }) => {
 	const id = inputId || input.name;
-	const rootClasses = classNames(
+	const rootClasses = cn(
 		FieldStyle.field,
 		{
 			[FieldStyle.error]: !!error,

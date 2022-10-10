@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { SvgIcon } from '../SvgIcon';
 
@@ -8,7 +8,7 @@ import EditIconStyle from './EditIcon.module.css';
 export const EditIcon: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<SvgIcon
-			className={classNames(EditIconStyle.icon, className)}
+			className={cn(EditIconStyle.icon, className)}
 			viewBox='0 0 6.3499999 6.3500002'
 			title='Pen'>
 			<g transform='rotate(45 6.244 2.292) scale(1.47563 1.65069)'>

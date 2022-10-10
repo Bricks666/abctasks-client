@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { BaseButton, BaseButtonProps } from '../BaseButton';
@@ -14,7 +14,7 @@ export const ListItemButton: React.FC<ListItemButtonProps> = ({
 }) => {
 	return (
 		<BaseButton
-			className={classNames(ListItemButtonStyle.button, className)}
+			className={cn(ListItemButtonStyle.button, className)}
 			{...props}>
 			{children}
 		</BaseButton>

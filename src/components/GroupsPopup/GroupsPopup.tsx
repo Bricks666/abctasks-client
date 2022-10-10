@@ -47,7 +47,6 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 	return (
 		<MainPopup
 			{...props}
-			className={GroupsPopupStyle.content}
 			onClose={onClose}
 			header={t('groups.title')}
 			alt={t('groups.title')}>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
 import TextStyle from './Text.module.css';
@@ -22,17 +22,15 @@ export const Text: React.FC<React.PropsWithChildren<TextProps>> = React.memo(
 		cssStyles,
 		component = 'p',
 		variant = component,
-		paddings = false,
 		margins = false,
 		align = 'start',
 	}) {
 		const element = React.createElement(component, {}, null);
-		const classes = classNames(
+		const classes = cn(
 			TextStyle.text,
 			TextStyle[variant],
 			TextStyle[align],
 			{
-				[TextStyle.withoutPadding]: !paddings,
 				[TextStyle.withoutMargins]: !margins,
 			},
 			className

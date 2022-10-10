@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { ExtractProps } from '@/interfaces/common';
 import { Draggable } from '../Draggable';
 import { TaskCard } from '../TaskCard';
@@ -28,7 +28,7 @@ export const DraggableTaskCard: React.FC<ExtractProps<typeof TaskCard>> = ({
 		evt.dataTransfer.clearData();
 	}, []);
 
-	const classes = classNames(
+	const classes = cn(
 		DraggableTaskCardStyle.card,
 		{
 			[DraggableTaskCardStyle.dragging]: isDrag,

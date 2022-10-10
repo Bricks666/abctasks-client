@@ -1,5 +1,4 @@
 import { ComponentType, lazy } from 'react';
-import { RoomPage, RoomsPage } from '@/pages';
 import { ROUTES } from '@/const';
 
 interface Route {
@@ -8,9 +7,12 @@ interface Route {
 	readonly isOnlyAuth?: true;
 }
 
-const Login = lazy(() => import('@/pages/LoginPage'));
-const Registration = lazy(() => import('@/pages/RegistrationPage'));
-const Settings = lazy(() => import('@/pages/SettingsPage'));
+const LoginPage = lazy(() => import('@/pages/LoginPage'));
+const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
+const RoomsPage = lazy(() => import('@/pages/RoomsPage'));
+const RoomPage = lazy(() => import('@/pages/RoomPage'));
+const SettingsPage = lazy(() => import('@/pages/SettingsPage'));
+const NotFoundPage = lazy(() => import('@/pages/NotFound'));
 
 export const routes: Route[] = [
 	{
@@ -25,15 +27,19 @@ export const routes: Route[] = [
 	},
 	{
 		path: ROUTES.LOGIN,
-		Component: Login,
+		Component: LoginPage,
 	},
 	{
 		path: ROUTES.REGISTRATION,
-		Component: Registration,
+		Component: RegistrationPage,
 	},
 	{
 		path: ROUTES.SETTINGS,
-		Component: Settings,
+		Component: SettingsPage,
 		isOnlyAuth: true,
+	},
+	{
+		path: ROUTES.NOT_FOUND,
+		Component: NotFoundPage,
 	},
 ];

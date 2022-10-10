@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { Color, Size } from '@/interfaces/ui';
 import { InputLabel } from '../InputLabel';
@@ -29,18 +29,18 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
 	size = 'medium',
 	...checkbox
 }) => {
-	const classes = classNames(
+	const classes = cn(
 		CheckboxStyle.label,
-		CheckboxStyle[color],
+		CheckboxStyle[color as keyof typeof CheckboxStyle],
 		CheckboxStyle[size]
 	);
 
 	const id = inputId || checkbox.name;
 
 	return (
-		<div className={classNames(CheckboxStyle.container, className)}>
+		<div className={cn(CheckboxStyle.container, className)}>
 			<input
-				className={classNames(CheckboxStyle.input, 'visibility-hidden')}
+				className={cn(CheckboxStyle.input, 'visibility-hidden')}
 				{...checkbox}
 				type='checkbox'
 				id={id}

@@ -1,6 +1,6 @@
 /* eslint-disable react/style-prop-object */
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { Text } from '../Text';
 
@@ -12,7 +12,7 @@ export const AlertTitle: React.FC<React.PropsWithChildren<CommonProps>> = ({
 }) => {
 	return (
 		<Text
-			className={classNames(AlertTitleStyle.title, className)}
+			className={cn(AlertTitleStyle.title, className)}
 			component='p'
 			variant='h6'>
 			{children}

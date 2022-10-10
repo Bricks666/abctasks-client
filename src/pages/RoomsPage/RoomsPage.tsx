@@ -5,7 +5,7 @@ import { usePageTitle } from '@/hooks';
 import { ContentLayout } from '@/ui/ContentLayout';
 import { RoomsHeader } from '@/components/RoomsHeader';
 
-export const RoomsPage: React.FC = () => {
+const RoomsPage: React.FC = () => {
 	const { t } = useTranslation('rooms');
 	usePageTitle(t('title'));
 	return (
@@ -17,3 +17,5 @@ export const RoomsPage: React.FC = () => {
 		</main>
 	);
 };
+
+export default RoomsPage;

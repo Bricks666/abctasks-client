@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { Text } from '../Text';
 import { TaskGroup } from '@/models/Groups/types';
@@ -20,7 +20,7 @@ export const Group: React.FC<GroupProps> = React.memo(function Group({
 	};
 	return (
 		<Text
-			className={classNames(GroupStyle.group, className)}
+			className={cn(GroupStyle.group, className)}
 			cssStyles={groupStyle}
 			component='span'>
 			{name}

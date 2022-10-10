@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
 import SelectStyle from './Select.module.css';
@@ -17,10 +17,7 @@ export const Select = React.forwardRef<
 	React.PropsWithChildren<SelectProps>
 >(function Select({ className, children, ...select }, ref) {
 	return (
-		<select
-			className={classNames(SelectStyle.select, className)}
-			{...select}
-			ref={ref}>
+		<select className={cn(SelectStyle.select, className)} {...select} ref={ref}>
 			{children}
 		</select>
 	);

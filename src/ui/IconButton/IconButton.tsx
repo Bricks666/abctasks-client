@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { Size } from '@/interfaces/ui';
@@ -12,7 +12,7 @@ export interface IconButtonProps extends CommonProps, BaseButtonProps {
 
 export const IconButton: React.FC<IconButtonProps> = React.memo(
 	function IconBase({ className, children, size = 'medium', ...button }) {
-		const classes = classNames(
+		const classes = cn(
 			IconButtonStyle.button,
 			IconButtonStyle[size],
 			className

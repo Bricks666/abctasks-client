@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 
@@ -19,7 +19,7 @@ export const Picture: React.FC<PictureProps> = React.memo(function Picture({
 }) {
 	return (
 		<img
-			className={classNames(PictureStyle.picture, className)}
+			className={cn(PictureStyle.picture, className)}
 			src={src}
 			alt={alt}
 			{...props}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { Room } from '@/models/Rooms/types';
 import { Card } from '@/ui/Card';
 import { CardHeader } from '@/ui/CardHeader';
@@ -47,7 +47,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 		[editLink, id]
 	);
 	return (
-		<Card className={classNames(RoomCardStyle.card, className)}>
+		<Card className={cn(RoomCardStyle.card, className)}>
 			<CardHeader
 				className={RoomCardStyle.header}
 				secondaryAction={<EditMenu options={options} />}>

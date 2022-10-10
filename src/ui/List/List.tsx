@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
 import ListStyle from './List.module.css';
@@ -13,7 +13,7 @@ export const List: React.FC<React.PropsWithChildren<ListProps>> = ({
 	dense,
 	children,
 }) => {
-	const classes = classNames(
+	const classes = cn(
 		ListStyle.list,
 		{
 			[ListStyle.dense]: dense,

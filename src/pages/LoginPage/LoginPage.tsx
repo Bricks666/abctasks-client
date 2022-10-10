@@ -9,7 +9,7 @@ import { usePageTitle } from '@/hooks';
 
 import LoginPageStyle from './LoginPage.module.css';
 
-export const LoginPage: React.FC<CommonProps> = ({ className }) => {
+const LoginPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('login');
 	usePageTitle(t('title'));
 	return (
@@ -26,3 +26,4 @@ export const LoginPage: React.FC<CommonProps> = ({ className }) => {
 		</main>
 	);
 };
+export default LoginPage;

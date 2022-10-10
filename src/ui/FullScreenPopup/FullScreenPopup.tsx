@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import { CommonProps, VoidFunction } from '@/interfaces/common';
 import { Block } from '../Block';
 import { Collapse } from '../Collapse';
@@ -24,10 +23,7 @@ export const FullScreenPopup: React.FC<
 				<Collapse origin='bottom' open={isOpen} duration={300}>
 					<Block className={FullScreenPopupStyle.block}>
 						<PopupHeader onClose={onClose}>{header}</PopupHeader>
-						<PopupContent
-							className={classNames(FullScreenPopupStyle.content, className)}>
-							{children}
-						</PopupContent>
+						<PopupContent className={className}>{children}</PopupContent>
 					</Block>
 				</Collapse>
 			</div>

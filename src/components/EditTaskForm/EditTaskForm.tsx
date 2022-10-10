@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable indent */
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
@@ -77,7 +77,7 @@ export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 
 	return (
 		<form
-			className={classNames(EditTaskFromStyle.form, className)}
+			className={cn(EditTaskFromStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			<TextField {...register('groupId')} select label={t('edit_task.group')}>
 				{groups.map(({ id, name }) => (

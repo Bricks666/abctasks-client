@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { SvgIcon } from '../SvgIcon';
@@ -8,7 +8,7 @@ import CrossIconStyle from './CrossIcon.module.css';
 export const CrossIcon: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<SvgIcon
-			className={classNames(CrossIconStyle.icon, className)}
+			className={cn(CrossIconStyle.icon, className)}
 			viewBox='0 0 6.3500037 6.3500038'
 			title='cross'>
 			<g transform='translate(-0.84736779,-0.71342559)'>

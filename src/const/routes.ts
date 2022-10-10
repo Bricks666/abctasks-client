@@ -42,4 +42,5 @@ export const ROUTES = {
 	SETTINGS: 'settings/*',
 	SETTINGS_PROFILE: 'profile',
 	SETTINGS_GENERIC: 'generic',
+	NOT_FOUND: '*',
 };

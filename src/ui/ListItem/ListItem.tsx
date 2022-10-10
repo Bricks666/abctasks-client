@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
 import ListItemStyle from './ListItem.module.css';
@@ -15,7 +15,7 @@ export const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> = ({
 	...props
 }) => {
 	return (
-		<li className={classNames(ListItemStyle.item, className)} {...props}>
+		<li className={cn(ListItemStyle.item, className)} {...props}>
 			{children}
 		</li>
 	);

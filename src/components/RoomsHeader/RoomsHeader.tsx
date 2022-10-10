@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Block } from '@/ui/Block';
 import { Text } from '@/ui/Text';
@@ -28,7 +28,7 @@ export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 		[createLink]
 	);
 	return (
-		<Block className={classNames(RoomsHeaderStyle.header, className)}>
+		<Block className={cn(RoomsHeaderStyle.header, className)}>
 			<Text component='h2'>{t('title')}</Text>
 			<EditMenu options={options} />
 		</Block>

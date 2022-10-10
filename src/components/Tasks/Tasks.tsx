@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useGroupedTasks, useLoadingTasks } from '@/hooks';
 import { CommonProps } from '@/interfaces/common';
@@ -48,7 +48,7 @@ export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	);
 
 	return (
-		<section className={classNames(TasksStyle.tasks, className)}>
+		<section className={cn(TasksStyle.tasks, className)}>
 			<LoadingWrapper
 				className={TasksStyle.loading}
 				isLoading={isLoading}

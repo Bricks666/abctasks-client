@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import React, {
 	ChangeEventHandler,
 	FocusEventHandler,
@@ -20,7 +20,7 @@ export interface TextareaProps extends CommonProps {
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 	({ className, ...textarea }, ref) => {
-		const classes = classNames(TextareaStyle.textarea, className);
+		const classes = cn(TextareaStyle.textarea, className);
 		return <textarea className={classes} {...textarea} ref={ref} />;
 	}
 );

@@ -3,7 +3,9 @@ import { Transition, TransitionProps } from '../Transition';
 
 import FadeStyle from './Fade.module.css';
 
-export const Fade: React.FC<Omit<TransitionProps, 'classes'>> = (props) => {
+export const Fade: React.FC<
+	React.PropsWithChildren<Omit<TransitionProps, 'classes'>>
+> = (props) => {
 	const classes = {
 		entering: FadeStyle.open,
 		entered: FadeStyle.opened,

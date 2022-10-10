@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { Color } from '@/interfaces/ui';
 import { Block } from '../Block';
@@ -35,7 +35,7 @@ export const Alert: React.FC<React.PropsWithChildren<AlertProps>> = ({
 	color = 'primary',
 	type = 'standard',
 }) => {
-	const rootClasses = classNames(
+	const rootClasses = cn(
 		AlertStyle.root,
 		AlertStyle[color],
 		AlertStyle[type],

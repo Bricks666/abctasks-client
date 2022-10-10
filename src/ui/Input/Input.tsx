@@ -1,5 +1,5 @@
 /* eslint-disable prefer-rest-params */
-import classNames from 'classnames';
+import cn from 'classnames';
 import React, {
 	ChangeEventHandler,
 	HTMLInputTypeAttribute,
@@ -27,7 +27,7 @@ export const Input = memo(
 		{ className, type = 'text', ...input },
 		ref
 	) {
-		const classes = classNames(InputStyle.input, className);
+		const classes = cn(InputStyle.input, className);
 		return <input className={classes} type={type} {...input} ref={ref} />;
 	})
 );

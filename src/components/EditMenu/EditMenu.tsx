@@ -27,12 +27,7 @@ export const EditMenu: React.FC<EditMenuComponent> = ({
 	return (
 		<div className={className}>
 			<div className={EditMenuStyle.container} ref={setReference}>
-				<IconButton
-					className={EditMenuStyle.button}
-					onClick={toggle}
-					size={size}
-					tabIndex={0}
-					title={alt}>
+				<IconButton onClick={toggle} size={size} tabIndex={0} title={alt}>
 					<DotsIcon />
 				</IconButton>
 			</div>

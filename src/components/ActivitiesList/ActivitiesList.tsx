@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Stack } from '@/ui/Stack';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
@@ -16,7 +16,7 @@ export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 	const activities = useActivities();
 	const isLoading = useLoadingActivities();
 	return (
-		<section className={classNames(ActivitiesListStyle.container, className)}>
+		<section className={cn(ActivitiesListStyle.container, className)}>
 			<Text component='h3'>{t('activities.title')}</Text>
 			<LoadingWrapper
 				isLoading={isLoading}

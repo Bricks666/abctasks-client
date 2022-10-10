@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { CrossIcon } from '../CrossIcon';
 import { IconButton } from '../IconButton';
@@ -16,7 +16,7 @@ export const PopupHeader: React.FC<
 	React.PropsWithChildren<PopupHeaderProps>
 > = ({ className, children, onClose, closeIcon }) => {
 	return (
-		<header className={classNames(PopupHeaderStyle.header, className)}>
+		<header className={cn(PopupHeaderStyle.header, className)}>
 			{children && (
 				<Text className={PopupHeaderStyle.text} component='h2'>
 					{children}

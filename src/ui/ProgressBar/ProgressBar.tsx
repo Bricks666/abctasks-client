@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { HEX, CommonProps } from '@/interfaces/common';
 import { Text } from '../Text';
 
@@ -34,7 +34,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = React.memo(
 		};
 
 		return (
-			<label className={classNames(ProgressBarStyle.label, className)}>
+			<label className={cn(ProgressBarStyle.label, className)}>
 				{children}
 				<Text
 					component='span'

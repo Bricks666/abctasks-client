@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { deleteTask } from '@/models/Tasks';
@@ -53,9 +53,8 @@ export const TaskCard: React.FC<TaskCardComponent> = ({
 	}
 
 	return (
-		<Card className={classNames(TaskCardStyle.card, className)}>
+		<Card className={cn(TaskCardStyle.card, className)}>
 			<CardHeader
-				className={TaskCardStyle.header}
 				secondaryAction={
 					<EditMenu
 						options={options}

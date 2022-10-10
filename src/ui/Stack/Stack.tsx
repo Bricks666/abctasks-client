@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
 import StackStyle from './Stack.module.css';
@@ -13,7 +13,7 @@ export interface StackProps extends CommonProps {
 
 export const Stack: React.FC<React.PropsWithChildren<StackProps>> = React.memo(
 	function Stack({ children, className, direction = 'column', space = 'm' }) {
-		const classes = classNames(
+		const classes = cn(
 			StackStyle.stack,
 			StackStyle[direction],
 			StackStyle[space],

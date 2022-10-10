@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useTasksProgress, useTasksProgressLoading } from './hooks';
 import { TaskProgress } from '../TaskProgress';
@@ -16,7 +16,7 @@ export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
 	const isLoading = useTasksProgressLoading();
 
 	return (
-		<section className={classNames(TasksProgressStyle.wrapper, className)}>
+		<section className={cn(TasksProgressStyle.wrapper, className)}>
 			<Text component='h3'>{t('taskProgress.title')}</Text>
 			<LoadingWrapper
 				isLoading={isLoading}
