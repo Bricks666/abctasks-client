@@ -1,10 +1,10 @@
-import { ID } from "@/interfaces/common";
+import { ID } from '@/interfaces/common';
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
-} from "@/interfaces/response";
-import { ErrorHandlerParams } from "@/packages/eventSource";
-import { instance, sseListener } from "./instance";
+} from '@/interfaces/response';
+import { ErrorHandlerParams } from '@/packages/eventSource';
+import { instance, sseListener } from './instance';
 
 export const getTasksProgressApi = async (
 	roomId: ID

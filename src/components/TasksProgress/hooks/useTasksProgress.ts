@@ -1,12 +1,12 @@
-import { useEffect, useRef } from "react";
-import { useStore } from "effector-react";
+import { useEffect, useRef } from 'react';
+import { useStore } from 'effector-react';
+import { useParams } from 'react-router-dom';
 import {
 	$TasksProgress,
 	loadTasksProgress,
 	subscribeChangeProgress,
-} from "@/models/Progress";
-import { useParams } from "react-router-dom";
-import { CloseConnect } from "@/packages/eventSource";
+} from '@/models/Progress';
+import { CloseConnect } from '@/packages/eventSource';
 
 export const useTasksProgress = () => {
 	const tasksProgress = useStore($TasksProgress);
@@ -20,7 +20,9 @@ export const useTasksProgress = () => {
 		}
 
 		return () => {
-			closeRef.current && closeRef.current();
+			if (closeRef.current) {
+				closeRef.current();
+			}
 			closeRef.current = null;
 		};
 	}, [roomId]);

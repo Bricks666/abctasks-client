@@ -1,29 +1,29 @@
-import React, { DragEventHandler, FC, useCallback, useState } from "react";
-import classNames from "classnames";
-import { ExtractProps } from "@/interfaces/common";
-import { Draggable } from "../Draggable";
-import { TaskCard } from "../TaskCard";
+import * as React from 'react';
+import classNames from 'classnames';
+import { ExtractProps } from '@/interfaces/common';
+import { Draggable } from '../Draggable';
+import { TaskCard } from '../TaskCard';
 
-import DraggableTaskCardStyle from "./DraggableTaskCard.module.css";
+import DraggableTaskCardStyle from './DraggableTaskCard.module.css';
 
-export const DraggableTaskCard: FC<ExtractProps<typeof TaskCard>> = ({
+export const DraggableTaskCard: React.FC<ExtractProps<typeof TaskCard>> = ({
 	id,
 	status,
 	className,
 	...props
 }) => {
-	const [isDrag, setIsDrag] = useState(false);
+	const [isDrag, setIsDrag] = React.useState(false);
 
-	const onDragStart = useCallback<DragEventHandler>(
+	const onDragStart = React.useCallback<React.DragEventHandler>(
 		(evt) => {
 			evt.dataTransfer.clearData();
-			evt.dataTransfer.setData("status", status.toString());
-			evt.dataTransfer.setData("taskId", id.toString());
+			evt.dataTransfer.setData('status', status.toString());
+			evt.dataTransfer.setData('taskId', id.toString());
 			setIsDrag(true);
 		},
 		[status, id]
 	);
-	const onDragEnd = useCallback<DragEventHandler>((evt) => {
+	const onDragEnd = React.useCallback<React.DragEventHandler>((evt) => {
 		setIsDrag(false);
 		evt.dataTransfer.clearData();
 	}, []);

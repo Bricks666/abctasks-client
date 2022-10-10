@@ -1,4 +1,4 @@
-import { CloseConnect } from "@/packages/eventSource";
+import { CloseConnect } from '@/packages/eventSource';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type HEX = `#${string}`;
@@ -6,7 +6,7 @@ export type HEX = `#${string}`;
 /* TODO: Изменить типизацию на более конкретную */
 export type DateType = string;
 
-export interface ClassNameProps {
+export interface CommonProps {
 	readonly className?: string;
 }
 
@@ -30,3 +30,5 @@ export interface BasePopup {
 export type ID = string | number;
 
 export type WithCloseRef = { closeRef: { current: CloseConnect | null } };
+
+export type VoidFunction = () => void;

@@ -1,5 +1,5 @@
-import { ActivityResponse } from "@/interfaces/response";
-import { ActivityStructure } from "./types";
+import { ActivityResponse } from '@/interfaces/response';
+import { ActivityStructure } from './types';
 
 export const toValidActivity = (
 	activity: ActivityResponse

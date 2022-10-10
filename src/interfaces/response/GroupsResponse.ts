@@ -1,4 +1,4 @@
-import { HEX, ID } from "../common";
+import { HEX, ID } from '../common';
 
 export interface TaskGroupResponse {
 	readonly groupId: ID;

@@ -17,7 +17,7 @@
 }
 
 .root:focus-visible {
-  outline: var(--color) 2px solid;
+	outline: var(--color) 2px solid;
 }
 
 .avatar {
@@ -30,8 +30,6 @@
 	font-weight: 500;
 	color: white;
 }
-
-
 
 /* SIZES */
 .small {

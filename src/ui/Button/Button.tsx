@@ -1,28 +1,28 @@
-import classNames from "classnames";
-import React, { FC, ReactElement } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { Color, Size } from "@/interfaces/ui";
-import { BaseButton, BaseButtonProps } from "../BaseButton";
-import { Text } from "../Text";
+import classNames from 'classnames';
+import * as React from 'react';
+import { CommonProps } from '@/interfaces/common';
+import { Color, Size } from '@/interfaces/ui';
+import { BaseButton, BaseButtonProps } from '../BaseButton';
+import { Text } from '../Text';
 
-import ButtonStyle from "./Button.module.css";
+import ButtonStyle from './Button.module.css';
 
-type Type = "filed" | "text" | "outline";
+type Type = 'filed' | 'text' | 'outline';
 
-interface ButtonProps extends ClassNameProps, BaseButtonProps {
+export interface ButtonProps extends CommonProps, BaseButtonProps {
 	readonly color?: Color;
 	readonly type?: Type;
 	readonly size?: Size;
-	readonly icon?: ReactElement;
-	readonly iconPosition?: "start" | "end";
+	readonly icon?: React.ReactElement;
+	readonly iconPosition?: 'start' | 'end';
 }
 
-export const Button: FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
 	className,
-	color = "primary",
-	type = "filed",
-	size = "medium",
-	iconPosition = "start",
+	color = 'primary',
+	type = 'filed',
+	size = 'medium',
+	iconPosition = 'start',
 	icon = null,
 	children,
 	...props
@@ -38,9 +38,8 @@ export const Button: FC<ButtonProps> = ({
 	const buttonIcon = icon ? (
 		<Text
 			className={ButtonStyle[`icon--${iconPosition}`]}
-			component="span"
-			style="p"
-		>
+			component='span'
+			variant='p'>
 			{icon}
 		</Text>
 	) : null;

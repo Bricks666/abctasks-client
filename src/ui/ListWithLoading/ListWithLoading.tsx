@@ -1,25 +1,21 @@
-import React, { FC, ReactElement } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { List } from "../List";
-import { LoadingWrapper } from "../LoadingWrapper";
+import * as React from 'react';
+import { CommonProps } from '@/interfaces/common';
+import { List } from '../List';
+import { LoadingWrapper } from '../LoadingWrapper';
 
-interface ListWithLoadingProps extends ClassNameProps {
+export interface ListWithLoadingProps extends CommonProps {
 	readonly isLoading: boolean;
-	readonly loadingIndicator: ReactElement;
+	readonly loadingIndicator: React.ReactElement;
 }
 
-export const ListWithLoading: FC<ListWithLoadingProps> = ({
-	loadingIndicator,
-	isLoading,
-	className,
-	children,
-}) => {
+export const ListWithLoading: React.FC<
+	React.PropsWithChildren<ListWithLoadingProps>
+> = ({ loadingIndicator, isLoading, className, children }) => {
 	return (
 		<LoadingWrapper
 			className={className}
 			isLoading={isLoading}
-			loadingIndicator={loadingIndicator}
-		>
+			loadingIndicator={loadingIndicator}>
 			<List className={className}>{children}</List>
 		</LoadingWrapper>
 	);

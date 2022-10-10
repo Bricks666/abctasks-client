@@ -1,19 +1,18 @@
-import { ExtractProps } from "@/interfaces/common";
-import classNames from "classnames";
-import React, { FC } from "react";
-import { Transition } from "../Transition";
+import classNames from 'classnames';
+import * as React from 'react';
+import { Transition, TransitionProps } from '../Transition';
 
-import CollapseStyle from "./Collapse.module.css";
+import CollapseStyle from './Collapse.module.css';
 
-interface CollapseProps extends ExtractProps<typeof Transition, "classes"> {
-	readonly direction?: "horizontal" | "vertical";
-	readonly origin?: "top" | "bottom" | "right" | "left";
+export interface CollapseProps extends Omit<TransitionProps, 'classes'> {
+	readonly direction?: 'horizontal' | 'vertical';
+	readonly origin?: 'top' | 'bottom' | 'right' | 'left';
 }
 
-export const Collapse: FC<CollapseProps> = ({
+export const Collapse: React.FC<CollapseProps> = ({
 	className,
-	direction = "vertical",
-	origin = "top",
+	direction = 'vertical',
+	origin = 'top',
 	...props
 }) => {
 	const classes = classNames(

@@ -1,40 +1,34 @@
-import classNames from "classnames";
-import React, {
-	ChangeEventHandler,
-	FC,
-	FocusEventHandler,
-	memo,
-	Ref,
-} from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { Color, Size } from "@/interfaces/ui";
-import { InputLabel } from "../InputLabel";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
+import { Color, Size } from '@/interfaces/ui';
+import { InputLabel } from '../InputLabel';
 
-import CheckboxStyle from "./Checkbox.module.css";
+import CheckboxStyle from './Checkbox.module.css';
 
-export interface CheckboxProps extends ClassNameProps {
+export interface CheckboxProps extends CommonProps {
 	readonly name: string;
 	readonly checked?: boolean;
-	readonly onChange?: ChangeEventHandler;
-	readonly onFocus?: FocusEventHandler;
-	readonly onBlur?: FocusEventHandler;
+	readonly onChange?: React.ChangeEventHandler;
+	readonly onFocus?: React.FocusEventHandler;
+	readonly onBlur?: React.FocusEventHandler;
 	readonly require?: boolean;
 	readonly readOnly?: boolean;
 	readonly inputId?: string;
 	readonly size?: Size;
 	readonly color?: Color;
-	readonly inputRef?: Ref<HTMLInputElement>;
+	readonly inputRef?: React.Ref<HTMLInputElement>;
 }
 
-export const Checkbox: FC<CheckboxProps> = memo(function Checkbox({
+export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
 	className,
 	children,
 	inputId,
 	inputRef,
-	color = "primary",
-	size = "medium",
+	color = 'primary',
+	size = 'medium',
 	...checkbox
-}) {
+}) => {
 	const classes = classNames(
 		CheckboxStyle.label,
 		CheckboxStyle[color],
@@ -46,9 +40,9 @@ export const Checkbox: FC<CheckboxProps> = memo(function Checkbox({
 	return (
 		<div className={classNames(CheckboxStyle.container, className)}>
 			<input
-				className={classNames(CheckboxStyle.input, "visibility-hidden")}
+				className={classNames(CheckboxStyle.input, 'visibility-hidden')}
 				{...checkbox}
-				type="checkbox"
+				type='checkbox'
 				id={id}
 				ref={inputRef}
 			/>
@@ -57,4 +51,4 @@ export const Checkbox: FC<CheckboxProps> = memo(function Checkbox({
 			</InputLabel>
 		</div>
 	);
-});
+};

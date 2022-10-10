@@ -1,1 +1,1 @@
-export { MainPopup } from "./MainPopup";
+export { MainPopup, type MainPopupProps } from './MainPopup';

@@ -1,2 +1,2 @@
-export { useTasksProgress } from "./useTasksProgress";
-export { useTasksProgressLoading } from "./useTasksProgressLoading";
+export { useTasksProgress } from './useTasksProgress';
+export { useTasksProgressLoading } from './useTasksProgressLoading';

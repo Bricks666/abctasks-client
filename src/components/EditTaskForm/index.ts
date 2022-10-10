@@ -1,1 +1,1 @@
-export { EditTaskForm } from "./EditTaskForm";
+export { EditTaskForm, type EditTaskFormValues } from './EditTaskForm';

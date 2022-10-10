@@ -3,29 +3,29 @@ export {
 	createTaskApi,
 	editTaskApi,
 	deleteTaskApi,
-} from "./tasks";
+} from './tasks';
 export {
 	authApi,
 	loginApi,
 	registrationApi,
 	logoutApi,
 	refreshApi,
-} from "./auth";
+} from './auth';
 
-export { getActivitiesApi, subscribeNewActivitiesApi } from "./activities";
+export { getActivitiesApi, subscribeNewActivitiesApi } from './activities';
 
 export {
 	getTaskGroupsApi,
 	createTaskGroupApi,
 	deleteGroupApi,
 	editGroupApi,
-} from "./groups";
-export { getTasksProgressApi, subscribeChangeProgressApi } from "./progress";
+} from './groups';
+export { getTasksProgressApi, subscribeChangeProgressApi } from './progress';
 
-export { updateProfileApi, getProfileApi } from "./profile";
+export { updateProfileApi, getProfileApi } from './profile';
 export {
 	createRoomApi,
 	deleteRoomApi,
 	editRoomApi,
 	getRoomsApi,
-} from "./rooms";
+} from './rooms';

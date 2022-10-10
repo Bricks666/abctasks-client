@@ -1,5 +1,5 @@
-import { TaskGroupResponse } from "@/interfaces/response";
-import { TaskGroup, TaskGroupsMap } from "./types";
+import { TaskGroupResponse } from '@/interfaces/response';
+import { TaskGroup, TaskGroupsMap } from './types';
 
 export const createGroupsMap = (groups: TaskGroup[]): TaskGroupsMap => {
 	return Object.values(groups).reduce<TaskGroupsMap>((map, group) => {

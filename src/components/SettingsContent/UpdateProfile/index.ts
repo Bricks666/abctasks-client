@@ -1,1 +1,1 @@
-export { UpdateProfile } from "./UpdateProfile";
+export { UpdateProfile } from './UpdateProfile';

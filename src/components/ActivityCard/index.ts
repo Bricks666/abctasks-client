@@ -1,1 +1,1 @@
-export { ActivityCard } from "./ActivityCard";
+export { ActivityCard, type ActivityCardProps } from './ActivityCard';

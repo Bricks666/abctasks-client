@@ -1,7 +1,7 @@
 .header {
 	display: grid;
 	grid-template-columns: 1fr min-content;
-  align-items: center;
+	align-items: center;
 
 	padding: 1em;
 }

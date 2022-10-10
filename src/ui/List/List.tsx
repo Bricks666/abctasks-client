@@ -1,14 +1,18 @@
-import classNames from "classnames";
-import React, { FC } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
 
-import ListStyle from "./List.module.css";
+import ListStyle from './List.module.css';
 
-interface ListProps extends ClassNameProps {
+export interface ListProps extends CommonProps {
 	readonly dense?: boolean;
 }
 
-export const List: FC<ListProps> = ({ className, dense, children }) => {
+export const List: React.FC<React.PropsWithChildren<ListProps>> = ({
+	className,
+	dense,
+	children,
+}) => {
 	const classes = classNames(
 		ListStyle.list,
 		{

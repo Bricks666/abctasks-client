@@ -1,31 +1,27 @@
-import React, {
-	ChangeEventHandler,
-	FocusEventHandler,
-	forwardRef,
-} from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
 
-import SelectStyle from "./Select.module.css";
-import classNames from "classnames";
+import SelectStyle from './Select.module.css';
 
-interface SelectProps extends ClassNameProps {
+export interface SelectProps extends CommonProps {
 	readonly id?: string;
 	readonly value?: number | string;
-	readonly onChange?: ChangeEventHandler;
-	readonly onFocus?: FocusEventHandler;
-	readonly onBlur?: FocusEventHandler;
+	readonly onChange?: React.ChangeEventHandler;
+	readonly onFocus?: React.FocusEventHandler;
+	readonly onBlur?: React.FocusEventHandler;
 }
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-	function Select({ className, children, ...select }, ref) {
-		return (
-			<select
-				className={classNames(SelectStyle.select, className)}
-				{...select}
-				ref={ref}
-			>
-				{children}
-			</select>
-		);
-	}
-);
+export const Select = React.forwardRef<
+	HTMLSelectElement,
+	React.PropsWithChildren<SelectProps>
+>(function Select({ className, children, ...select }, ref) {
+	return (
+		<select
+			className={classNames(SelectStyle.select, className)}
+			{...select}
+			ref={ref}>
+			{children}
+		</select>
+	);
+});

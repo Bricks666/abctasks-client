@@ -1,27 +1,24 @@
-import classNames from "classnames";
-import React, { FC, MouseEventHandler, ReactNode } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { CrossIcon } from "../CrossIcon";
-import { IconButton } from "../IconButton";
-import { Text } from "../Text";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
+import { CrossIcon } from '../CrossIcon';
+import { IconButton } from '../IconButton';
+import { Text } from '../Text';
 
-import PopupHeaderStyle from "./PopupHeader.module.css";
+import PopupHeaderStyle from './PopupHeader.module.css';
 
-interface PopupHeaderProps extends ClassNameProps {
-	readonly onClose?: MouseEventHandler;
-	readonly closeIcon?: ReactNode;
+export interface PopupHeaderProps extends CommonProps {
+	readonly onClose?: React.MouseEventHandler;
+	readonly closeIcon?: React.ReactNode;
 }
 
-export const PopupHeader: FC<PopupHeaderProps> = ({
-	className,
-	children,
-	onClose,
-	closeIcon,
-}) => {
+export const PopupHeader: React.FC<
+	React.PropsWithChildren<PopupHeaderProps>
+> = ({ className, children, onClose, closeIcon }) => {
 	return (
 		<header className={classNames(PopupHeaderStyle.header, className)}>
 			{children && (
-				<Text className={PopupHeaderStyle.text} component="h2">
+				<Text className={PopupHeaderStyle.text} component='h2'>
 					{children}
 				</Text>
 			)}

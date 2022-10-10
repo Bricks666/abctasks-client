@@ -1,12 +1,12 @@
+import { useStore } from 'effector-react';
+import { useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import { CloseConnect } from '@/packages/eventSource';
 import {
 	$Activities,
 	loadActivities,
 	subscribeNewActivity,
-} from "@/models/Activities";
-import { CloseConnect } from "@/packages/eventSource";
-import { useStore } from "effector-react";
-import { useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+} from '@/models/Activities';
 
 export const useActivities = () => {
 	const activities = useStore($Activities);
@@ -19,7 +19,9 @@ export const useActivities = () => {
 			subscribeNewActivity({ roomId, closeRef });
 		}
 		return () => {
-			closeRef.current && closeRef.current();
+			if (closeRef.current) {
+				closeRef.current();
+			}
 			closeRef.current = null;
 		};
 	}, [roomId]);

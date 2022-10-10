@@ -3,7 +3,7 @@
 	align-items: center;
 	justify-content: center;
 
-  width: max-content;
+	width: max-content;
 }
 
 .label {
@@ -20,7 +20,7 @@
 }
 
 .label::before {
-	content: "";
+	content: '';
 
 	display: inline-block;
 
@@ -42,7 +42,7 @@
 }
 
 .input:checked + .label::before {
-	background-image: url("./check.svg");
+	background-image: url('./check.svg');
 	background-color: var(--color);
 }
 

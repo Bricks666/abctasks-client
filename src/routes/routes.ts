@@ -1,6 +1,6 @@
-import { ComponentType, lazy } from "react";
-import { RoomPage, RoomsPage } from "@/pages";
-import { ROUTES } from "@/const";
+import { ComponentType, lazy } from 'react';
+import { RoomPage, RoomsPage } from '@/pages';
+import { ROUTES } from '@/const';
 
 interface Route {
 	readonly path: string;
@@ -8,9 +8,9 @@ interface Route {
 	readonly isOnlyAuth?: true;
 }
 
-const Login = lazy(() => import("@/pages/LoginPage"));
-const Registration = lazy(() => import("@/pages/RegistrationPage"));
-const Settings = lazy(() => import("@/pages/SettingsPage"));
+const Login = lazy(() => import('@/pages/LoginPage'));
+const Registration = lazy(() => import('@/pages/RegistrationPage'));
+const Settings = lazy(() => import('@/pages/SettingsPage'));
 
 export const routes: Route[] = [
 	{

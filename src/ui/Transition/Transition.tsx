@@ -1,6 +1,6 @@
-import React, { CSSProperties, FC, useEffect, useState } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import classNames from "classnames";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
 
 export interface TransitionPair<T> {
 	readonly enter?: T;
@@ -14,7 +14,7 @@ export interface TransitionCSS {
 	readonly exited?: string;
 }
 
-interface TransitionProps extends ClassNameProps {
+export interface TransitionProps extends CommonProps {
 	readonly open: boolean;
 	readonly easing?: TransitionPair<string> | string;
 	readonly duration?: TransitionPair<number> | number;
@@ -25,9 +25,9 @@ const transition = {
 	enter: 195,
 	exit: 195,
 };
-const standardEasing = "ease-in";
+const standardEasing = 'ease-in';
 
-export const Transition: FC<TransitionProps> = ({
+export const Transition: React.FC<React.PropsWithChildren<TransitionProps>> = ({
 	open,
 	children,
 	className,
@@ -35,22 +35,22 @@ export const Transition: FC<TransitionProps> = ({
 	easing,
 	classes = {},
 }) => {
-	const { entered = "", entering = "", exited = "", exiting = "" } = classes;
+	const { entered = '', entering = '', exited = '', exiting = '' } = classes;
 	const enterDuration =
-		(typeof duration === "number" ? duration : duration?.enter) ||
+		(typeof duration === 'number' ? duration : duration?.enter) ||
 		transition.enter;
 	const exitDuration =
-		(typeof duration === "number" ? duration : duration?.exit) ||
+		(typeof duration === 'number' ? duration : duration?.exit) ||
 		enterDuration ||
 		transition.exit;
 	const enterEasing =
-		(typeof easing === "string" ? easing : easing?.enter) || standardEasing;
+		(typeof easing === 'string' ? easing : easing?.enter) || standardEasing;
 	const exitEasing =
-		(typeof easing === "string" ? easing : easing?.exit) || standardEasing;
+		(typeof easing === 'string' ? easing : easing?.exit) || standardEasing;
 
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
-	useEffect(() => {
+	React.useEffect(() => {
 		setTimeout(() => setIsOpen(open));
 	}, [open]);
 	const classesNames = classNames(
@@ -63,8 +63,8 @@ export const Transition: FC<TransitionProps> = ({
 		className
 	);
 
-	const styles: CSSProperties = {
-		transitionDuration: (open ? enterDuration : exitDuration) + "ms",
+	const styles: React.CSSProperties = {
+		transitionDuration: `${open ? enterDuration : exitDuration}ms`,
 		transitionTimingFunction: open ? enterEasing : exitEasing,
 	};
 

@@ -1,20 +1,20 @@
-import classNames from "classnames";
-import { useParams } from "react-router-dom";
-import React, { FC } from "react";
-import { useTranslation } from "react-i18next";
-import { ClassNameProps } from "@/interfaces/common";
-import { Block } from "@/ui/Block";
-import { Text } from "@/ui/Text";
-import { usePrepareLink } from "@/hooks";
-import { GET_PARAMS, POPUPS } from "@/const";
-import { EditMenu } from "../EditMenu";
-import { MenuOption } from "@/ui/MenuItem";
-import { useRoom } from "./hooks";
+import * as React from 'react';
+import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Block } from '@/ui/Block';
+import { Text } from '@/ui/Text';
+import { usePrepareLink } from '@/hooks';
+import { GET_PARAMS, POPUPS } from '@/const';
+import { EditMenu } from '../EditMenu';
+import { MenuOption } from '@/ui/MenuItem';
+import { useRoom } from './hooks';
+import { CommonProps } from '@/interfaces/common';
 
-import RoomHeaderStyle from "./RoomHeader.module.css";
+import RoomHeaderStyle from './RoomHeader.module.css';
 
-export const RoomHeader: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("room");
+export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('room');
 	const groupsLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.groups,
@@ -22,7 +22,7 @@ export const RoomHeader: FC<ClassNameProps> = ({ className }) => {
 	});
 	const options: MenuOption[] = [
 		{
-			label: t("menus.groups"),
+			label: t('menus.groups'),
 			to: groupsLink,
 		},
 	];
@@ -30,10 +30,10 @@ export const RoomHeader: FC<ClassNameProps> = ({ className }) => {
 	const room = useRoom(roomId);
 	return (
 		<Block className={classNames(RoomHeaderStyle.block, className)}>
-			<Text className={RoomHeaderStyle.header} component="h2">
+			<Text className={RoomHeaderStyle.header} component='h2'>
 				{room?.name}
 			</Text>
-			<EditMenu options={options} alt="Open room edit menu" />
+			<EditMenu options={options} alt='Open room edit menu' />
 		</Block>
 	);
 };

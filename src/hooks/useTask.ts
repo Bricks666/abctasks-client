@@ -1,4 +1,4 @@
-import { useTasks } from ".";
+import { useTasks } from '.';
 
 export const useTask = (taskId: number | string | null) => {
 	const tasks = useTasks();

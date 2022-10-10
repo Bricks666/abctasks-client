@@ -1,1 +1,1 @@
-export { PopupHeader } from "./PopupHeader";
+export { PopupHeader, type PopupHeaderProps } from './PopupHeader';

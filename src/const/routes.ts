@@ -7,11 +7,11 @@ interface GetParams {
 }
 
 export const GET_PARAMS: GetParams = {
-	popup: "popup",
-	taskStatus: "task-status",
-	taskId: "task-id",
-	groupId: "group-id",
-	roomId: "room-id",
+	popup: 'popup',
+	taskStatus: 'task-status',
+	taskId: 'task-id',
+	groupId: 'group-id',
+	roomId: 'room-id',
 };
 
 interface Popups {
@@ -25,21 +25,21 @@ interface Popups {
 }
 
 export const POPUPS: Popups = {
-	createTask: "create-task",
-	editTask: "edit-task",
-	groups: "groups",
-	createGroup: "create-group",
-	editGroup: "edit-group",
-	createRoom: "create-room",
-	editRoom: "edit-room",
+	createTask: 'create-task',
+	editTask: 'edit-task',
+	groups: 'groups',
+	createGroup: 'create-group',
+	editGroup: 'edit-group',
+	createRoom: 'create-room',
+	editRoom: 'edit-room',
 };
 
 export const ROUTES = {
-	ROOMS: "rooms",
-	ROOM: "rooms/:id",
-	LOGIN: "login",
-	REGISTRATION: "registration",
-	SETTINGS: "settings/*",
-	SETTINGS_PROFILE: "profile",
-	SETTINGS_GENERIC: "generic",
+	ROOMS: 'rooms',
+	ROOM: 'rooms/:id',
+	LOGIN: 'login',
+	REGISTRATION: 'registration',
+	SETTINGS: 'settings/*',
+	SETTINGS_PROFILE: 'profile',
+	SETTINGS_GENERIC: 'generic',
 };

@@ -1,5 +1,5 @@
-import { getActivitiesApi, subscribeNewActivitiesApi } from "@/api";
-import { guard, sample } from "effector";
+import { guard, sample } from 'effector';
+import { getActivitiesApi, subscribeNewActivitiesApi } from '@/api';
 import {
 	$Activities,
 	addActivity,
@@ -7,9 +7,9 @@ import {
 	loadActivitiesFx,
 	subscribeNewActivity,
 	subscribeNewActivityFx,
-} from ".";
-import { mayStartFxHandler } from "../handlers";
-import { toValidActivity } from "./utils";
+} from '.';
+import { mayStartFxHandler } from '../handlers';
+import { toValidActivity } from './utils';
 
 loadActivitiesFx.use(getActivitiesApi);
 subscribeNewActivityFx.use(async ({ closeRef, ...config }) => {

@@ -1,27 +1,27 @@
-import React, { FC, useMemo } from "react";
-import { Block } from "@/ui/Block";
-import { Text } from "@/ui/Text";
-import { EditMenu } from "../EditMenu";
-import { ClassNameProps } from "@/interfaces/common";
-import classNames from "classnames";
-import { useTranslation } from "react-i18next";
-import { MenuOption } from "@/ui/MenuItem";
-import { usePrepareLink } from "@/hooks";
-import { GET_PARAMS, POPUPS } from "@/const";
+import * as React from 'react';
+import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
+import { Block } from '@/ui/Block';
+import { Text } from '@/ui/Text';
+import { EditMenu } from '../EditMenu';
+import { MenuOption } from '@/ui/MenuItem';
+import { usePrepareLink } from '@/hooks';
+import { GET_PARAMS, POPUPS } from '@/const';
+import { CommonProps } from '@/interfaces/common';
 
-import RoomsHeaderStyle from "./RoomsHeader.module.css";
+import RoomsHeaderStyle from './RoomsHeader.module.css';
 
-export const RoomsHeader: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("rooms");
+export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('rooms');
 	const createLink = usePrepareLink({
 		addQuery: {
 			[GET_PARAMS.popup]: POPUPS.createRoom,
 		},
 	});
-	const options = useMemo<MenuOption[]>(
+	const options = React.useMemo<MenuOption[]>(
 		() => [
 			{
-				label: "Create room",
+				label: 'Create room',
 				to: createLink,
 			},
 		],
@@ -29,7 +29,7 @@ export const RoomsHeader: FC<ClassNameProps> = ({ className }) => {
 	);
 	return (
 		<Block className={classNames(RoomsHeaderStyle.header, className)}>
-			<Text component="h2">{t("title")}</Text>
+			<Text component='h2'>{t('title')}</Text>
 			<EditMenu options={options} />
 		</Block>
 	);

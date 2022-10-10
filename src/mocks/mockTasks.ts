@@ -1,8 +1,8 @@
-import { TaskAuthor, TaskStatus, TaskStructure } from "../models/Tasks/types";
+import { TaskAuthor, TaskStatus, TaskStructure } from '../models/Tasks/types';
 
 const mockAuthor: TaskAuthor = {
-	name: "John",
-	photo: "https://effector.dev/ru/img/comet.png",
+	name: 'John',
+	photo: 'https://effector.dev/ru/img/comet.png',
 };
 
 export const mockTasks: TaskStructure[] = [
@@ -12,8 +12,8 @@ export const mockTasks: TaskStructure[] = [
 		author: mockAuthor,
 		status: TaskStatus.READY,
 		groupId: 1,
-		content: "AderAderAder",
-		addedDate: "2022-01-19",
+		content: 'AderAderAder',
+		addedDate: '2022-01-19',
 		commentCount: 3,
 	},
 	{
@@ -22,8 +22,8 @@ export const mockTasks: TaskStructure[] = [
 		author: mockAuthor,
 		status: TaskStatus.REVIEW,
 		groupId: 1,
-		content: "AderAderAder",
-		addedDate: "2022-01-14",
+		content: 'AderAderAder',
+		addedDate: '2022-01-14',
 		commentCount: 3,
 	},
 	{
@@ -32,8 +32,8 @@ export const mockTasks: TaskStructure[] = [
 		author: mockAuthor,
 		status: TaskStatus.DONE,
 		groupId: 1,
-		content: "AderAderAder",
-		addedDate: "2022-01-10",
+		content: 'AderAderAder',
+		addedDate: '2022-01-10',
 		commentCount: 3,
 	},
 	{
@@ -42,8 +42,8 @@ export const mockTasks: TaskStructure[] = [
 		author: mockAuthor,
 		status: TaskStatus.IN_PROGRESS,
 		groupId: 1,
-		content: "AderAderAder",
-		addedDate: "2022-01-09",
+		content: 'AderAderAder',
+		addedDate: '2022-01-09',
 		commentCount: 3,
 	},
 	{
@@ -52,8 +52,8 @@ export const mockTasks: TaskStructure[] = [
 		author: mockAuthor,
 		status: TaskStatus.READY,
 		groupId: 2,
-		content: "AderAderAder",
-		addedDate: "2022-01-19",
+		content: 'AderAderAder',
+		addedDate: '2022-01-19',
 		commentCount: 3,
 	},
 	{
@@ -63,8 +63,8 @@ export const mockTasks: TaskStructure[] = [
 		status: TaskStatus.REVIEW,
 		groupId: 2,
 		content:
-			"Effects in effector allows users to change their implementation (handler) via use calls, which would be used to mocking them in tests.",
-		addedDate: "2022-01-14",
+			'Effects in effector allows users to change their implementation (handler) via use calls, which would be used to mocking them in tests.',
+		addedDate: '2022-01-14',
 		commentCount: 3,
 	},
 	{
@@ -73,8 +73,8 @@ export const mockTasks: TaskStructure[] = [
 		author: mockAuthor,
 		status: TaskStatus.DONE,
 		groupId: 2,
-		content: "AderAderAder",
-		addedDate: "2022-01-10",
+		content: 'AderAderAder',
+		addedDate: '2022-01-10',
 		commentCount: 3,
 	},
 	{
@@ -83,8 +83,8 @@ export const mockTasks: TaskStructure[] = [
 		author: mockAuthor,
 		status: TaskStatus.IN_PROGRESS,
 		groupId: 2,
-		content: "AderAderAder",
-		addedDate: "2022-01-09",
+		content: 'AderAderAder',
+		addedDate: '2022-01-09',
 		commentCount: 3,
 	},
 ];

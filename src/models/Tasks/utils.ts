@@ -1,5 +1,5 @@
-import { TaskStructure } from "./types";
-import { TaskResponse } from "@/interfaces/response";
+import { TaskStructure } from './types';
+import { TaskResponse } from '@/interfaces/response';
 
 export const toValidTask = (task: TaskResponse): TaskStructure => {
 	return {

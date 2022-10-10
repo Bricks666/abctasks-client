@@ -1,5 +1,6 @@
-import { createRoomApi, deleteRoomApi, editRoomApi, getRoomsApi } from "@/api";
-import { guard, sample } from "effector";
+/* eslint-disable eqeqeq */
+import { guard, sample } from 'effector';
+import { createRoomApi, deleteRoomApi, editRoomApi, getRoomsApi } from '@/api';
 import {
 	$Rooms,
 	createRoom,
@@ -11,9 +12,9 @@ import {
 	loadRooms,
 	loadRoomsFx,
 	resetRooms,
-} from ".";
-import { mayStartFxHandler } from "../handlers";
-import { toValidRoom } from "./utils";
+} from '.';
+import { mayStartFxHandler } from '../handlers';
+import { toValidRoom } from './utils';
 
 loadRoomsFx.use(getRoomsApi);
 deleteRoomFx.use(deleteRoomApi);

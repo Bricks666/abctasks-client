@@ -1,1 +1,1 @@
-export { ListItemButton } from "./ListItemButton";
+export { ListItemButton, type ListItemButtonProps } from './ListItemButton';

@@ -1,2 +1,2 @@
-export { useActivities } from "./useActivities";
-export { useLoadingActivities } from "./useLoadingActivities";
+export { useActivities } from './useActivities';
+export { useLoadingActivities } from './useLoadingActivities';

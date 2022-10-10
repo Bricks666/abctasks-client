@@ -1,43 +1,40 @@
-import { ClassNameProps } from "@/interfaces/common";
-import React, {
-	AriaAttributes,
-	AriaRole,
-	CSSProperties,
-	FC,
-	MouseEventHandler,
-} from "react";
-import { Path } from "react-router-dom";
-import { ListItem } from "../ListItem";
-import { ListItemButton } from "../ListItemButton";
-import { Text } from "../Text";
+import * as React from 'react';
+import { Path } from 'react-router-dom';
+import { CommonProps } from '@/interfaces/common';
+import { ListItem } from '../ListItem';
+import { ListItemButton } from '../ListItemButton';
+import { Text } from '../Text';
 
-import MenuItemStyle from "./MenuItem.module.css";
+import MenuItemStyle from './MenuItem.module.css';
 
 export type MenuOption = {
 	readonly label: string;
-	readonly onClick?: MouseEventHandler;
+	readonly onClick?: React.MouseEventHandler;
 	readonly to?: Path | string;
-	readonly icon?: JSX.Element;
+	readonly icon?: React.ReactElement;
 };
 
-interface MenuItemProps extends ClassNameProps, MenuOption, AriaAttributes {
-	readonly style?: CSSProperties;
-	readonly role?: AriaRole;
+export interface MenuItemProps
+	extends CommonProps,
+		MenuOption,
+		React.AriaAttributes {
+	readonly style?: React.CSSProperties;
+	readonly role?: React.AriaRole;
 }
 
-export const MenuItem: FC<MenuItemProps> = ({
+export const MenuItem: React.FC<MenuItemProps> = ({
 	label,
 	icon,
 	onClick,
 	to,
-	role = "menuitem",
+	role = 'menuitem',
 	...props
 }) => {
 	return (
 		<ListItem className={MenuItemStyle.item} role={role} {...props}>
 			<ListItemButton onClick={onClick} to={to} tabIndex={0}>
 				{icon}
-				<Text component="span">{label}</Text>
+				<Text component='span'>{label}</Text>
 			</ListItemButton>
 		</ListItem>
 	);

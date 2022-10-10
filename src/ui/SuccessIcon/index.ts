@@ -1,1 +1,1 @@
-export { SuccessIcon } from "./SuccessIcon";
+export { SuccessIcon } from './SuccessIcon';

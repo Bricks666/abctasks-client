@@ -1,1 +1,1 @@
-export { RoomForm } from "./RoomForm";
+export { RoomForm, type RoomFormProps } from './RoomForm';

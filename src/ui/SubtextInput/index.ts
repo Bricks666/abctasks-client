@@ -1,1 +1,1 @@
-export { SubtextInput } from "./SubtextInput";
+export { SubtextInput } from './SubtextInput';

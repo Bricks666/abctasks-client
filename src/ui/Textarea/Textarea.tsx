@@ -1,14 +1,14 @@
-import classNames from "classnames";
+import classNames from 'classnames';
 import React, {
 	ChangeEventHandler,
 	FocusEventHandler,
 	forwardRef,
-} from "react";
-import { ClassNameProps } from "@/interfaces/common";
+} from 'react';
+import { CommonProps } from '@/interfaces/common';
 
-import TextareaStyle from "./Textarea.module.css";
+import TextareaStyle from './Textarea.module.css';
 
-interface TextareaProps extends ClassNameProps {
+export interface TextareaProps extends CommonProps {
 	readonly value?: string | number;
 	readonly onChange?: ChangeEventHandler;
 	readonly onFocus?: FocusEventHandler;

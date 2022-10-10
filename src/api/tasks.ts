@@ -2,14 +2,14 @@ import {
 	TaskRequest,
 	EditTaskRequest,
 	DeleteTaskRequest,
-} from "@/interfaces/requests";
-import { instance } from "./instance";
+} from '@/interfaces/requests';
+import { instance } from './instance';
 import {
 	CreateTaskResponse,
 	TasksResponse,
 	DeleteTaskResponse,
-} from "@/interfaces/response";
-import { ID } from "@/interfaces/common";
+} from '@/interfaces/response';
+import { ID } from '@/interfaces/common';
 
 export const getTasksApi = async (roomId: ID): Promise<TasksResponse> => {
 	const response = await instance.get(`/todos/${roomId}`);

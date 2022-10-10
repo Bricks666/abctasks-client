@@ -1,7 +1,7 @@
-import { ID } from "@/interfaces/common";
-import { ActivitiesResponse, ActivityResponse } from "@/interfaces/response";
-import { ErrorHandlerParams } from "@/packages/eventSource";
-import { instance, sseListener } from "./instance";
+import { ID } from '@/interfaces/common';
+import { ActivitiesResponse, ActivityResponse } from '@/interfaces/response';
+import { ErrorHandlerParams } from '@/packages/eventSource';
+import { instance, sseListener } from './instance';
 
 export const getActivitiesApi = async (
 	roomId: ID
@@ -22,7 +22,7 @@ export const subscribeNewActivitiesApi = async ({
 	onNewActivity,
 	roomId,
 }: SubscribeNewActivitiesApiParams) => {
-	return await sseListener.connect<string>(`activities/${roomId}/subscribe`, {
+	return sseListener.connect<string>(`activities/${roomId}/subscribe`, {
 		onmessage: (evt) => onNewActivity(JSON.parse(evt.data)),
 		onerror: onError,
 	});

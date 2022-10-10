@@ -1,13 +1,13 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import { ClassNameProps } from "@/interfaces/common";
-import { Block } from "@/ui/Block";
-import { ContentLayout } from "@/ui/ContentLayout";
-import { ProfileLink } from "./ProfileLink";
+import * as React from 'react';
+import classNames from 'classnames';
+import { Block } from '@/ui/Block';
+import { CommonProps } from '@/interfaces/common';
+import { ContentLayout } from '@/ui/ContentLayout';
+import { ProfileLink } from './ProfileLink';
 
-import HeaderStyle from "./Header.module.css";
+import HeaderStyle from './Header.module.css';
 
-export const Header: FC<ClassNameProps> = ({ className }) => {
+export const Header: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<header className={classNames(HeaderStyle.header, className)}>
 			<ContentLayout>

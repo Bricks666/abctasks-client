@@ -1,26 +1,27 @@
-import { SubscribeNewActivitiesApiParams } from "@/api/activities";
-import { ID, WithCloseRef } from "@/interfaces/common";
-import { ActivitiesResponse, ActivityResponse } from "@/interfaces/response";
-import { createDomain } from "effector-logger";
-import { ActivityStructure } from "./types";
+/* eslint-disable import/no-extraneous-dependencies */
+import { createDomain } from 'effector-logger';
+import { SubscribeNewActivitiesApiParams } from '@/api/activities';
+import { ID, WithCloseRef } from '@/interfaces/common';
+import { ActivitiesResponse, ActivityResponse } from '@/interfaces/response';
+import { ActivityStructure } from './types';
 
-export const ActivitiesDomain = createDomain("ActivitiesDomain");
+export const ActivitiesDomain = createDomain('ActivitiesDomain');
 
 export const $Activities = ActivitiesDomain.store<ActivityStructure[]>([], {
-	name: "ActivitiesStore",
+	name: 'ActivitiesStore',
 });
 
 export const loadActivitiesFx = ActivitiesDomain.effect<ID, ActivitiesResponse>(
-	"loadActivitiesFx"
+	'loadActivitiesFx'
 );
 export const subscribeNewActivityFx = ActivitiesDomain.effect<
 	SubscribeNewActivitiesApiParams & WithCloseRef,
 	void
->("subscribeNewActivityFx");
+>('subscribeNewActivityFx');
 
-export const loadActivities = ActivitiesDomain.event<ID>("loadActivitiesEvent");
+export const loadActivities = ActivitiesDomain.event<ID>('loadActivitiesEvent');
 export const subscribeNewActivity = ActivitiesDomain.event<
 	{ roomId: ID } & WithCloseRef
->("subscribeNewActivityEvent");
+>('subscribeNewActivityEvent');
 export const addActivity =
-	ActivitiesDomain.event<ActivityResponse>("addActivityEvent");
+	ActivitiesDomain.event<ActivityResponse>('addActivityEvent');

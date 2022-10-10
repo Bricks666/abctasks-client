@@ -1,10 +1,13 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import { ClassNameProps } from "@/interfaces/common";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
 
-import ContentLayoutStyle from "./ContentLayout.module.css";
+import ContentLayoutStyle from './ContentLayout.module.css';
 
-export const ContentLayout: FC<ClassNameProps> = ({ children, className }) => {
+export const ContentLayout: React.FC<React.PropsWithChildren<CommonProps>> = ({
+	children,
+	className,
+}) => {
 	return (
 		<div className={classNames(ContentLayoutStyle.contentLayout, className)}>
 			{children}

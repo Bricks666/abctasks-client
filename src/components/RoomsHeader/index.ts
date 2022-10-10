@@ -1,1 +1,1 @@
-export { RoomsHeader } from "./RoomsHeader";
+export { RoomsHeader } from './RoomsHeader';

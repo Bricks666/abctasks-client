@@ -2,8 +2,9 @@ import {
 	Event,
 	EventSourcePolyfill as EventSource,
 	MessageEvent as DataEvent,
-} from "event-source-polyfill";
-import { ErrorHandlerParams, InterceptorHandler, Reconnect } from ".";
+} from 'event-source-polyfill';
+import { ErrorHandlerParams, Reconnect } from '.';
+import { InterceptorClass } from './interceptor';
 import {
 	ConnectConfig,
 	DataType,
@@ -11,35 +12,25 @@ import {
 	Handlers,
 	Headers,
 	InstanceConfig,
-	Interceptor,
 	Interceptors,
 	MessageEvent,
 	OpenEvent,
 	TimeoutError,
 	ErrorEvent,
-} from "./types";
-import { prepareFullPath } from "./utils";
-
-class InterceptorClass<T> implements Interceptor<T> {
-	handler: InterceptorHandler<T> | null;
-
-	constructor() {
-		this.handler = null;
-	}
-
-	use(handler: InterceptorHandler<T>) {
-		this.handler = handler;
-	}
-}
+} from './types';
+import { prepareFullPath } from './utils';
 
 export class SSEListener {
 	#baseURL: string;
+
 	#withCredentials: boolean;
+
 	#headers: Headers;
+
 	readonly interceptors: Interceptors<DataType>;
 
 	constructor(options: Partial<InstanceConfig> = {}) {
-		this.#baseURL = options.baseURL || "";
+		this.#baseURL = options.baseURL || '';
 		this.#withCredentials = options.withCredentials || false;
 		this.#headers = options.headers || {};
 
@@ -105,6 +96,7 @@ export class SSEListener {
 			}
 		};
 	}
+
 	#onMessage<T extends DataType>(messageHandler?: Handler<MessageEvent<T>>) {
 		return async (evt: DataEvent) => {
 			let event = evt as unknown as MessageEvent<T>;
@@ -119,6 +111,7 @@ export class SSEListener {
 			}
 		};
 	}
+
 	#onError<T extends DataType>(
 		url: string,
 		handlers: Handlers<T>,
@@ -132,7 +125,7 @@ export class SSEListener {
 			}
 			event = evt as ErrorEvent;
 			let reconnect: Reconnect = async () =>
-				await this.connect(url, handlers, options);
+				this.connect(url, handlers, options);
 			if (this.interceptors.beforeError.handler) {
 				const intercepted = await this.interceptors.beforeError.handler({
 					event,

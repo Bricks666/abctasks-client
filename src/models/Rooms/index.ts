@@ -1,33 +1,34 @@
-import { createDomain } from "effector-logger";
-import { ID } from "@/interfaces/common";
+/* eslint-disable import/no-extraneous-dependencies */
+import { createDomain } from 'effector-logger';
+import { ID } from '@/interfaces/common';
 import {
 	DeleteRoomResponse,
 	RoomResponse,
 	RoomsResponse,
-} from "@/interfaces/response";
-import { Room } from "./types";
-import { CreateRoomRequest, EditRoomRequest } from "@/interfaces/requests";
+} from '@/interfaces/response';
+import { Room } from './types';
+import { CreateRoomRequest, EditRoomRequest } from '@/interfaces/requests';
 
-export const RoomsDomain = createDomain("RoomsDomain");
+export const RoomsDomain = createDomain('RoomsDomain');
 
-export const $Rooms = RoomsDomain.store<Room[]>([], { name: "RoomsStore" });
+export const $Rooms = RoomsDomain.store<Room[]>([], { name: 'RoomsStore' });
 
 export const loadRoomsFx = RoomsDomain.effect<void, RoomsResponse>(
-	"loadRoomsFx"
+	'loadRoomsFx'
 );
 export const deleteRoomFx = RoomsDomain.effect<ID, DeleteRoomResponse>(
-	"deleteRoomFx"
+	'deleteRoomFx'
 );
 export const createRoomFx = RoomsDomain.effect<CreateRoomRequest, RoomResponse>(
-	"createRoomFx"
+	'createRoomFx'
 );
 export const editRoomFx = RoomsDomain.effect<EditRoomRequest, RoomResponse>(
-	"editRoomFx"
+	'editRoomFx'
 );
 
-export const loadRooms = RoomsDomain.event<void>("loadRoomsEvent");
-export const deleteRoom = RoomsDomain.event<ID>("deleteRoomEvent");
+export const loadRooms = RoomsDomain.event<void>('loadRoomsEvent');
+export const deleteRoom = RoomsDomain.event<ID>('deleteRoomEvent');
 export const createRoom =
-	RoomsDomain.event<CreateRoomRequest>("createRoomEvent");
-export const editRoom = RoomsDomain.event<EditRoomRequest>("editRoomEvent");
-export const resetRooms = RoomsDomain.event("resetRooms");
+	RoomsDomain.event<CreateRoomRequest>('createRoomEvent');
+export const editRoom = RoomsDomain.event<EditRoomRequest>('editRoomEvent');
+export const resetRooms = RoomsDomain.event('resetRooms');

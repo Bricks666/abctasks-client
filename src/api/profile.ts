@@ -1,9 +1,10 @@
-import { instance } from "./instance";
-import { UpdateProfileRequest } from "@/interfaces/requests";
-import { UserResponse } from "@/interfaces/response";
+/* eslint-disable no-nested-ternary */
+import { instance } from './instance';
+import { UpdateProfileRequest } from '@/interfaces/requests';
+import { UserResponse } from '@/interfaces/response';
 
 export const getProfileApi = async () => {
-	const response = await instance.get<UserResponse>("/profile");
+	const response = await instance.get<UserResponse>('/profile');
 
 	return response.data;
 };
@@ -14,16 +15,16 @@ export const updateProfileApi = async ({
 }: UpdateProfileRequest) => {
 	const photoData = new FormData();
 	const validPhoto =
-		typeof photo === "string" ? photo : photo && photo[0] ? photo[0] : "";
-	photoData.set("photo", validPhoto);
-	photoData.set("login", values.login);
+		typeof photo === 'string' ? photo : photo && photo[0] ? photo[0] : '';
+	photoData.set('photo', validPhoto);
+	photoData.set('login', values.login);
 
 	const response = await instance.post<UserResponse>(
-		"profile/update",
+		'profile/update',
 		photoData,
 		{
 			headers: {
-				"Content-Type": "multipart/form-data",
+				'Content-Type': 'multipart/form-data',
 			},
 		}
 	);

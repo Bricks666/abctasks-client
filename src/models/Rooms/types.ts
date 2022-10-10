@@ -1,4 +1,4 @@
-import { ID } from "@/interfaces/common";
+import { ID } from '@/interfaces/common';
 
 export interface Room {
 	readonly id: ID;

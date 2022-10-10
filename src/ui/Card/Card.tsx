@@ -1,26 +1,26 @@
-import classNames from "classnames";
-import React, { FC, memo } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { Block } from "../Block";
+import * as React from 'react';
+import classNames from 'classnames';
+import { Block } from '../Block';
+import { CommonProps } from '@/interfaces/common';
 
-import CardStyle from "./Card.module.css";
+import CardStyle from './Card.module.css';
 
-interface CardProps extends ClassNameProps {
-	readonly shadowOn?: "always" | "hover" | "never";
+export interface CardProps extends CommonProps {
+	readonly shadowOn?: 'always' | 'hover' | 'never';
 }
 
-export const Card: FC<CardProps> = memo(function Card({
+export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({
 	className,
 	children,
-	shadowOn = "hover",
-}) {
+	shadowOn = 'hover',
+}) => {
 	const classes = classNames(
 		CardStyle.card,
 		{
-			[CardStyle.shadowAlways]: shadowOn === "always",
-			[CardStyle.shadowHover]: shadowOn === "hover",
+			[CardStyle.shadowAlways]: shadowOn === 'always',
+			[CardStyle.shadowHover]: shadowOn === 'hover',
 		},
 		className
 	);
 	return <Block className={classes}>{children}</Block>;
-});
+};

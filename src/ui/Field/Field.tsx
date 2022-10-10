@@ -1,32 +1,25 @@
-import classNames from "classnames";
-import React, {
-	ChangeEventHandler,
-	FC,
-	FocusEventHandler,
-	HTMLInputTypeAttribute,
-	ReactNode,
-	Ref,
-} from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { Input } from "../Input";
-import { InputLabel } from "../InputLabel";
-import { Textarea } from "../Textarea";
-import { SubtextInput } from "../SubtextInput";
-import { Select } from "../Select";
+/* eslint-disable no-nested-ternary */
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
+import { Input } from '../Input';
+import { InputLabel } from '../InputLabel';
+import { Textarea } from '../Textarea';
+import { SubtextInput } from '../SubtextInput';
+import { Select } from '../Select';
 
-import FieldStyle from "./Field.module.css";
+import FieldStyle from './Field.module.css';
 
-export interface FieldProps extends ClassNameProps {
+export interface FieldProps extends CommonProps {
 	readonly name: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	readonly value?: any;
 	readonly inputId?: string;
-	readonly label?: ReactNode;
-	readonly onChange: ChangeEventHandler;
-	readonly onBlur?: FocusEventHandler;
-	readonly onFocus?: FocusEventHandler;
-	readonly type?: HTMLInputTypeAttribute;
-	readonly inputRef?: Ref<
+	readonly label?: React.ReactNode;
+	readonly onChange: React.ChangeEventHandler;
+	readonly onBlur?: React.FocusEventHandler;
+	readonly onFocus?: React.FocusEventHandler;
+	readonly type?: React.HTMLInputTypeAttribute;
+	readonly inputRef?: React.Ref<
 		HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 	>;
 	readonly multiline?: boolean;
@@ -35,7 +28,7 @@ export interface FieldProps extends ClassNameProps {
 	readonly select?: boolean;
 }
 
-export const Field: FC<FieldProps> = ({
+export const Field: React.FC<FieldProps> = ({
 	className,
 	label,
 	inputId,
@@ -63,21 +56,21 @@ export const Field: FC<FieldProps> = ({
 			className={inputClassName}
 			{...input}
 			id={id}
-			ref={inputRef as Ref<HTMLSelectElement>}
+			ref={inputRef as React.Ref<HTMLSelectElement>}
 		/>
 	) : multiline ? (
 		<Textarea
 			className={inputClassName}
 			{...input}
 			id={id}
-			ref={inputRef as Ref<HTMLTextAreaElement>}
+			ref={inputRef as React.Ref<HTMLTextAreaElement>}
 		/>
 	) : (
 		<Input
 			className={inputClassName}
 			{...input}
 			id={id}
-			ref={inputRef as Ref<HTMLInputElement>}
+			ref={inputRef as React.Ref<HTMLInputElement>}
 		/>
 	);
 

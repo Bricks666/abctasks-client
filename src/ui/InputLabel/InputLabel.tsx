@@ -1,14 +1,14 @@
-import classNames from "classnames";
-import React, { FC } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
 
-import InputLabelStyle from "./InputLabel.module.css";
+import InputLabelStyle from './InputLabel.module.css';
 
-interface InputLabelProps extends ClassNameProps {
+export interface InputLabelProps extends CommonProps {
 	readonly HTMLFor: string;
 }
 
-export const InputLabel: FC<InputLabelProps> = ({
+export const InputLabel: React.FC<React.PropsWithChildren<InputLabelProps>> = ({
 	HTMLFor,
 	children,
 	className,

@@ -1,1 +1,1 @@
-export { ListWithLoading } from "./ListWithLoading";
+export { ListWithLoading, type ListWithLoadingProps } from './ListWithLoading';

@@ -1,10 +1,10 @@
+import { useMemo } from 'react';
 import {
 	GroupedByStatusTasksStore,
 	TaskStatus,
 	TaskStructure,
-} from "@/models/Tasks/types";
-import { useMemo } from "react";
-import { useTasks } from "./useTasks";
+} from '@/models/Tasks/types';
+import { useTasks } from './useTasks';
 
 const createGrouper = (status: TaskStatus) => {
 	return (state: TaskStructure[]) => {

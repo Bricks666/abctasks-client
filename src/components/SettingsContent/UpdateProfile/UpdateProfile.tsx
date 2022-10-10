@@ -1,21 +1,20 @@
-import React, { FC } from "react";
-import { Block } from "@/ui/Block";
-import { Text } from "@/ui/Text";
-import { ClassNameProps } from "@/interfaces/common";
-import { UpdateProfileForm } from "./UpdateProfileForm";
-import { useProfileLoading } from "@/hooks";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
+import * as React from 'react';
+import { Block } from '@/ui/Block';
+import { Text } from '@/ui/Text';
+import { CommonProps } from '@/interfaces/common';
+import { UpdateProfileForm } from './UpdateProfileForm';
+import { useProfileLoading } from '@/hooks';
+import { LoadingWrapper } from '@/ui/LoadingWrapper';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
 
-export const UpdateProfile: FC<ClassNameProps> = ({ className }) => {
+export const UpdateProfile: React.FC<CommonProps> = ({ className }) => {
 	const isLoading = useProfileLoading();
 	return (
 		<LoadingWrapper
 			isLoading={isLoading}
-			loadingIndicator={<LoadingIndicator />}
-		>
+			loadingIndicator={<LoadingIndicator />}>
 			<Block className={className}>
-				<Text component="h3">Profile</Text>
+				<Text component='h3'>Profile</Text>
 				<UpdateProfileForm />
 			</Block>
 		</LoadingWrapper>

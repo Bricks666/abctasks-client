@@ -1,16 +1,16 @@
-import classNames from "classnames";
-import React, { FC } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { Overlay } from "../Overlay";
-import { PopupHeader } from "../PopupHeader";
-import { Fade } from "../Fade";
-import { PopupContent } from "../PopupContent";
-import { useKeyListener } from "../hooks";
-import { FocusTrap } from "../FocusTrap";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps, VoidFunction } from '@/interfaces/common';
+import { Overlay } from '../Overlay';
+import { PopupHeader } from '../PopupHeader';
+import { Fade } from '../Fade';
+import { PopupContent } from '../PopupContent';
+import { useKeyListener } from '../hooks';
+import { FocusTrap } from '../FocusTrap';
 
-import MainPopupStyle from "./MainPopup.module.css";
+import MainPopupStyle from './MainPopup.module.css';
 
-interface MainPopupComponent extends ClassNameProps {
+export interface MainPopupProps extends CommonProps {
 	readonly isOpen: boolean;
 	readonly onClose: VoidFunction;
 	readonly header?: string;
@@ -19,7 +19,7 @@ interface MainPopupComponent extends ClassNameProps {
 	readonly isFocus?: boolean;
 }
 
-export const MainPopup: FC<MainPopupComponent> = ({
+export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = ({
 	isOpen,
 	onClose,
 	children,
@@ -29,15 +29,14 @@ export const MainPopup: FC<MainPopupComponent> = ({
 	closeOnEsc = true,
 	isFocus = isOpen,
 }) => {
-	useKeyListener("Escape", onClose, closeOnEsc && isFocus);
+	useKeyListener('Escape', onClose, closeOnEsc && isFocus);
 	return (
 		<Overlay onClose={onClose} alt={alt}>
 			<FocusTrap open={isFocus}>
 				<Fade open={isOpen} className={MainPopupStyle.overlay}>
 					<PopupHeader onClose={onClose}>{header}</PopupHeader>
 					<PopupContent
-						className={classNames(MainPopupStyle.content, className)}
-					>
+						className={classNames(MainPopupStyle.content, className)}>
 						{children}
 					</PopupContent>
 				</Fade>

@@ -1,17 +1,17 @@
 /* eslint-disable prefer-rest-params */
-import classNames from "classnames";
+import classNames from 'classnames';
 import React, {
 	ChangeEventHandler,
 	HTMLInputTypeAttribute,
 	memo,
 	FocusEventHandler,
 	forwardRef,
-} from "react";
-import { ClassNameProps } from "@/interfaces/common";
+} from 'react';
+import { CommonProps } from '@/interfaces/common';
 
-import InputStyle from "./Input.module.css";
+import InputStyle from './Input.module.css';
 
-interface InputProps extends ClassNameProps {
+export interface InputProps extends CommonProps {
 	readonly value?: string | number;
 	readonly onChange?: ChangeEventHandler;
 	readonly onFocus?: FocusEventHandler;
@@ -24,14 +24,10 @@ interface InputProps extends ClassNameProps {
 
 export const Input = memo(
 	forwardRef<HTMLInputElement, InputProps>(function Input(
-		{ className, type = "text", ...input },
+		{ className, type = 'text', ...input },
 		ref
 	) {
-		const classes = classNames(
-			InputStyle.input,
-			{ [InputStyle.color]: type === "color" },
-			className
-		);
+		const classes = classNames(InputStyle.input, className);
 		return <input className={classes} type={type} {...input} ref={ref} />;
 	})
 );

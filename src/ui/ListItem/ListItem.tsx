@@ -1,15 +1,15 @@
-import classNames from "classnames";
-import React, { AriaRole, FC } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
 
-import ListItemStyle from "./ListItem.module.css";
+import ListItemStyle from './ListItem.module.css';
 
-interface ListItemProps extends ClassNameProps {
-	readonly role?: AriaRole;
+export interface ListItemProps extends CommonProps {
+	readonly role?: React.AriaRole;
 	readonly tabIndex?: number;
 }
 
-export const ListItem: FC<ListItemProps> = ({
+export const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> = ({
 	children,
 	className,
 	...props

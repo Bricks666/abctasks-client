@@ -1,1 +1,1 @@
-export { TasksList } from "./TasksList";
+export { TasksList, type TasksListProps } from './TasksList';

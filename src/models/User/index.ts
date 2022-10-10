@@ -1,7 +1,8 @@
-import { ID } from "@/interfaces/common";
-import { UpdateProfileRequest } from "@/interfaces/requests";
-import { UserResponse } from "@/interfaces/response";
-import { createDomain } from "effector-logger";
+/* eslint-disable import/no-extraneous-dependencies */
+import { createDomain } from 'effector-logger';
+import { ID } from '@/interfaces/common';
+import { UpdateProfileRequest } from '@/interfaces/requests';
+import { UserResponse } from '@/interfaces/response';
 
 export interface User {
 	readonly userId: ID;
@@ -9,20 +10,20 @@ export interface User {
 	readonly photo: string | null;
 }
 
-export const initialUser = { userId: 0, login: "", photo: null };
+export const initialUser = { userId: 0, login: '', photo: null };
 
-export const UserDomain = createDomain("UserDomain");
+export const UserDomain = createDomain('UserDomain');
 
 export const $User = UserDomain.store<User>(initialUser, {
-	name: "User",
+	name: 'User',
 });
 
-export const loadUserFx = UserDomain.effect<void, UserResponse>("loadUserFx");
+export const loadUserFx = UserDomain.effect<void, UserResponse>('loadUserFx');
 export const updateProfileFx = UserDomain.effect<
 	UpdateProfileRequest,
 	UserResponse
->("updateProfileFx");
+>('updateProfileFx');
 
-export const loadUser = UserDomain.event<void>("loadUserEvent");
+export const loadUser = UserDomain.event<void>('loadUserEvent');
 export const updateProfile =
-	UserDomain.event<UpdateProfileRequest>("updateProfileEvent");
+	UserDomain.event<UpdateProfileRequest>('updateProfileEvent');

@@ -1,20 +1,20 @@
-import classNames from "classnames";
-import React, { FC } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import classNames from 'classnames';
+import * as React from 'react';
+import { CommonProps } from '@/interfaces/common';
 
-import LoadingIndicatorStyle from "./LoadingIndicator.module.css";
+import LoadingIndicatorStyle from './LoadingIndicator.module.css';
 
-type Size = "small" | "medium" | "large";
+type Size = 'small' | 'medium' | 'large';
 
-interface LoadingIndicatorComponent extends ClassNameProps {
+export interface LoadingIndicatorProps extends CommonProps {
 	readonly size?: Size;
 	readonly text?: string;
 }
 
-export const LoadingIndicator: FC<LoadingIndicatorComponent> = ({
+export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
 	className,
 	text,
-	size = "medium",
+	size = 'medium',
 }) => {
 	const classes = classNames(
 		LoadingIndicatorStyle.indicatorContainer,
@@ -23,7 +23,7 @@ export const LoadingIndicator: FC<LoadingIndicatorComponent> = ({
 
 	return (
 		<div className={className}>
-			<progress className="visibility-hidden" />
+			<progress className='visibility-hidden' />
 			<div className={classes}>
 				<div className={LoadingIndicatorStyle.circleGroup}>
 					<span

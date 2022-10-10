@@ -1,1 +1,1 @@
-export { InfoIcon } from "./InfoIcon";
+export { InfoIcon } from './InfoIcon';

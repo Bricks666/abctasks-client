@@ -1,4 +1,4 @@
-import { forward, guard, sample } from "effector";
+import { forward, guard, sample } from 'effector';
 import {
 	$LoadingTasks,
 	$Tasks,
@@ -12,11 +12,11 @@ import {
 	loadTasksFx,
 	moveTask,
 	resetTasks,
-} from ".";
-import { getTasksApi, createTaskApi, editTaskApi, deleteTaskApi } from "@/api";
-import { mayStartFxHandler } from "../handlers";
-import { editTaskHandler } from "./handlers";
-import { toValidTask } from "./utils";
+} from '.';
+import { getTasksApi, createTaskApi, editTaskApi, deleteTaskApi } from '@/api';
+import { mayStartFxHandler } from '../handlers';
+import { editTaskHandler } from './handlers';
+import { toValidTask } from './utils';
 
 loadTasksFx.use(getTasksApi);
 
@@ -94,7 +94,7 @@ sample({
 		return {
 			status,
 			id: taskId,
-			roomId: roomId,
+			roomId,
 			groupId: task.groupId,
 			content: task.content,
 		};

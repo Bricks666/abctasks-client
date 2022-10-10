@@ -1,1 +1,1 @@
-export { CrossIcon } from "./CrossIcon";
+export { CrossIcon } from './CrossIcon';

@@ -1,21 +1,21 @@
-import React, { FC, Suspense, useEffect } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { useIsAuthorizing } from "@/hooks";
-import { auth } from "@/models/Auth";
-import { routes } from "@/routes";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
-import { AuthRoute } from "../AuthRoute";
-import { Header } from "../Header";
-import { Popups } from "../Popups";
+import * as React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useIsAuthorizing } from '@/hooks';
+import { auth } from '@/models/Auth';
+import { routes } from '@/routes';
+import { ROUTES } from '@/const';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
+import { LoadingWrapper } from '@/ui/LoadingWrapper';
+import { AuthRoute } from '../AuthRoute';
+import { Header } from '../Header';
+import { Popups } from '../Popups';
 
-import AppStyle from "./App.module.css";
-import { ROUTES } from "@/const";
+import AppStyle from './App.module.css';
 
-export const App: FC = () => {
+export const App: React.FC = () => {
 	const isAuthorizing = useIsAuthorizing();
 
-	useEffect(() => {
+	React.useEffect(() => {
 		auth();
 	}, []);
 
@@ -23,29 +23,27 @@ export const App: FC = () => {
 		<LoadingWrapper
 			className={AppStyle.loading}
 			isLoading={isAuthorizing}
-			loadingIndicator={<LoadingIndicator text="Загрузка..." />}
-		>
+			loadingIndicator={<LoadingIndicator text='Загрузка...' />}>
 			<Routes>
-				<Route path="/login" element={null} />
-				<Route path="/registration" element={null} />
-				<Route path="*" element={<Header />} />
+				<Route path='/login' element={null} />
+				<Route path='/registration' element={null} />
+				<Route path='*' element={<Header />} />
 			</Routes>
 
 			<Routes>
-				<Route path="/*" element={<Popups />}>
+				<Route path='/*' element={<Popups />}>
 					{routes.map(({ isOnlyAuth, path, Component }) => (
 						<Route
 							path={path}
 							element={
-								<Suspense
+								<React.Suspense
 									fallback={
 										<LoadingWrapper
 											className={AppStyle.loading}
-											loadingIndicator={<LoadingIndicator text="Загрузка..." />}
+											loadingIndicator={<LoadingIndicator text='Загрузка...' />}
 											isLoading
 										/>
-									}
-								>
+									}>
 									{isOnlyAuth ? (
 										<AuthRoute>
 											<Component />
@@ -53,15 +51,12 @@ export const App: FC = () => {
 									) : (
 										<Component />
 									)}
-								</Suspense>
+								</React.Suspense>
 							}
 							key={path}
 						/>
 					))}
-					<Route
-						path="*"
-						element={<Navigate to={ROUTES.ROOMS} replace={true} />}
-					/>
+					<Route path='*' element={<Navigate to={ROUTES.ROOMS} replace />} />
 				</Route>
 			</Routes>
 		</LoadingWrapper>

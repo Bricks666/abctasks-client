@@ -1,14 +1,16 @@
+import { VoidFunction } from '@/interfaces/common';
+
 export interface InstanceConfig {
 	readonly baseURL: string;
 	readonly withCredentials: boolean;
 	readonly headers: Headers;
 }
-export type ConnectConfig = Omit<InstanceConfig, "baseURL">;
+export type ConnectConfig = Omit<InstanceConfig, 'baseURL'>;
 
 export type DataType = string | Uint8Array | Buffer;
 export interface TimeoutError {
 	readonly error: Error;
-	readonly type: "error";
+	readonly type: 'error';
 }
 export type Headers = Record<string, string>;
 
@@ -25,16 +27,16 @@ export interface ServicesEvent extends CommonEvent {
 }
 
 export interface OpenEvent extends ServicesEvent {
-	readonly type: "open";
+	readonly type: 'open';
 }
 
 export interface MessageEvent<T extends DataType> extends CommonEvent {
-	readonly type: "message";
+	readonly type: 'message';
 	readonly data: T;
 }
 
 export interface ErrorEvent extends ServicesEvent {
-	readonly type: "error";
+	readonly type: 'error';
 }
 
 export type CloseConnect = VoidFunction;

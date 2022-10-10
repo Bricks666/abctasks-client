@@ -1,23 +1,23 @@
-import React, { FC, useMemo } from "react";
-import classNames from "classnames";
-import { ClassNameProps } from "@/interfaces/common";
-import { Room } from "@/models/Rooms/types";
-import { Card } from "@/ui/Card";
-import { CardHeader } from "@/ui/CardHeader";
-import { List } from "@/ui/List";
-import { ListItem } from "@/ui/ListItem";
-import { EditMenu } from "@/components/EditMenu";
-import { MenuOption } from "@/ui/MenuItem";
-import { usePrepareLink } from "@/hooks";
-import { GET_PARAMS, POPUPS } from "@/const";
-import { deleteRoom } from "@/models/Rooms";
-import { Button } from "@/ui/Button";
+import * as React from 'react';
+import classNames from 'classnames';
+import { Room } from '@/models/Rooms/types';
+import { Card } from '@/ui/Card';
+import { CardHeader } from '@/ui/CardHeader';
+import { List } from '@/ui/List';
+import { ListItem } from '@/ui/ListItem';
+import { EditMenu } from '@/components/EditMenu';
+import { MenuOption } from '@/ui/MenuItem';
+import { usePrepareLink } from '@/hooks';
+import { GET_PARAMS, POPUPS } from '@/const';
+import { deleteRoom } from '@/models/Rooms';
+import { Button } from '@/ui/Button';
+import { CommonProps } from '@/interfaces/common';
 
-import RoomCardStyle from "./RoomCard.module.css";
+import RoomCardStyle from './RoomCard.module.css';
 
-interface RoomCardProps extends ClassNameProps, Room {}
+export interface RoomCardProps extends CommonProps, Room {}
 
-export const RoomCard: FC<RoomCardProps> = ({
+export const RoomCard: React.FC<RoomCardProps> = ({
 	id,
 	name,
 	className,
@@ -33,14 +33,14 @@ export const RoomCard: FC<RoomCardProps> = ({
 			[GET_PARAMS.roomId]: id,
 		},
 	});
-	const options = useMemo<MenuOption[]>(
+	const options = React.useMemo<MenuOption[]>(
 		() => [
 			{
-				label: "Edit",
+				label: 'Edit',
 				to: editLink,
 			},
 			{
-				label: "Delete",
+				label: 'Delete',
 				onClick: () => deleteRoom(id),
 			},
 		],
@@ -50,8 +50,7 @@ export const RoomCard: FC<RoomCardProps> = ({
 		<Card className={classNames(RoomCardStyle.card, className)}>
 			<CardHeader
 				className={RoomCardStyle.header}
-				secondaryAction={<EditMenu options={options} />}
-			>
+				secondaryAction={<EditMenu options={options} />}>
 				{name}
 			</CardHeader>
 			<List>
@@ -61,7 +60,7 @@ export const RoomCard: FC<RoomCardProps> = ({
 				<ListItem>Активности: {activitiesCount}</ListItem>
 				<ListItem>Пользователи: {usersCount}</ListItem>
 			</List>
-			<Button type="text" to={`${id}`}>
+			<Button type='text' to={`${id}`}>
 				Перейти
 			</Button>
 		</Card>

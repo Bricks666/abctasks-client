@@ -1,40 +1,41 @@
-import { SubscribeChangeProgressProps } from "@/api/progress";
-import { ID, WithCloseRef } from "@/interfaces/common";
+/* eslint-disable import/no-extraneous-dependencies */
+import { createDomain } from 'effector-logger';
+import { SubscribeChangeProgressProps } from '@/api/progress';
+import { ID, WithCloseRef } from '@/interfaces/common';
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
-} from "@/interfaces/response";
-import { createDomain } from "effector-logger";
-import { TaskProgressStructure } from "./types";
+} from '@/interfaces/response';
+import { TaskProgressStructure } from './types';
 
-export const ProgressDomain = createDomain("ProgressDomain");
+export const ProgressDomain = createDomain('ProgressDomain');
 
 export const $TasksProgress = ProgressDomain.store<TaskProgressStructure[]>(
 	[],
 	{
-		name: "TasksProgress",
+		name: 'TasksProgress',
 	}
 );
 export const $LoadingTasksProgress = ProgressDomain.store<boolean>(false, {
-	name: "LoadingTasksProgress",
+	name: 'LoadingTasksProgress',
 });
 
 export const loadTasksProgressFx = ProgressDomain.effect<
 	ID,
 	TasksProgressResponse
->("loadTasksProgress");
+>('loadTasksProgress');
 export const subscribeChangeProgressFx = ProgressDomain.effect<
 	SubscribeChangeProgressProps & WithCloseRef,
 	void
->("subscribeChangeProgressFx");
+>('subscribeChangeProgressFx');
 
-export const loadTasksProgress = ProgressDomain.event<ID>("loadTasksProgress");
+export const loadTasksProgress = ProgressDomain.event<ID>('loadTasksProgress');
 export const subscribeChangeProgress = ProgressDomain.event<
 	{
 		roomId: ID;
 	} & WithCloseRef
->("subscribeChangeProgressEvent");
+>('subscribeChangeProgressEvent');
 export const changeProgress = ProgressDomain.event<ChangeProgressResponse[]>(
-	"changeProgressEvent"
+	'changeProgressEvent'
 );
-export const resetProgress = ProgressDomain.event("resetProgress");
+export const resetProgress = ProgressDomain.event('resetProgress');

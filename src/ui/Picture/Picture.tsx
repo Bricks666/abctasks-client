@@ -1,17 +1,17 @@
-import classNames from "classnames";
-import React, { FC, ImgHTMLAttributes, memo } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import classNames from 'classnames';
+import * as React from 'react';
+import { CommonProps } from '@/interfaces/common';
 
-import PictureStyle from "./Picture.module.css";
+import PictureStyle from './Picture.module.css';
 
-interface PictureProps
-	extends ClassNameProps,
-		Readonly<ImgHTMLAttributes<HTMLImageElement>> {
+export interface PictureProps
+	extends CommonProps,
+		Readonly<React.ImgHTMLAttributes<HTMLImageElement>> {
 	readonly alt: string;
 	readonly src: string;
 }
 
-export const Picture: FC<PictureProps> = memo(function Picture({
+export const Picture: React.FC<PictureProps> = React.memo(function Picture({
 	className,
 	alt,
 	src,

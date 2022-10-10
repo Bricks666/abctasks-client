@@ -1,20 +1,20 @@
-import React, { DragEventHandler, FC, memo } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import * as React from 'react';
+import { CommonProps } from '@/interfaces/common';
 
-interface DropZoneProps extends ClassNameProps {
-	onDrop: DragEventHandler<HTMLDivElement>;
-	onDragOver: DragEventHandler<HTMLDivElement>;
+export interface DropZoneProps extends CommonProps {
+	readonly onDrop: React.DragEventHandler<HTMLDivElement>;
+	readonly onDragOver: React.DragEventHandler<HTMLDivElement>;
 }
 
-export const DropZone: FC<DropZoneProps> = memo(function DropZone({
+export const DropZone: React.FC<React.PropsWithChildren<DropZoneProps>> = ({
 	children,
 	onDrop,
 	onDragOver,
 	className,
-}) {
+}) => {
 	return (
 		<div className={className} onDrop={onDrop} onDragOver={onDragOver}>
 			{children}
 		</div>
 	);
-});
+};

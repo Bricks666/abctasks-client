@@ -1,10 +1,10 @@
+import { guard, sample } from 'effector';
 import {
 	createTaskGroupApi,
 	deleteGroupApi,
 	editGroupApi,
 	getTaskGroupsApi,
-} from "@/api";
-import { guard, sample } from "effector";
+} from '@/api';
 import {
 	$TaskGroups,
 	createGroup,
@@ -16,9 +16,9 @@ import {
 	loadTaskGroups,
 	loadTaskGroupsFx,
 	resetGroups,
-} from ".";
-import { mayStartFxHandler } from "../handlers";
-import { toValidTaskGroup } from "./utils";
+} from '.';
+import { mayStartFxHandler } from '../handlers';
+import { toValidTaskGroup } from './utils';
 
 loadTaskGroupsFx.use(getTaskGroupsApi);
 createGroupFx.use(createTaskGroupApi);

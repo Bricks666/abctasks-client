@@ -1,13 +1,13 @@
-import React, { FC, useCallback } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { TextField } from "../TextField";
-import { Button } from "@/ui/Button";
-import { useForm } from "react-hook-form";
-import { CreateEditRoomRequest, EditRoomRequest } from "@/interfaces/requests";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { validatingScheme } from "./validator";
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import { CommonProps, VoidFunction } from '@/interfaces/common';
+import { TextField } from '../TextField';
+import { Button } from '@/ui/Button';
+import { CreateEditRoomRequest, EditRoomRequest } from '@/interfaces/requests';
+import { validatingScheme } from './validator';
 
-interface RoomFormProps extends ClassNameProps {
+export interface RoomFormProps extends CommonProps {
 	readonly submitHandler: (values: CreateEditRoomRequest) => unknown;
 	readonly buttonText: string;
 	readonly defaultState?: CreateEditRoomRequest;
@@ -17,12 +17,12 @@ interface RoomFormProps extends ClassNameProps {
 const createInitialState = (): EditRoomRequest => {
 	return {
 		roomId: 0,
-		roomName: "",
-		roomDescription: "",
+		roomName: '',
+		roomDescription: '',
 	};
 };
 
-export const RoomForm: FC<RoomFormProps> = ({
+export const RoomForm: React.FC<RoomFormProps> = ({
 	afterSubmit,
 	submitHandler,
 	className,
@@ -36,24 +36,26 @@ export const RoomForm: FC<RoomFormProps> = ({
 	const { errors, isDirty, isSubmitting } = formState;
 	const { roomDescription, roomName } = errors;
 	const disabled = !isDirty || isSubmitting;
-	const onSubmit = useCallback(
+	const onSubmit = React.useCallback(
 		async (values: CreateEditRoomRequest) => {
 			await submitHandler(values);
-			afterSubmit && afterSubmit();
+			if (afterSubmit) {
+				afterSubmit();
+			}
 		},
 		[submitHandler, afterSubmit]
 	);
 	return (
 		<form className={className} onSubmit={handleSubmit(onSubmit)}>
 			<TextField
-				{...register("roomName")}
+				{...register('roomName')}
 				error={roomName?.message}
-				label="Room name"
+				label='Room name'
 			/>
 			<TextField
-				{...register("roomDescription")}
+				{...register('roomDescription')}
 				error={roomDescription?.message}
-				label="Room description"
+				label='Room description'
 			/>
 			<Button disabled={disabled}>{buttonText}</Button>
 		</form>

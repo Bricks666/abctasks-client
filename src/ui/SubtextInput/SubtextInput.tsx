@@ -1,16 +1,18 @@
-import { ClassNameProps } from "@/interfaces/common";
-import classNames from "classnames";
-import React, { FC } from "react";
-import { Text } from "../Text";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
+import { Text } from '../Text';
 
-import SubtextInputStyle from "./SubtextInput.module.css";
+import SubtextInputStyle from './SubtextInput.module.css';
 
-export const SubtextInput: FC<ClassNameProps> = ({ className, children }) => {
+export const SubtextInput: React.FC<React.PropsWithChildren<CommonProps>> = ({
+	className,
+	children,
+}) => {
 	return (
 		<Text
 			className={classNames(SubtextInputStyle.text, className)}
-			component="span"
-		>
+			component='span'>
 			{children}
 		</Text>
 	);

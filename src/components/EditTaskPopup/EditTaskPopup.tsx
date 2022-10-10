@@ -1,20 +1,20 @@
-import React, { FC } from "react";
-import { useGoBack } from "@/hooks";
-import { BasePopup, ClassNameProps } from "@/interfaces/common";
-import { MainPopup } from "@/ui/MainPopup";
-import { EditTaskForm } from "../EditTaskForm";
-import { useTranslation } from "react-i18next";
+import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useGoBack } from '@/hooks';
+import { BasePopup, CommonProps } from '@/interfaces/common';
+import { MainPopup } from '@/ui/MainPopup';
+import { EditTaskForm } from '../EditTaskForm';
 
-import EditTaskPopupStyle from "./EditTaskPopup.module.css";
+import EditTaskPopupStyle from './EditTaskPopup.module.css';
 
-interface EditTaskPopupProps extends ClassNameProps, BasePopup {}
+export interface EditTaskPopupProps extends CommonProps, BasePopup {}
 
-export const EditTaskPopup: FC<EditTaskPopupProps> = (props) => {
+export const EditTaskPopup: React.FC<EditTaskPopupProps> = (props) => {
 	const onClose = useGoBack();
-	const { t } = useTranslation("popups");
+	const { t } = useTranslation('popups');
 
 	return (
-		<MainPopup {...props} onClose={onClose} header={t("edit_task.title")}>
+		<MainPopup {...props} onClose={onClose} header={t('edit_task.title')}>
 			<EditTaskForm className={EditTaskPopupStyle.form} />
 		</MainPopup>
 	);

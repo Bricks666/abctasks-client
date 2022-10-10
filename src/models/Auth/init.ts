@@ -1,11 +1,11 @@
+import { forward, guard, sample } from 'effector';
 import {
 	authApi,
 	loginApi,
 	logoutApi,
 	refreshApi,
 	registrationApi,
-} from "@/api";
-import { forward, guard, sample } from "effector";
+} from '@/api';
 import {
 	$Authorizing,
 	$Login,
@@ -23,8 +23,8 @@ import {
 	refreshFx,
 	registration,
 	registrationFx,
-} from ".";
-import { mayStartFxHandler } from "../handlers";
+} from '.';
+import { mayStartFxHandler } from '../handlers';
 
 authFx.use(async () => {
 	await authApi();

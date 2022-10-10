@@ -1,6 +1,6 @@
-import { $Rooms, loadRooms, loadRoomsFx, resetRooms } from "@/models/Rooms";
-import { useStore } from "effector-react";
-import { useEffect } from "react";
+import { useStore } from 'effector-react';
+import { useEffect } from 'react';
+import { $Rooms, loadRooms, loadRoomsFx, resetRooms } from '@/models/Rooms';
 
 export const useRooms = () => {
 	const rooms = useStore($Rooms);

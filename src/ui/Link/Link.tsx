@@ -1,18 +1,21 @@
-import classNames from "classnames";
-import React, { FC } from "react";
-import { LinkProps, Link as ReactLink } from "react-router-dom";
-import { ClassNameProps } from "@/interfaces/common";
+import classNames from 'classnames';
+import * as React from 'react';
+import {
+	LinkProps as ReactLinkProps,
+	Link as ReactLink,
+} from 'react-router-dom';
+import { CommonProps } from '@/interfaces/common';
 
-import LinkStyle from "./Link.module.css";
+import LinkStyle from './Link.module.css';
 
-type LinkType = "common" | "react";
+type LinkType = 'common' | 'react';
 
-interface LinkComponent extends ClassNameProps, Readonly<LinkProps> {
+export interface LinkProps extends CommonProps, Readonly<ReactLinkProps> {
 	readonly type: LinkType;
 	readonly to: string;
 }
 
-export const Link: FC<LinkComponent> = ({
+export const Link: React.FC<LinkProps> = ({
 	className,
 	type,
 	to,
@@ -23,7 +26,7 @@ export const Link: FC<LinkComponent> = ({
 	...link
 }) => {
 	const classes = classNames(LinkStyle.link, className);
-	if (type === "common") {
+	if (type === 'common') {
 		return (
 			<a className={classes} href={to} {...link}>
 				{children}
@@ -38,8 +41,7 @@ export const Link: FC<LinkComponent> = ({
 			to={to}
 			replace={replace}
 			reloadDocument={reloadDocument}
-			{...link}
-		>
+			{...link}>
 			{children}
 		</ReactLink>
 	);

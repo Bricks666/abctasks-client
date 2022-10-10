@@ -1,5 +1,5 @@
-import { ServerRoom } from "@/interfaces/response";
-import { Room } from "./types";
+import { ServerRoom } from '@/interfaces/response';
+import { Room } from './types';
 
 export const toValidRoom = (room: ServerRoom): Room => {
 	return {

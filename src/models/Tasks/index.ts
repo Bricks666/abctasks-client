@@ -1,45 +1,46 @@
-import { createDomain } from "effector-logger";
+/* eslint-disable import/no-extraneous-dependencies */
+import { createDomain } from 'effector-logger';
 import {
 	TasksResponse,
 	DeleteTaskResponse,
 	CreateTaskResponse,
-} from "@/interfaces/response";
+} from '@/interfaces/response';
 import {
 	DeleteTaskRequest,
 	EditTaskRequest,
 	MoveTaskRequest,
 	TaskRequest,
-} from "@/interfaces/requests";
-import { TaskStructure } from "./types";
-import { ID } from "@/interfaces/common";
+} from '@/interfaces/requests';
+import { TaskStructure } from './types';
+import { ID } from '@/interfaces/common';
 
-export const TasksDomain = createDomain("TasksDomain");
+export const TasksDomain = createDomain('TasksDomain');
 
 export const $Tasks = TasksDomain.store<TaskStructure[]>([], {
-	name: "Tasks",
+	name: 'Tasks',
 });
 export const $LoadingTasks = TasksDomain.store<boolean>(false, {
-	name: "LoadingTasks",
+	name: 'LoadingTasks',
 });
 
-export const loadTasksFx = TasksDomain.effect<ID, TasksResponse>("loadTasksFx");
+export const loadTasksFx = TasksDomain.effect<ID, TasksResponse>('loadTasksFx');
 
 export const createTaskFx = TasksDomain.effect<TaskRequest, CreateTaskResponse>(
-	"createTaskFx"
+	'createTaskFx'
 );
 export const editTaskFx = TasksDomain.effect<
 	EditTaskRequest,
 	CreateTaskResponse
->("editTasksFx");
+>('editTasksFx');
 export const deleteTaskFx = TasksDomain.effect<
 	DeleteTaskRequest,
 	DeleteTaskResponse
->("deleteTaskFx");
+>('deleteTaskFx');
 
-export const loadTasks = TasksDomain.event<ID>("loadTasks");
-export const createTask = TasksDomain.event<TaskRequest>("createTaskEvent");
-export const editTask = TasksDomain.event<EditTaskRequest>("editTaskEvent");
+export const loadTasks = TasksDomain.event<ID>('loadTasks');
+export const createTask = TasksDomain.event<TaskRequest>('createTaskEvent');
+export const editTask = TasksDomain.event<EditTaskRequest>('editTaskEvent');
 export const deleteTask =
-	TasksDomain.event<DeleteTaskRequest>("deleteTaskEvent");
-export const moveTask = TasksDomain.event<MoveTaskRequest>("modeTaskEvent");
-export const resetTasks = TasksDomain.event("resetTasksEvent");
+	TasksDomain.event<DeleteTaskRequest>('deleteTaskEvent');
+export const moveTask = TasksDomain.event<MoveTaskRequest>('modeTaskEvent');
+export const resetTasks = TasksDomain.event('resetTasksEvent');

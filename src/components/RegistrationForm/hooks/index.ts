@@ -1,1 +1,1 @@
-export { useRegistrationError } from "./useRegistrationError";
+export { useRegistrationError } from './useRegistrationError';

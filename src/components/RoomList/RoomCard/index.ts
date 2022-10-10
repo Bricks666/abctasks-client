@@ -1,1 +1,1 @@
-export { RoomCard } from "./RoomCard";
+export { RoomCard, type RoomCardProps } from './RoomCard';

@@ -1,42 +1,45 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React, { FC, useEffect, useRef } from "react";
+import * as React from 'react';
 
-import FocusTrapStyle from "./FocusTrap.module.css";
+import FocusTrapStyle from './FocusTrap.module.css';
 
-interface FocusTrapProps {
+export interface FocusTrapProps {
 	readonly open: boolean;
 }
 
 const tabbableSelectors = [
-	"[tabindex]",
-	"a[href]",
-	"button:not([disabled])",
-	"input",
-	"select",
-	"textarea",
+	'[tabindex]',
+	'a[href]',
+	'button:not([disabled])',
+	'input',
+	'select',
+	'textarea',
 ];
 
 const getTabbable = (root: HTMLElement) => {
 	return Array.from(
-		root.querySelectorAll<HTMLElement>(tabbableSelectors.join(","))
+		root.querySelectorAll<HTMLElement>(tabbableSelectors.join(','))
 	);
 };
 
-export const FocusTrap: FC<FocusTrapProps> = ({ open, children }) => {
-	const rootRef = useRef<HTMLDivElement | null>(null);
-	const startElement = useRef<HTMLDivElement | null>(null);
-	const endElement = useRef<HTMLDivElement | null>(null);
-	const lastFocus = useRef<HTMLElement | null>(null);
-	const lastKeyboardEvent = useRef<globalThis.KeyboardEvent | null>(null);
+export const FocusTrap: React.FC<React.PropsWithChildren<FocusTrapProps>> = ({
+	open,
+	children,
+}) => {
+	const rootRef = React.useRef<HTMLDivElement | null>(null);
+	const startElement = React.useRef<HTMLDivElement | null>(null);
+	const endElement = React.useRef<HTMLDivElement | null>(null);
+	const lastFocus = React.useRef<HTMLElement | null>(null);
+	const lastKeyboardEvent = React.useRef<globalThis.KeyboardEvent | null>(null);
 
-	useEffect(() => {
+	React.useEffect(() => {
 		lastFocus.current = document.activeElement as HTMLElement;
 		return () => {
 			lastFocus.current?.focus();
 		};
 	}, []);
 
-	useEffect(() => {
+	React.useEffect(() => {
 		if (!open || !rootRef.current) {
 			return;
 		}
@@ -68,21 +71,21 @@ export const FocusTrap: FC<FocusTrapProps> = ({ open, children }) => {
 			}
 		};
 
-		document.addEventListener("focusin", focusin);
+		document.addEventListener('focusin', focusin);
 
 		return () => {
-			document.removeEventListener("focusin", focusin);
+			document.removeEventListener('focusin', focusin);
 		};
 	}, [open]);
 
-	useEffect(() => {
+	React.useEffect(() => {
 		if (!open || !rootRef.current) {
 			return;
 		}
 
 		const tabHandler = (evt: globalThis.KeyboardEvent) => {
 			const { key, shiftKey, target } = evt;
-			if (key !== "Tab") {
+			if (key !== 'Tab') {
 				return;
 			}
 			lastKeyboardEvent.current = evt;
@@ -91,20 +94,20 @@ export const FocusTrap: FC<FocusTrapProps> = ({ open, children }) => {
 			}
 		};
 
-		document.addEventListener("keyup", tabHandler);
+		document.addEventListener('keyup', tabHandler);
 
 		return () => {
-			document.removeEventListener("keyup", tabHandler);
+			document.removeEventListener('keyup', tabHandler);
 		};
 	}, [open]);
 
 	return (
 		<>
-			<div className="visibility-hidden" tabIndex={0} ref={startElement} />
+			<div className='visibility-hidden' tabIndex={0} ref={startElement} />
 			<div className={FocusTrapStyle.trap} ref={rootRef}>
 				{children}
 			</div>
-			<div className="visibility-hidden" tabIndex={0} ref={endElement} />
+			<div className='visibility-hidden' tabIndex={0} ref={endElement} />
 		</>
 	);
 };

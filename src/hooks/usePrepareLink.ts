@@ -1,6 +1,6 @@
-import { ID } from "@/interfaces/common";
-import { useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ID } from '@/interfaces/common';
 
 interface UsePrepareLinkParams {
 	readonly query?: Record<string, string>;
@@ -34,16 +34,16 @@ export const usePrepareLink = ({
 		);
 		Object.entries(addQuery || {}).forEach(([key, value]) => {
 			const query = newQuery.get(key);
-			const currentValues = query?.split(",") || null;
+			const currentValues = query?.split(',') || null;
 			const newValue = currentValues
-				? `${currentValues.join(",")},${value}`
+				? `${currentValues.join(',')},${value}`
 				: value;
 			newQuery.set(key, newValue as string);
 		});
 
 		return {
 			pathname,
-			search: newQuery.toString() || "",
+			search: newQuery.toString() || '',
 			hash: location.hash,
 		};
 	}, [location, to, addQuery, query, saveQuery]);

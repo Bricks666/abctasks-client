@@ -1,6 +1,6 @@
-import { TaskResponse } from "@/interfaces/response";
-import { TaskStructure } from "./types";
-import { toValidTask } from "./utils";
+import { TaskResponse } from '@/interfaces/response';
+import { TaskStructure } from './types';
+import { toValidTask } from './utils';
 
 export const editTaskHandler = (
 	tasks: TaskStructure[],

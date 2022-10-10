@@ -2,7 +2,7 @@
 	display: grid;
 
 	grid-template-columns: var(--template-columns);
-  grid-template-rows: repeat(3, min-content);
+	grid-template-rows: repeat(3, min-content);
 
 	row-gap: 1.5rem;
 }

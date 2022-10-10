@@ -1,1 +1,1 @@
-export { SaveLink } from "./SaveLink";
+export { SaveLink, type SaveLinkProps } from './SaveLink';

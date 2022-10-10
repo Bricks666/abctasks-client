@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 export const useClickOutside = (
 	reference: HTMLElement | null,
@@ -18,8 +18,8 @@ export const useClickOutside = (
 				onClick(evt);
 			}
 		};
-		document.addEventListener("mousedown", listener);
+		document.addEventListener('mousedown', listener);
 
-		return () => document.removeEventListener("mousedown", listener);
+		return () => document.removeEventListener('mousedown', listener);
 	}, [reference, onClick, condition]);
 };

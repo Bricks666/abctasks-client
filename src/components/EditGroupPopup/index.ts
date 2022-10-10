@@ -1,1 +1,1 @@
-export { EditGroupPopup } from "./EditGroupPopup";
+export { EditGroupPopup } from './EditGroupPopup';

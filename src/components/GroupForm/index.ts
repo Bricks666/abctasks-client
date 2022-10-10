@@ -1,1 +1,1 @@
-export { GroupForm } from "./GroupForm";
+export { GroupForm, type GroupFormProps } from './GroupForm';

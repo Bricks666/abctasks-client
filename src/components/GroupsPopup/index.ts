@@ -1,1 +1,1 @@
-export { GroupsPopup } from "./GroupsPopup";
+export { GroupsPopup, type GroupsPopupProps } from './GroupsPopup';

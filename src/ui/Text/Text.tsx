@@ -1,44 +1,46 @@
-import classNames from "classnames";
-import React, { createElement, CSSProperties, FC, memo } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
 
-import TextStyle from "./Text.module.css";
+import TextStyle from './Text.module.css';
 
-type Components = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
+type Components = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 
-interface TextProps extends ClassNameProps {
+export interface TextProps extends CommonProps {
 	readonly component?: Components;
-	readonly style?: Components;
+	readonly variant?: Components;
 	readonly paddings?: boolean;
 	readonly margins?: boolean;
-	readonly cssStyles?: CSSProperties;
-	readonly align?: "start" | "center" | "end" | "justify";
+	readonly cssStyles?: React.CSSProperties;
+	readonly align?: 'start' | 'center' | 'end' | 'justify';
 }
 
-export const Text: FC<TextProps> = memo(function Text({
-	children,
-	className,
-	cssStyles,
-	component = "p",
-	style = component,
-	paddings = false,
-	margins = false,
-	align = "start",
-}) {
-	const element = createElement(component, {}, {});
-	const classes = classNames(
-		TextStyle.text,
-		TextStyle[style],
-		TextStyle[align],
-		{
-			[TextStyle.withoutPadding]: !paddings,
-			[TextStyle.withoutMargins]: !margins,
-		},
-		className
-	);
-	return (
-		<element.type className={classes} {...element.props} style={cssStyles}>
-			{children}
-		</element.type>
-	);
-});
+export const Text: React.FC<React.PropsWithChildren<TextProps>> = React.memo(
+	function Text({
+		children,
+		className,
+		cssStyles,
+		component = 'p',
+		variant = component,
+		paddings = false,
+		margins = false,
+		align = 'start',
+	}) {
+		const element = React.createElement(component, {}, null);
+		const classes = classNames(
+			TextStyle.text,
+			TextStyle[variant],
+			TextStyle[align],
+			{
+				[TextStyle.withoutPadding]: !paddings,
+				[TextStyle.withoutMargins]: !margins,
+			},
+			className
+		);
+		return (
+			<element.type className={classes} {...element.props} style={cssStyles}>
+				{children}
+			</element.type>
+		);
+	}
+);

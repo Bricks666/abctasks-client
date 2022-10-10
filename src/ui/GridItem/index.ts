@@ -1,1 +1,1 @@
-export { GridItem } from "./GridItem";
+export { GridItem, type GridItemProps } from './GridItem';

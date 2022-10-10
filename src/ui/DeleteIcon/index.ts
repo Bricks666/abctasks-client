@@ -1,1 +1,1 @@
-export { DeleteIcon } from "./DeleteIcon";
+export { DeleteIcon } from './DeleteIcon';

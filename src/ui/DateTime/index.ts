@@ -1,1 +1,1 @@
-export { DateTime } from "./DateTime";
+export { DateTime, type DateTimeProps } from './DateTime';

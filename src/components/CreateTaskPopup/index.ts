@@ -1,1 +1,1 @@
-export { CreateTaskPopup } from "./CreateTaskPopup";
+export { CreateTaskPopup, type CreateTaskPopupProps } from './CreateTaskPopup';

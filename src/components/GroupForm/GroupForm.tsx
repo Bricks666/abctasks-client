@@ -1,20 +1,20 @@
-import React, { FC } from "react";
-import { useParams } from "react-router-dom";
-import classNames from "classnames";
-import { useForm } from "react-hook-form";
-import { TextField } from "@/components/TextField";
-import { Button } from "@/ui/Button";
-import { CreateEditGroupRequest } from "@/interfaces/requests";
-import { Group } from "@/ui/Group";
-import { ClassNameProps, ID } from "@/interfaces/common";
-import { Stack } from "@/ui/Stack";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { validatingScheme } from "./validator";
-import { useTranslation } from "react-i18next";
+import * as React from 'react';
+import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import { useTranslation } from 'react-i18next';
+import { TextField } from '@/components/TextField';
+import { Button } from '@/ui/Button';
+import { CreateEditGroupRequest } from '@/interfaces/requests';
+import { Stack } from '@/ui/Stack';
+import { validatingScheme } from './validator';
+import { CommonProps, ID, VoidFunction } from '@/interfaces/common';
+import { Group } from '@/ui/Group';
 
-import GroupFormStyle from "./GroupForm.module.css";
+import GroupFormStyle from './GroupForm.module.css';
 
-interface GroupFormProps extends ClassNameProps {
+export interface GroupFormProps extends CommonProps {
 	readonly defaultState?: CreateEditGroupRequest | null;
 	readonly afterSubmit?: VoidFunction;
 	readonly submitHandler: (values: CreateEditGroupRequest) => unknown;
@@ -24,14 +24,14 @@ interface GroupFormProps extends ClassNameProps {
 const createInitialState = (roomId: ID): CreateEditGroupRequest => {
 	return {
 		id: 0,
-		mainColor: "#000",
-		secondColor: "#fff",
-		name: "",
-		roomId: roomId,
+		mainColor: '#000',
+		secondColor: '#fff',
+		name: '',
+		roomId,
 	};
 };
 
-export const GroupForm: FC<GroupFormProps> = ({
+export const GroupForm: React.FC<GroupFormProps> = ({
 	afterSubmit,
 	submitHandler,
 	className,
@@ -47,36 +47,36 @@ export const GroupForm: FC<GroupFormProps> = ({
 	const state = watch();
 	const onSubmit = (values: CreateEditGroupRequest) => {
 		submitHandler(values);
+		// eslint-disable-next-line no-unused-expressions
 		afterSubmit && afterSubmit();
 	};
-	const { t } = useTranslation("popups");
+	const { t } = useTranslation('popups');
 	const { isDirty, isSubmitting, errors } = formState;
 	return (
 		<form
 			className={classNames(GroupFormStyle.block, className)}
-			onSubmit={handleSubmit(onSubmit)}
-		>
+			onSubmit={handleSubmit(onSubmit)}>
 			<Stack className={GroupFormStyle.fields}>
 				<TextField
 					className={GroupFormStyle.input}
-					{...register("name")}
-					label={t("group_form.name")}
+					{...register('name')}
+					label={t('group_form.name')}
 					error={errors.name?.message}
 				/>
 				<TextField
 					className={GroupFormStyle.color}
-					{...register("mainColor")}
+					{...register('mainColor')}
 					inputClassName={GroupFormStyle.color_input}
-					label={t("group_form.main_color")}
-					type="color"
+					label={t('group_form.main_color')}
+					type='color'
 					error={errors.mainColor?.message}
 				/>
 				<TextField
 					className={GroupFormStyle.color}
-					{...register("secondColor")}
+					{...register('secondColor')}
 					inputClassName={GroupFormStyle.color_input}
-					label={t("group_form.secondary_color")}
-					type="color"
+					label={t('group_form.secondary_color')}
+					type='color'
 					error={errors.secondColor?.message}
 				/>
 			</Stack>
@@ -84,8 +84,7 @@ export const GroupForm: FC<GroupFormProps> = ({
 
 			<Button
 				className={GroupFormStyle.button}
-				disabled={!isDirty || isSubmitting}
-			>
+				disabled={!isDirty || isSubmitting}>
 				{buttonText}
 			</Button>
 		</form>

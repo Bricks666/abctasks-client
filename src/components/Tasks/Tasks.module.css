@@ -5,7 +5,7 @@
 }
 
 .loading {
-  grid-column: 1 / -1;
+	grid-column: 1 / -1;
 }
 
 @media (min-width: 1000px) {

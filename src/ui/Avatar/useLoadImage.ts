@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export const useLoadImage = (url?: string | null) => {
-	const [status, setStatus] = useState<"loaded" | "error" | "nothing">(
-		"nothing"
+	const [status, setStatus] = useState<'loaded' | 'error' | 'nothing'>(
+		'nothing'
 	);
 
 	useEffect(() => {
@@ -10,13 +10,13 @@ export const useLoadImage = (url?: string | null) => {
 			return undefined;
 		}
 		const image = new Image();
-		setStatus("nothing");
+		setStatus('nothing');
 		image.src = url;
 		image.onload = () => {
-			setStatus("loaded");
+			setStatus('loaded');
 		};
 		image.onerror = () => {
-			setStatus("error");
+			setStatus('error');
 		};
 	}, [url]);
 	return status;

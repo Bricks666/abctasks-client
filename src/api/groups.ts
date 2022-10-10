@@ -1,15 +1,15 @@
-import { ID } from "@/interfaces/common";
+import { ID } from '@/interfaces/common';
 import {
 	CreateEditGroupRequest,
 	DeleteGroupRequest,
-} from "@/interfaces/requests";
+} from '@/interfaces/requests';
 import {
 	CreateGroupResponse,
 	DeleteGroupResponse,
 	EditGroupResponse,
 	TaskGroupsResponse,
-} from "@/interfaces/response";
-import { instance } from "./instance";
+} from '@/interfaces/response';
+import { instance } from './instance';
 
 export const getTaskGroupsApi = async (
 	roomId: ID

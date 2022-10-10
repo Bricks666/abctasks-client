@@ -1,4 +1,4 @@
-import { DateType, ID } from "@/interfaces/common";
+import { DateType, ID } from '@/interfaces/common';
 
 export enum TaskStatus {
 	DONE,

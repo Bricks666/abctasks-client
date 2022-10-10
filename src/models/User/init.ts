@@ -1,5 +1,5 @@
-import { getProfileApi, updateProfileApi } from "@/api";
-import { forward, guard, sample } from "effector";
+import { forward, guard, sample } from 'effector';
+import { getProfileApi, updateProfileApi } from '@/api';
 import {
 	$User,
 	initialUser,
@@ -7,9 +7,9 @@ import {
 	loadUserFx,
 	updateProfile,
 	updateProfileFx,
-} from ".";
-import { authFx, loginFx, logoutFx } from "../Auth";
-import { mayStartFxHandler } from "../handlers";
+} from '.';
+import { authFx, loginFx, logoutFx } from '../Auth';
+import { mayStartFxHandler } from '../handlers';
 
 loadUserFx.use(getProfileApi);
 updateProfileFx.use(updateProfileApi);

@@ -1,1 +1,1 @@
-export { TaskListHeader } from "./TaskListHeader";
+export { TaskListHeader, type TaskListHeaderComponent } from './TaskListHeader';

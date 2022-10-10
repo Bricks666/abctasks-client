@@ -1,35 +1,35 @@
-import React, { DragEventHandler, FC, useCallback } from "react";
-import { useParams } from "react-router-dom";
-import { ClassNameProps } from "@/interfaces/common";
-import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
-import { DropZone } from "../DropZone";
-import { TaskListHeader } from "../TaskListHeader";
-import { moveTask } from "@/models/Tasks";
-import { DraggableTaskCard } from "../DraggableTaskCard";
-import { Stack } from "@/ui/Stack";
+import * as React from 'react';
+import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
+import { TaskStatus, TaskStructure } from '@/models/Tasks/types';
+import { DropZone } from '../DropZone';
+import { TaskListHeader } from '../TaskListHeader';
+import { moveTask } from '@/models/Tasks';
+import { DraggableTaskCard } from '../DraggableTaskCard';
+import { Stack } from '@/ui/Stack';
 
-import TasksListStyle from "./TasksList.module.css";
-import classNames from "classnames";
+import TasksListStyle from './TasksList.module.css';
 
-interface TasksListComponent extends ClassNameProps {
+export interface TasksListProps extends CommonProps {
 	readonly tasks: TaskStructure[];
 	readonly columnStatus: TaskStatus;
 	readonly header?: string;
 }
-const onDragOver: DragEventHandler<HTMLDivElement> = (evt) =>
+const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 	evt.preventDefault();
 
-export const TasksList: FC<TasksListComponent> = ({
+export const TasksList: React.FC<TasksListProps> = ({
 	tasks,
 	className,
 	columnStatus,
 	header,
 }) => {
 	const { id: roomId } = useParams();
-	const onDrop = useCallback<DragEventHandler>(
+	const onDrop = React.useCallback<React.DragEventHandler>(
 		(evt) => {
-			const taskId = +evt.dataTransfer.getData("taskId");
-			const status = +evt.dataTransfer.getData("status");
+			const taskId = +evt.dataTransfer.getData('taskId');
+			const status = +evt.dataTransfer.getData('status');
 			if (status !== columnStatus && roomId != null) {
 				moveTask({
 					status: columnStatus.toString() as unknown as TaskStatus,
@@ -45,13 +45,11 @@ export const TasksList: FC<TasksListComponent> = ({
 		<DropZone
 			className={classNames(TasksListStyle.dropZone, className)}
 			onDrop={onDrop}
-			onDragOver={onDragOver}
-		>
-			<Stack space="l">
+			onDragOver={onDragOver}>
+			<Stack space='l'>
 				<TaskListHeader
 					className={TasksListStyle.header}
-					columnStatus={columnStatus}
-				>
+					columnStatus={columnStatus}>
 					{header}
 				</TaskListHeader>
 				<Stack>

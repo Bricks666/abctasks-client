@@ -1,14 +1,14 @@
-import React, { FC, memo } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import dayjs from "dayjs";
-import { Text } from "../Text";
+import * as React from 'react';
+import dayjs from 'dayjs';
+import { CommonProps } from '@/interfaces/common';
+import { Text } from '../Text';
 
-interface DateTimeProps extends ClassNameProps {
+export interface DateTimeProps extends CommonProps {
 	readonly date: string | number | Date;
 	readonly format: string;
 }
 
-export const DateTime: FC<DateTimeProps> = memo(function Datetime({
+export const DateTime: React.FC<DateTimeProps> = React.memo(function Datetime({
 	date,
 	format,
 	className,
@@ -17,7 +17,7 @@ export const DateTime: FC<DateTimeProps> = memo(function Datetime({
 	const showDate = dayjs(jsDate).format(format);
 	return (
 		<time className={className} dateTime={jsDate}>
-			<Text component="span">{showDate}</Text>
+			<Text component='span'>{showDate}</Text>
 		</time>
 	);
 });

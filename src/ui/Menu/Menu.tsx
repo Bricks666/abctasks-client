@@ -1,19 +1,19 @@
-import { ClassNameProps, ExtractProps } from "@/interfaces/common";
-import React, { AriaRole, CSSProperties, FC } from "react";
-import { List } from "../List";
-import { Popover } from "../Popover";
+import * as React from 'react';
+import { CommonProps, ExtractProps } from '@/interfaces/common';
+import { List } from '../List';
+import { Popover } from '../Popover';
 
-interface MenuProps
-	extends ClassNameProps,
-		ExtractProps<typeof Popover, "className"> {
-	readonly role?: AriaRole;
-	readonly style?: CSSProperties;
+export interface MenuProps
+	extends CommonProps,
+		ExtractProps<typeof Popover, 'className'> {
+	readonly role?: React.AriaRole;
+	readonly style?: React.CSSProperties;
 }
 
-export const Menu: FC<MenuProps> = ({
+export const Menu: React.FC<MenuProps> = ({
 	children,
 	className,
-	role = "menu",
+	role = 'menu',
 	...props
 }) => {
 	return (

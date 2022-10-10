@@ -3,12 +3,12 @@ import React, {
 	HTMLInputTypeAttribute,
 	PropsWithChildren,
 	ReactNode,
-} from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
-import { ClassNameProps } from "@/interfaces/common";
-import { Field } from "@/ui/Field";
+} from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
+import { CommonProps } from '@/interfaces/common';
+import { Field } from '@/ui/Field';
 
-interface TextFieldProps extends ClassNameProps, UseFormRegisterReturn {
+export interface TextFieldProps extends CommonProps, UseFormRegisterReturn {
 	readonly error?: string;
 	readonly multiline?: boolean;
 	readonly select?: boolean;

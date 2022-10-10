@@ -1,7 +1,7 @@
-import { useStore } from "effector-react";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { $TaskGroups, loadTaskGroups, resetGroups } from "@/models/Groups";
+import { useStore } from 'effector-react';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { $TaskGroups, loadTaskGroups, resetGroups } from '@/models/Groups';
 
 export const useTaskGroups = () => {
 	const groups = useStore($TaskGroups);

@@ -1,19 +1,17 @@
-import React, { DragEventHandler, FC, memo } from "react";
+import * as React from 'react';
 
-interface DraggableProps {
-	readonly onDragStart?: DragEventHandler;
-	readonly onDragEnd?: DragEventHandler;
-	readonly onDragEnter?: DragEventHandler;
-	readonly onDragLeave?: DragEventHandler;
+export interface DraggableProps {
+	readonly onDragStart?: React.DragEventHandler;
+	readonly onDragEnd?: React.DragEventHandler;
+	readonly onDragEnter?: React.DragEventHandler;
+	readonly onDragLeave?: React.DragEventHandler;
 }
 
-export const Draggable: FC<DraggableProps> = memo(function Draggable({
-	children,
-	...handlers
-}) {
-	return (
-		<div draggable {...handlers}>
-			{children}
-		</div>
-	);
-});
+export const Draggable: React.FC<React.PropsWithChildren<DraggableProps>> =
+	React.memo(function Draggable({ children, ...handlers }) {
+		return (
+			<div draggable {...handlers}>
+				{children}
+			</div>
+		);
+	});

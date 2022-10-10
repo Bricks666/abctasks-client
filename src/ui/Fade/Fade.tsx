@@ -1,10 +1,9 @@
-import { ExtractProps } from "@/interfaces/common";
-import React, { FC } from "react";
-import { Transition } from "../Transition";
+import * as React from 'react';
+import { Transition, TransitionProps } from '../Transition';
 
-import FadeStyle from "./Fade.module.css";
+import FadeStyle from './Fade.module.css';
 
-export const Fade: FC<ExtractProps<typeof Transition, "classes">> = (props) => {
+export const Fade: React.FC<Omit<TransitionProps, 'classes'>> = (props) => {
 	const classes = {
 		entering: FadeStyle.open,
 		entered: FadeStyle.opened,

@@ -1,1 +1,1 @@
-export { UpdateProfileForm } from "./UpdateProfileForm";
+export { UpdateProfileForm } from './UpdateProfileForm';

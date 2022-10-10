@@ -1,27 +1,22 @@
-import classNames from "classnames";
-import React, { FC, memo } from "react";
-import { ClassNameProps } from "@/interfaces/common";
+import * as React from 'react';
+import classNames from 'classnames';
+import { CommonProps } from '@/interfaces/common';
 
-import SvgIconStyle from "./SvgIcon.module.css";
+import SvgIconStyle from './SvgIcon.module.css';
 
-interface SvgIconProps extends ClassNameProps {
+export interface SvgIconProps extends CommonProps {
 	readonly viewBox: string;
 	readonly title?: string;
 }
 
-export const SvgIcon: FC<SvgIconProps> = memo(function SvgIcon({
-	children,
-	className,
-	viewBox,
-	title,
-}) {
-	return (
-		<svg
-			className={classNames(SvgIconStyle.icon, className)}
-			viewBox={viewBox}
-			aria-label={title}
-		>
-			{children}
-		</svg>
-	);
-});
+export const SvgIcon: React.FC<React.PropsWithChildren<SvgIconProps>> =
+	React.memo(function SvgIcon({ children, className, viewBox, title }) {
+		return (
+			<svg
+				className={classNames(SvgIconStyle.icon, className)}
+				viewBox={viewBox}
+				aria-label={title}>
+				{children}
+			</svg>
+		);
+	});

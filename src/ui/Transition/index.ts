@@ -1,1 +1,1 @@
-export { Transition } from "./Transition";
+export { Transition, type TransitionProps } from './Transition';

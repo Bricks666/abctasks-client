@@ -1,46 +1,46 @@
-import React, { FC, useMemo } from "react";
-import classNames from "classnames";
-import { useTranslation } from "react-i18next";
-import { useGroupedTasks, useLoadingTasks } from "@/hooks";
-import { ClassNameProps } from "@/interfaces/common";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
-import { TasksList } from "../TasksList";
-import { TaskStatus, TaskStructure } from "@/models/Tasks/types";
+import * as React from 'react';
+import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
+import { useGroupedTasks, useLoadingTasks } from '@/hooks';
+import { CommonProps } from '@/interfaces/common';
+import { LoadingWrapper } from '@/ui/LoadingWrapper';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
+import { TasksList } from '../TasksList';
+import { TaskStatus, TaskStructure } from '@/models/Tasks/types';
 
-import TasksStyle from "./Tasks.module.css";
+import TasksStyle from './Tasks.module.css';
 
-interface Column {
+export interface Column {
 	readonly headerCode: string;
 	readonly tasks: TaskStructure[];
 	readonly status: TaskStatus;
 }
 
-export const Tasks: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("room");
+export const Tasks: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('room');
 	const tasks = useGroupedTasks();
 	const isLoading = useLoadingTasks();
 
-	const columns = useMemo<Column[]>(
+	const columns = React.useMemo<Column[]>(
 		() => [
 			{
-				headerCode: "ready",
-				tasks: tasks["ready"],
+				headerCode: 'ready',
+				tasks: tasks.ready,
 				status: TaskStatus.READY,
 			},
 			{
-				headerCode: "inProgress",
-				tasks: tasks["inProgress"],
+				headerCode: 'inProgress',
+				tasks: tasks.inProgress,
 				status: TaskStatus.IN_PROGRESS,
 			},
 			{
-				headerCode: "review",
-				tasks: tasks["needReview"],
+				headerCode: 'review',
+				tasks: tasks.needReview,
 				status: TaskStatus.REVIEW,
 			},
 			{
-				headerCode: "done",
-				tasks: tasks["done"],
+				headerCode: 'done',
+				tasks: tasks.done,
 				status: TaskStatus.DONE,
 			},
 		],
@@ -52,8 +52,7 @@ export const Tasks: FC<ClassNameProps> = ({ className }) => {
 			<LoadingWrapper
 				className={TasksStyle.loading}
 				isLoading={isLoading}
-				loadingIndicator={<LoadingIndicator />}
-			>
+				loadingIndicator={<LoadingIndicator />}>
 				{columns.map(({ headerCode, status, tasks }) => (
 					<TasksList
 						tasks={tasks}

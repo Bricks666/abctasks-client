@@ -1,1 +1,1 @@
-export { CreateTaskForm } from "./CreateTaskForm";
+export { CreateTaskForm, type TaskFormValues } from './CreateTaskForm';

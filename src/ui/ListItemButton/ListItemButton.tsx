@@ -1,13 +1,13 @@
-import classNames from "classnames";
-import React, { FC } from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { BaseButton, BaseButtonProps } from "../BaseButton";
+import classNames from 'classnames';
+import * as React from 'react';
+import { CommonProps } from '@/interfaces/common';
+import { BaseButton, BaseButtonProps } from '../BaseButton';
 
-import ListItemButtonStyle from "./ListItemButton.module.css";
+import ListItemButtonStyle from './ListItemButton.module.css';
 
-interface ListItemButtonProps extends ClassNameProps, BaseButtonProps {}
+export interface ListItemButtonProps extends CommonProps, BaseButtonProps {}
 
-export const ListItemButton: FC<ListItemButtonProps> = ({
+export const ListItemButton: React.FC<ListItemButtonProps> = ({
 	className,
 	children,
 	...props
@@ -15,8 +15,7 @@ export const ListItemButton: FC<ListItemButtonProps> = ({
 	return (
 		<BaseButton
 			className={classNames(ListItemButtonStyle.button, className)}
-			{...props}
-		>
+			{...props}>
 			{children}
 		</BaseButton>
 	);

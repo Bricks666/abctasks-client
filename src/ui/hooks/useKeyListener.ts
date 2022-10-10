@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
+import { VoidFunction } from '@/interfaces/common';
 
 export const useKeyListener = (
 	key: string,
@@ -13,11 +14,11 @@ export const useKeyListener = (
 					callback();
 				}
 			};
-			document.addEventListener("keydown", onKeyDown);
+			document.addEventListener('keydown', onKeyDown);
 		}
 
 		return () => {
-			document.removeEventListener("keydown", onKeyDown);
+			document.removeEventListener('keydown', onKeyDown);
 		};
 	}, [key, callback, condition]);
 };

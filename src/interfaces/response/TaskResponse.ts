@@ -1,5 +1,5 @@
-import { TaskStatus } from "@/models/Tasks/types";
-import { ID } from "../common";
+import { TaskStatus } from '@/models/Tasks/types';
+import { ID } from '../common';
 
 export interface TasksResponse {
 	readonly tasks: TaskResponse[];

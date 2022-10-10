@@ -1,1 +1,1 @@
-export { FullScreenPopup } from "./FullScreenPopup";
+export { FullScreenPopup, type FillScreenPopupProps } from './FullScreenPopup';

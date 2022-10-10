@@ -1,1 +1,1 @@
-export { TaskProgress } from "./TaskProgress";
+export { TaskProgress, type TaskProgressComponent } from './TaskProgress';

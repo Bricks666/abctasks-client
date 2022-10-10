@@ -1,10 +1,10 @@
-import Joi from "joi";
-import { LoginRequest } from "@/interfaces/requests";
+import Joi from 'joi';
+import { LoginRequest } from '@/interfaces/requests';
 import {
 	allowedSymbolsRegExp,
 	MAX_LOGIN_PASSWORD_LENGTH,
 	MIN_LOGIN_PASSWORD_LENGTH,
-} from "@/const";
+} from '@/const';
 
 export const validationSchema = Joi.object<LoginRequest>({
 	login: Joi.string()
@@ -13,11 +13,11 @@ export const validationSchema = Joi.object<LoginRequest>({
 		.max(MAX_LOGIN_PASSWORD_LENGTH)
 		.required()
 		.messages({
-			"string.empty": "Login must be provided",
-			"string.pattern.base":
-				"Login can only contain latins alphas, numeric and !, *, (, ), _, +",
-			"string.min": `Login must contain minimum ${MIN_LOGIN_PASSWORD_LENGTH} symbols`,
-			"string.max": `Login must contain maximum ${MAX_LOGIN_PASSWORD_LENGTH} symbols`,
+			'string.empty': 'Login must be provided',
+			'string.pattern.base':
+				'Login can only contain latins alphas, numeric and !, *, (, ), _, +',
+			'string.min': `Login must contain minimum ${MIN_LOGIN_PASSWORD_LENGTH} symbols`,
+			'string.max': `Login must contain maximum ${MAX_LOGIN_PASSWORD_LENGTH} symbols`,
 		}),
 	password: Joi.string()
 		.pattern(allowedSymbolsRegExp)
@@ -25,11 +25,11 @@ export const validationSchema = Joi.object<LoginRequest>({
 		.max(MAX_LOGIN_PASSWORD_LENGTH)
 		.required()
 		.messages({
-			"string.empty": "Password must be provided",
-			"string.pattern.base":
-				"Password can only contain latins alphas, numeric and !, *, (, ), _, +",
-			"string.min": `Password must contain minimum ${MIN_LOGIN_PASSWORD_LENGTH} symbols`,
-			"string.max": `Password must contain maximum ${MAX_LOGIN_PASSWORD_LENGTH} symbols`,
+			'string.empty': 'Password must be provided',
+			'string.pattern.base':
+				'Password can only contain latins alphas, numeric and !, *, (, ), _, +',
+			'string.min': `Password must contain minimum ${MIN_LOGIN_PASSWORD_LENGTH} symbols`,
+			'string.max': `Password must contain maximum ${MAX_LOGIN_PASSWORD_LENGTH} symbols`,
 		}),
-	remember: Joi.boolean(),
+	rememberMe: Joi.boolean(),
 });

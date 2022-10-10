@@ -1,1 +1,1 @@
-export { ExclamationIcon } from "./ExclamationIcon";
+export { ExclamationIcon } from './ExclamationIcon';

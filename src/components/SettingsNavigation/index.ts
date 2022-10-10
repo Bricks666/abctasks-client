@@ -1,1 +1,1 @@
-export { SettingsNavigation } from "./SettingsNavigation";
+export { SettingsNavigation } from './SettingsNavigation';

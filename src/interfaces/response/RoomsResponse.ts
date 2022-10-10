@@ -1,4 +1,4 @@
-import { ID } from "../common";
+import { ID } from '../common';
 
 export interface ServerRoom {
 	readonly roomId: ID;
