@@ -75,10 +75,7 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 				error={errors.password?.message}
 			/>
 			<Checkbox {...register('rememberMe')} label={t('fields.remember')} />
-			<Button
-				className={LoginFormStyle.button}
-				disabled={!isDirty || isSubmitting}
-				type='filed'>
+			<Button disabled={!isDirty || isSubmitting} type='filed'>
 				{t('buttons.submit')}
 			</Button>
 		</form>

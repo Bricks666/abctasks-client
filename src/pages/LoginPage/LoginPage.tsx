@@ -13,7 +13,7 @@ const LoginPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('login');
 	usePageTitle(t('title'));
 	return (
-		<main className={className}>
+		<div className={className}>
 			<ContentLayout className={LoginPageStyle.layout}>
 				<Text className={LoginPageStyle.header} component='h2' align='center'>
 					{t('title')}
@@ -23,7 +23,7 @@ const LoginPage: React.FC<CommonProps> = ({ className }) => {
 					{t('links.registration')}
 				</SaveLink>
 			</ContentLayout>
-		</main>
+		</div>
 	);
 };
 export default LoginPage;

@@ -10,11 +10,10 @@ import { useGetParam, useGoBack, useTask, useTaskGroups } from '@/hooks';
 import { CommonProps, ID } from '@/interfaces/common';
 import { editTask } from '@/models/Tasks';
 import { TaskStatus, TaskStructure } from '@/models/Tasks/types';
-import { TaskGroup } from '@/models/Groups/types';
 import { Button } from '@/ui/Button';
 import { TextField } from '../TextField';
-import { useGroup } from '@/hooks/useGroup';
 import { validatingScheme } from './validator';
+import { Select } from '@/ui/Select';
 
 import EditTaskFromStyle from './EditTaskForm.module.css';
 
@@ -24,14 +23,11 @@ export interface EditTaskFormValues {
 	readonly status: TaskStatus;
 }
 
-const prepareTask = (
-	task: TaskStructure | null,
-	group: TaskGroup | null
-): EditTaskFormValues => {
-	return task && group
+const prepareTask = (task: TaskStructure | null): EditTaskFormValues => {
+	return task
 		? {
 				content: task.content,
-				groupId: group.id,
+				groupId: task.groupId,
 				status: task.status,
 		  }
 		: {
@@ -51,12 +47,11 @@ const statuses = {
 export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 	const taskId = useGetParam(GET_PARAMS.taskId);
 	const task = useTask(taskId);
-	const group = useGroup(task?.groupId || null);
 	const groups = useTaskGroups();
 	const goBack = useGoBack();
 	const { t } = useTranslation(['popups', 'room']);
 	const { register, handleSubmit, formState } = useForm<EditTaskFormValues>({
-		defaultValues: prepareTask(task, group),
+		defaultValues: prepareTask(task),
 		resolver: joiResolver(validatingScheme),
 	});
 
@@ -64,7 +59,7 @@ export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 		({ groupId, status, ...values }) => {
 			editTask({
 				...values,
-				id: +(taskId as unknown as number),
+				id: +taskId!,
 				status,
 				groupId,
 				roomId: task?.roomId || 0,
@@ -74,25 +69,24 @@ export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 		[goBack, taskId, task?.roomId]
 	);
 	const { isDirty } = formState;
-
 	return (
 		<form
 			className={cn(EditTaskFromStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
-			<TextField {...register('groupId')} select label={t('edit_task.group')}>
+			<Select {...register('groupId')}>
 				{groups.map(({ id, name }) => (
 					<option value={id} key={id}>
 						{name}
 					</option>
 				))}
-			</TextField>
-			<TextField {...register('status')} select label={t('edit_task.status')}>
+			</Select>
+			<Select {...register('status')}>
 				{Object.entries(statuses).map(([code, name]) => (
 					<option value={code} key={code}>
 						{t(`statuses.${name}`, { ns: 'room' })}
 					</option>
 				))}
-			</TextField>
+			</Select>
 
 			<TextField
 				className={EditTaskFromStyle.textarea}

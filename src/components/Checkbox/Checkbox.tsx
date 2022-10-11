@@ -13,7 +13,7 @@ export interface CheckboxProps extends CommonProps, UseFormRegisterReturn {
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 	({ label, ...props }, ref) => {
 		return (
-			<CheckboxUI inputRef={ref} {...props}>
+			<CheckboxUI {...props} inputRef={ref}>
 				{label}
 			</CheckboxUI>
 		);

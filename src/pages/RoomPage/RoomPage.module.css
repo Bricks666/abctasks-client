@@ -26,6 +26,8 @@
 	}
 
 	.aside {
+		row-gap: 2rem;
+
 		grid-row: 1 / -1;
 
 		padding: 0 1em;

@@ -5,10 +5,10 @@ import { useGoBack } from '@/hooks';
 import { RoomForm } from '../RoomForm';
 import { createRoom } from '@/models/Rooms';
 
-export const CreateRoomPopup: React.FC<BasePopup> = ({ isOpen, isFocus }) => {
+export const CreateRoomPopup: React.FC<BasePopup> = (props) => {
 	const onClose = useGoBack();
 	return (
-		<MainPopup isOpen={isOpen} isFocus={isFocus} onClose={onClose}>
+		<MainPopup {...props} onClose={onClose}>
 			<RoomForm
 				submitHandler={createRoom}
 				afterSubmit={onClose}

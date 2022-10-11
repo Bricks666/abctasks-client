@@ -1,6 +1,10 @@
 .block {
 	background-color: white;
 
+	transition-property: box-shadow, border-color;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-out;
+
 	overflow: hidden;
 }
 
@@ -10,4 +14,14 @@
 
 .square {
 	border-radius: none;
+}
+
+.shadowAlways {
+	box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+	border-color: rgba(162, 179, 207, 0.2);
+}
+
+.shadowHover:hover {
+	box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+	border-color: rgba(162, 179, 207, 0.2);
 }

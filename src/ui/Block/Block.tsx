@@ -10,6 +10,7 @@ export interface BlockProps
 	extends CommonProps,
 		Omit<React.HTMLAttributes<HTMLDivElement>, 'className'> {
 	readonly type?: Type;
+	readonly shadowOn?: 'always' | 'hover' | 'never';
 }
 
 export const Block: React.FC<BlockProps> = React.memo(function Block({

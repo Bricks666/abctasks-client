@@ -52,7 +52,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 					columnStatus={columnStatus}>
 					{header}
 				</TaskListHeader>
-				<Stack>
+				<Stack space='xs'>
 					{tasks.map((task) => (
 						<DraggableTaskCard {...task} key={task.id} />
 					))}

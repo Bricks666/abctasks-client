@@ -12,6 +12,7 @@ import { TaskStatus } from '@/models/Tasks/types';
 import { Button } from '@/ui/Button';
 import { TextField } from '../TextField';
 import { validationScheme } from './validator';
+import { Select } from '@/ui/Select';
 
 import TaskFormStyle from './CreateTaskForm.module.css';
 
@@ -53,18 +54,14 @@ export const CreateTaskForm: React.FC<React.PropsWithChildren<CommonProps>> = ({
 		<form
 			className={cn(TaskFormStyle.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
-			<TextField
-				{...register('groupId', { disabled: isSubmitting })}
-				select
-				label={t('add_task.group')}
-				error={errors.groupId?.message}>
+			<Select {...register('groupId', { disabled: isSubmitting })}>
 				<option value={-1}>None</option>
 				{groups.map(({ id, name }) => (
 					<option value={id} key={id}>
 						{name}
 					</option>
 				))}
-			</TextField>
+			</Select>
 			<TextField
 				className={TaskFormStyle.textarea}
 				{...register('content', { disabled: isSubmitting })}

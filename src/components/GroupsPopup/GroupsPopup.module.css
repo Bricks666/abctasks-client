@@ -1,15 +1,3 @@
-.add_button {
-	margin-left: auto;
-}
-
-@media (min-width: 640px) {
-	.list {
-		width: 580px;
-	}
-}
-
-@media (max-width: 640px) {
-	.list {
-		width: 100%;
-	}
+.list {
+	min-width: 550px;
 }

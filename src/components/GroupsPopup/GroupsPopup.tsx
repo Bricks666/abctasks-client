@@ -12,9 +12,9 @@ import { IconButton } from '@/ui/IconButton';
 import { DeleteIcon } from '@/ui/DeleteIcon';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
-import { EditIcon } from '@/ui/EditIcon';
 import { Stack } from '@/ui/Stack';
 import { UsePrepareLinkResponse } from '@/hooks/usePrepareLink';
+import { EditIcon } from '@/ui/EditIcon';
 
 import GroupsPopupStyle from './GroupsPopup.module.css';
 

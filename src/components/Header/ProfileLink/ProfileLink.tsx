@@ -26,7 +26,7 @@ export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<div className={className}>
 			<Avatar
-				src={photo}
+				src={photo || ''}
 				alt={login}
 				ref={setReference}
 				onClick={toggle}

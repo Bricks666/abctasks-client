@@ -5,8 +5,6 @@ import { ListItem } from '../ListItem';
 import { ListItemButton } from '../ListItemButton';
 import { Text } from '../Text';
 
-import MenuItemStyle from './MenuItem.module.css';
-
 export type MenuOption = {
 	readonly label: string;
 	readonly onClick?: React.MouseEventHandler;
@@ -31,7 +29,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 	...props
 }) => {
 	return (
-		<ListItem className={MenuItemStyle.item} role={role} {...props}>
+		<ListItem role={role} {...props}>
 			<ListItemButton onClick={onClick} to={to} tabIndex={0}>
 				{icon}
 				<Text component='span'>{label}</Text>

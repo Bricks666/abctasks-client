@@ -3,8 +3,8 @@ import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useGroupedTasks, useLoadingTasks } from '@/hooks';
 import { CommonProps } from '@/interfaces/common';
-import { LoadingWrapper } from '@/ui/LoadingWrapper';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
+import { LoadingWrapper } from '@/components/LoadingWrapper';
+import { LoadingIndicator } from '@/components/LoadingIndicator';
 import { TasksList } from '../TasksList';
 import { TaskStatus, TaskStructure } from '@/models/Tasks/types';
 
