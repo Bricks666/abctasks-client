@@ -23,7 +23,6 @@ export const routes: Route[] = [
 	{
 		path: ROUTES.ROOM,
 		Component: RoomPage,
-		isOnlyAuth: true,
 	},
 	{
 		path: ROUTES.LOGIN,

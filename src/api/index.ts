@@ -4,13 +4,8 @@ export {
 	editTaskApi,
 	deleteTaskApi,
 } from './tasks';
-export {
-	authApi,
-	loginApi,
-	registrationApi,
-	logoutApi,
-	refreshApi,
-} from './auth';
+export * as authApi from './auth';
+export * as roomsApi from './rooms';
 
 export { getActivitiesApi, subscribeNewActivitiesApi } from './activities';
 
@@ -23,9 +18,3 @@ export {
 export { getTasksProgressApi, subscribeChangeProgressApi } from './progress';
 
 export { updateProfileApi, getProfileApi } from './profile';
-export {
-	createRoomApi,
-	deleteRoomApi,
-	editRoomApi,
-	getRoomsApi,
-} from './rooms';

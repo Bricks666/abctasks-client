@@ -12,9 +12,8 @@ import { Group } from '@/ui/Group';
 import { Text } from '@/ui/Text';
 import { MenuOption } from '@/ui/MenuItem';
 import { DateTime } from '@/ui/DateTime';
-import { useGroup } from '@/hooks/useGroup';
+import { useGroup, usePrepareLink } from '@/hooks';
 import { CommonProps } from '@/interfaces/common';
-import { usePrepareLink } from '@/hooks';
 
 import styles from './TaskCard.module.css';
 

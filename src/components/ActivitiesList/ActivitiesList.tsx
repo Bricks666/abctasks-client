@@ -13,7 +13,7 @@ import styles from './ActivitiesList.module.css';
 
 export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
-	const activities = useActivities();
+	const activities = useActivities() || [];
 	const isLoading = useLoadingActivities();
 	return (
 		<section className={cn(styles.container, className)}>

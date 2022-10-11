@@ -13,11 +13,8 @@ import { VoidResponse } from '@/interfaces/response';
 export const Auth = createDomain('AuthDomain');
 
 export const $AuthUser = Auth.store<User | null>(null);
-
 export const $AccessToken = Auth.store<string | null>(null);
-
 export const $IsAuth = $AuthUser.map<boolean>((state) => !!state);
-
 export const $IsRegistered = Auth.store<boolean>(false);
 
 export const loginFx = Auth.effect<

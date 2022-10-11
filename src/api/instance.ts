@@ -26,8 +26,8 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use(
 	(response) => {
 		const { data } = response;
-		if ('accessToken' in data) {
-			setAccessToken(data.accessToken);
+		if (data.data && data.data.tokens) {
+			setAccessToken(data.data.tokens.accessToken);
 		}
 		return response;
 	},

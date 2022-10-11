@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useGetParam } from '.';
-import { GET_PARAMS } from '../const';
+import { useGetParam } from '@/hooks';
+import { GET_PARAMS } from '@/const';
 
 const parsePopups = (popups: string | null) => {
 	return popups ? popups.split(',') : [];

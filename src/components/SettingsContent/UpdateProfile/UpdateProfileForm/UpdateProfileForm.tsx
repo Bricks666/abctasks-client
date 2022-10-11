@@ -1,24 +1,25 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
+import { useStore } from 'effector-react';
+import { $AuthUser } from '@/models/auth';
 import { TextField } from '@/components/TextField';
-import { useImageURL, useUserInfo } from '@/hooks';
+import { useImageURL } from '@/hooks';
 import { Button } from '@/ui/Button';
 import { Picture } from '@/ui/Picture';
-import { updateProfile } from '@/models/User';
-import { UpdateProfileRequest } from '@/interfaces/requests';
+import { updateProfile, UpdateUserRequest } from '@/models/User';
 
 import styles from './UpdateProfileForm.module.css';
 
 export const UpdateProfileForm: React.FC = () => {
-	const userInfo = useUserInfo();
+	const userInfo = useStore($AuthUser)!;
 	const { watch, handleSubmit, register, formState } =
-		useForm<UpdateProfileRequest>({
+		useForm<UpdateUserRequest>({
 			defaultValues: userInfo,
 		});
 
 	const photo = watch('photo');
 	const showedPhoto = useImageURL(photo);
-	const onSubmit = (values: UpdateProfileRequest) => {
+	const onSubmit = (values: UpdateUserRequest) => {
 		updateProfile(values);
 	};
 	const { errors, isDirty, isSubmitting } = formState;
@@ -34,13 +35,13 @@ export const UpdateProfileForm: React.FC = () => {
 				{...register('photo')}
 				type='file'
 				accept='image/*'
-				error={errors.photo?.message}
+				error={errors.photo?.message?.toString()}
 			/>
 			<TextField
 				className={styles.input}
 				{...register('login')}
 				label='Login'
-				error={errors.login?.message}
+				error={errors.login?.message?.toString()}
 			/>
 			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
 				Save

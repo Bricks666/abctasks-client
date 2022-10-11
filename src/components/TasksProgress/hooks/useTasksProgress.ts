@@ -1,11 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useStore } from 'effector-react';
 import { useParams } from 'react-router-dom';
-import {
-	$TasksProgress,
-	loadTasksProgress,
-	subscribeChangeProgress,
-} from '@/models/Progress';
+import { $TasksProgress, loadTasksProgress } from '@/models/Progress';
 import { CloseConnect } from '@/packages/eventSource';
 
 export const useTasksProgress = () => {
@@ -16,7 +12,6 @@ export const useTasksProgress = () => {
 	useEffect(() => {
 		if (roomId) {
 			loadTasksProgress(roomId);
-			subscribeChangeProgress({ roomId, closeRef });
 		}
 
 		return () => {

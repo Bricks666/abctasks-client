@@ -1,21 +1,31 @@
 import { createQuery, createMutation } from '@farfetched/core';
+import { runtypeContract } from '@farfetched/runtypes';
+import { Boolean } from 'runtypes';
 import {
+	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
 } from '@/interfaces/response/standardResponse';
 import { authFx, loginFx, logoutFx, registrationFx } from './units';
-import { AuthResponse, LoginRequest, RegistrationRequest } from './types';
-import { getIsSuccessResponseContract } from '../contracts/isSuccessResponse';
-import { VoidResponse } from '@/interfaces/response';
+import {
+	authResponse,
+	AuthResponse,
+	LoginRequest,
+	RegistrationRequest,
+} from './types';
+import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
+import { voidResponse, VoidResponse } from '@/interfaces/response';
 
 export const authQuery = createQuery<
 	void,
 	StandardResponse<AuthResponse>,
 	Error,
-	StandardSuccessResponse<AuthResponse>
+	StandardSuccessResponse<AuthResponse>,
+	void
 >({
 	effect: authFx,
-	contract: getIsSuccessResponseContract(),
+	contract: runtypeContract(getStandardSuccessResponse(authResponse)),
+	validate: getIsSuccessResponseValidator(),
 });
 
 export const loginMutation = createMutation<
@@ -25,7 +35,7 @@ export const loginMutation = createMutation<
 	Error
 >({
 	effect: loginFx,
-	contract: getIsSuccessResponseContract(),
+	contract: runtypeContract(getStandardSuccessResponse(authResponse)),
 });
 
 export const registrationMutation = createMutation<
@@ -35,7 +45,7 @@ export const registrationMutation = createMutation<
 	Error
 >({
 	effect: registrationFx,
-	contract: getIsSuccessResponseContract(),
+	contract: runtypeContract(getStandardSuccessResponse(voidResponse)),
 });
 
 export const logoutMutation = createMutation<
@@ -45,5 +55,5 @@ export const logoutMutation = createMutation<
 	Error
 >({
 	effect: logoutFx,
-	contract: getIsSuccessResponseContract(),
+	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
 });

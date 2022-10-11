@@ -1,6 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { Room } from '@/models/Rooms/types';
+import { useMutation } from '@farfetched/react';
+import { deleteRoomMutation, Room } from '@/models/rooms';
 import { Card } from '@/ui/Card';
 import { CardHeader } from '@/ui/CardHeader';
 import { List } from '@/ui/List';
@@ -9,7 +10,6 @@ import { EditMenu } from '@/components/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
 import { GET_PARAMS, POPUPS } from '@/const';
-import { deleteRoom } from '@/models/Rooms';
 import { Button } from '@/ui/Button';
 import { CommonProps } from '@/interfaces/common';
 
@@ -21,12 +21,9 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	id,
 	name,
 	className,
-	activitiesCount,
 	description,
-	doneTaskCount,
-	taskCount,
-	usersCount,
 }) => {
+	const deleteRoom = useMutation(deleteRoomMutation);
 	const editLink = usePrepareLink({
 		addQuery: {
 			[GET_PARAMS.popup]: POPUPS.editRoom,
@@ -41,7 +38,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 			},
 			{
 				label: 'Delete',
-				onClick: () => deleteRoom(id),
+				onClick: () => deleteRoom.start(id),
 			},
 		],
 		[editLink, id]
@@ -55,10 +52,6 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 			</CardHeader>
 			<List>
 				<ListItem>Описание: {description}</ListItem>
-				<ListItem>Количество задач: {taskCount}</ListItem>
-				<ListItem>Выполненных задач:{doneTaskCount}</ListItem>
-				<ListItem>Активности: {activitiesCount}</ListItem>
-				<ListItem>Пользователи: {usersCount}</ListItem>
 			</List>
 			<Button type='text' to={`${id}`}>
 				Перейти

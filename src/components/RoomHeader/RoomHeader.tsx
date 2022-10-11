@@ -2,19 +2,25 @@ import * as React from 'react';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { loadRoomQuery } from '@/models/rooms';
 import { Block } from '@/ui/Block';
 import { Text } from '@/ui/Text';
-import { usePrepareLink } from '@/hooks';
+import { usePrepareLink, useImminentlyQuery } from '@/hooks';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { EditMenu } from '../EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
-import { useRoom } from './hooks';
 import { CommonProps } from '@/interfaces/common';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
 
 import styles from './RoomHeader.module.css';
 
 export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
+	const { id: roomId } = useParams();
+	const { data: room, pending } = useImminentlyQuery(
+		loadRoomQuery,
+		Number(roomId)
+	);
 	const groupsLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.groups,
@@ -26,13 +32,17 @@ export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 			to: groupsLink,
 		},
 	];
-	const { id: roomId } = useParams();
-	const room = useRoom(roomId);
+	const isLoading = !room || pending;
+
 	return (
 		<Block className={cn(styles.block, className)}>
-			<Text className={styles.header} component='h2'>
-				{room?.name}
-			</Text>
+			{isLoading ? (
+				<LoadingIndicator size='small' />
+			) : (
+				<Text className={styles.header} component='h2'>
+					{room?.name}
+				</Text>
+			)}
 			<EditMenu options={options} alt='Open room edit menu' />
 		</Block>
 	);

@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGoBack, usePrepareLink, useTaskGroups } from '@/hooks';
+import {
+	useGoBack,
+	usePrepareLink,
+	useTaskGroups,
+	UsePrepareLinkResponse,
+} from '@/hooks';
 import { BasePopup, CommonProps, ID } from '@/interfaces/common';
 import { Group } from '@/ui/Group';
 import { List } from '@/ui/List';
@@ -13,7 +18,6 @@ import { DeleteIcon } from '@/ui/DeleteIcon';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
 import { Stack } from '@/ui/Stack';
-import { UsePrepareLinkResponse } from '@/hooks/usePrepareLink';
 import { EditIcon } from '@/ui/EditIcon';
 
 import styles from './GroupsPopup.module.css';

@@ -3,7 +3,7 @@ import { authQuery } from '@/models/auth';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
 import { AppRoutes } from '@/components/AppRoutes';
-import { useImminentlyQuery } from '@/hooks/useImminentlyQuery';
+import { useImminentlyQuery } from '@/hooks';
 
 import styles from './App.module.css';
 

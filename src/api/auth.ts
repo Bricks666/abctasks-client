@@ -1,10 +1,14 @@
-import { LoginRequest, RegistrationRequest } from '@/interfaces/requests';
-import { TokensResponse, VoidResponse } from '@/interfaces/response';
+import { VoidResponse } from '@/interfaces/response';
 import { StandardResponse } from '@/interfaces/response/standardResponse';
-import { AuthResponse } from '@/models/auth/types';
+import {
+	AuthResponse,
+	LoginRequest,
+	RegistrationRequest,
+	TokensResponse,
+} from '@/models/auth/types';
 import { instance } from './instance';
 
-export const loginApi = async (credentials: LoginRequest) => {
+export const login = async (credentials: LoginRequest) => {
 	const response = await instance.post<StandardResponse<AuthResponse>>(
 		'/auth/login',
 		credentials
@@ -12,14 +16,14 @@ export const loginApi = async (credentials: LoginRequest) => {
 	return response.data;
 };
 
-export const authApi = async () => {
+export const auth = async () => {
 	const response = await instance.get<StandardResponse<AuthResponse>>('/auth');
 
 	return response.data;
 };
 
-export const registrationApi = async (credentials: RegistrationRequest) => {
-	const response = await instance.put<StandardResponse<VoidResponse>>(
+export const registration = async (credentials: RegistrationRequest) => {
+	const response = await instance.post<StandardResponse<VoidResponse>>(
 		'/auth/registration',
 		credentials
 	);
@@ -27,7 +31,7 @@ export const registrationApi = async (credentials: RegistrationRequest) => {
 	return response.data;
 };
 
-export const logoutApi = async () => {
+export const logout = async () => {
 	const response = await instance.delete<StandardResponse<boolean>>(
 		'/auth/logout'
 	);
@@ -35,7 +39,7 @@ export const logoutApi = async () => {
 	return response.data;
 };
 
-export const refreshApi = async () => {
+export const refresh = async () => {
 	const response = await instance.get<StandardResponse<TokensResponse>>(
 		'/auth/refresh'
 	);

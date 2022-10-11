@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { TaskProgressStructure } from '@/models/Progress/types';
 import { CommonProps } from '@/interfaces/common';
 import { ProgressBar } from '@/ui/ProgressBar';
-import { useGroup } from '@/hooks/useGroup';
+import { useGroup } from '@/hooks';
 
 export interface TaskProgressComponent
 	extends CommonProps,

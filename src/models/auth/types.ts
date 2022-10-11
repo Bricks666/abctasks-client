@@ -1,14 +1,19 @@
-import { User } from '../User';
+import { Record, String, Static } from 'runtypes';
+import { userResponse } from '../User';
 
-export interface TokensResponse {
-	readonly accessToken: string;
-	readonly refreshToken: string;
-}
+export const tokensResponse = Record({
+	accessToken: String,
+	refreshToken: String,
+}).asReadonly();
 
-export interface AuthResponse {
-	readonly tokens: TokensResponse;
-	readonly user: User;
-}
+export interface TokensResponse extends Static<typeof tokensResponse> {}
+
+export const authResponse = Record({
+	tokens: tokensResponse,
+	user: userResponse,
+}).asReadonly();
+
+export interface AuthResponse extends Static<typeof authResponse> {}
 
 export interface LoginRequest {
 	readonly login: string;

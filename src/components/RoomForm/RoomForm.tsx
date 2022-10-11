@@ -4,17 +4,17 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { CommonProps, VoidFunction } from '@/interfaces/common';
 import { TextField } from '../TextField';
 import { Button } from '@/ui/Button';
-import { CreateEditRoomRequest, EditRoomRequest } from '@/interfaces/requests';
 import { validatingScheme } from './validator';
+import { CreateUpdateRoomRequest, UpdateRoomRequest } from '@/models/rooms';
 
 export interface RoomFormProps extends CommonProps {
-	readonly submitHandler: (values: CreateEditRoomRequest) => unknown;
+	readonly submitHandler: (values: CreateUpdateRoomRequest) => unknown;
 	readonly buttonText: string;
-	readonly defaultState?: CreateEditRoomRequest;
+	readonly defaultState?: CreateUpdateRoomRequest;
 	readonly afterSubmit?: VoidFunction;
 }
 
-const createInitialState = (): EditRoomRequest => {
+const createInitialState = (): UpdateRoomRequest => {
 	return {
 		roomId: 0,
 		roomName: '',
@@ -37,7 +37,7 @@ export const RoomForm: React.FC<RoomFormProps> = ({
 	const { roomDescription, roomName } = errors;
 	const disabled = !isDirty || isSubmitting;
 	const onSubmit = React.useCallback(
-		async (values: CreateEditRoomRequest) => {
+		async (values: CreateUpdateRoomRequest) => {
 			await submitHandler(values);
 			if (afterSubmit) {
 				afterSubmit();

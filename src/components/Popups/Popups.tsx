@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { POPUPS } from '@/const';
-import { usePopups } from '@/hooks';
 import { CreateTaskPopup } from '../CreateTaskPopup';
 import { EditTaskPopup } from '../EditTaskPopup';
 import { GroupsPopup } from '../GroupsPopup';
@@ -10,6 +9,7 @@ import { CreateGroupPopup } from '../CreateGroupPopup';
 import { BasePopup } from '@/interfaces/common';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { CreateRoomPopup } from '../CreateRoomPopup';
+import { usePopups } from './usePopups';
 
 const popupsMap: Record<string, React.ComponentType<BasePopup>> = {
 	[POPUPS.createTask]: CreateTaskPopup,

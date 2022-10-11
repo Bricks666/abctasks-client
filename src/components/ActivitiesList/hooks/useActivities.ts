@@ -2,11 +2,7 @@ import { useStore } from 'effector-react';
 import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { CloseConnect } from '@/packages/eventSource';
-import {
-	$Activities,
-	loadActivities,
-	subscribeNewActivity,
-} from '@/models/Activities';
+import { $Activities, loadActivities } from '@/models/Activities';
 
 export const useActivities = () => {
 	const activities = useStore($Activities);
@@ -16,7 +12,7 @@ export const useActivities = () => {
 	useEffect(() => {
 		if (roomId) {
 			loadActivities(roomId);
-			subscribeNewActivity({ roomId, closeRef });
+			// subscribeNewActivity({ roomId, closeRef });
 		}
 		return () => {
 			if (closeRef.current) {

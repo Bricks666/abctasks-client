@@ -1,11 +1,5 @@
 import { forward, sample } from 'effector';
-import {
-	authApi,
-	loginApi,
-	logoutApi,
-	refreshApi,
-	registrationApi,
-} from '@/api';
+import { authApi } from '@/api';
 import {
 	$AccessToken,
 	$AuthUser,
@@ -23,11 +17,11 @@ import {
 	registrationMutation,
 } from './queries';
 
-authFx.use(authApi);
-loginFx.use(loginApi);
-registrationFx.use(registrationApi);
-logoutFx.use(logoutApi);
-refreshFx.use(refreshApi);
+authFx.use(authApi.auth);
+loginFx.use(authApi.login);
+registrationFx.use(authApi.registration);
+logoutFx.use(authApi.logout);
+refreshFx.use(authApi.refresh);
 
 sample({
 	clock: authQuery.finished.success,
