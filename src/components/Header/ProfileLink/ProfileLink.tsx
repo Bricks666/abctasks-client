@@ -1,28 +1,41 @@
 import * as React from 'react';
-import { useAnyPopupOpen, useToggle, useUserInfo } from '@/hooks';
+import { useMutation } from '@farfetched/react';
+import { useStore } from 'effector-react';
+import { $AuthUser, logoutMutation } from '@/models/auth';
+import { useAnyPopupOpen, useToggle } from '@/hooks';
 import { CommonProps } from '@/interfaces/common';
-import { Avatar } from '@/ui/Avatar';
-import { logout } from '@/models/Auth';
 import { Menu } from '@/ui/Menu';
 import { MenuItem, MenuOption } from '@/ui/MenuItem';
+import { Avatar } from '@/ui/Avatar';
 import { ROUTES } from '@/const';
 
-const options: MenuOption[] = [
-	{
-		label: 'Settings',
-		to: ROUTES.SETTINGS.slice(0, -2),
-	},
-	{
-		label: 'Logout',
-		onClick: () => logout(),
-	},
-];
-
 export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
-	const { login, photo } = useUserInfo();
+	const user = useStore($AuthUser);
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
 	const anyPopupOpen = useAnyPopupOpen();
+	const { start } = useMutation(logoutMutation);
+
+	const options: MenuOption[] = React.useMemo(
+		() => [
+			{
+				label: 'Settings',
+				to: ROUTES.SETTINGS.slice(0, -2),
+			},
+			{
+				label: 'Logout',
+				onClick: () => start(),
+			},
+		],
+		[start]
+	);
+
+	if (!user) {
+		return null;
+	}
+
+	const { login, photo } = user;
+
 	return (
 		<div className={className}>
 			<Avatar

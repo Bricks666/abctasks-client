@@ -43,7 +43,7 @@ export const Popups = () => {
 					}
 					return (
 						<Component
-							open={popups.includes(mountedPopup)}
+							isOpen={popups.includes(mountedPopup)}
 							key={mountedPopup}
 						/>
 					);

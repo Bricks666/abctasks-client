@@ -1,11 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
-import { ID } from '@/interfaces/common';
 import { UpdateProfileRequest } from '@/interfaces/requests';
 import { UserResponse } from '@/interfaces/response';
 
 export interface User {
-	readonly userId: ID;
+	readonly userId: number;
 	readonly login: string;
 	readonly photo: string | null;
 }

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { TaskStatus, TaskStructure } from '@/models/Tasks/types';
 import { DropZone } from '../DropZone';
@@ -42,10 +41,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 	);
 
 	return (
-		<DropZone
-			className={cn(styles.dropZone, className)}
-			onDrop={onDrop}
-			onDragOver={onDragOver}>
+		<DropZone className={className} onDrop={onDrop} onDragOver={onDragOver}>
 			<Stack space='l'>
 				<TaskListHeader className={styles.header} columnStatus={columnStatus}>
 					{header}

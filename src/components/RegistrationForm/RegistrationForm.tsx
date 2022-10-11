@@ -2,17 +2,12 @@ import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import cn from 'classnames';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { Location, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { RegistrationRequest } from '@/interfaces/requests';
-import { clearRegistrationError, registrationFx } from '@/models/Auth';
-import { useLocationState } from '@/hooks';
+import { useMutation } from '@farfetched/react';
+import { RegistrationRequest, registrationMutation } from '@/models/auth';
 import { Button } from '@/ui/Button';
 import { TextField } from '../TextField';
 import { validationSchema } from './validator';
-import { useRegistrationError } from './hooks';
-import { Alert } from '@/ui/Alert';
-import { AlertTitle } from '@/ui/AlertTitle';
 import { CommonProps } from '@/interfaces/common';
 
 import styles from './RegistrationForm.module.css';
@@ -25,41 +20,22 @@ const initialValues: RegistrationRequest = {
 
 export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('registration');
+	const { start } = useMutation(registrationMutation);
 	const { register, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
 	});
-	const navigate = useNavigate();
-	const state = useLocationState<Location>();
 	const onSubmit = React.useCallback<SubmitHandler<RegistrationRequest>>(
 		async (values) => {
-			await registrationFx(values);
-			navigate('/login', { replace: true, state });
+			start(values);
 		},
-		[navigate, state]
+		[]
 	);
 	const { isSubmitting, isDirty, errors } = formState;
-	const error = useRegistrationError();
-
-	React.useEffect(() => {
-		return () => {
-			clearRegistrationError();
-		};
-	}, []);
-
 	return (
 		<form
 			className={cn(styles.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
-			{error && (
-				<Alert
-					type='outline'
-					color='error'
-					onClose={() => clearRegistrationError()}>
-					<AlertTitle>Registration error</AlertTitle>
-					This user already registered
-				</Alert>
-			)}
 			<TextField
 				{...register('login')}
 				label={t('fields.login')}

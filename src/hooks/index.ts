@@ -1,8 +1,6 @@
 export { useTasks } from './useTasks';
 export { useLoadingTasks } from './useLoadingTasks';
-export { useIsLogin } from './useIsLogin';
 export { useLocationState } from './useLocationState';
-export { useIsAuthorizing } from './useIsAuthorizing';
 export { useClickOutside } from './useClickOutside';
 export { usePrepareLink } from './usePrepareLink';
 export { useGetParam } from './useGetParam';

@@ -8,7 +8,7 @@ import {
 	updateProfile,
 	updateProfileFx,
 } from '.';
-import { authFx, loginFx, logoutFx } from '../Auth';
+import { authFx, loginFx, logoutFx } from '../auth';
 import { mayStartFxHandler } from '../handlers';
 
 loadUserFx.use(getProfileApi);

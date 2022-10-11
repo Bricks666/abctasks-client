@@ -34,7 +34,7 @@ export const TaskListHeader: React.FC<
 
 	return (
 		<header className={className}>
-			<Block className={styles.background}>
+			<Block>
 				<Text component='h3'>{children}</Text>
 				<EditMenu
 					className={styles.editMenu}

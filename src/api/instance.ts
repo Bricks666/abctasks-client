@@ -4,7 +4,7 @@ import axios from 'axios';
 import { SSEListener } from '@/packages/eventSource';
 
 export const baseURL = 'http://localhost:5000/api';
-export let accessToken = '';
+let accessToken = '';
 
 export const instance = axios.create({
 	baseURL,

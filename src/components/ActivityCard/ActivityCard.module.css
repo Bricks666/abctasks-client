@@ -1,0 +1,16 @@
+.card {
+	grid-template-columns: min-content 1fr;
+	row-gap: 4px;
+}
+
+.avatar {
+	grid-row: span 2;
+}
+
+.icon {
+	fill: white;
+}
+
+.icon:hover {
+	fill: white;
+}

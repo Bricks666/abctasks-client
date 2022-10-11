@@ -1,3 +1,1 @@
-export interface VoidResponse {
-	readonly resultCode: number;
-}
+export interface VoidResponse {}

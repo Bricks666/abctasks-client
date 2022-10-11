@@ -11,15 +11,10 @@ export interface LoadingWrapperProps extends CommonProps {
 
 export const LoadingWrapper: React.FC<
 	React.PropsWithChildren<LoadingWrapperProps>
-> = React.memo(function LoadingWrapper({
-	className,
-	isLoading,
-	loadingIndicator,
-	children,
-}) {
+> = ({ className, isLoading, loadingIndicator, children }) => {
 	return isLoading ? (
 		<div className={cn(styles.wrapper, className)}>{loadingIndicator}</div>
 	) : (
 		(children as React.ReactElement)
 	);
-});
+};

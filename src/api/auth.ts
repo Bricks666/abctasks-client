@@ -1,9 +1,11 @@
 import { LoginRequest, RegistrationRequest } from '@/interfaces/requests';
 import { TokensResponse, VoidResponse } from '@/interfaces/response';
+import { StandardResponse } from '@/interfaces/response/standardResponse';
+import { AuthResponse } from '@/models/auth/types';
 import { instance } from './instance';
 
 export const loginApi = async (credentials: LoginRequest) => {
-	const response = await instance.post<TokensResponse>(
+	const response = await instance.post<StandardResponse<AuthResponse>>(
 		'/auth/login',
 		credentials
 	);
@@ -11,13 +13,13 @@ export const loginApi = async (credentials: LoginRequest) => {
 };
 
 export const authApi = async () => {
-	const response = await instance.get<TokensResponse>('/auth');
+	const response = await instance.get<StandardResponse<AuthResponse>>('/auth');
 
 	return response.data;
 };
 
 export const registrationApi = async (credentials: RegistrationRequest) => {
-	const response = await instance.put<VoidResponse>(
+	const response = await instance.put<StandardResponse<VoidResponse>>(
 		'/auth/registration',
 		credentials
 	);
@@ -26,13 +28,17 @@ export const registrationApi = async (credentials: RegistrationRequest) => {
 };
 
 export const logoutApi = async () => {
-	const response = await instance.delete<VoidResponse>('/auth/logout');
+	const response = await instance.delete<StandardResponse<boolean>>(
+		'/auth/logout'
+	);
 
 	return response.data;
 };
 
 export const refreshApi = async () => {
-	const response = await instance.get<TokensResponse>('/auth/refresh');
+	const response = await instance.get<StandardResponse<TokensResponse>>(
+		'/auth/refresh'
+	);
 
 	return response.data;
 };

@@ -1,23 +1,19 @@
 import * as React from 'react';
-import { useIsAuthorizing } from '@/hooks';
-import { auth } from '@/models/Auth';
+import { authQuery } from '@/models/auth';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
 import { AppRoutes } from '@/components/AppRoutes';
+import { useImminentlyQuery } from '@/hooks/useImminentlyQuery';
 
 import styles from './App.module.css';
 
 export const App: React.FC = () => {
-	const isAuthorizing = useIsAuthorizing();
-
-	React.useEffect(() => {
-		auth();
-	}, []);
+	const { pending } = useImminentlyQuery(authQuery, undefined);
 
 	return (
 		<LoadingWrapper
 			className={styles.loading}
-			isLoading={isAuthorizing}
+			isLoading={pending}
 			loadingIndicator={<LoadingIndicator text='Загрузка...' />}>
 			<AppRoutes />
 		</LoadingWrapper>
