@@ -1,5 +1,5 @@
 declare const styles: {
+	readonly overlay: string;
 	readonly header: string;
-	readonly editMenu: string;
 };
 export = styles;

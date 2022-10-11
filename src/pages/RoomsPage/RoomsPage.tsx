@@ -4,17 +4,18 @@ import { RoomList } from '@/components/RoomList';
 import { usePageTitle } from '@/hooks';
 import { ContentLayout } from '@/ui/ContentLayout';
 import { RoomsHeader } from '@/components/RoomsHeader';
+import { MainLayout } from '@/layouts/MainLayout';
 
 const RoomsPage: React.FC = () => {
 	const { t } = useTranslation('rooms');
 	usePageTitle(t('title'));
 	return (
-		<main>
+		<MainLayout>
 			<ContentLayout>
 				<RoomsHeader />
 				<RoomList />
 			</ContentLayout>
-		</main>
+		</MainLayout>
 	);
 };
 

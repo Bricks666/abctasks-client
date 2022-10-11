@@ -6,6 +6,7 @@ import { CommonProps } from '@/interfaces/common';
 import { ContentLayout } from '@/ui/ContentLayout';
 import { Text } from '@/ui/Text';
 import { usePageTitle } from '@/hooks';
+import { AuthLayout } from '@/layouts/AuthLayout';
 
 import styles from './RegistrationPage.module.css';
 
@@ -13,7 +14,7 @@ const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('registration');
 	usePageTitle(t('title'));
 	return (
-		<main className={className}>
+		<AuthLayout className={className}>
 			<ContentLayout className={styles.layout}>
 				<Text className={styles.header} component='h2'>
 					{t('title')}
@@ -23,7 +24,7 @@ const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 					{t('links.login')}
 				</SaveLink>
 			</ContentLayout>
-		</main>
+		</AuthLayout>
 	);
 };
 

@@ -8,7 +8,7 @@ import { GroupsPopup } from '../GroupsPopup';
 import { EditGroupPopup } from '../EditGroupPopup';
 import { CreateGroupPopup } from '../CreateGroupPopup';
 import { BasePopup } from '@/interfaces/common';
-import { LoadingIndicator } from '@/components/LoadingIndicator';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { CreateRoomPopup } from '../CreateRoomPopup';
 
 const popupsMap: Record<string, React.ComponentType<BasePopup>> = {

@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useTasksProgress, useTasksProgressLoading } from './hooks';
 import { TaskProgress } from '../TaskProgress';
 import { Text } from '@/ui/Text';
-import { LoadingIndicator } from '@/components/LoadingIndicator';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { Stack } from '@/ui/Stack';
-import { LoadingWrapper } from '@/components/LoadingWrapper';
+import { LoadingWrapper } from '@/ui/LoadingWrapper';
 import styles from './TasksProgress.module.css';
 import { CommonProps } from '@/interfaces/common';
 

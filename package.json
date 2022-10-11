@@ -16,8 +16,6 @@
 		"gen:css-types": "tcm src"
 	},
 	"dependencies": {
-		"@emotion/react": "^11.9.0",
-		"@emotion/styled": "^11.8.1",
 		"@hookform/resolvers": "^2.8.8",
 		"@popperjs/core": "^2.11.6",
 		"axios": "^1.1.2",

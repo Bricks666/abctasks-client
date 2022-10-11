@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { LoadingIndicator } from '@/components/LoadingIndicator';
-import { LoadingWrapper } from '@/components/LoadingWrapper';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
+import { LoadingWrapper } from '@/ui/LoadingWrapper';
 import { useRooms } from '@/hooks';
 import { Stack } from '@/ui/Stack';
 import { RoomCard } from './RoomCard';

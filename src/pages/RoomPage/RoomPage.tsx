@@ -9,6 +9,7 @@ import { usePageTitle } from '@/hooks';
 import { ActivitiesList } from '@/components/ActivitiesList';
 import { Stack } from '@/ui/Stack';
 import { RoomHeader } from '@/components/RoomHeader';
+import { MainLayout } from '@/layouts/MainLayout';
 
 import styles from './RoomPage.module.css';
 
@@ -16,7 +17,7 @@ const RoomPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
 	usePageTitle(t('title'));
 	return (
-		<main>
+		<MainLayout>
 			<ContentLayout className={cn(styles.layout, className)}>
 				<RoomHeader />
 				<Tasks className={styles.tasks} />
@@ -25,7 +26,7 @@ const RoomPage: React.FC<CommonProps> = ({ className }) => {
 					<ActivitiesList />
 				</Stack>
 			</ContentLayout>
-		</main>
+		</MainLayout>
 	);
 };
 
