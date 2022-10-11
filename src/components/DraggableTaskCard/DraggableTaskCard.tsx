@@ -4,7 +4,7 @@ import { ExtractProps } from '@/interfaces/common';
 import { Draggable } from '../Draggable';
 import { TaskCard } from '../TaskCard';
 
-import DraggableTaskCardStyle from './DraggableTaskCard.module.css';
+import styles from './DraggableTaskCard.module.css';
 
 export const DraggableTaskCard: React.FC<ExtractProps<typeof TaskCard>> = ({
 	id,
@@ -29,9 +29,9 @@ export const DraggableTaskCard: React.FC<ExtractProps<typeof TaskCard>> = ({
 	}, []);
 
 	const classes = cn(
-		DraggableTaskCardStyle.card,
+		styles.card,
 		{
-			[DraggableTaskCardStyle.dragging]: isDrag,
+			[styles.dragging]: isDrag,
 		},
 		className
 	);

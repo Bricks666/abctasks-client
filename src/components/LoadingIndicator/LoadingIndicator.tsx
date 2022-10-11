@@ -2,7 +2,7 @@ import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 
-import LoadingIndicatorStyle from './LoadingIndicator.module.css';
+import styles from './LoadingIndicator.module.css';
 
 type Size = 'small' | 'medium' | 'large';
 
@@ -16,42 +16,19 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
 	text,
 	size = 'medium',
 }) => {
-	const classes = cn(
-		LoadingIndicatorStyle.indicatorContainer,
-		LoadingIndicatorStyle[size]
-	);
+	const classes = cn(styles.indicatorContainer, styles[size]);
 
 	return (
 		<div className={className}>
 			<progress className='visibility-hidden' />
 			<div className={classes}>
-				<div className={LoadingIndicatorStyle.circleGroup}>
-					<span
-						className={cn(
-							LoadingIndicatorStyle.circle,
-							LoadingIndicatorStyle.circle1
-						)}
-					/>
-					<span
-						className={cn(
-							LoadingIndicatorStyle.circle,
-							LoadingIndicatorStyle.circle2
-						)}
-					/>
-					<span
-						className={cn(
-							LoadingIndicatorStyle.circle,
-							LoadingIndicatorStyle.circle3
-						)}
-					/>
-					<span
-						className={cn(
-							LoadingIndicatorStyle.circle,
-							LoadingIndicatorStyle.circle4
-						)}
-					/>
+				<div className={styles.circleGroup}>
+					<span className={cn(styles.circle, styles.circle1)} />
+					<span className={cn(styles.circle, styles.circle2)} />
+					<span className={cn(styles.circle, styles.circle3)} />
+					<span className={cn(styles.circle, styles.circle4)} />
 				</div>
-				{text && <h2 className={LoadingIndicatorStyle.header}>{text}</h2>}
+				{text && <h2 className={styles.header}>{text}</h2>}
 			</div>
 		</div>
 	);

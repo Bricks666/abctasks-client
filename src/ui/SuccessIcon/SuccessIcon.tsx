@@ -2,14 +2,14 @@ import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { SvgIcon } from '../SvgIcon';
 
-import SuccessIconStyle from './SuccessIcon.module.css';
+import styles from './SuccessIcon.module.css';
 
 export const SuccessIcon: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<SvgIcon className={className} viewBox='0 0 6.35 6.35' title='success'>
 			<g transform='matrix(1.04777 0 0 1.10377 -1.108 -.48)'>
 				<rect
-					className={SuccessIconStyle.icon}
+					className={styles.icon}
 					width='.635'
 					height='3.47'
 					x='-1.4'
@@ -18,7 +18,7 @@ export const SuccessIcon: React.FC<CommonProps> = ({ className }) => {
 					transform='rotate(-45)'
 				/>
 				<rect
-					className={SuccessIconStyle.icon}
+					className={styles.icon}
 					width='.635'
 					height='5.374'
 					x='5.623'

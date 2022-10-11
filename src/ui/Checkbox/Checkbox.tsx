@@ -4,7 +4,7 @@ import { CommonProps } from '@/interfaces/common';
 import { Color, Size } from '@/interfaces/ui';
 import { InputLabel } from '../InputLabel';
 
-import CheckboxStyle from './Checkbox.module.css';
+import styles from './Checkbox.module.css';
 
 export interface CheckboxProps extends CommonProps {
 	readonly name: string;
@@ -30,17 +30,17 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = ({
 	...checkbox
 }) => {
 	const classes = cn(
-		CheckboxStyle.label,
-		CheckboxStyle[color as keyof typeof CheckboxStyle],
-		CheckboxStyle[size]
+		styles.label,
+		styles[color as keyof typeof styles],
+		styles[size]
 	);
 
 	const id = inputId || checkbox.name;
 
 	return (
-		<div className={cn(CheckboxStyle.container, className)}>
+		<div className={cn(styles.container, className)}>
 			<input
-				className={cn(CheckboxStyle.input, 'visibility-hidden')}
+				className={cn(styles.input, 'visibility-hidden')}
 				{...checkbox}
 				type='checkbox'
 				id={id}

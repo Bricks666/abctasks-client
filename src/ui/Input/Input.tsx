@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { CommonProps } from '@/interfaces/common';
 
-import InputStyle from './Input.module.css';
+import styles from './Input.module.css';
 
 export interface InputProps extends CommonProps {
 	readonly value?: string | number;
@@ -27,7 +27,7 @@ export const Input = memo(
 		{ className, type = 'text', ...input },
 		ref
 	) {
-		const classes = cn(InputStyle.input, className);
+		const classes = cn(styles.input, className);
 		return <input className={classes} type={type} {...input} ref={ref} />;
 	})
 );

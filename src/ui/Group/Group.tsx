@@ -4,7 +4,7 @@ import { CommonProps } from '@/interfaces/common';
 import { Text } from '../Text';
 import { TaskGroup } from '@/models/Groups/types';
 
-import GroupStyle from './Group.module.css';
+import styles from './Group.module.css';
 
 export interface GroupProps extends CommonProps, TaskGroup {}
 
@@ -14,14 +14,14 @@ export const Group: React.FC<GroupProps> = React.memo(function Group({
 	name,
 	secondColor,
 }: GroupProps) {
-	const groupStyle: React.CSSProperties = {
+	const CSSstyles: React.CSSProperties = {
 		backgroundColor: secondColor,
 		color: mainColor,
 	};
 	return (
 		<Text
-			className={cn(GroupStyle.group, className)}
-			cssStyles={groupStyle}
+			className={cn(styles.group, className)}
+			cssStyles={CSSstyles}
 			component='span'>
 			{name}
 		</Text>

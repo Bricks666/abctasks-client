@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 import { Text } from '../Text';
 
-import CardHeaderStyle from './CardHeader.module.css';
+import styles from './CardHeader.module.css';
 
 export interface CardHeaderProps extends CommonProps {
 	readonly secondaryAction?: React.ReactElement;
@@ -12,14 +12,12 @@ export interface CardHeaderProps extends CommonProps {
 export const CardHeader: React.FC<React.PropsWithChildren<CardHeaderProps>> =
 	React.memo(function CardHeader({ children, className, secondaryAction }) {
 		return (
-			<header className={cn(CardHeaderStyle.header, className)}>
-				<Text className={CardHeaderStyle.head} component='p' variant='h3'>
+			<header className={cn(styles.header, className)}>
+				<Text className={styles.head} component='p' variant='h3'>
 					{children}
 				</Text>
 				{secondaryAction && (
-					<div className={CardHeaderStyle.secondaryAction}>
-						{secondaryAction}
-					</div>
+					<div className={styles.secondaryAction}>{secondaryAction}</div>
 				)}
 			</header>
 		);

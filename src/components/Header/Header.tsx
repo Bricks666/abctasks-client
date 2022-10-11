@@ -4,14 +4,14 @@ import { CommonProps } from '@/interfaces/common';
 import { ContentLayout } from '@/ui/ContentLayout';
 import { ProfileLink } from './ProfileLink';
 
-import HeaderStyle from './Header.module.css';
+import styles from './Header.module.css';
 
 export const Header: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<header className={className}>
 			<ContentLayout>
-				<Block className={HeaderStyle.layout}>
-					<ProfileLink className={HeaderStyle.avatar} />
+				<Block className={styles.layout}>
+					<ProfileLink className={styles.avatar} />
 				</Block>
 			</ContentLayout>
 		</header>

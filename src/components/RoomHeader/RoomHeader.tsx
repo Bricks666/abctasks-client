@@ -11,7 +11,7 @@ import { MenuOption } from '@/ui/MenuItem';
 import { useRoom } from './hooks';
 import { CommonProps } from '@/interfaces/common';
 
-import RoomHeaderStyle from './RoomHeader.module.css';
+import styles from './RoomHeader.module.css';
 
 export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
@@ -29,8 +29,8 @@ export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { id: roomId } = useParams();
 	const room = useRoom(roomId);
 	return (
-		<Block className={cn(RoomHeaderStyle.block, className)}>
-			<Text className={RoomHeaderStyle.header} component='h2'>
+		<Block className={cn(styles.block, className)}>
+			<Text className={styles.header} component='h2'>
 				{room?.name}
 			</Text>
 			<EditMenu options={options} alt='Open room edit menu' />

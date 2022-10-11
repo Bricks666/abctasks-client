@@ -2,7 +2,7 @@ import cn from 'classnames';
 import * as React from 'react';
 import { Transition, TransitionProps } from '../Transition';
 
-import CollapseStyle from './Collapse.module.css';
+import styles from './Collapse.module.css';
 
 export interface CollapseProps extends Omit<TransitionProps, 'classes'> {
 	readonly direction?: 'horizontal' | 'vertical';
@@ -16,16 +16,16 @@ export const Collapse: React.FC<React.PropsWithChildren<CollapseProps>> = ({
 	...props
 }) => {
 	const classes = cn(
-		CollapseStyle.collapse,
-		CollapseStyle[direction],
-		CollapseStyle[origin],
+		styles.collapse,
+		styles[direction],
+		styles[origin],
 		className
 	);
 	const transitionClasses = {
-		entering: CollapseStyle.open,
-		entered: CollapseStyle.opened,
-		exiting: CollapseStyle.close,
-		exited: CollapseStyle.closed,
+		entering: styles.open,
+		entered: styles.opened,
+		exiting: styles.close,
+		exited: styles.closed,
 	};
 	return (
 		<Transition className={classes} classes={transitionClasses} {...props} />

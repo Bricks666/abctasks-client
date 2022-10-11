@@ -7,7 +7,7 @@ import { Text } from '@/ui/Text';
 import { LoadingIndicator } from '@/components/LoadingIndicator';
 import { Stack } from '@/ui/Stack';
 import { LoadingWrapper } from '@/components/LoadingWrapper';
-import TasksProgressStyle from './TasksProgress.module.css';
+import styles from './TasksProgress.module.css';
 import { CommonProps } from '@/interfaces/common';
 
 export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
@@ -16,12 +16,12 @@ export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
 	const isLoading = useTasksProgressLoading();
 
 	return (
-		<section className={cn(TasksProgressStyle.wrapper, className)}>
+		<section className={cn(styles.wrapper, className)}>
 			<Text component='h3'>{t('taskProgress.title')}</Text>
 			<LoadingWrapper
 				isLoading={isLoading}
 				loadingIndicator={<LoadingIndicator size='small' />}>
-				<Stack className={TasksProgressStyle.list}>
+				<Stack className={styles.list}>
 					{progresses.map((progress) => (
 						<TaskProgress {...progress} key={progress.groupId} />
 					))}

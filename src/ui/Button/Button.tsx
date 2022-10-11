@@ -5,7 +5,7 @@ import { Color, Size } from '@/interfaces/ui';
 import { BaseButton, BaseButtonProps } from '../BaseButton';
 import { Text } from '../Text';
 
-import ButtonStyle from './Button.module.css';
+import styles from './Button.module.css';
 
 type Type = 'filed' | 'text' | 'outline';
 
@@ -28,16 +28,16 @@ export const Button: React.FC<ButtonProps> = ({
 	...props
 }) => {
 	const classes = cn(
-		ButtonStyle.button,
-		ButtonStyle[type],
-		ButtonStyle[color],
-		ButtonStyle[size],
+		styles.button,
+		styles[type],
+		styles[color],
+		styles[size],
 		className
 	);
 
 	const buttonIcon = icon ? (
 		<Text
-			className={ButtonStyle[`icon--${iconPosition}`]}
+			className={styles[`icon--${iconPosition}`]}
 			component='span'
 			variant='p'>
 			{icon}

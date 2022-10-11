@@ -15,7 +15,7 @@ import { Alert } from '@/ui/Alert';
 import { AlertTitle } from '@/ui/AlertTitle';
 import { CommonProps } from '@/interfaces/common';
 
-import RegistrationFormStyle from './RegistrationForm.module.css';
+import styles from './RegistrationForm.module.css';
 
 const initialValues: RegistrationRequest = {
 	login: '',
@@ -49,7 +49,7 @@ export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 
 	return (
 		<form
-			className={cn(RegistrationFormStyle.form, className)}
+			className={cn(styles.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			{error && (
 				<Alert
@@ -80,9 +80,7 @@ export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 				disabled={isSubmitting}
 				error={errors.repeatPassword?.message}
 			/>
-			<Button
-				className={RegistrationFormStyle.button}
-				disabled={!isDirty || isSubmitting}>
+			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
 				{t('buttons.submit')}
 			</Button>
 		</form>

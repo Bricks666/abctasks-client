@@ -7,7 +7,7 @@ import { Block } from '../Block';
 import { FocusTrap } from '../FocusTrap';
 import { useKeyListener } from '../hooks';
 
-import PopoverStyle from './Popover.module.css';
+import styles from './Popover.module.css';
 
 export interface PopoverProps
 	extends React.AriaAttributes,
@@ -32,20 +32,22 @@ export const Popover: React.FC<PopoverProps> = React.memo(function Popover({
 	...props
 }) {
 	const [popover, setPopover] = React.useState<HTMLElement | null>(null);
-	const { styles, attributes } = usePopper(reference, popover, { placement });
+	const { styles: CSSStyles, attributes } = usePopper(reference, popover, {
+		placement,
+	});
 	useClickOutside(popover, onClose, isOpen);
 	useKeyListener('Escape', onClose, closeOnEsc && isOpen);
 
 	return isOpen ? (
 		<Portal>
 			<div
-				className={PopoverStyle.popover}
-				style={{ ...styles.popper, ...style }}
+				className={styles.popover}
+				style={{ ...CSSStyles.popper, ...style }}
 				{...attributes}
 				ref={setPopover}
 				{...props}>
 				<FocusTrap open={isFocus}>
-					<Block className={PopoverStyle.block}>{children}</Block>
+					<Block className={styles.block}>{children}</Block>
 				</FocusTrap>
 			</div>
 		</Portal>

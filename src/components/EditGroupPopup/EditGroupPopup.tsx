@@ -7,6 +7,8 @@ import { GroupForm } from '../GroupForm';
 import { GET_PARAMS } from '@/const';
 import { editGroup } from '@/models/Groups';
 
+import styles from './EditGroupPopup.module.css';
+
 export interface EditGroupPopupProps extends CommonProps, BasePopup {}
 
 export const EditGroupPopup: React.FC<
@@ -23,6 +25,7 @@ export const EditGroupPopup: React.FC<
 			header={t('edit_task.title')}
 			alt={t('edit_task.title')}>
 			<GroupForm
+				className={styles.form}
 				afterSubmit={onClose}
 				defaultState={group}
 				submitHandler={editGroup}

@@ -6,7 +6,7 @@ import { PopupContent } from '../PopupContent';
 import { PopupHeader } from '../PopupHeader';
 import { Portal } from '../Portal';
 
-import FullScreenPopupStyle from './FullScreenPopup.module.css';
+import styles from './FullScreenPopup.module.css';
 
 export interface FillScreenPopupProps extends CommonProps {
 	readonly isOpen: boolean;
@@ -19,9 +19,9 @@ export const FullScreenPopup: React.FC<
 > = ({ children, className, isOpen, onClose, header }) => {
 	return (
 		<Portal>
-			<div className={FullScreenPopupStyle.container}>
+			<div className={styles.container}>
 				<Collapse origin='bottom' open={isOpen} duration={300}>
-					<Block className={FullScreenPopupStyle.block}>
+					<Block className={styles.block}>
 						<PopupHeader onClose={onClose}>{header}</PopupHeader>
 						<PopupContent className={className}>{children}</PopupContent>
 					</Block>

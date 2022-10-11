@@ -16,7 +16,7 @@ import { Stack } from '@/ui/Stack';
 import { UsePrepareLinkResponse } from '@/hooks/usePrepareLink';
 import { EditIcon } from '@/ui/EditIcon';
 
-import GroupsPopupStyle from './GroupsPopup.module.css';
+import styles from './GroupsPopup.module.css';
 
 export interface GroupsPopupProps extends CommonProps, BasePopup {}
 
@@ -51,13 +51,10 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 			header={t('groups.title')}
 			alt={t('groups.title')}>
 			<Stack>
-				<Button
-					className={GroupsPopupStyle.add_button}
-					to={addGroupLink}
-					type='text'>
+				<Button to={addGroupLink} type='text'>
 					{t('groups.add_group')}
 				</Button>
-				<List className={GroupsPopupStyle.list}>
+				<List className={styles.list}>
 					{groups.map((group) => (
 						<ListItem key={group.id}>
 							<Group {...group} />

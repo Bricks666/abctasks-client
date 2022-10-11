@@ -9,7 +9,7 @@ import { ExclamationIcon } from '../ExclamationIcon';
 import { SuccessIcon } from '../SuccessIcon';
 import { InfoIcon } from '../InfoIcon';
 
-import AlertStyle from './Alert.module.css';
+import styles from './Alert.module.css';
 
 type AllowedColor = Exclude<Color, 'dark' | 'secondary'>;
 
@@ -35,12 +35,7 @@ export const Alert: React.FC<React.PropsWithChildren<AlertProps>> = ({
 	color = 'primary',
 	type = 'standard',
 }) => {
-	const rootClasses = cn(
-		AlertStyle.root,
-		AlertStyle[color],
-		AlertStyle[type],
-		className
-	);
+	const rootClasses = cn(styles.root, styles[color], styles[type], className);
 	const actionPart =
 		action ||
 		(onClose ? (
@@ -50,9 +45,9 @@ export const Alert: React.FC<React.PropsWithChildren<AlertProps>> = ({
 		) : null);
 	return (
 		<Block className={rootClasses} role='alert'>
-			<div className={AlertStyle.icon}>{iconMap[color]}</div>
-			<div className={AlertStyle.content}>{children}</div>
-			{actionPart && <div className={AlertStyle.action}>{actionPart}</div>}
+			<div className={styles.icon}>{iconMap[color]}</div>
+			<div className={styles.content}>{children}</div>
+			{actionPart && <div className={styles.action}>{actionPart}</div>}
 		</Block>
 	);
 };

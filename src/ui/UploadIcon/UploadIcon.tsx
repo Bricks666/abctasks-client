@@ -2,13 +2,13 @@ import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { SvgIcon } from '../SvgIcon';
 
-import UploadIconStyle from './UploadIcon.module.css';
+import styles from './UploadIcon.module.css';
 
 export const UploadIcon: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<SvgIcon className={className} viewBox='0 0 6.35 6.35'>
 			<rect
-				className={UploadIconStyle.rect}
+				className={styles.rect}
 				width='5.292'
 				height='.661'
 				x='.529'
@@ -17,7 +17,7 @@ export const UploadIcon: React.FC<CommonProps> = ({ className }) => {
 				rx='.265'
 			/>
 			<rect
-				className={UploadIconStyle.rect}
+				className={styles.rect}
 				width='4.762'
 				height='.661'
 				x='.654'
@@ -28,7 +28,7 @@ export const UploadIcon: React.FC<CommonProps> = ({ className }) => {
 			/>
 			<g transform='translate(.05)'>
 				<rect
-					className={UploadIconStyle.rect}
+					className={styles.rect}
 					width='2.646'
 					height='.661'
 					x='2.292'
@@ -38,7 +38,7 @@ export const UploadIcon: React.FC<CommonProps> = ({ className }) => {
 					transform='rotate(45)'
 				/>
 				<rect
-					className={UploadIconStyle.rect}
+					className={styles.rect}
 					width='2.646'
 					height='.661'
 					x='-2.126'
@@ -49,7 +49,7 @@ export const UploadIcon: React.FC<CommonProps> = ({ className }) => {
 				/>
 			</g>
 			<rect
-				className={UploadIconStyle.rect}
+				className={styles.rect}
 				width='.087'
 				height='.019'
 				x='2.217'

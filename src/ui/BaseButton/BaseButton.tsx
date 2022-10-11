@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Link, To } from 'react-router-dom';
 import { CommonProps } from '@/interfaces/common';
 
-import BaseButtonStyle from './BaseButton.module.css';
+import styles from './BaseButton.module.css';
 
 /* Переработать ссылку */
 export interface BaseButtonProps
@@ -24,7 +24,7 @@ export const BaseButton: React.FC<BaseButtonProps> = ({
 	buttonType,
 	...props
 }) => {
-	const classes = cn(BaseButtonStyle.button, className);
+	const classes = cn(styles.button, className);
 	if (to) {
 		return (
 			<Link className={classes} to={to}>

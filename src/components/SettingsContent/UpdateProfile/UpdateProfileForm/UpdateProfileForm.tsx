@@ -7,7 +7,7 @@ import { Picture } from '@/ui/Picture';
 import { updateProfile } from '@/models/User';
 import { UpdateProfileRequest } from '@/interfaces/requests';
 
-import UpdateProfileFormStyle from './UpdateProfileForm.module.css';
+import styles from './UpdateProfileForm.module.css';
 
 export const UpdateProfileForm: React.FC = () => {
 	const userInfo = useUserInfo();
@@ -23,11 +23,9 @@ export const UpdateProfileForm: React.FC = () => {
 	};
 	const { errors, isDirty, isSubmitting } = formState;
 	return (
-		<form
-			className={UpdateProfileFormStyle.form}
-			onSubmit={handleSubmit(onSubmit)}>
+		<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 			<Picture
-				className={UpdateProfileFormStyle.picture}
+				className={styles.picture}
 				alt={userInfo.login}
 				src={showedPhoto || ''}
 			/>
@@ -39,14 +37,12 @@ export const UpdateProfileForm: React.FC = () => {
 				error={errors.photo?.message}
 			/>
 			<TextField
-				className={UpdateProfileFormStyle.input}
+				className={styles.input}
 				{...register('login')}
 				label='Login'
 				error={errors.login?.message}
 			/>
-			<Button
-				className={UpdateProfileFormStyle.button}
-				disabled={!isDirty || isSubmitting}>
+			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
 				Save
 			</Button>
 		</form>

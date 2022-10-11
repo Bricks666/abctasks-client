@@ -5,7 +5,7 @@ import { Color, Size } from '@/interfaces/ui';
 import { Picture } from '../Picture';
 import { useLoadImage } from './useLoadImage';
 
-import AvatarStyle from './Avatar.module.css';
+import styles from './Avatar.module.css';
 
 export interface AvatarProps
 	extends CommonProps,
@@ -31,16 +31,16 @@ export const Avatar = React.memo(
 		ref
 	) {
 		const classes = cn(
-			AvatarStyle.root,
-			AvatarStyle[size],
-			AvatarStyle[color as keyof typeof AvatarStyle],
+			styles.root,
+			styles[size],
+			styles[color as keyof typeof styles],
 			className
 		);
 		const status = useLoadImage(src);
 		const imageLoadedNotFalling = src && status === 'loaded';
 
 		const content = imageLoadedNotFalling ? (
-			<Picture className={AvatarStyle.avatar} src={src} alt={alt} />
+			<Picture className={styles.avatar} src={src} alt={alt} />
 		) : (
 			children
 		);

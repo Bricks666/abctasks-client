@@ -9,14 +9,14 @@ import { Text } from '@/ui/Text';
 import { CommonProps } from '@/interfaces/common';
 import { ActivityCard } from '../ActivityCard';
 
-import ActivitiesListStyle from './ActivitiesList.module.css';
+import styles from './ActivitiesList.module.css';
 
 export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
 	const activities = useActivities();
 	const isLoading = useLoadingActivities();
 	return (
-		<section className={cn(ActivitiesListStyle.container, className)}>
+		<section className={cn(styles.container, className)}>
 			<Text component='h3'>{t('activities.title')}</Text>
 			<LoadingWrapper
 				isLoading={isLoading}

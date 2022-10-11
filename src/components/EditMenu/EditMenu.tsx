@@ -7,7 +7,7 @@ import { Menu } from '@/ui/Menu';
 import { MenuItem, MenuOption } from '@/ui/MenuItem';
 import { useAnyPopupOpen, useToggle } from '@/hooks';
 
-import EditMenuStyle from './EditMenu.module.css';
+import styles from './EditMenu.module.css';
 
 export interface EditMenuComponent extends CommonProps {
 	readonly alt?: string;
@@ -26,7 +26,7 @@ export const EditMenu: React.FC<EditMenuComponent> = ({
 	const anyPopupOpen = useAnyPopupOpen();
 	return (
 		<div className={className}>
-			<div className={EditMenuStyle.container} ref={setReference}>
+			<div className={styles.container} ref={setReference}>
 				<IconButton onClick={toggle} size={size} tabIndex={0} title={alt}>
 					<DotsIcon />
 				</IconButton>

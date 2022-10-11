@@ -5,7 +5,7 @@ import { BasePopup, CommonProps } from '@/interfaces/common';
 import { MainPopup } from '@/ui/MainPopup';
 import { EditTaskForm } from '../EditTaskForm';
 
-import EditTaskPopupStyle from './EditTaskPopup.module.css';
+import styles from './EditTaskPopup.module.css';
 
 export interface EditTaskPopupProps extends CommonProps, BasePopup {}
 
@@ -15,7 +15,7 @@ export const EditTaskPopup: React.FC<EditTaskPopupProps> = (props) => {
 
 	return (
 		<MainPopup {...props} onClose={onClose} header={t('edit_task.title')}>
-			<EditTaskForm className={EditTaskPopupStyle.form} />
+			<EditTaskForm className={styles.form} />
 		</MainPopup>
 	);
 };

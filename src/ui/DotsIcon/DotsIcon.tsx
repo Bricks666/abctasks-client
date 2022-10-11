@@ -3,14 +3,14 @@ import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { SvgIcon } from '../SvgIcon';
 
-import DotsIconStyle from './DotsIcon.module.css';
+import styles from './DotsIcon.module.css';
 
 export const DotsIcon: React.FC<CommonProps> = React.memo(function DotsIcon({
 	className,
 }) {
 	return (
 		<SvgIcon
-			className={cn(DotsIconStyle.icon, className)}
+			className={cn(styles.icon, className)}
 			viewBox='0 0 20 6'
 			title='Three dots'>
 			<circle cx='3' cy='3' r='3' />

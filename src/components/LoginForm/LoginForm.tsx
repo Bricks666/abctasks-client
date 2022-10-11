@@ -16,7 +16,7 @@ import { useLoginError } from './hooks';
 import { TextField } from '../TextField';
 import { CommonProps } from '@/interfaces/common';
 
-import LoginFormStyle from './LoginForm.module.css';
+import styles from './LoginForm.module.css';
 
 const initialValue: LoginRequest = {
 	login: '',
@@ -52,7 +52,7 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 
 	return (
 		<form
-			className={cn(LoginFormStyle.form, className)}
+			className={cn(styles.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			{error && (
 				<Alert color='error' type='outline' onClose={() => clearLoginError()}>

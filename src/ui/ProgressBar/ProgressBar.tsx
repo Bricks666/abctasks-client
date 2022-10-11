@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { HEX, CommonProps } from '@/interfaces/common';
 import { Text } from '../Text';
 
-import ProgressBarStyle from './ProgressBar.module.css';
+import styles from './ProgressBar.module.css';
 
 export interface ProgressBarProps extends CommonProps {
 	readonly children: string | number;
@@ -25,7 +25,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = React.memo(
 		progressbarBGColor,
 		progressbarColor,
 	}) {
-		const progressbarStyle: React.CSSProperties = {
+		const CSSstyles: React.CSSProperties = {
 			backgroundColor: progressbarBGColor || 'white',
 		};
 		const progress: React.CSSProperties = {
@@ -34,16 +34,16 @@ export const ProgressBar: React.FC<ProgressBarProps> = React.memo(
 		};
 
 		return (
-			<label className={cn(ProgressBarStyle.label, className)}>
+			<label className={cn(styles.label, className)}>
 				{children}
 				<Text
 					component='span'
 					className={
-						ProgressBarStyle.progressNumbers
+						styles.progressNumbers
 					}>{`${currentValue}/${maxValue}`}</Text>
-				<div className={ProgressBarStyle.progressbar} style={progressbarStyle}>
+				<div className={styles.progressbar} style={CSSstyles}>
 					<div
-						className={ProgressBarStyle.progress}
+						className={styles.progress}
 						style={progress}
 						role='progressbar'
 						aria-valuemin={0}

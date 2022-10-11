@@ -9,7 +9,7 @@ import { usePrepareLink } from '@/hooks';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { CommonProps } from '@/interfaces/common';
 
-import RoomsHeaderStyle from './RoomsHeader.module.css';
+import styles from './RoomsHeader.module.css';
 
 export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('rooms');
@@ -28,7 +28,7 @@ export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 		[createLink]
 	);
 	return (
-		<Block className={cn(RoomsHeaderStyle.header, className)}>
+		<Block className={cn(styles.header, className)}>
 			<Text component='h2'>{t('title')}</Text>
 			<EditMenu options={options} />
 		</Block>

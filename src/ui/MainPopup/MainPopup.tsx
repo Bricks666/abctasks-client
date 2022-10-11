@@ -7,7 +7,7 @@ import { PopupContent } from '../PopupContent';
 import { useKeyListener } from '../hooks';
 import { FocusTrap } from '../FocusTrap';
 
-import MainPopupStyle from './MainPopup.module.css';
+import styles from './MainPopup.module.css';
 
 export interface MainPopupProps extends CommonProps {
 	readonly isOpen: boolean;
@@ -32,7 +32,7 @@ export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = ({
 	return (
 		<Overlay onClose={onClose} alt={alt}>
 			<FocusTrap open={isFocus}>
-				<Fade open={isOpen} className={MainPopupStyle.overlay}>
+				<Fade open={isOpen} className={styles.overlay}>
 					<PopupHeader onClose={onClose}>{header}</PopupHeader>
 					<PopupContent className={className}>{children}</PopupContent>
 				</Fade>

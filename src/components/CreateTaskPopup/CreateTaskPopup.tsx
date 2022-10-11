@@ -5,7 +5,7 @@ import { BasePopup, CommonProps } from '@/interfaces/common';
 import { MainPopup } from '@/ui/MainPopup';
 import { CreateTaskForm } from '../CreateTaskForm';
 
-import TaskPopupStyle from './CreateTaskPopup.module.css';
+import styles from './CreateTaskPopup.module.css';
 
 export interface CreateTaskPopupProps extends CommonProps, BasePopup {}
 
@@ -15,7 +15,7 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 
 	return (
 		<MainPopup {...props} header={t('add_task.title')} onClose={onClose}>
-			<CreateTaskForm className={TaskPopupStyle.form} />
+			<CreateTaskForm className={styles.form} />
 		</MainPopup>
 	);
 };

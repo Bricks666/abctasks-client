@@ -9,7 +9,7 @@ import { Block } from '@/ui/Block';
 import { MenuOption } from '@/ui/MenuItem';
 import { TaskStatus } from '@/models/Tasks/types';
 
-import TaskListHeaderStyle from './TaskListHeader.module.css';
+import styles from './TaskListHeader.module.css';
 
 export interface TaskListHeaderComponent extends CommonProps {
 	readonly columnStatus: TaskStatus;
@@ -34,10 +34,10 @@ export const TaskListHeader: React.FC<
 
 	return (
 		<header className={className}>
-			<Block className={TaskListHeaderStyle.background}>
+			<Block className={styles.background}>
 				<Text component='h3'>{children}</Text>
 				<EditMenu
-					className={TaskListHeaderStyle.editMenu}
+					className={styles.editMenu}
 					options={options}
 					alt="Open tasks list's edit menu"
 				/>

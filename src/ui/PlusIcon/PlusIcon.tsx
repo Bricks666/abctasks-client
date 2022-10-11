@@ -3,12 +3,12 @@ import * as React from 'react';
 import { SvgIcon } from '../SvgIcon';
 import { CommonProps } from '@/interfaces/common';
 
-import PlusIconStyle from './PlusIcon.module.css';
+import styles from './PlusIcon.module.css';
 
 export const PlusIcon: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<SvgIcon
-			className={cn(PlusIconStyle.icon, className)}
+			className={cn(styles.icon, className)}
 			viewBox='0 0 6.35 6.35'
 			title='plus'>
 			<rect width='.794' height='6.35' x='2.778' ry='.52' />

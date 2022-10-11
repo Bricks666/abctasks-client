@@ -15,7 +15,7 @@ import { TextField } from '../TextField';
 import { validatingScheme } from './validator';
 import { Select } from '@/ui/Select';
 
-import EditTaskFromStyle from './EditTaskForm.module.css';
+import styles from './EditTaskForm.module.css';
 
 export interface EditTaskFormValues {
 	readonly content: string;
@@ -71,7 +71,7 @@ export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 	const { isDirty } = formState;
 	return (
 		<form
-			className={cn(EditTaskFromStyle.form, className)}
+			className={cn(styles.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			<Select {...register('groupId')}>
 				{groups.map(({ id, name }) => (
@@ -89,12 +89,12 @@ export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 			</Select>
 
 			<TextField
-				className={EditTaskFromStyle.textarea}
+				className={styles.textarea}
 				{...register('content')}
 				multiline
 				label={t('edit_task.content')}
 			/>
-			<Button className={EditTaskFromStyle.button} disabled={!isDirty}>
+			<Button className={styles.button} disabled={!isDirty}>
 				{t('edit_task.button')}
 			</Button>
 		</form>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
-import SelectStyle from './Select.module.css';
+import styles from './Select.module.css';
 
 export interface SelectProps extends CommonProps {
 	readonly id?: string;
@@ -17,7 +17,7 @@ export const Select = React.forwardRef<
 	React.PropsWithChildren<SelectProps>
 >(function Select({ className, children, ...select }, ref) {
 	return (
-		<select className={cn(SelectStyle.select, className)} {...select} ref={ref}>
+		<select className={cn(styles.select, className)} {...select} ref={ref}>
 			{children}
 		</select>
 	);

@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
-import InputLabelStyle from './InputLabel.module.css';
+import styles from './InputLabel.module.css';
 
 export interface InputLabelProps extends CommonProps {
 	readonly HTMLFor: string;
@@ -13,7 +13,7 @@ export const InputLabel: React.FC<React.PropsWithChildren<InputLabelProps>> = ({
 	children,
 	className,
 }) => {
-	const classes = cn(InputLabelStyle.label, className);
+	const classes = cn(styles.label, className);
 	return (
 		<label className={classes} htmlFor={HTMLFor}>
 			{children}

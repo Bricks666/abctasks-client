@@ -10,17 +10,17 @@ import { ActivitiesList } from '@/components/ActivitiesList';
 import { Stack } from '@/ui/Stack';
 import { RoomHeader } from '@/components/RoomHeader';
 
-import HomePageStyle from './RoomPage.module.css';
+import styles from './RoomPage.module.css';
 
 const RoomPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
 	usePageTitle(t('title'));
 	return (
 		<main>
-			<ContentLayout className={cn(HomePageStyle.layout, className)}>
+			<ContentLayout className={cn(styles.layout, className)}>
 				<RoomHeader />
-				<Tasks className={HomePageStyle.tasks} />
-				<Stack className={HomePageStyle.aside}>
+				<Tasks className={styles.tasks} />
+				<Stack className={styles.aside}>
 					<TasksProgress />
 					<ActivitiesList />
 				</Stack>

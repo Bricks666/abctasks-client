@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
-import TextStyle from './Text.module.css';
+import styles from './Text.module.css';
 
 type Components = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 
@@ -27,11 +27,11 @@ export const Text: React.FC<React.PropsWithChildren<TextProps>> = React.memo(
 	}) {
 		const element = React.createElement(component, {}, null);
 		const classes = cn(
-			TextStyle.text,
-			TextStyle[variant],
-			TextStyle[align],
+			styles.text,
+			styles[variant],
+			styles[align],
 			{
-				[TextStyle.withoutMargins]: !margins,
+				[styles.withoutMargins]: !margins,
 			},
 			className
 		);

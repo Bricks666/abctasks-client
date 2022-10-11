@@ -13,7 +13,7 @@ import { deleteRoom } from '@/models/Rooms';
 import { Button } from '@/ui/Button';
 import { CommonProps } from '@/interfaces/common';
 
-import RoomCardStyle from './RoomCard.module.css';
+import styles from './RoomCard.module.css';
 
 export interface RoomCardProps extends CommonProps, Room {}
 
@@ -47,9 +47,9 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 		[editLink, id]
 	);
 	return (
-		<Card className={cn(RoomCardStyle.card, className)}>
+		<Card className={cn(styles.card, className)}>
 			<CardHeader
-				className={RoomCardStyle.header}
+				className={styles.header}
 				secondaryAction={<EditMenu options={options} />}>
 				{name}
 			</CardHeader>

@@ -16,7 +16,7 @@ import { useGroup } from '@/hooks/useGroup';
 import { CommonProps } from '@/interfaces/common';
 import { usePrepareLink } from '@/hooks';
 
-import TaskCardStyle from './TaskCard.module.css';
+import styles from './TaskCard.module.css';
 
 export interface TaskCardComponent extends CommonProps, TaskStructure {}
 
@@ -53,7 +53,7 @@ export const TaskCard: React.FC<TaskCardComponent> = ({
 	}
 
 	return (
-		<Card className={cn(TaskCardStyle.card, className)}>
+		<Card className={cn(styles.card, className)}>
 			<CardHeader
 				secondaryAction={
 					<EditMenu
@@ -65,15 +65,11 @@ export const TaskCard: React.FC<TaskCardComponent> = ({
 				<Group {...group} />
 			</CardHeader>
 
-			<Text className={TaskCardStyle.content}>{content}</Text>
-			<div className={TaskCardStyle.additionInfo}>
+			<Text>{content}</Text>
+			<div>
 				<DateTime date={addedDate} format='MMM DD' />
 				<Text component='span'>{commentCount}</Text>
-				<Avatar
-					className={TaskCardStyle.avatar}
-					size='small'
-					src={author.photo}
-					alt={author.name}>
+				<Avatar size='small' src={author.photo} alt={author.name}>
 					{author.name[0]?.toUpperCase()}
 				</Avatar>
 			</div>

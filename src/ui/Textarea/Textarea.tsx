@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { CommonProps } from '@/interfaces/common';
 
-import TextareaStyle from './Textarea.module.css';
+import styles from './Textarea.module.css';
 
 export interface TextareaProps extends CommonProps {
 	readonly value?: string | number;
@@ -20,7 +20,7 @@ export interface TextareaProps extends CommonProps {
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 	({ className, ...textarea }, ref) => {
-		const classes = cn(TextareaStyle.textarea, className);
+		const classes = cn(styles.textarea, className);
 		return <textarea className={classes} {...textarea} ref={ref} />;
 	}
 );

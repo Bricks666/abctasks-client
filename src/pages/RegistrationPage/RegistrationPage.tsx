@@ -7,19 +7,19 @@ import { ContentLayout } from '@/ui/ContentLayout';
 import { Text } from '@/ui/Text';
 import { usePageTitle } from '@/hooks';
 
-import RegistrationPageStyle from './RegistrationPage.module.css';
+import styles from './RegistrationPage.module.css';
 
 const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('registration');
 	usePageTitle(t('title'));
 	return (
 		<main className={className}>
-			<ContentLayout className={RegistrationPageStyle.layout}>
-				<Text className={RegistrationPageStyle.header} component='h2'>
+			<ContentLayout className={styles.layout}>
+				<Text className={styles.header} component='h2'>
 					{t('title')}
 				</Text>
-				<RegistrationForm className={RegistrationPageStyle.form} />
-				<SaveLink className={RegistrationPageStyle.link} to='/login'>
+				<RegistrationForm className={styles.form} />
+				<SaveLink className={styles.link} to='/login'>
 					{t('links.login')}
 				</SaveLink>
 			</ContentLayout>

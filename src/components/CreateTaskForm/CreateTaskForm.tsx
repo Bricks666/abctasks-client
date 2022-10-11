@@ -14,7 +14,7 @@ import { TextField } from '../TextField';
 import { validationScheme } from './validator';
 import { Select } from '@/ui/Select';
 
-import TaskFormStyle from './CreateTaskForm.module.css';
+import styles from './CreateTaskForm.module.css';
 
 export interface TaskFormValues {
 	readonly content: string;
@@ -52,7 +52,7 @@ export const CreateTaskForm: React.FC<React.PropsWithChildren<CommonProps>> = ({
 
 	return (
 		<form
-			className={cn(TaskFormStyle.form, className)}
+			className={cn(styles.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			<Select {...register('groupId', { disabled: isSubmitting })}>
 				<option value={-1}>None</option>
@@ -63,13 +63,13 @@ export const CreateTaskForm: React.FC<React.PropsWithChildren<CommonProps>> = ({
 				))}
 			</Select>
 			<TextField
-				className={TaskFormStyle.textarea}
+				className={styles.textarea}
 				{...register('content', { disabled: isSubmitting })}
 				label={t('add_task.content')}
 				multiline
 				error={errors.content?.message}
 			/>
-			<Button className={TaskFormStyle.button} disabled={disableButton}>
+			<Button className={styles.button} disabled={disableButton}>
 				{t('add_task.button')}
 			</Button>
 		</form>

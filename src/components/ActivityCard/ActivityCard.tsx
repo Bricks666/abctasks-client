@@ -12,7 +12,7 @@ import { CommonProps } from '@/interfaces/common';
 import { Card } from '@/ui/Card';
 import { DateTime } from '@/ui/DateTime';
 
-import ActivityCardStyle from './ActivityCard.module.css';
+import styles from './ActivityCard.module.css';
 
 export interface ActivityCardProps extends CommonProps, ActivityStructure {}
 
@@ -23,9 +23,9 @@ const colorMap: Record<Activities, Color> = {
 };
 
 const iconMap: Record<Activities, React.ReactNode> = {
-	[Activities.CREATE]: <PlusIcon className={ActivityCardStyle.icon} />,
-	[Activities.DELETE]: <DeleteIcon className={ActivityCardStyle.icon} />,
-	[Activities.EDIT]: <EditIcon className={ActivityCardStyle.icon} />,
+	[Activities.CREATE]: <PlusIcon className={styles.icon} />,
+	[Activities.DELETE]: <DeleteIcon className={styles.icon} />,
+	[Activities.EDIT]: <EditIcon className={styles.icon} />,
 };
 
 export const ActivityCard: React.FC<ActivityCardProps> = ({
@@ -37,9 +37,9 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
 }) => {
 	const { t } = useTranslation('room');
 	return (
-		<Card className={cn(ActivityCardStyle.card, className)}>
+		<Card className={cn(styles.card, className)}>
 			<Avatar
-				className={ActivityCardStyle.avatar}
+				className={styles.avatar}
 				size='medium'
 				alt={t(`activities.activityType.${activity}`)}
 				color={colorMap[activity]}>

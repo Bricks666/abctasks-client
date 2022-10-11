@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
-import LoadingWrapperStyle from './LoadingWrapper.module.css';
+import styles from './LoadingWrapper.module.css';
 
 export interface LoadingWrapperProps extends CommonProps {
 	readonly isLoading: boolean;
@@ -18,9 +18,7 @@ export const LoadingWrapper: React.FC<
 	children,
 }) {
 	return isLoading ? (
-		<div className={cn(LoadingWrapperStyle.wrapper, className)}>
-			{loadingIndicator}
-		</div>
+		<div className={cn(styles.wrapper, className)}>{loadingIndicator}</div>
 	) : (
 		(children as React.ReactElement)
 	);

@@ -2,7 +2,7 @@ import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 
-import PictureStyle from './Picture.module.css';
+import styles from './Picture.module.css';
 
 export interface PictureProps
 	extends CommonProps,
@@ -19,7 +19,7 @@ export const Picture: React.FC<PictureProps> = React.memo(function Picture({
 }) {
 	return (
 		<img
-			className={cn(PictureStyle.picture, className)}
+			className={cn(styles.picture, className)}
 			src={src}
 			alt={alt}
 			{...props}

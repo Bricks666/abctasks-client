@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +11,7 @@ import { validatingScheme } from './validator';
 import { CommonProps, ID, VoidFunction } from '@/interfaces/common';
 import { Group } from '@/ui/Group';
 
-import GroupFormStyle from './GroupForm.module.css';
+import styles from './GroupForm.module.css';
 
 export interface GroupFormProps extends CommonProps {
 	readonly defaultState?: CreateEditGroupRequest | null;
@@ -53,26 +52,24 @@ export const GroupForm: React.FC<GroupFormProps> = ({
 	const { t } = useTranslation('popups');
 	const { isDirty, isSubmitting, errors } = formState;
 	return (
-		<form
-			className={cn(GroupFormStyle.block, className)}
-			onSubmit={handleSubmit(onSubmit)}>
-			<Stack className={GroupFormStyle.fields}>
+		<form className={className} onSubmit={handleSubmit(onSubmit)}>
+			<Stack className={styles.fields}>
 				<TextField
-					className={GroupFormStyle.input}
+					className={styles.input}
 					{...register('name')}
 					label={t('group_form.name')}
 					error={errors.name?.message}
 				/>
 				<TextField
 					{...register('mainColor')}
-					inputClassName={GroupFormStyle.color_input}
+					inputClassName={styles.color_input}
 					label={t('group_form.main_color')}
 					type='color'
 					error={errors.mainColor?.message}
 				/>
 				<TextField
 					{...register('secondColor')}
-					inputClassName={GroupFormStyle.color_input}
+					inputClassName={styles.color_input}
 					label={t('group_form.secondary_color')}
 					type='color'
 					error={errors.secondColor?.message}
@@ -80,9 +77,7 @@ export const GroupForm: React.FC<GroupFormProps> = ({
 			</Stack>
 			{state.name && <Group {...state} />}
 
-			<Button
-				className={GroupFormStyle.button}
-				disabled={!isDirty || isSubmitting}>
+			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
 				{buttonText}
 			</Button>
 		</form>

@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { CommonProps } from '@/interfaces/common';
 
-import LinkStyle from './Link.module.css';
+import styles from './Link.module.css';
 
 type LinkType = 'common' | 'react';
 
@@ -25,7 +25,7 @@ export const Link: React.FC<LinkProps> = ({
 	children,
 	...link
 }) => {
-	const classes = cn(LinkStyle.link, className);
+	const classes = cn(styles.link, className);
 	if (type === 'common') {
 		return (
 			<a className={classes} href={to} {...link}>

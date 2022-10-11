@@ -4,7 +4,7 @@ import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { Portal } from '../Portal';
 
-import OverlayStyle from './Overlay.module.css';
+import styles from './Overlay.module.css';
 
 export interface OverlayComponent extends CommonProps {
 	readonly onClose: React.MouseEventHandler;
@@ -19,9 +19,9 @@ export const Overlay: React.FC<React.PropsWithChildren<OverlayComponent>> = ({
 }) => {
 	return (
 		<Portal>
-			<div className={OverlayStyle.dialog} role='dialog' aria-label={alt}>
+			<div className={styles.dialog} role='dialog' aria-label={alt}>
 				<div
-					className={OverlayStyle.button}
+					className={styles.button}
 					role='button'
 					onClick={onClose}
 					tabIndex={0}

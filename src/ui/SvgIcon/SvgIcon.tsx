@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
-import SvgIconStyle from './SvgIcon.module.css';
+import styles from './SvgIcon.module.css';
 
 export interface SvgIconProps extends CommonProps {
 	readonly viewBox: string;
@@ -13,7 +13,7 @@ export const SvgIcon: React.FC<React.PropsWithChildren<SvgIconProps>> =
 	React.memo(function SvgIcon({ children, className, viewBox, title }) {
 		return (
 			<svg
-				className={cn(SvgIconStyle.icon, className)}
+				className={cn(styles.icon, className)}
 				viewBox={viewBox}
 				aria-label={title}>
 				{children}

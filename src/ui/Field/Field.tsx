@@ -8,7 +8,7 @@ import { Textarea } from '../Textarea';
 import { SubtextInput } from '../SubtextInput';
 import { Select } from '../Select';
 
-import FieldStyle from './Field.module.css';
+import styles from './Field.module.css';
 
 export interface FieldProps extends CommonProps {
 	readonly name: string;
@@ -41,9 +41,9 @@ export const Field: React.FC<FieldProps> = ({
 }) => {
 	const id = inputId || input.name;
 	const rootClasses = cn(
-		FieldStyle.field,
+		styles.field,
 		{
-			[FieldStyle.error]: !!error,
+			[styles.error]: !!error,
 		},
 		className
 	);

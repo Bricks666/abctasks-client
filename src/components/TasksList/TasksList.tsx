@@ -9,7 +9,7 @@ import { moveTask } from '@/models/Tasks';
 import { DraggableTaskCard } from '../DraggableTaskCard';
 import { Stack } from '@/ui/Stack';
 
-import TasksListStyle from './TasksList.module.css';
+import styles from './TasksList.module.css';
 
 export interface TasksListProps extends CommonProps {
 	readonly tasks: TaskStructure[];
@@ -43,13 +43,11 @@ export const TasksList: React.FC<TasksListProps> = ({
 
 	return (
 		<DropZone
-			className={cn(TasksListStyle.dropZone, className)}
+			className={cn(styles.dropZone, className)}
 			onDrop={onDrop}
 			onDragOver={onDragOver}>
 			<Stack space='l'>
-				<TaskListHeader
-					className={TasksListStyle.header}
-					columnStatus={columnStatus}>
+				<TaskListHeader className={styles.header} columnStatus={columnStatus}>
 					{header}
 				</TaskListHeader>
 				<Stack space='xs'>

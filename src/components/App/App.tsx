@@ -10,7 +10,7 @@ import { AuthRoute } from '../AuthRoute';
 import { Header } from '../Header';
 import { Popups } from '../Popups';
 
-import AppStyle from './App.module.css';
+import styles from './App.module.css';
 
 export const App: React.FC = () => {
 	const isAuthorizing = useIsAuthorizing();
@@ -21,7 +21,7 @@ export const App: React.FC = () => {
 
 	return (
 		<LoadingWrapper
-			className={AppStyle.loading}
+			className={styles.loading}
 			isLoading={isAuthorizing}
 			loadingIndicator={<LoadingIndicator text='Загрузка...' />}>
 			<Routes>
@@ -39,7 +39,7 @@ export const App: React.FC = () => {
 								<React.Suspense
 									fallback={
 										<LoadingWrapper
-											className={AppStyle.loading}
+											className={styles.loading}
 											loadingIndicator={<LoadingIndicator text='Загрузка...' />}
 											isLoading
 										/>

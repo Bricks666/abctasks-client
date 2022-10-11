@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import * as React from 'react';
 
-import FocusTrapStyle from './FocusTrap.module.css';
+import styles from './FocusTrap.module.css';
 
 export interface FocusTrapProps {
 	readonly open: boolean;
@@ -104,7 +104,7 @@ export const FocusTrap: React.FC<React.PropsWithChildren<FocusTrapProps>> = ({
 	return (
 		<>
 			<div className='visibility-hidden' tabIndex={0} ref={startElement} />
-			<div className={FocusTrapStyle.trap} ref={rootRef}>
+			<div className={styles.trap} ref={rootRef}>
 				{children}
 			</div>
 			<div className='visibility-hidden' tabIndex={0} ref={endElement} />

@@ -6,6 +6,8 @@ import { useGoBack } from '@/hooks';
 import { GroupForm } from '../GroupForm';
 import { createGroup } from '@/models/Groups';
 
+import styles from './CreateGroupPopup.module.css';
+
 export interface CreateGroupPopupProps extends CommonProps, BasePopup {}
 
 export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
@@ -18,6 +20,7 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 			header={t('add_group.title')}
 			alt={t('add_group.title')}>
 			<GroupForm
+				className={styles.form}
 				afterSubmit={onClose}
 				submitHandler={createGroup}
 				buttonText={t('add_group.button')}

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { BaseButton, BaseButtonProps } from '../BaseButton';
 
-import ListItemButtonStyle from './ListItemButton.module.css';
+import styles from './ListItemButton.module.css';
 
 export interface ListItemButtonProps extends CommonProps, BaseButtonProps {}
 
@@ -13,9 +13,7 @@ export const ListItemButton: React.FC<ListItemButtonProps> = ({
 	...props
 }) => {
 	return (
-		<BaseButton
-			className={cn(ListItemButtonStyle.button, className)}
-			{...props}>
+		<BaseButton className={cn(styles.button, className)} {...props}>
 			{children}
 		</BaseButton>
 	);

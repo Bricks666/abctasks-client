@@ -8,7 +8,7 @@ import { LoadingIndicator } from '@/components/LoadingIndicator';
 import { TasksList } from '../TasksList';
 import { TaskStatus, TaskStructure } from '@/models/Tasks/types';
 
-import TasksStyle from './Tasks.module.css';
+import styles from './Tasks.module.css';
 
 export interface Column {
 	readonly headerCode: string;
@@ -48,9 +48,9 @@ export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	);
 
 	return (
-		<section className={cn(TasksStyle.tasks, className)}>
+		<section className={cn(styles.tasks, className)}>
 			<LoadingWrapper
-				className={TasksStyle.loading}
+				className={styles.loading}
 				isLoading={isLoading}
 				loadingIndicator={<LoadingIndicator />}>
 				{columns.map(({ headerCode, status, tasks }) => (

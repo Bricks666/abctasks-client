@@ -3,12 +3,12 @@ import * as React from 'react';
 import { CommonProps } from '@/interfaces/common';
 import { SvgIcon } from '../SvgIcon';
 
-import DeleteIconStyle from './DeleteIcon.module.css';
+import styles from './DeleteIcon.module.css';
 
 export const DeleteIcon: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<SvgIcon
-			className={cn(DeleteIconStyle.icon, className)}
+			className={cn(styles.icon, className)}
 			viewBox='0 0 6.35 6.35'
 			title='trash basket'>
 			<g transform='matrix(.95694 0 0 .95694 .127 -.256)'>

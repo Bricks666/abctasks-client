@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { CommonProps } from '@/interfaces/common';
 
-import BlockStyle from './Block.module.css';
+import styles from './Block.module.css';
 
 type Type = 'rounded' | 'square';
 
@@ -19,7 +19,7 @@ export const Block: React.FC<BlockProps> = React.memo(function Block({
 	type = 'rounded',
 	...props
 }) {
-	const classes = cn(BlockStyle.block, BlockStyle[type], className);
+	const classes = cn(styles.block, styles[type], className);
 	return (
 		<div className={classes} {...props}>
 			{children}
