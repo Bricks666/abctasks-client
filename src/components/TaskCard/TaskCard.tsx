@@ -1,9 +1,9 @@
 import * as React from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { useMutation } from '@farfetched/react';
 import { GET_PARAMS, POPUPS } from '@/const';
-import { deleteTask } from '@/models/Tasks';
-import { TaskStructure } from '@/models/Tasks/types';
+import { removeTaskMutation, Task } from '@/models/tasks';
 import { Avatar } from '@/ui/Avatar';
 import { Card } from '@/ui/Card';
 import { CardHeader } from '@/ui/CardHeader';
@@ -17,19 +17,20 @@ import { CommonProps } from '@/interfaces/common';
 
 import styles from './TaskCard.module.css';
 
-export interface TaskCardComponent extends CommonProps, TaskStructure {}
+export interface TaskCardComponent extends CommonProps, Task {}
 
 export const TaskCard: React.FC<TaskCardComponent> = ({
 	className,
 	groupId,
 	content,
 	commentCount,
-	addedDate,
+	createdAt,
 	author,
 	id,
 	roomId,
 }) => {
 	const { t } = useTranslation('room');
+	const removeTask = useMutation(removeTaskMutation);
 	const editLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.editTask,
@@ -43,7 +44,7 @@ export const TaskCard: React.FC<TaskCardComponent> = ({
 		},
 		{
 			label: t('menus.deleteTask'),
-			onClick: () => deleteTask({ id, roomId }),
+			onClick: () => removeTask.start({ id, roomId }),
 		},
 	];
 	const group = useGroup(groupId);
@@ -66,7 +67,7 @@ export const TaskCard: React.FC<TaskCardComponent> = ({
 
 			<Text>{content}</Text>
 			<div>
-				<DateTime date={addedDate} format='MMM DD' />
+				<DateTime date={createdAt} format='MMM DD' />
 				<Text component='span'>{commentCount}</Text>
 				<Avatar size='small' src={author.photo} alt={author.name}>
 					{author.name[0]?.toUpperCase()}

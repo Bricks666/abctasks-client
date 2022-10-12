@@ -1,29 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
-import {
-	CreateRoomRequest,
-	Room,
-	RoomResponse,
-	UpdateRoomRequest,
-} from './types';
-import { StandardResponse } from '@/interfaces/response/standardResponse';
+import { CreateRoomRequest, RoomResponse, UpdateRoomRequest } from './types';
+import { StandardResponse } from '@/interfaces/response';
 
 export const RoomsDomain = createDomain('RoomsDomain');
 
-export const $Rooms = RoomsDomain.store<Room[]>([], { name: 'RoomsStore' });
+export const $RoomId = RoomsDomain.store<number>(0, { name: 'Active room id' });
 
-export const loadRoomsFx = RoomsDomain.effect<
+export const getRoomsFx = RoomsDomain.effect<
 	void,
 	StandardResponse<RoomResponse[]>
->('loadRoomsFx');
-export const loadRoomFx = RoomsDomain.effect<
+>('getRoomsFx');
+export const getRoomFx = RoomsDomain.effect<
 	number,
 	StandardResponse<RoomResponse>
->('loadRoomFx');
-export const deleteRoomFx = RoomsDomain.effect<
+>('getRoomFx');
+export const removeRoomFx = RoomsDomain.effect<
 	number,
 	StandardResponse<boolean>
->('deleteRoomFx');
+>('removeRoomFx');
 export const createRoomFx = RoomsDomain.effect<
 	CreateRoomRequest,
 	StandardResponse<RoomResponse>

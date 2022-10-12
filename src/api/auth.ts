@@ -1,11 +1,10 @@
-import { VoidResponse } from '@/interfaces/response';
-import { StandardResponse } from '@/interfaces/response/standardResponse';
+import { VoidResponse, StandardResponse } from '@/interfaces/response';
 import {
 	AuthResponse,
 	LoginRequest,
 	RegistrationRequest,
 	TokensResponse,
-} from '@/models/auth/types';
+} from '@/models/auth';
 import { instance } from './instance';
 
 export const login = async (credentials: LoginRequest) => {

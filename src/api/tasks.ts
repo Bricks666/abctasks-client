@@ -1,45 +1,53 @@
+import { StandardResponse } from '@/interfaces/response';
 import {
-	TaskRequest,
-	EditTaskRequest,
-	DeleteTaskRequest,
-} from '@/interfaces/requests';
+	CreateTaskRequest,
+	RemoveTaskRequest,
+	GetTaskRequest,
+	TaskResponse,
+	UpdateTaskRequest,
+} from '@/models/tasks';
 import { instance } from './instance';
-import {
-	CreateTaskResponse,
-	TasksResponse,
-	DeleteTaskResponse,
-} from '@/interfaces/response';
-import { ID } from '@/interfaces/common';
 
-export const getTasksApi = async (roomId: ID): Promise<TasksResponse> => {
-	const response = await instance.get(`/todos/${roomId}`);
+export const getAll = async (roomId: number) => {
+	const response = await instance.get<StandardResponse<TaskResponse[]>>(
+		`/tasks/${roomId}`
+	);
 	return response.data;
 };
 
-export const createTaskApi = async ({
-	roomId,
-	...createTask
-}: TaskRequest): Promise<CreateTaskResponse> => {
-	const response = await instance.put(`/todos/${roomId}/new`, createTask);
+export const getOne = async ({ roomId, id }: GetTaskRequest) => {
+	const response = await instance.get<StandardResponse<TaskResponse>>(
+		`/tasks/${roomId}/${id}`
+	);
+	return response.data;
+};
+
+export const create = async ({ roomId, ...createTask }: CreateTaskRequest) => {
+	const response = await instance.post<StandardResponse<TaskResponse>>(
+		`/tasks/${roomId}/create`,
+		createTask
+	);
 
 	return response.data;
 };
 
-export const editTaskApi = async ({
+export const update = async ({
 	id,
 	roomId,
 	...editTask
-}: EditTaskRequest): Promise<CreateTaskResponse> => {
-	const response = await instance.post(`/todos/${roomId}/${id}/edit`, editTask);
+}: UpdateTaskRequest) => {
+	const response = await instance.put<StandardResponse<TaskResponse>>(
+		`/tasks/${roomId}/${id}/update`,
+		editTask
+	);
 
 	return response.data;
 };
 
-export const deleteTaskApi = async ({
-	roomId,
-	id,
-}: DeleteTaskRequest): Promise<DeleteTaskResponse> => {
-	const response = await instance.delete(`/todos/${roomId}/${id}/delete`);
+export const remove = async ({ roomId, id }: RemoveTaskRequest) => {
+	const response = await instance.delete<StandardResponse<boolean>>(
+		`/tasks/${roomId}/${id}/delete`
+	);
 
 	return response.data;
 };

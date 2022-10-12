@@ -1,11 +1,11 @@
-import { TaskAuthor, TaskStatus, TaskStructure } from '../models/Tasks/types';
+import { TaskAuthor, TaskStatus, Task } from '../models/tasks/types';
 
 const mockAuthor: TaskAuthor = {
 	name: 'John',
 	photo: 'https://effector.dev/ru/img/comet.png',
 };
 
-export const mockTasks: TaskStructure[] = [
+export const mockTasks: Task[] = [
 	{
 		id: 1,
 		roomId: 1,

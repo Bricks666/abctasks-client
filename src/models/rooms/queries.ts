@@ -5,7 +5,7 @@ import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
-} from '@/interfaces/response/standardResponse';
+} from '@/interfaces/response';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
 import {
 	CreateRoomRequest,
@@ -16,36 +16,36 @@ import {
 } from './types';
 import {
 	createRoomFx,
-	deleteRoomFx,
-	loadRoomFx,
-	loadRoomsFx,
+	removeRoomFx,
+	getRoomFx,
+	getRoomsFx,
 	updateRoomFx,
 } from './units';
 import { getDataExtractor } from '../mapData/dataExtractor';
 import { converter } from './utils';
 
-export const loadRoomsQuery = createQuery<
+export const getRoomsQuery = createQuery<
 	void,
 	StandardResponse<RoomResponse[]>,
 	Error,
 	StandardSuccessResponse<RoomResponse[]>,
 	Room[]
 >({
-	effect: loadRoomsFx,
+	effect: getRoomsFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(roomResponse))),
 	validate: getIsSuccessResponseValidator(),
 	mapData: (response: StandardSuccessResponse<RoomResponse[]>) =>
 		getDataExtractor<RoomResponse[]>()(response).map(converter),
 });
 
-export const loadRoomQuery = createQuery<
+export const getRoomQuery = createQuery<
 	number,
 	StandardResponse<RoomResponse>,
 	Error,
 	StandardSuccessResponse<RoomResponse>,
 	Room
 >({
-	effect: loadRoomFx,
+	effect: getRoomFx,
 	contract: runtypeContract(getStandardSuccessResponse(roomResponse)),
 	validate: getIsSuccessResponseValidator(),
 	mapData: (response: StandardSuccessResponse<RoomResponse>) =>
@@ -72,12 +72,12 @@ export const updateRoomMutation = createMutation<
 	contract: runtypeContract(getStandardSuccessResponse(roomResponse)),
 });
 
-export const deleteRoomMutation = createMutation<
+export const removeRoomMutation = createMutation<
 	number,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	Error
 >({
-	effect: deleteRoomFx,
+	effect: removeRoomFx,
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
 });

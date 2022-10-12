@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { loadRoomQuery } from '@/models/rooms';
+import { getRoomQuery } from '@/models/rooms';
 import { Block } from '@/ui/Block';
 import { Text } from '@/ui/Text';
 import { usePrepareLink, useImminentlyQuery } from '@/hooks';
@@ -18,7 +18,7 @@ export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
 	const { id: roomId } = useParams();
 	const { data: room, pending } = useImminentlyQuery(
-		loadRoomQuery,
+		getRoomQuery,
 		Number(roomId)
 	);
 	const groupsLink = usePrepareLink({

@@ -2,14 +2,26 @@
 /* eslint-disable indent */
 import * as React from 'react';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
+import { useMutation } from '@farfetched/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
+import {
+	getTaskQuery,
+	updateTaskMutation,
+	TaskStatus,
+	Task,
+	statuses,
+} from '@/models/tasks';
 import { GET_PARAMS } from '@/const';
-import { useGetParam, useGoBack, useTask, useTaskGroups } from '@/hooks';
-import { CommonProps, ID } from '@/interfaces/common';
-import { editTask } from '@/models/Tasks';
-import { TaskStatus, TaskStructure } from '@/models/Tasks/types';
+import {
+	useGetParam,
+	useGoBack,
+	useImminentlyQuery,
+	useTaskGroups,
+} from '@/hooks';
+import { CommonProps } from '@/interfaces/common';
 import { Button } from '@/ui/Button';
 import { TextField } from '../TextField';
 import { validatingScheme } from './validator';
@@ -17,13 +29,13 @@ import { Select } from '@/ui/Select';
 
 import styles from './EditTaskForm.module.css';
 
-export interface EditTaskFormValues {
+export interface UpdateTaskFormValues {
 	readonly content: string;
-	readonly groupId: ID;
+	readonly groupId: number;
 	readonly status: TaskStatus;
 }
 
-const prepareTask = (task: TaskStructure | null): EditTaskFormValues => {
+const prepareTask = (task: Task | null): UpdateTaskFormValues => {
 	return task
 		? {
 				content: task.content,
@@ -33,31 +45,29 @@ const prepareTask = (task: TaskStructure | null): EditTaskFormValues => {
 		: {
 				content: '',
 				groupId: 0,
-				status: TaskStatus.READY,
+				status: 'ready',
 		  };
-};
-
-const statuses = {
-	[TaskStatus.READY]: 'ready',
-	[TaskStatus.IN_PROGRESS]: 'inProgress',
-	[TaskStatus.REVIEW]: 'review',
-	[TaskStatus.DONE]: 'done',
 };
 
 export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 	const taskId = useGetParam(GET_PARAMS.taskId);
-	const task = useTask(taskId);
+	const { id: roomId } = useParams();
+	const { data: task } = useImminentlyQuery(getTaskQuery, {
+		id: Number(taskId),
+		roomId: Number(roomId),
+	});
+	const updateTask = useMutation(updateTaskMutation);
 	const groups = useTaskGroups();
 	const goBack = useGoBack();
 	const { t } = useTranslation(['popups', 'room']);
-	const { register, handleSubmit, formState } = useForm<EditTaskFormValues>({
+	const { register, handleSubmit, formState } = useForm<UpdateTaskFormValues>({
 		defaultValues: prepareTask(task),
 		resolver: joiResolver(validatingScheme),
 	});
 
-	const onSubmit = React.useCallback<SubmitHandler<EditTaskFormValues>>(
+	const onSubmit = React.useCallback<SubmitHandler<UpdateTaskFormValues>>(
 		({ groupId, status, ...values }) => {
-			editTask({
+			updateTask.start({
 				...values,
 				id: +taskId!,
 				status,
@@ -81,8 +91,8 @@ export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 				))}
 			</Select>
 			<Select {...register('status')}>
-				{Object.entries(statuses).map(([code, name]) => (
-					<option value={code} key={code}>
+				{statuses.map((name) => (
+					<option value={name} key={name}>
 						{t(`statuses.${name}`, { ns: 'room' })}
 					</option>
 				))}

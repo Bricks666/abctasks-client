@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
 import { useMutation } from '@farfetched/react';
-import { deleteRoomMutation, Room } from '@/models/rooms';
+import { removeRoomMutation, Room } from '@/models/rooms';
 import { Card } from '@/ui/Card';
 import { CardHeader } from '@/ui/CardHeader';
 import { List } from '@/ui/List';
@@ -23,7 +23,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	className,
 	description,
 }) => {
-	const deleteRoom = useMutation(deleteRoomMutation);
+	const deleteRoom = useMutation(removeRoomMutation);
 	const editLink = usePrepareLink({
 		addQuery: {
 			[GET_PARAMS.popup]: POPUPS.editRoom,

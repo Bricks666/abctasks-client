@@ -1,4 +1,4 @@
-import { StandardSuccessResponse } from '@/interfaces/response/standardResponse';
+import { StandardSuccessResponse } from '@/interfaces/response';
 
 export type CallbackOneArgs<Arg1, Result> = (args1: Arg1) => Result;
 

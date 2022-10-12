@@ -1,14 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { User } from '../User';
-import { StandardResponse } from '@/interfaces/response/standardResponse';
+import { StandardResponse, VoidResponse } from '@/interfaces/response';
 import {
 	AuthResponse,
 	LoginRequest,
 	RegistrationRequest,
 	TokensResponse,
 } from './types';
-import { VoidResponse } from '@/interfaces/response';
 
 export const Auth = createDomain('AuthDomain');
 

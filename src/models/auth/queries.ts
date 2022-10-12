@@ -5,7 +5,9 @@ import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
-} from '@/interfaces/response/standardResponse';
+	voidResponse,
+	VoidResponse,
+} from '@/interfaces/response';
 import { authFx, loginFx, logoutFx, registrationFx } from './units';
 import {
 	authResponse,
@@ -14,7 +16,6 @@ import {
 	RegistrationRequest,
 } from './types';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
-import { voidResponse, VoidResponse } from '@/interfaces/response';
 
 export const authQuery = createQuery<
 	void,

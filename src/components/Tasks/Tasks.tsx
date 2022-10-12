@@ -1,47 +1,48 @@
 import * as React from 'react';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useGroupedTasks, useLoadingTasks } from '@/hooks';
+import { useGroupedTasks } from '@/hooks';
 import { CommonProps } from '@/interfaces/common';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { TasksList } from '../TasksList';
-import { TaskStatus, TaskStructure } from '@/models/Tasks/types';
+import { TaskStatus, Task } from '@/models/tasks/types';
 
 import styles from './Tasks.module.css';
 
 export interface Column {
 	readonly headerCode: string;
-	readonly tasks: TaskStructure[];
+	readonly tasks: Task[];
 	readonly status: TaskStatus;
 }
 
 export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
-	const tasks = useGroupedTasks();
-	const isLoading = useLoadingTasks();
+	const { id: roomId } = useParams();
+	const tasks = useGroupedTasks(Number(roomId));
 
 	const columns = React.useMemo<Column[]>(
 		() => [
 			{
 				headerCode: 'ready',
 				tasks: tasks.ready,
-				status: TaskStatus.READY,
+				status: 'ready',
 			},
 			{
 				headerCode: 'inProgress',
 				tasks: tasks.inProgress,
-				status: TaskStatus.IN_PROGRESS,
+				status: 'in progress',
 			},
 			{
 				headerCode: 'review',
 				tasks: tasks.needReview,
-				status: TaskStatus.REVIEW,
+				status: 'review',
 			},
 			{
 				headerCode: 'done',
 				tasks: tasks.done,
-				status: TaskStatus.DONE,
+				status: 'done',
 			},
 		],
 		[tasks]
@@ -51,7 +52,7 @@ export const Tasks: React.FC<CommonProps> = ({ className }) => {
 		<section className={cn(styles.tasks, className)}>
 			<LoadingWrapper
 				className={styles.loading}
-				isLoading={isLoading}
+				isLoading={false}
 				loadingIndicator={<LoadingIndicator />}>
 				{columns.map(({ headerCode, status, tasks }) => (
 					<TasksList

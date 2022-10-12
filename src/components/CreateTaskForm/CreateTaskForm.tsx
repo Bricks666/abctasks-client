@@ -1,14 +1,14 @@
 import * as React from 'react';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
+import { useMutation } from '@farfetched/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
+import { createTaskMutation, TaskStatus } from '@/models/tasks';
 import { GET_PARAMS } from '@/const';
 import { useGetParam, useTaskGroups } from '@/hooks';
 import { CommonProps } from '@/interfaces/common';
-import { createTask } from '@/models/Tasks';
-import { TaskStatus } from '@/models/Tasks/types';
 import { Button } from '@/ui/Button';
 import { TextField } from '../TextField';
 import { validationScheme } from './validator';
@@ -24,9 +24,9 @@ export interface TaskFormValues {
 export const CreateTaskForm: React.FC<React.PropsWithChildren<CommonProps>> = ({
 	className,
 }) => {
-	const status =
-		useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || TaskStatus.READY;
+	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || 'ready';
 	const { id: roomId } = useParams();
+	const createTask = useMutation(createTaskMutation);
 	const groups = useTaskGroups();
 	const { t } = useTranslation('popups');
 
@@ -37,10 +37,10 @@ export const CreateTaskForm: React.FC<React.PropsWithChildren<CommonProps>> = ({
 
 	const onSubmit = React.useCallback<SubmitHandler<TaskFormValues>>(
 		(values) => {
-			createTask({
+			createTask.start({
 				...values,
 				status,
-				roomId: roomId!,
+				roomId: Number(roomId),
 			});
 			reset();
 		},

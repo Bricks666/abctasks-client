@@ -1,4 +1,4 @@
-import { StandardResponse } from '@/interfaces/response/standardResponse';
+import { StandardResponse } from '@/interfaces/response';
 import {
 	CreateRoomRequest,
 	RoomResponse,

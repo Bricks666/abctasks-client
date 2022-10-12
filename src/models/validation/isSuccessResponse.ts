@@ -1,10 +1,14 @@
 import { Validator } from '@farfetched/core/validation/type';
-import { StandardResponse } from '@/interfaces/response/standardResponse';
+import {
+	StandardResponse,
+	StandardSuccessResponse,
+} from '@/interfaces/response';
 
 export const getIsSuccessResponseValidator = <T>(): Validator<
 	StandardResponse<T>,
 	unknown,
 	void
 > => {
-	return (data) => data.errorMessage === null;
+	return (data): data is StandardSuccessResponse<T> =>
+		data.errorMessage === null;
 };

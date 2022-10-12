@@ -7,7 +7,7 @@ import { EditMenu } from '../EditMenu';
 import { Text } from '@/ui/Text';
 import { Block } from '@/ui/Block';
 import { MenuOption } from '@/ui/MenuItem';
-import { TaskStatus } from '@/models/Tasks/types';
+import { TaskStatus } from '@/models/tasks/types';
 
 import styles from './TaskListHeader.module.css';
 

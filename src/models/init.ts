@@ -1,4 +1,4 @@
-import './Tasks/init';
+import './tasks/init';
 import './Activities/init';
 import './User/init';
 import './Groups/init';

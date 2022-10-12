@@ -1,9 +1,4 @@
-export {
-	getTasksApi,
-	createTaskApi,
-	editTaskApi,
-	deleteTaskApi,
-} from './tasks';
+export * as tasksApi from './tasks';
 export * as authApi from './auth';
 export * as roomsApi from './rooms';
 
