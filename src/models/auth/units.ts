@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { User } from '../User';
-import { StandardResponse, VoidResponse } from '@/interfaces/response';
+import { StandardResponse, VoidResponse } from '@/types/response';
 import {
 	AuthResponse,
 	LoginRequest,

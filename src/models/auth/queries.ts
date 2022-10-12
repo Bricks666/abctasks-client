@@ -7,7 +7,7 @@ import {
 	StandardSuccessResponse,
 	voidResponse,
 	VoidResponse,
-} from '@/interfaces/response';
+} from '@/types/response';
 import { authFx, loginFx, logoutFx, registrationFx } from './units';
 import {
 	authResponse,

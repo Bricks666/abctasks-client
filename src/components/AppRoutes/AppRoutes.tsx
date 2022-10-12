@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { routes } from '@/routes';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';

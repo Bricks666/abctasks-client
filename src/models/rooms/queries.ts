@@ -5,7 +5,7 @@ import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
-} from '@/interfaces/response';
+} from '@/types/response';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
 import {
 	CreateRoomRequest,
@@ -21,8 +21,8 @@ import {
 	getRoomsFx,
 	updateRoomFx,
 } from './units';
-import { getDataExtractor } from '../mapData/dataExtractor';
 import { converter } from './utils';
+import { dataExtractor } from '../mapData/dataExtractor';
 
 export const getRoomsQuery = createQuery<
 	void,
@@ -35,7 +35,7 @@ export const getRoomsQuery = createQuery<
 	contract: runtypeContract(getStandardSuccessResponse(Array(roomResponse))),
 	validate: getIsSuccessResponseValidator(),
 	mapData: (response: StandardSuccessResponse<RoomResponse[]>) =>
-		getDataExtractor<RoomResponse[]>()(response).map(converter),
+		dataExtractor<RoomResponse[]>(response).map(converter),
 });
 
 export const getRoomQuery = createQuery<
@@ -49,7 +49,7 @@ export const getRoomQuery = createQuery<
 	contract: runtypeContract(getStandardSuccessResponse(roomResponse)),
 	validate: getIsSuccessResponseValidator(),
 	mapData: (response: StandardSuccessResponse<RoomResponse>) =>
-		converter(getDataExtractor<RoomResponse>()(response)),
+		converter(dataExtractor<RoomResponse>(response)),
 });
 
 export const createRoomMutation = createMutation<

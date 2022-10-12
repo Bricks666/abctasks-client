@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 import styles from './LoadingIndicator.module.css';
 

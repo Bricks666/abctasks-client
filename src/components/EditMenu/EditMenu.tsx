@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { CommonProps } from '@/interfaces/common';
-import { Size } from '@/interfaces/ui';
+import { CommonProps } from '@/types/common';
+import { Size } from '@/types/ui';
 import { DotsIcon } from '@/ui/DotsIcon';
 import { IconButton } from '@/ui/IconButton';
 import { Menu } from '@/ui/Menu';

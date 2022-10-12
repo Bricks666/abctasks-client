@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { ContentLayout } from '@/ui/ContentLayout';
 import { TasksProgress } from '@/components/TasksProgress';
 import { Tasks } from '@/components/Tasks';

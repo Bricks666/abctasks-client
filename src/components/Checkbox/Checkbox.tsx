@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Checkbox as CheckboxUI } from '@/ui/Checkbox';
 
 export interface CheckboxProps extends CommonProps, UseFormRegisterReturn {

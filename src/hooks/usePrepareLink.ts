@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ID } from '@/interfaces/common';
+import { ID } from '@/types/common';
 
 interface UsePrepareLinkParams {
 	readonly query?: Record<string, string>;

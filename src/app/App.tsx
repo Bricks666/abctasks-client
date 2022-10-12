@@ -8,12 +8,13 @@ import { useImminentlyQuery } from '@/hooks';
 import styles from './App.module.css';
 
 export const App: React.FC = () => {
-	const { pending } = useImminentlyQuery(authQuery, undefined);
+	const { status } = useImminentlyQuery(authQuery, undefined);
+	const isLoading = status === 'initial' || status === 'pending';
 
 	return (
 		<LoadingWrapper
 			className={styles.loading}
-			isLoading={pending}
+			isLoading={isLoading}
 			loadingIndicator={<LoadingIndicator text='Загрузка...' />}>
 			<AppRoutes />
 		</LoadingWrapper>

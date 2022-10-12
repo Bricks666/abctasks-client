@@ -1,5 +1,5 @@
-import { ID } from '@/interfaces/common';
-import { ChangeProgressResponse } from '@/interfaces/response';
+import { ID } from '@/types/common';
+import { ChangeProgressResponse } from '@/types/response';
 import { TaskProgressStructure } from './types';
 import { toValidTaskProgress } from './utils';
 

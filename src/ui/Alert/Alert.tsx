@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { CommonProps } from '@/interfaces/common';
-import { Color } from '@/interfaces/ui';
+import { CommonProps } from '@/types/common';
+import { Color } from '@/types/ui';
 import { Block } from '../Block';
 import { IconButton } from '../IconButton';
 import { CrossIcon } from '../CrossIcon';

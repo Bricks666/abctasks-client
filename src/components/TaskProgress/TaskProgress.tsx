@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TaskProgressStructure } from '@/models/Progress/types';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { ProgressBar } from '@/ui/ProgressBar';
-import { useGroup } from '@/hooks';
 
 export interface TaskProgressComponent
 	extends CommonProps,
@@ -13,10 +12,10 @@ export const TaskProgress: React.FC<TaskProgressComponent> = ({
 	completedCount,
 	totalCount,
 	className,
-	groupId,
+	/* groupId, */
 }) => {
 	const { t } = useTranslation('room');
-	const group = useGroup(groupId);
+	const group = null;
 
 	if (!group) {
 		return null;

@@ -1,4 +1,4 @@
-import { ID } from '@/interfaces/common';
+import { ID } from '@/types/common';
 
 export interface TaskProgressStructure {
 	readonly groupId: ID;

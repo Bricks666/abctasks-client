@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
-import { StandardResponse } from '@/interfaces/response';
+import { StandardResponse } from '@/types/response';
 import {
 	CreateTaskRequest,
 	RemoveTaskRequest,

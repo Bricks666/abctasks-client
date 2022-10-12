@@ -9,7 +9,7 @@ import { usePrepareLink, useImminentlyQuery } from '@/hooks';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { EditMenu } from '../EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 
 import styles from './RoomHeader.module.css';
@@ -19,7 +19,8 @@ export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { id: roomId } = useParams();
 	const { data: room, pending } = useImminentlyQuery(
 		getRoomQuery,
-		Number(roomId)
+		Number(roomId),
+		roomId
 	);
 	const groupsLink = usePrepareLink({
 		query: {

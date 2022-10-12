@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
 import { Block } from '../Block';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 import styles from './Card.module.css';
 

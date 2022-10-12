@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { VoidFunction } from '@/interfaces/common';
+import { VoidFunction } from '@/types/common';
 
 export const useToggle = (defaultValue = false): [boolean, VoidFunction] => {
 	const [isToggle, setIsToggle] = useState(defaultValue);

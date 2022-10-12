@@ -3,12 +3,12 @@ import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@/ui/Avatar';
 import { Activities, ActivityStructure } from '@/models/Activities/types';
-import { Color } from '@/interfaces/ui';
+import { Color } from '@/types/ui';
 import { Text } from '@/ui/Text';
 import { DeleteIcon } from '@/ui/DeleteIcon';
 import { EditIcon } from '@/ui/EditIcon';
 import { PlusIcon } from '@/ui/PlusIcon';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Card } from '@/ui/Card';
 import { DateTime } from '@/ui/DateTime';
 

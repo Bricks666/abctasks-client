@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { $IsAuth } from '@/models/auth';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import { LoginForm } from '@/components/LoginForm';
 import { SaveLink } from '@/components/SaveLink';

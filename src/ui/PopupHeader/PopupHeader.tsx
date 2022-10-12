@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { CrossIcon } from '../CrossIcon';
 import { IconButton } from '../IconButton';
 import { Text } from '../Text';

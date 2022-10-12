@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { CreateEditRoomRequest } from '@/interfaces/requests';
+import { CreateEditRoomRequest } from '@/types/requests';
 
 export const validatingScheme = Joi.object<CreateEditRoomRequest>({
 	roomId: Joi.number().required(),

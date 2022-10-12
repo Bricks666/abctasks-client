@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { UpdateTaskFormValues } from './EditTaskForm';
+import { UpdateTaskFormValues } from './UpdateTaskForm';
 
 export const validatingScheme = Joi.object<UpdateTaskFormValues>({
 	content: Joi.string().max(128).required().messages({

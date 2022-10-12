@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ROUTES } from '@/const';
 import { i18n } from '@/i18n';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Block } from '@/ui/Block';
 import { List } from '@/ui/List';
 import { ListItem } from '@/ui/ListItem';

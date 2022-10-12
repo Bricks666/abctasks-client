@@ -8,7 +8,7 @@ import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { Stack } from '@/ui/Stack';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
 import styles from './TasksProgress.module.css';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');

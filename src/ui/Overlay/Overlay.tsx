@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Portal } from '../Portal';
 
 import styles from './Overlay.module.css';

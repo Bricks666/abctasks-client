@@ -4,7 +4,7 @@ import {
 	MAX_LOGIN_PASSWORD_LENGTH,
 	MIN_LOGIN_PASSWORD_LENGTH,
 } from '@/const';
-import { RegistrationRequest } from '@/interfaces/requests';
+import { RegistrationRequest } from '@/types/requests';
 
 export const validationSchema = Joi.object<RegistrationRequest>({
 	login: Joi.string()

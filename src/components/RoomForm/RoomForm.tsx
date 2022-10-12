@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { CommonProps, VoidFunction } from '@/interfaces/common';
+import { CommonProps, VoidFunction } from '@/types/common';
 import { TextField } from '../TextField';
 import { Button } from '@/ui/Button';
 import { validatingScheme } from './validator';

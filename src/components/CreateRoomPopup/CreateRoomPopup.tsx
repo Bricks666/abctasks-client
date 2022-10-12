@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMutation } from '@farfetched/react';
 import { createRoomMutation } from '@/models/rooms';
-import { BasePopup } from '@/interfaces/common';
+import { BasePopup } from '@/types/common';
 import { MainPopup } from '@/ui/MainPopup';
 import { useGoBack } from '@/hooks';
 import { RoomForm } from '../RoomForm';

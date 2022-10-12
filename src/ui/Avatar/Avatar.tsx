@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { CommonProps } from '@/interfaces/common';
-import { Color, Size } from '@/interfaces/ui';
+import { CommonProps } from '@/types/common';
+import { Color, Size } from '@/types/ui';
 import { Picture } from '../Picture';
 import { useLoadImage } from './useLoadImage';
 

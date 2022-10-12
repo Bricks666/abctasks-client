@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { LoginRequest } from '@/interfaces/requests';
+import { LoginRequest } from '@/types/requests';
 import {
 	allowedSymbolsRegExp,
 	MAX_LOGIN_PASSWORD_LENGTH,

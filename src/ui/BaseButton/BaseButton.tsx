@@ -2,7 +2,7 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { Link, To } from 'react-router-dom';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 import styles from './BaseButton.module.css';
 

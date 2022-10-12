@@ -1,4 +1,4 @@
-import { ID } from '@/interfaces/common';
+import { ID } from '@/types/common';
 
 export enum Activities {
 	EDIT,

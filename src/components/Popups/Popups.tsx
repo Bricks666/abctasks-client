@@ -2,21 +2,21 @@ import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { POPUPS } from '@/const';
 import { CreateTaskPopup } from '../CreateTaskPopup';
-import { EditTaskPopup } from '../EditTaskPopup';
+import { UpdateTaskPopup } from '../UpdateTaskPopup';
 import { GroupsPopup } from '../GroupsPopup';
-import { EditGroupPopup } from '../EditGroupPopup';
+import { UpdateGroupPopup } from '../UpdateGroupPopup';
 import { CreateGroupPopup } from '../CreateGroupPopup';
-import { BasePopup } from '@/interfaces/common';
+import { BasePopup } from '@/types/common';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { CreateRoomPopup } from '../CreateRoomPopup';
 import { usePopups } from './usePopups';
 
 const popupsMap: Record<string, React.ComponentType<BasePopup>> = {
 	[POPUPS.createTask]: CreateTaskPopup,
-	[POPUPS.editTask]: EditTaskPopup,
+	[POPUPS.updateTask]: UpdateTaskPopup,
 	[POPUPS.groups]: GroupsPopup,
 	[POPUPS.createGroup]: CreateGroupPopup,
-	[POPUPS.editGroup]: EditGroupPopup,
+	[POPUPS.updateGRoup]: UpdateGroupPopup,
 	[POPUPS.createRoom]: CreateRoomPopup,
 };
 

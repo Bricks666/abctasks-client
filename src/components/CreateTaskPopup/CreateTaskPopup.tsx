@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGoBack } from '@/hooks';
-import { BasePopup, CommonProps } from '@/interfaces/common';
+import { BasePopup, CommonProps } from '@/types/common';
 import { MainPopup } from '@/ui/MainPopup';
 import { CreateTaskForm } from '../CreateTaskForm';
 

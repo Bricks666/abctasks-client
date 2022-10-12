@@ -1,5 +1,5 @@
-import { ID } from '@/interfaces/common';
-import { ActivitiesResponse, ActivityResponse } from '@/interfaces/response';
+import { ID } from '@/types/common';
+import { ActivitiesResponse, ActivityResponse } from '@/types/response';
 import { ErrorHandlerParams } from '@/packages/eventSource';
 import { instance, sseListener } from './instance';
 

@@ -1,12 +1,14 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Text } from '../Text';
-import { TaskGroup } from '@/models/Groups/types';
+import { Group as GroupModel } from '@/models/groups/types';
 
 import styles from './Group.module.css';
 
-export interface GroupProps extends CommonProps, TaskGroup {}
+export interface GroupProps
+	extends CommonProps,
+		Omit<GroupModel, 'id' | 'roomId'> {}
 
 export const Group: React.FC<GroupProps> = React.memo(function Group({
 	className,

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { CreateRoomRequest, RoomResponse, UpdateRoomRequest } from './types';
-import { StandardResponse } from '@/interfaces/response';
+import { StandardResponse } from '@/types/response';
 
 export const RoomsDomain = createDomain('RoomsDomain');
 

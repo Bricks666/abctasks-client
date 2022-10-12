@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Header } from '@/components/Header';
 
 export interface MainLayoutProps extends CommonProps {}

@@ -1,4 +1,4 @@
-import { VoidResponse, StandardResponse } from '@/interfaces/response';
+import { VoidResponse, StandardResponse } from '@/types/response';
 import {
 	AuthResponse,
 	LoginRequest,
@@ -26,7 +26,6 @@ export const registration = async (credentials: RegistrationRequest) => {
 		'/auth/registration',
 		credentials
 	);
-
 	return response.data;
 };
 
@@ -34,7 +33,6 @@ export const logout = async () => {
 	const response = await instance.delete<StandardResponse<boolean>>(
 		'/auth/logout'
 	);
-
 	return response.data;
 };
 
@@ -42,6 +40,5 @@ export const refresh = async () => {
 	const response = await instance.get<StandardResponse<TokensResponse>>(
 		'/auth/refresh'
 	);
-
 	return response.data;
 };

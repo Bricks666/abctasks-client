@@ -11,7 +11,7 @@ import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { Button } from '@/ui/Button';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 import styles from './RoomCard.module.css';
 
@@ -26,7 +26,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	const deleteRoom = useMutation(removeRoomMutation);
 	const editLink = usePrepareLink({
 		addQuery: {
-			[GET_PARAMS.popup]: POPUPS.editRoom,
+			[GET_PARAMS.popup]: POPUPS.updateRoom,
 			[GET_PARAMS.roomId]: id,
 		},
 	});

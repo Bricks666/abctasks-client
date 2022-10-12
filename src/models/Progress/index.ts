@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { SubscribeChangeProgressProps } from '@/api/progress';
-import { ID, WithCloseRef } from '@/interfaces/common';
+import { ID, WithCloseRef } from '@/types/common';
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
-} from '@/interfaces/response';
+} from '@/types/response';
 import { TaskProgressStructure } from './types';
 
 export const ProgressDomain = createDomain('ProgressDomain');

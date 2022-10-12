@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import * as React from 'react';
 import cn from 'classnames';
-import { HEX, CommonProps } from '@/interfaces/common';
+import { HEX, CommonProps } from '@/types/common';
 import { Text } from '../Text';
 
 import styles from './ProgressBar.module.css';

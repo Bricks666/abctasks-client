@@ -1,19 +1,21 @@
+/* eslint-disable sonarjs/no-empty-collection */
 import * as React from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Stack } from '@/ui/Stack';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
-import { useActivities, useLoadingActivities } from './hooks';
+import { /* useActivities,  */ useLoadingActivities } from './hooks';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { Text } from '@/ui/Text';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { ActivityCard } from '../ActivityCard';
+import { ActivityStructure } from '@/models/Activities/types';
 
 import styles from './ActivitiesList.module.css';
 
 export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
-	const activities = useActivities() || [];
+	const activities: ActivityStructure[] = [];
 	const isLoading = useLoadingActivities();
 	return (
 		<section className={cn(styles.container, className)}>

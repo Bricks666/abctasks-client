@@ -6,7 +6,7 @@ import { useStore } from 'effector-react';
 import { $IsAuth, registrationMutation } from '@/models/auth';
 import { RegistrationForm } from '@/components/RegistrationForm';
 import { SaveLink } from '@/components/SaveLink';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { ContentLayout } from '@/ui/ContentLayout';
 import { Text } from '@/ui/Text';
 import { usePageTitle } from '@/hooks';

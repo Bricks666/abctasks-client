@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Path } from 'react-router-dom';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { ListItem } from '../ListItem';
 import { ListItemButton } from '../ListItemButton';
 import { Text } from '../Text';

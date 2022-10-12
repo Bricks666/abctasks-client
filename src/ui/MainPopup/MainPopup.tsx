@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { CommonProps, VoidFunction } from '@/interfaces/common';
+import { CommonProps, VoidFunction } from '@/types/common';
 import { Overlay } from '../Overlay';
 import { PopupHeader } from '../PopupHeader';
 import { Fade } from '../Fade';
 import { PopupContent } from '../PopupContent';
 import { useKeyListener } from '../hooks';
-import { FocusTrap } from '../FocusTrap';
+/* import { FocusTrap } from '../FocusTrap'; */
 
 import styles from './MainPopup.module.css';
 
@@ -31,12 +31,12 @@ export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = ({
 	useKeyListener('Escape', onClose, closeOnEsc && isFocus);
 	return (
 		<Overlay onClose={onClose} alt={alt}>
-			<FocusTrap open={isFocus}>
-				<Fade open={isOpen} className={styles.overlay}>
-					<PopupHeader onClose={onClose}>{header}</PopupHeader>
-					<PopupContent className={className}>{children}</PopupContent>
-				</Fade>
-			</FocusTrap>
+			{/* <FocusTrap open={isFocus}> */}
+			<Fade open={isOpen} className={styles.overlay}>
+				<PopupHeader onClose={onClose}>{header}</PopupHeader>
+				<PopupContent className={className}>{children}</PopupContent>
+			</Fade>
+			{/* </FocusTrap> */}
 		</Overlay>
 	);
 };

@@ -1,8 +1,8 @@
-import { ID } from '@/interfaces/common';
+import { ID } from '@/types/common';
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
-} from '@/interfaces/response';
+} from '@/types/response';
 import { ErrorHandlerParams } from '@/packages/eventSource';
 import { instance, sseListener } from './instance';
 

@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { SubscribeNewActivitiesApiParams } from '@/api/activities';
-import { ID, WithCloseRef } from '@/interfaces/common';
-import { ActivitiesResponse, ActivityResponse } from '@/interfaces/response';
+import { ID, WithCloseRef } from '@/types/common';
+import { ActivitiesResponse, ActivityResponse } from '@/types/response';
 import { ActivityStructure } from './types';
 
 export const ActivitiesDomain = createDomain('ActivitiesDomain');

@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGroupedTasks } from '@/hooks';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { TasksList } from '../TasksList';

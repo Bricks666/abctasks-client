@@ -12,8 +12,8 @@ import { Group } from '@/ui/Group';
 import { Text } from '@/ui/Text';
 import { MenuOption } from '@/ui/MenuItem';
 import { DateTime } from '@/ui/DateTime';
-import { useGroup, usePrepareLink } from '@/hooks';
-import { CommonProps } from '@/interfaces/common';
+import { useGroupsMap, usePrepareLink } from '@/hooks';
+import { CommonProps } from '@/types/common';
 
 import styles from './TaskCard.module.css';
 
@@ -21,8 +21,8 @@ export interface TaskCardComponent extends CommonProps, Task {}
 
 export const TaskCard: React.FC<TaskCardComponent> = ({
 	className,
-	groupId,
 	content,
+	groupId,
 	commentCount,
 	createdAt,
 	author,
@@ -33,21 +33,26 @@ export const TaskCard: React.FC<TaskCardComponent> = ({
 	const removeTask = useMutation(removeTaskMutation);
 	const editLink = usePrepareLink({
 		query: {
-			[GET_PARAMS.popup]: POPUPS.editTask,
+			[GET_PARAMS.popup]: POPUPS.updateTask,
 			[GET_PARAMS.taskId]: id.toString(),
 		},
 	});
-	const options: MenuOption[] = [
-		{
-			label: t('menus.editTask'),
-			to: editLink,
-		},
-		{
-			label: t('menus.deleteTask'),
-			onClick: () => removeTask.start({ id, roomId }),
-		},
-	];
-	const group = useGroup(groupId);
+	const options: MenuOption[] = React.useMemo(
+		() => [
+			{
+				label: t('menus.editTask'),
+				to: editLink,
+			},
+			{
+				label: t('menus.deleteTask'),
+				onClick: () => removeTask.start({ id, roomId }),
+			},
+		],
+		[editLink, id, roomId]
+	);
+	const { data: groups } = useGroupsMap(roomId);
+	const group = groups[groupId];
+
 	if (!group) {
 		return null;
 	}

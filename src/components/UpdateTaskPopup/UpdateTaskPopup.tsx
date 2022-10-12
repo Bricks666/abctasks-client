@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGoBack } from '@/hooks';
-import { BasePopup, CommonProps } from '@/interfaces/common';
+import { BasePopup, CommonProps } from '@/types/common';
 import { MainPopup } from '@/ui/MainPopup';
-import { EditTaskForm } from '../EditTaskForm';
+import { EditTaskForm } from './UpdateTaskForm';
 
-import styles from './EditTaskPopup.module.css';
+import styles from './UpdateTaskPopup.module.css';
 
-export interface EditTaskPopupProps extends CommonProps, BasePopup {}
+export interface UpdateTaskPopupProps extends CommonProps, BasePopup {}
 
-export const EditTaskPopup: React.FC<EditTaskPopupProps> = (props) => {
+export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	const onClose = useGoBack();
 	const { t } = useTranslation('popups');
 

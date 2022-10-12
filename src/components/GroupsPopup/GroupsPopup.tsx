@@ -1,18 +1,20 @@
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
+import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
+import { getGroupsQuery, removeGroupMutation } from '@/models/groups';
 import {
 	useGoBack,
 	usePrepareLink,
-	useTaskGroups,
 	UsePrepareLinkResponse,
+	useImminentlyQuery,
 } from '@/hooks';
-import { BasePopup, CommonProps, ID } from '@/interfaces/common';
+import { BasePopup, CommonProps, ID } from '@/types/common';
 import { Group } from '@/ui/Group';
 import { List } from '@/ui/List';
 import { ListItem } from '@/ui/ListItem';
 import { ListItemSecondaryAction } from '@/ui/ListItemSecondaryAction';
 import { Button } from '@/ui/Button';
-import { deleteGroup } from '@/models/Groups';
 import { IconButton } from '@/ui/IconButton';
 import { DeleteIcon } from '@/ui/DeleteIcon';
 import { GET_PARAMS, POPUPS } from '@/const';
@@ -33,17 +35,23 @@ const createEditLink = (params: UsePrepareLinkResponse, groupId: ID) => {
 
 export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 	const onClose = useGoBack();
-	const groups = useTaskGroups();
+	const { id: roomId } = useParams();
+	const { data: groups } = useImminentlyQuery(
+		getGroupsQuery,
+		Number(roomId),
+		roomId
+	);
+	const removeGroup = useMutation(removeGroupMutation);
 	const { t } = useTranslation('popups');
-	const addGroupLink = usePrepareLink({
+	const createGroup = usePrepareLink({
 		addQuery: {
 			[GET_PARAMS.popup]: POPUPS.createGroup,
 		},
 		saveQuery: true,
 	});
-	const editGroupLink = usePrepareLink({
+	const updateGroup = usePrepareLink({
 		addQuery: {
-			[GET_PARAMS.popup]: POPUPS.editGroup,
+			[GET_PARAMS.popup]: POPUPS.updateGRoup,
 		},
 		saveQuery: true,
 	});
@@ -55,20 +63,20 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 			header={t('groups.title')}
 			alt={t('groups.title')}>
 			<Stack>
-				<Button to={addGroupLink} type='text'>
+				<Button to={createGroup} type='text'>
 					{t('groups.add_group')}
 				</Button>
 				<List className={styles.list}>
-					{groups.map((group) => (
+					{groups?.map((group) => (
 						<ListItem key={group.id}>
 							<Group {...group} />
 							<ListItemSecondaryAction>
-								<IconButton to={createEditLink(editGroupLink, group.id)}>
+								<IconButton to={createEditLink(updateGroup, group.id)}>
 									<EditIcon />
 								</IconButton>
 								<IconButton
 									onClick={() =>
-										deleteGroup({ id: group.id, roomId: group.roomId })
+										removeGroup.start({ id: group.id, roomId: group.roomId })
 									}>
 									<DeleteIcon />
 								</IconButton>

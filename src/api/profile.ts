@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { instance } from './instance';
-import { UpdateProfileRequest } from '@/interfaces/requests';
-import { UserResponse } from '@/interfaces/response';
+import { UpdateProfileRequest } from '@/types/requests';
+import { UserResponse } from '@/types/response';
 
 export const getProfileApi = async () => {
 	const response = await instance.get<UserResponse>('/profile');

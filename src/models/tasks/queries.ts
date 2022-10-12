@@ -5,7 +5,7 @@ import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
-} from '@/interfaces/response';
+} from '@/types/response';
 import {
 	CreateTaskRequest,
 	GetTaskRequest,
@@ -23,7 +23,7 @@ import {
 	updateTaskFx,
 } from './units';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
-import { getDataExtractor } from '../mapData/dataExtractor';
+import { dataExtractor } from '../mapData/dataExtractor';
 import { converter } from './utils';
 
 export const getTasksQuery = createQuery<
@@ -37,7 +37,7 @@ export const getTasksQuery = createQuery<
 	contract: runtypeContract(getStandardSuccessResponse(Array(taskResponse))),
 	validate: getIsSuccessResponseValidator(),
 	mapData: (data: StandardSuccessResponse<TaskResponse[]>) =>
-		getDataExtractor<TaskResponse[]>()(data).map(converter),
+		dataExtractor<TaskResponse[]>(data).map(converter),
 });
 
 export const getTaskQuery = createQuery<
@@ -51,7 +51,7 @@ export const getTaskQuery = createQuery<
 	contract: runtypeContract(getStandardSuccessResponse(taskResponse)),
 	validate: getIsSuccessResponseValidator(),
 	mapData: (data: StandardSuccessResponse<TaskResponse>) =>
-		converter(getDataExtractor<TaskResponse>()(data)),
+		converter(dataExtractor<TaskResponse>(data)),
 });
 
 export const createTaskMutation = createMutation<

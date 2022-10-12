@@ -1,7 +1,10 @@
+import { Template, String, Static } from 'runtypes';
 import { CloseConnect } from '@/packages/eventSource';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export type HEX = `#${string}`;
+export const hex = Template`#${String.withConstraint(
+	(code) => code.length === 3 || code.length === 6
+)}`;
+export type HEX = Static<typeof hex>;
 
 /* TODO: Изменить типизацию на более конкретную */
 export type DateType = string;

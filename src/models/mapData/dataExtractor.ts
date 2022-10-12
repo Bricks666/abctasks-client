@@ -1,10 +1,5 @@
-import { StandardSuccessResponse } from '@/interfaces/response';
+import { StandardSuccessResponse } from '@/types/response';
 
-export type CallbackOneArgs<Arg1, Result> = (args1: Arg1) => Result;
-
-export const getDataExtractor = <T>(): CallbackOneArgs<
-	StandardSuccessResponse<T>,
-	T
-> => {
-	return (response) => response.data;
+export const dataExtractor = <T>(response: StandardSuccessResponse<T>): T => {
+	return response.data;
 };

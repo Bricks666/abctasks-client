@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 export interface AuthLayoutProps extends CommonProps {}
 

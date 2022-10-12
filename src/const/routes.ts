@@ -16,22 +16,22 @@ export const GET_PARAMS: GetParams = {
 
 interface Popups {
 	readonly createTask: string;
-	readonly editTask: string;
+	readonly updateTask: string;
 	readonly groups: string;
 	readonly createGroup: string;
-	readonly editGroup: string;
+	readonly updateGRoup: string;
 	readonly createRoom: string;
-	readonly editRoom: string;
+	readonly updateRoom: string;
 }
 
 export const POPUPS: Popups = {
 	createTask: 'create-task',
-	editTask: 'edit-task',
+	updateTask: 'update-task',
 	groups: 'groups',
 	createGroup: 'create-group',
-	editGroup: 'edit-group',
+	updateGRoup: 'update-group',
 	createRoom: 'create-room',
-	editRoom: 'edit-room',
+	updateRoom: 'update-room',
 };
 
 export const ROUTES = {

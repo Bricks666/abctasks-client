@@ -8,7 +8,7 @@ import { RegistrationRequest, registrationMutation } from '@/models/auth';
 import { Button } from '@/ui/Button';
 import { TextField } from '../TextField';
 import { validationSchema } from './validator';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 import styles from './RegistrationForm.module.css';
 

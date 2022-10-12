@@ -1,10 +1,14 @@
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { BasePopup, CommonProps } from '@/interfaces/common';
+import { SubmitHandler } from 'react-hook-form';
+import { useMutation } from '@farfetched/react';
+import { createGroupMutation } from '@/models/groups';
+import { BasePopup, CommonProps } from '@/types/common';
 import { MainPopup } from '@/ui/MainPopup';
 import { useGoBack } from '@/hooks';
-import { GroupForm } from '../GroupForm';
-import { createGroup } from '@/models/Groups';
+import { GroupForm, GroupFormValues } from '../GroupForm';
+import { defaultFormValues } from './data';
 
 import styles from './CreateGroupPopup.module.css';
 
@@ -13,6 +17,18 @@ export interface CreateGroupPopupProps extends CommonProps, BasePopup {}
 export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 	const onClose = useGoBack();
 	const { t } = useTranslation('popups');
+	const { id: roomId } = useParams();
+	const createGroup = useMutation(createGroupMutation);
+
+	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(
+		(values) => {
+			createGroup.start({
+				...values,
+				roomId: Number(roomId),
+			});
+		},
+		[roomId]
+	);
 	return (
 		<MainPopup
 			{...props}
@@ -21,8 +37,8 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 			alt={t('add_group.title')}>
 			<GroupForm
 				className={styles.form}
-				afterSubmit={onClose}
-				submitHandler={createGroup}
+				onSubmit={onSubmit}
+				defaultValues={defaultFormValues}
 				buttonText={t('add_group.button')}
 			/>
 		</MainPopup>

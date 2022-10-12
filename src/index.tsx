@@ -13,11 +13,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<ErrorBoundary>
-				<App />
-			</ErrorBoundary>
-		</BrowserRouter>
-	</React.StrictMode>
+	<BrowserRouter>
+		<ErrorBoundary>
+			<App />
+		</ErrorBoundary>
+	</BrowserRouter>
 );

@@ -5,7 +5,7 @@ import React, {
 	ReactNode,
 } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Field } from '@/ui/Field';
 
 export interface TextFieldProps extends CommonProps, UseFormRegisterReturn {

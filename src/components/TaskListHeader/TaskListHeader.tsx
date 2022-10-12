@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { usePrepareLink } from '@/hooks';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { EditMenu } from '../EditMenu';
 import { Text } from '@/ui/Text';
 import { Block } from '@/ui/Block';

@@ -1,4 +1,4 @@
-import { VoidFunction } from '@/interfaces/common';
+import { VoidFunction } from '@/types/common';
 
 export interface InstanceConfig {
 	readonly baseURL: string;

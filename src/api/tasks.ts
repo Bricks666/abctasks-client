@@ -1,4 +1,4 @@
-import { StandardResponse } from '@/interfaces/response';
+import { StandardResponse } from '@/types/response';
 import {
 	CreateTaskRequest,
 	RemoveTaskRequest,
@@ -22,25 +22,19 @@ export const getOne = async ({ roomId, id }: GetTaskRequest) => {
 	return response.data;
 };
 
-export const create = async ({ roomId, ...createTask }: CreateTaskRequest) => {
+export const create = async ({ roomId, ...body }: CreateTaskRequest) => {
 	const response = await instance.post<StandardResponse<TaskResponse>>(
 		`/tasks/${roomId}/create`,
-		createTask
+		body
 	);
-
 	return response.data;
 };
 
-export const update = async ({
-	id,
-	roomId,
-	...editTask
-}: UpdateTaskRequest) => {
+export const update = async ({ id, roomId, ...body }: UpdateTaskRequest) => {
 	const response = await instance.put<StandardResponse<TaskResponse>>(
 		`/tasks/${roomId}/${id}/update`,
-		editTask
+		body
 	);
-
 	return response.data;
 };
 
@@ -48,6 +42,5 @@ export const remove = async ({ roomId, id }: RemoveTaskRequest) => {
 	const response = await instance.delete<StandardResponse<boolean>>(
 		`/tasks/${roomId}/${id}/delete`
 	);
-
 	return response.data;
 };

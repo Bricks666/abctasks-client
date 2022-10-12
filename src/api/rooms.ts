@@ -1,4 +1,4 @@
-import { StandardResponse } from '@/interfaces/response';
+import { StandardResponse } from '@/types/response';
 import {
 	CreateRoomRequest,
 	RoomResponse,
@@ -10,7 +10,6 @@ export const getAll = async () => {
 	const response = await instance.get<StandardResponse<RoomResponse[]>>(
 		'/rooms'
 	);
-
 	return response.data;
 };
 
@@ -18,7 +17,6 @@ export const getOne = async (id: number) => {
 	const response = await instance.get<StandardResponse<RoomResponse>>(
 		`/rooms/${id}`
 	);
-
 	return response.data;
 };
 
@@ -27,13 +25,11 @@ export const create = async (room: CreateRoomRequest) => {
 		'/rooms/create',
 		room
 	);
-
 	return response.data;
 };
 
-export const update = async ({ roomId, ...data }: UpdateRoomRequest) => {
-	const response = await instance.put(`/rooms/${roomId}/update`, data);
-
+export const update = async ({ roomId, ...body }: UpdateRoomRequest) => {
+	const response = await instance.put(`/rooms/${roomId}/update`, body);
 	return response.data;
 };
 
@@ -41,6 +37,5 @@ export const remove = async (roomId: number) => {
 	const response = await instance.delete<StandardResponse<boolean>>(
 		`/rooms/${roomId}/delete`
 	);
-
 	return response.data;
 };

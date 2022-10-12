@@ -14,20 +14,16 @@ import {
 	Task,
 	statuses,
 } from '@/models/tasks';
+import { getGroupsQuery } from '@/models/groups';
 import { GET_PARAMS } from '@/const';
-import {
-	useGetParam,
-	useGoBack,
-	useImminentlyQuery,
-	useTaskGroups,
-} from '@/hooks';
-import { CommonProps } from '@/interfaces/common';
+import { useGetParam, useImminentlyQuery } from '@/hooks';
+import { CommonProps } from '@/types/common';
 import { Button } from '@/ui/Button';
-import { TextField } from '../TextField';
+import { TextField } from '../../TextField';
 import { validatingScheme } from './validator';
 import { Select } from '@/ui/Select';
 
-import styles from './EditTaskForm.module.css';
+import styles from './UpdateTaskForm.module.css';
 
 export interface UpdateTaskFormValues {
 	readonly content: string;
@@ -49,16 +45,20 @@ const prepareTask = (task: Task | null): UpdateTaskFormValues => {
 		  };
 };
 
-export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
+export const UpdateTaskForm: React.FC<CommonProps> = ({ className }) => {
 	const taskId = useGetParam(GET_PARAMS.taskId);
 	const { id: roomId } = useParams();
-	const { data: task } = useImminentlyQuery(getTaskQuery, {
-		id: Number(taskId),
-		roomId: Number(roomId),
-	});
+	const { data: task } = useImminentlyQuery(
+		getTaskQuery,
+		{
+			id: Number(taskId),
+			roomId: Number(roomId),
+		},
+		roomId,
+		taskId
+	);
 	const updateTask = useMutation(updateTaskMutation);
-	const groups = useTaskGroups();
-	const goBack = useGoBack();
+	const { data: groups } = useImminentlyQuery(getGroupsQuery, Number(roomId));
 	const { t } = useTranslation(['popups', 'room']);
 	const { register, handleSubmit, formState } = useForm<UpdateTaskFormValues>({
 		defaultValues: prepareTask(task),
@@ -74,9 +74,8 @@ export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 				groupId,
 				roomId: task?.roomId || 0,
 			});
-			goBack();
 		},
-		[goBack, taskId, task?.roomId]
+		[taskId, task?.roomId]
 	);
 	const { isDirty } = formState;
 	return (
@@ -84,7 +83,8 @@ export const EditTaskForm: React.FC<CommonProps> = ({ className }) => {
 			className={cn(styles.form, className)}
 			onSubmit={handleSubmit(onSubmit)}>
 			<Select {...register('groupId')}>
-				{groups.map(({ id, name }) => (
+				{/* TODO: Добавить загрузку */}
+				{groups?.map(({ id, name }) => (
 					<option value={id} key={id}>
 						{name}
 					</option>

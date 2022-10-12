@@ -1,55 +1,37 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@/components/TextField';
 import { Button } from '@/ui/Button';
-import { CreateEditGroupRequest } from '@/interfaces/requests';
 import { Stack } from '@/ui/Stack';
-import { validatingScheme } from './validator';
-import { CommonProps, ID, VoidFunction } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Group } from '@/ui/Group';
+import { validatingScheme } from './validator';
+import { GroupFormValues } from './types';
 
 import styles from './GroupForm.module.css';
 
 export interface GroupFormProps extends CommonProps {
-	readonly defaultState?: CreateEditGroupRequest | null;
-	readonly afterSubmit?: VoidFunction;
-	readonly submitHandler: (values: CreateEditGroupRequest) => unknown;
+	readonly defaultValues: GroupFormValues;
 	readonly buttonText: string;
+	readonly onSubmit: SubmitHandler<GroupFormValues>;
 }
 
-const createInitialState = (roomId: ID): CreateEditGroupRequest => {
-	return {
-		id: 0,
-		mainColor: '#000',
-		secondColor: '#fff',
-		name: '',
-		roomId,
-	};
-};
-
 export const GroupForm: React.FC<GroupFormProps> = ({
-	afterSubmit,
-	submitHandler,
 	className,
-	defaultState,
+	defaultValues,
 	buttonText,
+	onSubmit,
 }) => {
-	const { id: roomId } = useParams();
-	const { register, handleSubmit, watch, formState } =
-		useForm<CreateEditGroupRequest>({
-			defaultValues: defaultState || createInitialState(roomId!),
-			resolver: joiResolver(validatingScheme),
-		});
-	const state = watch();
-	const onSubmit = (values: CreateEditGroupRequest) => {
-		submitHandler(values);
-		// eslint-disable-next-line no-unused-expressions
-		afterSubmit && afterSubmit();
-	};
 	const { t } = useTranslation('popups');
+	const { register, handleSubmit, watch, formState } = useForm<GroupFormValues>(
+		{
+			resolver: joiResolver(validatingScheme),
+			defaultValues,
+		}
+	);
+	const state = watch();
 	const { isDirty, isSubmitting, errors } = formState;
 	return (
 		<form className={className} onSubmit={handleSubmit(onSubmit)}>
@@ -76,7 +58,6 @@ export const GroupForm: React.FC<GroupFormProps> = ({
 				/>
 			</Stack>
 			{state.name && <Group {...state} />}
-
 			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
 				{buttonText}
 			</Button>

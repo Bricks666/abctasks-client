@@ -9,7 +9,7 @@ import { loginMutation, LoginRequest } from '@/models/auth';
 import { Checkbox } from '../Checkbox';
 import { validationSchema } from './validator';
 import { TextField } from '../TextField';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 import styles from './LoginForm.module.css';
 

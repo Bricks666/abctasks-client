@@ -1,4 +1,4 @@
-import { TaskProgressResponse } from '@/interfaces/response';
+import { TaskProgressResponse } from '@/types/response';
 import { TaskProgressStructure } from './types';
 
 export const toValidTaskProgress = (

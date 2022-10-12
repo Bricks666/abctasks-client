@@ -4,7 +4,7 @@ import {
 	LinkProps as ReactLinkProps,
 	Link as ReactLink,
 } from 'react-router-dom';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 
 import styles from './Link.module.css';
 

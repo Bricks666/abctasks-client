@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { SSEListener } from '@/packages/eventSource';
 
-export const baseURL = 'http://localhost:5000/api';
+export const baseURL = `http://${import.meta.env.VITE_API_HOST}:5000/api`;
 let accessToken = '';
 
 export const instance = axios.create({

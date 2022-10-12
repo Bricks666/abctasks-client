@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLocationState } from '@/hooks';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Link } from '@/ui/Link';
 
 export interface SaveLinkProps extends CommonProps {

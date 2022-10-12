@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
 import { TaskStatus, Task, updateTaskMutation } from '@/models/tasks';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { DropZone } from '../DropZone';
 import { TaskListHeader } from '../TaskListHeader';
 import { DraggableTaskCard } from '../DraggableTaskCard';

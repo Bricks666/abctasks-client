@@ -3,7 +3,7 @@ import { useMutation } from '@farfetched/react';
 import { useStore } from 'effector-react';
 import { $AuthUser, logoutMutation } from '@/models/auth';
 import { useAnyPopupOpen, useToggle } from '@/hooks';
-import { CommonProps } from '@/interfaces/common';
+import { CommonProps } from '@/types/common';
 import { Menu } from '@/ui/Menu';
 import { MenuItem, MenuOption } from '@/ui/MenuItem';
 import { Avatar } from '@/ui/Avatar';
