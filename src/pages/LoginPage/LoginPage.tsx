@@ -33,7 +33,7 @@ const LoginPage: React.FC<CommonProps> = ({ className }) => {
 				</Text>
 				<LoginForm className={styles.form} />
 				<SaveLink className={styles.link} to='/registration'>
-					{t('links.registration')}
+					{t('actions.registration')}
 				</SaveLink>
 			</ContentLayout>
 		</AuthLayout>

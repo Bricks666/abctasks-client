@@ -49,7 +49,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	);
 
 	return (
-		<MainPopup {...props} onClose={onClose} header={t('update_task.title')}>
+		<MainPopup {...props} onClose={onClose} header={t('task.updateTitle')}>
 			{loading ? (
 				<LoadingIndicator />
 			) : (
@@ -58,7 +58,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 					onSubmit={onSubmit}
 					roomId={Number(roomId)}
 					defaultValues={defaultValues}
-					buttonText={t('update_task.button')}
+					buttonText={t('actions.save', { ns: 'common' })}
 				/>
 			)}
 		</MainPopup>

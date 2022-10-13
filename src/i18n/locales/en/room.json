@@ -1,11 +1,5 @@
 {
-	"title": "Room",
-	"statuses": {
-		"ready": "Ready",
-		"in progress": "In progress",
-		"review": "Review",
-		"done": "Done"
-	},
+	"title": "Комната",
 	"taskProgress": {
 		"title": "Tasks Progress",
 		"progressAria": "Progress of {{name}} tasks is {{completed}}"
@@ -23,10 +17,7 @@
 			"remove": "removed"
 		}
 	},
-	"menus": {
-		"groups": "Groups",
-		"addTask": "Add task",
-		"editTask": "Edit",
-		"removeTask": "Delete"
+	"actions": {
+		"groups": "Show groups"
 	}
 }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useMutation } from '@farfetched/react';
 import { useStore } from 'effector-react';
+import { useTranslation } from 'react-i18next';
 import { $AuthUser, logoutMutation } from '@/models/auth';
 import { useAnyPopupOpen, useToggle } from '@/hooks';
 import { CommonProps } from '@/types/common';
@@ -10,6 +11,7 @@ import { Avatar } from '@/ui/Avatar';
 import { ROUTES } from '@/const';
 
 export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('header');
 	const user = useStore($AuthUser);
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
@@ -19,11 +21,11 @@ export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
 	const options: MenuOption[] = React.useMemo(
 		() => [
 			{
-				label: 'Settings',
+				label: t('actions.settings'),
 				to: ROUTES.SETTINGS.slice(0, -2),
 			},
 			{
-				label: 'Logout',
+				label: t('actions.logout'),
 				onClick: () => start(),
 			},
 		],

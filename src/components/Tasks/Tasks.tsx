@@ -19,7 +19,7 @@ export interface Column {
 }
 
 export const Tasks: React.FC<CommonProps> = ({ className }) => {
-	const { t } = useTranslation('room');
+	const { t } = useTranslation('task');
 	const { id: roomId } = useParams();
 	const tasks = useGroupedTasks(Number(roomId));
 	/*

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
+import { useTranslation } from 'react-i18next';
 import { removeRoomMutation, Room } from '@/models/rooms';
 import { Card } from '@/ui/Card';
 import { CardHeader } from '@/ui/CardHeader';
@@ -23,8 +25,9 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	className,
 	description,
 }) => {
+	const { t } = useTranslation('rooms');
 	const removeRoom = useMutation(removeRoomMutation);
-	const editLink = usePrepareLink({
+	const updateLink = usePrepareLink({
 		addQuery: {
 			[GET_PARAMS.popup]: POPUPS.updateRoom,
 			[GET_PARAMS.roomId]: id,
@@ -33,15 +36,15 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	const options = React.useMemo<MenuOption[]>(
 		() => [
 			{
-				label: 'Edit',
-				to: editLink,
+				label: t('actions.update', { ns: 'common' }),
+				to: updateLink,
 			},
 			{
-				label: 'Delete',
+				label: t('actions.remove', { ns: 'common' }),
 				onClick: () => removeRoom.start(id),
 			},
 		],
-		[editLink, id]
+		[updateLink, id]
 	);
 	return (
 		<Card className={cn(styles.card, className)}>
@@ -51,9 +54,11 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 				{name}
 			</CardHeader>
 			<List>
-				<ListItem>Описание: {description}</ListItem>
+				<ListItem>
+					{t('card.description')}: {description}
+				</ListItem>
 			</List>
-			<Button type='text' to={`${id}`}>
+			<Button component={Link} type='text' to={`${id}`}>
 				Перейти
 			</Button>
 		</Card>

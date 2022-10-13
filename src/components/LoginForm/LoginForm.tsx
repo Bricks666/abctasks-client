@@ -54,7 +54,7 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 			/>
 			<Checkbox {...register('rememberMe')} label={t('fields.remember')} />
 			<Button disabled={!isDirty || isSubmitting} type='filed'>
-				{t('buttons.submit')}
+				{t('actions.submit')}
 			</Button>
 		</form>
 	);

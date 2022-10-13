@@ -1,11 +1,5 @@
 {
 	"title": "Комната",
-	"statuses": {
-		"ready": "В ожидании",
-		"in progress": "В прогрессе",
-		"review": "Проверка",
-		"done": "Выполнено"
-	},
 	"taskProgress": {
 		"title": "Прогресс",
 		"progressAria": "Прогресс задач группы {{name}}, выполнено {{completed}}"
@@ -23,10 +17,7 @@
 			"remove": "удалил"
 		}
 	},
-	"menus": {
-		"groups": "Группы",
-		"addTask": "Добавить задачу",
-		"editTask": "Изменить",
-		"removeTask": "Удалить"
+	"actions": {
+		"groups": "Показать группы"
 	}
 }

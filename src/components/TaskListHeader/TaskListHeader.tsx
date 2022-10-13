@@ -18,16 +18,16 @@ export interface TaskListHeaderComponent extends CommonProps {
 export const TaskListHeader: React.FC<
 	React.PropsWithChildren<TaskListHeaderComponent>
 > = ({ children, className, columnStatus }) => {
-	const { t } = useTranslation('room');
+	const { t } = useTranslation('common');
 	const editFormLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.createTask,
-			[GET_PARAMS.taskStatus]: columnStatus.toString(),
+			[GET_PARAMS.taskStatus]: columnStatus,
 		},
 	});
 	const options: MenuOption[] = [
 		{
-			label: t('menus.addTask'),
+			label: t('actions.create'),
 			to: editFormLink,
 		},
 	];

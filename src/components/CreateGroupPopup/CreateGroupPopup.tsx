@@ -33,13 +33,13 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 		<MainPopup
 			{...props}
 			onClose={onClose}
-			header={t('add_group.title')}
-			alt={t('add_group.title')}>
+			header={t('group.createTitle')}
+			alt={t('group.createTitle')}>
 			<GroupForm
 				className={styles.form}
 				onSubmit={onSubmit}
 				defaultValues={defaultFormValues}
-				buttonText={t('add_group.button')}
+				buttonText={t('actions.create', { ns: 'common' })}
 			/>
 		</MainPopup>
 	);

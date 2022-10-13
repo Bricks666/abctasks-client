@@ -39,20 +39,20 @@ export const GroupForm: React.FC<GroupFormProps> = ({
 				<TextField
 					className={styles.input}
 					{...register('name')}
-					label={t('group_form.name')}
+					label={t('group.name')}
 					error={errors.name?.message}
 				/>
 				<TextField
 					{...register('mainColor')}
 					inputClassName={styles.color_input}
-					label={t('group_form.main_color')}
+					label={t('group.mainColor')}
 					type='color'
 					error={errors.mainColor?.message}
 				/>
 				<TextField
 					{...register('secondColor')}
 					inputClassName={styles.color_input}
-					label={t('group_form.secondary_color')}
+					label={t('group.secondaryColor')}
 					type='color'
 					error={errors.secondColor?.message}
 				/>

@@ -5,10 +5,8 @@
 		"password": "Пароль",
 		"remember": "Запомнить меня"
 	},
-	"buttons": {
-		"submit": "Войти"
-	},
-	"links": {
+	"actions": {
+		"submit": "Войти",
 		"registration": "Зарегистрироваться"
 	}
 }

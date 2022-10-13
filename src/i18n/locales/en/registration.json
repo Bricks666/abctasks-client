@@ -5,10 +5,8 @@
 		"password": "Password",
 		"passwordRepeat": "Password Repeat"
 	},
-	"buttons": {
-		"submit": "Registration"
-	},
-	"links": {
+	"actions": {
+		"submit": "Registration",
 		"login": "Login"
 	}
 }

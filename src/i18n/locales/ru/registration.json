@@ -5,10 +5,8 @@
 		"password": "Пароль",
 		"passwordRepeat": "Повторите пароль"
 	},
-	"buttons": {
-		"submit": "Регистрация"
-	},
-	"links": {
+	"actions": {
+		"submit": "Регистрация",
 		"login": "Войти"
 	}
 }

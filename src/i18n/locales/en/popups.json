@@ -1,15 +1,19 @@
 {
-	"add_task": {
-		"title": "Добавить задачу",
-		"group": "Группа",
-		"content": "Содержание",
-		"button": "Добавить"
+	"task": {
+		"createTitle": "Create task",
+		"updateTitle": "Update task",
+		"group": "Group",
+		"status": "Status",
+		"content": "Content"
 	},
-	"update_task": {
-		"title": "Добавить задачу",
-		"group": "Группа",
-		"status": "Статус",
-		"content": "Содержание",
-		"button": "Добавить"
+	"group": {
+		"createTitle": "Create group",
+		"updateTitle": "Update group",
+		"name": "Name",
+		"mainColor": "Main color",
+		"secondaryColor": "Secondary color"
+	},
+	"groups": {
+		"title": "Groups"
 	}
 }

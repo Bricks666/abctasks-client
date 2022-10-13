@@ -9,24 +9,28 @@ import styles from './Button.module.css';
 
 type Type = 'filed' | 'text' | 'outline';
 
-export interface ButtonProps extends CommonProps, BaseButtonProps {
-	readonly color?: Color;
-	readonly type?: Type;
-	readonly size?: Size;
-	readonly icon?: React.ReactElement;
-	readonly iconPosition?: 'start' | 'end';
-}
+export type ButtonProps<E extends React.ElementType> = CommonProps &
+	BaseButtonProps<E> & {
+		readonly color?: Color;
+		readonly type?: Type;
+		readonly size?: Size;
+		readonly icon?: React.ReactElement;
+		readonly iconPosition?: 'start' | 'end';
+	};
 
-export const Button: React.FC<ButtonProps> = ({
-	className,
-	color = 'primary',
-	type = 'filed',
-	size = 'medium',
-	iconPosition = 'start',
-	icon = null,
-	children,
-	...props
-}) => {
+export const Button = <E extends React.ElementType>(
+	props: ButtonProps<E>
+): React.ReactElement => {
+	const {
+		className,
+		color = 'primary',
+		type = 'filed',
+		size = 'medium',
+		iconPosition = 'start',
+		icon = null,
+		children,
+		...rest
+	} = props;
 	const classes = cn(
 		styles.button,
 		styles[type],
@@ -45,7 +49,7 @@ export const Button: React.FC<ButtonProps> = ({
 	) : null;
 
 	return (
-		<BaseButton className={classes} {...props}>
+		<BaseButton className={classes} {...rest}>
 			{[buttonIcon, children]}
 		</BaseButton>
 	);

@@ -57,7 +57,7 @@ export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 				error={errors.repeatPassword?.message}
 			/>
 			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
-				{t('buttons.submit')}
+				{t('actions.submit')}
 			</Button>
 		</form>
 	);

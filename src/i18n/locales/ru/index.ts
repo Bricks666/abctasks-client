@@ -6,3 +6,5 @@ export { default as rooms } from './rooms.json';
 export { default as popups } from './popups.json';
 export { default as settings } from './settings.json';
 export { default as registration } from './registration.json';
+export { default as task } from './task.json';
+export { default as header } from './header.json';

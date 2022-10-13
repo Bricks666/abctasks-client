@@ -26,7 +26,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 	id,
 	roomId,
 }) => {
-	const { t } = useTranslation('room');
+	const { t } = useTranslation('common');
 	const removeTask = useMutation(removeTaskMutation);
 	const editLink = usePrepareLink({
 		query: {
@@ -37,11 +37,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 	const options: MenuOption[] = React.useMemo(
 		() => [
 			{
-				label: t('menus.editTask'),
+				label: t('actions.update'),
 				to: editLink,
 			},
 			{
-				label: t('menus.removeTask'),
+				label: t('actions.remove'),
 				onClick: () => removeTask.start({ id, roomId }),
 			},
 		],

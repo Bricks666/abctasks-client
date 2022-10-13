@@ -44,14 +44,14 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 			<Select {...register('status')}>
 				{statuses.map((name) => (
 					<option value={name} key={name}>
-						{t(`statuses.${name}`, { ns: 'room' })}
+						{t(`statuses.${name}`, { ns: 'task' })}
 					</option>
 				))}
 			</Select>
 			<TextField
 				className={styles.textarea}
 				{...register('content')}
-				label={t('add_task.content')}
+				label={t('task.content')}
 				multiline
 				error={errors.content?.message}
 				disabled={isSubmitting}

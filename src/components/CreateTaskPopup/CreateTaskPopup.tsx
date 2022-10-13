@@ -41,13 +41,13 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 	);
 
 	return (
-		<MainPopup {...props} header={t('add_task.title')} onClose={onClose}>
+		<MainPopup {...props} header={t('task.createTitle')} onClose={onClose}>
 			<TaskForm
 				className={styles.form}
 				onSubmit={onSubmit}
 				defaultValues={defaultState}
 				roomId={Number(roomId)}
-				buttonText={t('add_task.button')}
+				buttonText={t('actions.create', { ns: 'common' })}
 			/>
 		</MainPopup>
 	);

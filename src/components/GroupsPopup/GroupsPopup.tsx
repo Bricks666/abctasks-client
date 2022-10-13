@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { getGroupsQuery, removeGroupMutation } from '@/models/groups';
@@ -63,21 +63,25 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 			header={t('groups.title')}
 			alt={t('groups.title')}>
 			<Stack>
-				<Button to={createGroup} type='text'>
-					{t('groups.add_group')}
+				<Button component={Link} to={createGroup} type='text'>
+					{t('actions.create', { ns: 'common' })}
 				</Button>
 				<List className={styles.list}>
 					{groups?.map((group) => (
 						<ListItem key={group.id}>
 							<Group {...group} />
 							<ListItemSecondaryAction>
-								<IconButton to={createEditLink(updateGroup, group.id)}>
+								<IconButton
+									component={Link}
+									to={createEditLink(updateGroup, group.id)}
+									title={t('actions.update', { ns: 'common' })}>
 									<EditIcon />
 								</IconButton>
 								<IconButton
 									onClick={() =>
 										removeGroup.start({ id: group.id, roomId: group.roomId })
-									}>
+									}
+									title={t('actions.remove', { ns: 'common' })}>
 									<DeleteIcon />
 								</IconButton>
 							</ListItemSecondaryAction>

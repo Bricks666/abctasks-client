@@ -29,7 +29,7 @@ export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	});
 	const options: MenuOption[] = [
 		{
-			label: t('menus.groups'),
+			label: t('actions.groups'),
 			to: groupsLink,
 		},
 	];

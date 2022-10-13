@@ -1,44 +1,28 @@
 /* eslint-disable react/button-has-type */
 import cn from 'classnames';
 import * as React from 'react';
-import { Link, To } from 'react-router-dom';
 import { CommonProps } from '@/types/common';
 
 import styles from './BaseButton.module.css';
 
-/* Переработать ссылку */
-export interface BaseButtonProps
-	extends CommonProps,
-		React.DOMAttributes<HTMLButtonElement>,
-		Omit<React.HTMLAttributes<HTMLButtonElement>, 'className'> {
-	readonly to?: To;
-	readonly disabled?: boolean;
-	readonly buttonType?: 'button' | 'submit' | 'reset';
+interface BaseButtonOwnProps<E extends React.ElementType> extends CommonProps {
+	readonly component?: E;
 }
 
-export const BaseButton: React.FC<BaseButtonProps> = ({
-	children,
-	className,
-	disabled,
-	to,
-	buttonType,
-	...props
-}) => {
+export type BaseButtonProps<E extends React.ElementType> =
+	BaseButtonOwnProps<E> &
+		React.ComponentPropsWithoutRef<E> &
+		React.PropsWithChildren;
+
+export const BaseButton = <E extends React.ElementType>(
+	props: BaseButtonProps<E>
+): React.ReactElement => {
+	const { className, component = 'button', children, ...rest } = props;
+	const Tag = component;
 	const classes = cn(styles.button, className);
-	if (to) {
-		return (
-			<Link className={classes} to={to}>
-				{children}
-			</Link>
-		);
-	}
 	return (
-		<button
-			className={classes}
-			disabled={disabled}
-			{...props}
-			type={buttonType}>
+		<Tag className={classes} {...rest}>
 			{children}
-		</button>
+		</Tag>
 	);
 };
