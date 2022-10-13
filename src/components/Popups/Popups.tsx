@@ -10,14 +10,16 @@ import { BasePopup } from '@/types/common';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { CreateRoomPopup } from '../CreateRoomPopup';
 import { usePopups } from './usePopups';
+import { UpdateRoomPopup } from '../UpdateRoomPopup';
 
 const popupsMap: Record<string, React.ComponentType<BasePopup>> = {
 	[POPUPS.createTask]: CreateTaskPopup,
 	[POPUPS.updateTask]: UpdateTaskPopup,
 	[POPUPS.groups]: GroupsPopup,
 	[POPUPS.createGroup]: CreateGroupPopup,
-	[POPUPS.updateGRoup]: UpdateGroupPopup,
+	[POPUPS.updateGroup]: UpdateGroupPopup,
 	[POPUPS.createRoom]: CreateRoomPopup,
+	[POPUPS.updateRoom]: UpdateRoomPopup,
 };
 
 export const Popups = () => {

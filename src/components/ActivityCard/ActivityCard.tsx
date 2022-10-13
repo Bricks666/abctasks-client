@@ -5,7 +5,7 @@ import { Avatar } from '@/ui/Avatar';
 import { Activity, ActivityType } from '@/models/activities/types';
 import { Color } from '@/types/ui';
 import { Text } from '@/ui/Text';
-import { DeleteIcon } from '@/ui/DeleteIcon';
+import { RemoveIcon } from '@/ui/RemoveIcon';
 import { EditIcon } from '@/ui/EditIcon';
 import { PlusIcon } from '@/ui/PlusIcon';
 import { CommonProps } from '@/types/common';
@@ -24,7 +24,7 @@ const colorMap: Record<ActivityType, Color> = {
 
 const iconMap: Record<ActivityType, React.ReactNode> = {
 	create: <PlusIcon className={styles.icon} />,
-	remove: <DeleteIcon className={styles.icon} />,
+	remove: <RemoveIcon className={styles.icon} />,
 	update: <EditIcon className={styles.icon} />,
 };
 
@@ -40,7 +40,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
 			<Avatar
 				className={styles.avatar}
 				size='medium'
-				alt={t(`activities.activityType.${type}`)}
+				alt={t(`activities.type.${type}`)}
 				color={colorMap[type]}>
 				{iconMap[type]}
 			</Avatar>

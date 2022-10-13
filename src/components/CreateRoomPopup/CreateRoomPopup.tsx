@@ -1,23 +1,38 @@
 import * as React from 'react';
 import { useMutation } from '@farfetched/react';
+import { SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { createRoomMutation } from '@/models/rooms';
 import { BasePopup } from '@/types/common';
 import { MainPopup } from '@/ui/MainPopup';
 import { useGoBack } from '@/hooks';
-import { RoomForm } from '../RoomForm';
+import { RoomForm, RoomFormValues } from '../RoomForm';
 
 import styles from './CreateRoomPopup.module.css';
 
+const defaultValues: RoomFormValues = {
+	description: '',
+	name: '',
+};
+
 export const CreateRoomPopup: React.FC<BasePopup> = (props) => {
 	const onClose = useGoBack();
-	const { start } = useMutation(createRoomMutation);
+	const { t } = useTranslation('popups');
+	const createRoom = useMutation(createRoomMutation);
+
+	const onSubmit = React.useCallback<SubmitHandler<RoomFormValues>>(
+		(values) => {
+			createRoom.start(values);
+		},
+		[]
+	);
 	return (
-		<MainPopup {...props} onClose={onClose}>
+		<MainPopup {...props} header={t('room.updateTitle')} onClose={onClose}>
 			<RoomForm
 				className={styles.form}
-				submitHandler={start}
-				afterSubmit={onClose}
-				buttonText='Add'
+				onSubmit={onSubmit}
+				defaultValues={defaultValues}
+				buttonText={t('actions.create', { ns: 'common' })}
 			/>
 		</MainPopup>
 	);

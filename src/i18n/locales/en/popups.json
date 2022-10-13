@@ -15,5 +15,11 @@
 	},
 	"groups": {
 		"title": "Groups"
+	},
+	"room": {
+		"createTitle": "Create room",
+		"updateTitle": "Update rooms",
+		"name": "Name",
+		"description": "Description"
 	}
 }

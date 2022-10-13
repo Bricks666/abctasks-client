@@ -19,7 +19,7 @@ interface Popups {
 	readonly updateTask: string;
 	readonly groups: string;
 	readonly createGroup: string;
-	readonly updateGRoup: string;
+	readonly updateGroup: string;
 	readonly createRoom: string;
 	readonly updateRoom: string;
 }
@@ -29,7 +29,7 @@ export const POPUPS: Popups = {
 	updateTask: 'update-task',
 	groups: 'groups',
 	createGroup: 'create-group',
-	updateGRoup: 'update-group',
+	updateGroup: 'update-group',
 	createRoom: 'create-room',
 	updateRoom: 'update-room',
 };

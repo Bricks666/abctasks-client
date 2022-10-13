@@ -16,7 +16,7 @@ import { ListItem } from '@/ui/ListItem';
 import { ListItemSecondaryAction } from '@/ui/ListItemSecondaryAction';
 import { Button } from '@/ui/Button';
 import { IconButton } from '@/ui/IconButton';
-import { DeleteIcon } from '@/ui/DeleteIcon';
+import { RemoveIcon } from '@/ui/RemoveIcon';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
 import { Stack } from '@/ui/Stack';
@@ -51,7 +51,7 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 	});
 	const updateGroup = usePrepareLink({
 		addQuery: {
-			[GET_PARAMS.popup]: POPUPS.updateGRoup,
+			[GET_PARAMS.popup]: POPUPS.updateGroup,
 		},
 		saveQuery: true,
 	});
@@ -82,7 +82,7 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 										removeGroup.start({ id: group.id, roomId: group.roomId })
 									}
 									title={t('actions.remove', { ns: 'common' })}>
-									<DeleteIcon />
+									<RemoveIcon />
 								</IconButton>
 							</ListItemSecondaryAction>
 						</ListItem>

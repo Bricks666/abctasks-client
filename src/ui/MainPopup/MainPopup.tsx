@@ -12,7 +12,7 @@ import styles from './MainPopup.module.css';
 export interface MainPopupProps extends CommonProps {
 	readonly isOpen: boolean;
 	readonly onClose: VoidFunction;
-	readonly header?: string;
+	readonly header: string;
 	readonly closeOnEsc?: boolean;
 	readonly alt?: string;
 	readonly isFocus?: boolean;

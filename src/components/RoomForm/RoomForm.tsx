@@ -1,61 +1,45 @@
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { CommonProps, VoidFunction } from '@/types/common';
+import { CommonProps } from '@/types/common';
 import { TextField } from '../TextField';
 import { Button } from '@/ui/Button';
 import { validatingScheme } from './validator';
-import { CreateUpdateRoomRequest, UpdateRoomRequest } from '@/models/rooms';
+import { RoomFormValues } from './types';
 
 export interface RoomFormProps extends CommonProps {
-	readonly submitHandler: (values: CreateUpdateRoomRequest) => unknown;
+	readonly onSubmit: SubmitHandler<RoomFormValues>;
 	readonly buttonText: string;
-	readonly defaultState?: CreateUpdateRoomRequest;
-	readonly afterSubmit?: VoidFunction;
+	readonly defaultValues: RoomFormValues;
 }
 
-const createInitialState = (): UpdateRoomRequest => {
-	return {
-		id: 0,
-		name: '',
-		description: '',
-	};
-};
-
 export const RoomForm: React.FC<RoomFormProps> = ({
-	afterSubmit,
-	submitHandler,
+	onSubmit,
 	className,
-	defaultState,
+	defaultValues,
 	buttonText,
 }) => {
+	const { t } = useTranslation('popups');
 	const { register, formState, handleSubmit } = useForm({
-		defaultValues: defaultState || createInitialState(),
 		resolver: joiResolver(validatingScheme),
+		defaultValues,
 	});
 	const { errors, isDirty, isSubmitting } = formState;
-	const { description: roomDescription, name: roomName } = errors;
+	const { description, name } = errors;
 	const disabled = !isDirty || isSubmitting;
-	const onSubmit = React.useCallback(
-		async (values: CreateUpdateRoomRequest) => {
-			await submitHandler(values);
-			if (afterSubmit) {
-				afterSubmit();
-			}
-		},
-		[submitHandler, afterSubmit]
-	);
+
 	return (
 		<form className={className} onSubmit={handleSubmit(onSubmit)}>
 			<TextField
 				{...register('name')}
-				error={roomName?.message}
-				label='Room name'
+				error={name?.message}
+				label={t('room.name')}
 			/>
 			<TextField
 				{...register('description')}
-				error={roomDescription?.message}
-				label='Room description'
+				error={description?.message}
+				label={t('room.description')}
 			/>
 			<Button disabled={disabled}>{buttonText}</Button>
 		</form>

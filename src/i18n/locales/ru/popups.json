@@ -15,5 +15,11 @@
 	},
 	"groups": {
 		"title": "Группы"
+	},
+	"room": {
+		"createTitle": "Создать комнату",
+		"updateTitle": "Изменить комнату",
+		"name": "Название",
+		"description": "Описание"
 	}
 }

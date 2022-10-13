@@ -1,0 +1,1 @@
+export { UpdateRoomPopup } from './UpdateRoomPopup';

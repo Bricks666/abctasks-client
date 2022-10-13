@@ -3,9 +3,9 @@ import * as React from 'react';
 import { CommonProps } from '@/types/common';
 import { SvgIcon } from '../SvgIcon';
 
-import styles from './DeleteIcon.module.css';
+import styles from './RemoveIcon.module.css';
 
-export const DeleteIcon: React.FC<CommonProps> = ({ className }) => {
+export const RemoveIcon: React.FC<CommonProps> = ({ className }) => {
 	return (
 		<SvgIcon
 			className={cn(styles.icon, className)}
