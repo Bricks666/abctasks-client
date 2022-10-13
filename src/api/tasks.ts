@@ -40,7 +40,7 @@ export const update = async ({ id, roomId, ...body }: UpdateTaskRequest) => {
 
 export const remove = async ({ roomId, id }: RemoveTaskRequest) => {
 	const response = await instance.delete<StandardResponse<boolean>>(
-		`/tasks/${roomId}/${id}/delete`
+		`/tasks/${roomId}/${id}/remove`
 	);
 	return response.data;
 };

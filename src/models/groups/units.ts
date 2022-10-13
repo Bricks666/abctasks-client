@@ -28,4 +28,4 @@ export const updateGroupFx = GroupsDomain.effect<
 export const removeGroupFx = GroupsDomain.effect<
 	RemoveGroupRequest,
 	StandardResponse<boolean>
->('deleteGroupFx');
+>('removeGroupFx');

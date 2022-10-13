@@ -6,21 +6,19 @@ import { TextField } from '@/components/TextField';
 import { useImageURL } from '@/hooks';
 import { Button } from '@/ui/Button';
 import { Picture } from '@/ui/Picture';
-import { updateProfile, UpdateUserRequest } from '@/models/User';
 
 import styles from './UpdateProfileForm.module.css';
 
 export const UpdateProfileForm: React.FC = () => {
 	const userInfo = useStore($AuthUser)!;
-	const { watch, handleSubmit, register, formState } =
-		useForm<UpdateUserRequest>({
-			defaultValues: userInfo,
-		});
+	const { watch, handleSubmit, register, formState } = useForm<any>({
+		defaultValues: userInfo,
+	});
 
 	const photo = watch('photo');
 	const showedPhoto = useImageURL(photo);
-	const onSubmit = (values: UpdateUserRequest) => {
-		updateProfile(values);
+	const onSubmit = (values: any) => {
+		console.log(values);
 	};
 	const { errors, isDirty, isSubmitting } = formState;
 	return (

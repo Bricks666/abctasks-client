@@ -23,7 +23,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	className,
 	description,
 }) => {
-	const deleteRoom = useMutation(removeRoomMutation);
+	const removeRoom = useMutation(removeRoomMutation);
 	const editLink = usePrepareLink({
 		addQuery: {
 			[GET_PARAMS.popup]: POPUPS.updateRoom,
@@ -38,7 +38,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 			},
 			{
 				label: 'Delete',
-				onClick: () => deleteRoom.start(id),
+				onClick: () => removeRoom.start(id),
 			},
 		],
 		[editLink, id]

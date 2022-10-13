@@ -5,7 +5,7 @@
 		"content": "Содержание",
 		"button": "Добавить"
 	},
-	"edit_task": {
+	"update_task": {
 		"title": "Изменить задачу",
 		"group": "Группа",
 		"status": "Статус",

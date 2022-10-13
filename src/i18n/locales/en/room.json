@@ -12,21 +12,21 @@
 	},
 	"activities": {
 		"title": "Activities",
-		"text": "{{activist}} has $t(activities.activityType.{{activity}}) $t(activities.spheres.{{sphere}})",
+		"text": "{{activistId}} has $t(activities.type.{{type}}) $t(activities.spheres.{{sphere}})",
 		"spheres": {
 			"task": "task",
 			"group": "group"
 		},
-		"activityType": {
-			"0": "edited",
-			"1": "created",
-			"2": "deleted"
+		"type": {
+			"update": "updated",
+			"create": "created",
+			"remove": "removed"
 		}
 	},
 	"menus": {
 		"groups": "Groups",
 		"addTask": "Add task",
 		"editTask": "Edit",
-		"deleteTask": "Delete"
+		"removeTask": "Delete"
 	}
 }

@@ -1,12 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
-import { User } from '../User';
 import { StandardResponse, VoidResponse } from '@/types/response';
 import {
 	AuthResponse,
 	LoginRequest,
 	RegistrationRequest,
-	TokensResponse,
+	Tokens,
+	User,
 } from './types';
 
 export const Auth = createDomain('AuthDomain');
@@ -30,6 +30,6 @@ export const registrationFx = Auth.effect<
 export const logoutFx = Auth.effect<void, StandardResponse<boolean>>(
 	'logoutFx'
 );
-export const refreshFx = Auth.effect<void, StandardResponse<TokensResponse>>(
+export const refreshFx = Auth.effect<void, StandardResponse<Tokens>>(
 	'refreshFx'
 );

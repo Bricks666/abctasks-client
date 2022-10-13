@@ -1,16 +1,23 @@
-import { Record, String, Static } from 'runtypes';
-import { userResponse } from '../User';
+import { Record, String, Static, Number } from 'runtypes';
 
-export const tokensResponse = Record({
+export const user = Record({
+	id: Number,
+	login: String,
+	photo: String.nullable(),
+}).asReadonly();
+
+export type User = Static<typeof user>;
+
+export const tokens = Record({
 	accessToken: String,
 	refreshToken: String,
 }).asReadonly();
 
-export interface TokensResponse extends Static<typeof tokensResponse> {}
+export interface Tokens extends Static<typeof tokens> {}
 
 export const authResponse = Record({
-	tokens: tokensResponse,
-	user: userResponse,
+	tokens,
+	user,
 }).asReadonly();
 
 export interface AuthResponse extends Static<typeof authResponse> {}

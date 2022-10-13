@@ -3,7 +3,7 @@ import {
 	AuthResponse,
 	LoginRequest,
 	RegistrationRequest,
-	TokensResponse,
+	Tokens,
 } from '@/models/auth';
 import { instance } from './instance';
 
@@ -37,7 +37,7 @@ export const logout = async () => {
 };
 
 export const refresh = async () => {
-	const response = await instance.get<StandardResponse<TokensResponse>>(
+	const response = await instance.get<StandardResponse<Tokens>>(
 		'/auth/refresh'
 	);
 	return response.data;

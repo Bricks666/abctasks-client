@@ -16,9 +16,9 @@ export interface RoomFormProps extends CommonProps {
 
 const createInitialState = (): UpdateRoomRequest => {
 	return {
-		roomId: 0,
-		roomName: '',
-		roomDescription: '',
+		id: 0,
+		name: '',
+		description: '',
 	};
 };
 
@@ -34,7 +34,7 @@ export const RoomForm: React.FC<RoomFormProps> = ({
 		resolver: joiResolver(validatingScheme),
 	});
 	const { errors, isDirty, isSubmitting } = formState;
-	const { roomDescription, roomName } = errors;
+	const { description: roomDescription, name: roomName } = errors;
 	const disabled = !isDirty || isSubmitting;
 	const onSubmit = React.useCallback(
 		async (values: CreateUpdateRoomRequest) => {
@@ -48,12 +48,12 @@ export const RoomForm: React.FC<RoomFormProps> = ({
 	return (
 		<form className={className} onSubmit={handleSubmit(onSubmit)}>
 			<TextField
-				{...register('roomName')}
+				{...register('name')}
 				error={roomName?.message}
 				label='Room name'
 			/>
 			<TextField
-				{...register('roomDescription')}
+				{...register('description')}
 				error={roomDescription?.message}
 				label='Room description'
 			/>

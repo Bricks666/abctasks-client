@@ -1,4 +1,4 @@
-import { Activities, ActivitySphere } from '@/models/Activities/types';
+import { Activities, ActivitySphere } from '@/models/activities/types';
 
 export interface ActivityResponse {
 	readonly activityId: number;

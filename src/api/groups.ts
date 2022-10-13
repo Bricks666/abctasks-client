@@ -25,6 +25,6 @@ export const update = async ({ id, roomId, ...body }: UpdateGroupRequest) => {
 };
 
 export const remove = async ({ roomId, id }: RemoveGroupRequest) => {
-	const response = await instance.delete(`/groups/${roomId}/${id}/delete`);
+	const response = await instance.delete(`/groups/${roomId}/${id}/remove`);
 	return response.data;
 };

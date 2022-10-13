@@ -20,7 +20,7 @@ export const useGroupedTasks = (roomId: number) => {
 		() => ({
 			ready: createGrouper('ready')(tasks || []),
 			done: createGrouper('done')(tasks || []),
-			inProgress: createGrouper('in progress')(tasks || []),
+			'in progress': createGrouper('in progress')(tasks || []),
 			needReview: createGrouper('review')(tasks || []),
 		}),
 		[tasks]

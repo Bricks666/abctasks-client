@@ -41,7 +41,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 				to: editLink,
 			},
 			{
-				label: t('menus.deleteTask'),
+				label: t('menus.removeTask'),
 				onClick: () => removeTask.start({ id, roomId }),
 			},
 		],

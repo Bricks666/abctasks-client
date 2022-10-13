@@ -12,21 +12,21 @@
 	},
 	"activities": {
 		"title": "Активности",
-		"text": "Пользователь {{activist}} $t(activities.activityType.{{activity}}) $t(activities.spheres.{{sphere}})",
+		"text": "Пользователь {{activistId}} $t(activities.type.{{type}}) $t(activities.spheres.{{sphere}})",
 		"spheres": {
 			"task": "задачу",
 			"group": "группу"
 		},
-		"activityType": {
-			"0": "изменил",
-			"1": "создал",
-			"2": "удалил"
+		"type": {
+			"update": "изменил",
+			"create": "создал",
+			"remove": "удалил"
 		}
 	},
 	"menus": {
 		"groups": "Группы",
 		"addTask": "Добавить задачу",
 		"editTask": "Изменить",
-		"deleteTask": "Удалить"
+		"removeTask": "Удалить"
 	}
 }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@/ui/Avatar';
-import { Activities, ActivityStructure } from '@/models/Activities/types';
+import { Activity, ActivityType } from '@/models/activities/types';
 import { Color } from '@/types/ui';
 import { Text } from '@/ui/Text';
 import { DeleteIcon } from '@/ui/DeleteIcon';
@@ -14,26 +14,25 @@ import { DateTime } from '@/ui/DateTime';
 
 import styles from './ActivityCard.module.css';
 
-export interface ActivityCardProps extends CommonProps, ActivityStructure {}
+export interface ActivityCardProps extends CommonProps, Activity {}
 
-const colorMap: Record<Activities, Color> = {
-	[Activities.CREATE]: 'success',
-	[Activities.DELETE]: 'error',
-	[Activities.EDIT]: 'warning',
+const colorMap: Record<ActivityType, Color> = {
+	create: 'success',
+	remove: 'error',
+	update: 'warning',
 };
 
-const iconMap: Record<Activities, React.ReactNode> = {
-	[Activities.CREATE]: <PlusIcon className={styles.icon} />,
-	[Activities.DELETE]: <DeleteIcon className={styles.icon} />,
-	[Activities.EDIT]: <EditIcon className={styles.icon} />,
+const iconMap: Record<ActivityType, React.ReactNode> = {
+	create: <PlusIcon className={styles.icon} />,
+	remove: <DeleteIcon className={styles.icon} />,
+	update: <EditIcon className={styles.icon} />,
 };
 
 export const ActivityCard: React.FC<ActivityCardProps> = ({
-	activity,
+	type,
 	sphere,
-	activist,
 	className,
-	date,
+	createdAt,
 }) => {
 	const { t } = useTranslation('room');
 	return (
@@ -41,19 +40,18 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
 			<Avatar
 				className={styles.avatar}
 				size='medium'
-				alt={t(`activities.activityType.${activity}`)}
-				color={colorMap[activity]}>
-				{iconMap[activity]}
+				alt={t(`activities.activityType.${type}`)}
+				color={colorMap[type]}>
+				{iconMap[type]}
 			</Avatar>
 			<Text component='p'>
 				{t('activities.text', {
-					activist,
-					activity,
+					type,
 					sphere,
 				})}
 			</Text>
 
-			<DateTime date={date} format='MMM DD' />
+			<DateTime date={createdAt} format='MMM DD' />
 		</Card>
 	);
 };

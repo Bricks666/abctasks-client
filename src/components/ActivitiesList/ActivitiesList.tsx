@@ -1,22 +1,20 @@
-/* eslint-disable sonarjs/no-empty-collection */
 import * as React from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { Stack } from '@/ui/Stack';
-import { LoadingWrapper } from '@/ui/LoadingWrapper';
-import { /* useActivities,  */ useLoadingActivities } from './hooks';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
-import { Text } from '@/ui/Text';
 import { CommonProps } from '@/types/common';
+import { Stack } from '@/ui/Stack';
+import { Text } from '@/ui/Text';
+import { LoadingWrapper } from '@/ui/LoadingWrapper';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { ActivityCard } from '../ActivityCard';
-import { ActivityStructure } from '@/models/Activities/types';
+import { useActivities } from './useActivities';
 
 import styles from './ActivitiesList.module.css';
 
 export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
-	const activities: ActivityStructure[] = [];
-	const isLoading = useLoadingActivities();
+	const { data: activities, loading } = useActivities();
+	const isLoading = loading && !activities;
 	return (
 		<section className={cn(styles.container, className)}>
 			<Text component='h3'>{t('activities.title')}</Text>
@@ -24,7 +22,7 @@ export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 				isLoading={isLoading}
 				loadingIndicator={<LoadingIndicator size='small' />}>
 				<Stack space='s'>
-					{activities.slice(0, 10).map((activity) => (
+					{activities?.map((activity) => (
 						<ActivityCard {...activity} key={activity.id} />
 					))}
 				</Stack>

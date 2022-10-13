@@ -1,13 +1,13 @@
 import { ID } from '@/types/common';
-import { ActivitiesResponse, ActivityResponse } from '@/types/response';
+import { ActivityResponse, StandardResponse } from '@/types/response';
 import { ErrorHandlerParams } from '@/packages/eventSource';
 import { instance, sseListener } from './instance';
+import { Activity } from '@/models/activities/types';
 
-export const getActivitiesApi = async (
-	roomId: ID
-): Promise<ActivitiesResponse> => {
-	const response = await instance.get(`/activities/${roomId}`);
-
+export const getAll = async (roomId: ID) => {
+	const response = await instance.get<StandardResponse<Activity[]>>(
+		`/activities/${roomId}`
+	);
 	return response.data;
 };
 
@@ -17,7 +17,7 @@ export interface SubscribeNewActivitiesApiParams {
 	onError?: (param: ErrorHandlerParams) => void;
 }
 
-export const subscribeNewActivitiesApi = async ({
+export const subscribeCreate = async ({
 	onError,
 	onNewActivity,
 	roomId,

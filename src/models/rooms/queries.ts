@@ -7,13 +7,7 @@ import {
 	StandardSuccessResponse,
 } from '@/types/response';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
-import {
-	CreateRoomRequest,
-	Room,
-	roomResponse,
-	RoomResponse,
-	UpdateRoomRequest,
-} from './types';
+import { CreateRoomRequest, room, Room, UpdateRoomRequest } from './types';
 import {
 	createRoomFx,
 	removeRoomFx,
@@ -21,55 +15,54 @@ import {
 	getRoomsFx,
 	updateRoomFx,
 } from './units';
-import { converter } from './utils';
 import { dataExtractor } from '../mapData/dataExtractor';
 
 export const getRoomsQuery = createQuery<
 	void,
-	StandardResponse<RoomResponse[]>,
+	StandardResponse<Room[]>,
 	Error,
-	StandardSuccessResponse<RoomResponse[]>,
+	StandardSuccessResponse<Room[]>,
 	Room[]
 >({
 	effect: getRoomsFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(roomResponse))),
+	contract: runtypeContract(getStandardSuccessResponse(Array(room))),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (response: StandardSuccessResponse<RoomResponse[]>) =>
-		dataExtractor<RoomResponse[]>(response).map(converter),
+	mapData: (response: StandardSuccessResponse<Room[]>) =>
+		dataExtractor<Room[]>(response),
 });
 
 export const getRoomQuery = createQuery<
 	number,
-	StandardResponse<RoomResponse>,
+	StandardResponse<Room>,
 	Error,
-	StandardSuccessResponse<RoomResponse>,
+	StandardSuccessResponse<Room>,
 	Room
 >({
 	effect: getRoomFx,
-	contract: runtypeContract(getStandardSuccessResponse(roomResponse)),
+	contract: runtypeContract(getStandardSuccessResponse(room)),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (response: StandardSuccessResponse<RoomResponse>) =>
-		converter(dataExtractor<RoomResponse>(response)),
+	mapData: (response: StandardSuccessResponse<Room>) =>
+		dataExtractor<Room>(response),
 });
 
 export const createRoomMutation = createMutation<
 	CreateRoomRequest,
-	StandardResponse<RoomResponse>,
-	StandardSuccessResponse<RoomResponse>,
+	StandardResponse<Room>,
+	StandardSuccessResponse<Room>,
 	Error
 >({
 	effect: createRoomFx,
-	contract: runtypeContract(getStandardSuccessResponse(roomResponse)),
+	contract: runtypeContract(getStandardSuccessResponse(room)),
 });
 
 export const updateRoomMutation = createMutation<
 	UpdateRoomRequest,
-	StandardResponse<RoomResponse>,
-	StandardSuccessResponse<RoomResponse>,
+	StandardResponse<Room>,
+	StandardSuccessResponse<Room>,
 	Error
 >({
 	effect: updateRoomFx,
-	contract: runtypeContract(getStandardSuccessResponse(roomResponse)),
+	contract: runtypeContract(getStandardSuccessResponse(room)),
 });
 
 export const removeRoomMutation = createMutation<

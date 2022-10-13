@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import * as React from 'react';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
@@ -21,7 +22,9 @@ export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
 	const { id: roomId } = useParams();
 	const tasks = useGroupedTasks(Number(roomId));
-
+	/*
+TODO: Пересмотреть распределение на колонки
+*/
 	const columns = React.useMemo<Column[]>(
 		() => [
 			{
@@ -30,8 +33,8 @@ export const Tasks: React.FC<CommonProps> = ({ className }) => {
 				status: 'ready',
 			},
 			{
-				headerCode: 'inProgress',
-				tasks: tasks.inProgress,
+				headerCode: 'in progress',
+				tasks: tasks['in progress'],
 				status: 'in progress',
 			},
 			{

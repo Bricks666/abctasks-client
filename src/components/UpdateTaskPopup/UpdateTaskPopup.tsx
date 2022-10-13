@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { SubmitHandler } from 'react-hook-form';
 import { useMutation } from '@farfetched/react';
+import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { getTaskQuery, updateTaskMutation } from '@/models/tasks';
 import { BasePopup, CommonProps } from '@/types/common';
@@ -27,6 +27,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 		roomId
 	);
 	const updateTask = useMutation(updateTaskMutation);
+
 	const onSubmit = React.useCallback<SubmitHandler<TaskFormValues>>(
 		(values) => {
 			updateTask.start({
@@ -48,7 +49,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	);
 
 	return (
-		<MainPopup {...props} onClose={onClose} header={t('edit_task.title')}>
+		<MainPopup {...props} onClose={onClose} header={t('update_task.title')}>
 			{loading ? (
 				<LoadingIndicator />
 			) : (
@@ -57,7 +58,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 					onSubmit={onSubmit}
 					roomId={Number(roomId)}
 					defaultValues={defaultValues}
-					buttonText={t('edit_task.button')}
+					buttonText={t('update_task.button')}
 				/>
 			)}
 		</MainPopup>

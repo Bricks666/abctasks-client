@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Record, Number, String, Static, Union, Literal } from 'runtypes';
 
 export const taskStatus = Union(
@@ -29,7 +30,7 @@ export interface Task extends Static<typeof task> {}
 
 export interface GroupedByStatusTasks {
 	readonly ready: Task[];
-	readonly inProgress: Task[];
+	readonly 'in progress': Task[];
 	readonly needReview: Task[];
 	readonly done: Task[];
 }

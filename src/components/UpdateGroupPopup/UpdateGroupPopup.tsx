@@ -51,8 +51,8 @@ export const UpdateGroupPopup: React.FC<
 		<MainPopup
 			{...props}
 			onClose={onClose}
-			header={t('edit_task.title')}
-			alt={t('edit_task.title')}>
+			header={t('update_task.title')}
+			alt={t('update_task.title')}>
 			{isLoading ? (
 				<LoadingIndicator />
 			) : (
@@ -60,7 +60,7 @@ export const UpdateGroupPopup: React.FC<
 					className={styles.form}
 					defaultValues={changeGroup}
 					onSubmit={onSubmit}
-					buttonText={t('edit_task.button')}
+					buttonText={t('update_task.button')}
 				/>
 			)}
 		</MainPopup>

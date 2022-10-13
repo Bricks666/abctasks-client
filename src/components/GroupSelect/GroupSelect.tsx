@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { getGroupsQuery } from '@/models/groups';
 import { useImminentlyQuery } from '@/hooks';
 import { CommonProps } from '@/types/common';
@@ -15,6 +16,7 @@ export const GroupSelect = React.memo(
 		ref
 	) {
 		const { className, roomId, ...rest } = props;
+		const { t } = useTranslation('common');
 		const { data: groups, loading } = useImminentlyQuery(
 			getGroupsQuery,
 			Number(roomId),
@@ -28,7 +30,7 @@ export const GroupSelect = React.memo(
 				) : (
 					<Select className={className} {...rest} ref={ref}>
 						{/* TODO: Добавить загрузку */}
-						<option value={-1}>None</option>
+						<option value={-1}>{t('none')}</option>
 						{groups?.map(({ id, name }) => (
 							<option value={id} key={id}>
 								{name}
