@@ -15,5 +15,7 @@ export const useImminentlyQuery = <Params, Data, Error>(
 		start(params);
 	}, refetchOn);
 
-	return { ...response, status };
+	const loading = status === 'initial' || status === 'pending';
+
+	return { ...response, status, loading };
 };

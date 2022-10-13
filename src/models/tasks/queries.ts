@@ -11,8 +11,7 @@ import {
 	GetTaskRequest,
 	RemoveTaskRequest,
 	Task,
-	TaskResponse,
-	taskResponse,
+	task,
 	UpdateTaskRequest,
 } from './types';
 import {
@@ -24,54 +23,52 @@ import {
 } from './units';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
 import { dataExtractor } from '../mapData/dataExtractor';
-import { converter } from './utils';
 
 export const getTasksQuery = createQuery<
 	number,
-	StandardResponse<TaskResponse[]>,
+	StandardResponse<Task[]>,
 	Error,
-	StandardSuccessResponse<TaskResponse[]>,
+	StandardSuccessResponse<Task[]>,
 	Task[]
 >({
 	effect: getTasksFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(taskResponse))),
+	contract: runtypeContract(getStandardSuccessResponse(Array(task))),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (data: StandardSuccessResponse<TaskResponse[]>) =>
-		dataExtractor<TaskResponse[]>(data).map(converter),
+	mapData: (data: StandardSuccessResponse<Task[]>) =>
+		dataExtractor<Task[]>(data),
 });
 
 export const getTaskQuery = createQuery<
 	GetTaskRequest,
-	StandardResponse<TaskResponse>,
+	StandardResponse<Task>,
 	Error,
-	StandardSuccessResponse<TaskResponse>,
+	StandardSuccessResponse<Task>,
 	Task
 >({
 	effect: getTaskFx,
-	contract: runtypeContract(getStandardSuccessResponse(taskResponse)),
+	contract: runtypeContract(getStandardSuccessResponse(task)),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (data: StandardSuccessResponse<TaskResponse>) =>
-		converter(dataExtractor<TaskResponse>(data)),
+	mapData: (data: StandardSuccessResponse<Task>) => dataExtractor<Task>(data),
 });
 
 export const createTaskMutation = createMutation<
 	CreateTaskRequest,
-	StandardResponse<TaskResponse>,
-	StandardSuccessResponse<TaskResponse>,
+	StandardResponse<Task>,
+	StandardSuccessResponse<Task>,
 	Error
 >({
 	effect: createTaskFx,
-	contract: runtypeContract(getStandardSuccessResponse(taskResponse)),
+	contract: runtypeContract(getStandardSuccessResponse(task)),
 });
 
 export const updateTaskMutation = createMutation<
 	UpdateTaskRequest,
-	StandardResponse<TaskResponse>,
-	StandardSuccessResponse<TaskResponse>,
+	StandardResponse<Task>,
+	StandardSuccessResponse<Task>,
 	Error
 >({
 	effect: updateTaskFx,
-	contract: runtypeContract(getStandardSuccessResponse(taskResponse)),
+	contract: runtypeContract(getStandardSuccessResponse(task)),
 });
 
 export const removeTaskMutation = createMutation<

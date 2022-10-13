@@ -30,9 +30,3 @@ sample({
 	source: $RoomId,
 	target: getTasksQuery.start,
 });
-
-sample({
-	clock: getTasksQuery.finished.success,
-	fn: (data) => data.params,
-	target: $RoomId,
-});

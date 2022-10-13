@@ -1,11 +1,5 @@
-import { Task, TaskResponse } from './types';
-import { converter } from './utils';
+import { Task } from './types';
 
-export const editTaskHandler = (
-	tasks: Task[],
-	{ task }: { task: TaskResponse }
-) => {
-	const validTask = converter(task);
-
-	return tasks.map((task) => (task.id === validTask.id ? validTask : task));
+export const editTaskHandler = (tasks: Task[], { task }: { task: Task }) => {
+	return tasks.map((t) => (t.id === task.id ? task : t));
 };

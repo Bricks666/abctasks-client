@@ -1,12 +1,13 @@
 import Joi from 'joi';
 import { allowedSymbolsRegExp } from '@/const';
-import { TaskFormValues } from './CreateTaskForm';
+import { TaskFormValues } from './types';
 
 export const validationScheme = Joi.object<TaskFormValues>({
 	groupId: Joi.number().required().messages({
 		'number.empty': 'Group must be choose',
 		'number.positive': 'Group must be choose',
 	}),
+	status: Joi.string().required(),
 	content: Joi.string()
 		.pattern(allowedSymbolsRegExp)
 		.max(128)

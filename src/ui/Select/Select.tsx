@@ -4,13 +4,9 @@ import { CommonProps } from '@/types/common';
 
 import styles from './Select.module.css';
 
-export interface SelectProps extends CommonProps {
-	readonly id?: string;
-	readonly value?: number | string;
-	readonly onChange?: React.ChangeEventHandler;
-	readonly onFocus?: React.FocusEventHandler;
-	readonly onBlur?: React.FocusEventHandler;
-}
+export interface SelectProps
+	extends CommonProps,
+		React.SelectHTMLAttributes<HTMLSelectElement> {}
 
 export const Select = React.forwardRef<
 	HTMLSelectElement,

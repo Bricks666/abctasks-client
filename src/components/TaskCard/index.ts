@@ -1,1 +1,1 @@
-export { TaskCard, type TaskCardComponent } from './TaskCard';
+export { TaskCard, type TaskCardProps } from './TaskCard';

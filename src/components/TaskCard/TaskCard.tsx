@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useMutation } from '@farfetched/react';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { removeTaskMutation, Task } from '@/models/tasks';
-import { Avatar } from '@/ui/Avatar';
 import { Card } from '@/ui/Card';
 import { CardHeader } from '@/ui/CardHeader';
 import { EditMenu } from '../EditMenu';
@@ -17,15 +16,13 @@ import { CommonProps } from '@/types/common';
 
 import styles from './TaskCard.module.css';
 
-export interface TaskCardComponent extends CommonProps, Task {}
+export interface TaskCardProps extends CommonProps, Task {}
 
-export const TaskCard: React.FC<TaskCardComponent> = ({
+export const TaskCard: React.FC<TaskCardProps> = ({
 	className,
 	content,
 	groupId,
-	commentCount,
 	createdAt,
-	author,
 	id,
 	roomId,
 }) => {
@@ -73,10 +70,7 @@ export const TaskCard: React.FC<TaskCardComponent> = ({
 			<Text>{content}</Text>
 			<div>
 				<DateTime date={createdAt} format='MMM DD' />
-				<Text component='span'>{commentCount}</Text>
-				<Avatar size='small' src={author.photo} alt={author.name}>
-					{author.name[0]?.toUpperCase()}
-				</Avatar>
+				<Text component='span'>0</Text>
 			</div>
 		</Card>
 	);

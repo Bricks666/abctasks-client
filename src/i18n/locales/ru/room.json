@@ -2,7 +2,7 @@
 	"title": "Комната",
 	"statuses": {
 		"ready": "В ожидании",
-		"inProgress": "В прогрессе",
+		"in progress": "В прогрессе",
 		"review": "Проверка",
 		"done": "Выполнено"
 	},
@@ -14,8 +14,8 @@
 		"title": "Активности",
 		"text": "Пользователь {{activist}} $t(activities.activityType.{{activity}}) $t(activities.spheres.{{sphere}})",
 		"spheres": {
-			"0": "задачу",
-			"1": "группу"
+			"task": "задачу",
+			"group": "группу"
 		},
 		"activityType": {
 			"0": "изменил",

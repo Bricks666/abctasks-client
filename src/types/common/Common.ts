@@ -10,7 +10,7 @@ export type HEX = Static<typeof hex>;
 export type DateType = string;
 
 export interface CommonProps {
-	readonly className?: string;
+	className?: string;
 }
 
 export type MappedObject<V> = {
