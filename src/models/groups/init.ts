@@ -7,19 +7,19 @@ import {
 } from './queries';
 import { groupsApi } from '@/api';
 import {
-	createGroupFx,
-	removeGroupFx,
-	updateGroupFx,
 	getGroupsFx,
 	$GroupsMap,
+	createGroupBaseFx,
+	removeGroupBaseFx,
+	updateGroupBaseFx,
 } from './units';
 import { $RoomId } from '../rooms';
 import { createGroupsMap } from './utils';
 
 getGroupsFx.use(groupsApi.getAll);
-createGroupFx.use(groupsApi.create);
-updateGroupFx.use(groupsApi.update);
-removeGroupFx.use(groupsApi.remove);
+createGroupBaseFx.use(groupsApi.create);
+updateGroupBaseFx.use(groupsApi.update);
+removeGroupBaseFx.use(groupsApi.remove);
 
 sample({
 	clock: [

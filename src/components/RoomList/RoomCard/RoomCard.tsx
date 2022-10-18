@@ -41,7 +41,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 			},
 			{
 				label: t('actions.remove', { ns: 'common' }),
-				onClick: () => removeRoom.start(id),
+				onClick: () => removeRoom.start({ id }),
 			},
 		],
 		[updateLink, id]

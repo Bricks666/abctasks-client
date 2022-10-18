@@ -1,13 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
-import { StandardResponse } from '@/types/response';
+import { StandardFailError } from '@/packages/request';
 import {
 	CreateGroupRequest,
-	Group,
-	GroupsMap,
-	RemoveGroupRequest,
 	UpdateGroupRequest,
-} from './types';
+	RemoveGroupRequest,
+} from '@/api';
+import { StandardResponse } from '@/types/response';
+import { attachWithAccessToken } from '../auth';
+import { Group, GroupsMap } from './types';
 
 export const GroupsDomain = createDomain('GroupsDomain');
 
@@ -15,17 +16,36 @@ export const $GroupsMap = GroupsDomain.store<GroupsMap>({});
 
 export const getGroupsFx = GroupsDomain.effect<
 	number,
-	StandardResponse<Group[]>
+	StandardResponse<Group[]>,
+	StandardFailError
 >('getGroupsFx');
-export const createGroupFx = GroupsDomain.effect<
+
+export const createGroupBaseFx = GroupsDomain.effect<
 	CreateGroupRequest,
-	StandardResponse<Group>
->('createGroupFx');
-export const updateGroupFx = GroupsDomain.effect<
+	StandardResponse<Group>,
+	StandardFailError
+>('createGroupBaseFx');
+export const createGroupFx = attachWithAccessToken({
+	effect: createGroupBaseFx,
+	name: 'createGroupBaseFx',
+});
+
+export const updateGroupBaseFx = GroupsDomain.effect<
 	UpdateGroupRequest,
-	StandardResponse<Group>
->('updateGroupFx');
-export const removeGroupFx = GroupsDomain.effect<
+	StandardResponse<Group>,
+	StandardFailError
+>('updateGroupBaseFx');
+export const updateGroupFx = attachWithAccessToken({
+	effect: updateGroupBaseFx,
+	name: 'updateGroupBaseFx',
+});
+
+export const removeGroupBaseFx = GroupsDomain.effect<
 	RemoveGroupRequest,
-	StandardResponse<boolean>
->('removeGroupFx');
+	StandardResponse<boolean>,
+	StandardFailError
+>('removeGroupBaseFx');
+export const removeGroupFx = attachWithAccessToken({
+	effect: removeGroupBaseFx,
+	name: 'removeGroupBaseFx',
+});

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { TaskProgressStructure } from '@/models/Progress/types';
+import { TaskProgressStructure } from '@/models/progress/types';
 import { CommonProps } from '@/types/common';
 import { ProgressBar } from '@/ui/ProgressBar';
 

@@ -1,14 +1,20 @@
+import { ErrorHandlerParams } from '@/packages/eventSource';
+import { fetcher } from '@/packages/request';
 import { ID } from '@/types/common';
 import { ActivityResponse, StandardResponse } from '@/types/response';
-import { ErrorHandlerParams } from '@/packages/eventSource';
-import { instance, sseListener } from './instance';
+import { sseListener } from '../instance';
 import { Activity } from '@/models/activities/types';
 
-export const getAll = async (roomId: ID) => {
-	const response = await instance.get<StandardResponse<Activity[]>>(
-		`/activities/${roomId}`
-	);
-	return response.data;
+const activitiesFetcher = fetcher.create({
+	baseURL: 'activities',
+});
+
+export const getAll = async (roomId: number) => {
+	return activitiesFetcher.get<StandardResponse<Activity[]>>({
+		path: {
+			url: roomId,
+		},
+	});
 };
 
 export interface SubscribeNewActivitiesApiParams {

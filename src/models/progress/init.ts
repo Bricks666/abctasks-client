@@ -1,5 +1,5 @@
 import { forward, guard, sample } from 'effector';
-import { getTasksProgressApi, subscribeChangeProgressApi } from '@/api';
+import { progressApi } from '@/api';
 import {
 	$LoadingTasksProgress,
 	$TasksProgress,
@@ -14,9 +14,9 @@ import { mayStartFxHandler } from '../handlers';
 import { changeProgressHandler } from './handler';
 import { toValidTaskProgress } from './utils';
 
-loadTasksProgressFx.use(getTasksProgressApi);
+loadTasksProgressFx.use(progressApi.getAll);
 subscribeChangeProgressFx.use(async ({ closeRef, ...config }) => {
-	closeRef.current = await subscribeChangeProgressApi(config);
+	closeRef.current = await progressApi.subscribeChangeProgressApi(config);
 });
 
 guard({

@@ -1,10 +1,10 @@
 import { sample } from 'effector';
 import {
-	createTaskFx,
-	removeTaskFx,
-	updateTaskFx,
 	getTasksFx,
 	getTaskFx,
+	createTaskBaseFx,
+	removeTaskBaseFx,
+	updateTaskBaseFx,
 } from './units';
 import { tasksApi } from '@/api';
 import {
@@ -17,9 +17,9 @@ import { $RoomId } from '../rooms';
 
 getTasksFx.use(tasksApi.getAll);
 getTaskFx.use(tasksApi.getOne);
-createTaskFx.use(tasksApi.create);
-updateTaskFx.use(tasksApi.update);
-removeTaskFx.use(tasksApi.remove);
+createTaskBaseFx.use(tasksApi.create);
+updateTaskBaseFx.use(tasksApi.update);
+removeTaskBaseFx.use(tasksApi.remove);
 
 sample({
 	clock: [

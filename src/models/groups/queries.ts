@@ -1,18 +1,18 @@
 import { createMutation, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array, Boolean } from 'runtypes';
+import { StandardFailError } from '@/packages/request';
+import {
+	CreateGroupRequest,
+	UpdateGroupRequest,
+	RemoveGroupRequest,
+} from '@/api';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
 } from '@/types/response';
-import {
-	CreateGroupRequest,
-	Group,
-	group,
-	RemoveGroupRequest,
-	UpdateGroupRequest,
-} from './types';
+import { Group, group } from './types';
 import {
 	createGroupFx,
 	getGroupsFx,
@@ -21,11 +21,12 @@ import {
 } from './units';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
 import { dataExtractor } from '../mapData/dataExtractor';
+import { WithoutAccess } from '../auth';
 
 export const getGroupsQuery = createQuery<
 	number,
 	StandardResponse<Group[]>,
-	Error,
+	StandardFailError,
 	StandardSuccessResponse<Group[]>,
 	Group[]
 >({
@@ -36,30 +37,30 @@ export const getGroupsQuery = createQuery<
 });
 
 export const createGroupMutation = createMutation<
-	CreateGroupRequest,
+	WithoutAccess<CreateGroupRequest>,
 	StandardResponse<Group>,
 	StandardSuccessResponse<Group>,
-	Error
+	StandardFailError
 >({
 	effect: createGroupFx,
 	contract: runtypeContract(getStandardSuccessResponse(group)),
 });
 
 export const updateGroupMutation = createMutation<
-	UpdateGroupRequest,
+	WithoutAccess<UpdateGroupRequest>,
 	StandardResponse<Group>,
 	StandardSuccessResponse<Group>,
-	Error
+	StandardFailError
 >({
 	effect: updateGroupFx,
 	contract: runtypeContract(getStandardSuccessResponse(group)),
 });
 
 export const removeGroupMutation = createMutation<
-	RemoveGroupRequest,
+	WithoutAccess<RemoveGroupRequest>,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
-	Error
+	StandardFailError
 >({
 	effect: removeGroupFx,
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),

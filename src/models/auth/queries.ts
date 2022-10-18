@@ -1,6 +1,7 @@
 import { createQuery, createMutation } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Boolean } from 'runtypes';
+import { LoginRequest, RegistrationRequest } from '@/api';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,
@@ -9,12 +10,7 @@ import {
 	VoidResponse,
 } from '@/types/response';
 import { authFx, loginFx, logoutFx, registrationFx } from './units';
-import {
-	authResponse,
-	AuthResponse,
-	LoginRequest,
-	RegistrationRequest,
-} from './types';
+import { authResponse, AuthResponse } from './types';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
 
 export const authQuery = createQuery<

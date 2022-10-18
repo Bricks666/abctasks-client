@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
-import { SubscribeChangeProgressProps } from '@/api/progress';
-import { ID, WithCloseRef } from '@/types/common';
+import { SubscribeChangeProgressProps } from '@/api/progress/progress';
+import { WithCloseRef } from '@/types/common';
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
@@ -21,7 +21,7 @@ export const $LoadingTasksProgress = ProgressDomain.store<boolean>(false, {
 });
 
 export const loadTasksProgressFx = ProgressDomain.effect<
-	ID,
+	number,
 	TasksProgressResponse
 >('loadTasksProgress');
 export const subscribeChangeProgressFx = ProgressDomain.effect<
@@ -29,10 +29,11 @@ export const subscribeChangeProgressFx = ProgressDomain.effect<
 	void
 >('subscribeChangeProgressFx');
 
-export const loadTasksProgress = ProgressDomain.event<ID>('loadTasksProgress');
+export const loadTasksProgress =
+	ProgressDomain.event<number>('loadTasksProgress');
 export const subscribeChangeProgress = ProgressDomain.event<
 	{
-		roomId: ID;
+		roomId: number;
 	} & WithCloseRef
 >('subscribeChangeProgressEvent');
 export const changeProgress = ProgressDomain.event<ChangeProgressResponse[]>(

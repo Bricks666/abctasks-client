@@ -1,13 +1,19 @@
 import { createQuery, createMutation } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array, Boolean } from 'runtypes';
+import { StandardFailError } from '@/packages/request';
+import {
+	CreateRoomRequest,
+	GetRoomsRequest,
+	RemoveRoomRequest,
+	UpdateRoomRequest,
+} from '@/api';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
 } from '@/types/response';
-import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
-import { CreateRoomRequest, room, Room, UpdateRoomRequest } from './types';
+import { room, Room } from './types';
 import {
 	createRoomFx,
 	removeRoomFx,
@@ -16,11 +22,13 @@ import {
 	updateRoomFx,
 } from './units';
 import { dataExtractor } from '../mapData/dataExtractor';
+import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
+import { WithoutAccess } from '../auth';
 
 export const getRoomsQuery = createQuery<
-	void,
+	WithoutAccess<GetRoomsRequest>,
 	StandardResponse<Room[]>,
-	Error,
+	StandardFailError,
 	StandardSuccessResponse<Room[]>,
 	Room[]
 >({
@@ -34,7 +42,7 @@ export const getRoomsQuery = createQuery<
 export const getRoomQuery = createQuery<
 	number,
 	StandardResponse<Room>,
-	Error,
+	StandardFailError,
 	StandardSuccessResponse<Room>,
 	Room
 >({
@@ -46,30 +54,30 @@ export const getRoomQuery = createQuery<
 });
 
 export const createRoomMutation = createMutation<
-	CreateRoomRequest,
+	WithoutAccess<CreateRoomRequest>,
 	StandardResponse<Room>,
 	StandardSuccessResponse<Room>,
-	Error
+	StandardFailError
 >({
 	effect: createRoomFx,
 	contract: runtypeContract(getStandardSuccessResponse(room)),
 });
 
 export const updateRoomMutation = createMutation<
-	UpdateRoomRequest,
+	WithoutAccess<UpdateRoomRequest>,
 	StandardResponse<Room>,
 	StandardSuccessResponse<Room>,
-	Error
+	StandardFailError
 >({
 	effect: updateRoomFx,
 	contract: runtypeContract(getStandardSuccessResponse(room)),
 });
 
 export const removeRoomMutation = createMutation<
-	number,
+	WithoutAccess<RemoveRoomRequest>,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
-	Error
+	StandardFailError
 >({
 	effect: removeRoomFx,
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),

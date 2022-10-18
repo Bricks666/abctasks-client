@@ -38,25 +38,3 @@ export interface GroupedByStatusTasks {
 export type StatusNamesStore = {
 	readonly [key in keyof GroupedByStatusTasks]: TaskStatus;
 };
-
-export interface GetTaskRequest {
-	readonly id: number;
-	readonly roomId: number;
-}
-
-export interface CreateTaskRequest {
-	readonly roomId: number;
-	readonly groupId: number;
-	readonly content: string;
-	readonly status: TaskStatus;
-}
-
-export interface UpdateTaskRequest extends Partial<CreateTaskRequest> {
-	readonly id: number;
-	readonly roomId: number;
-}
-
-export interface RemoveTaskRequest {
-	readonly id: number;
-	readonly roomId: number;
-}

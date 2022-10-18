@@ -7,15 +7,3 @@ export const room = Record({
 }).asReadonly();
 
 export interface Room extends Static<typeof room> {}
-
-export interface RemoveRoomResponse {
-	readonly roomId: number;
-}
-
-export interface CreateRoomRequest {
-	readonly name: string;
-	readonly description: string;
-}
-export interface UpdateRoomRequest extends Partial<CreateRoomRequest> {
-	readonly id: number;
-}

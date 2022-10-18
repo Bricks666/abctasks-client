@@ -1,13 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
+import { LoginRequest, RegistrationRequest } from '@/api';
 import { StandardResponse, VoidResponse } from '@/types/response';
-import {
-	AuthResponse,
-	LoginRequest,
-	RegistrationRequest,
-	Tokens,
-	User,
-} from './types';
+import { AuthResponse, Tokens, User } from './types';
 
 export const Auth = createDomain('AuthDomain');
 
@@ -20,6 +15,7 @@ export const loginFx = Auth.effect<
 	LoginRequest,
 	StandardResponse<AuthResponse>
 >('loginFx');
+
 export const authFx = Auth.effect<void, StandardResponse<AuthResponse>>(
 	'authFx'
 );

@@ -1,16 +1,24 @@
+import { fetcher } from '@/packages/request';
 import { ID } from '@/types/common';
 import {
 	ChangeProgressResponse,
 	TasksProgressResponse,
 } from '@/types/response';
 import { ErrorHandlerParams } from '@/packages/eventSource';
-import { instance, sseListener } from './instance';
+import { sseListener } from '../instance';
 
-export const getTasksProgressApi = async (
-	roomId: ID
+const progressFetcher = fetcher.create({
+	baseURL: 'progress',
+});
+
+export const getAll = async (
+	roomId: number
 ): Promise<TasksProgressResponse> => {
-	const response = await instance.get(`/progress/${roomId}`);
-	return response.data;
+	return progressFetcher.get({
+		path: {
+			url: roomId,
+		},
+	});
 };
 
 export interface SubscribeChangeProgressProps {

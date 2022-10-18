@@ -1,13 +1,13 @@
-/* eslint-disable eqeqeq */
-import { forward, sample } from 'effector';
+/* eslint-disable import/no-extraneous-dependencies */
+import { sample } from 'effector-logger';
 import { roomsApi } from '@/api';
 import {
-	createRoomFx,
-	removeRoomFx,
-	updateRoomFx,
 	getRoomFx,
-	getRoomsFx,
 	$RoomId,
+	getRoomsBaseFx,
+	createRoomBaseFx,
+	removeRoomBaseFx,
+	updateRoomBaseFx,
 } from './units';
 import {
 	createRoomMutation,
@@ -17,19 +17,20 @@ import {
 	getRoomQuery,
 } from './queries';
 
-getRoomsFx.use(roomsApi.getAll);
+getRoomsBaseFx.use(roomsApi.getAll);
 getRoomFx.use(roomsApi.getOne);
-removeRoomFx.use(roomsApi.remove);
-updateRoomFx.use(roomsApi.update);
-createRoomFx.use(roomsApi.create);
+removeRoomBaseFx.use(roomsApi.remove);
+updateRoomBaseFx.use(roomsApi.update);
+createRoomBaseFx.use(roomsApi.create);
 
-forward({
-	from: [
+sample({
+	clock: [
 		removeRoomMutation.finished.success,
 		updateRoomMutation.finished.success,
 		createRoomMutation.finished.success,
 	],
-	to: getRoomsQuery.start,
+	fn: () => ({}),
+	target: getRoomsQuery.start,
 });
 
 sample({
