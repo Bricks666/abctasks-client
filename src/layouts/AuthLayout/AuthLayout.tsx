@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { Container } from '@mui/material';
 import { CommonProps } from '@/types/common';
+import { StyledMain } from './styles';
 
 export interface AuthLayoutProps extends CommonProps {}
 
@@ -8,8 +10,8 @@ export const AuthLayout: React.FC<React.PropsWithChildren<AuthLayoutProps>> = (
 ) => {
 	const { className, children } = props;
 	return (
-		<div className={className}>
-			<main>{children}</main>
-		</div>
+		<Container>
+			<StyledMain className={className}>{children}</StyledMain>
+		</Container>
 	);
 };

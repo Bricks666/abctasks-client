@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { FormControlLabel, Checkbox as CheckboxMUI } from '@mui/material';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import { CommonProps } from '@/types/common';
-import { Checkbox as CheckboxUI } from '@/ui/Checkbox';
 
 export interface CheckboxProps extends CommonProps, UseFormRegisterReturn {
 	readonly disabled?: boolean;
@@ -13,9 +13,10 @@ export interface CheckboxProps extends CommonProps, UseFormRegisterReturn {
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 	({ label, ...props }, ref) => {
 		return (
-			<CheckboxUI {...props} inputRef={ref}>
-				{label}
-			</CheckboxUI>
+			<FormControlLabel
+				control={<CheckboxMUI {...props} inputRef={ref} />}
+				label={label}
+			/>
 		);
 	}
 );

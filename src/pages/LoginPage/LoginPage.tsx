@@ -1,17 +1,12 @@
 import * as React from 'react';
+import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { $IsAuth } from '@/models/auth';
-import { CommonProps } from '@/types/common';
-import { AuthLayout } from '@/layouts/AuthLayout';
-import { LoginForm } from '@/components/LoginForm';
-import { SaveLink } from '@/components/SaveLink';
-import { ContentLayout } from '@/ui/ContentLayout';
-import { Text } from '@/ui/Text';
 import { usePageTitle } from '@/hooks';
-
-import styles from './LoginPage.module.css';
+import { CommonProps } from '@/types/common';
+import { StyledForm, StyledLayout, StyledLink } from './styles';
 
 const LoginPage: React.FC<CommonProps> = ({ className }) => {
 	const isAuth = useStore($IsAuth);
@@ -26,17 +21,13 @@ const LoginPage: React.FC<CommonProps> = ({ className }) => {
 	}, [isAuth]);
 
 	return (
-		<AuthLayout className={className}>
-			<ContentLayout className={styles.layout}>
-				<Text className={styles.header} component='h2' align='center'>
-					{t('title')}
-				</Text>
-				<LoginForm className={styles.form} />
-				<SaveLink className={styles.link} to='/registration'>
-					{t('actions.registration')}
-				</SaveLink>
-			</ContentLayout>
-		</AuthLayout>
+		<StyledLayout className={className}>
+			<Typography variant='h2' align='center'>
+				{t('title')}
+			</Typography>
+			<StyledForm />
+			<StyledLink to='/registration'>{t('actions.registration')}</StyledLink>
+		</StyledLayout>
 	);
 };
 export default LoginPage;

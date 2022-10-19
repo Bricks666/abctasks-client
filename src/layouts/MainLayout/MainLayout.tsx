@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Container } from '@mui/material';
 import { CommonProps } from '@/types/common';
 import { Header } from '@/components/Header';
 
@@ -9,9 +10,9 @@ export const MainLayout: React.FC<React.PropsWithChildren<MainLayoutProps>> = (
 ) => {
 	const { className, children } = props;
 	return (
-		<div className={className}>
+		<Container className={className}>
 			<Header />
 			<main>{children}</main>
-		</div>
+		</Container>
 	);
 };

@@ -1,18 +1,15 @@
 import * as React from 'react';
-import cn from 'classnames';
+import { Button, TextField } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
 import { LoginRequest } from '@/api';
-import { Button } from '@/ui/Button';
 import { loginMutation } from '@/models/auth';
 import { Checkbox } from '../Checkbox';
 import { validationSchema } from './validator';
-import { TextField } from '../TextField';
 import { CommonProps } from '@/types/common';
-
-import styles from './LoginForm.module.css';
+import { StyledWrapper } from './styles';
 
 const initialValue: LoginRequest = {
 	login: '',
@@ -36,27 +33,34 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 	);
 
 	return (
-		<form
-			className={cn(styles.form, className)}
-			onSubmit={handleSubmit(onSubmit)}>
+		<StyledWrapper className={className} onSubmit={handleSubmit(onSubmit)}>
 			<TextField
-				{...register('login')}
+				className='field'
 				label={t('fields.login')}
 				disabled={isSubmitting}
-				error={errors.login?.message}
+				helperText={errors.login?.message}
+				error={!!errors.login}
+				variant='outlined'
+				{...register('login')}
 			/>
 
 			<TextField
-				{...register('password')}
+				className='field'
 				label={t('fields.password')}
 				type='password'
 				disabled={isSubmitting}
-				error={errors.password?.message}
+				helperText={errors.password?.message}
+				error={!!errors.login}
+				variant='outlined'
+				{...register('password')}
 			/>
 			<Checkbox {...register('rememberMe')} label={t('fields.remember')} />
-			<Button disabled={!isDirty || isSubmitting} type='filed'>
+			<Button
+				type='submit'
+				disabled={!isDirty || isSubmitting}
+				variant='outlined'>
 				{t('actions.submit')}
 			</Button>
-		</form>
+		</StyledWrapper>
 	);
 };

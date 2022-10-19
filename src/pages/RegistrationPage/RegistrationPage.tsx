@@ -7,7 +7,6 @@ import { $IsAuth, registrationMutation } from '@/models/auth';
 import { RegistrationForm } from '@/components/RegistrationForm';
 import { SaveLink } from '@/components/SaveLink';
 import { CommonProps } from '@/types/common';
-import { ContentLayout } from '@/ui/ContentLayout';
 import { Text } from '@/ui/Text';
 import { usePageTitle } from '@/hooks';
 import { AuthLayout } from '@/layouts/AuthLayout';
@@ -44,15 +43,13 @@ const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 
 	return (
 		<AuthLayout className={className}>
-			<ContentLayout className={styles.layout}>
-				<Text className={styles.header} component='h2'>
-					{t('title')}
-				</Text>
-				<RegistrationForm className={styles.form} />
-				<SaveLink className={styles.link} to='/login'>
-					{t('actions.login')}
-				</SaveLink>
-			</ContentLayout>
+			<Text className={styles.header} component='h2'>
+				{t('title')}
+			</Text>
+			<RegistrationForm className={styles.form} />
+			<SaveLink className={styles.link} to='/login'>
+				{t('actions.login')}
+			</SaveLink>
 		</AuthLayout>
 	);
 };

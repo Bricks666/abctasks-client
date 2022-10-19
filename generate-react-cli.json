@@ -8,7 +8,7 @@
 			"customTemplates": {
 				"index": "templates/component/index.ts",
 				"component": "templates/component/TemplateName.tsx",
-				"style": "templates/component/TemplateName.module.css"
+				"style": "templates/component/styles.ts"
 			},
 			"path": "src/components",
 			"withStyle": true,
@@ -20,7 +20,7 @@
 		"page": {
 			"customTemplates": {
 				"component": "templates/page/TemplateNamePage.tsx",
-				"style": "templates/page/TemplateNamePage.module.css",
+				"style": "templates/page/styles.ts",
 				"index": "templates/page/index.ts"
 			},
 			"path": "src/pages",
