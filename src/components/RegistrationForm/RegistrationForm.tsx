@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import cn from 'classnames';
+import { Button, TextField } from '@mui/material';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@farfetched/react';
-import { RegistrationRequest, registrationMutation } from '@/models/auth';
-import { Button } from '@/ui/Button';
-import { TextField } from '../TextField';
-import { validationSchema } from './validator';
+import { RegistrationRequest } from '@/api';
+import { registrationMutation } from '@/models/auth';
 import { CommonProps } from '@/types/common';
-
-import styles from './RegistrationForm.module.css';
+import { validationSchema } from './validator';
+import { StyledForm } from './styles';
 
 const initialValues: RegistrationRequest = {
 	login: '',
@@ -33,32 +31,39 @@ export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 	);
 	const { isSubmitting, isDirty, errors } = formState;
 	return (
-		<form
-			className={cn(styles.form, className)}
-			onSubmit={handleSubmit(onSubmit)}>
+		<StyledForm className={className} onSubmit={handleSubmit(onSubmit)}>
 			<TextField
-				{...register('login')}
 				label={t('fields.login')}
 				disabled={isSubmitting}
-				error={errors.login?.message}
+				helperText={errors.login?.message}
+				error={!!errors.login}
+				autoComplete='new-password'
+				{...register('login')}
 			/>
 			<TextField
-				{...register('password')}
+				type='password'
 				label={t('fields.password')}
-				type='password'
 				disabled={isSubmitting}
-				error={errors.password?.message}
+				helperText={errors.password?.message}
+				error={!!errors.password}
+				autoComplete='new-password'
+				{...register('password')}
 			/>
 			<TextField
-				{...register('repeatPassword')}
-				label={t('fields.passwordRepeat')}
 				type='password'
+				label={t('fields.passwordRepeat')}
 				disabled={isSubmitting}
-				error={errors.repeatPassword?.message}
+				helperText={errors.repeatPassword?.message}
+				error={!!errors.repeatPassword}
+				autoComplete='new-password'
+				{...register('repeatPassword')}
 			/>
-			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
+			<Button
+				disabled={!isDirty || isSubmitting}
+				type='submit'
+				variant='outlined'>
 				{t('actions.submit')}
 			</Button>
-		</form>
+		</StyledForm>
 	);
 };

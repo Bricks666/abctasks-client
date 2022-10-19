@@ -6,7 +6,9 @@ import { useStore } from 'effector-react';
 import { $IsAuth } from '@/models/auth';
 import { usePageTitle } from '@/hooks';
 import { CommonProps } from '@/types/common';
-import { StyledForm, StyledLayout, StyledLink } from './styles';
+import { AuthLayout } from '@/layouts/AuthLayout';
+import { LoginForm } from '@/components/LoginForm';
+import { StyledLink } from './styles';
 
 const LoginPage: React.FC<CommonProps> = ({ className }) => {
 	const isAuth = useStore($IsAuth);
@@ -21,13 +23,13 @@ const LoginPage: React.FC<CommonProps> = ({ className }) => {
 	}, [isAuth]);
 
 	return (
-		<StyledLayout className={className}>
-			<Typography variant='h2' align='center'>
+		<AuthLayout className={className}>
+			<Typography variant='h3' component='h2' align='center'>
 				{t('title')}
 			</Typography>
-			<StyledForm />
+			<LoginForm />
 			<StyledLink to='/registration'>{t('actions.registration')}</StyledLink>
-		</StyledLayout>
+		</AuthLayout>
 	);
 };
 export default LoginPage;

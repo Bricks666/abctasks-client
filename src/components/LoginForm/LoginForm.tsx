@@ -40,7 +40,6 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 				disabled={isSubmitting}
 				helperText={errors.login?.message}
 				error={!!errors.login}
-				variant='outlined'
 				{...register('login')}
 			/>
 
@@ -51,7 +50,6 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 				disabled={isSubmitting}
 				helperText={errors.password?.message}
 				error={!!errors.login}
-				variant='outlined'
 				{...register('password')}
 			/>
 			<Checkbox {...register('rememberMe')} label={t('fields.remember')} />

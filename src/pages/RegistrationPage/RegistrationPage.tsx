@@ -1,17 +1,15 @@
 import * as React from 'react';
+import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@farfetched/react';
 import { useStore } from 'effector-react';
 import { $IsAuth, registrationMutation } from '@/models/auth';
-import { RegistrationForm } from '@/components/RegistrationForm';
-import { SaveLink } from '@/components/SaveLink';
-import { CommonProps } from '@/types/common';
-import { Text } from '@/ui/Text';
-import { usePageTitle } from '@/hooks';
 import { AuthLayout } from '@/layouts/AuthLayout';
-
-import styles from './RegistrationPage.module.css';
+import { RegistrationForm } from '@/components/RegistrationForm';
+import { CommonProps } from '@/types/common';
+import { usePageTitle } from '@/hooks';
+import { StyledLink } from './styles';
 
 const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('registration');
@@ -43,13 +41,11 @@ const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 
 	return (
 		<AuthLayout className={className}>
-			<Text className={styles.header} component='h2'>
+			<Typography variant='h3' component='h2' align='center'>
 				{t('title')}
-			</Text>
-			<RegistrationForm className={styles.form} />
-			<SaveLink className={styles.link} to='/login'>
-				{t('actions.login')}
-			</SaveLink>
+			</Typography>
+			<RegistrationForm />
+			<StyledLink to='/login'>{t('actions.login')}</StyledLink>
 		</AuthLayout>
 	);
 };
