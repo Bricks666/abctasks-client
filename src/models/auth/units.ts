@@ -2,7 +2,7 @@
 import { createDomain } from 'effector-logger';
 import { LoginRequest, RegistrationRequest } from '@/api';
 import { StandardResponse, VoidResponse } from '@/types/response';
-import { AuthResponse, Tokens, User } from './types';
+import { AuthResponse, User } from './types';
 
 export const Auth = createDomain('AuthDomain');
 
@@ -25,7 +25,4 @@ export const registrationFx = Auth.effect<
 >('registrationFx');
 export const logoutFx = Auth.effect<void, StandardResponse<boolean>>(
 	'logoutFx'
-);
-export const refreshFx = Auth.effect<void, StandardResponse<Tokens>>(
-	'refreshFx'
 );

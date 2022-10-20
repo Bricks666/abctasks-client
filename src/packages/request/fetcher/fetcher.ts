@@ -90,7 +90,10 @@ export class Fetcher extends BaseFetcher<AxiosInstance, BaseFetcherOptions> {
 	}
 
 	static #throwError(error: any): never {
-		throw new StandardFailError(error.status!, error.message);
+		throw new StandardFailError(
+			error.response.status!,
+			error.response.statusText
+		);
 	}
 }
 

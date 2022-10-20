@@ -13,13 +13,16 @@ import { attachWithAccessToken } from '../auth';
 
 export const TasksDomain = createDomain('TasksDomain');
 
-export const getTasksFx = TasksDomain.effect<number, StandardResponse<Task[]>>(
-	'getTasksFx'
-);
+export const getTasksFx = TasksDomain.effect<
+	number,
+	StandardResponse<Task[]>,
+	StandardFailError
+>('getTasksFx');
 
 export const getTaskFx = TasksDomain.effect<
 	GetTaskRequest,
-	StandardResponse<Task>
+	StandardResponse<Task>,
+	StandardFailError
 >('getTaskFx');
 
 export const createTaskBaseFx = TasksDomain.effect<

@@ -8,6 +8,7 @@ import { MainLayout } from '@/layouts/MainLayout';
 const RoomsPage: React.FC = () => {
 	const { t } = useTranslation('rooms');
 	usePageTitle(t('title'));
+
 	return (
 		<MainLayout>
 			<RoomsHeader />

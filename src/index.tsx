@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { ThemeProvider } from '@mui/material';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './app';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { theme } from './styles';
 import './models/init';
 import './i18n';
 
@@ -14,8 +16,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<BrowserRouter>
-		<ErrorBoundary>
-			<App />
-		</ErrorBoundary>
+		<ThemeProvider theme={theme}>
+			<ErrorBoundary>
+				<App />
+			</ErrorBoundary>
+		</ThemeProvider>
 	</BrowserRouter>
 );

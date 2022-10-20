@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
+import { Stack } from '@mui/material';
 import { useMutation } from '@farfetched/react';
 import { TaskStatus, Task, updateTaskMutation } from '@/models/tasks';
 import { CommonProps } from '@/types/common';
-import { DropZone } from '../DropZone';
 import { TaskListHeader } from '../TaskListHeader';
-import { DraggableTaskCard } from '../DraggableTaskCard';
-import { Stack } from '@/ui/Stack';
-
-import styles from './TasksList.module.css';
+import { TaskCard } from '../TaskCard';
+import { StyledList } from './styles';
 
 export interface TasksListProps extends CommonProps {
 	readonly tasks: Task[];
@@ -42,17 +40,17 @@ export const TasksList: React.FC<TasksListProps> = ({
 	);
 
 	return (
-		<DropZone className={className} onDrop={onDrop} onDragOver={onDragOver}>
-			<Stack space='l'>
-				<TaskListHeader className={styles.header} columnStatus={columnStatus}>
-					{header}
-				</TaskListHeader>
-				<Stack space='xs'>
-					{tasks.map((task) => (
-						<DraggableTaskCard {...task} key={task.id} />
-					))}
-				</Stack>
-			</Stack>
-		</DropZone>
+		<Stack
+			className={className}
+			spacing={1}
+			onDrop={onDrop}
+			onDragOver={onDragOver}>
+			<TaskListHeader columnStatus={columnStatus}>{header}</TaskListHeader>
+			<StyledList spacing={1}>
+				{tasks.map((task) => (
+					<TaskCard {...task} key={task.id} />
+				))}
+			</StyledList>
+		</Stack>
 	);
 };

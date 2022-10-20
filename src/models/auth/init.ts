@@ -7,7 +7,6 @@ import {
 	authFx,
 	loginFx,
 	logoutFx,
-	refreshFx,
 	registrationFx,
 } from './units';
 import {
@@ -21,7 +20,6 @@ authFx.use(authApi.auth);
 loginFx.use(authApi.login);
 registrationFx.use(authApi.registration);
 logoutFx.use(authApi.logout);
-refreshFx.use(authApi.refresh);
 
 sample({
 	clock: authQuery.finished.success,

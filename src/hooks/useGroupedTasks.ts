@@ -10,13 +10,13 @@ const createGrouper = (status: TaskStatus) => {
 };
 
 export const useGroupedTasks = (roomId: number) => {
-	const { data: tasks = [] } = useImminentlyQuery(
+	const { data: tasks = [], ...rest } = useImminentlyQuery(
 		getTasksQuery,
 		roomId,
 		roomId
 	);
 
-	return useMemo<GroupedByStatusTasks>(
+	const data = useMemo<GroupedByStatusTasks>(
 		() => ({
 			ready: createGrouper('ready')(tasks || []),
 			done: createGrouper('done')(tasks || []),
@@ -25,4 +25,9 @@ export const useGroupedTasks = (roomId: number) => {
 		}),
 		[tasks]
 	);
+
+	return {
+		data,
+		...rest,
+	};
 };

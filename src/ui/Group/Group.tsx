@@ -1,10 +1,7 @@
 import * as React from 'react';
-import cn from 'classnames';
 import { CommonProps } from '@/types/common';
-import { Text } from '../Text';
-import { Group as GroupModel } from '@/models/groups/types';
-
-import styles from './Group.module.css';
+import { Group as GroupModel } from '@/models/groups';
+import { StyledTitle } from './styles';
 
 export interface GroupProps
 	extends CommonProps,
@@ -16,16 +13,13 @@ export const Group: React.FC<GroupProps> = React.memo(function Group({
 	name,
 	secondColor,
 }: GroupProps) {
-	const CSSstyles: React.CSSProperties = {
-		backgroundColor: secondColor,
-		color: mainColor,
-	};
 	return (
-		<Text
-			className={cn(styles.group, className)}
-			cssStyles={CSSstyles}
-			component='span'>
+		<StyledTitle
+			className={className}
+			mainColor={mainColor}
+			secondColor={secondColor}
+			variant='body2'>
 			{name}
-		</Text>
+		</StyledTitle>
 	);
 });

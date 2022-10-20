@@ -1,16 +1,12 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import * as React from 'react';
-import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { TaskStatus, Task } from '@/models/tasks/types';
 import { useGroupedTasks } from '@/hooks';
 import { CommonProps } from '@/types/common';
-import { LoadingWrapper } from '@/ui/LoadingWrapper';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { TasksList } from '../TasksList';
-import { TaskStatus, Task } from '@/models/tasks/types';
-
-import styles from './Tasks.module.css';
+import { StyledWrapper } from './styles';
 
 export interface Column {
 	readonly headerCode: string;
@@ -21,7 +17,7 @@ export interface Column {
 export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('task');
 	const { id: roomId } = useParams();
-	const tasks = useGroupedTasks(Number(roomId));
+	const { data: tasks } = useGroupedTasks(Number(roomId));
 	/*
 TODO: Пересмотреть распределение на колонки
 */
@@ -52,20 +48,15 @@ TODO: Пересмотреть распределение на колонки
 	);
 
 	return (
-		<section className={cn(styles.tasks, className)}>
-			<LoadingWrapper
-				className={styles.loading}
-				isLoading={false}
-				loadingIndicator={<LoadingIndicator />}>
-				{columns.map(({ headerCode, status, tasks }) => (
-					<TasksList
-						tasks={tasks}
-						columnStatus={status}
-						header={t(`statuses.${headerCode}`)}
-						key={headerCode}
-					/>
-				))}
-			</LoadingWrapper>
-		</section>
+		<StyledWrapper className={className}>
+			{columns.map(({ headerCode, status, tasks }) => (
+				<TasksList
+					tasks={tasks}
+					columnStatus={status}
+					header={t(`statuses.${headerCode}`)}
+					key={headerCode}
+				/>
+			))}
+		</StyledWrapper>
 	);
 };

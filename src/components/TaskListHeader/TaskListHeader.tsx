@@ -1,47 +1,50 @@
 import * as React from 'react';
+import { SxProps, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { usePrepareLink } from '@/hooks';
 import { CommonProps } from '@/types/common';
 import { EditMenu } from '../EditMenu';
-import { Text } from '@/ui/Text';
-import { Block } from '@/ui/Block';
 import { MenuOption } from '@/ui/MenuItem';
 import { TaskStatus } from '@/models/tasks/types';
-
-import styles from './TaskListHeader.module.css';
+import { StyledWrapper } from './styles';
 
 export interface TaskListHeaderComponent extends CommonProps {
 	readonly columnStatus: TaskStatus;
 }
 
+const titleSx: SxProps = {
+	fontWeight: 700,
+};
+
 export const TaskListHeader: React.FC<
 	React.PropsWithChildren<TaskListHeaderComponent>
 > = ({ children, className, columnStatus }) => {
 	const { t } = useTranslation('common');
-	const editFormLink = usePrepareLink({
+	const createTaskLink = usePrepareLink({
 		query: {
 			[GET_PARAMS.popup]: POPUPS.createTask,
 			[GET_PARAMS.taskStatus]: columnStatus,
 		},
 	});
-	const options: MenuOption[] = [
-		{
-			label: t('actions.create'),
-			to: editFormLink,
-		},
-	];
+	const options: MenuOption[] = React.useMemo(
+		() => [
+			{
+				icon: <AddIcon />,
+				label: t('actions.create'),
+				to: createTaskLink,
+			},
+		],
+		[createTaskLink]
+	);
 
 	return (
-		<header className={className}>
-			<Block>
-				<Text component='h3'>{children}</Text>
-				<EditMenu
-					className={styles.editMenu}
-					options={options}
-					alt="Open tasks list's edit menu"
-				/>
-			</Block>
-		</header>
+		<StyledWrapper className={className}>
+			<Typography variant='h6' component='h3' sx={titleSx}>
+				{children}
+			</Typography>
+			<EditMenu options={options} alt="Open tasks list's edit menu" />
+		</StyledWrapper>
 	);
 };

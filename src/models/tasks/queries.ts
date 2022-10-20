@@ -6,14 +6,7 @@ import {
 	StandardResponse,
 	StandardSuccessResponse,
 } from '@/types/response';
-import {
-	CreateTaskRequest,
-	GetTaskRequest,
-	RemoveTaskRequest,
-	Task,
-	task,
-	UpdateTaskRequest,
-} from './types';
+import { Task, task } from './types';
 import {
 	createTaskFx,
 	getTaskFx,
@@ -23,11 +16,19 @@ import {
 } from './units';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
 import { dataExtractor } from '../mapData/dataExtractor';
+import {
+	GetTaskRequest,
+	CreateTaskRequest,
+	UpdateTaskRequest,
+	RemoveTaskRequest,
+} from '@/api';
+import { WithoutAccess } from '../auth';
+import { StandardFailError } from '@/packages/request';
 
 export const getTasksQuery = createQuery<
 	number,
 	StandardResponse<Task[]>,
-	Error,
+	StandardFailError,
 	StandardSuccessResponse<Task[]>,
 	Task[]
 >({
@@ -41,7 +42,7 @@ export const getTasksQuery = createQuery<
 export const getTaskQuery = createQuery<
 	GetTaskRequest,
 	StandardResponse<Task>,
-	Error,
+	StandardFailError,
 	StandardSuccessResponse<Task>,
 	Task
 >({
@@ -52,30 +53,30 @@ export const getTaskQuery = createQuery<
 });
 
 export const createTaskMutation = createMutation<
-	CreateTaskRequest,
+	WithoutAccess<CreateTaskRequest>,
 	StandardResponse<Task>,
 	StandardSuccessResponse<Task>,
-	Error
+	StandardFailError
 >({
 	effect: createTaskFx,
 	contract: runtypeContract(getStandardSuccessResponse(task)),
 });
 
 export const updateTaskMutation = createMutation<
-	UpdateTaskRequest,
+	WithoutAccess<UpdateTaskRequest>,
 	StandardResponse<Task>,
 	StandardSuccessResponse<Task>,
-	Error
+	StandardFailError
 >({
 	effect: updateTaskFx,
 	contract: runtypeContract(getStandardSuccessResponse(task)),
 });
 
 export const removeTaskMutation = createMutation<
-	RemoveTaskRequest,
+	WithoutAccess<RemoveTaskRequest>,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
-	Error
+	StandardFailError
 >({
 	effect: removeTaskFx,
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),

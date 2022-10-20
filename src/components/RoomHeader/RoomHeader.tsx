@@ -1,18 +1,18 @@
 import * as React from 'react';
-import cn from 'classnames';
+import { Skeleton, SxProps, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getRoomQuery } from '@/models/rooms';
-import { Block } from '@/ui/Block';
-import { Text } from '@/ui/Text';
 import { usePrepareLink, useImminentlyQuery } from '@/hooks';
 import { GET_PARAMS, POPUPS } from '@/const';
 import { EditMenu } from '../EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { CommonProps } from '@/types/common';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
+import { StyledWrapper } from './styled';
 
-import styles from './RoomHeader.module.css';
+const titleSx: SxProps = {
+	fontWeight: 700,
+};
 
 export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
@@ -36,15 +36,11 @@ export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const isLoading = !room || pending;
 
 	return (
-		<Block className={cn(styles.block, className)}>
-			{isLoading ? (
-				<LoadingIndicator size='small' />
-			) : (
-				<Text className={styles.header} component='h2'>
-					{room?.name}
-				</Text>
-			)}
+		<StyledWrapper className={className}>
+			<Typography variant='h4' component='h1' sx={titleSx}>
+				{isLoading ? <Skeleton width='15em' /> : room?.name}
+			</Typography>
 			<EditMenu options={options} alt='Open room edit menu' />
-		</Block>
+		</StyledWrapper>
 	);
 };
