@@ -22,7 +22,7 @@ export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 				isLoading={isLoading}
 				loadingIndicator={<LoadingIndicator size='small' />}>
 				<Stack space='s'>
-					{activities?.map((activity) => (
+					{activities?.slice(0, 5).map((activity) => (
 						<ActivityCard {...activity} key={activity.id} />
 					))}
 				</Stack>

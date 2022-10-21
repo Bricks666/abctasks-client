@@ -17,7 +17,7 @@ const titleSx: SxProps = {
 export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
 	const { id: roomId } = useParams();
-	const { data: room, pending } = useImminentlyQuery(
+	const { data: room, loading } = useImminentlyQuery(
 		getRoomQuery,
 		Number(roomId),
 		roomId
@@ -33,7 +33,7 @@ export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 			to: groupsLink,
 		},
 	];
-	const isLoading = !room || pending;
+	const isLoading = !room || loading;
 
 	return (
 		<StyledWrapper className={className}>

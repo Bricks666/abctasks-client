@@ -28,6 +28,7 @@ export const useGroupedTasks = (roomId: number) => {
 
 	return {
 		data,
+		isEmpty: !tasks,
 		...rest,
 	};
 };

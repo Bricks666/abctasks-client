@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardContent, CardHeader } from '@mui/material';
+import { CardContent, CardHeader, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
@@ -8,12 +8,13 @@ import { useGroupsMap, usePrepareLink } from '@/hooks';
 import { removeTaskMutation, Task } from '@/models/tasks';
 import { CommonProps } from '@/types/common';
 import { GET_PARAMS, POPUPS } from '@/const';
-import { Group } from '@/ui/Group';
-import { Text } from '@/ui/Text';
+import { GroupLabel } from '@/ui/GroupLabel';
 import { MenuOption } from '@/ui/MenuItem';
 import { DateTime } from '@/ui/DateTime';
 import { EditMenu } from '../EditMenu';
 import { StyledCard, StyledContent } from './styles';
+import { Group } from '@/models/groups';
+import { SkeletonGroupLabel } from '../SkeletonGroupLabel';
 
 export interface TaskCardProps extends CommonProps, Task {}
 
@@ -36,7 +37,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 		},
 	});
 	const { data: groups } = useGroupsMap(roomId);
-	const group = groups[groupId];
+	const group: Group | undefined = groups[groupId];
 
 	const onDragStart = React.useCallback<React.DragEventHandler>(
 		(evt) => {
@@ -69,9 +70,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 		[updateLink, id, roomId]
 	);
 
-	if (!group) {
-		return null;
-	}
+	const title = group ? <GroupLabel {...group} /> : <SkeletonGroupLabel />;
 
 	return (
 		<StyledCard
@@ -88,14 +87,16 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 						alt="Open task's edit menu "
 					/>
 				}
-				title={<Group {...group} />}
+				title={title}
 				titleTypographyProps={{ component: 'div' }}
 			/>
 			<CardContent>
 				<StyledContent>{content}</StyledContent>
 				<div>
 					<DateTime date={createdAt} format='MMM DD' />
-					<Text component='span'>0</Text>
+					<Typography variant='body2' component='span'>
+						0
+					</Typography>
 				</div>
 			</CardContent>
 		</StyledCard>

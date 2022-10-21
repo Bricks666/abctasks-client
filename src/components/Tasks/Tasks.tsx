@@ -17,7 +17,7 @@ export interface Column {
 export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('task');
 	const { id: roomId } = useParams();
-	const { data: tasks } = useGroupedTasks(Number(roomId));
+	const { data: tasks, loading, isEmpty } = useGroupedTasks(Number(roomId));
 	/*
 TODO: Пересмотреть распределение на колонки
 */
@@ -53,6 +53,7 @@ TODO: Пересмотреть распределение на колонки
 				<TasksList
 					tasks={tasks}
 					columnStatus={status}
+					isLoading={loading && isEmpty}
 					header={t(`statuses.${headerCode}`)}
 					key={headerCode}
 				/>

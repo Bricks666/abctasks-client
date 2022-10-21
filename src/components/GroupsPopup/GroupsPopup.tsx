@@ -10,7 +10,7 @@ import {
 	useImminentlyQuery,
 } from '@/hooks';
 import { BasePopup, CommonProps, ID } from '@/types/common';
-import { Group } from '@/ui/Group';
+import { GroupLabel } from '@/ui/GroupLabel';
 import { List } from '@/ui/List';
 import { ListItem } from '@/ui/ListItem';
 import { ListItemSecondaryAction } from '@/ui/ListItemSecondaryAction';
@@ -69,7 +69,7 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 				<List className={styles.list}>
 					{groups?.map((group) => (
 						<ListItem key={group.id}>
-							<Group {...group} />
+							<GroupLabel {...group} />
 							<ListItemSecondaryAction>
 								<IconButton
 									component={Link}

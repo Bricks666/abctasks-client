@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { CommonProps } from '@/types/common';
-import { Text } from '../Text';
 
 export interface DateTimeProps extends CommonProps {
 	readonly date: string | number | Date;
@@ -17,7 +17,9 @@ export const DateTime: React.FC<DateTimeProps> = React.memo(function Datetime({
 	const showDate = dayjs(jsDate).format(format);
 	return (
 		<time className={className} dateTime={jsDate}>
-			<Text component='span'>{showDate}</Text>
+			<Typography variant='body2' component='span'>
+				{showDate}
+			</Typography>
 		</time>
 	);
 });

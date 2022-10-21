@@ -6,7 +6,7 @@ import { TextField } from '@/components/TextField';
 import { Button } from '@/ui/Button';
 import { Stack } from '@/ui/Stack';
 import { CommonProps } from '@/types/common';
-import { Group } from '@/ui/Group';
+import { GroupLabel } from '@/ui/GroupLabel';
 import { validatingScheme } from './validator';
 import { GroupFormValues } from './types';
 
@@ -57,7 +57,7 @@ export const GroupForm: React.FC<GroupFormProps> = ({
 					error={errors.secondColor?.message}
 				/>
 			</Stack>
-			{state.name && <Group {...state} />}
+			{state.name && <GroupLabel {...state} />}
 			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
 				{buttonText}
 			</Button>
