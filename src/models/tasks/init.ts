@@ -13,7 +13,6 @@ import {
 	removeTaskMutation,
 	updateTaskMutation,
 } from './queries';
-import { $RoomId } from '../rooms';
 
 getTasksFx.use(tasksApi.getAll);
 getTaskFx.use(tasksApi.getOne);
@@ -22,11 +21,37 @@ updateTaskBaseFx.use(tasksApi.update);
 removeTaskBaseFx.use(tasksApi.remove);
 
 sample({
-	clock: [
-		removeTaskMutation.finished.success,
-		updateTaskMutation.finished.success,
-		createTaskMutation.finished.success,
-	],
-	source: $RoomId,
-	target: getTasksQuery.start,
+	clock: createTaskMutation.finished.success,
+	source: getTasksQuery.$data,
+	fn: (tasks, { data: { data } }) => {
+		if (!tasks) {
+			return null;
+		}
+		return [...tasks, data];
+	},
+	target: getTasksQuery.$data,
+});
+
+sample({
+	clock: updateTaskMutation.finished.success,
+	source: getTasksQuery.$data,
+	fn: (tasks, { data: { data } }) => {
+		if (!tasks) {
+			return null;
+		}
+		return tasks.map((task) => (task.id === data.id ? data : task));
+	},
+	target: getTasksQuery.$data,
+});
+
+sample({
+	clock: removeTaskMutation.finished.success,
+	source: getTasksQuery.$data,
+	fn: (tasks, { params, data: { data } }) => {
+		if (!tasks || !data) {
+			return tasks;
+		}
+		return tasks.filter((task) => task.id !== params.id);
+	},
+	target: getTasksQuery.$data,
 });

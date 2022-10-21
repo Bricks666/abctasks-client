@@ -1,61 +1,26 @@
-import { forward, guard, sample } from 'effector';
+import { sample } from 'effector';
 import { progressApi } from '@/api';
 import {
-	$LoadingTasksProgress,
-	$TasksProgress,
-	changeProgress,
-	loadTasksProgress,
-	loadTasksProgressFx,
-	resetProgress,
-	subscribeChangeProgress,
-	subscribeChangeProgressFx,
-} from '.';
-import { mayStartFxHandler } from '../handlers';
-import { changeProgressHandler } from './handler';
-import { toValidTaskProgress } from './utils';
+	createTaskMutation,
+	removeTaskMutation,
+	updateTaskMutation,
+} from '../tasks';
+import { getProgressFx } from './units';
+import { removeGroupMutation, updateGroupMutation } from '../groups';
+import { getProgressQuery } from './queries';
 
-loadTasksProgressFx.use(progressApi.getAll);
-subscribeChangeProgressFx.use(async ({ closeRef, ...config }) => {
-	closeRef.current = await progressApi.subscribeChangeProgressApi(config);
-});
-
-guard({
-	clock: loadTasksProgress,
-	filter: mayStartFxHandler(loadTasksProgressFx.pending),
-	target: loadTasksProgressFx,
-});
+getProgressFx.use(progressApi.getAll);
 
 sample({
-	clock: loadTasksProgressFx.doneData,
-	fn: (taskProgressServer) =>
-		taskProgressServer.tasksProgress.map(toValidTaskProgress),
-	target: $TasksProgress,
-});
-
-forward({
-	from: loadTasksProgressFx.pending,
-	to: $LoadingTasksProgress,
-});
-
-sample({
-	clock: subscribeChangeProgress,
-	fn: (data) => ({
-		onChangeProgress: changeProgress,
-		onError: () => subscribeChangeProgress(data),
-		...data,
-	}),
-	target: subscribeChangeProgressFx,
-});
-
-sample({
-	source: $TasksProgress,
-	clock: changeProgress,
-	fn: changeProgressHandler,
-	target: $TasksProgress,
-});
-
-sample({
-	clock: resetProgress,
-	fn: () => [],
-	target: $TasksProgress,
+	clock: [
+		createTaskMutation.finished.success,
+		updateTaskMutation.finished.success,
+		removeTaskMutation.finished.success,
+		updateGroupMutation.finished.success,
+		removeGroupMutation.finished.success,
+	],
+	fn: (data) => {
+		return data.params.roomId;
+	},
+	target: getProgressQuery.start,
 });

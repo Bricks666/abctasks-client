@@ -1,7 +1,9 @@
-import { ID } from '@/types/common';
+import { Number, Record, Static } from 'runtypes';
 
-export interface TaskProgressStructure {
-	readonly groupId: ID;
-	readonly completedCount: number;
-	readonly totalCount: number;
-}
+export const progress = Record({
+	groupId: Number,
+	completedCount: Number,
+	totalCount: Number,
+}).asReadonly();
+
+export interface Progress extends Static<typeof progress> {}

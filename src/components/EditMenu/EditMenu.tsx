@@ -12,29 +12,26 @@ export interface EditMenuComponent extends CommonProps {
 	readonly size?: Size;
 }
 
-export const EditMenu: React.FC<EditMenuComponent> = ({
-	options,
-	className,
-	size,
-	alt,
-}) => {
-	const [isOpen, toggle] = useToggle();
-	const [reference, setReference] = React.useState<HTMLElement | null>(null);
-	return (
-		<div className={className}>
-			<IconButton
-				onClick={toggle}
-				size={size}
-				tabIndex={0}
-				title={alt}
-				ref={setReference}>
-				<MoreHorizIcon />
-			</IconButton>
-			<Menu anchorEl={reference} open={isOpen} onClose={toggle}>
-				{options.map((option) => (
-					<MenuItem {...option} key={option.label} />
-				))}
-			</Menu>
-		</div>
-	);
-};
+export const EditMenu: React.FC<EditMenuComponent> = React.memo(
+	({ options, className, size, alt }) => {
+		const [isOpen, toggle] = useToggle();
+		const [reference, setReference] = React.useState<HTMLElement | null>(null);
+		return (
+			<div className={className}>
+				<IconButton
+					onClick={toggle}
+					size={size}
+					tabIndex={0}
+					title={alt}
+					ref={setReference}>
+					<MoreHorizIcon />
+				</IconButton>
+				<Menu anchorEl={reference} open={isOpen} onClose={toggle}>
+					{options.map((option) => (
+						<MenuItem {...option} key={option.label} />
+					))}
+				</Menu>
+			</div>
+		);
+	}
+);

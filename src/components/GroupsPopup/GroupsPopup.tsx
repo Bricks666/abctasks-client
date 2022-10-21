@@ -3,12 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { getGroupsQuery, removeGroupMutation } from '@/models/groups';
-import {
-	useGoBack,
-	usePrepareLink,
-	UsePrepareLinkResponse,
-	useImminentlyQuery,
-} from '@/hooks';
+import { useGoBack, usePrepareLink, useImminentlyQuery } from '@/hooks';
 import { BasePopup, CommonProps, ID } from '@/types/common';
 import { GroupLabel } from '@/ui/GroupLabel';
 import { List } from '@/ui/List';
@@ -26,11 +21,8 @@ import styles from './GroupsPopup.module.css';
 
 export interface GroupsPopupProps extends CommonProps, BasePopup {}
 
-const createEditLink = (params: UsePrepareLinkResponse, groupId: ID) => {
-	return {
-		...params,
-		search: `${params.search}&${GET_PARAMS.groupId}=${groupId}`,
-	};
+const createEditLink = (path: string, groupId: ID): string => {
+	return `${path}&${GET_PARAMS.groupId}=${groupId}`;
 };
 
 export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {

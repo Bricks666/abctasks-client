@@ -10,25 +10,26 @@ const createGrouper = (status: TaskStatus) => {
 };
 
 export const useGroupedTasks = (roomId: number) => {
-	const { data: tasks = [], ...rest } = useImminentlyQuery(
+	const { data: tasks, ...rest } = useImminentlyQuery(
 		getTasksQuery,
 		roomId,
 		roomId
 	);
 
-	const data = useMemo<GroupedByStatusTasks>(
-		() => ({
-			ready: createGrouper('ready')(tasks || []),
-			done: createGrouper('done')(tasks || []),
-			'in progress': createGrouper('in progress')(tasks || []),
-			needReview: createGrouper('review')(tasks || []),
-		}),
-		[tasks]
-	);
+	const data = useMemo<GroupedByStatusTasks | null>(() => {
+		if (!tasks) {
+			return null;
+		}
+		return {
+			ready: createGrouper('ready')(tasks),
+			done: createGrouper('done')(tasks),
+			'in progress': createGrouper('in progress')(tasks),
+			needReview: createGrouper('review')(tasks),
+		};
+	}, [tasks]);
 
 	return {
 		data,
-		isEmpty: !tasks,
 		...rest,
 	};
 };

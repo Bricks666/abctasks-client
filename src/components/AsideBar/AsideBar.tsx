@@ -12,7 +12,6 @@ export const AsideBar: React.FC<AsideBarProps> = React.memo(function AsideBar(
 	const { className } = props;
 	return (
 		<StyledWrapper className={className}>
-			{' '}
 			<TasksProgress />
 			<ActivitiesList />
 		</StyledWrapper>

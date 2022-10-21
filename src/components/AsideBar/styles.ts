@@ -1,3 +1,6 @@
 import { styled } from '@mui/material';
 
-export const StyledWrapper = styled('div')``;
+export const StyledWrapper = styled('div')`
+	display: grid;
+	grid-template-rows: 4fr 6fr;
+`;

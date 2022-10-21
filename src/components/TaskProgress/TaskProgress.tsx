@@ -1,40 +1,48 @@
 import * as React from 'react';
+import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { TaskProgressStructure } from '@/models/progress/types';
+import { Progress } from '@/models/progress/types';
 import { CommonProps } from '@/types/common';
-import { ProgressBar } from '@/ui/ProgressBar';
+import { StyledLegend, StyledProgress } from './styles';
+import { Group } from '@/models/groups';
 
 export interface TaskProgressComponent
 	extends CommonProps,
-		TaskProgressStructure {}
+		Omit<Progress, 'groupId'>,
+		Pick<Group, 'mainColor' | 'secondColor' | 'name'> {}
 
 export const TaskProgress: React.FC<TaskProgressComponent> = ({
 	completedCount,
 	totalCount,
 	className,
-	/* groupId, */
+	mainColor,
+	secondColor,
+	name,
 }) => {
 	const { t } = useTranslation('room');
-	const group = null;
 
-	if (!group) {
-		return null;
-	}
-
-	const { mainColor, name, secondColor } = group;
+	const value = (completedCount / totalCount) * 100;
 
 	return (
-		<ProgressBar
-			className={className}
-			currentValue={completedCount}
-			maxValue={totalCount}
-			ariaText={t('taskProgress.progressAria', {
-				name,
-				completed: completedCount,
-			})}
-			progressbarBGColor={secondColor}
-			progressbarColor={mainColor}>
-			{name}
-		</ProgressBar>
+		<div>
+			<StyledLegend variant='body1'>
+				{name}{' '}
+				<Typography>
+					{completedCount}/{totalCount}
+				</Typography>
+			</StyledLegend>
+			<StyledProgress
+				className={className}
+				variant='determinate'
+				value={value}
+				valueBuffer={100}
+				aria-label={t('taskProgress.progressAria', {
+					name,
+					completed: completedCount,
+				})}
+				secondColor={secondColor}
+				mainColor={mainColor}
+			/>
+		</div>
 	);
 };

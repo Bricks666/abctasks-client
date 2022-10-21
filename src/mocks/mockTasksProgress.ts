@@ -1,6 +1,6 @@
-import { TaskProgressStructure } from '../models/progress/types';
+import { Progress } from '../models/progress/types';
 
-export const mockTasksProgress: TaskProgressStructure[] = [
+export const mockTasksProgress: Progress[] = [
 	{
 		groupId: 1,
 		completedCount: 1,

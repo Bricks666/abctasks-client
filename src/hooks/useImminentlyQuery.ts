@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Query } from '@farfetched/core';
 import { useQuery } from '@farfetched/react';
 import { useStore } from 'effector-react';
@@ -10,12 +11,11 @@ export const useImminentlyQuery = <Params, Data, Error>(
 ) => {
 	const { start, ...response } = useQuery(query);
 	const status = useStore(query.$status);
+	const loading = status === 'initial' || status === 'pending';
 
 	useEffect(() => {
 		start(params);
 	}, refetchOn);
-
-	const loading = status === 'initial' || status === 'pending';
 
 	return { ...response, status, loading };
 };

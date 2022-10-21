@@ -2,17 +2,11 @@ import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ID } from '@/types/common';
 
-interface UsePrepareLinkParams {
+export interface UsePrepareLinkParams {
 	readonly query?: Record<string, string>;
 	readonly saveQuery?: boolean;
 	readonly addQuery?: Record<string, ID>;
 	readonly to?: string;
-}
-
-export interface UsePrepareLinkResponse {
-	readonly pathname: string;
-	readonly search: string;
-	readonly hash: string;
 }
 
 export const usePrepareLink = ({
@@ -20,7 +14,7 @@ export const usePrepareLink = ({
 	addQuery,
 	query,
 	saveQuery = false,
-}: UsePrepareLinkParams): UsePrepareLinkResponse => {
+}: UsePrepareLinkParams): string => {
 	const location = useLocation();
 	return useMemo(() => {
 		const pathname = to || location.pathname;
@@ -41,10 +35,6 @@ export const usePrepareLink = ({
 			newQuery.set(key, newValue as string);
 		});
 
-		return {
-			pathname,
-			search: newQuery.toString() || '',
-			hash: location.hash,
-		};
+		return `${pathname}?${newQuery.toString()}`;
 	}, [location, to, addQuery, query, saveQuery]);
 };

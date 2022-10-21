@@ -1,25 +1,28 @@
-import { ID } from '@/types/common';
-import { ChangeProgressResponse } from '@/types/response';
-import { TaskProgressStructure } from './types';
-import { toValidTaskProgress } from './utils';
+import { Progress } from './types';
+
+export interface ProgressChange {
+	readonly groupId: number;
+	readonly progress: any;
+}
 
 export const changeProgressHandler = (
-	state: TaskProgressStructure[],
-	changes: ChangeProgressResponse[]
+	state: Progress[],
+	changes: ProgressChange[]
 ) => {
-	const newState: TaskProgressStructure[] = [];
-	const idsMap = Object.values(changes).reduce<
-		Record<ID, ChangeProgressResponse>
-	>((acc, change) => {
-		acc[change.groupId] = change;
-		return acc;
-	}, {});
+	const newState: Progress[] = [];
+	const idsMap = Object.values(changes).reduce<Record<number, ProgressChange>>(
+		(acc, change) => {
+			acc[change.groupId] = change;
+			return acc;
+		},
+		{}
+	);
 	state.forEach((progress) => {
 		const change = idsMap[progress.groupId];
 		if (change) {
 			const changedProgress = change.progress;
 			if (changedProgress) {
-				newState.push(toValidTaskProgress(changedProgress));
+				newState.push(changedProgress);
 			}
 			delete idsMap[progress.groupId];
 			return;
@@ -29,9 +32,7 @@ export const changeProgressHandler = (
 
 	const rest = Object.values(idsMap);
 	if (rest.length) {
-		rest.forEach((change) =>
-			newState.push(toValidTaskProgress(change.progress))
-		);
+		rest.forEach((change) => newState.push(change.progress));
 	}
 
 	return newState;

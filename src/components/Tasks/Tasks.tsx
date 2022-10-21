@@ -3,21 +3,22 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { TaskStatus, Task } from '@/models/tasks/types';
-import { useGroupedTasks } from '@/hooks';
+import { useGroupedTasks, useGroupsMap } from '@/hooks';
 import { CommonProps } from '@/types/common';
 import { TasksList } from '../TasksList';
 import { StyledWrapper } from './styles';
 
 export interface Column {
 	readonly headerCode: string;
-	readonly tasks: Task[];
+	readonly tasks: Task[] | null;
 	readonly status: TaskStatus;
 }
 
 export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('task');
 	const { id: roomId } = useParams();
-	const { data: tasks, loading, isEmpty } = useGroupedTasks(Number(roomId));
+	const { data: tasks } = useGroupedTasks(Number(roomId));
+	const { data: groupMap } = useGroupsMap(Number(roomId));
 	/*
 TODO: Пересмотреть распределение на колонки
 */
@@ -25,22 +26,22 @@ TODO: Пересмотреть распределение на колонки
 		() => [
 			{
 				headerCode: 'ready',
-				tasks: tasks.ready,
+				tasks: tasks?.ready || null,
 				status: 'ready',
 			},
 			{
 				headerCode: 'in progress',
-				tasks: tasks['in progress'],
+				tasks: tasks?.['in progress'] || null,
 				status: 'in progress',
 			},
 			{
 				headerCode: 'review',
-				tasks: tasks.needReview,
+				tasks: tasks?.needReview || null,
 				status: 'review',
 			},
 			{
 				headerCode: 'done',
-				tasks: tasks.done,
+				tasks: tasks?.done || null,
 				status: 'done',
 			},
 		],
@@ -52,8 +53,8 @@ TODO: Пересмотреть распределение на колонки
 			{columns.map(({ headerCode, status, tasks }) => (
 				<TasksList
 					tasks={tasks}
+					groupMap={groupMap}
 					columnStatus={status}
-					isLoading={loading && isEmpty}
 					header={t(`statuses.${headerCode}`)}
 					key={headerCode}
 				/>

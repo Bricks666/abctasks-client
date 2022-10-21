@@ -1,6 +1,6 @@
 export { useLocationState } from './useLocationState';
 export { useClickOutside } from './useClickOutside';
-export { usePrepareLink, type UsePrepareLinkResponse } from './usePrepareLink';
+export { usePrepareLink, type UsePrepareLinkParams } from './usePrepareLink';
 export { useGetParam } from './useGetParam';
 export { useGoBack } from './useGoBack';
 export { usePageTitle } from './usePageTitle';

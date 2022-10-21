@@ -8,11 +8,13 @@ import { TaskListHeader } from '../TaskListHeader';
 import { TaskCard } from '../TaskCard';
 import { SkeletonTaskCard } from '../SkeletonTaskCard';
 import { StyledList } from './styles';
+import { GroupsMap } from '@/models/groups';
+import { EMPTY_ARRAYS } from '@/const/ui';
 
 export interface TasksListProps extends CommonProps {
-	readonly tasks: Task[];
+	readonly tasks: Task[] | null;
 	readonly columnStatus: TaskStatus;
-	readonly isLoading: boolean;
+	readonly groupMap: GroupsMap | null;
 	readonly header?: string;
 }
 const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
@@ -22,8 +24,8 @@ export const TasksList: React.FC<TasksListProps> = ({
 	tasks,
 	className,
 	columnStatus,
-	isLoading,
 	header,
+	groupMap,
 }) => {
 	const { id: roomId } = useParams();
 	const moveTask = useMutation(updateTaskMutation);
@@ -42,9 +44,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 		[roomId, columnStatus]
 	);
 
-	const loadingTasks: Task[] | undefined[] = isLoading
-		? Array.from(new Array<undefined>(4))
-		: tasks;
+	const isLoading = !tasks;
 
 	return (
 		<Stack
@@ -54,9 +54,12 @@ export const TasksList: React.FC<TasksListProps> = ({
 			onDragOver={onDragOver}>
 			<TaskListHeader columnStatus={columnStatus}>{header}</TaskListHeader>
 			<StyledList spacing={1}>
-				{loadingTasks.map((task) =>
-					task ? <TaskCard {...task} key={task.id} /> : <SkeletonTaskCard />
-				)}
+				{isLoading
+					? EMPTY_ARRAYS[4].map(() => <SkeletonTaskCard />)
+					: tasks.map((task) => {
+							const group = groupMap ? groupMap[task.groupId] : null;
+							return <TaskCard {...task} group={group} key={task.id} />;
+					  })}
 			</StyledList>
 		</Stack>
 	);

@@ -1,4 +1,5 @@
-import { sample } from 'effector';
+/* eslint-disable import/no-extraneous-dependencies */
+import { sample } from 'effector-logger';
 import {
 	createGroupMutation,
 	getGroupsQuery,
@@ -8,13 +9,10 @@ import {
 import { groupsApi } from '@/api';
 import {
 	getGroupsFx,
-	$GroupsMap,
 	createGroupBaseFx,
 	removeGroupBaseFx,
 	updateGroupBaseFx,
 } from './units';
-import { $RoomId } from '../rooms';
-import { createGroupsMap } from './utils';
 
 getGroupsFx.use(groupsApi.getAll);
 createGroupBaseFx.use(groupsApi.create);
@@ -22,22 +20,43 @@ updateGroupBaseFx.use(groupsApi.update);
 removeGroupBaseFx.use(groupsApi.remove);
 
 sample({
-	clock: [
-		updateGroupMutation.finished.success,
-		createGroupMutation.finished.success,
-		removeGroupMutation.finished.success,
-	],
-	source: $RoomId,
-	fn: (roomId) => roomId,
-	target: getGroupsQuery.start,
+	clock: createGroupMutation.finished.success,
+	source: getGroupsQuery.$data,
+	fn: (groups, { data: { data } }) => {
+		if (!groups) {
+			return null;
+		}
+		return [...groups, data];
+	},
+	target: getGroupsQuery.$data,
 });
 
 sample({
-	clock: getGroupsQuery.finished.success,
-	fn: (response) => {
-		const { data } = response;
-
-		return createGroupsMap(data);
+	clock: updateGroupMutation.finished.success,
+	source: getGroupsQuery.$data,
+	fn: (groups, { data: { data } }) => {
+		if (!groups) {
+			return null;
+		}
+		return groups.map((group) => {
+			if (group.id === data.id) {
+				return data;
+			}
+			return group;
+		});
 	},
-	target: $GroupsMap,
+	target: getGroupsQuery.$data,
+});
+
+sample({
+	clock: removeGroupMutation.finished.success,
+	source: getGroupsQuery.$data,
+	fn: (groups, { data: { data }, params }) => {
+		if (!groups || !data) {
+			return groups;
+		}
+		const { id } = params;
+		return groups.filter((group) => group.id !== id);
+	},
+	target: getGroupsQuery.$data,
 });

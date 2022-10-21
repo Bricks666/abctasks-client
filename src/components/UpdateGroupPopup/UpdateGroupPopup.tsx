@@ -23,7 +23,7 @@ export const UpdateGroupPopup: React.FC<
 	const { id: roomId } = useParams();
 	const id = Number(useGetParam(GET_PARAMS.groupId));
 	const { data: groups, status } = useGroupsMap(Number(roomId));
-	const group = groups[id];
+	const group = groups?.[id] || null;
 	const updateGroup = useMutation(updateGroupMutation);
 	const isLoading = status === 'initial' || status === 'pending' || !group;
 

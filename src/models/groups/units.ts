@@ -8,11 +8,9 @@ import {
 } from '@/api';
 import { StandardResponse } from '@/types/response';
 import { attachWithAccessToken } from '../auth';
-import { Group, GroupsMap } from './types';
+import { Group } from './types';
 
 export const GroupsDomain = createDomain('GroupsDomain');
-
-export const $GroupsMap = GroupsDomain.store<GroupsMap>({});
 
 export const getGroupsFx = GroupsDomain.effect<
 	number,

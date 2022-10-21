@@ -6,7 +6,9 @@ interface StyledTitleProps {
 	readonly secondColor: HEX;
 }
 
-export const StyledTitle = styled(Typography)<StyledTitleProps>`
+export const StyledTitle = styled(Typography, {
+	shouldForwardProp: (prop) => prop !== 'mainColor' && prop !== 'secondColor',
+})<StyledTitleProps>`
 	display: inline-block;
 
 	width: max-content;
