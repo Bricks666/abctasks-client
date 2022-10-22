@@ -27,7 +27,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = ({
 		<div>
 			<StyledLegend variant='body1'>
 				{name}{' '}
-				<Typography>
+				<Typography component='span' color='#b4b4b4'>
 					{completedCount}/{totalCount}
 				</Typography>
 			</StyledLegend>

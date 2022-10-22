@@ -10,7 +10,7 @@ export const SkeletonTaskProgress: React.FC<SkeletonTaskProgressProps> =
 		const { className } = props;
 		return (
 			<StyledWrapper className={className}>
-				<Skeleton width='30%' height='1em' />
+				<Skeleton width='30%' height='1.25em' />
 				<Skeleton width='100%' height='1.25em' />
 			</StyledWrapper>
 		);

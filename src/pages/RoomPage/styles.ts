@@ -9,12 +9,14 @@ export const StyledLayout = styled(MainLayout)`
 	grid-template-rows: min-content 1fr;
 	gap: 1em;
 
-	height: 100%;
+	padding: 2em;
 
-	overflow-y: hidden;
+	overflow: hidden;
 
 	@media (min-width: 1300px) {
 		---room-page-template-columns: 4fr 1fr;
+
+		height: 100vh;
 	}
 
 	@media (max-width: 1300px) {
@@ -42,8 +44,6 @@ export const StyledAside = styled(AsideBar)`
 
 		display: grid;
 		row-gap: 2rem;
-
-		padding: 0 1em;
 
 		border-left: 1px solid #d9e0e9;
 	}

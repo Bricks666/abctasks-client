@@ -1,31 +1,30 @@
 import * as React from 'react';
-import cn from 'classnames';
+import { Typography } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
-import { Avatar } from '@/ui/Avatar';
-import { Activity, ActivityType } from '@/models/activities/types';
+import { Activity, ActivityType } from '@/models/activities';
 import { Color } from '@/types/ui';
-import { Text } from '@/ui/Text';
-import { RemoveIcon } from '@/ui/RemoveIcon';
-import { EditIcon } from '@/ui/EditIcon';
-import { PlusIcon } from '@/ui/PlusIcon';
 import { CommonProps } from '@/types/common';
-import { Card } from '@/ui/Card';
 import { DateTime } from '@/ui/DateTime';
-
-import styles from './ActivityCard.module.css';
+import { StyledAvatar, StyledCard, StyledCardContent } from './styles';
 
 export interface ActivityCardProps extends CommonProps, Activity {}
 
-const colorMap: Record<ActivityType, Color> = {
+const colorMap: Record<
+	ActivityType,
+	Exclude<Color, 'primary' | 'secondary' | 'dark'>
+> = {
 	create: 'success',
 	remove: 'error',
 	update: 'warning',
 };
 
 const iconMap: Record<ActivityType, React.ReactNode> = {
-	create: <PlusIcon className={styles.icon} />,
-	remove: <RemoveIcon className={styles.icon} />,
-	update: <EditIcon className={styles.icon} />,
+	create: <AddIcon />,
+	remove: <DeleteIcon />,
+	update: <EditIcon />,
 };
 
 export const ActivityCard: React.FC<ActivityCardProps> = ({
@@ -36,22 +35,21 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
 }) => {
 	const { t } = useTranslation('room');
 	return (
-		<Card className={cn(styles.card, className)}>
-			<Avatar
-				className={styles.avatar}
-				size='medium'
-				alt={t(`activities.type.${type}`)}
-				color={colorMap[type]}>
-				{iconMap[type]}
-			</Avatar>
-			<Text component='p'>
-				{t('activities.text', {
-					type,
-					sphere,
-				})}
-			</Text>
-
-			<DateTime date={createdAt} format='MMM DD' />
-		</Card>
+		<StyledCard className={className}>
+			<StyledCardContent>
+				<StyledAvatar alt={t(`activities.type.${type}`)} color={colorMap[type]}>
+					{iconMap[type]}
+				</StyledAvatar>
+				<div>
+					<Typography component='p'>
+						{t('activities.text', {
+							type,
+							sphere,
+						})}
+					</Typography>
+					<DateTime date={createdAt} format='MMM DD' />
+				</div>
+			</StyledCardContent>
+		</StyledCard>
 	);
 };

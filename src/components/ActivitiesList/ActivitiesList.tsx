@@ -1,32 +1,32 @@
 import * as React from 'react';
-import cn from 'classnames';
+import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { CommonProps } from '@/types/common';
-import { Stack } from '@/ui/Stack';
-import { Text } from '@/ui/Text';
-import { LoadingWrapper } from '@/ui/LoadingWrapper';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
+import { EMPTY_ARRAYS } from '@/const/ui';
 import { ActivityCard } from '../ActivityCard';
 import { useActivities } from './useActivities';
-
-import styles from './ActivitiesList.module.css';
+import { SkeletonActivityCard } from '../SkeletonActivityCard';
+import { StyledList, StyledWrapper, titleSx } from './styles';
 
 export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
-	const { data: activities, loading } = useActivities();
-	const isLoading = loading && !activities;
+	const { data: activities } = useActivities();
+	const isLoading = !activities;
+
 	return (
-		<section className={cn(styles.container, className)}>
-			<Text component='h3'>{t('activities.title')}</Text>
-			<LoadingWrapper
-				isLoading={isLoading}
-				loadingIndicator={<LoadingIndicator size='small' />}>
-				<Stack space='s'>
-					{activities?.slice(0, 5).map((activity) => (
-						<ActivityCard {...activity} key={activity.id} />
-					))}
-				</Stack>
-			</LoadingWrapper>
-		</section>
+		<StyledWrapper className={className} spacing={1.5}>
+			<Typography variant='body2' component='h3' sx={titleSx}>
+				{t('activities.title')}
+			</Typography>
+			<StyledList spacing={1}>
+				{isLoading
+					? EMPTY_ARRAYS[4].map(() => <SkeletonActivityCard />)
+					: activities
+							.slice(0, 100)
+							.map((activity) => (
+								<ActivityCard {...activity} key={activity.id} />
+							))}
+			</StyledList>
+		</StyledWrapper>
 	);
 };
