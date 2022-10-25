@@ -4,18 +4,19 @@ import { useTranslation } from 'react-i18next';
 import { SubmitHandler } from 'react-hook-form';
 import { useMutation } from '@farfetched/react';
 import { createGroupMutation } from '@/models/groups';
-import { BasePopup, CommonProps } from '@/types/common';
+import { routes } from '@/const';
+import { BasePopupProps, CommonProps } from '@/types/common';
 import { MainPopup } from '@/ui/MainPopup';
-import { useGoBack } from '@/hooks';
+import { useClosePopup } from '@/hooks';
 import { GroupForm, GroupFormValues } from '../GroupForm';
 import { defaultFormValues } from './data';
 
 import styles from './CreateGroupPopup.module.css';
 
-export interface CreateGroupPopupProps extends CommonProps, BasePopup {}
+export interface CreateGroupPopupProps extends CommonProps, BasePopupProps {}
 
 export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
-	const onClose = useGoBack();
+	const onClose = useClosePopup(routes.POPUPS.createGroup);
 	const { t } = useTranslation('popups');
 	const { id: roomId } = useParams();
 	const createGroup = useMutation(createGroupMutation);
@@ -26,8 +27,9 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 				...values,
 				roomId: Number(roomId),
 			});
+			onClose();
 		},
-		[roomId]
+		[roomId, onClose]
 	);
 	return (
 		<MainPopup

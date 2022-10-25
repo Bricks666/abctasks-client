@@ -1,7 +1,11 @@
 import { useMemo } from 'react';
-import { GroupedByStatusTasks, TaskStatus, Task } from '@/models/tasks/types';
-import { useImminentlyQuery } from './useImminentlyQuery';
-import { getTasksQuery } from '@/models/tasks/queries';
+import { useQuery } from '@farfetched/react';
+import {
+	GroupedByStatusTasks,
+	TaskStatus,
+	Task,
+	getTasksQuery,
+} from '@/models/tasks';
 
 const createGrouper = (status: TaskStatus) => {
 	return (state: Task[]) => {
@@ -9,13 +13,9 @@ const createGrouper = (status: TaskStatus) => {
 	};
 };
 
-export const useGroupedTasks = (roomId: number) => {
-	const { data: tasks, ...rest } = useImminentlyQuery(
-		getTasksQuery,
-		roomId,
-		roomId
-	);
-
+export const useGroupedTasks = () => {
+	const { data: tasks, ...rest } = useQuery(getTasksQuery);
+	console.debug(tasks);
 	const data = useMemo<GroupedByStatusTasks | null>(() => {
 		if (!tasks) {
 			return null;

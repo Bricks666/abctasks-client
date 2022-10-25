@@ -1,5 +1,5 @@
 import { ComponentType, lazy } from 'react';
-import { ROUTES } from '@/const';
+import { routes as r } from '@/const';
 
 interface Route {
 	readonly path: string;
@@ -16,29 +16,29 @@ const NotFoundPage = lazy(() => import('@/pages/NotFound'));
 
 export const routes: Route[] = [
 	{
-		path: ROUTES.ROOMS,
+		path: r.ROUTES.ROOMS,
 		Component: RoomsPage,
 		isOnlyAuth: true,
 	},
 	{
-		path: ROUTES.ROOM,
+		path: r.ROUTES.ROOM,
 		Component: RoomPage,
 	},
 	{
-		path: ROUTES.LOGIN,
+		path: r.ROUTES.LOGIN,
 		Component: LoginPage,
 	},
 	{
-		path: ROUTES.REGISTRATION,
+		path: r.ROUTES.REGISTRATION,
 		Component: RegistrationPage,
 	},
 	{
-		path: ROUTES.SETTINGS,
+		path: r.ROUTES.SETTINGS,
 		Component: SettingsPage,
 		isOnlyAuth: true,
 	},
 	{
-		path: ROUTES.NOT_FOUND,
+		path: r.ROUTES.NOT_FOUND,
 		Component: NotFoundPage,
 	},
 ];

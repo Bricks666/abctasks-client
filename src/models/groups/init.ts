@@ -12,6 +12,7 @@ import {
 	createGroupBaseFx,
 	removeGroupBaseFx,
 	updateGroupBaseFx,
+	groupsGate,
 } from './units';
 
 getGroupsFx.use(groupsApi.getAll);
@@ -59,4 +60,10 @@ sample({
 		return groups.filter((group) => group.id !== id);
 	},
 	target: getGroupsQuery.$data,
+});
+
+sample({
+	clock: groupsGate.state,
+	fn: ({ roomId }) => roomId,
+	target: getGroupsQuery.start,
 });

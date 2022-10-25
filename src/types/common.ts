@@ -25,9 +25,8 @@ export type ExtractProps<
 
 export type AnyFunction = (...args: any[]) => any;
 
-export interface BasePopup {
+export interface BasePopupProps {
 	readonly isOpen: boolean;
-	readonly isFocus?: boolean;
 }
 
 export type ID = string | number;
@@ -35,3 +34,7 @@ export type ID = string | number;
 export type WithCloseRef = { closeRef: { current: CloseConnect | null } };
 
 export type VoidFunction = () => void;
+
+export type AddType<T extends AnyObject, AT> = {
+	[K in keyof T]: T[K] | AT;
+};

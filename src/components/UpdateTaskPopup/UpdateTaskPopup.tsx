@@ -1,31 +1,31 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { useMutation } from '@farfetched/react';
+import { useMutation, useQuery } from '@farfetched/react';
+import { useGate } from 'effector-react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { getTaskQuery, updateTaskMutation } from '@/models/tasks';
-import { BasePopup, CommonProps } from '@/types/common';
-import { useGetParam, useGoBack, useImminentlyQuery } from '@/hooks';
-import { GET_PARAMS } from '@/const';
+import { getTaskQuery, taskGate, updateTaskMutation } from '@/models/tasks';
+import { BasePopupProps, CommonProps } from '@/types/common';
+import { useGetParam, useClosePopup } from '@/hooks';
+import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { TaskForm, TaskFormValues } from '../TaskForm';
 
 import styles from './UpdateTaskPopup.module.css';
 
-export interface UpdateTaskPopupProps extends CommonProps, BasePopup {}
+export interface UpdateTaskPopupProps extends CommonProps, BasePopupProps {}
 
 export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
-	const onClose = useGoBack();
 	const { t } = useTranslation('popups');
 	const { id: roomId } = useParams();
-	const id = Number(useGetParam(GET_PARAMS.taskId));
-	const { data: task, loading } = useImminentlyQuery(
-		getTaskQuery,
-		{ id, roomId: Number(roomId) },
-		id,
-		roomId
+	const id = Number(useGetParam(routes.GET_PARAMS.taskId));
+	useGate(taskGate, { id, roomId: Number(roomId) });
+	const onClose = useClosePopup(
+		routes.GET_PARAMS.taskId,
+		routes.GET_PARAMS.popup
 	);
+	const { data: task } = useQuery(getTaskQuery);
 	const updateTask = useMutation(updateTaskMutation);
 
 	const onSubmit = React.useCallback<SubmitHandler<TaskFormValues>>(
@@ -35,8 +35,9 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 				id,
 				roomId: Number(roomId),
 			});
+			onClose();
 		},
-		[roomId, id]
+		[roomId, id, onClose]
 	);
 
 	const defaultValues = React.useMemo<TaskFormValues>(
@@ -47,6 +48,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 		}),
 		[task]
 	);
+	const loading = !task;
 
 	return (
 		<MainPopup {...props} onClose={onClose} header={t('task.updateTitle')}>
@@ -56,7 +58,6 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 				<TaskForm
 					className={styles.form}
 					onSubmit={onSubmit}
-					roomId={Number(roomId)}
 					defaultValues={defaultValues}
 					buttonText={t('actions.save', { ns: 'common' })}
 				/>

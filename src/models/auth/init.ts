@@ -5,6 +5,7 @@ import {
 	$AuthUser,
 	$IsRegistered,
 	authFx,
+	authGate,
 	loginFx,
 	logoutFx,
 	registrationFx,
@@ -50,4 +51,9 @@ sample({
 	clock: registrationMutation.finished.success,
 	fn: () => true,
 	target: $IsRegistered,
+});
+
+sample({
+	clock: authGate.state,
+	target: authQuery.start,
 });

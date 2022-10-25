@@ -4,22 +4,23 @@ import { useParams } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { createTaskMutation, TaskStatus } from '@/models/tasks';
-import { useGetParam, useGoBack } from '@/hooks';
-import { BasePopup, CommonProps } from '@/types/common';
-import { GET_PARAMS } from '@/const';
+import { useGetParam, useClosePopup } from '@/hooks';
+import { BasePopupProps, CommonProps } from '@/types/common';
+import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
 import { TaskForm, TaskFormValues } from '../TaskForm';
 
 import styles from './CreateTaskPopup.module.css';
 
-export interface CreateTaskPopupProps extends CommonProps, BasePopup {}
+export interface CreateTaskPopupProps extends CommonProps, BasePopupProps {}
 
 export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
-	const onClose = useGoBack();
 	const { t } = useTranslation('popups');
 	const { id: roomId } = useParams();
+	const onClose = useClosePopup(routes.POPUPS.createTask);
 	const createTask = useMutation(createTaskMutation);
-	const status = useGetParam<TaskStatus>(GET_PARAMS.taskStatus) || 'ready';
+	const status =
+		useGetParam<TaskStatus>(routes.GET_PARAMS.taskStatus) || 'ready';
 
 	const onSubmit = React.useCallback<SubmitHandler<TaskFormValues>>(
 		(values) => {
@@ -27,8 +28,9 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 				...values,
 				roomId: Number(roomId),
 			});
+			onClose();
 		},
-		[roomId]
+		[roomId, onClose]
 	);
 
 	const defaultState = React.useMemo<TaskFormValues>(
@@ -46,7 +48,6 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 				className={styles.form}
 				onSubmit={onSubmit}
 				defaultValues={defaultState}
-				roomId={Number(roomId)}
 				buttonText={t('actions.create', { ns: 'common' })}
 			/>
 		</MainPopup>

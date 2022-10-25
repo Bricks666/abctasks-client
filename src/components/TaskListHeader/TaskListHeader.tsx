@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SxProps, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
-import { GET_PARAMS, POPUPS } from '@/const';
+import { routes } from '@/const';
 import { usePrepareLink } from '@/hooks';
 import { CommonProps } from '@/types/common';
 import { EditMenu } from '../EditMenu';
@@ -24,8 +24,8 @@ export const TaskListHeader: React.FC<
 	const { t } = useTranslation('common');
 	const createTaskLink = usePrepareLink({
 		query: {
-			[GET_PARAMS.popup]: POPUPS.createTask,
-			[GET_PARAMS.taskStatus]: columnStatus,
+			[routes.GET_PARAMS.popup]: routes.POPUPS.createTask,
+			[routes.GET_PARAMS.taskStatus]: columnStatus,
 		},
 	});
 	const options: MenuOption[] = React.useMemo(

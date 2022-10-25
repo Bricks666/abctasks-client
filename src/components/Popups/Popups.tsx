@@ -1,25 +1,25 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
-import { POPUPS } from '@/const';
+import { routes } from '@/const';
 import { CreateTaskPopup } from '../CreateTaskPopup';
 import { UpdateTaskPopup } from '../UpdateTaskPopup';
 import { GroupsPopup } from '../GroupsPopup';
 import { UpdateGroupPopup } from '../UpdateGroupPopup';
 import { CreateGroupPopup } from '../CreateGroupPopup';
-import { BasePopup } from '@/types/common';
+import { BasePopupProps } from '@/types/common';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { CreateRoomPopup } from '../CreateRoomPopup';
 import { usePopups } from './usePopups';
 import { UpdateRoomPopup } from '../UpdateRoomPopup';
 
-const popupsMap: Record<string, React.ComponentType<BasePopup>> = {
-	[POPUPS.createTask]: CreateTaskPopup,
-	[POPUPS.updateTask]: UpdateTaskPopup,
-	[POPUPS.groups]: GroupsPopup,
-	[POPUPS.createGroup]: CreateGroupPopup,
-	[POPUPS.updateGroup]: UpdateGroupPopup,
-	[POPUPS.createRoom]: CreateRoomPopup,
-	[POPUPS.updateRoom]: UpdateRoomPopup,
+const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
+	[routes.POPUPS.createTask]: CreateTaskPopup,
+	[routes.POPUPS.updateTask]: UpdateTaskPopup,
+	[routes.POPUPS.groups]: GroupsPopup,
+	[routes.POPUPS.createGroup]: CreateGroupPopup,
+	[routes.POPUPS.updateGroup]: UpdateGroupPopup,
+	[routes.POPUPS.createRoom]: CreateRoomPopup,
+	[routes.POPUPS.updateRoom]: UpdateRoomPopup,
 };
 
 export const Popups = () => {

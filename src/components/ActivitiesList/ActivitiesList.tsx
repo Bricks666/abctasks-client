@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { Typography } from '@mui/material';
+import { useQuery } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
+import { getActivitiesQuery } from '@/models/activities';
 import { CommonProps } from '@/types/common';
-import { EMPTY_ARRAYS } from '@/const/ui';
+import { ui } from '@/const';
 import { ActivityCard } from '../ActivityCard';
-import { useActivities } from './useActivities';
 import { SkeletonActivityCard } from '../SkeletonActivityCard';
 import { StyledList, StyledWrapper, titleSx } from './styles';
 
 export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
-	const { data: activities } = useActivities();
+	const { data: activities } = useQuery(getActivitiesQuery);
 	const isLoading = !activities;
 
 	return (
@@ -20,9 +21,9 @@ export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 			</Typography>
 			<StyledList spacing={1}>
 				{isLoading
-					? EMPTY_ARRAYS[4].map(() => <SkeletonActivityCard />)
+					? ui.EMPTY_ARRAYS[4].map(() => <SkeletonActivityCard />)
 					: activities
-							.slice(0, 100)
+							.slice(0, 10)
 							.map((activity) => (
 								<ActivityCard {...activity} key={activity.id} />
 							))}

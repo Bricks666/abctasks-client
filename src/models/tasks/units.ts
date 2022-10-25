@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
+import { createGate } from 'effector-react';
 import { StandardResponse } from '@/types/response';
 import { Task } from './types';
 import {
@@ -10,6 +11,7 @@ import {
 } from '@/api';
 import { StandardFailError } from '@/packages/request';
 import { attachWithAccessToken } from '../auth';
+import { InRoomRequest } from '@/types/request';
 
 export const TasksDomain = createDomain('TasksDomain');
 
@@ -53,4 +55,14 @@ export const removeTaskBaseFx = TasksDomain.effect<
 export const removeTaskFx = attachWithAccessToken({
 	effect: removeTaskBaseFx,
 	name: 'removeTaskFx',
+});
+
+export const tasksGate = createGate<InRoomRequest>({
+	domain: TasksDomain,
+	name: 'tasksGate',
+});
+
+export const taskGate = createGate<GetTaskRequest>({
+	domain: TasksDomain,
+	name: 'taskGate',
 });

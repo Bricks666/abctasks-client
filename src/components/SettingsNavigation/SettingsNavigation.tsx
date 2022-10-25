@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ROUTES } from '@/const';
+import { routes } from '@/const';
 import { i18n } from '@/i18n';
 import { CommonProps } from '@/types/common';
 import { Block } from '@/ui/Block';
@@ -10,11 +10,11 @@ import { ListItemButton } from '@/ui/ListItemButton';
 const navigation = [
 	{
 		label: i18n.t('navigation.generic', { ns: 'settings' }),
-		to: ROUTES.SETTINGS_GENERIC,
+		to: routes.ROUTES.SETTINGS_GENERIC,
 	},
 	{
 		label: i18n.t('navigation.profile', { ns: 'settings' }),
-		to: ROUTES.SETTINGS_PROFILE,
+		to: routes.ROUTES.SETTINGS_PROFILE,
 	},
 ];
 

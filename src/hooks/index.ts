@@ -1,8 +1,8 @@
 export { useLocationState } from './useLocationState';
 export { useClickOutside } from './useClickOutside';
-export { usePrepareLink, type UsePrepareLinkParams } from './usePrepareLink';
+export { usePrepareLink } from './usePrepareLink';
 export { useGetParam } from './useGetParam';
-export { useGoBack } from './useGoBack';
+export { useClosePopup } from './useClosePopup';
 export { usePageTitle } from './usePageTitle';
 export { useGroupedTasks } from './useGroupedTasks';
 export { useToggle } from './useToggle';
@@ -10,3 +10,4 @@ export { useAnyPopupOpen } from './useAnyPopupOpen';
 export { useImageURL } from './useImageURL';
 export { useImminentlyQuery } from './useImminentlyQuery';
 export { useGroupsMap } from './useGroupsMap';
+export { useExtendedQuery } from './useExtendedQuery';

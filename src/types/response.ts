@@ -29,3 +29,6 @@ export const getStandardResponse = <RT>(T: Runtype<RT>) => {
 export type StandardResponse<T> =
 	| StandardFailResponse
 	| StandardSuccessResponse<T>;
+
+export const voidResponse = Record({});
+export type VoidResponse = Static<typeof voidResponse>;

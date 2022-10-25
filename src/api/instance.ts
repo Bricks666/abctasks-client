@@ -1,7 +1,7 @@
 import { SSEListener } from '@/packages/eventSource';
-import { baseURL } from '@/const/api';
+import { api } from '@/const';
 
 export const sseListener = new SSEListener({
-	baseURL,
+	baseURL: api.api,
 	withCredentials: true,
 });

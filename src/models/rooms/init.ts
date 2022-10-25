@@ -3,11 +3,12 @@ import { sample } from 'effector-logger';
 import { roomsApi } from '@/api';
 import {
 	getRoomFx,
-	$RoomId,
 	getRoomsBaseFx,
 	createRoomBaseFx,
 	removeRoomBaseFx,
 	updateRoomBaseFx,
+	roomsGate,
+	roomGate,
 } from './units';
 import {
 	createRoomMutation,
@@ -34,9 +35,13 @@ sample({
 });
 
 sample({
-	clock: getRoomQuery.finished.success,
-	fn: (data) => {
-		return data.data.id;
-	},
-	target: $RoomId,
+	clock: roomsGate.state,
+	fn: () => ({}),
+	target: getRoomsQuery.start,
+});
+
+sample({
+	clock: roomGate.state,
+	fn: ({ roomId }) => roomId,
+	target: getRoomQuery.start,
 });

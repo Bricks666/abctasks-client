@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
+import { createGate } from 'effector-react';
 import { StandardFailError } from '@/packages/request';
 import {
 	CreateGroupRequest,
@@ -9,6 +10,7 @@ import {
 import { StandardResponse } from '@/types/response';
 import { attachWithAccessToken } from '../auth';
 import { Group } from './types';
+import { InRoomRequest } from '@/types/request';
 
 export const GroupsDomain = createDomain('GroupsDomain');
 
@@ -46,4 +48,9 @@ export const removeGroupBaseFx = GroupsDomain.effect<
 export const removeGroupFx = attachWithAccessToken({
 	effect: removeGroupBaseFx,
 	name: 'removeGroupBaseFx',
+});
+
+export const groupsGate = createGate<InRoomRequest>({
+	domain: GroupsDomain,
+	name: 'groupsGate',
 });

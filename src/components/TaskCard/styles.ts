@@ -4,7 +4,9 @@ interface StyledCardProps {
 	readonly isDrag: boolean;
 }
 
-export const StyledCard = styled(Card)<StyledCardProps>`
+export const StyledCard = styled(Card, {
+	shouldForwardProp: (prop) => prop !== 'isDrag',
+})<StyledCardProps>`
 	width: 100%;
 
 	box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;

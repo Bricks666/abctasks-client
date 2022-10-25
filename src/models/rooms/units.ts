@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
+import { createGate } from 'effector-react';
 import { StandardFailError } from '@/packages/request';
 import {
 	CreateRoomRequest,
@@ -10,10 +11,9 @@ import {
 import { StandardResponse } from '@/types/response';
 import { Room } from './types';
 import { attachWithAccessToken } from '../auth';
+import { InRoomRequest } from '@/types/request';
 
 export const RoomsDomain = createDomain('RoomsDomain');
-
-export const $RoomId = RoomsDomain.store<number>(0, { name: 'Active room id' });
 
 export const getRoomsBaseFx = RoomsDomain.effect<
 	GetRoomsRequest,
@@ -61,4 +61,14 @@ export const removeRoomBaseFx = RoomsDomain.effect<
 export const removeRoomFx = attachWithAccessToken({
 	effect: removeRoomBaseFx,
 	name: 'removeRoomFx',
+});
+
+export const roomsGate = createGate({
+	domain: RoomsDomain,
+	name: 'roomsGate',
+});
+
+export const roomGate = createGate<InRoomRequest>({
+	domain: RoomsDomain,
+	name: 'roomGate',
 });

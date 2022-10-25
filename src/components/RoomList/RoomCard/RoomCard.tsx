@@ -11,7 +11,7 @@ import { ListItem } from '@/ui/ListItem';
 import { EditMenu } from '@/components/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
-import { GET_PARAMS, POPUPS } from '@/const';
+import { routes } from '@/const';
 import { Button } from '@/ui/Button';
 import { CommonProps } from '@/types/common';
 
@@ -29,8 +29,8 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	const removeRoom = useMutation(removeRoomMutation);
 	const updateLink = usePrepareLink({
 		addQuery: {
-			[GET_PARAMS.popup]: POPUPS.updateRoom,
-			[GET_PARAMS.roomId]: id,
+			[routes.GET_PARAMS.popup]: routes.POPUPS.updateRoom,
+			[routes.GET_PARAMS.roomId]: id,
 		},
 	});
 	const options = React.useMemo<MenuOption[]>(

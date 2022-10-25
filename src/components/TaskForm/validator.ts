@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { allowedSymbolsRegExp } from '@/const';
+import { forms } from '@/const';
 import { TaskFormValues } from './types';
 
 export const validationScheme = Joi.object<TaskFormValues>({
@@ -9,7 +9,7 @@ export const validationScheme = Joi.object<TaskFormValues>({
 	}),
 	status: Joi.string().required(),
 	content: Joi.string()
-		.pattern(allowedSymbolsRegExp)
+		.pattern(forms.allowedSymbolsRegExp)
 		.max(128)
 		.required()
 		.messages({

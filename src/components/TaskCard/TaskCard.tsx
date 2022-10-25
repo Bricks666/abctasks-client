@@ -7,7 +7,7 @@ import { useMutation } from '@farfetched/react';
 import { usePrepareLink } from '@/hooks';
 import { removeTaskMutation, Task } from '@/models/tasks';
 import { CommonProps } from '@/types/common';
-import { GET_PARAMS, POPUPS } from '@/const';
+import { routes } from '@/const';
 import { GroupLabel } from '@/ui/GroupLabel';
 import { MenuOption } from '@/ui/MenuItem';
 import { DateTime } from '@/ui/DateTime';
@@ -27,8 +27,8 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo(
 		const removeTask = useMutation(removeTaskMutation);
 		const updateLink = usePrepareLink({
 			query: {
-				[GET_PARAMS.popup]: POPUPS.updateTask,
-				[GET_PARAMS.taskId]: id.toString(),
+				[routes.GET_PARAMS.popup]: routes.POPUPS.updateTask,
+				[routes.GET_PARAMS.taskId]: id.toString(),
 			},
 		});
 

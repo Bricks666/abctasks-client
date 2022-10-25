@@ -6,7 +6,7 @@ import { Text } from '@/ui/Text';
 import { EditMenu } from '../EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
-import { GET_PARAMS, POPUPS } from '@/const';
+import { routes } from '@/const';
 import { CommonProps } from '@/types/common';
 
 import styles from './RoomsHeader.module.css';
@@ -15,7 +15,7 @@ export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('rooms');
 	const createLink = usePrepareLink({
 		addQuery: {
-			[GET_PARAMS.popup]: POPUPS.createRoom,
+			[routes.GET_PARAMS.popup]: routes.POPUPS.createRoom,
 		},
 	});
 	const options = React.useMemo<MenuOption[]>(

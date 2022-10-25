@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { baseURL } from '@/const';
+import { api } from '@/const';
 import { BaseFetcher, BaseFetcherOptions } from '../base';
 import { BaseRequestOptions, BodyRequestOptions } from './types';
 import { StandardFailError } from '../error';
@@ -98,6 +98,6 @@ export class Fetcher extends BaseFetcher<AxiosInstance, BaseFetcherOptions> {
 }
 
 export const fetcher = new Fetcher({
-	baseURL,
+	baseURL: api.api,
 	credentials: true,
 });

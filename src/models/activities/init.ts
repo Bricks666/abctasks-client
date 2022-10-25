@@ -1,6 +1,6 @@
 import { sample } from 'effector';
 import { activitiesApi } from '@/api';
-import { getActivitiesFx } from '.';
+import { getActivitiesFx, activityGate } from './units';
 import {
 	createTaskMutation,
 	removeTaskMutation,
@@ -12,7 +12,6 @@ import {
 	updateGroupMutation,
 } from '../groups';
 import { getActivitiesQuery } from './queries';
-import { $RoomId } from '../rooms';
 
 getActivitiesFx.use(activitiesApi.getAll);
 
@@ -25,9 +24,14 @@ sample({
 		updateGroupMutation.finished.success,
 		removeGroupMutation.finished.success,
 	],
-	source: $RoomId,
-	fn: (roomId) => {
+	fn: ({ params: { roomId } }) => {
 		return roomId;
 	},
+	target: getActivitiesQuery.start,
+});
+
+sample({
+	clock: activityGate.state,
+	fn: ({ roomId }) => roomId,
 	target: getActivitiesQuery.start,
 });

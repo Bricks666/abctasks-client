@@ -1,6 +1,5 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { TaskStatus, Task } from '@/models/tasks/types';
 import { useGroupedTasks, useGroupsMap } from '@/hooks';
@@ -16,9 +15,9 @@ export interface Column {
 
 export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('task');
-	const { id: roomId } = useParams();
-	const { data: tasks } = useGroupedTasks(Number(roomId));
-	const { data: groupMap } = useGroupsMap(Number(roomId));
+	const { data: tasks } = useGroupedTasks();
+	const { data: groupMap } = useGroupsMap();
+	console.debug(tasks, groupMap);
 	/*
 TODO: Пересмотреть распределение на колонки
 */

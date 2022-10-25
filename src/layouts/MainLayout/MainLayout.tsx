@@ -9,6 +9,7 @@ export const MainLayout: React.FC<React.PropsWithChildren<MainLayoutProps>> = (
 	props
 ) => {
 	const { className, children } = props;
+
 	return (
 		<StyledWrapper>
 			{/* <Header /> */}

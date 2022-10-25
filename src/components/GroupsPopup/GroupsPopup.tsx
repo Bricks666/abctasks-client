@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useMutation } from '@farfetched/react';
+import { Link } from 'react-router-dom';
+import { useMutation, useQuery } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { getGroupsQuery, removeGroupMutation } from '@/models/groups';
-import { useGoBack, usePrepareLink, useImminentlyQuery } from '@/hooks';
-import { BasePopup, CommonProps, ID } from '@/types/common';
+import { useClosePopup, usePrepareLink } from '@/hooks';
+import { BasePopupProps, CommonProps, ID } from '@/types/common';
 import { GroupLabel } from '@/ui/GroupLabel';
 import { List } from '@/ui/List';
 import { ListItem } from '@/ui/ListItem';
@@ -12,40 +12,35 @@ import { ListItemSecondaryAction } from '@/ui/ListItemSecondaryAction';
 import { Button } from '@/ui/Button';
 import { IconButton } from '@/ui/IconButton';
 import { RemoveIcon } from '@/ui/RemoveIcon';
-import { GET_PARAMS, POPUPS } from '@/const';
+import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
 import { Stack } from '@/ui/Stack';
 import { EditIcon } from '@/ui/EditIcon';
 
 import styles from './GroupsPopup.module.css';
 
-export interface GroupsPopupProps extends CommonProps, BasePopup {}
+export interface GroupsPopupProps extends CommonProps, BasePopupProps {}
 
 const createEditLink = (path: string, groupId: ID): string => {
-	return `${path}&${GET_PARAMS.groupId}=${groupId}`;
+	return `${path}&${routes.GET_PARAMS.groupId}=${groupId}`;
 };
 
 export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
-	const onClose = useGoBack();
-	const { id: roomId } = useParams();
-	const { data: groups } = useImminentlyQuery(
-		getGroupsQuery,
-		Number(roomId),
-		roomId
-	);
+	const onClose = useClosePopup(routes.POPUPS.groups);
+	const { data: groups } = useQuery(getGroupsQuery);
 	const removeGroup = useMutation(removeGroupMutation);
 	const { t } = useTranslation('popups');
 	const createGroup = usePrepareLink({
-		addQuery: {
-			[GET_PARAMS.popup]: POPUPS.createGroup,
+		query: {
+			[routes.GET_PARAMS.popup]: routes.POPUPS.createGroup,
 		},
-		saveQuery: true,
+		keepOldQuery: true,
 	});
 	const updateGroup = usePrepareLink({
-		addQuery: {
-			[GET_PARAMS.popup]: POPUPS.updateGroup,
+		query: {
+			[routes.GET_PARAMS.popup]: routes.POPUPS.updateGroup,
 		},
-		saveQuery: true,
+		keepOldQuery: true,
 	});
 
 	return (

@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { Stack } from '@mui/material';
 import { useMutation } from '@farfetched/react';
 import { TaskStatus, Task, updateTaskMutation } from '@/models/tasks';
+import { GroupsMap } from '@/models/groups';
+import { ui } from '@/const';
 import { CommonProps } from '@/types/common';
 import { TaskListHeader } from '../TaskListHeader';
 import { TaskCard } from '../TaskCard';
 import { SkeletonTaskCard } from '../SkeletonTaskCard';
-import { StyledList } from './styles';
-import { GroupsMap } from '@/models/groups';
-import { EMPTY_ARRAYS } from '@/const/ui';
+import { StyledList, StyledWrapper } from './styles';
 
 export interface TasksListProps extends CommonProps {
 	readonly tasks: Task[] | null;
@@ -47,7 +46,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 	const isLoading = !tasks;
 
 	return (
-		<Stack
+		<StyledWrapper
 			className={className}
 			spacing={1}
 			onDrop={onDrop}
@@ -55,12 +54,12 @@ export const TasksList: React.FC<TasksListProps> = ({
 			<TaskListHeader columnStatus={columnStatus}>{header}</TaskListHeader>
 			<StyledList spacing={1}>
 				{isLoading
-					? EMPTY_ARRAYS[4].map(() => <SkeletonTaskCard />)
+					? ui.EMPTY_ARRAYS[4].map(() => <SkeletonTaskCard />)
 					: tasks.map((task) => {
 							const group = groupMap ? groupMap[task.groupId] : null;
 							return <TaskCard {...task} group={group} key={task.id} />;
 					  })}
 			</StyledList>
-		</Stack>
+		</StyledWrapper>
 	);
 };

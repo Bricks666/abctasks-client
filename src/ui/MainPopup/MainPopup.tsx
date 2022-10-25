@@ -1,13 +1,6 @@
 import * as React from 'react';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { CommonProps, VoidFunction } from '@/types/common';
-import { Overlay } from '../Overlay';
-import { PopupHeader } from '../PopupHeader';
-import { Fade } from '../Fade';
-import { PopupContent } from '../PopupContent';
-import { useKeyListener } from '../hooks';
-/* import { FocusTrap } from '../FocusTrap'; */
-
-import styles from './MainPopup.module.css';
 
 export interface MainPopupProps extends CommonProps {
 	readonly isOpen: boolean;
@@ -15,7 +8,6 @@ export interface MainPopupProps extends CommonProps {
 	readonly header: string;
 	readonly closeOnEsc?: boolean;
 	readonly alt?: string;
-	readonly isFocus?: boolean;
 }
 
 export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = ({
@@ -24,19 +16,11 @@ export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = ({
 	children,
 	className,
 	header,
-	alt,
-	closeOnEsc = true,
-	isFocus = isOpen,
 }) => {
-	useKeyListener('Escape', onClose, closeOnEsc && isFocus);
 	return (
-		<Overlay onClose={onClose} alt={alt}>
-			{/* <FocusTrap open={isFocus}> */}
-			<Fade open={isOpen} className={styles.overlay}>
-				<PopupHeader onClose={onClose}>{header}</PopupHeader>
-				<PopupContent className={className}>{children}</PopupContent>
-			</Fade>
-			{/* </FocusTrap> */}
-		</Overlay>
+		<Dialog className={className} open={isOpen} onClose={onClose}>
+			<DialogTitle align='center'>{header}</DialogTitle>
+			<DialogContent>{children}</DialogContent>
+		</Dialog>
 	);
 };

@@ -1,7 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
+import { createGate } from 'effector-react';
 import { StandardResponse } from '@/types/response';
 import { Activity } from './types';
+import { InRoomRequest } from '@/types/request';
 
 export const ActivitiesDomain = createDomain('ActivitiesDomain');
 
@@ -16,3 +18,8 @@ export const getActivitiesFx = ActivitiesDomain.effect<
 
 export const getActivities =
 	ActivitiesDomain.event<number>('getActivitiesEvent');
+
+export const activityGate = createGate<InRoomRequest>({
+	domain: ActivitiesDomain,
+	name: 'activitiesGate',
+});

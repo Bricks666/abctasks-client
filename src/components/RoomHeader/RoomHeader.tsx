@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Skeleton, SxProps, Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useQuery } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { getRoomQuery } from '@/models/rooms';
-import { usePrepareLink, useImminentlyQuery } from '@/hooks';
-import { GET_PARAMS, POPUPS } from '@/const';
+import { usePrepareLink } from '@/hooks';
+import { routes } from '@/const';
 import { EditMenu } from '../EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { CommonProps } from '@/types/common';
@@ -16,15 +16,10 @@ const titleSx: SxProps = {
 
 export const RoomHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
-	const { id: roomId } = useParams();
-	const { data: room, loading } = useImminentlyQuery(
-		getRoomQuery,
-		Number(roomId),
-		roomId
-	);
+	const { data: room, loading } = useQuery(getRoomQuery);
 	const groupsLink = usePrepareLink({
 		query: {
-			[GET_PARAMS.popup]: POPUPS.groups,
+			[routes.GET_PARAMS.popup]: routes.POPUPS.groups,
 		},
 	});
 	const options: MenuOption[] = [

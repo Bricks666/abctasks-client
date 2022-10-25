@@ -1,8 +1,8 @@
-import { GET_PARAMS } from '@/const';
+import { routes } from '@/const';
 import { useGetParam } from './useGetParam';
 
 export const useAnyPopupOpen = () => {
-	const params = useGetParam(GET_PARAMS.popup);
+	const params = useGetParam(routes.GET_PARAMS.popup);
 
 	return !!params;
 };

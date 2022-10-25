@@ -5,10 +5,13 @@ import {
 	createTaskBaseFx,
 	removeTaskBaseFx,
 	updateTaskBaseFx,
+	tasksGate,
+	taskGate,
 } from './units';
 import { tasksApi } from '@/api';
 import {
 	createTaskMutation,
+	getTaskQuery,
 	getTasksQuery,
 	removeTaskMutation,
 	updateTaskMutation,
@@ -54,4 +57,15 @@ sample({
 		return tasks.filter((task) => task.id !== params.id);
 	},
 	target: getTasksQuery.$data,
+});
+
+sample({
+	clock: tasksGate.state,
+	fn: ({ roomId }) => roomId,
+	target: getTasksQuery.start,
+});
+
+sample({
+	clock: taskGate.state,
+	target: getTaskQuery.start,
 });

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
+import { createGate } from 'effector-react';
 import { LoginRequest, RegistrationRequest } from '@/api';
 import { StandardResponse, VoidResponse } from '@/types/response';
 import { AuthResponse, User } from './types';
@@ -26,3 +27,8 @@ export const registrationFx = Auth.effect<
 export const logoutFx = Auth.effect<void, StandardResponse<boolean>>(
 	'logoutFx'
 );
+
+export const authGate = createGate({
+	domain: Auth,
+	name: 'authGate',
+});

@@ -3,12 +3,12 @@ import { useMutation } from '@farfetched/react';
 import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { $AuthUser, logoutMutation } from '@/models/auth';
+import { routes } from '@/const';
 import { useAnyPopupOpen, useToggle } from '@/hooks';
 import { CommonProps } from '@/types/common';
 import { Menu } from '@/ui/Menu';
 import { MenuItem, MenuOption } from '@/ui/MenuItem';
 import { Avatar } from '@/ui/Avatar';
-import { ROUTES } from '@/const';
 
 export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('header');
@@ -22,7 +22,7 @@ export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
 		() => [
 			{
 				label: t('actions.settings'),
-				to: ROUTES.SETTINGS.slice(0, -2),
+				to: routes.ROUTES.SETTINGS.slice(0, -2),
 			},
 			{
 				label: t('actions.logout'),
