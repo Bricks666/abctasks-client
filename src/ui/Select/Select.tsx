@@ -1,20 +1,56 @@
 import * as React from 'react';
-import cn from 'classnames';
+import {
+	FormControl,
+	InputLabel,
+	Select as MUISelect,
+	SelectProps as MUISelectProps,
+} from '@mui/material';
+import {
+	FieldValues,
+	useController,
+	UseControllerProps,
+	UseControllerReturn,
+} from 'react-hook-form';
 import { CommonProps } from '@/types';
 
-import styles from './Select.module.css';
-
-export interface SelectProps
+export interface SelectProps<FormValues extends FieldValues>
 	extends CommonProps,
-		React.SelectHTMLAttributes<HTMLSelectElement> {}
+		UseControllerProps<FormValues>,
+		Omit<MUISelectProps, keyof UseControllerProps | keyof UseControllerReturn> {
+	readonly label?: string;
+}
 
-export const Select = React.forwardRef<
-	HTMLSelectElement,
-	React.PropsWithChildren<SelectProps>
->(function Select({ className, children, ...select }, ref) {
+export const Select = <FormValues extends FieldValues>({
+	children,
+	control,
+	name,
+	defaultValue,
+	rules,
+	shouldUnregister,
+	label,
+	...select
+}: React.PropsWithChildren<SelectProps<FormValues>>) => {
+	const { field } = useController({
+		name,
+		control,
+		defaultValue,
+		rules,
+		shouldUnregister,
+	});
+	const { ref, ...controls } = field;
+	const labelId = React.useId();
+	const id = React.useId();
 	return (
-		<select className={cn(styles.select, className)} {...select} ref={ref}>
-			{children}
-		</select>
+		<FormControl>
+			<InputLabel id={labelId}>{label}</InputLabel>
+			<MUISelect
+				{...select}
+				{...controls}
+				labelId={labelId}
+				id={id}
+				inputRef={ref}>
+				{children}
+			</MUISelect>
+		</FormControl>
 	);
-});
+};

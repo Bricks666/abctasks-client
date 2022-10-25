@@ -9,10 +9,8 @@ import { BasePopupProps, CommonProps } from '@/types';
 import { useGetParam, useClosePopup } from '@/hooks';
 import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
-import { TaskForm, TaskFormValues } from '../TaskForm';
-
-import styles from './UpdateTaskPopup.module.css';
+import { TaskFormValues } from '../TaskForm';
+import { StyledForm, StyledSkeleton } from './styles';
 
 export interface UpdateTaskPopupProps extends CommonProps, BasePopupProps {}
 
@@ -53,10 +51,9 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	return (
 		<MainPopup {...props} onClose={onClose} header={t('task.updateTitle')}>
 			{loading ? (
-				<LoadingIndicator />
+				<StyledSkeleton />
 			) : (
-				<TaskForm
-					className={styles.form}
+				<StyledForm
 					onSubmit={onSubmit}
 					defaultValues={defaultValues}
 					buttonText={t('actions.save', { ns: 'common' })}

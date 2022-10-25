@@ -43,7 +43,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 		[roomId, columnStatus]
 	);
 
-	const isLoading = !tasks;
+	const loading = !tasks;
 
 	return (
 		<StyledWrapper
@@ -53,7 +53,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 			onDragOver={onDragOver}>
 			<TaskListHeader columnStatus={columnStatus}>{header}</TaskListHeader>
 			<StyledList spacing={1}>
-				{isLoading
+				{loading
 					? ui.EMPTY_ARRAYS[4].map(() => <SkeletonTaskCard />)
 					: tasks.map((task) => {
 							const group = groupMap ? groupMap[task.groupId] : null;

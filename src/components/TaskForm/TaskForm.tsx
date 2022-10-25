@@ -1,5 +1,5 @@
 import * as React from 'react';
-import cn from 'classnames';
+import { Box, Button, MenuItem, Skeleton } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@farfetched/react';
@@ -7,14 +7,11 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { getGroupsQuery } from '@/models/groups';
 import { statuses } from '@/models/tasks';
 import { CommonProps } from '@/types';
-import { Button } from '@/ui/Button';
 import { Select } from '@/ui/Select';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
+import { Field } from '@/ui/Field';
 import { validationScheme } from './validator';
-import { TextField } from '../TextField';
 import { TaskFormValues } from './types';
-
-import styles from './TaskForm.module.css';
+import { buttonSx, fieldSx, fromSx } from './styles';
 
 export interface TaskFormProps extends CommonProps {
 	readonly defaultValues: TaskFormValues;
@@ -26,53 +23,51 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 	const { buttonText, defaultValues, onSubmit, className } = props;
 	const { data: groups } = useQuery(getGroupsQuery);
 	const { t } = useTranslation('popups');
-	const { handleSubmit, formState, register } = useForm<TaskFormValues>({
+	const { handleSubmit, formState, control } = useForm<TaskFormValues>({
 		resolver: joiResolver(validationScheme),
 		defaultValues,
 	});
 	const groupsLoading = !groups;
 
-	const { isDirty, isSubmitting, errors } = formState;
+	const { isDirty, isSubmitting } = formState;
 	const disableButton = !isDirty || isSubmitting;
 
 	return (
-		<form
-			className={cn(styles.form, className)}
-			onSubmit={handleSubmit(onSubmit)}>
-			<div>
-				{groupsLoading ? (
-					<LoadingIndicator size='small' />
-				) : (
-					<Select {...register('groupId')}>
-						{/* TODO: Добавить загрузку */}
-						<option value={-1}>{t('none')}</option>
-						{groups?.map(({ id, name }) => (
-							<option value={id} key={id}>
-								{name}
-							</option>
-						))}
-					</Select>
-				)}
-			</div>
-
-			<Select {...register('status')}>
+		<Box
+			className={className}
+			onSubmit={handleSubmit(onSubmit)}
+			component='form'
+			sx={fromSx}>
+			{groupsLoading ? (
+				<Skeleton height='3em' />
+			) : (
+				<Select name='groupId' control={control} label={t(`task.group`)}>
+					<MenuItem value={-1}>{t('none')}</MenuItem>
+					{groups?.map(({ id, name }) => (
+						<MenuItem value={id} key={id}>
+							{name}
+						</MenuItem>
+					))}
+				</Select>
+			)}
+			<Select name='status' control={control} label={t(`task.status`)}>
 				{statuses.map((name) => (
-					<option value={name} key={name}>
+					<MenuItem value={name} key={name}>
 						{t(`statuses.${name}`, { ns: 'task' })}
-					</option>
+					</MenuItem>
 				))}
 			</Select>
-			<TextField
-				className={styles.textarea}
-				{...register('content')}
+			<Field
+				name='content'
+				control={control}
 				label={t('task.content')}
 				multiline
-				error={errors.content?.message}
 				disabled={isSubmitting}
+				sx={fieldSx}
 			/>
-			<Button className={styles.button} disabled={disableButton}>
+			<Button type='submit' disabled={disableButton} sx={buttonSx}>
 				{buttonText}
 			</Button>
-		</form>
+		</Box>
 	);
 });

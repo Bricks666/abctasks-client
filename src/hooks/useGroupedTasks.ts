@@ -15,7 +15,7 @@ const createGrouper = (status: TaskStatus) => {
 
 export const useGroupedTasks = () => {
 	const { data: tasks, ...rest } = useQuery(getTasksQuery);
-	console.debug(tasks);
+
 	const data = useMemo<GroupedByStatusTasks | null>(() => {
 		if (!tasks) {
 			return null;

@@ -17,7 +17,6 @@ export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('task');
 	const { data: tasks } = useGroupedTasks();
 	const { data: groupMap } = useGroupsMap();
-	console.debug(tasks, groupMap);
 	/*
 TODO: Пересмотреть распределение на колонки
 */

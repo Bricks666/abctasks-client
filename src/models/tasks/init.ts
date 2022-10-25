@@ -60,12 +60,12 @@ sample({
 });
 
 sample({
-	clock: tasksGate.state,
+	clock: tasksGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getTasksQuery.start,
 });
 
 sample({
-	clock: taskGate.state,
+	clock: taskGate.open,
 	target: getTaskQuery.start,
 });

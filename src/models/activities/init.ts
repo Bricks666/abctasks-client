@@ -31,7 +31,7 @@ sample({
 });
 
 sample({
-	clock: activityGate.state,
+	clock: activityGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getActivitiesQuery.start,
 });

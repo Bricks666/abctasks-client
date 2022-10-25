@@ -63,7 +63,7 @@ sample({
 });
 
 sample({
-	clock: groupsGate.state,
+	clock: groupsGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getGroupsQuery.start,
 });

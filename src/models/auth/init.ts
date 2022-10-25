@@ -54,6 +54,6 @@ sample({
 });
 
 sample({
-	clock: authGate.state,
+	clock: authGate.open,
 	target: authQuery.start,
 });

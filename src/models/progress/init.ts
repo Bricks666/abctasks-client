@@ -26,7 +26,7 @@ sample({
 });
 
 sample({
-	clock: progressGate.state,
+	clock: progressGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getProgressQuery.start,
 });

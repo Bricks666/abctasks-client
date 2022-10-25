@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { routes } from '@/const';
+import { BasePopupProps } from '@/types';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { CreateTaskPopup } from '../CreateTaskPopup';
 import { UpdateTaskPopup } from '../UpdateTaskPopup';
 import { GroupsPopup } from '../GroupsPopup';
 import { UpdateGroupPopup } from '../UpdateGroupPopup';
 import { CreateGroupPopup } from '../CreateGroupPopup';
-import { BasePopupProps } from '@/types';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { CreateRoomPopup } from '../CreateRoomPopup';
 import { usePopups } from './usePopups';
 import { UpdateRoomPopup } from '../UpdateRoomPopup';
@@ -25,14 +25,6 @@ const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
 export const Popups = () => {
 	const { mountedPopups, popups } = usePopups();
 
-	React.useEffect(() => {
-		if (mountedPopups.length) {
-			document.body.classList.add('popup_open');
-			return () => {
-				document.body.classList.remove('popup_open');
-			};
-		}
-	}, [mountedPopups.length]);
 	return (
 		<>
 			<Outlet />

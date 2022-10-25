@@ -35,13 +35,13 @@ sample({
 });
 
 sample({
-	clock: roomsGate.state,
+	clock: roomsGate.open,
 	fn: () => ({}),
 	target: getRoomsQuery.start,
 });
 
 sample({
-	clock: roomGate.state,
+	clock: roomGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getRoomQuery.start,
 });
