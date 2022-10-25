@@ -7,10 +7,9 @@ import {
 	UpdateGroupRequest,
 	RemoveGroupRequest,
 } from '@/api';
-import { StandardResponse } from '@/types/response';
+import { StandardResponse, InRoomRequest } from '@/types';
 import { attachWithAccessToken } from '../auth';
 import { Group } from './types';
-import { InRoomRequest } from '@/types/request';
 
 export const GroupsDomain = createDomain('GroupsDomain');
 

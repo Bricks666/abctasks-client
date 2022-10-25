@@ -5,7 +5,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { useMutation } from '@farfetched/react';
 import { createGroupMutation } from '@/models/groups';
 import { routes } from '@/const';
-import { BasePopupProps, CommonProps } from '@/types/common';
+import { BasePopupProps, CommonProps } from '@/types';
 import { MainPopup } from '@/ui/MainPopup';
 import { useClosePopup } from '@/hooks';
 import { GroupForm, GroupFormValues } from '../GroupForm';

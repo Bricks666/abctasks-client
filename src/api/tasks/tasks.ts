@@ -1,5 +1,5 @@
 import { fetcher } from '@/packages/request';
-import { StandardResponse } from '@/types/response';
+import { StandardResponse } from '@/types';
 import { Task } from '@/models/tasks';
 import {
 	GetTaskRequest,

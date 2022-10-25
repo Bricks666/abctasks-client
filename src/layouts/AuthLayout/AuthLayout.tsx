@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Container } from '@mui/material';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { StyledMain } from './styles';
 
 export interface AuthLayoutProps extends CommonProps {}

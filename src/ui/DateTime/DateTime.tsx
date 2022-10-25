@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 
 export interface DateTimeProps extends CommonProps {
 	readonly date: string | number | Date;

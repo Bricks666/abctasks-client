@@ -1,5 +1,4 @@
-import { Query } from '@/types/api';
-import { AddType } from '@/types/common';
+import { Query, AddType } from '@/types';
 
 export const prepareQuery = (
 	query: Query,

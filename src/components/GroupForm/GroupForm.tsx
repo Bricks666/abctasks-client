@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { TextField } from '@/components/TextField';
 import { Button } from '@/ui/Button';
 import { Stack } from '@/ui/Stack';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { GroupLabel } from '@/ui/GroupLabel';
 import { validatingScheme } from './validator';
 import { GroupFormValues } from './types';

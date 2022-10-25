@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { ExtractProps } from '@/types/common';
+import { ExtractProps } from '@/types';
 import { Draggable } from '../Draggable';
 import { TaskCard } from '../TaskCard';
 

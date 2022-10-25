@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { Group } from '@/models/groups';
 import { StyledTitle } from './styles';
 

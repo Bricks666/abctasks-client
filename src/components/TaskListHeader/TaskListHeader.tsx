@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 import { routes } from '@/const';
 import { usePrepareLink } from '@/hooks';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { EditMenu } from '../EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { TaskStatus } from '@/models/tasks/types';

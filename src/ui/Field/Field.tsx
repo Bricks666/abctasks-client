@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import * as React from 'react';
 import cn from 'classnames';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { Input } from '../Input';
 import { InputLabel } from '../InputLabel';
 import { Textarea } from '../Textarea';

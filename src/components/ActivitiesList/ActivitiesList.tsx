@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { useQuery } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { getActivitiesQuery } from '@/models/activities';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { ui } from '@/const';
 import { ActivityCard } from '../ActivityCard';
 import { SkeletonActivityCard } from '../SkeletonActivityCard';

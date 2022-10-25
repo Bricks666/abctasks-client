@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { VoidFunction } from '@/types/common';
+import { VoidFunction } from '@/types';
 
 export const useKeyListener = (
 	key: string,

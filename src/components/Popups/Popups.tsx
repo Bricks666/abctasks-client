@@ -6,7 +6,7 @@ import { UpdateTaskPopup } from '../UpdateTaskPopup';
 import { GroupsPopup } from '../GroupsPopup';
 import { UpdateGroupPopup } from '../UpdateGroupPopup';
 import { CreateGroupPopup } from '../CreateGroupPopup';
-import { BasePopupProps } from '@/types/common';
+import { BasePopupProps } from '@/types';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { CreateRoomPopup } from '../CreateRoomPopup';
 import { usePopups } from './usePopups';

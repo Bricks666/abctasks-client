@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Block } from '@/ui/Block';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { ProfileLink } from './ProfileLink';
 
 import styles from './Header.module.css';

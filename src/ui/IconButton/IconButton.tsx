@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { CommonProps } from '@/types/common';
-import { Size } from '@/types/ui';
+import { CommonProps, Size } from '@/types';
 import { BaseButton, BaseButtonProps } from '../BaseButton';
 
 import styles from './IconButton.module.css';

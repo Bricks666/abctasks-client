@@ -1,4 +1,4 @@
-import { VoidResponse, StandardResponse } from '@/types/response';
+import { VoidResponse, StandardResponse } from '@/types';
 import { AuthResponse, Tokens } from '@/models/auth';
 import { fetcher } from '@/packages/request';
 import { LoginRequest, RegistrationRequest } from './types';

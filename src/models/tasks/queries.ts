@@ -5,7 +5,7 @@ import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
-} from '@/types/response';
+} from '@/types';
 import { Task, task } from './types';
 import {
 	createTaskFx,

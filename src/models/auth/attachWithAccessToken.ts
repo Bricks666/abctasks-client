@@ -3,7 +3,7 @@ import { Effect, Store } from 'effector';
 import { attach, createDomain, sample } from 'effector-logger';
 import { AccessOptions, StandardFailError } from '@/packages/request';
 import { $AccessToken } from './units';
-import { StandardResponse } from '@/types/response';
+import { StandardResponse } from '@/types';
 import { Tokens } from './types';
 import { authApi } from '@/api';
 

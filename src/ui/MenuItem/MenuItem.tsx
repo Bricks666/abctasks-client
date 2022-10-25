@@ -5,7 +5,7 @@ import {
 	MenuItem as MenuItemMUI,
 } from '@mui/material';
 import { To, Link } from 'react-router-dom';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 
 export interface BaseMenuOption {
 	readonly label: string;

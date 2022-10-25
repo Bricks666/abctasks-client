@@ -1,6 +1,6 @@
 import { Progress } from '@/models/progress';
 import { fetcher } from '@/packages/request';
-import { StandardResponse } from '@/types/response';
+import { StandardResponse } from '@/types';
 
 const progressFetcher = fetcher.create({
 	baseURL: 'progress',

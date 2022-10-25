@@ -11,7 +11,7 @@ import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
-} from '@/types/response';
+} from '@/types';
 import { Group, group } from './types';
 import {
 	createGroupFx,

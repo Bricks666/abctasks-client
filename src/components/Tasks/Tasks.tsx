@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TaskStatus, Task } from '@/models/tasks/types';
 import { useGroupedTasks, useGroupsMap } from '@/hooks';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { TasksList } from '../TasksList';
 import { StyledWrapper } from './styles';
 

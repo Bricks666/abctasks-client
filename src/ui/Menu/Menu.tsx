@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps, ExtractProps } from '@/types/common';
+import { CommonProps, ExtractProps } from '@/types';
 import { List } from '../List';
 import { Popover } from '../Popover';
 

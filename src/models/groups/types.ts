@@ -1,5 +1,5 @@
 import { Record, Number, String, Static } from 'runtypes';
-import { hex } from '@/types/common';
+import { hex } from '@/types';
 
 export const group = Record({
 	id: Number,

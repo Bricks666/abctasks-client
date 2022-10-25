@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 
 export interface GridItemProps extends CommonProps {
 	readonly columnCount?: number | string;

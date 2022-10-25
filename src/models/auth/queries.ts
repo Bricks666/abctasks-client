@@ -8,7 +8,7 @@ import {
 	StandardSuccessResponse,
 	voidResponse,
 	VoidResponse,
-} from '@/types/response';
+} from '@/types';
 import { authFx, loginFx, logoutFx, registrationFx } from './units';
 import { authResponse, AuthResponse } from './types';
 import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';

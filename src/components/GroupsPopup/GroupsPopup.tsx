@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { getGroupsQuery, removeGroupMutation } from '@/models/groups';
 import { useClosePopup, usePrepareLink } from '@/hooks';
-import { BasePopupProps, CommonProps, ID } from '@/types/common';
+import { BasePopupProps, CommonProps, ID } from '@/types';
 import { GroupLabel } from '@/ui/GroupLabel';
 import { List } from '@/ui/List';
 import { ListItem } from '@/ui/ListItem';

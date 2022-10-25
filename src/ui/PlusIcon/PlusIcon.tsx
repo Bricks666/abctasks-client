@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { SvgIcon } from '../SvgIcon';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 
 import styles from './PlusIcon.module.css';
 

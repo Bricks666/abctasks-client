@@ -5,7 +5,7 @@ import { useGate } from 'effector-react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { getTaskQuery, taskGate, updateTaskMutation } from '@/models/tasks';
-import { BasePopupProps, CommonProps } from '@/types/common';
+import { BasePopupProps, CommonProps } from '@/types';
 import { useGetParam, useClosePopup } from '@/hooks';
 import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';

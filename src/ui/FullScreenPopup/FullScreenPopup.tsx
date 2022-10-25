@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps, VoidFunction } from '@/types/common';
+import { CommonProps, VoidFunction } from '@/types';
 import { Block } from '../Block';
 import { Collapse } from '../Collapse';
 import { PopupContent } from '../PopupContent';

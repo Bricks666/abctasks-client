@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation } from '@farfetched/react';
 import { usePrepareLink } from '@/hooks';
 import { removeTaskMutation, Task } from '@/models/tasks';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { routes } from '@/const';
 import { GroupLabel } from '@/ui/GroupLabel';
 import { MenuOption } from '@/ui/MenuItem';

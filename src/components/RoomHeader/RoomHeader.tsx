@@ -7,7 +7,7 @@ import { usePrepareLink } from '@/hooks';
 import { routes } from '@/const';
 import { EditMenu } from '../EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { StyledWrapper } from './styled';
 
 const titleSx: SxProps = {

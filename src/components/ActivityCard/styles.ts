@@ -1,5 +1,5 @@
 import { Avatar, AvatarProps, Card, CardContent, styled } from '@mui/material';
-import { Color } from '@/types/ui';
+import { Color } from '@/types';
 
 export const StyledCard = styled(Card)`
 	overflow: unset;

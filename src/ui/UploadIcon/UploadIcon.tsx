@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { SvgIcon } from '../SvgIcon';
 
 import styles from './UploadIcon.module.css';

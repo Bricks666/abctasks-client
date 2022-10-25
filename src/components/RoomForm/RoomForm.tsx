@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { TextField } from '../TextField';
 import { Button } from '@/ui/Button';
 import { validatingScheme } from './validator';

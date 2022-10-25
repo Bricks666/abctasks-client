@@ -6,7 +6,7 @@ import { useQuery } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { getGroupsQuery } from '@/models/groups';
 import { statuses } from '@/models/tasks';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { Button } from '@/ui/Button';
 import { Select } from '@/ui/Select';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';

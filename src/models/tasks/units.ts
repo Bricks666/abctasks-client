@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { createGate } from 'effector-react';
-import { StandardResponse } from '@/types/response';
+import { StandardResponse, InRoomRequest } from '@/types';
 import { Task } from './types';
 import {
 	GetTaskRequest,
@@ -11,7 +11,6 @@ import {
 } from '@/api';
 import { StandardFailError } from '@/packages/request';
 import { attachWithAccessToken } from '../auth';
-import { InRoomRequest } from '@/types/request';
 
 export const TasksDomain = createDomain('TasksDomain');
 

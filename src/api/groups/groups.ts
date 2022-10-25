@@ -1,6 +1,6 @@
 import { fetcher } from '@/packages/request';
 import { Group } from '@/models/groups';
-import { StandardResponse } from '@/types/response';
+import { StandardResponse } from '@/types';
 import {
 	CreateGroupRequest,
 	UpdateGroupRequest,

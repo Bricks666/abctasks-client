@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { routes } from '@/const';
 import { i18n } from '@/i18n';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { Block } from '@/ui/Block';
 import { List } from '@/ui/List';
 import { ListItem } from '@/ui/ListItem';

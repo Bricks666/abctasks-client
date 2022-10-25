@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AddType } from '@/types/common';
+import { AddType, Query } from '@/types';
 import { usePrepareLink } from './usePrepareLink';
-import { Query } from '@/types/api';
 
 export const useClosePopup = (...keys: string[]) => {
 	const navigate = useNavigate();

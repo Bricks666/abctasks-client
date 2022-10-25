@@ -2,8 +2,7 @@ import * as React from 'react';
 import { IconButton, Menu } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useToggle } from '@/hooks';
-import { CommonProps } from '@/types/common';
-import { Size } from '@/types/ui';
+import { CommonProps, Size } from '@/types';
 import { MenuOption, MenuItem } from '@/ui/MenuItem';
 
 export interface EditMenuComponent extends CommonProps {

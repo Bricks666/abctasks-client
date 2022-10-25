@@ -7,7 +7,7 @@ import { EditMenu } from '../EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
 import { routes } from '@/const';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 
 import styles from './RoomsHeader.module.css';
 

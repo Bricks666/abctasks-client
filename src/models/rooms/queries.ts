@@ -12,7 +12,7 @@ import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse,
-} from '@/types/response';
+} from '@/types';
 import { room, Room } from './types';
 import {
 	createRoomFx,

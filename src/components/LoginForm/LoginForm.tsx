@@ -8,7 +8,7 @@ import { LoginRequest } from '@/api';
 import { loginMutation } from '@/models/auth';
 import { Checkbox } from '../Checkbox';
 import { validationSchema } from './validator';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { StyledWrapper } from './styles';
 
 const initialValue: LoginRequest = {

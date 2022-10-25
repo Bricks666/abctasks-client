@@ -4,7 +4,7 @@ import React, {
 	FocusEventHandler,
 	forwardRef,
 } from 'react';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 
 import styles from './Textarea.module.css';
 

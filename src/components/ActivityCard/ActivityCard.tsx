@@ -5,8 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 import { Activity, ActivityType } from '@/models/activities';
-import { Color } from '@/types/ui';
-import { CommonProps } from '@/types/common';
+import { Color, CommonProps } from '@/types';
 import { DateTime } from '@/ui/DateTime';
 import { StyledAvatar, StyledCard, StyledCardContent } from './styles';
 

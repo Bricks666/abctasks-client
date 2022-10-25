@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { getProgressQuery } from '@/models/progress';
 import { useGroupsMap } from '@/hooks';
 import { ui } from '@/const';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { TaskProgress } from '../TaskProgress';
 import { SkeletonTaskProgress } from '../SkeletonTaskProgress';
 import { StyledList, StyledWrapper, titleSx } from './styles';

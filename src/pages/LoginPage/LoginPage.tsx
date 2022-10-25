@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { $IsAuth } from '@/models/auth';
 import { usePageTitle } from '@/hooks';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import { LoginForm } from '@/components/LoginForm';
 import { StyledLink } from './styles';

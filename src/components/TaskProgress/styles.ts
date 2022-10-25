@@ -4,7 +4,7 @@ import {
 	styled,
 	Typography,
 } from '@mui/material';
-import { HEX } from '@/types/common';
+import { HEX } from '@/types';
 
 export const StyledLegend = styled(Typography)`
 	display: flex;

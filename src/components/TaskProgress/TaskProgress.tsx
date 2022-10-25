@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Progress } from '@/models/progress/types';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { StyledLegend, StyledProgress } from './styles';
 import { Group } from '@/models/groups';
 

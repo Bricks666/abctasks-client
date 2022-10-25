@@ -4,7 +4,7 @@ import { useMutation } from '@farfetched/react';
 import { TaskStatus, Task, updateTaskMutation } from '@/models/tasks';
 import { GroupsMap } from '@/models/groups';
 import { ui } from '@/const';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { TaskListHeader } from '../TaskListHeader';
 import { TaskCard } from '../TaskCard';
 import { SkeletonTaskCard } from '../SkeletonTaskCard';

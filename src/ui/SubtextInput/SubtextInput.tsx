@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { Text } from '../Text';
 
 import styles from './SubtextInput.module.css';

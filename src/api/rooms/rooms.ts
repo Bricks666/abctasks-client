@@ -1,4 +1,4 @@
-import { StandardResponse } from '@/types/response';
+import { StandardResponse } from '@/types';
 import { Room } from '@/models/rooms';
 import { AccessOptions, fetcher } from '@/packages/request';
 import {

@@ -7,7 +7,7 @@ import { useStore } from 'effector-react';
 import { $IsAuth, registrationMutation } from '@/models/auth';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import { RegistrationForm } from '@/components/RegistrationForm';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { usePageTitle } from '@/hooks';
 import { StyledLink } from './styles';
 

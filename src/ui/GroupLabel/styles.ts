@@ -1,5 +1,5 @@
 import { styled, Typography } from '@mui/material';
-import { HEX } from '@/types/common';
+import { HEX } from '@/types';
 
 interface StyledTitleProps {
 	readonly mainColor: HEX;

@@ -1,7 +1,6 @@
 import { Location } from 'react-router-dom';
-import { Query } from '@/types/api';
+import { Query, AddType } from '@/types';
 import { prepareQuery } from './prepareQuery';
-import { AddType } from '@/types/common';
 
 export interface PrepareLinkParams {
 	readonly path?: string;

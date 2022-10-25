@@ -8,10 +8,9 @@ import {
 	RemoveRoomRequest,
 	UpdateRoomRequest,
 } from '@/api';
-import { StandardResponse } from '@/types/response';
+import { StandardResponse, InRoomRequest } from '@/types';
 import { Room } from './types';
 import { attachWithAccessToken } from '../auth';
-import { InRoomRequest } from '@/types/request';
 
 export const RoomsDomain = createDomain('RoomsDomain');
 

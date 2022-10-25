@@ -13,7 +13,7 @@ import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
 import { routes } from '@/const';
 import { Button } from '@/ui/Button';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 
 import styles from './RoomCard.module.css';
 

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { SubmitHandler } from 'react-hook-form';
 import { updateGroupMutation } from '@/models/groups';
 import { routes } from '@/const';
-import { BasePopupProps, CommonProps } from '@/types/common';
+import { BasePopupProps, CommonProps } from '@/types';
 import { MainPopup } from '@/ui/MainPopup';
 import { useClosePopup, useGetParam, useGroupsMap } from '@/hooks';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';

@@ -2,7 +2,7 @@
 import { createDomain } from 'effector-logger';
 import { createGate } from 'effector-react';
 import { LoginRequest, RegistrationRequest } from '@/api';
-import { StandardResponse, VoidResponse } from '@/types/response';
+import { StandardResponse, VoidResponse } from '@/types';
 import { AuthResponse, User } from './types';
 
 export const Auth = createDomain('AuthDomain');

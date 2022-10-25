@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './app';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { theme } from './types/styles';
+import { theme } from '@/types';
 import './models/init';
 import './i18n';
 

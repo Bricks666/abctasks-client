@@ -5,7 +5,7 @@ import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { createTaskMutation, TaskStatus } from '@/models/tasks';
 import { useGetParam, useClosePopup } from '@/hooks';
-import { BasePopupProps, CommonProps } from '@/types/common';
+import { BasePopupProps, CommonProps } from '@/types';
 import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
 import { TaskForm, TaskFormValues } from '../TaskForm';

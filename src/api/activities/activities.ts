@@ -1,7 +1,6 @@
 import { ErrorHandlerParams } from '@/packages/eventSource';
 import { fetcher } from '@/packages/request';
-import { ID } from '@/types/common';
-import { ActivityResponse, StandardResponse } from '@/types/response';
+import { ID, ActivityResponse, StandardResponse } from '@/types';
 import { sseListener } from '../instance';
 import { Activity } from '@/models/activities/types';
 

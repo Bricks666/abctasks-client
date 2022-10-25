@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { CommonProps } from '@/types/common';
-import { Color, Size } from '@/types/ui';
+import { CommonProps, Color, Size } from '@/types';
 import { BaseButton, BaseButtonProps } from '../BaseButton';
 import { Text } from '../Text';
 

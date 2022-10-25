@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation } from '@farfetched/react';
 import { RegistrationRequest } from '@/api';
 import { registrationMutation } from '@/models/auth';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { validationSchema } from './validator';
 import { StyledForm } from './styles';
 

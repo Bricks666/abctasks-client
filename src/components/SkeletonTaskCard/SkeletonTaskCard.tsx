@@ -7,7 +7,7 @@ import {
 	Skeleton,
 	Typography,
 } from '@mui/material';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { SkeletonGroupLabel } from '../SkeletonGroupLabel';
 
 export interface SkeletonTaskCardProps extends CommonProps {

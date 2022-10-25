@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Avatar, Skeleton } from '@mui/material';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 import { StyledBlock, StyledCard, StyledCardContent } from './styles';
 
 export interface SkeletonActivityCardProps extends CommonProps {}

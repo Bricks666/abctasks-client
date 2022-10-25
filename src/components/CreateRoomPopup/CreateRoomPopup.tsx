@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { createRoomMutation } from '@/models/rooms';
 import { routes } from '@/const';
 import { useClosePopup } from '@/hooks';
-import { BasePopupProps } from '@/types/common';
+import { BasePopupProps } from '@/types';
 import { MainPopup } from '@/ui/MainPopup';
 import { RoomForm, RoomFormValues } from '../RoomForm';
 

@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@farfetched/react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { getRoomQuery, roomGate, updateRoomMutation } from '@/models/rooms';
-import { BasePopupProps } from '@/types/common';
+import { BasePopupProps } from '@/types';
 import { useGetParam, useClosePopup } from '@/hooks';
 import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';

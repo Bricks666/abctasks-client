@@ -1,5 +1,5 @@
 import { AccessOptions } from '@/packages/request';
-import { HEX } from '@/types/common';
+import { HEX } from '@/types';
 
 export interface CreateGroupRequest extends Required<AccessOptions> {
 	readonly roomId: number;
