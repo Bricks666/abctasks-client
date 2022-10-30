@@ -41,7 +41,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	const defaultValues = React.useMemo<TaskFormValues>(
 		() => ({
 			content: task?.content || '',
-			groupId: task?.groupId || -1,
+			groupId: task?.groupId || 0,
 			status: task?.status || 'ready',
 		}),
 		[task]

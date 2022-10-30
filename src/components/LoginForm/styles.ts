@@ -1,13 +1,9 @@
-import { styled } from '@mui/material';
+import { styled, SxProps } from '@mui/material';
 
 export const StyledWrapper = styled('form')`
 	display: grid;
 	grid-template-columns: var(--login-form-template-columns);
 	gap: 10px;
-
-	.field {
-		grid-column: var(--login-form-field-column);
-	}
 
 	@media (min-width: 600px) {
 		--login-form-template-columns: max-content 1fr;
@@ -19,3 +15,7 @@ export const StyledWrapper = styled('form')`
 		--login-form-field-column: 1;
 	}
 `;
+
+export const fieldSx: SxProps = {
+	gridColumn: 'var(--login-form-field-column)',
+};

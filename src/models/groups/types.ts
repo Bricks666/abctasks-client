@@ -12,5 +12,5 @@ export const group = Record({
 export interface Group extends Static<typeof group> {}
 
 export interface GroupsMap {
-	[id: number]: Group;
+	[id: number]: Group | undefined;
 }

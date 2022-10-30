@@ -1,4 +1,5 @@
 import { sample } from 'effector';
+import { tasksApi } from '@/api';
 import {
 	getTasksFx,
 	getTaskFx,
@@ -8,7 +9,6 @@ import {
 	tasksGate,
 	taskGate,
 } from './units';
-import { tasksApi } from '@/api';
 import {
 	createTaskMutation,
 	getTaskQuery,

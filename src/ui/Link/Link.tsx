@@ -10,7 +10,7 @@ import styles from './Link.module.css';
 
 type LinkType = 'common' | 'react';
 
-export interface LinkProps extends CommonProps, Readonly<ReactLinkProps> {
+export interface LinkProps extends CommonProps, ReactLinkProps {
 	readonly type: LinkType;
 	readonly to: string;
 }

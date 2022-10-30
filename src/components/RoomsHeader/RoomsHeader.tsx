@@ -14,7 +14,7 @@ import styles from './RoomsHeader.module.css';
 export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('rooms');
 	const createLink = usePrepareLink({
-		addQuery: {
+		query: {
 			[routes.GET_PARAMS.popup]: routes.POPUPS.createRoom,
 		},
 	});

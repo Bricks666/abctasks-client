@@ -19,8 +19,6 @@ export default defineConfig({
 	},
 	css: {
 		devSourcemap: true,
-		modules: {},
-		postcss: {},
 	},
 	logLevel: 'error',
 	plugins: [

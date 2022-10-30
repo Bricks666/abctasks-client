@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { StyledWrapper } from './styles';
+
+import styles from './TemplateNamePage.module.css';
 
 const TemplateNamePage: React.FC = () => {
-	return <StyledWrapper>{null}</StyledWrapper>;
+	return null;
 };
 
 export default TemplateNamePage;

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TaskStatus, Task } from '@/models/tasks/types';
-import { useGroupedTasks, useGroupsMap } from '@/hooks';
+import { useGroupedTasks } from '@/hooks';
 import { CommonProps } from '@/types';
 import { TasksList } from '../TasksList';
 import { StyledWrapper } from './styles';
@@ -16,7 +16,6 @@ export interface Column {
 export const Tasks: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('task');
 	const { data: tasks } = useGroupedTasks();
-	const { data: groupMap } = useGroupsMap();
 	/*
 TODO: Пересмотреть распределение на колонки
 */
@@ -51,7 +50,6 @@ TODO: Пересмотреть распределение на колонки
 			{columns.map(({ headerCode, status, tasks }) => (
 				<TasksList
 					tasks={tasks}
-					groupMap={groupMap}
 					columnStatus={status}
 					header={t(`statuses.${headerCode}`)}
 					key={headerCode}

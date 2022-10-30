@@ -1,27 +1,30 @@
 import * as React from 'react';
+import {
+	Button,
+	IconButton,
+	List,
+	ListItem,
+	ListItemSecondaryAction,
+	Skeleton,
+	Stack,
+} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { getGroupsQuery, removeGroupMutation } from '@/models/groups';
 import { useClosePopup, usePrepareLink } from '@/hooks';
-import { BasePopupProps, CommonProps, ID } from '@/types';
+import { BasePopupProps, CommonProps } from '@/types';
+import { routes, ui } from '@/const';
 import { GroupLabel } from '@/ui/GroupLabel';
-import { List } from '@/ui/List';
-import { ListItem } from '@/ui/ListItem';
-import { ListItemSecondaryAction } from '@/ui/ListItemSecondaryAction';
-import { Button } from '@/ui/Button';
-import { IconButton } from '@/ui/IconButton';
-import { RemoveIcon } from '@/ui/RemoveIcon';
-import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
-import { Stack } from '@/ui/Stack';
-import { EditIcon } from '@/ui/EditIcon';
 
 import styles from './GroupsPopup.module.css';
 
 export interface GroupsPopupProps extends CommonProps, BasePopupProps {}
 
-const createEditLink = (path: string, groupId: ID): string => {
+const createEditLink = (path: string, groupId: number | string): string => {
 	return `${path}&${routes.GET_PARAMS.groupId}=${groupId}`;
 };
 
@@ -43,6 +46,33 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 		keepOldQuery: true,
 	});
 
+	const items = groups
+		? groups.map((group) => (
+				<ListItem key={group.id}>
+					<GroupLabel {...group} />
+					<ListItemSecondaryAction>
+						<IconButton
+							component={Link}
+							to={createEditLink(updateGroup, group.id)}
+							title={t('actions.update', { ns: 'common' })}>
+							<EditIcon />
+						</IconButton>
+						<IconButton
+							onClick={() =>
+								removeGroup.start({ id: group.id, roomId: group.roomId })
+							}
+							title={t('actions.remove', { ns: 'common' })}>
+							<DeleteIcon />
+						</IconButton>
+					</ListItemSecondaryAction>
+				</ListItem>
+		  ))
+		: ui.EMPTY_ARRAYS[4].map((_, i) => (
+				<ListItem key={i}>
+					<Skeleton width='100%' height='1rem + 4px' />
+				</ListItem>
+		  ));
+
 	return (
 		<MainPopup
 			{...props}
@@ -53,28 +83,7 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 				<Button component={Link} to={createGroup} type='text'>
 					{t('actions.create', { ns: 'common' })}
 				</Button>
-				<List className={styles.list}>
-					{groups?.map((group) => (
-						<ListItem key={group.id}>
-							<GroupLabel {...group} />
-							<ListItemSecondaryAction>
-								<IconButton
-									component={Link}
-									to={createEditLink(updateGroup, group.id)}
-									title={t('actions.update', { ns: 'common' })}>
-									<EditIcon />
-								</IconButton>
-								<IconButton
-									onClick={() =>
-										removeGroup.start({ id: group.id, roomId: group.roomId })
-									}
-									title={t('actions.remove', { ns: 'common' })}>
-									<RemoveIcon />
-								</IconButton>
-							</ListItemSecondaryAction>
-						</ListItem>
-					))}
-				</List>
+				<List className={styles.list}>{items}</List>
 			</Stack>
 		</MainPopup>
 	);

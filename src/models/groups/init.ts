@@ -13,7 +13,9 @@ import {
 	removeGroupBaseFx,
 	updateGroupBaseFx,
 	groupsGate,
+	$GroupsMap,
 } from './units';
+import { createGroupsMap } from './utils';
 
 getGroupsFx.use(groupsApi.getAll);
 createGroupBaseFx.use(groupsApi.create);
@@ -66,4 +68,10 @@ sample({
 	clock: groupsGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getGroupsQuery.start,
+});
+
+sample({
+	source: getGroupsQuery.$data,
+	fn: (data) => (data ? createGroupsMap(data) : {}),
+	target: $GroupsMap,
 });

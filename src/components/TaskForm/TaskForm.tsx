@@ -7,11 +7,11 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { getGroupsQuery } from '@/models/groups';
 import { statuses } from '@/models/tasks';
 import { CommonProps } from '@/types';
-import { Select } from '@/ui/Select';
 import { Field } from '@/ui/Field';
 import { validationScheme } from './validator';
 import { TaskFormValues } from './types';
 import { buttonSx, fieldSx, fromSx } from './styles';
+import { GroupLabel } from '@/ui/GroupLabel';
 
 export interface TaskFormProps extends CommonProps {
 	readonly defaultValues: TaskFormValues;
@@ -41,22 +41,21 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 			{groupsLoading ? (
 				<Skeleton height='3em' />
 			) : (
-				<Select name='groupId' control={control} label={t(`task.group`)}>
-					<MenuItem value={-1}>{t('none')}</MenuItem>
-					{groups?.map(({ id, name }) => (
-						<MenuItem value={id} key={id}>
-							{name}
+				<Field name='groupId' control={control} label={t(`task.group`)} select>
+					{groups?.map((group) => (
+						<MenuItem value={group.id} key={group.id}>
+							<GroupLabel {...group} />
 						</MenuItem>
 					))}
-				</Select>
+				</Field>
 			)}
-			<Select name='status' control={control} label={t(`task.status`)}>
+			<Field name='status' control={control} label={t(`task.status`)} select>
 				{statuses.map((name) => (
 					<MenuItem value={name} key={name}>
 						{t(`statuses.${name}`, { ns: 'task' })}
 					</MenuItem>
 				))}
-			</Select>
+			</Field>
 			<Field
 				name='content'
 				control={control}

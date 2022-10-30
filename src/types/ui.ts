@@ -6,3 +6,7 @@ export type Color =
 	| 'error'
 	| 'warning'
 	| 'dark';
+
+export interface BasePopupProps {
+	readonly isOpen: boolean;
+}

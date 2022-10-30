@@ -6,7 +6,7 @@ import styles from './Picture.module.css';
 
 export interface PictureProps
 	extends CommonProps,
-		Readonly<React.ImgHTMLAttributes<HTMLImageElement>> {
+		React.ImgHTMLAttributes<HTMLImageElement> {
 	readonly alt: string;
 	readonly src: string;
 }

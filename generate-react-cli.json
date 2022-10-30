@@ -8,27 +8,31 @@
 			"customTemplates": {
 				"index": "templates/component/index.ts",
 				"component": "templates/component/TemplateName.tsx",
-				"style": "templates/component/styles.ts"
+				"style": "templates/component/TemplateName.module.css",
+				"styletsd": "templates/component/TemplateName.module.css.d.ts"
 			},
 			"path": "src/components",
 			"withStyle": true,
 			"withTest": false,
 			"withStory": false,
 			"withLazy": false,
-			"withIndex": true
+			"withIndex": true,
+			"withStyletsd": true
 		},
 		"page": {
 			"customTemplates": {
 				"component": "templates/page/TemplateNamePage.tsx",
-				"style": "templates/page/styles.ts",
-				"index": "templates/page/index.ts"
+				"index": "templates/page/index.ts",
+				"style": "templates/page/TemplateNamePage.module.css",
+				"styletsd": "templates/page/TemplateNamePage.module.css.d.ts"
 			},
 			"path": "src/pages",
 			"withStyle": true,
 			"withTest": false,
 			"withStory": false,
 			"withLazy": false,
-			"withIndex": true
+			"withIndex": true,
+			"withStyletsd": true
 		}
 	}
 }

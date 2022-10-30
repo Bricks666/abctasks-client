@@ -9,5 +9,5 @@ export { useToggle } from './useToggle';
 export { useAnyPopupOpen } from './useAnyPopupOpen';
 export { useImageURL } from './useImageURL';
 export { useImminentlyQuery } from './useImminentlyQuery';
-export { useGroupsMap } from './useGroupsMap';
 export { useExtendedQuery } from './useExtendedQuery';
+export { useGroup } from './useGroup';

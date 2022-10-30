@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
 import { LoginRequest } from '@/api';
 import { loginMutation } from '@/models/auth';
+import { CommonProps } from '@/types';
+import { Field } from '@/ui/Field';
 import { Checkbox } from '../Checkbox';
 import { validationSchema } from './validator';
-import { CommonProps } from '@/types';
-import { StyledWrapper } from './styles';
+import { fieldSx, StyledWrapper } from './styles';
 
 const initialValue: LoginRequest = {
 	login: '',
@@ -20,11 +21,11 @@ const initialValue: LoginRequest = {
 export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('login');
 	const login = useMutation(loginMutation);
-	const { register, handleSubmit, formState } = useForm<LoginRequest>({
+	const { handleSubmit, formState, control } = useForm<LoginRequest>({
 		defaultValues: initialValue,
 		resolver: joiResolver(validationSchema),
 	});
-	const { isDirty, isSubmitting, errors } = formState;
+	const { isDirty, isSubmitting } = formState;
 	const onSubmit = React.useCallback<SubmitHandler<LoginRequest>>(
 		async (values) => {
 			login.start(values);
@@ -34,25 +35,27 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 
 	return (
 		<StyledWrapper className={className} onSubmit={handleSubmit(onSubmit)}>
-			<TextField
-				className='field'
+			<Field
+				name='login'
+				control={control}
 				label={t('fields.login')}
 				disabled={isSubmitting}
-				helperText={errors.login?.message}
-				error={!!errors.login}
-				{...register('login')}
+				sx={fieldSx}
 			/>
 
-			<TextField
-				className='field'
+			<Field
+				name='password'
+				control={control}
 				label={t('fields.password')}
 				type='password'
 				disabled={isSubmitting}
-				helperText={errors.password?.message}
-				error={!!errors.login}
-				{...register('password')}
+				sx={fieldSx}
 			/>
-			<Checkbox {...register('rememberMe')} label={t('fields.remember')} />
+			<Checkbox
+				name='rememberMe'
+				control={control}
+				label={t('fields.remember')}
+			/>
 			<Button
 				type='submit'
 				disabled={!isDirty || isSubmitting}

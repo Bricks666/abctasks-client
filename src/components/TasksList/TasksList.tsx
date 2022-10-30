@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
 import { TaskStatus, Task, updateTaskMutation } from '@/models/tasks';
-import { GroupsMap } from '@/models/groups';
 import { ui } from '@/const';
 import { CommonProps } from '@/types';
 import { TaskListHeader } from '../TaskListHeader';
@@ -13,7 +12,6 @@ import { StyledList, StyledWrapper } from './styles';
 export interface TasksListProps extends CommonProps {
 	readonly tasks: Task[] | null;
 	readonly columnStatus: TaskStatus;
-	readonly groupMap: GroupsMap | null;
 	readonly header?: string;
 }
 const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
@@ -24,7 +22,6 @@ export const TasksList: React.FC<TasksListProps> = ({
 	className,
 	columnStatus,
 	header,
-	groupMap,
 }) => {
 	const { id: roomId } = useParams();
 	const moveTask = useMutation(updateTaskMutation);
@@ -55,10 +52,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 			<StyledList spacing={1}>
 				{loading
 					? ui.EMPTY_ARRAYS[4].map(() => <SkeletonTaskCard />)
-					: tasks.map((task) => {
-							const group = groupMap ? groupMap[task.groupId] : null;
-							return <TaskCard {...task} group={group} key={task.id} />;
-					  })}
+					: tasks.map((task) => <TaskCard {...task} key={task.id} />)}
 			</StyledList>
 		</StyledWrapper>
 	);

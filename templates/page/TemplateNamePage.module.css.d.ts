@@ -1,4 +1,4 @@
 declare const styles: {
-	readonly form: string;
+  readonly "templateName": string;
 };
 export = styles;

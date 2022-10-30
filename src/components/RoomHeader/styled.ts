@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { styled, SxProps } from '@mui/material';
 
 export const StyledWrapper = styled('header')`
 	display: grid;
@@ -8,3 +8,7 @@ export const StyledWrapper = styled('header')`
 
 	padding: 2rem 0;
 `;
+
+export const titleSx: SxProps = {
+	fontWeight: 700,
+};

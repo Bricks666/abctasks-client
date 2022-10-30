@@ -5,8 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { getActivitiesQuery } from '@/models/activities';
 import { CommonProps } from '@/types';
 import { ui } from '@/const';
-import { ActivityCard } from '../ActivityCard';
-import { SkeletonActivityCard } from '../SkeletonActivityCard';
+import { ActivityCard } from './ActivityCard';
+import { SkeletonActivityCard } from './SkeletonActivityCard';
+
 import { StyledList, StyledWrapper, titleSx } from './styles';
 
 export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
@@ -21,7 +22,7 @@ export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 			</Typography>
 			<StyledList spacing={1}>
 				{isLoading
-					? ui.EMPTY_ARRAYS[4].map(() => <SkeletonActivityCard />)
+					? ui.EMPTY_ARRAYS[4].map((_, i) => <SkeletonActivityCard key={i} />)
 					: activities
 							.slice(0, 10)
 							.map((activity) => (

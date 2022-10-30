@@ -4,12 +4,12 @@ import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler } from 'react-hook-form';
 import { updateGroupMutation } from '@/models/groups';
+import { useClosePopup, useGetParam, useGroup } from '@/hooks';
 import { routes } from '@/const';
 import { BasePopupProps, CommonProps } from '@/types';
 import { MainPopup } from '@/ui/MainPopup';
-import { useClosePopup, useGetParam, useGroupsMap } from '@/hooks';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { GroupForm, GroupFormValues } from '../GroupForm';
+import { SkeletonGroupForm } from '../SkeletonGroupForm';
 
 import styles from './UpdateGroupPopup.module.css';
 
@@ -20,15 +20,14 @@ export const UpdateGroupPopup: React.FC<
 > = (props) => {
 	const { t } = useTranslation('popups');
 	const { id: roomId } = useParams();
-	const id = Number(useGetParam(routes.GET_PARAMS.groupId));
-	const { data: groups } = useGroupsMap();
-	const group = groups?.[id] || null;
+	const id = useGetParam(routes.GET_PARAMS.groupId);
+	const group = useGroup(Number(id));
 	const updateGroup = useMutation(updateGroupMutation);
 	const onClose = useClosePopup(
 		routes.GET_PARAMS.groupId,
 		routes.POPUPS.updateGroup
 	);
-	const isLoading = !group;
+	const isLoading = !group && id !== null;
 
 	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(
 		(values) => {
@@ -58,7 +57,7 @@ export const UpdateGroupPopup: React.FC<
 			header={t('group.updateTitle')}
 			alt={t('group.updateTitle')}>
 			{isLoading ? (
-				<LoadingIndicator />
+				<SkeletonGroupForm className={styles.form} />
 			) : (
 				<GroupForm
 					className={styles.form}

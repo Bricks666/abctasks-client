@@ -1,5 +1,5 @@
 declare const styles: {
-	readonly form: string;
+	readonly wrapper: string;
 	readonly input: string;
 	readonly colorInput: string;
 	readonly button: string;

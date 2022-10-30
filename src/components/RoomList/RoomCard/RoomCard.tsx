@@ -28,7 +28,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	const { t } = useTranslation('rooms');
 	const removeRoom = useMutation(removeRoomMutation);
 	const updateLink = usePrepareLink({
-		addQuery: {
+		query: {
 			[routes.GET_PARAMS.popup]: routes.POPUPS.updateRoom,
 			[routes.GET_PARAMS.roomId]: id,
 		},

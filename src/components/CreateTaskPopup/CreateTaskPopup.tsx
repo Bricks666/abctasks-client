@@ -36,7 +36,7 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 	const defaultState = React.useMemo<TaskFormValues>(
 		() => ({
 			content: '',
-			groupId: -1,
+			groupId: 0,
 			status,
 		}),
 		[status]
