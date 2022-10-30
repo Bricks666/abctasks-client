@@ -1,1 +1,0 @@
-export { DotsIcon } from './DotsIcon';

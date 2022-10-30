@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { TaskStatus, Task } from '@/models/tasks/types';
 import { useGroupedTasks } from '@/hooks';
 import { CommonProps } from '@/types';
-import { TasksList } from '../TasksList';
+import { TasksList } from './TasksList';
 import { StyledWrapper } from './styles';
 
 export interface Column {

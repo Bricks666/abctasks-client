@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { getRoomQuery } from '@/models/rooms';
 import { usePrepareLink } from '@/hooks';
 import { routes } from '@/const';
-import { EditMenu } from '../EditMenu';
+import { EditMenu } from '@/ui/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { CommonProps } from '@/types';
 import { StyledWrapper, titleSx } from './styled';

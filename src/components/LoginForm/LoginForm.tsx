@@ -8,7 +8,7 @@ import { LoginRequest } from '@/api';
 import { loginMutation } from '@/models/auth';
 import { CommonProps } from '@/types';
 import { Field } from '@/ui/Field';
-import { Checkbox } from '../Checkbox';
+import { Checkbox } from '@/ui/Checkbox';
 import { validationSchema } from './validator';
 import { fieldSx, StyledWrapper } from './styles';
 

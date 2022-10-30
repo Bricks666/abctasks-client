@@ -7,8 +7,8 @@ import { getProgressQuery } from '@/models/progress';
 import { $GroupsMap } from '@/models/groups';
 import { ui } from '@/const';
 import { CommonProps } from '@/types';
-import { TaskProgress } from '../TaskProgress';
-import { SkeletonTaskProgress } from '../SkeletonTaskProgress';
+import { TaskProgress } from './TaskProgress';
+import { SkeletonTaskProgress } from './SkeletonTaskProgress';
 import { StyledList, StyledWrapper, titleSx } from './styles';
 
 export const TasksProgress: React.FC<CommonProps> = ({ className }) => {

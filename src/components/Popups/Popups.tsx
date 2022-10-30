@@ -3,14 +3,16 @@ import { Outlet } from 'react-router-dom';
 import { routes } from '@/const';
 import { BasePopupProps } from '@/types';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
-import { CreateTaskPopup } from '../CreateTaskPopup';
-import { UpdateTaskPopup } from '../UpdateTaskPopup';
-import { GroupsPopup } from '../GroupsPopup';
-import { UpdateGroupPopup } from '../UpdateGroupPopup';
-import { CreateGroupPopup } from '../CreateGroupPopup';
-import { CreateRoomPopup } from '../CreateRoomPopup';
-import { usePopups } from './usePopups';
-import { UpdateRoomPopup } from '../UpdateRoomPopup';
+import {
+	CreateTaskPopup,
+	UpdateTaskPopup,
+	GroupsPopup,
+	UpdateGroupPopup,
+	CreateGroupPopup,
+	CreateRoomPopup,
+	UpdateRoomPopup,
+} from './components';
+import { usePopups } from './hooks';
 
 const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
 	[routes.POPUPS.createTask]: CreateTaskPopup,

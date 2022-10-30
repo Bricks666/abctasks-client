@@ -1,1 +1,0 @@
-export { SuccessIcon } from './SuccessIcon';

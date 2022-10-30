@@ -1,19 +1,15 @@
 import * as React from 'react';
 import cn from 'classnames';
+import { Button, Card, CardHeader, List, ListItem } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { removeRoomMutation, Room } from '@/models/rooms';
-import { Card } from '@/ui/Card';
-import { CardHeader } from '@/ui/CardHeader';
-import { List } from '@/ui/List';
-import { ListItem } from '@/ui/ListItem';
-import { EditMenu } from '@/components/EditMenu';
-import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
 import { routes } from '@/const';
-import { Button } from '@/ui/Button';
 import { CommonProps } from '@/types';
+import { EditMenu } from '@/ui/EditMenu';
+import { MenuOption } from '@/ui/MenuItem';
 
 import styles from './RoomCard.module.css';
 
@@ -50,9 +46,9 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 		<Card className={cn(styles.card, className)}>
 			<CardHeader
 				className={styles.header}
-				secondaryAction={<EditMenu options={options} />}>
-				{name}
-			</CardHeader>
+				action={<EditMenu options={options} />}
+				title={name}
+			/>
 			<List>
 				<ListItem>
 					{t('card.description')}: {description}

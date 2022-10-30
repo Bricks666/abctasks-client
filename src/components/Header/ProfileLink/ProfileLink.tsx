@@ -1,21 +1,19 @@
 import * as React from 'react';
+import { Avatar, Menu } from '@mui/material';
 import { useMutation } from '@farfetched/react';
 import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { $AuthUser, logoutMutation } from '@/models/auth';
 import { routes } from '@/const';
-import { useAnyPopupOpen, useToggle } from '@/hooks';
+import { useToggle } from '@/hooks';
 import { CommonProps } from '@/types';
-import { Menu } from '@/ui/Menu';
-import { MenuItem, MenuOption } from '@/ui/MenuItem';
-import { Avatar } from '@/ui/Avatar';
+import { MenuOption, MenuItem } from '@/ui/MenuItem';
 
 export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('header');
 	const user = useStore($AuthUser);
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
-	const anyPopupOpen = useAnyPopupOpen();
 	const { start } = useMutation(logoutMutation);
 
 	const options: MenuOption[] = React.useMemo(
@@ -50,12 +48,7 @@ export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
 				role='button'>
 				{login[0]?.toUpperCase()}
 			</Avatar>
-			<Menu
-				reference={reference}
-				isOpen={isOpen}
-				onClose={toggle}
-				placement='bottom-end'
-				isFocus={!anyPopupOpen}>
+			<Menu anchorEl={reference} open={isOpen} onClose={toggle}>
 				{options.map((option) => (
 					<MenuItem {...option} key={option.label} />
 				))}

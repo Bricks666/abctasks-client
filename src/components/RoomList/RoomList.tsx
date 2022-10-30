@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { Stack } from '@mui/material';
 import { useQuery } from '@farfetched/react';
+import { getRoomsQuery } from '@/models/rooms';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
-import { getRoomsQuery } from '@/models/rooms';
-import { Stack } from '@/ui/Stack';
 import { RoomCard } from './RoomCard';
 
 export const RoomList: React.FC = () => {
@@ -14,7 +14,7 @@ export const RoomList: React.FC = () => {
 		<LoadingWrapper
 			isLoading={isLoading}
 			loadingIndicator={<LoadingIndicator />}>
-			<Stack direction='row'>
+			<Stack spacing={1} direction='row'>
 				{data?.map((room) => (
 					<RoomCard {...room} key={room.id} />
 				))}

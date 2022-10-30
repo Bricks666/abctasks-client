@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Block } from '@/ui/Block';
 import { Text } from '@/ui/Text';
-import { EditMenu } from '../EditMenu';
+import { EditMenu } from '../../ui/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
 import { routes } from '@/const';
