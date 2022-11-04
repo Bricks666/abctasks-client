@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Template, String, Static } from 'runtypes';
 
 export const hex = Template`#${String.withConstraint(

@@ -4,7 +4,6 @@ import { useMutation } from '@farfetched/react';
 import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { $AuthUser, logoutMutation } from '@/models/auth';
-import { routes } from '@/const';
 import { useToggle } from '@/hooks';
 import { CommonProps } from '@/types';
 import { MenuOption, MenuItem } from '@/ui/MenuItem';
@@ -20,7 +19,7 @@ export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
 		() => [
 			{
 				label: t('actions.settings'),
-				to: routes.ROUTES.SETTINGS.slice(0, -2),
+				to: '/settings',
 			},
 			{
 				label: t('actions.logout'),

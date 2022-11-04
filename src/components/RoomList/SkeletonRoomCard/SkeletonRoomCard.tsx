@@ -7,7 +7,7 @@ import {
 	CardHeader,
 	Skeleton,
 } from '@mui/material';
-import { CommonProps } from '@/types/common';
+import { CommonProps } from '@/types';
 
 import styles from './SkeletonRoomCard.module.css';
 
