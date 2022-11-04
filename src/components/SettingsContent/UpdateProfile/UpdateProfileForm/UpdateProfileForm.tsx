@@ -1,10 +1,9 @@
 import * as React from 'react';
+import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useStore } from 'effector-react';
 import { $AuthUser } from '@/models/auth';
 import { useImageURL } from '@/hooks';
-import { Button } from '@/ui/Button';
-import { Picture } from '@/ui/Picture';
 import { Field } from '@/ui/Field';
 
 import styles from './UpdateProfileForm.module.css';
@@ -23,7 +22,7 @@ export const UpdateProfileForm: React.FC = () => {
 	const { isDirty, isSubmitting } = formState;
 	return (
 		<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-			<Picture
+			<img
 				className={styles.picture}
 				alt={userInfo.login}
 				src={showedPhoto || ''}

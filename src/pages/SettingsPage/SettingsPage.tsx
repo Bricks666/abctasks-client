@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Text } from '@/ui/Text';
+import { Typography } from '@mui/material';
 import { usePageTitle } from '@/hooks';
 import { SettingsNavigation } from '@/components/SettingsNavigation';
-import { Block } from '@/ui/Block';
 import { SettingsContent } from '@/components/SettingsContent';
 import { MainLayout } from '@/layouts/MainLayout';
 
@@ -12,9 +11,9 @@ const SettingsPage: React.FC = () => {
 	usePageTitle('Settings');
 	return (
 		<MainLayout>
-			<Block className={SettingsPageNavigation.header}>
-				<Text component='h2'>Settings</Text>
-			</Block>
+			<div className={SettingsPageNavigation.header}>
+				<Typography component='h2'>Settings</Typography>
+			</div>
 			<SettingsNavigation />
 			<SettingsContent />
 		</MainLayout>

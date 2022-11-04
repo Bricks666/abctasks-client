@@ -3,6 +3,7 @@ import { TasksProgress } from '../TasksProgress';
 
 export const StyledWrapper = styled('div')`
 	display: grid;
+	grid-template-rows: max-content 1fr;
 `;
 
 export const StyledProgress = styled(TasksProgress)`

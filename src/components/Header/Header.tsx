@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Block } from '@/ui/Block';
+import cn from 'classnames';
+import { AppBar, Toolbar } from '@mui/material';
 import { CommonProps } from '@/types';
 import { ProfileLink } from './ProfileLink';
 
@@ -7,10 +8,13 @@ import styles from './Header.module.css';
 
 export const Header: React.FC<CommonProps> = ({ className }) => {
 	return (
-		<header className={className}>
-			<Block className={styles.layout}>
+		<AppBar
+			className={cn(styles.header, className)}
+			position='static'
+			color='transparent'>
+			<Toolbar className={styles.bar}>
 				<ProfileLink className={styles.avatar} />
-			</Block>
-		</header>
+			</Toolbar>
+		</AppBar>
 	);
 };

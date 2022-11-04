@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { CommonProps } from '@/types';
-import { StyledWrapper } from './styles';
-// import { Header } from '@/components/Header';
+import { Header } from '@/components/Header';
+
+import styles from './MainLayout.module.css';
 
 export interface MainLayoutProps extends CommonProps {}
 
@@ -11,9 +12,9 @@ export const MainLayout: React.FC<React.PropsWithChildren<MainLayoutProps>> = (
 	const { className, children } = props;
 
 	return (
-		<StyledWrapper>
-			{/* <Header /> */}
+		<section className={styles.layout}>
+			<Header />
 			<main className={className}>{children}</main>
-		</StyledWrapper>
+		</section>
 	);
 };

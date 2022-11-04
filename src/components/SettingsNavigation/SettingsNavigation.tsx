@@ -1,11 +1,8 @@
 import * as React from 'react';
+import { List, ListItem, ListItemButton } from '@mui/material';
 import { routes } from '@/const';
 import { i18n } from '@/i18n';
 import { CommonProps } from '@/types';
-import { Block } from '@/ui/Block';
-import { List } from '@/ui/List';
-import { ListItem } from '@/ui/ListItem';
-import { ListItemButton } from '@/ui/ListItemButton';
 
 const navigation = [
 	{
@@ -20,7 +17,7 @@ const navigation = [
 
 export const SettingsNavigation: React.FC<CommonProps> = ({ className }) => {
 	return (
-		<Block className={className}>
+		<section className={className}>
 			<List>
 				{navigation.map(({ label, ...props }) => (
 					<ListItem key={label}>
@@ -28,6 +25,6 @@ export const SettingsNavigation: React.FC<CommonProps> = ({ className }) => {
 					</ListItem>
 				))}
 			</List>
-		</Block>
+		</section>
 	);
 };
