@@ -1,6 +1,13 @@
 import * as React from 'react';
 import cn from 'classnames';
-import { Button, Card, CardHeader, List, ListItem } from '@mui/material';
+import {
+	Button,
+	Card,
+	CardActions,
+	CardContent,
+	CardHeader,
+	Typography,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
@@ -49,14 +56,16 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 				action={<EditMenu options={options} />}
 				title={name}
 			/>
-			<List>
-				<ListItem>
+			<CardContent className={styles.content}>
+				<Typography>
 					{t('card.description')}: {description}
-				</ListItem>
-			</List>
-			<Button component={Link} type='text' to={`${id}`}>
-				Перейти
-			</Button>
+				</Typography>
+			</CardContent>
+			<CardActions>
+				<Button component={Link} type='text' to={`${id}`}>
+					Перейти
+				</Button>
+			</CardActions>
 		</Card>
 	);
 };

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Button } from '@mui/material';
+import cn from 'classnames';
+import { Button, Stack } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -7,6 +8,8 @@ import { CommonProps } from '@/types';
 import { Field } from '@/ui/Field';
 import { validatingScheme } from './validator';
 import { RoomFormValues } from './types';
+
+import styles from './RoomForm.module.css';
 
 export interface RoomFormProps extends CommonProps {
 	readonly onSubmit: SubmitHandler<RoomFormValues>;
@@ -29,16 +32,20 @@ export const RoomForm: React.FC<RoomFormProps> = ({
 	const disabled = !isDirty || isSubmitting;
 
 	return (
-		<form className={className} onSubmit={handleSubmit(onSubmit)}>
+		<Stack
+			className={cn(styles.form, className)}
+			spacing={1}
+			onSubmit={handleSubmit(onSubmit)}
+			component='form'>
 			<Field name='name' control={control} label={t('room.name')} />
 			<Field
 				name='description'
 				control={control}
 				label={t('room.description')}
 			/>
-			<Button disabled={disabled} type='submit'>
+			<Button className={styles.button} disabled={disabled} type='submit'>
 				{buttonText}
 			</Button>
-		</form>
+		</Stack>
 	);
 };

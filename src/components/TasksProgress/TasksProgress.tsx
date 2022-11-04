@@ -25,7 +25,7 @@ export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
 			</Typography>
 			<StyledList spacing={1.5}>
 				{isLoading
-					? ui.EMPTY_ARRAYS[2].map(() => <SkeletonTaskProgress />)
+					? ui.getEmptyArray(2).map(() => <SkeletonTaskProgress />)
 					: progresses.map((progress) => {
 							const group = groups[progress.groupId];
 							if (!group) {

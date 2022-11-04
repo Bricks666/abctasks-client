@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeProvider } from '@mui/material';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { theme } from '@/types';
@@ -17,9 +17,11 @@ const root = ReactDOM.createRoot(
 root.render(
 	<BrowserRouter>
 		<ThemeProvider theme={theme}>
-			<ErrorBoundary>
-				<App />
-			</ErrorBoundary>
+			<StyledEngineProvider injectFirst>
+				<ErrorBoundary>
+					<App />
+				</ErrorBoundary>
+			</StyledEngineProvider>
 		</ThemeProvider>
 	</BrowserRouter>
 );

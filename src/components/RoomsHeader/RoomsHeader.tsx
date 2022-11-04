@@ -1,9 +1,8 @@
 import * as React from 'react';
 import cn from 'classnames';
+import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { Block } from '@/ui/Block';
-import { Text } from '@/ui/Text';
-import { EditMenu } from '../../ui/EditMenu';
+import { EditMenu } from '@/ui/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 import { usePrepareLink } from '@/hooks';
 import { routes } from '@/const';
@@ -28,9 +27,11 @@ export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 		[createLink]
 	);
 	return (
-		<Block className={cn(styles.header, className)}>
-			<Text component='h2'>{t('title')}</Text>
+		<header className={cn(styles.header, className)}>
+			<Typography variant='h4' component='h1'>
+				{t('title')}
+			</Typography>
 			<EditMenu options={options} />
-		</Block>
+		</header>
 	);
 };

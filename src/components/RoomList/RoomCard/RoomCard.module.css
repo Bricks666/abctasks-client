@@ -1,15 +1,16 @@
 .card {
-	min-height: 200px;
-}
+	min-width: 200px;
+	height: min(max-content, 300px);
 
-.link {
-	color: inherit;
-}
+	padding: 1em;
 
-.link:hover {
-	text-decoration: none;
+	overflow-y: scroll;
 }
 
 .header {
-	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.content {
+	overflow-y: scroll;
 }

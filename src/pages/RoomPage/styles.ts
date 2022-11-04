@@ -9,8 +9,6 @@ export const StyledLayout = styled(MainLayout)`
 	grid-template-rows: min-content 1fr;
 	gap: 1em;
 
-	padding: 2em;
-
 	overflow: hidden;
 
 	@media (min-width: 1300px) {

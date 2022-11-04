@@ -51,7 +51,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 			<TaskListHeader columnStatus={columnStatus}>{header}</TaskListHeader>
 			<StyledList spacing={1}>
 				{loading
-					? ui.EMPTY_ARRAYS[4].map(() => <SkeletonTaskCard />)
+					? ui.getEmptyArray(4).map(() => <SkeletonTaskCard />)
 					: tasks.map((task) => <TaskCard {...task} key={task.id} />)}
 			</StyledList>
 		</StyledWrapper>

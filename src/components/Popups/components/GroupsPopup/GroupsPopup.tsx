@@ -67,7 +67,7 @@ export const GroupsPopup: React.FC<GroupsPopupProps> = (props) => {
 					</ListItemSecondaryAction>
 				</ListItem>
 		  ))
-		: ui.EMPTY_ARRAYS[4].map((_, i) => (
+		: ui.getEmptyArray(4).map((_, i) => (
 				<ListItem key={i}>
 					<Skeleton width='100%' height='1rem + 4px' />
 				</ListItem>

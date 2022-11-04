@@ -22,7 +22,7 @@ export const ActivitiesList: React.FC<CommonProps> = ({ className }) => {
 			</Typography>
 			<StyledList spacing={1}>
 				{isLoading
-					? ui.EMPTY_ARRAYS[4].map((_, i) => <SkeletonActivityCard key={i} />)
+					? ui.getEmptyArray(4).map((_, i) => <SkeletonActivityCard key={i} />)
 					: activities
 							.slice(0, 10)
 							.map((activity) => (

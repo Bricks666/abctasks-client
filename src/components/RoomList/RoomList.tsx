@@ -1,24 +1,22 @@
 import * as React from 'react';
-import { Stack } from '@mui/material';
 import { useQuery } from '@farfetched/react';
 import { getRoomsQuery } from '@/models/rooms';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
-import { LoadingWrapper } from '@/ui/LoadingWrapper';
 import { RoomCard } from './RoomCard';
+import { ui } from '@/const';
+import { SkeletonRoomCard } from './SkeletonRoomCard';
+
+import styles from './RoomList.module.css';
 
 export const RoomList: React.FC = () => {
-	const { data, pending } = useQuery(getRoomsQuery);
-	const isLoading = !data && pending;
+	const { data } = useQuery(getRoomsQuery);
+	const isLoading = !data;
+	const items = isLoading
+		? ui
+				.getEmptyArray(15)
+				.map((_, i) => <SkeletonRoomCard className={styles.card} key={i} />)
+		: data.map((room) => (
+				<RoomCard className={styles.card} {...room} key={room.id} />
+		  ));
 
-	return (
-		<LoadingWrapper
-			isLoading={isLoading}
-			loadingIndicator={<LoadingIndicator />}>
-			<Stack spacing={1} direction='row'>
-				{data?.map((room) => (
-					<RoomCard {...room} key={room.id} />
-				))}
-			</Stack>
-		</LoadingWrapper>
-	);
+	return <section className={styles.list}>{items}</section>;
 };
