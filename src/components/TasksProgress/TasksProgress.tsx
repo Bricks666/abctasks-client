@@ -1,34 +1,41 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import { useTranslation } from "react-i18next";
-import { ClassNameProps } from "@/interfaces/common";
-import { useTasksProgress, useTasksProgressLoading } from "./hooks";
-import { TaskProgress } from "../TaskProgress";
-import { Text } from "@/ui/Text";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
-import { Stack } from "@/ui/Stack";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
+import * as React from 'react';
+import { Typography } from '@mui/material';
+import { useStore } from 'effector-react';
+import { useQuery } from '@farfetched/react';
+import { useTranslation } from 'react-i18next';
+import { getProgressQuery } from '@/models/progress';
+import { $GroupsMap } from '@/models/groups';
+import { ui } from '@/const';
+import { CommonProps } from '@/types';
+import { TaskProgress } from './TaskProgress';
+import { SkeletonTaskProgress } from './SkeletonTaskProgress';
+import { StyledList, StyledWrapper, titleSx } from './styles';
 
-import TasksProgressStyle from "./TasksProgress.module.css";
+export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('room');
+	const { data: progresses } = useQuery(getProgressQuery);
+	const groups = useStore($GroupsMap);
 
-export const TasksProgress: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("room");
-	const progresses = useTasksProgress();
-	const isLoading = useTasksProgressLoading();
+	const isLoading = !groups || !progresses;
 
 	return (
-		<section className={classNames(TasksProgressStyle.wrapper, className)}>
-			<Text component="h3">{t("taskProgress.title")}</Text>
-			<LoadingWrapper
-				isLoading={isLoading}
-				loadingIndicator={<LoadingIndicator size="small" />}
-			>
-				<Stack className={TasksProgressStyle.list}>
-					{progresses.map((progress) => (
-						<TaskProgress {...progress} key={progress.groupId} />
-					))}
-				</Stack>
-			</LoadingWrapper>
-		</section>
+		<StyledWrapper className={className} spacing={1.5}>
+			<Typography variant='body2' component='h2' sx={titleSx}>
+				{t('taskProgress.title')}
+			</Typography>
+			<StyledList spacing={1.5}>
+				{isLoading
+					? ui.getEmptyArray(2).map(() => <SkeletonTaskProgress />)
+					: progresses.map((progress) => {
+							const group = groups[progress.groupId];
+							if (!group) {
+								return null;
+							}
+							return (
+								<TaskProgress {...progress} {...group} key={progress.groupId} />
+							);
+					  })}
+			</StyledList>
+		</StyledWrapper>
 	);
 };

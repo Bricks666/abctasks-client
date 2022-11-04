@@ -3,36 +3,44 @@ interface GetParams {
 	readonly taskStatus: string;
 	readonly taskId: string;
 	readonly groupId: string;
+	readonly roomId: string;
 }
 
 export const GET_PARAMS: GetParams = {
-	popup: "popup",
-	taskStatus: "task-status",
-	taskId: "task-id",
-	groupId: "group-id",
+	popup: 'popup',
+	taskStatus: 'task-status',
+	taskId: 'task-id',
+	groupId: 'group-id',
+	roomId: 'room-id',
 };
 
 interface Popups {
 	readonly createTask: string;
-	readonly editTask: string;
+	readonly updateTask: string;
 	readonly groups: string;
 	readonly createGroup: string;
-	readonly editGroup: string;
+	readonly updateGroup: string;
+	readonly createRoom: string;
+	readonly updateRoom: string;
 }
 
 export const POPUPS: Popups = {
-	createTask: "create-task",
-	editTask: "edit-task",
-	groups: "groups",
-	createGroup: "create-group",
-	editGroup: "edit-group",
+	createTask: 'create-task',
+	updateTask: 'update-task',
+	groups: 'groups',
+	createGroup: 'create-group',
+	updateGroup: 'update-group',
+	createRoom: 'create-room',
+	updateRoom: 'update-room',
 };
 
 export const ROUTES = {
-	HOMEPAGE: "*",
-	LOGIN: "login",
-	REGISTRATION: "registration",
-	SETTINGS: "settings/*",
-	SETTINGS_PROFILE: "profile",
-	SETTINGS_GENERIC: "generic",
+	ROOMS: 'rooms',
+	ROOM: 'rooms/:id',
+	LOGIN: 'login',
+	REGISTRATION: 'registration',
+	SETTINGS: 'settings/*',
+	SETTINGS_PROFILE: 'profile',
+	SETTINGS_GENERIC: 'generic',
+	NOT_FOUND: '*',
 };

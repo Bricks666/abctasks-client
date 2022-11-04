@@ -1,2 +1,2 @@
-export { SSEListener } from "./eventSource";
-export * from "./types";
+export { SSEListener } from './eventSource';
+export * from './types';

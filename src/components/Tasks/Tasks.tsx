@@ -1,51 +1,60 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import { useTranslation } from "react-i18next";
-import { useGroupedTasks, useLoadingTasks } from "@/hooks";
-import { ClassNameProps } from "@/interfaces/common";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
-import { TasksList } from "../TasksList";
+/* eslint-disable sonarjs/no-duplicate-string */
+import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import { TaskStatus, Task } from '@/models/tasks/types';
+import { useGroupedTasks } from '@/hooks';
+import { CommonProps } from '@/types';
+import { TasksList } from './TasksList';
+import { StyledWrapper } from './styles';
 
-import TasksStyle from "./Tasks.module.css";
+export interface Column {
+	readonly headerCode: string;
+	readonly tasks: Task[] | null;
+	readonly status: TaskStatus;
+}
 
-export const Tasks: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("room");
-	const tasks = useGroupedTasks();
-	const isLoading = useLoadingTasks();
+export const Tasks: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('task');
+	const { data: tasks } = useGroupedTasks();
+	/*
+TODO: Пересмотреть распределение на колонки
+*/
+	const columns = React.useMemo<Column[]>(
+		() => [
+			{
+				headerCode: 'ready',
+				tasks: tasks?.ready || null,
+				status: 'ready',
+			},
+			{
+				headerCode: 'in progress',
+				tasks: tasks?.['in progress'] || null,
+				status: 'in progress',
+			},
+			{
+				headerCode: 'review',
+				tasks: tasks?.needReview || null,
+				status: 'review',
+			},
+			{
+				headerCode: 'done',
+				tasks: tasks?.done || null,
+				status: 'done',
+			},
+		],
+		[tasks]
+	);
 
 	return (
-		<section className={classNames(TasksStyle.tasks, className)}>
-			<LoadingWrapper
-				className={TasksStyle.loading}
-				isLoading={isLoading}
-				loadingIndicator={<LoadingIndicator />}
-			>
+		<StyledWrapper className={className}>
+			{columns.map(({ headerCode, status, tasks }) => (
 				<TasksList
-					listHeader="Ready"
-					header={t("statuses.ready")}
-					tasks={tasks["ready"]}
-					key="Ready"
+					tasks={tasks}
+					columnStatus={status}
+					header={t(`statuses.${headerCode}`)}
+					key={headerCode}
 				/>
-				<TasksList
-					listHeader="In Progress"
-					header={t("statuses.inProgress")}
-					tasks={tasks["inProgress"]}
-					key="In progress"
-				/>
-				<TasksList
-					listHeader="Review"
-					header={t("statuses.review")}
-					tasks={tasks["needReview"]}
-					key="Review"
-				/>
-				<TasksList
-					listHeader="Done"
-					header={t("statuses.done")}
-					tasks={tasks["done"]}
-					key="Done"
-				/>
-			</LoadingWrapper>
-		</section>
+			))}
+		</StyledWrapper>
 	);
 };

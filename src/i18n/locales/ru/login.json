@@ -1,0 +1,12 @@
+{
+	"title": "Вход",
+	"fields": {
+		"login": "Логин",
+		"password": "Пароль",
+		"remember": "Запомнить меня"
+	},
+	"actions": {
+		"submit": "Войти",
+		"registration": "Зарегистрироваться"
+	}
+}

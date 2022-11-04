@@ -1,60 +1,51 @@
-import classNames from "classnames";
-import React, {
-	ChangeEventHandler,
-	FC,
-	FocusEventHandler,
-	memo,
-	Ref,
-} from "react";
-import { ClassNameProps } from "@/interfaces/common";
-import { Color, Size } from "@/interfaces/ui";
-import { InputLabel } from "../InputLabel";
+import * as React from 'react';
+import {
+	FormControlLabel,
+	Checkbox as CheckboxMUI,
+	CheckboxProps as MUICheckboxProps,
+} from '@mui/material';
+import {
+	FieldValues,
+	useController,
+	UseControllerProps,
+	UseControllerReturn,
+} from 'react-hook-form';
+import { CommonProps } from '@/types';
 
-import CheckboxStyle from "./Checkbox.module.css";
-
-export interface CheckboxProps extends ClassNameProps {
-	readonly name: string;
-	readonly checked?: boolean;
-	readonly onChange?: ChangeEventHandler;
-	readonly onFocus?: FocusEventHandler;
-	readonly onBlur?: FocusEventHandler;
-	readonly require?: boolean;
-	readonly readOnly?: boolean;
-	readonly inputId?: string;
-	readonly size?: Size;
-	readonly color?: Color;
-	readonly inputRef?: Ref<HTMLInputElement>;
+export interface CheckboxProps<FormValues extends FieldValues>
+	extends CommonProps,
+		UseControllerProps<FormValues>,
+		Omit<
+			MUICheckboxProps,
+			keyof UseControllerProps | keyof UseControllerReturn
+		> {
+	readonly label?: string;
 }
 
-export const Checkbox: FC<CheckboxProps> = memo(function Checkbox({
-	className,
-	children,
-	inputId,
-	inputRef,
-	color = "primary",
-	size = "medium",
-	...checkbox
-}) {
-	const classes = classNames(
-		CheckboxStyle.label,
-		CheckboxStyle[color],
-		CheckboxStyle[size]
-	);
-
-	const id = inputId || checkbox.name;
-
+export const Checkbox = <FormValues extends FieldValues>(
+	props: CheckboxProps<FormValues>
+) => {
+	const {
+		label,
+		name,
+		control,
+		defaultValue,
+		rules,
+		shouldUnregister,
+		...rest
+	} = props;
+	const { field } = useController({
+		name,
+		control,
+		defaultValue,
+		rules,
+		shouldUnregister,
+	});
+	const { ref, ...controls } = field;
 	return (
-		<div className={classNames(CheckboxStyle.container, className)}>
-			<input
-				className={classNames(CheckboxStyle.input, "visibility-hidden")}
-				{...checkbox}
-				type="checkbox"
-				id={id}
-				ref={inputRef}
-			/>
-			<InputLabel className={classes} HTMLFor={id}>
-				{children}
-			</InputLabel>
-		</div>
+		<FormControlLabel
+			control={<CheckboxMUI {...rest} {...controls} inputRef={ref} />}
+			label={label}
+		/>
 	);
-});
+};

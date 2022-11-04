@@ -1,54 +1,40 @@
-import React, { FC } from "react";
-import { useForm } from "react-hook-form";
-import { TextField } from "@/components/TextField";
-import { useImageURL, useUserInfo } from "@/hooks";
-import { Button } from "@/ui/Button";
-import { Picture } from "@/ui/Picture";
-import { updateProfile } from "@/models/User";
-import { UpdateProfileRequest } from "@/interfaces/requests";
+import * as React from 'react';
+import { Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { useStore } from 'effector-react';
+import { $AuthUser } from '@/models/auth';
+import { useImageURL } from '@/hooks';
+import { Field } from '@/ui/Field';
 
-import UpdateProfileFormStyle from "./UpdateProfileForm.module.css";
+import styles from './UpdateProfileForm.module.css';
 
-export const UpdateProfileForm: FC = () => {
-	const userInfo = useUserInfo();
-	const { watch, handleSubmit, register, formState } =
-		useForm<UpdateProfileRequest>({
-			defaultValues: userInfo,
-		});
+export const UpdateProfileForm: React.FC = () => {
+	const userInfo = useStore($AuthUser)!;
+	const { watch, handleSubmit, formState, control } = useForm<any>({
+		defaultValues: userInfo,
+	});
 
-	const photo = watch("photo");
+	const photo = watch('photo');
 	const showedPhoto = useImageURL(photo);
-	const onSubmit = (values: UpdateProfileRequest) => {
-		updateProfile(values);
+	const onSubmit = (values: any) => {
+		console.log(values);
 	};
-	const { errors, isDirty, isSubmitting } = formState;
+	const { isDirty, isSubmitting } = formState;
 	return (
-		<form
-			className={UpdateProfileFormStyle.form}
-			onSubmit={handleSubmit(onSubmit)}
-		>
-			<Picture
-				className={UpdateProfileFormStyle.picture}
+		<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+			<img
+				className={styles.picture}
 				alt={userInfo.login}
-				src={showedPhoto || ""}
+				src={showedPhoto || ''}
 			/>
-			<TextField
-				inputClassName="visibility-hidden"
-				{...register("photo")}
-				type="file"
-				accept="image/*"
-				error={errors.photo?.message}
+			<Field name='photo' control={control} type='file' />
+			<Field
+				name='login'
+				control={control}
+				className={styles.input}
+				label='Login'
 			/>
-			<TextField
-				className={UpdateProfileFormStyle.input}
-				{...register("login")}
-				label="Login"
-				error={errors.login?.message}
-			/>
-			<Button
-				className={UpdateProfileFormStyle.button}
-				disabled={!isDirty || isSubmitting}
-			>
+			<Button className={styles.button} disabled={!isDirty || isSubmitting}>
 				Save
 			</Button>
 		</form>

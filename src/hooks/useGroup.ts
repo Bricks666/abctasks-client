@@ -1,20 +1,8 @@
-import { $TaskGroupsMap, loadTaskGroups } from "@/models/Groups";
-import { useStore } from "effector-react";
-import { useEffect } from "react";
+import { useStoreMap } from 'effector-react';
+import { $GroupsMap } from '@/models/groups';
 
-export const useGroup = (id: number | null) => {
-	const groups = useStore($TaskGroupsMap);
-	const length = Object.values(groups).length;
-
-	useEffect(() => {
-		if (!length) {
-			loadTaskGroups();
-		}
-	}, [length]);
-
-	if (!id) {
-		return null;
-	}
-
-	return groups[id] || null;
+export const useGroup = (groupId: number) => {
+	return useStoreMap($GroupsMap, (groups) => {
+		return groups[groupId] ?? null;
+	});
 };

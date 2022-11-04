@@ -1,1 +1,1 @@
-export { LoadingWrapper } from "./LoadingWrapper";
+export { LoadingWrapper, type LoadingWrapperProps } from './LoadingWrapper';

@@ -1,0 +1,25 @@
+{
+	"task": {
+		"createTitle": "Create task",
+		"updateTitle": "Update task",
+		"group": "Group",
+		"status": "Status",
+		"content": "Content"
+	},
+	"group": {
+		"createTitle": "Create group",
+		"updateTitle": "Update group",
+		"name": "Name",
+		"mainColor": "Main color",
+		"secondaryColor": "Secondary color"
+	},
+	"groups": {
+		"title": "Groups"
+	},
+	"room": {
+		"createTitle": "Create room",
+		"updateTitle": "Update rooms",
+		"name": "Name",
+		"description": "Description"
+	}
+}

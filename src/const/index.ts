@@ -1,6 +1,4 @@
-export { GET_PARAMS, POPUPS, ROUTES } from "./routes";
-export {
-	allowedSymbolsRegExp,
-	MAX_LOGIN_PASSWORD_LENGTH,
-	MIN_LOGIN_PASSWORD_LENGTH,
-} from "./forms";
+export * as routes from './routes';
+export * as forms from './forms';
+export * as api from './api';
+export * as ui from './ui';

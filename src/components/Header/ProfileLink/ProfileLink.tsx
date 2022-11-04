@@ -1,48 +1,53 @@
-import React, { FC, useState } from "react";
-import { useAnyPopupOpen, useToggle, useUserInfo } from "@/hooks";
-import { ClassNameProps } from "@/interfaces/common";
-import { Avatar } from "@/ui/Avatar";
-import { logout } from "@/models/Auth";
-import { Menu } from "@/ui/Menu";
-import { MenuItem, MenuOption } from "@/ui/MenuItem";
-import { ROUTES } from "@/const";
+import * as React from 'react';
+import { Avatar, Menu } from '@mui/material';
+import { useMutation } from '@farfetched/react';
+import { useStore } from 'effector-react';
+import { useTranslation } from 'react-i18next';
+import { $AuthUser, logoutMutation } from '@/models/auth';
+import { useToggle } from '@/hooks';
+import { CommonProps } from '@/types';
+import { MenuOption, MenuItem } from '@/ui/MenuItem';
 
-const options: MenuOption[] = [
-	{
-		label: "Settings",
-		to: ROUTES.SETTINGS.slice(0, -2),
-	},
-	{
-		label: "Logout",
-		onClick: () => logout(),
-	},
-];
-
-export const ProfileLink: FC<ClassNameProps> = ({ className }) => {
-	const { login, photo } = useUserInfo();
+export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('header');
+	const user = useStore($AuthUser);
 	const [isOpen, toggle] = useToggle(false);
-	const [reference, setReference] = useState<HTMLElement | null>(null);
-	const anyPopupOpen = useAnyPopupOpen();
+	const [reference, setReference] = React.useState<HTMLElement | null>(null);
+	const { start } = useMutation(logoutMutation);
+
+	const options: MenuOption[] = React.useMemo(
+		() => [
+			{
+				label: t('actions.settings'),
+				to: '/settings',
+			},
+			{
+				label: t('actions.logout'),
+				onClick: () => start(),
+			},
+		],
+		[start]
+	);
+
+	if (!user) {
+		return null;
+	}
+
+	const { login, photo } = user;
+
 	return (
 		<div className={className}>
 			<Avatar
-				src={photo}
+				src={photo || ''}
 				alt={login}
 				ref={setReference}
 				onClick={toggle}
 				tabIndex={0}
-				aria-haspopup="menu"
-				role="button"
-			>
+				aria-haspopup='menu'
+				role='button'>
 				{login[0]?.toUpperCase()}
 			</Avatar>
-			<Menu
-				reference={reference}
-				isOpen={isOpen}
-				onClose={toggle}
-				placement="bottom-end"
-				isFocus={!anyPopupOpen}
-			>
+			<Menu anchorEl={reference} open={isOpen} onClose={toggle}>
 				{options.map((option) => (
 					<MenuItem {...option} key={option.label} />
 				))}

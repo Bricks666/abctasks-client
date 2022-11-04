@@ -1,86 +1,67 @@
-import React, { FC, useCallback, useEffect } from "react";
-import { Location, useNavigate } from "react-router-dom";
-import classNames from "classnames";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { useTranslation } from "react-i18next";
-import { LoginRequest } from "@/interfaces/requests";
-import { Button } from "@/ui/Button";
-import { clearLoginError, loginFx } from "@/models/Auth";
-import { useLocationState } from "@/hooks";
-import { TextField } from "../TextField";
-import { ClassNameProps } from "@/interfaces/common";
-import { Checkbox } from "../Checkbox";
-import { validationSchema } from "./validator";
-import { Alert } from "@/ui/Alert";
-import { AlertTitle } from "@/ui/AlertTitle";
-import { useLoginError } from "./hooks";
-
-import LoginFormStyle from "./LoginForm.module.css";
+import * as React from 'react';
+import { Button } from '@mui/material';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation } from '@farfetched/react';
+import { joiResolver } from '@hookform/resolvers/joi';
+import { useTranslation } from 'react-i18next';
+import { LoginRequest } from '@/api';
+import { loginMutation } from '@/models/auth';
+import { CommonProps } from '@/types';
+import { Field } from '@/ui/Field';
+import { Checkbox } from '@/ui/Checkbox';
+import { validationSchema } from './validator';
+import { fieldSx, StyledWrapper } from './styles';
 
 const initialValue: LoginRequest = {
-	login: "",
-	password: "",
-	remember: false,
+	login: '',
+	password: '',
+	rememberMe: false,
 };
 
-export const LoginForm: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("login");
-	const { register, handleSubmit, formState } = useForm<LoginRequest>({
+export const LoginForm: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('login');
+	const login = useMutation(loginMutation);
+	const { handleSubmit, formState, control } = useForm<LoginRequest>({
 		defaultValues: initialValue,
 		resolver: joiResolver(validationSchema),
 	});
-	const navigate = useNavigate();
-	const state = useLocationState<Location>();
 	const { isDirty, isSubmitting } = formState;
-	const onSubmit = useCallback<SubmitHandler<LoginRequest>>(
+	const onSubmit = React.useCallback<SubmitHandler<LoginRequest>>(
 		async (values) => {
-			await loginFx(values);
-			const to = state || "/";
-
-			navigate(to, { replace: true });
+			login.start(values);
 		},
-		[navigate, state]
+		[]
 	);
-	/* TODO: Make error typing */
-	const error = useLoginError();
-	useEffect(() => {
-		return () => {
-			clearLoginError();
-		};
-	}, []);
 
 	return (
-		<form
-			className={classNames(LoginFormStyle.form, className)}
-			onSubmit={handleSubmit(onSubmit)}
-		>
-			{error && (
-				<Alert color="error" type="outline" onClose={() => clearLoginError()}>
-					<AlertTitle>Authorization error</AlertTitle>
-					Incorrect login or password
-				</Alert>
-			)}
-			<TextField
-				{...register("login")}
-				label={t("fields.login")}
+		<StyledWrapper className={className} onSubmit={handleSubmit(onSubmit)}>
+			<Field
+				name='login'
+				control={control}
+				label={t('fields.login')}
 				disabled={isSubmitting}
+				sx={fieldSx}
 			/>
 
-			<TextField
-				{...register("password")}
-				label={t("fields.password")}
-				type="password"
+			<Field
+				name='password'
+				control={control}
+				label={t('fields.password')}
+				type='password'
 				disabled={isSubmitting}
+				sx={fieldSx}
 			/>
-			<Checkbox {...register("remember")} label={t("fields.remember")} />
+			<Checkbox
+				name='rememberMe'
+				control={control}
+				label={t('fields.remember')}
+			/>
 			<Button
-				className={LoginFormStyle.button}
+				type='submit'
 				disabled={!isDirty || isSubmitting}
-				type="filed"
-			>
-				{t("buttons.submit")}
+				variant='outlined'>
+				{t('actions.submit')}
 			</Button>
-		</form>
+		</StyledWrapper>
 	);
 };

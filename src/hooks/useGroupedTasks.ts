@@ -1,13 +1,35 @@
-import { $GroupedByStatusTasksStore, loadTasks } from "@/models/Tasks";
-import { useStore } from "effector-react";
-import { useEffect } from "react";
+import { useMemo } from 'react';
+import { useQuery } from '@farfetched/react';
+import {
+	GroupedByStatusTasks,
+	TaskStatus,
+	Task,
+	getTasksQuery,
+} from '@/models/tasks';
+
+const createGrouper = (status: TaskStatus) => {
+	return (state: Task[]) => {
+		return state.filter((task) => task.status === status);
+	};
+};
 
 export const useGroupedTasks = () => {
-	const tasks = useStore($GroupedByStatusTasksStore);
+	const { data: tasks, ...rest } = useQuery(getTasksQuery);
 
-	useEffect(() => {
-		loadTasks();
-	}, []);
+	const data = useMemo<GroupedByStatusTasks | null>(() => {
+		if (!tasks) {
+			return null;
+		}
+		return {
+			ready: createGrouper('ready')(tasks),
+			done: createGrouper('done')(tasks),
+			'in progress': createGrouper('in progress')(tasks),
+			needReview: createGrouper('review')(tasks),
+		};
+	}, [tasks]);
 
-	return tasks;
+	return {
+		data,
+		...rest,
+	};
 };

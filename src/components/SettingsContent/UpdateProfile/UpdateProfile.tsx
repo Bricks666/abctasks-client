@@ -1,23 +1,17 @@
-import React, { FC } from "react";
-import { Block } from "@/ui/Block";
-import { Text } from "@/ui/Text";
-import { ClassNameProps } from "@/interfaces/common";
-import { UpdateProfileForm } from "./UpdateProfileForm";
-import { useProfileLoading } from "@/hooks";
-import { LoadingWrapper } from "@/ui/LoadingWrapper";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
+import * as React from 'react';
+import { Typography } from '@mui/material';
+import { CommonProps } from '@/types';
+import { UpdateProfileForm } from './UpdateProfileForm';
+import { LoadingWrapper } from '@/ui/LoadingWrapper';
+import { LoadingIndicator } from '@/ui/LoadingIndicator';
 
-export const UpdateProfile: FC<ClassNameProps> = ({ className }) => {
-	const isLoading = useProfileLoading();
+export const UpdateProfile: React.FC<CommonProps> = ({ className }) => {
 	return (
-		<LoadingWrapper
-			isLoading={isLoading}
-			loadingIndicator={<LoadingIndicator />}
-		>
-			<Block className={className}>
-				<Text component="h3">Profile</Text>
+		<LoadingWrapper isLoading loadingIndicator={<LoadingIndicator />}>
+			<section className={className}>
+				<Typography component='h3'>Profile</Typography>
 				<UpdateProfileForm />
-			</Block>
+			</section>
 		</LoadingWrapper>
 	);
 };

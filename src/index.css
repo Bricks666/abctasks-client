@@ -45,8 +45,8 @@ body {
 
 	background-color: var(--background);
 
-	font-family: "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans",
-		"Helvetica Neue", sans-serif;
+	font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans',
+		'Helvetica Neue', sans-serif;
 	color: #2e2e2e;
 }
 

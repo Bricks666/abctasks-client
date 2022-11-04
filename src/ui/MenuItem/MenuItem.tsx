@@ -1,44 +1,41 @@
-import { ClassNameProps } from "@/interfaces/common";
-import React, {
-	AriaAttributes,
-	AriaRole,
-	CSSProperties,
-	FC,
-	MouseEventHandler,
-} from "react";
-import { Path } from "react-router-dom";
-import { ListItem } from "../ListItem";
-import { ListItemButton } from "../ListItemButton";
-import { Text } from "../Text";
+import * as React from 'react';
+import {
+	ListItemIcon,
+	ListItemText,
+	MenuItem as MenuItemMUI,
+} from '@mui/material';
+import { To, Link } from 'react-router-dom';
+import { CommonProps } from '@/types';
 
-import MenuItemStyle from "./MenuItem.module.css";
-
-export type MenuOption = {
+export interface BaseMenuOption {
 	readonly label: string;
-	readonly onClick?: MouseEventHandler;
-	readonly to?: Path | string;
-	readonly icon?: JSX.Element;
-};
-
-interface MenuItemProps extends ClassNameProps, MenuOption, AriaAttributes {
-	readonly style?: CSSProperties;
-	readonly role?: AriaRole;
+	readonly icon?: React.ReactElement;
 }
 
-export const MenuItem: FC<MenuItemProps> = ({
-	label,
-	icon,
-	onClick,
-	to,
-	role = "menuitem",
-	...props
-}) => {
+export interface ButtonMenuOption extends BaseMenuOption {
+	readonly onClick: React.MouseEventHandler<HTMLButtonElement>;
+	readonly to?: never;
+}
+
+export interface LinkMenuOption extends BaseMenuOption {
+	readonly onClick?: never;
+	readonly to: To;
+}
+
+export type MenuOption = ButtonMenuOption | LinkMenuOption;
+
+export type MenuItemProps = CommonProps &
+	MenuOption & {
+		readonly role?: React.AriaRole;
+	};
+
+export const MenuItem: React.FC<MenuItemProps> = (props) => {
+	const { label, icon, onClick, to, ...rest } = props;
+	const itemButtonProps = to ? { component: Link, to } : { onClick };
 	return (
-		<ListItem className={MenuItemStyle.item} role={role} {...props}>
-			<ListItemButton onClick={onClick} to={to} tabIndex={0}>
-				{icon}
-				<Text component="span">{label}</Text>
-			</ListItemButton>
-		</ListItem>
+		<MenuItemMUI {...(itemButtonProps as any)} {...rest}>
+			{icon && <ListItemIcon>{icon}</ListItemIcon>}
+			<ListItemText>{label}</ListItemText>
+		</MenuItemMUI>
 	);
 };

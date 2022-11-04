@@ -1,0 +1,25 @@
+{
+	"task": {
+		"createTitle": "Добавить задачу",
+		"updateTitle": "Изменить задачу",
+		"group": "Группа",
+		"status": "Статус",
+		"content": "Содержание"
+	},
+	"group": {
+		"createTitle": "Добавить группу",
+		"updateTitle": "Изменить группу",
+		"name": "Название",
+		"mainColor": "Основной цвет",
+		"secondaryColor": "Дополнительный цвет"
+	},
+	"groups": {
+		"title": "Группы"
+	},
+	"room": {
+		"createTitle": "Создать комнату",
+		"updateTitle": "Изменить комнату",
+		"name": "Название",
+		"description": "Описание"
+	}
+}

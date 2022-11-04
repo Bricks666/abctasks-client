@@ -1,1 +1,1 @@
-export { MenuItem, type MenuOption } from "./MenuItem";
+export { MenuItem, type MenuOption } from './MenuItem';

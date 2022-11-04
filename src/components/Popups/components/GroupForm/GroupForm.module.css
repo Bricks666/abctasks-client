@@ -1,0 +1,22 @@
+.form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 15px;
+
+	padding: 10px;
+}
+
+.input {
+	grid-column: span 2;
+}
+
+.colorInput {
+	align-self: end;
+
+	height: 50px;
+}
+
+.button {
+	grid-column: 2;
+	justify-self: end;
+}

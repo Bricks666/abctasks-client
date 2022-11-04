@@ -1,1 +1,1 @@
-export { ProfileLink } from "./ProfileLink";
+export { ProfileLink } from './ProfileLink';

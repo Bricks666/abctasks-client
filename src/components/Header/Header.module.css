@@ -1,7 +1,11 @@
-.layout {
-	display: flex;
+.header {
+	box-shadow: none;
+}
 
-	padding: 1rem;
+.bar {
+	gap: 1em;
+
+	padding: 0;
 }
 
 .avatar {

@@ -1,39 +1,38 @@
-import classNames from "classnames";
-import React, { FC } from "react";
-import { useTranslation } from "react-i18next";
-import { ClassNameProps } from "@/interfaces/common";
-import { Block } from "@/ui/Block";
-import { Text } from "@/ui/Text";
-import { usePrepareLink } from "@/hooks";
-import { GET_PARAMS, POPUPS } from "@/const";
-import { EditMenu } from "../EditMenu";
-import { MenuOption } from "@/ui/MenuItem";
+import * as React from 'react';
+import { Skeleton, Typography } from '@mui/material';
+import { useQuery } from '@farfetched/react';
+import { useTranslation } from 'react-i18next';
+import { getRoomQuery } from '@/models/rooms';
+import { usePrepareLink } from '@/hooks';
+import { routes } from '@/const';
+import { EditMenu } from '@/ui/EditMenu';
+import { MenuOption } from '@/ui/MenuItem';
+import { CommonProps } from '@/types';
+import { StyledWrapper, titleSx } from './styled';
 
-import RoomHeaderStyle from "./RoomHeader.module.css";
-
-interface RoomHeaderProps extends ClassNameProps {
-	readonly header: string;
-}
-
-export const RoomHeader: FC<RoomHeaderProps> = ({ header, className }) => {
-	const { t } = useTranslation("room");
+export const RoomHeader: React.FC<CommonProps> = (props) => {
+	const { className } = props;
+	const { t } = useTranslation('room');
+	const { data: room } = useQuery(getRoomQuery);
 	const groupsLink = usePrepareLink({
 		query: {
-			[GET_PARAMS.popup]: POPUPS.groups,
+			[routes.GET_PARAMS.popup]: routes.POPUPS.groups,
 		},
 	});
 	const options: MenuOption[] = [
 		{
-			label: t("menus.groups"),
+			label: t('actions.groups'),
 			to: groupsLink,
 		},
 	];
+	const isLoading = !room;
+
 	return (
-		<Block className={classNames(RoomHeaderStyle.block, className)}>
-			<Text className={RoomHeaderStyle.header} component="h2">
-				{header}
-			</Text>
-			<EditMenu options={options} alt="Open room edit menu" />
-		</Block>
+		<StyledWrapper className={className}>
+			<Typography variant='h4' component='h1' sx={titleSx}>
+				{isLoading ? <Skeleton width='15em' /> : room!.name}
+			</Typography>
+			<EditMenu options={options} alt='Open room edit menu' />
+		</StyledWrapper>
 	);
 };

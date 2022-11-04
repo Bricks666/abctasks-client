@@ -1,90 +1,67 @@
-import React, { FC, useCallback, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import classNames from "classnames";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { useTranslation } from "react-i18next";
-import { ClassNameProps } from "@/interfaces/common";
-import { RegistrationRequest } from "@/interfaces/requests";
-import { clearRegistrationError, registrationFx } from "@/models/Auth";
-import { Location, useNavigate } from "react-router-dom";
-import { useLocationState } from "@/hooks";
-import { Button } from "@/ui/Button";
-import { TextField } from "../TextField";
-import { validationSchema } from "./validator";
-import { useRegistrationError } from "./hooks";
-import { Alert } from "@/ui/Alert";
-import { AlertTitle } from "@/ui/AlertTitle";
-
-import RegistrationFormStyle from "./RegistrationForm.module.css";
+import * as React from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Button } from '@mui/material';
+import { joiResolver } from '@hookform/resolvers/joi';
+import { useTranslation } from 'react-i18next';
+import { useMutation } from '@farfetched/react';
+import { RegistrationRequest } from '@/api';
+import { registrationMutation } from '@/models/auth';
+import { CommonProps } from '@/types';
+import { validationSchema } from './validator';
+import { StyledForm } from './styles';
+import { Field } from '@/ui/Field';
 
 const initialValues: RegistrationRequest = {
-	login: "",
-	password: "",
-	repeatPassword: "",
+	login: '',
+	password: '',
+	repeatPassword: '',
 };
 
-export const RegistrationForm: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("registration");
-	const { register, handleSubmit, formState } = useForm<RegistrationRequest>({
+export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('registration');
+	const { start } = useMutation(registrationMutation);
+	const { control, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
 	});
-	const navigate = useNavigate();
-	const state = useLocationState<Location>();
-	const onSubmit = useCallback(
+	const onSubmit = React.useCallback<SubmitHandler<RegistrationRequest>>(
 		async (values) => {
-			await registrationFx(values);
-			navigate("/login", { replace: true, state });
+			start(values);
 		},
-		[navigate, state]
+		[]
 	);
 	const { isSubmitting, isDirty } = formState;
-	const error = useRegistrationError();
-
-	useEffect(() => {
-		return () => {
-			clearRegistrationError();
-		};
-	}, []);
-
 	return (
-		<form
-			className={classNames(RegistrationFormStyle.form, className)}
-			onSubmit={handleSubmit(onSubmit)}
-		>
-			{error && (
-				<Alert
-					type="outline"
-					color="error"
-					onClose={() => clearRegistrationError()}
-				>
-					<AlertTitle>Registration error</AlertTitle>
-					This user already registered
-				</Alert>
-			)}
-			<TextField
-				{...register("login")}
-				label={t("fields.login")}
+		<StyledForm className={className} onSubmit={handleSubmit(onSubmit)}>
+			<Field
+				name='login'
+				control={control}
+				label={t('fields.login')}
 				disabled={isSubmitting}
+				autoComplete='new-password'
 			/>
-			<TextField
-				{...register("login")}
-				label={t("fields.password")}
-				type="password"
+			<Field
+				name='password'
+				control={control}
+				type='password'
+				label={t('fields.password')}
 				disabled={isSubmitting}
+				autoComplete='new-password'
 			/>
-			<TextField
-				{...register("repeatPassword")}
-				label={t("fields.passwordRepeat")}
-				type="password"
+			<Field
+				name='repeatPassword'
+				control={control}
+				type='password'
+				label={t('fields.passwordRepeat')}
 				disabled={isSubmitting}
+				autoComplete='new-password'
 			/>
 			<Button
-				className={RegistrationFormStyle.button}
 				disabled={!isDirty || isSubmitting}
-			>
-				{t("buttons.submit")}
+				type='submit'
+				variant='outlined'>
+				{t('actions.submit')}
 			</Button>
-		</form>
+		</StyledForm>
 	);
 };

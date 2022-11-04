@@ -1,14 +1,14 @@
-import React, { FC } from "react";
-import { useLocation } from "react-router-dom";
-import { useLocationState } from "@/hooks";
-import { ClassNameProps } from "@/interfaces/common";
-import { Link } from "@/ui/Link";
+import * as React from 'react';
+import { Button } from '@mui/material';
+import { useLocation, Link } from 'react-router-dom';
+import { useLocationState } from '@/hooks';
+import { CommonProps } from '@/types';
 
-interface SaveLinkComponent extends ClassNameProps {
+export interface SaveLinkProps extends CommonProps {
 	to: string;
 }
 
-export const SaveLink: FC<SaveLinkComponent> = ({
+export const SaveLink: React.FC<React.PropsWithChildren<SaveLinkProps>> = ({
 	className,
 	to,
 	children,
@@ -17,8 +17,13 @@ export const SaveLink: FC<SaveLinkComponent> = ({
 	const state = useLocationState();
 
 	return (
-		<Link className={className} type="react" to={to} state={state || location}>
+		<Button
+			className={className}
+			to={to}
+			state={state || location}
+			variant='text'
+			component={Link}>
 			{children}
-		</Link>
+		</Button>
 	);
 };

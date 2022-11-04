@@ -1,28 +1,35 @@
-import React, { FC } from "react";
-import { useTranslation } from "react-i18next";
-import { LoginForm } from "@/components/LoginForm";
-import { SaveLink } from "@/components/SaveLink";
-import { ClassNameProps } from "@/interfaces/common";
-import { ContentLayout } from "@/ui/ContentLayout";
-import { Text } from "@/ui/Text";
-import { usePageTitle } from "@/hooks";
+import * as React from 'react';
+import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useStore } from 'effector-react';
+import { $IsAuth } from '@/models/auth';
+import { usePageTitle } from '@/hooks';
+import { CommonProps } from '@/types';
+import { AuthLayout } from '@/layouts/AuthLayout';
+import { LoginForm } from '@/components/LoginForm';
+import { StyledLink } from './styles';
 
-import LoginPageStyle from "./LoginPage.module.css";
+const LoginPage: React.FC<CommonProps> = ({ className }) => {
+	const isAuth = useStore($IsAuth);
+	const navigate = useNavigate();
+	const { t } = useTranslation('login');
+	usePageTitle(t('title'));
 
-export const LoginPage: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("login");
-	usePageTitle(t("title"));
+	React.useEffect(() => {
+		if (isAuth) {
+			navigate('/rooms', { replace: true });
+		}
+	}, [isAuth]);
+
 	return (
-		<main className={className}>
-			<ContentLayout className={LoginPageStyle.layout}>
-				<Text className={LoginPageStyle.header} component="h2" align="center">
-					{t("title")}
-				</Text>
-				<LoginForm className={LoginPageStyle.form} />
-				<SaveLink className={LoginPageStyle.link} to="/registration">
-					{t("links.registration")}
-				</SaveLink>
-			</ContentLayout>
-		</main>
+		<AuthLayout className={className}>
+			<Typography variant='h3' component='h2' align='center'>
+				{t('title')}
+			</Typography>
+			<LoginForm />
+			<StyledLink to='/registration'>{t('actions.registration')}</StyledLink>
+		</AuthLayout>
 	);
 };
+export default LoginPage;
