@@ -7,8 +7,7 @@ import {
 	StandardResponse,
 	StandardSuccessResponse,
 } from '@/types';
-import { dataExtractor } from '../mapData/dataExtractor';
-import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
+import { getIsSuccessResponseValidator, dataExtractor } from '../utils';
 import { Progress, progress } from './types';
 import { getProgressFx } from './units';
 

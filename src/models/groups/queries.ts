@@ -12,6 +12,7 @@ import {
 	StandardResponse,
 	StandardSuccessResponse,
 } from '@/types';
+import { dataExtractor, getIsSuccessResponseValidator } from '../utils';
 import { Group, group } from './types';
 import {
 	createGroupFx,
@@ -19,9 +20,6 @@ import {
 	removeGroupFx,
 	updateGroupFx,
 } from './units';
-import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
-import { dataExtractor } from '../mapData/dataExtractor';
-import { WithoutAccess } from '../auth';
 
 export const getGroupsQuery = createQuery<
 	number,
@@ -33,11 +31,11 @@ export const getGroupsQuery = createQuery<
 	effect: getGroupsFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(group))),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (data: StandardSuccessResponse<Group[]>) => dataExtractor(data),
+	mapData: dataExtractor,
 });
 
 export const createGroupMutation = createMutation<
-	WithoutAccess<CreateGroupRequest>,
+	CreateGroupRequest,
 	StandardResponse<Group>,
 	StandardSuccessResponse<Group>,
 	StandardFailError
@@ -47,7 +45,7 @@ export const createGroupMutation = createMutation<
 });
 
 export const updateGroupMutation = createMutation<
-	WithoutAccess<UpdateGroupRequest>,
+	UpdateGroupRequest,
 	StandardResponse<Group>,
 	StandardSuccessResponse<Group>,
 	StandardFailError
@@ -57,7 +55,7 @@ export const updateGroupMutation = createMutation<
 });
 
 export const removeGroupMutation = createMutation<
-	WithoutAccess<RemoveGroupRequest>,
+	RemoveGroupRequest,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	StandardFailError

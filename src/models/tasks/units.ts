@@ -1,16 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { createGate } from 'effector-react';
+import { StandardFailError } from '@/packages/request';
 import { StandardResponse, InRoomRequest } from '@/types';
-import { Task } from './types';
 import {
 	GetTaskRequest,
 	CreateTaskRequest,
 	UpdateTaskRequest,
 	RemoveTaskRequest,
 } from '@/api';
-import { StandardFailError } from '@/packages/request';
-import { attachWithAccessToken } from '../auth';
+import { Task } from './types';
 
 export const TasksDomain = createDomain('TasksDomain');
 
@@ -26,35 +25,23 @@ export const getTaskFx = TasksDomain.effect<
 	StandardFailError
 >('getTaskFx');
 
-export const createTaskBaseFx = TasksDomain.effect<
+export const createTaskFx = TasksDomain.effect<
 	CreateTaskRequest,
 	StandardResponse<Task>,
 	StandardFailError
->('createTaskBaseFx');
-export const createTaskFx = attachWithAccessToken({
-	effect: createTaskBaseFx,
-	name: 'createTaskFx',
-});
+>('createTaskFx');
 
-export const updateTaskBaseFx = TasksDomain.effect<
+export const updateTaskFx = TasksDomain.effect<
 	UpdateTaskRequest,
 	StandardResponse<Task>,
 	StandardFailError
->('updateTaskBaseFx');
-export const updateTaskFx = attachWithAccessToken({
-	effect: updateTaskBaseFx,
-	name: 'updateTaskFx',
-});
+>('updateTaskFx');
 
-export const removeTaskBaseFx = TasksDomain.effect<
+export const removeTaskFx = TasksDomain.effect<
 	RemoveTaskRequest,
 	StandardResponse<boolean>,
 	StandardFailError
->('removeTaskBaseFx');
-export const removeTaskFx = attachWithAccessToken({
-	effect: removeTaskBaseFx,
-	name: 'removeTaskFx',
-});
+>('removeTaskFx');
 
 export const tasksGate = createGate<InRoomRequest>({
 	domain: TasksDomain,

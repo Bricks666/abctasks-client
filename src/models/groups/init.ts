@@ -9,18 +9,18 @@ import {
 import { groupsApi } from '@/api';
 import {
 	getGroupsFx,
-	createGroupBaseFx,
-	removeGroupBaseFx,
-	updateGroupBaseFx,
+	createGroupFx,
+	removeGroupFx,
+	updateGroupFx,
 	groupsGate,
 	$GroupsMap,
 } from './units';
 import { createGroupsMap } from './utils';
 
 getGroupsFx.use(groupsApi.getAll);
-createGroupBaseFx.use(groupsApi.create);
-updateGroupBaseFx.use(groupsApi.update);
-removeGroupBaseFx.use(groupsApi.remove);
+createGroupFx.use(groupsApi.create);
+updateGroupFx.use(groupsApi.update);
+removeGroupFx.use(groupsApi.remove);
 
 sample({
 	clock: createGroupMutation.finished.success,

@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { createGate } from 'effector-react';
+import { StandardFailError } from '@/packages/request';
 import { StandardResponse, InRoomRequest } from '@/types';
 import { Progress } from './types';
-import { StandardFailError } from '@/packages/request';
 
 export const ProgressDomain = createDomain('ProgressDomain');
 

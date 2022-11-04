@@ -10,57 +10,38 @@ import {
 } from '@/api';
 import { StandardResponse, InRoomRequest } from '@/types';
 import { Room } from './types';
-import { attachWithAccessToken } from '../auth';
 
 export const RoomsDomain = createDomain('RoomsDomain');
 
-export const getRoomsBaseFx = RoomsDomain.effect<
+export const getRoomsFx = RoomsDomain.effect<
 	GetRoomsRequest,
 	StandardResponse<Room[]>,
 	StandardFailError
->('getRoomsBaseFx');
-export const getRoomsFx = attachWithAccessToken({
-	effect: getRoomsBaseFx,
-	name: 'getRoomsFx',
-});
+>('getRoomsFx');
 
 export const getRoomFx = RoomsDomain.effect<
 	number,
 	StandardResponse<Room>,
 	StandardFailError
->('getRoomBaseFx');
+>('getRoomFx');
 
-export const createRoomBaseFx = RoomsDomain.effect<
+export const createRoomFx = RoomsDomain.effect<
 	CreateRoomRequest,
 	StandardResponse<Room>,
 	StandardFailError
->('createRoomBaseFx');
-export const createRoomFx = attachWithAccessToken({
-	effect: createRoomBaseFx,
-	name: 'createRoomFx',
-});
+>('createRoomFx');
 
-export const updateRoomBaseFx = RoomsDomain.effect<
+export const updateRoomFx = RoomsDomain.effect<
 	UpdateRoomRequest,
 	StandardResponse<Room>,
 	StandardFailError
->('updateRoomBaseFx');
+>('updateRoomFx');
 
-export const updateRoomFx = attachWithAccessToken({
-	effect: updateRoomBaseFx,
-	name: 'updateRoomFx',
-});
-
-export const removeRoomBaseFx = RoomsDomain.effect<
+export const removeRoomFx = RoomsDomain.effect<
 	RemoveRoomRequest,
 	StandardResponse<boolean>,
 	StandardFailError
->('removeRoomBaseFx');
-
-export const removeRoomFx = attachWithAccessToken({
-	effect: removeRoomBaseFx,
-	name: 'removeRoomFx',
-});
+>('removeRoomFx');
 
 export const roomsGate = createGate({
 	domain: RoomsDomain,

@@ -8,7 +8,7 @@ import {
 } from '@/types';
 import { activity, Activity } from './types';
 import { getActivitiesFx } from './units';
-import { dataExtractor } from '../mapData/dataExtractor';
+import { dataExtractor } from '../utils/dataExtractor';
 
 export const getActivitiesQuery = createQuery<
 	number,

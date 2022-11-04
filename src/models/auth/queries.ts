@@ -11,7 +11,7 @@ import {
 } from '@/types';
 import { authFx, loginFx, logoutFx, registrationFx } from './units';
 import { authResponse, AuthResponse } from './types';
-import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
+import { getIsSuccessResponseValidator } from '../utils/isSuccessResponse';
 
 export const authQuery = createQuery<
 	void,

@@ -3,9 +3,9 @@ import { tasksApi } from '@/api';
 import {
 	getTasksFx,
 	getTaskFx,
-	createTaskBaseFx,
-	removeTaskBaseFx,
-	updateTaskBaseFx,
+	createTaskFx,
+	removeTaskFx,
+	updateTaskFx,
 	tasksGate,
 	taskGate,
 } from './units';
@@ -19,9 +19,9 @@ import {
 
 getTasksFx.use(tasksApi.getAll);
 getTaskFx.use(tasksApi.getOne);
-createTaskBaseFx.use(tasksApi.create);
-updateTaskBaseFx.use(tasksApi.update);
-removeTaskBaseFx.use(tasksApi.remove);
+createTaskFx.use(tasksApi.create);
+updateTaskFx.use(tasksApi.update);
+removeTaskFx.use(tasksApi.remove);
 
 sample({
 	clock: createTaskMutation.finished.success,

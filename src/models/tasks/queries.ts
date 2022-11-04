@@ -1,4 +1,4 @@
-import { createMutation, createQuery } from '@farfetched/core';
+import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array, Boolean } from 'runtypes';
 import {
@@ -14,16 +14,15 @@ import {
 	removeTaskFx,
 	updateTaskFx,
 } from './units';
-import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
-import { dataExtractor } from '../mapData/dataExtractor';
 import {
 	GetTaskRequest,
 	CreateTaskRequest,
 	UpdateTaskRequest,
 	RemoveTaskRequest,
 } from '@/api';
-import { WithoutAccess } from '../auth';
 import { StandardFailError } from '@/packages/request';
+import { getIsSuccessResponseValidator, dataExtractor } from '../utils';
+import { createMutationWithAccess } from '../fabrics';
 
 export const getTasksQuery = createQuery<
 	number,
@@ -35,8 +34,7 @@ export const getTasksQuery = createQuery<
 	effect: getTasksFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(task))),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (data: StandardSuccessResponse<Task[]>) =>
-		dataExtractor<Task[]>(data),
+	mapData: dataExtractor,
 });
 
 export const getTaskQuery = createQuery<
@@ -49,11 +47,11 @@ export const getTaskQuery = createQuery<
 	effect: getTaskFx,
 	contract: runtypeContract(getStandardSuccessResponse(task)),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (data: StandardSuccessResponse<Task>) => dataExtractor<Task>(data),
+	mapData: dataExtractor,
 });
 
-export const createTaskMutation = createMutation<
-	WithoutAccess<CreateTaskRequest>,
+export const createTaskMutation = createMutationWithAccess<
+	CreateTaskRequest,
 	StandardResponse<Task>,
 	StandardSuccessResponse<Task>,
 	StandardFailError
@@ -62,8 +60,8 @@ export const createTaskMutation = createMutation<
 	contract: runtypeContract(getStandardSuccessResponse(task)),
 });
 
-export const updateTaskMutation = createMutation<
-	WithoutAccess<UpdateTaskRequest>,
+export const updateTaskMutation = createMutationWithAccess<
+	UpdateTaskRequest,
 	StandardResponse<Task>,
 	StandardSuccessResponse<Task>,
 	StandardFailError
@@ -72,8 +70,8 @@ export const updateTaskMutation = createMutation<
 	contract: runtypeContract(getStandardSuccessResponse(task)),
 });
 
-export const removeTaskMutation = createMutation<
-	WithoutAccess<RemoveTaskRequest>,
+export const removeTaskMutation = createMutationWithAccess<
+	RemoveTaskRequest,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	StandardFailError

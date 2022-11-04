@@ -3,10 +3,10 @@ import { sample } from 'effector-logger';
 import { roomsApi } from '@/api';
 import {
 	getRoomFx,
-	getRoomsBaseFx,
-	createRoomBaseFx,
-	removeRoomBaseFx,
-	updateRoomBaseFx,
+	getRoomsFx,
+	createRoomFx,
+	removeRoomFx,
+	updateRoomFx,
 	roomsGate,
 	roomGate,
 } from './units';
@@ -18,11 +18,11 @@ import {
 	getRoomQuery,
 } from './queries';
 
-getRoomsBaseFx.use(roomsApi.getAll);
+getRoomsFx.use(roomsApi.getAll);
 getRoomFx.use(roomsApi.getOne);
-removeRoomBaseFx.use(roomsApi.remove);
-updateRoomBaseFx.use(roomsApi.update);
-createRoomBaseFx.use(roomsApi.create);
+removeRoomFx.use(roomsApi.remove);
+updateRoomFx.use(roomsApi.update);
+createRoomFx.use(roomsApi.create);
 
 sample({
 	clock: [

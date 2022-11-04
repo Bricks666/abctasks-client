@@ -8,7 +8,6 @@ import {
 	RemoveGroupRequest,
 } from '@/api';
 import { StandardResponse, InRoomRequest } from '@/types';
-import { attachWithAccessToken } from '../auth';
 import { Group, GroupsMap } from './types';
 
 export const GroupsDomain = createDomain('GroupsDomain');
@@ -26,35 +25,23 @@ export const getGroupsFx = GroupsDomain.effect<
 	StandardFailError
 >('getGroupsFx');
 
-export const createGroupBaseFx = GroupsDomain.effect<
+export const createGroupFx = GroupsDomain.effect<
 	CreateGroupRequest,
 	StandardResponse<Group>,
 	StandardFailError
->('createGroupBaseFx');
-export const createGroupFx = attachWithAccessToken({
-	effect: createGroupBaseFx,
-	name: 'createGroupBaseFx',
-});
+>('createGroupFx');
 
-export const updateGroupBaseFx = GroupsDomain.effect<
+export const updateGroupFx = GroupsDomain.effect<
 	UpdateGroupRequest,
 	StandardResponse<Group>,
 	StandardFailError
->('updateGroupBaseFx');
-export const updateGroupFx = attachWithAccessToken({
-	effect: updateGroupBaseFx,
-	name: 'updateGroupBaseFx',
-});
+>('updateGroupFx');
 
-export const removeGroupBaseFx = GroupsDomain.effect<
+export const removeGroupFx = GroupsDomain.effect<
 	RemoveGroupRequest,
 	StandardResponse<boolean>,
 	StandardFailError
->('removeGroupBaseFx');
-export const removeGroupFx = attachWithAccessToken({
-	effect: removeGroupBaseFx,
-	name: 'removeGroupBaseFx',
-});
+>('removeGroupFx');
 
 export const groupsGate = createGate<InRoomRequest>({
 	domain: GroupsDomain,

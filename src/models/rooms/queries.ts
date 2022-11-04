@@ -1,4 +1,4 @@
-import { createQuery, createMutation } from '@farfetched/core';
+import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array, Boolean } from 'runtypes';
 import { StandardFailError } from '@/packages/request';
@@ -13,20 +13,19 @@ import {
 	StandardResponse,
 	StandardSuccessResponse,
 } from '@/types';
+import { dataExtractor, getIsSuccessResponseValidator } from '../utils';
+import { createMutationWithAccess, createQueryWithAccess } from '../fabrics';
 import { room, Room } from './types';
 import {
-	createRoomFx,
-	removeRoomFx,
 	getRoomFx,
 	getRoomsFx,
+	removeRoomFx,
+	createRoomFx,
 	updateRoomFx,
 } from './units';
-import { dataExtractor } from '../mapData/dataExtractor';
-import { getIsSuccessResponseValidator } from '../validation/isSuccessResponse';
-import { WithoutAccess } from '../auth';
 
-export const getRoomsQuery = createQuery<
-	WithoutAccess<GetRoomsRequest>,
+export const getRoomsQuery = createQueryWithAccess<
+	GetRoomsRequest,
 	StandardResponse<Room[]>,
 	StandardFailError,
 	StandardSuccessResponse<Room[]>,
@@ -35,8 +34,7 @@ export const getRoomsQuery = createQuery<
 	effect: getRoomsFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(room))),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (response: StandardSuccessResponse<Room[]>) =>
-		dataExtractor<Room[]>(response),
+	mapData: dataExtractor,
 });
 
 export const getRoomQuery = createQuery<
@@ -49,12 +47,11 @@ export const getRoomQuery = createQuery<
 	effect: getRoomFx,
 	contract: runtypeContract(getStandardSuccessResponse(room)),
 	validate: getIsSuccessResponseValidator(),
-	mapData: (response: StandardSuccessResponse<Room>) =>
-		dataExtractor<Room>(response),
+	mapData: dataExtractor,
 });
 
-export const createRoomMutation = createMutation<
-	WithoutAccess<CreateRoomRequest>,
+export const createRoomMutation = createMutationWithAccess<
+	CreateRoomRequest,
 	StandardResponse<Room>,
 	StandardSuccessResponse<Room>,
 	StandardFailError
@@ -63,8 +60,8 @@ export const createRoomMutation = createMutation<
 	contract: runtypeContract(getStandardSuccessResponse(room)),
 });
 
-export const updateRoomMutation = createMutation<
-	WithoutAccess<UpdateRoomRequest>,
+export const updateRoomMutation = createMutationWithAccess<
+	UpdateRoomRequest,
 	StandardResponse<Room>,
 	StandardSuccessResponse<Room>,
 	StandardFailError
@@ -73,8 +70,8 @@ export const updateRoomMutation = createMutation<
 	contract: runtypeContract(getStandardSuccessResponse(room)),
 });
 
-export const removeRoomMutation = createMutation<
-	WithoutAccess<RemoveRoomRequest>,
+export const removeRoomMutation = createMutationWithAccess<
+	RemoveRoomRequest,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	StandardFailError
