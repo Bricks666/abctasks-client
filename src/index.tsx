@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'atomic-router-react';
 import { theme } from '@/types';
 import { App } from './app';
+import { router } from './routes';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import './models/init';
 import './i18n';
@@ -15,7 +16,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-	<BrowserRouter>
+	<RouterProvider router={router}>
 		<ThemeProvider theme={theme}>
 			<StyledEngineProvider injectFirst>
 				<ErrorBoundary>
@@ -23,5 +24,5 @@ root.render(
 				</ErrorBoundary>
 			</StyledEngineProvider>
 		</ThemeProvider>
-	</BrowserRouter>
+	</RouterProvider>
 );

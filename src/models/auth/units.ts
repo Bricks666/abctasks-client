@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { createDomain } from 'effector-logger';
+import { combine, createDomain } from 'effector-logger';
 import { createGate } from 'effector-react';
 import { LoginRequest, RegistrationRequest } from '@/api';
 import { StandardResponse, VoidResponse } from '@/types';
@@ -9,8 +9,7 @@ export const Auth = createDomain('AuthDomain');
 
 export const $AuthUser = Auth.store<User | null>(null);
 export const $AccessToken = Auth.store<string | null>(null);
-export const $IsAuth = $AuthUser.map<boolean>((state) => !!state);
-export const $IsRegistered = Auth.store<boolean>(false);
+export const $IsAuth = combine($AuthUser, (state) => !!state);
 
 export const loginFx = Auth.effect<
 	LoginRequest,
@@ -28,7 +27,7 @@ export const logoutFx = Auth.effect<void, StandardResponse<boolean>>(
 	'logoutFx'
 );
 
-export const authGate = createGate({
+export const AuthGate = createGate({
 	domain: Auth,
 	name: 'authGate',
 });

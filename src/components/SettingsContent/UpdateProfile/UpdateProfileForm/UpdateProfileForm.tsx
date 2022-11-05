@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { $AuthUser } from '@/models/auth';
 import { useImageURL } from '@/hooks';
 import { Field } from '@/ui/Field';
@@ -9,7 +9,7 @@ import { Field } from '@/ui/Field';
 import styles from './UpdateProfileForm.module.css';
 
 export const UpdateProfileForm: React.FC = () => {
-	const userInfo = useStore($AuthUser)!;
+	const userInfo = useUnit($AuthUser)!;
 	const { watch, handleSubmit, formState, control } = useForm<any>({
 		defaultValues: userInfo,
 	});

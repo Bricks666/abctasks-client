@@ -2,7 +2,7 @@ import { Query, AddType } from '@/types';
 
 export const prepareQuery = (
 	query: Query,
-	defaultValue?: string,
+	defaultValue?: Record<string, string>,
 	deletedQuery: AddType<Query, boolean> = {}
 ): URLSearchParams => {
 	const newQuery = new URLSearchParams(defaultValue);

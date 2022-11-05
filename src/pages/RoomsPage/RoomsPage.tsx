@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { roomsGate } from '@/models/rooms';
+import { RoomsGate } from '@/models/rooms';
 import { usePageTitle } from '@/hooks';
 import { CommonProps } from '@/types';
 import { MainLayout } from '@/layouts/MainLayout';
@@ -14,7 +14,7 @@ import styles from './RoomsPage.module.css';
 const RoomsPage: React.FC<CommonProps> = (props) => {
 	const { className } = props;
 	const { t } = useTranslation('rooms');
-	useGate(roomsGate);
+	useGate(RoomsGate);
 	usePageTitle(t('title'));
 
 	return (

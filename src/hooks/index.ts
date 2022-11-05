@@ -1,4 +1,3 @@
-export { useLocationState } from './useLocationState';
 export { usePrepareLink } from './usePrepareLink';
 export { useGetParam } from './useGetParam';
 export { useClosePopup } from './useClosePopup';
@@ -7,3 +6,4 @@ export { useGroupedTasks } from './useGroupedTasks';
 export { useToggle } from './useToggle';
 export { useImageURL } from './useImageURL';
 export { useGroup } from './useGroup';
+export { useParam } from './useParam';

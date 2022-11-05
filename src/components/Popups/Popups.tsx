@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { Outlet } from 'react-router-dom';
 import { routes } from '@/const';
 import { BasePopupProps } from '@/types';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import {
 	CreateTaskPopup,
 	UpdateTaskPopup,
@@ -29,22 +27,19 @@ export const Popups = () => {
 
 	return (
 		<>
-			<Outlet />
-			<React.Suspense fallback={<LoadingIndicator />}>
-				{mountedPopups.map((mountedPopup) => {
-					const Component = popupsMap[mountedPopup];
+			{mountedPopups.map((mountedPopup) => {
+				const Component = popupsMap[mountedPopup];
 
-					if (!Component) {
-						return null;
-					}
-					return (
-						<Component
-							isOpen={popups.includes(mountedPopup)}
-							key={mountedPopup}
-						/>
-					);
-				})}
-			</React.Suspense>
+				if (!Component) {
+					return null;
+				}
+				return (
+					<Component
+						isOpen={popups.includes(mountedPopup)}
+						key={mountedPopup}
+					/>
+				);
+			})}
 		</>
 	);
 };

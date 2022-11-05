@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { useGate, useStore } from 'effector-react';
+import { useGate, useUnit } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { authGate, authQuery } from '@/models/auth';
+import { AuthGate, authQuery } from '@/models/auth';
+import { Popups } from '@/components/Popups';
+import { AppRoutes } from '@/components/AppRoutes';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import { LoadingWrapper } from '@/ui/LoadingWrapper';
-import { AppRoutes } from '@/components/AppRoutes';
 
 import styles from './App.module.css';
 
 export const App: React.FC = () => {
-	const status = useStore(authQuery.$status);
+	const status = useUnit(authQuery.$status);
 	const { t } = useTranslation('common');
-	useGate(authGate);
+	useGate(AuthGate);
 
 	const isLoading = status === 'initial' || status === 'pending';
 
@@ -21,6 +22,7 @@ export const App: React.FC = () => {
 			isLoading={isLoading}
 			loadingIndicator={<LoadingIndicator text={t('loading')} />}>
 			<AppRoutes />
+			<Popups />
 		</LoadingWrapper>
 	);
 };

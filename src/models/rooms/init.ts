@@ -1,14 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { sample } from 'effector-logger';
 import { roomsApi } from '@/api';
+import { closeCreateRoomPopup, closeUpdateRoomPopup } from '../routing';
 import {
 	getRoomFx,
 	getRoomsFx,
 	createRoomFx,
 	removeRoomFx,
 	updateRoomFx,
-	roomsGate,
-	roomGate,
+	RoomsGate,
+	RoomGate,
 } from './units';
 import {
 	createRoomMutation,
@@ -35,13 +36,23 @@ sample({
 });
 
 sample({
-	clock: roomsGate.open,
+	clock: updateRoomMutation.finished.success,
+	target: closeUpdateRoomPopup,
+});
+
+sample({
+	clock: createRoomMutation.finished.success,
+	target: closeCreateRoomPopup,
+});
+
+sample({
+	clock: RoomsGate.open,
 	fn: () => ({}),
 	target: getRoomsQuery.start,
 });
 
 sample({
-	clock: roomGate.open,
+	clock: RoomGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getRoomQuery.start,
 });

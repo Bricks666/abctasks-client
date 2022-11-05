@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Avatar, Menu } from '@mui/material';
 import { useMutation } from '@farfetched/react';
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { $AuthUser, logoutMutation } from '@/models/auth';
 import { useToggle } from '@/hooks';
@@ -10,23 +10,23 @@ import { MenuOption, MenuItem } from '@/ui/MenuItem';
 
 export const ProfileLink: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('header');
-	const user = useStore($AuthUser);
+	const user = useUnit($AuthUser);
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
-	const { start } = useMutation(logoutMutation);
+	const logout = useMutation(logoutMutation);
 
-	const options: MenuOption[] = React.useMemo(
+	const options: MenuOption<object>[] = React.useMemo(
 		() => [
 			{
 				label: t('actions.settings'),
-				to: '/settings',
+				onClick: console.log,
 			},
 			{
 				label: t('actions.logout'),
-				onClick: () => start(),
+				onClick: () => logout.start(),
 			},
 		],
-		[start]
+		[]
 	);
 
 	if (!user) {

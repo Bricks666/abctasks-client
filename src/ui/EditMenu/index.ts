@@ -1,1 +1,1 @@
-export { EditMenu, type EditMenuComponent } from './EditMenu';
+export { EditMenu, type EditMenuProps as EditMenuComponent } from './EditMenu';

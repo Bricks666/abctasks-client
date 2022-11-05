@@ -1,11 +1,12 @@
 import { forward, sample } from 'effector';
+import { redirect } from 'atomic-router';
 import { authApi } from '@/api';
+import { loginRoute, roomsRoute } from '@/routes';
 import {
 	$AccessToken,
 	$AuthUser,
-	$IsRegistered,
 	authFx,
-	authGate,
+	AuthGate,
 	loginFx,
 	logoutFx,
 	registrationFx,
@@ -16,6 +17,7 @@ import {
 	logoutMutation,
 	registrationMutation,
 } from './queries';
+import { goToState, saveCurrentLocation } from '../routing';
 
 authFx.use(authApi.auth);
 loginFx.use(authApi.login);
@@ -48,12 +50,24 @@ sample({
 });
 
 sample({
-	clock: registrationMutation.finished.success,
-	fn: () => true,
-	target: $IsRegistered,
+	clock: AuthGate.open,
+	target: [authQuery.start, saveCurrentLocation],
+});
+
+redirect({
+	clock: loginMutation.finished.success,
+	route: roomsRoute,
+});
+
+redirect({
+	clock: [
+		logoutMutation.finished.success,
+		registrationMutation.finished.success,
+	],
+	route: loginRoute,
 });
 
 sample({
-	clock: authGate.open,
-	target: authQuery.start,
+	clock: authQuery.finished.success,
+	target: goToState,
 });

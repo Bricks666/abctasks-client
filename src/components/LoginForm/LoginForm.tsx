@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useMutation } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
@@ -26,15 +26,9 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 		resolver: joiResolver(validationSchema),
 	});
 	const { isDirty, isSubmitting } = formState;
-	const onSubmit = React.useCallback<SubmitHandler<LoginRequest>>(
-		async (values) => {
-			login.start(values);
-		},
-		[]
-	);
 
 	return (
-		<StyledWrapper className={className} onSubmit={handleSubmit(onSubmit)}>
+		<StyledWrapper className={className} onSubmit={handleSubmit(login.start)}>
 			<Field
 				name='login'
 				control={control}

@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@farfetched/react';
 import { useGate } from 'effector-react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { getTaskQuery, taskGate, updateTaskMutation } from '@/models/tasks';
+import { getTaskQuery, TaskGate, updateTaskMutation } from '@/models/tasks';
 import { BasePopupProps, CommonProps } from '@/types';
 import { useGetParam, useClosePopup } from '@/hooks';
 import { routes } from '@/const';
@@ -18,7 +18,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	const { t } = useTranslation('popups');
 	const { id: roomId } = useParams();
 	const id = Number(useGetParam(routes.GET_PARAMS.taskId));
-	useGate(taskGate, { id, roomId: Number(roomId) });
+	useGate(TaskGate, { id, roomId: Number(roomId) });
 	const onClose = useClosePopup(
 		routes.GET_PARAMS.taskId,
 		routes.GET_PARAMS.popup

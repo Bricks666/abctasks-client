@@ -12,7 +12,7 @@ import {
 	createGroupFx,
 	removeGroupFx,
 	updateGroupFx,
-	groupsGate,
+	GroupsGate,
 	$GroupsMap,
 } from './units';
 import { createGroupsMap } from './utils';
@@ -65,7 +65,7 @@ sample({
 });
 
 sample({
-	clock: groupsGate.open,
+	clock: GroupsGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getGroupsQuery.start,
 });

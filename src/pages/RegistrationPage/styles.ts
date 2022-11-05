@@ -1,7 +1,6 @@
-import { styled } from '@mui/material';
-import { SaveLink } from '@/components/SaveLink';
+import { Button, styled } from '@mui/material';
 
-export const StyledLink = styled(SaveLink)`
+export const StyledLink = styled(Button)`
 	justify-self: end;
 
 	width: max-content;

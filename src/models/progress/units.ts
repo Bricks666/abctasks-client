@@ -13,7 +13,7 @@ export const getProgressFx = ProgressDomain.effect<
 	StandardFailError
 >('getProgressFx');
 
-export const progressGate = createGate<InRoomRequest>({
+export const ProgressGate = createGate<InRoomRequest>({
 	domain: ProgressDomain,
 	name: 'progressGate',
 });

@@ -3,9 +3,10 @@ import { useGate } from 'effector-react';
 import { useMutation, useQuery } from '@farfetched/react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { getRoomQuery, roomGate, updateRoomMutation } from '@/models/rooms';
+import { getRoomQuery, RoomGate, updateRoomMutation } from '@/models/rooms';
+import { closeUpdateRoomPopup } from '@/models/routing';
 import { BasePopupProps } from '@/types';
-import { useGetParam, useClosePopup } from '@/hooks';
+import { useGetParam } from '@/hooks';
 import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
 import { LoadingIndicator } from '@/ui/LoadingIndicator';
@@ -16,11 +17,7 @@ import styles from './UpdateRoomPopup.module.css';
 export const UpdateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	const { t } = useTranslation('popups');
 	const roomId = Number(useGetParam(routes.GET_PARAMS.roomId));
-	useGate(roomGate, { roomId });
-	const onClose = useClosePopup(
-		routes.GET_PARAMS.roomId,
-		routes.POPUPS.createRoom
-	);
+	useGate(RoomGate, { roomId });
 	const { data: room } = useQuery(getRoomQuery);
 	const updateRoom = useMutation(updateRoomMutation);
 
@@ -28,9 +25,8 @@ export const UpdateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	const onSubmit = React.useCallback<SubmitHandler<RoomFormValues>>(
 		(values) => {
 			updateRoom.start({ ...values, id: Number(roomId) });
-			onClose();
 		},
-		[roomId, onClose]
+		[roomId]
 	);
 
 	const defaultValues = React.useMemo<RoomFormValues>(
@@ -42,7 +38,10 @@ export const UpdateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	);
 
 	return (
-		<MainPopup {...props} header={t('room.updateTitle')} onClose={onClose}>
+		<MainPopup
+			{...props}
+			header={t('room.updateTitle')}
+			onClose={() => closeUpdateRoomPopup()}>
 			{loading ? (
 				<LoadingIndicator />
 			) : (

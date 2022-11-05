@@ -7,8 +7,9 @@
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:sonarjs/recommended",
-		/* 		"plugin:effector/recommended",
-		"plugin:effector/react", */
+		"plugin:effector/recommended",
+		"plugin:effector/react",
+		"plugin:effector/scope",
 		"plugin:import/recommended",
 		"plugin:import/warnings",
 		"plugin:import/typescript",
@@ -23,7 +24,7 @@
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"plugins": ["react", "@typescript-eslint"],
+	"plugins": ["react", "@typescript-eslint", "effector"],
 	"rules": {
 		/* STANDARD */
 		"no-use-before-define": "off",

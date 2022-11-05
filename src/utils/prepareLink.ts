@@ -1,5 +1,5 @@
-import { Location } from 'react-router-dom';
 import { Query, AddType } from '@/types';
+import { Location } from '@/models/routing';
 import { prepareQuery } from './prepareQuery';
 
 export interface PrepareLinkParams {
@@ -15,9 +15,9 @@ export const prepareLink = (
 ): string => {
 	const { path, query = {}, keepOldQuery = false, deleteQuery } = params;
 
-	let newQuery = prepareQuery(query, keepOldQuery ? location.search : '');
-	newQuery = prepareQuery(query, '', deleteQuery);
-	const to = path ?? location.pathname;
+	let newQuery = prepareQuery(query, keepOldQuery ? location.query : {});
+	newQuery = prepareQuery(query, {}, deleteQuery);
+	const to = path ?? location.path;
 
 	return `${to}?${newQuery}`;
 };

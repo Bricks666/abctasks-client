@@ -6,8 +6,8 @@ import {
 	createTaskFx,
 	removeTaskFx,
 	updateTaskFx,
-	tasksGate,
-	taskGate,
+	TasksGate,
+	TaskGate,
 } from './units';
 import {
 	createTaskMutation,
@@ -60,12 +60,12 @@ sample({
 });
 
 sample({
-	clock: tasksGate.open,
+	clock: TasksGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getTasksQuery.start,
 });
 
 sample({
-	clock: taskGate.open,
+	clock: TaskGate.open,
 	target: getTaskQuery.start,
 });
