@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import { Breadcrumbs, Typography, Link } from '@mui/material';
 import { Link as AtomicLink } from 'atomic-router-react';
-import { router } from '@/routes';
+import { router } from '@/models/routing';
 import { CommonProps } from '@/types';
 import { breadcrumbsMap } from './data';
 

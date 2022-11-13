@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
 import { useMutation } from '@farfetched/react';
 import { TaskStatus, Task, updateTaskMutation } from '@/models/tasks';
+import { useParam } from '@/hooks';
+import { roomRoute } from '@/routes';
 import { ui } from '@/const';
 import { CommonProps } from '@/types';
 import { TaskListHeader } from './TaskListHeader';
@@ -23,7 +24,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 	columnStatus,
 	header,
 }) => {
-	const { id: roomId } = useParams();
+	const roomId = useParam(roomRoute, 'id');
 	const moveTask = useMutation(updateTaskMutation);
 	const onDrop = React.useCallback<React.DragEventHandler>(
 		(evt) => {
@@ -48,10 +49,12 @@ export const TasksList: React.FC<TasksListProps> = ({
 			spacing={1}
 			onDrop={onDrop}
 			onDragOver={onDragOver}>
-			<TaskListHeader columnStatus={columnStatus}>{header}</TaskListHeader>
+			<TaskListHeader columnStatus={columnStatus} roomId={roomId}>
+				{header}
+			</TaskListHeader>
 			<StyledList spacing={1}>
 				{loading
-					? ui.getEmptyArray(4).map(() => <SkeletonTaskCard />)
+					? ui.getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />)
 					: tasks.map((task) => <TaskCard {...task} key={task.id} />)}
 			</StyledList>
 		</StyledWrapper>

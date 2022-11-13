@@ -1,6 +1,6 @@
 import { sample } from 'effector';
-import { HistoryPushParams, querySync, RouteQuery } from 'atomic-router';
-import { controls, router } from '@/routes';
+import { HistoryPushParams, querySync, redirect } from 'atomic-router';
+import { roomsRoute } from '@/routes';
 import { routes } from '@/const';
 import {
 	$groupId,
@@ -16,8 +16,10 @@ import {
 	closeUpdateGroupPopup,
 	closeUpdateRoomPopup,
 	closeUpdateTaskPopup,
+	controls,
 	goToState,
 	removePopup,
+	router,
 	saveCurrentLocation,
 	setState,
 } from './units';
@@ -30,10 +32,6 @@ querySync({
 		[routes.GET_PARAMS.taskId]: $taskId,
 		[routes.GET_PARAMS.taskStatus]: $taskStatus,
 		[routes.GET_PARAMS.roomId]: $roomId,
-	},
-	cleanup: {
-		empty: true,
-		irrelevant: false,
 	},
 });
 
@@ -95,8 +93,8 @@ sample({
 
 sample({
 	clock: saveCurrentLocation,
-	source: [router.$path, router.$query],
-	fn: ([path, query]: [string, RouteQuery]) => {
+	source: { path: router.$path, query: router.$query },
+	fn: ({ path, query }) => {
 		return { path, query };
 	},
 	target: $location,
@@ -114,12 +112,32 @@ sample({
 	target: router.push,
 });
 
-$groupId.reset(closeUpdateGroupPopup, closeCreateGroupPopup);
-$taskId.reset(closeCreateTaskPopup, closeUpdateTaskPopup);
-$taskStatus.reset(closeUpdateTaskPopup);
-$roomId.reset(closeCreateRoomPopup, closeUpdateRoomPopup);
-// $location.reset(goToState);
+sample({
+	clock: [closeUpdateGroupPopup, closeCreateGroupPopup],
+	target: $groupId.reinit!,
+});
 
-$location.watch(console.debug);
+sample({
+	clock: [closeCreateTaskPopup, closeUpdateTaskPopup],
+	target: $taskId.reinit!,
+});
 
-router.push.watch(console.debug);
+sample({
+	clock: [closeCreateTaskPopup, closeUpdateTaskPopup],
+	target: $taskId.reinit!,
+});
+
+sample({
+	clock: [closeUpdateTaskPopup],
+	target: $taskStatus.reinit!,
+});
+
+sample({
+	clock: [closeCreateRoomPopup, closeUpdateRoomPopup],
+	target: $roomId.reinit!,
+});
+
+redirect({
+	clock: router.routeNotFound,
+	route: roomsRoute,
+});

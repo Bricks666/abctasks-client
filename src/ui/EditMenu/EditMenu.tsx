@@ -15,19 +15,6 @@ export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
 	const { options, className, size, alt } = props;
 	const [isOpen, toggle] = useToggle();
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
-	const closedOptions = React.useMemo<MenuOption<object>[]>(
-		() =>
-			options.map((option) => ({
-				...option,
-				onClick: (evt) => {
-					if (option.onClick) {
-						option.onClick(evt);
-					}
-					toggle();
-				},
-			})),
-		[options]
-	);
 	return (
 		<div className={className}>
 			<IconButton
@@ -39,7 +26,7 @@ export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
 				<MoreHorizIcon />
 			</IconButton>
 			<Menu anchorEl={reference} open={isOpen} onClose={toggle}>
-				{closedOptions.map((option) => (
+				{options.map((option) => (
 					<MenuItem {...option} key={option.label} />
 				))}
 			</Menu>

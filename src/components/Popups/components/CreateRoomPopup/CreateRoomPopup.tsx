@@ -1,10 +1,9 @@
 import * as React from 'react';
+import { useUnit } from 'effector-react';
 import { useMutation } from '@farfetched/react';
-import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { createRoomMutation } from '@/models/rooms';
-import { routes } from '@/const';
-import { useClosePopup } from '@/hooks';
+import { closeCreateRoomPopup } from '@/models/routing';
 import { BasePopupProps } from '@/types';
 import { MainPopup } from '@/ui/MainPopup';
 import { RoomForm, RoomFormValues } from '../RoomForm';
@@ -17,22 +16,18 @@ const defaultValues: RoomFormValues = {
 };
 
 export const CreateRoomPopup: React.FC<BasePopupProps> = (props) => {
-	const onClose = useClosePopup(routes.POPUPS.createRoom);
 	const { t } = useTranslation('popups');
+	const onClose = useUnit(closeCreateRoomPopup);
 	const createRoom = useMutation(createRoomMutation);
 
-	const onSubmit = React.useCallback<SubmitHandler<RoomFormValues>>(
-		(values) => {
-			createRoom.start(values);
-			onClose();
-		},
-		[onClose]
-	);
 	return (
-		<MainPopup {...props} header={t('room.updateTitle')} onClose={onClose}>
+		<MainPopup
+			{...props}
+			header={t('room.updateTitle')}
+			onClose={() => onClose()}>
 			<RoomForm
 				className={styles.form}
-				onSubmit={onSubmit}
+				onSubmit={createRoom.start}
 				defaultValues={defaultValues}
 				buttonText={t('actions.create', { ns: 'common' })}
 			/>

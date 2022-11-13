@@ -1,4 +1,3 @@
-export { router, controls } from './router';
 export {
 	routes,
 	loginRoute,

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+/* import { Navigate, Route, Routes } from 'react-router-dom';
 import { routes } from '@/const';
 import { UpdateProfile } from './UpdateProfile';
 
-import styles from './SettingsContent.module.css';
+import styles from './SettingsContent.module.css'; */
 
 export const SettingsContent: React.FC = () => {
-	return (
+	return null; /* (
 		<Routes>
 			<Route
 				path={routes.ROUTES.SETTINGS_PROFILE}
@@ -17,5 +17,5 @@ export const SettingsContent: React.FC = () => {
 				element={<Navigate to={routes.ROUTES.SETTINGS_PROFILE} />}
 			/>
 		</Routes>
-	);
+	); */
 };

@@ -71,3 +71,8 @@ sample({
 	clock: authQuery.finished.success,
 	target: goToState,
 });
+
+redirect({
+	clock: authQuery.finished.failure,
+	route: loginRoute,
+});

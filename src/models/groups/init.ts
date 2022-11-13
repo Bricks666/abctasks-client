@@ -1,12 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { sample } from 'effector-logger';
+import { groupsApi } from '@/api';
+import { closeCreateGroupPopup, closeUpdateGroupPopup } from '../routing';
 import {
 	createGroupMutation,
 	getGroupsQuery,
 	removeGroupMutation,
 	updateGroupMutation,
 } from './queries';
-import { groupsApi } from '@/api';
 import {
 	getGroupsFx,
 	createGroupFx,
@@ -74,4 +75,14 @@ sample({
 	source: getGroupsQuery.$data,
 	fn: (data) => (data ? createGroupsMap(data) : {}),
 	target: $GroupsMap,
+});
+
+sample({
+	clock: createGroupMutation.finished.success,
+	target: closeCreateGroupPopup,
+});
+
+sample({
+	clock: updateGroupMutation.finished.success,
+	target: closeUpdateGroupPopup,
 });

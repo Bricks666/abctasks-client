@@ -16,6 +16,7 @@ import {
 	removeTaskMutation,
 	updateTaskMutation,
 } from './queries';
+import { closeCreateTaskPopup, closeUpdateTaskPopup } from '../routing';
 
 getTasksFx.use(tasksApi.getAll);
 getTaskFx.use(tasksApi.getOne);
@@ -68,4 +69,14 @@ sample({
 sample({
 	clock: TaskGate.open,
 	target: getTaskQuery.start,
+});
+
+sample({
+	clock: updateTaskMutation.finished.success,
+	target: closeUpdateTaskPopup,
+});
+
+sample({
+	clock: createTaskMutation.finished.success,
+	target: closeCreateTaskPopup,
 });

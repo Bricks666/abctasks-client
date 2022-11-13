@@ -1,6 +1,5 @@
 export { usePrepareLink } from './usePrepareLink';
 export { useGetParam } from './useGetParam';
-export { useClosePopup } from './useClosePopup';
 export { usePageTitle } from './usePageTitle';
 export { useGroupedTasks } from './useGroupedTasks';
 export { useToggle } from './useToggle';

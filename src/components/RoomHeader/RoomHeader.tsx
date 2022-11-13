@@ -1,30 +1,34 @@
 import * as React from 'react';
 import { Skeleton, Typography } from '@mui/material';
-import { useQuery } from '@farfetched/react';
+import { useUnit } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { getRoomQuery } from '@/models/rooms';
-import { usePrepareLink } from '@/hooks';
 import { routes } from '@/const';
+import { roomRoute } from '@/routes';
+import { useParam } from '@/hooks';
+import { CommonProps } from '@/types';
 import { EditMenu } from '@/ui/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
-import { CommonProps } from '@/types';
 import { StyledWrapper, titleSx } from './styled';
 
 export const RoomHeader: React.FC<CommonProps> = (props) => {
 	const { className } = props;
 	const { t } = useTranslation('room');
-	const { data: room } = useQuery(getRoomQuery);
-	const groupsLink = usePrepareLink({
-		query: {
-			[routes.GET_PARAMS.popup]: routes.POPUPS.groups,
-		},
-	});
-	const options: MenuOption[] = [
-		{
-			label: t('actions.groups'),
-			to: groupsLink,
-		},
-	];
+	const roomId = useParam(roomRoute, 'id');
+	const room = useUnit(getRoomQuery.$data);
+	const options = React.useMemo<MenuOption<any>[]>(
+		() => [
+			{
+				label: t('actions.groups'),
+				to: roomRoute,
+				params: { id: roomId },
+				query: {
+					[routes.GET_PARAMS.popup]: routes.POPUPS.groups,
+				},
+			},
+		],
+		[roomId]
+	);
 	const isLoading = !room;
 
 	return (
