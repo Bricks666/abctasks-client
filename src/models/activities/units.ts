@@ -18,7 +18,7 @@ export const getActivitiesFx = ActivitiesDomain.effect<
 export const getActivities =
 	ActivitiesDomain.event<number>('getActivitiesEvent');
 
-export const activityGate = createGate<InRoomRequest>({
+export const ActivityGate = createGate<InRoomRequest>({
 	domain: ActivitiesDomain,
 	name: 'activitiesGate',
 });

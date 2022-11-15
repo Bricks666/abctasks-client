@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { EditMenu } from '@/ui/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
-import { usePrepareLink } from '@/hooks';
+import { roomsRoute } from '@/routes';
 import { routes } from '@/const';
 import { CommonProps } from '@/types';
 
@@ -12,19 +12,19 @@ import styles from './RoomsHeader.module.css';
 
 export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('rooms');
-	const createLink = usePrepareLink({
-		query: {
-			[routes.GET_PARAMS.popup]: routes.POPUPS.createRoom,
-		},
-	});
-	const options = React.useMemo<MenuOption[]>(
+
+	const options = React.useMemo<MenuOption<any>[]>(
 		() => [
 			{
 				label: 'Create room',
-				to: createLink,
+				to: roomsRoute,
+				params: {},
+				query: {
+					[routes.GET_PARAMS.popup]: routes.POPUPS.createRoom,
+				},
 			},
 		],
-		[createLink]
+		[]
 	);
 	return (
 		<header className={cn(styles.header, className)}>

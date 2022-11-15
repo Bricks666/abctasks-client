@@ -1,9 +1,17 @@
 {
-	"presets": ["@babel/env", "@babel/typescript", "@babel/react"],
+	"presets": [
+		"@babel/env",
+		"@babel/typescript",
+		"@babel/react",
+		"atomic-router/babel-preset"
+	],
 	"plugins": [
 		[
 			"effector-logger/babel-plugin",
-			{ "inspector": true, "effector": { "factories": ["@farfetched/core"] } }
+			{
+				"inspector": true,
+				"effector": { "factories": ["@farfetched/core", "atomic-router"] }
+			}
 		]
 	]
 }

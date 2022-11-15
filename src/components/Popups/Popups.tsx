@@ -1,12 +1,9 @@
 import * as React from 'react';
-import { Outlet } from 'react-router-dom';
 import { routes } from '@/const';
 import { BasePopupProps } from '@/types';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
 import {
 	CreateTaskPopup,
 	UpdateTaskPopup,
-	GroupsPopup,
 	UpdateGroupPopup,
 	CreateGroupPopup,
 	CreateRoomPopup,
@@ -17,7 +14,6 @@ import { usePopups } from './hooks';
 const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
 	[routes.POPUPS.createTask]: CreateTaskPopup,
 	[routes.POPUPS.updateTask]: UpdateTaskPopup,
-	[routes.POPUPS.groups]: GroupsPopup,
 	[routes.POPUPS.createGroup]: CreateGroupPopup,
 	[routes.POPUPS.updateGroup]: UpdateGroupPopup,
 	[routes.POPUPS.createRoom]: CreateRoomPopup,
@@ -29,22 +25,19 @@ export const Popups = () => {
 
 	return (
 		<>
-			<Outlet />
-			<React.Suspense fallback={<LoadingIndicator />}>
-				{mountedPopups.map((mountedPopup) => {
-					const Component = popupsMap[mountedPopup];
+			{mountedPopups.map((mountedPopup) => {
+				const Component = popupsMap[mountedPopup];
 
-					if (!Component) {
-						return null;
-					}
-					return (
-						<Component
-							isOpen={popups.includes(mountedPopup)}
-							key={mountedPopup}
-						/>
-					);
-				})}
-			</React.Suspense>
+				if (!Component) {
+					return null;
+				}
+				return (
+					<Component
+						isOpen={popups.includes(mountedPopup)}
+						key={mountedPopup}
+					/>
+				);
+			})}
 		</>
 	);
 };

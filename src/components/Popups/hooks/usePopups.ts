@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useGetParam } from '@/hooks';
-import { routes } from '@/const';
+import { useUnit } from 'effector-react';
+import { $popups } from '@/models/routing';
 
 const parsePopups = (popups: string | null) => {
 	return popups ? popups.split(',') : [];
@@ -9,8 +9,8 @@ const parsePopups = (popups: string | null) => {
 let timeoutId: null | number = null;
 
 export const usePopups = () => {
-	const rawPopups = useGetParam(routes.GET_PARAMS.popup);
-	const [mountedPopups, setMountedPopups] = useState<string[]>(
+	const rawPopups = useUnit($popups);
+	const [mountedPopups, setMountedPopups] = useState<string[]>(() =>
 		parsePopups(rawPopups)
 	);
 

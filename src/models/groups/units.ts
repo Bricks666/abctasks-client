@@ -43,7 +43,7 @@ export const removeGroupFx = GroupsDomain.effect<
 	StandardFailError
 >('removeGroupFx');
 
-export const groupsGate = createGate<InRoomRequest>({
+export const GroupsGate = createGate<InRoomRequest>({
 	domain: GroupsDomain,
 	name: 'groupsGate',
 });

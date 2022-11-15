@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
@@ -19,20 +19,16 @@ const initialValues: RegistrationRequest = {
 
 export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('registration');
-	const { start } = useMutation(registrationMutation);
+	const registration = useMutation(registrationMutation);
 	const { control, handleSubmit, formState } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
 	});
-	const onSubmit = React.useCallback<SubmitHandler<RegistrationRequest>>(
-		async (values) => {
-			start(values);
-		},
-		[]
-	);
 	const { isSubmitting, isDirty } = formState;
 	return (
-		<StyledForm className={className} onSubmit={handleSubmit(onSubmit)}>
+		<StyledForm
+			className={className}
+			onSubmit={handleSubmit(registration.start)}>
 			<Field
 				name='login'
 				control={control}

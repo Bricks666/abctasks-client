@@ -1,38 +1,46 @@
 import { ComponentType, lazy } from 'react';
-import { routes as r } from '@/const';
+import { createRoute, redirect, UnmappedRouteObject } from 'atomic-router';
 
-interface Route {
-	readonly path: string;
-	readonly Component: ComponentType;
-	readonly isOnlyAuth?: true;
-}
+export const roomsRoute = createRoute();
+export const roomRoute = createRoute<{ id: number }>();
+export const loginRoute = createRoute();
+export const registrationRoute = createRoute();
+export const notFoundRoute = createRoute();
+roomRoute.$params.watch(console.debug);
+
+redirect({
+	clock: notFoundRoute.opened,
+	route: roomsRoute,
+});
 
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
 const RoomsPage = lazy(() => import('@/pages/RoomsPage'));
 const RoomPage = lazy(() => import('@/pages/RoomPage'));
-const NotFoundPage = lazy(() => import('@/pages/NotFound'));
+
+interface Route extends UnmappedRouteObject<any> {
+	readonly Component: ComponentType;
+}
 
 export const routes: Route[] = [
 	{
-		path: r.ROUTES.ROOMS,
+		path: '/rooms',
 		Component: RoomsPage,
-		isOnlyAuth: true,
+		route: roomsRoute,
 	},
 	{
-		path: r.ROUTES.ROOM,
+		path: '/rooms/:id',
 		Component: RoomPage,
+		route: roomRoute,
 	},
 	{
-		path: r.ROUTES.LOGIN,
+		path: '/login',
 		Component: LoginPage,
+		route: loginRoute,
 	},
 	{
-		path: r.ROUTES.REGISTRATION,
+		path: '/registration',
 		Component: RegistrationPage,
-	},
-	{
-		path: r.ROUTES.NOT_FOUND,
-		Component: NotFoundPage,
+		route: registrationRoute,
 	},
 ];

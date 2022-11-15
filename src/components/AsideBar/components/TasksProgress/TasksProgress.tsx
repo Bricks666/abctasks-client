@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Typography } from '@mui/material';
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { useQuery } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { getProgressQuery } from '@/models/progress';
@@ -14,7 +14,7 @@ import { StyledList, StyledWrapper, titleSx } from './styles';
 export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('room');
 	const { data: progresses } = useQuery(getProgressQuery);
-	const groups = useStore($GroupsMap);
+	const groups = useUnit($GroupsMap);
 
 	const isLoading = !groups || !progresses;
 
@@ -25,7 +25,7 @@ export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
 			</Typography>
 			<StyledList spacing={1.5}>
 				{isLoading
-					? ui.getEmptyArray(2).map(() => <SkeletonTaskProgress />)
+					? ui.getEmptyArray(2).map((_, i) => <SkeletonTaskProgress key={i} />)
 					: progresses.map((progress) => {
 							const group = groups[progress.groupId];
 							if (!group) {

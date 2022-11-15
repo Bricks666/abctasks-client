@@ -1,30 +1,13 @@
-interface GetParams {
-	readonly popup: string;
-	readonly taskStatus: string;
-	readonly taskId: string;
-	readonly groupId: string;
-	readonly roomId: string;
-}
-
-export const GET_PARAMS: GetParams = {
+export const GET_PARAMS = {
 	popup: 'popup',
 	taskStatus: 'task-status',
 	taskId: 'task-id',
 	groupId: 'group-id',
 	roomId: 'room-id',
-};
+	tab: 'tab',
+} as const;
 
-interface Popups {
-	readonly createTask: string;
-	readonly updateTask: string;
-	readonly groups: string;
-	readonly createGroup: string;
-	readonly updateGroup: string;
-	readonly createRoom: string;
-	readonly updateRoom: string;
-}
-
-export const POPUPS: Popups = {
+export const POPUPS = {
 	createTask: 'create-task',
 	updateTask: 'update-task',
 	groups: 'groups',
@@ -32,7 +15,7 @@ export const POPUPS: Popups = {
 	updateGroup: 'update-group',
 	createRoom: 'create-room',
 	updateRoom: 'update-room',
-};
+} as const;
 
 export const ROUTES = {
 	ROOMS: 'rooms',
@@ -43,4 +26,4 @@ export const ROUTES = {
 	SETTINGS_PROFILE: 'profile',
 	SETTINGS_GENERIC: 'generic',
 	NOT_FOUND: '*',
-};
+} as const;

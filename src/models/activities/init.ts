@@ -1,6 +1,6 @@
 import { sample } from 'effector';
 import { activitiesApi } from '@/api';
-import { getActivitiesFx, activityGate } from './units';
+import { getActivitiesFx, ActivityGate } from './units';
 import {
 	createTaskMutation,
 	removeTaskMutation,
@@ -31,7 +31,7 @@ sample({
 });
 
 sample({
-	clock: activityGate.open,
+	clock: ActivityGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getActivitiesQuery.start,
 });

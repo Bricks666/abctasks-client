@@ -3,7 +3,7 @@ import { SxProps, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 import { routes } from '@/const';
-import { usePrepareLink } from '@/hooks';
+import { roomRoute } from '@/routes';
 import { CommonProps } from '@/types';
 import { EditMenu } from '@/ui/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
@@ -12,6 +12,7 @@ import { StyledWrapper } from './styles';
 
 export interface TaskListHeaderComponent extends CommonProps {
 	readonly columnStatus: TaskStatus;
+	readonly roomId: number;
 }
 
 const titleSx: SxProps = {
@@ -20,23 +21,24 @@ const titleSx: SxProps = {
 
 export const TaskListHeader: React.FC<
 	React.PropsWithChildren<TaskListHeaderComponent>
-> = ({ children, className, columnStatus }) => {
+> = (props) => {
+	const { children, className, columnStatus, roomId } = props;
 	const { t } = useTranslation('common');
-	const createTaskLink = usePrepareLink({
-		query: {
-			[routes.GET_PARAMS.popup]: routes.POPUPS.createTask,
-			[routes.GET_PARAMS.taskStatus]: columnStatus,
-		},
-	});
-	const options: MenuOption[] = React.useMemo(
+
+	const options = React.useMemo<MenuOption<any>[]>(
 		() => [
 			{
 				icon: <AddIcon />,
 				label: t('actions.create'),
-				to: createTaskLink,
+				to: roomRoute,
+				params: { id: roomId },
+				query: {
+					[routes.GET_PARAMS.popup]: routes.POPUPS.createTask,
+					[routes.GET_PARAMS.taskStatus]: columnStatus,
+				},
 			},
 		],
-		[createTaskLink]
+		[columnStatus]
 	);
 
 	return (

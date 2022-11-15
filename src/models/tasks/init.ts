@@ -6,8 +6,8 @@ import {
 	createTaskFx,
 	removeTaskFx,
 	updateTaskFx,
-	tasksGate,
-	taskGate,
+	TasksGate,
+	TaskGate,
 } from './units';
 import {
 	createTaskMutation,
@@ -16,6 +16,7 @@ import {
 	removeTaskMutation,
 	updateTaskMutation,
 } from './queries';
+import { closeCreateTaskPopup, closeUpdateTaskPopup } from '../routing';
 
 getTasksFx.use(tasksApi.getAll);
 getTaskFx.use(tasksApi.getOne);
@@ -60,12 +61,22 @@ sample({
 });
 
 sample({
-	clock: tasksGate.open,
+	clock: TasksGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getTasksQuery.start,
 });
 
 sample({
-	clock: taskGate.open,
+	clock: TaskGate.open,
 	target: getTaskQuery.start,
+});
+
+sample({
+	clock: updateTaskMutation.finished.success,
+	target: closeUpdateTaskPopup,
+});
+
+sample({
+	clock: createTaskMutation.finished.success,
+	target: closeCreateTaskPopup,
 });

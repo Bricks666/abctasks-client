@@ -43,12 +43,12 @@ export const removeTaskFx = TasksDomain.effect<
 	StandardFailError
 >('removeTaskFx');
 
-export const tasksGate = createGate<InRoomRequest>({
+export const TasksGate = createGate<InRoomRequest>({
 	domain: TasksDomain,
 	name: 'tasksGate',
 });
 
-export const taskGate = createGate<GetTaskRequest>({
+export const TaskGate = createGate<GetTaskRequest>({
 	domain: TasksDomain,
 	name: 'taskGate',
 });

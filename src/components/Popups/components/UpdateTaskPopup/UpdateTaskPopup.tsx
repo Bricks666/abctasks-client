@@ -1,30 +1,27 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import { useMutation, useQuery } from '@farfetched/react';
-import { useGate } from 'effector-react';
+import { useMutation } from '@farfetched/react';
+import { useGate, useUnit } from 'effector-react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { getTaskQuery, taskGate, updateTaskMutation } from '@/models/tasks';
+import { getTaskQuery, TaskGate, updateTaskMutation } from '@/models/tasks';
 import { BasePopupProps, CommonProps } from '@/types';
-import { useGetParam, useClosePopup } from '@/hooks';
-import { routes } from '@/const';
+import { useParam } from '@/hooks';
 import { MainPopup } from '@/ui/MainPopup';
 import { TaskFormValues } from '../TaskForm';
 import { StyledForm, StyledSkeleton } from './styles';
+import { roomRoute } from '@/routes';
+import { $taskId, closeUpdateTaskPopup } from '@/models/routing';
 
 export interface UpdateTaskPopupProps extends CommonProps, BasePopupProps {}
 
 export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	const { t } = useTranslation('popups');
-	const { id: roomId } = useParams();
-	const id = Number(useGetParam(routes.GET_PARAMS.taskId));
-	useGate(taskGate, { id, roomId: Number(roomId) });
-	const onClose = useClosePopup(
-		routes.GET_PARAMS.taskId,
-		routes.GET_PARAMS.popup
-	);
-	const { data: task } = useQuery(getTaskQuery);
+	const roomId = useParam(roomRoute, 'id');
+	const id = useUnit($taskId)!;
+	const onClose = useUnit(closeUpdateTaskPopup);
+	const task = useUnit(getTaskQuery.$data);
 	const updateTask = useMutation(updateTaskMutation);
+	useGate(TaskGate, { id, roomId: Number(roomId) });
 
 	const onSubmit = React.useCallback<SubmitHandler<TaskFormValues>>(
 		(values) => {
@@ -33,9 +30,8 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 				id,
 				roomId: Number(roomId),
 			});
-			onClose();
 		},
-		[roomId, id, onClose]
+		[roomId, id]
 	);
 
 	const defaultValues = React.useMemo<TaskFormValues>(

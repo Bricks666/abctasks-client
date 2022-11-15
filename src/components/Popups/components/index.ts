@@ -4,4 +4,3 @@ export * from './CreateTaskPopup';
 export * from './UpdateGroupPopup';
 export * from './UpdateRoomPopup';
 export * from './UpdateTaskPopup';
-export * from './GroupsPopup';

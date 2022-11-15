@@ -8,17 +8,17 @@ import {
 	CardHeader,
 	Typography,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link } from 'atomic-router-react';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { removeRoomMutation, Room } from '@/models/rooms';
-import { usePrepareLink } from '@/hooks';
-import { routes } from '@/const';
+import { roomRoute, roomsRoute } from '@/routes';
 import { CommonProps } from '@/types';
 import { EditMenu } from '@/ui/EditMenu';
 import { MenuOption } from '@/ui/MenuItem';
 
 import styles from './RoomCard.module.css';
+import { routes } from '@/const';
 
 export interface RoomCardProps extends CommonProps, Room {}
 
@@ -30,24 +30,23 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 }) => {
 	const { t } = useTranslation('rooms');
 	const removeRoom = useMutation(removeRoomMutation);
-	const updateLink = usePrepareLink({
-		query: {
-			[routes.GET_PARAMS.popup]: routes.POPUPS.updateRoom,
-			[routes.GET_PARAMS.roomId]: id,
-		},
-	});
-	const options = React.useMemo<MenuOption[]>(
+	const options = React.useMemo<MenuOption<object>[]>(
 		() => [
 			{
 				label: t('actions.update', { ns: 'common' }),
-				to: updateLink,
+				to: roomsRoute,
+				params: {},
+				query: {
+					[routes.GET_PARAMS.popup]: routes.POPUPS.updateRoom,
+					[routes.GET_PARAMS.roomId]: id,
+				},
 			},
 			{
 				label: t('actions.remove', { ns: 'common' }),
 				onClick: () => removeRoom.start({ id }),
 			},
 		],
-		[updateLink, id]
+		[id]
 	);
 	return (
 		<Card className={cn(styles.card, className)}>
@@ -62,7 +61,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 				</Typography>
 			</CardContent>
 			<CardActions>
-				<Button component={Link} type='text' to={`${id}`}>
+				<Button variant='text' to={roomRoute} params={{ id }} component={Link}>
 					Перейти
 				</Button>
 			</CardActions>

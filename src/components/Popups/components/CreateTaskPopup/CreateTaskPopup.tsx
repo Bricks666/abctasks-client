@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useUnit } from 'effector-react';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
-import { createTaskMutation, TaskStatus } from '@/models/tasks';
-import { useGetParam, useClosePopup } from '@/hooks';
+import { createTaskMutation } from '@/models/tasks';
+import { $taskStatus, closeCreateTaskPopup } from '@/models/routing';
+import { roomRoute } from '@/routes';
+import { useParam } from '@/hooks';
 import { BasePopupProps, CommonProps } from '@/types';
-import { routes } from '@/const';
 import { MainPopup } from '@/ui/MainPopup';
 import { TaskForm, TaskFormValues } from '../TaskForm';
 
@@ -16,11 +17,10 @@ export interface CreateTaskPopupProps extends CommonProps, BasePopupProps {}
 
 export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 	const { t } = useTranslation('popups');
-	const { id: roomId } = useParams();
-	const onClose = useClosePopup(routes.POPUPS.createTask);
+	const roomId = useParam(roomRoute, 'id');
+	const onClose = useUnit(closeCreateTaskPopup);
+	const status = useUnit($taskStatus) || 'ready';
 	const createTask = useMutation(createTaskMutation);
-	const status =
-		useGetParam<TaskStatus>(routes.GET_PARAMS.taskStatus) || 'ready';
 
 	const onSubmit = React.useCallback<SubmitHandler<TaskFormValues>>(
 		(values) => {
@@ -28,9 +28,8 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 				...values,
 				roomId: Number(roomId),
 			});
-			onClose();
 		},
-		[roomId, onClose]
+		[roomId]
 	);
 
 	const defaultState = React.useMemo<TaskFormValues>(
@@ -43,7 +42,10 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 	);
 
 	return (
-		<MainPopup {...props} header={t('task.createTitle')} onClose={onClose}>
+		<MainPopup
+			{...props}
+			header={t('task.createTitle')}
+			onClose={() => onClose()}>
 			<TaskForm
 				className={styles.form}
 				onSubmit={onSubmit}

@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { useUnit } from 'effector-react';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler } from 'react-hook-form';
 import { updateGroupMutation } from '@/models/groups';
-import { useClosePopup, useGetParam, useGroup } from '@/hooks';
-import { routes } from '@/const';
+import { $groupId, closeUpdateGroupPopup } from '@/models/routing';
+import { roomRoute } from '@/routes';
+import { useGroup, useParam } from '@/hooks';
 import { BasePopupProps, CommonProps } from '@/types';
 import { MainPopup } from '@/ui/MainPopup';
 import { GroupForm, GroupFormValues } from '../GroupForm';
@@ -19,14 +20,11 @@ export const UpdateGroupPopup: React.FC<
 	React.PropsWithChildren<UpdateGroupPopupProps>
 > = (props) => {
 	const { t } = useTranslation('popups');
-	const { id: roomId } = useParams();
-	const id = useGetParam(routes.GET_PARAMS.groupId);
+	const roomId = useParam(roomRoute, 'id');
+	const id = useUnit($groupId);
+	const onClose = useUnit(closeUpdateGroupPopup);
 	const group = useGroup(Number(id));
 	const updateGroup = useMutation(updateGroupMutation);
-	const onClose = useClosePopup(
-		routes.GET_PARAMS.groupId,
-		routes.POPUPS.updateGroup
-	);
 	const isLoading = !group && id !== null;
 
 	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(
@@ -36,9 +34,8 @@ export const UpdateGroupPopup: React.FC<
 				roomId: Number(roomId),
 				id: Number(id),
 			});
-			onClose();
 		},
-		[id, roomId, onClose]
+		[id, roomId]
 	);
 
 	const changeGroup = React.useMemo<GroupFormValues>(
@@ -53,7 +50,7 @@ export const UpdateGroupPopup: React.FC<
 	return (
 		<MainPopup
 			{...props}
-			onClose={onClose}
+			onClose={() => onClose()}
 			header={t('group.updateTitle')}
 			alt={t('group.updateTitle')}>
 			{isLoading ? (

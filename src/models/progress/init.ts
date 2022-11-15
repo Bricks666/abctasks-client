@@ -5,7 +5,7 @@ import {
 	removeTaskMutation,
 	updateTaskMutation,
 } from '../tasks';
-import { getProgressFx, progressGate } from './units';
+import { getProgressFx, ProgressGate } from './units';
 import { removeGroupMutation, updateGroupMutation } from '../groups';
 import { getProgressQuery } from './queries';
 
@@ -26,7 +26,7 @@ sample({
 });
 
 sample({
-	clock: progressGate.open,
+	clock: ProgressGate.open,
 	fn: ({ roomId }) => roomId,
 	target: getProgressQuery.start,
 });

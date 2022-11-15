@@ -4,7 +4,8 @@ import {
 	ListItemText,
 	MenuItem as MenuItemMUI,
 } from '@mui/material';
-import { To, Link } from 'react-router-dom';
+import { Link } from 'atomic-router-react';
+import { RouteInstance, RouteQuery } from 'atomic-router';
 import { CommonProps } from '@/types';
 
 export interface BaseMenuOption {
@@ -15,25 +16,33 @@ export interface BaseMenuOption {
 export interface ButtonMenuOption extends BaseMenuOption {
 	readonly onClick: React.MouseEventHandler<HTMLButtonElement>;
 	readonly to?: never;
+	readonly params?: never;
+	readonly query?: never;
 }
 
-export interface LinkMenuOption extends BaseMenuOption {
-	readonly onClick?: never;
-	readonly to: To;
+export interface LinkMenuOption<P extends object> extends BaseMenuOption {
+	readonly onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	readonly to: RouteInstance<P>;
+	readonly params: P;
+	readonly query?: RouteQuery;
 }
 
-export type MenuOption = ButtonMenuOption | LinkMenuOption;
+export type MenuOption<P extends object> = ButtonMenuOption | LinkMenuOption<P>;
 
-export type MenuItemProps = CommonProps &
-	MenuOption & {
+export type MenuItemProps<P extends object> = CommonProps &
+	MenuOption<P> & {
 		readonly role?: React.AriaRole;
 	};
 
-export const MenuItem: React.FC<MenuItemProps> = (props) => {
-	const { label, icon, onClick, to, ...rest } = props;
-	const itemButtonProps = to ? { component: Link, to } : { onClick };
+export const MenuItem = <P extends object>(
+	props: React.PropsWithChildren<MenuItemProps<P>>
+) => {
+	const { label, icon, onClick, to, params, query, ...rest } = props;
+	const itemButtonProps = to
+		? { component: Link, to, params, query, onClick }
+		: { onClick, component: 'button' };
 	return (
-		<MenuItemMUI {...(itemButtonProps as any)} {...rest}>
+		<MenuItemMUI {...rest} {...(itemButtonProps as any)}>
 			{icon && <ListItemIcon>{icon}</ListItemIcon>}
 			<ListItemText>{label}</ListItemText>
 		</MenuItemMUI>

@@ -43,12 +43,12 @@ export const removeRoomFx = RoomsDomain.effect<
 	StandardFailError
 >('removeRoomFx');
 
-export const roomsGate = createGate({
+export const RoomsGate = createGate({
 	domain: RoomsDomain,
 	name: 'roomsGate',
 });
 
-export const roomGate = createGate<InRoomRequest>({
+export const RoomGate = createGate<InRoomRequest>({
 	domain: RoomsDomain,
 	name: 'roomGate',
 });

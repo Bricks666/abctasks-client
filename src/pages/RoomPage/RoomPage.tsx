@@ -1,25 +1,26 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
 import { useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { tasksGate } from '@/models/tasks';
-import { groupsGate } from '@/models/groups';
-import { activityGate } from '@/models/activities';
-import { progressGate } from '@/models/progress';
-import { roomGate } from '@/models/rooms';
-import { usePageTitle } from '@/hooks';
+import { TasksGate } from '@/models/tasks';
+import { GroupsGate } from '@/models/groups';
+import { ActivityGate } from '@/models/activities';
+import { ProgressGate } from '@/models/progress';
+import { RoomGate } from '@/models/rooms';
+import { usePageTitle, useParam } from '@/hooks';
 import { CommonProps } from '@/types';
 import { RoomHeader } from '@/components/RoomHeader';
+import { roomRoute } from '@/routes';
 import { StyledAside, StyledLayout, StyledTasks } from './styles';
 
-const RoomPage: React.FC<CommonProps> = ({ className }) => {
+const RoomPage: React.FC<CommonProps> = (props) => {
+	const { className } = props;
 	const { t } = useTranslation('room');
-	const { id: roomId } = useParams();
-	useGate(roomGate, { roomId: Number(roomId) });
-	useGate(tasksGate, { roomId: Number(roomId) });
-	useGate(groupsGate, { roomId: Number(roomId) });
-	useGate(activityGate, { roomId: Number(roomId) });
-	useGate(progressGate, { roomId: Number(roomId) });
+	const roomId = useParam(roomRoute, 'id');
+	useGate(RoomGate, { roomId });
+	useGate(TasksGate, { roomId });
+	useGate(GroupsGate, { roomId });
+	useGate(ActivityGate, { roomId });
+	useGate(ProgressGate, { roomId });
 	usePageTitle(t('title'));
 
 	return (

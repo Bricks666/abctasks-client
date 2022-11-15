@@ -1,1 +1,8 @@
-export { routes } from './routes';
+export {
+	routes,
+	loginRoute,
+	notFoundRoute,
+	registrationRoute,
+	roomRoute,
+	roomsRoute,
+} from './routes';

@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { Tab } from '@mui/material';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { CommonProps } from '@/types';
-import { ActivitiesList } from '../ActivitiesList';
-import { StyledProgress, StyledWrapper } from './styles';
+import { TasksProgress, ActivitiesList, Groups } from './components';
+
+import styles from './AsideBar.module.css';
 
 export interface AsideBarProps extends CommonProps {}
 
@@ -9,10 +12,27 @@ export const AsideBar: React.FC<AsideBarProps> = React.memo(function AsideBar(
 	props
 ) {
 	const { className } = props;
+	const [openTab, setOpenTab] = React.useState('progress');
+
+	const onChange = React.useCallback((_evt: unknown, value: string) => {
+		setOpenTab(value);
+	}, []);
+
 	return (
-		<StyledWrapper className={className}>
-			<StyledProgress />
-			<ActivitiesList />
-		</StyledWrapper>
+		<aside className={className}>
+			<TabContext value={openTab}>
+				<TabList onChange={onChange} variant='fullWidth'>
+					<Tab label='Прогресс' value='progress' />
+					<Tab label='Группы' value='groups' />
+				</TabList>
+				<TabPanel className={styles.panel} value='progress'>
+					<TasksProgress className={styles.progress} />
+					<ActivitiesList />
+				</TabPanel>
+				<TabPanel className={styles.panel} value='groups'>
+					<Groups />
+				</TabPanel>
+			</TabContext>
+		</aside>
 	);
 });

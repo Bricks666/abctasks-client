@@ -1,4 +1,4 @@
-import { createMutation, createQuery } from '@farfetched/core';
+import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array, Boolean } from 'runtypes';
 import { StandardFailError } from '@/packages/request';
@@ -20,6 +20,7 @@ import {
 	removeGroupFx,
 	updateGroupFx,
 } from './units';
+import { createMutationWithAccess } from '../fabrics';
 
 export const getGroupsQuery = createQuery<
 	number,
@@ -34,7 +35,7 @@ export const getGroupsQuery = createQuery<
 	mapData: dataExtractor,
 });
 
-export const createGroupMutation = createMutation<
+export const createGroupMutation = createMutationWithAccess<
 	CreateGroupRequest,
 	StandardResponse<Group>,
 	StandardSuccessResponse<Group>,
@@ -44,7 +45,7 @@ export const createGroupMutation = createMutation<
 	contract: runtypeContract(getStandardSuccessResponse(group)),
 });
 
-export const updateGroupMutation = createMutation<
+export const updateGroupMutation = createMutationWithAccess<
 	UpdateGroupRequest,
 	StandardResponse<Group>,
 	StandardSuccessResponse<Group>,
@@ -54,7 +55,7 @@ export const updateGroupMutation = createMutation<
 	contract: runtypeContract(getStandardSuccessResponse(group)),
 });
 
-export const removeGroupMutation = createMutation<
+export const removeGroupMutation = createMutationWithAccess<
 	RemoveGroupRequest,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,

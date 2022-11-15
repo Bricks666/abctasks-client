@@ -1,9 +1,15 @@
-import { useSearchParams } from 'react-router-dom';
+import { useStoreMap } from 'effector-react';
+import { router } from '@/models/routing';
 
 export const useGetParam = <T extends string | number = string>(
-	param: string
+	paramName: string
 ): T | null => {
-	const [getParams] = useSearchParams();
-
-	return getParams.get(param) as T | null;
+	return useStoreMap({
+		store: router.$query,
+		fn: (state, [name]) => {
+			return state[name];
+		},
+		defaultValue: null,
+		keys: [paramName],
+	});
 };
