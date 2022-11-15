@@ -1,21 +1,17 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { CommonProps } from '@/types';
+import { Typography } from '@mui/material';
+import { CommonProps, Size } from '@/types';
 
 import styles from './LoadingIndicator.module.css';
-
-type Size = 'small' | 'medium' | 'large';
 
 export interface LoadingIndicatorProps extends CommonProps {
 	readonly size?: Size;
 	readonly text?: string;
 }
 
-export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
-	className,
-	text,
-	size = 'medium',
-}) => {
+export const LoadingIndicator: React.FC<LoadingIndicatorProps> = (props) => {
+	const { className, text, size = 'medium' } = props;
 	const classes = cn(styles.indicatorContainer, styles[size]);
 
 	return (
@@ -28,7 +24,11 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
 					<span className={cn(styles.circle, styles.circle3)} />
 					<span className={cn(styles.circle, styles.circle4)} />
 				</div>
-				{text && <h2 className={styles.header}>{text}</h2>}
+				{text && (
+					<Typography align='center' fontWeight={500} component='h2'>
+						{text}
+					</Typography>
+				)}
 			</div>
 		</div>
 	);

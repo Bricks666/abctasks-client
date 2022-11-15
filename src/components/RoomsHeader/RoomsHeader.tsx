@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { EditMenu } from '@/ui/EditMenu';
-import { MenuOption } from '@/ui/MenuItem';
+import { MenuOption } from '@/shared/components/MenuItem';
 import { roomsRoute } from '@/routes';
 import { routes } from '@/const';
 import { CommonProps } from '@/types';

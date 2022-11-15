@@ -8,19 +8,19 @@ import { Link } from 'atomic-router-react';
 import { RouteInstance, RouteQuery } from 'atomic-router';
 import { CommonProps } from '@/types';
 
-export interface BaseMenuOption {
+interface BaseMenuOption {
 	readonly label: string;
 	readonly icon?: React.ReactElement;
 }
 
-export interface ButtonMenuOption extends BaseMenuOption {
+interface ButtonMenuOption extends BaseMenuOption {
 	readonly onClick: React.MouseEventHandler<HTMLButtonElement>;
 	readonly to?: never;
 	readonly params?: never;
 	readonly query?: never;
 }
 
-export interface LinkMenuOption<P extends object> extends BaseMenuOption {
+interface LinkMenuOption<P extends object> extends BaseMenuOption {
 	readonly onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	readonly to: RouteInstance<P>;
 	readonly params: P;

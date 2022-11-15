@@ -11,7 +11,8 @@ export interface LoadingWrapperProps extends CommonProps {
 
 export const LoadingWrapper: React.FC<
 	React.PropsWithChildren<LoadingWrapperProps>
-> = ({ className, isLoading, loadingIndicator, children }) => {
+> = (props) => {
+	const { className, isLoading, loadingIndicator, children } = props;
 	return isLoading ? (
 		<div className={cn(styles.wrapper, className)}>{loadingIndicator}</div>
 	) : (

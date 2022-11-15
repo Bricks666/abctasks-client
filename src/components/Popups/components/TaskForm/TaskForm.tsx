@@ -11,7 +11,7 @@ import { Field } from '@/ui/Field';
 import { validationScheme } from './validator';
 import { TaskFormValues } from './types';
 import { buttonSx, fieldSx, fromSx } from './styles';
-import { GroupLabel } from '@/ui/GroupLabel';
+import { GroupLabel } from '@/shared/components/GroupLabel';
 
 export interface TaskFormProps extends CommonProps {
 	readonly defaultValues: TaskFormValues;

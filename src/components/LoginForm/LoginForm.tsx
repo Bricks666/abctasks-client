@@ -7,8 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { LoginRequest } from '@/api';
 import { loginMutation } from '@/models/auth';
 import { CommonProps } from '@/types';
-import { Field } from '@/ui/Field';
-import { Checkbox } from '@/ui/Checkbox';
+import { Checkbox, Field } from '@/shared/components';
 import { validationSchema } from './validator';
 import { fieldSx, StyledWrapper } from './styles';
 

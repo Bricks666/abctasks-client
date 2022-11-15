@@ -6,7 +6,7 @@ import { routes } from '@/const';
 import { roomRoute } from '@/routes';
 import { CommonProps } from '@/types';
 import { EditMenu } from '@/ui/EditMenu';
-import { MenuOption } from '@/ui/MenuItem';
+import { MenuOption } from '@/shared/components/MenuItem';
 import { TaskStatus } from '@/models/tasks/types';
 import { StyledWrapper } from './styles';
 

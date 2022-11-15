@@ -18,7 +18,7 @@ import { roomRoute } from '@/routes';
 import { useParam } from '@/hooks';
 import { CommonProps } from '@/types';
 import { routes, ui } from '@/const';
-import { GroupLabel } from '@/ui/GroupLabel';
+import { GroupLabel } from '@/shared/components/GroupLabel';
 
 import styles from './GroupsList.module.css';
 

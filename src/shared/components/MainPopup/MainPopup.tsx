@@ -10,13 +10,10 @@ export interface MainPopupProps extends CommonProps {
 	readonly alt?: string;
 }
 
-export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = ({
-	isOpen,
-	onClose,
-	children,
-	className,
-	header,
-}) => {
+export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = (
+	props
+) => {
+	const { isOpen, onClose, children, className, header } = props;
 	return (
 		<Dialog className={className} open={isOpen} onClose={onClose}>
 			<DialogTitle align='center'>{header}</DialogTitle>

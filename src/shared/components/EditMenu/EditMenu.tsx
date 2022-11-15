@@ -3,7 +3,7 @@ import { IconButton, Menu } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useToggle } from '@/hooks';
 import { CommonProps, Size } from '@/types';
-import { MenuOption, MenuItem } from '@/ui/MenuItem';
+import { MenuOption, MenuItem } from '@/shared/components/MenuItem';
 
 export interface EditMenuProps extends CommonProps {
 	readonly alt?: string;

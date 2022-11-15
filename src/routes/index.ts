@@ -1,7 +1,6 @@
 export {
 	routes,
 	loginRoute,
-	notFoundRoute,
 	registrationRoute,
 	roomRoute,
 	roomsRoute,

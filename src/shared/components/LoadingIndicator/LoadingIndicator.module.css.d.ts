@@ -10,6 +10,5 @@ declare const styles: {
 	readonly circle2: string;
 	readonly circle3: string;
 	readonly circle4: string;
-	readonly header: string;
 };
 export = styles;

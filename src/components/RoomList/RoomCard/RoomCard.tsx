@@ -15,7 +15,7 @@ import { removeRoomMutation, Room } from '@/models/rooms';
 import { roomRoute, roomsRoute } from '@/routes';
 import { CommonProps } from '@/types';
 import { EditMenu } from '@/ui/EditMenu';
-import { MenuOption } from '@/ui/MenuItem';
+import { MenuOption } from '@/shared/components/MenuItem';
 
 import styles from './RoomCard.module.css';
 import { routes } from '@/const';
