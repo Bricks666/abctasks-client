@@ -40,9 +40,6 @@ export const StyledAside = styled(AsideBar)`
 	@media (min-width: 1300px) {
 		grid-row: 1 / -1;
 
-		display: grid;
-		row-gap: 2rem;
-
 		border-left: 1px solid #d9e0e9;
 	}
 

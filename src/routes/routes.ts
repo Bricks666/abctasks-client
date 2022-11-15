@@ -6,6 +6,7 @@ export const roomRoute = createRoute<{ id: number }>();
 export const loginRoute = createRoute();
 export const registrationRoute = createRoute();
 export const notFoundRoute = createRoute();
+roomRoute.$params.watch(console.debug);
 
 redirect({
 	clock: notFoundRoute.opened,

@@ -4,7 +4,6 @@ import { BasePopupProps } from '@/types';
 import {
 	CreateTaskPopup,
 	UpdateTaskPopup,
-	GroupsPopup,
 	UpdateGroupPopup,
 	CreateGroupPopup,
 	CreateRoomPopup,
@@ -15,7 +14,6 @@ import { usePopups } from './hooks';
 const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
 	[routes.POPUPS.createTask]: CreateTaskPopup,
 	[routes.POPUPS.updateTask]: UpdateTaskPopup,
-	[routes.POPUPS.groups]: GroupsPopup,
 	[routes.POPUPS.createGroup]: CreateGroupPopup,
 	[routes.POPUPS.updateGroup]: UpdateGroupPopup,
 	[routes.POPUPS.createRoom]: CreateRoomPopup,

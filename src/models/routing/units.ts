@@ -30,7 +30,6 @@ export const closeCreateTaskPopup = QueriesDomain.event();
 export const closeUpdateTaskPopup = QueriesDomain.event();
 export const closeCreateGroupPopup = QueriesDomain.event();
 export const closeUpdateGroupPopup = QueriesDomain.event();
-export const closeGroupsPopup = QueriesDomain.event();
 export const setState = QueriesDomain.event<Location>();
 export const saveCurrentLocation = QueriesDomain.event();
 export const goToState = QueriesDomain.event();
