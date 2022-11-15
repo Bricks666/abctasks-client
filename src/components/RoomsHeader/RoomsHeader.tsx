@@ -2,11 +2,10 @@ import * as React from 'react';
 import cn from 'classnames';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { EditMenu } from '@/ui/EditMenu';
-import { MenuOption } from '@/shared/components/MenuItem';
 import { roomsRoute } from '@/routes';
-import { routes } from '@/const';
+import { getParams, popups } from '@/const';
 import { CommonProps } from '@/types';
+import { EditMenu, MenuOption } from '@/shared/components';
 
 import styles from './RoomsHeader.module.css';
 
@@ -20,7 +19,7 @@ export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 				to: roomsRoute,
 				params: {},
 				query: {
-					[routes.GET_PARAMS.popup]: routes.POPUPS.createRoom,
+					[getParams.popup]: popups.createRoom,
 				},
 			},
 		],

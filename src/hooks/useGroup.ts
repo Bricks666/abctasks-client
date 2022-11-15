@@ -1,5 +1,5 @@
 import { useStoreMap } from 'effector-react';
-import { $GroupsMap } from '@/models/groups';
+import { $GroupsMap } from '@/models';
 
 export const useGroup = (groupId: number) => {
 	return useStoreMap($GroupsMap, (groups) => {

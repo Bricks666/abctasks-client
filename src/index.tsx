@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'atomic-router-react';
 import { createBrowserHistory } from 'history';
 import { App } from '@/app';
-import { router } from '@/models/routing';
+import { router } from '@/models';
 import { theme } from '@/types';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import '@/models/init';

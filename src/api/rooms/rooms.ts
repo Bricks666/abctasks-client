@@ -1,6 +1,6 @@
+import { AccessOptions, fetcher } from '@/packages';
+import { Room } from '@/models';
 import { StandardResponse } from '@/types';
-import { Room } from '@/models/rooms';
-import { AccessOptions, fetcher } from '@/packages/request';
 import {
 	CreateRoomRequest,
 	RemoveRoomRequest,

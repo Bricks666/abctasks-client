@@ -3,12 +3,15 @@ import { SubmitHandler } from 'react-hook-form';
 import { useUnit } from 'effector-react';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
-import { createTaskMutation } from '@/models/tasks';
-import { $taskStatus, closeCreateTaskPopup } from '@/models/routing';
+import {
+	$taskStatus,
+	closeCreateTaskPopup,
+	createTaskMutation,
+} from '@/models';
 import { roomRoute } from '@/routes';
 import { useParam } from '@/hooks';
 import { BasePopupProps, CommonProps } from '@/types';
-import { MainPopup } from '@/ui/MainPopup';
+import { MainPopup } from '@/shared/components';
 import { TaskForm, TaskFormValues } from '../TaskForm';
 
 import styles from './CreateTaskPopup.module.css';

@@ -1,5 +1,5 @@
-import { fetcher } from '@/packages/request';
-import { Activity } from '@/models/activities';
+import { fetcher } from '@/packages';
+import { Activity } from '@/models';
 import { StandardResponse } from '@/types';
 
 const activitiesFetcher = fetcher.create({

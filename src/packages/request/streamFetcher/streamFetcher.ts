@@ -42,6 +42,6 @@ export class StreamFetcher extends BaseFetcher<Socket, object> {
 }
 
 export const streamFetcher = new StreamFetcher({
-	baseURL: api.api,
+	baseURL: api,
 	credentials: true,
 });

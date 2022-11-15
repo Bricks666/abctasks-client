@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '@/hooks';
 import { CommonProps } from '@/types';
-import { AuthLayout } from '@/layouts/AuthLayout';
+import { AuthLayout } from '@/layouts';
 import { LoginForm } from '@/components/LoginForm';
 import { StyledLink } from './styles';
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { SxProps, Typography } from '@mui/material';
 import { CommonProps } from '@/types';
-import { Group } from '@/models/groups';
+import { Group } from '@/models';
 
 import styles from './GroupLabel.module.css';
 

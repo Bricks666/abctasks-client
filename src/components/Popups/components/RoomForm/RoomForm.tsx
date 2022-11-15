@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { CommonProps } from '@/types';
-import { Field } from '@/ui/Field';
+import { Field } from '@/shared/components';
 import { validatingScheme } from './validator';
 import { RoomFormValues } from './types';
 

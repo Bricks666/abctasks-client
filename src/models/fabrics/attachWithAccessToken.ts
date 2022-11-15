@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { Effect, Store } from 'effector';
 import { attach } from 'effector-logger';
-import { AccessOptions, StandardFailError } from '@/packages/request';
+import { AccessOptions, StandardFailError } from '@/packages';
 import { $AccessToken } from '../auth/units';
 
 export interface AttachWithAccessTokenOptions<

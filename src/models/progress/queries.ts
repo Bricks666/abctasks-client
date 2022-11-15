@@ -1,7 +1,7 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array } from 'runtypes';
-import { StandardFailError } from '@/packages/request';
+import { StandardFailError } from '@/packages';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,

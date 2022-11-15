@@ -4,16 +4,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@farfetched/react';
-import { removeTaskMutation, Task } from '@/models/tasks';
+import { removeTaskMutation, Task } from '@/models';
 import { roomRoute } from '@/routes';
 import { SkeletonGroupLabel } from '@/components/SkeletonGroupLabel';
 import { useGroup } from '@/hooks';
 import { CommonProps } from '@/types';
-import { routes } from '@/const';
-import { GroupLabel } from '@/shared/components/GroupLabel';
-import { MenuOption } from '@/shared/components/MenuItem';
-import { DateTime } from '@/ui/DateTime';
-import { EditMenu } from '@/ui/EditMenu';
+import { getParams, popups } from '@/const';
+import {
+	GroupLabel,
+	MenuOption,
+	DateTime,
+	EditMenu,
+} from '@/shared/components';
 import { StyledCard, StyledContent } from './styles';
 
 export interface TaskCardProps extends CommonProps, Task {}
@@ -50,8 +52,8 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 					id: roomId,
 				},
 				query: {
-					[routes.GET_PARAMS.popup]: routes.POPUPS.updateTask,
-					[routes.GET_PARAMS.taskId]: id,
+					[getParams.popup]: popups.updateTask,
+					[getParams.taskId]: id,
 				},
 			},
 			{

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector-logger';
 import { createGate } from 'effector-react';
-import { StandardFailError } from '@/packages/request';
+import { StandardFailError } from '@/packages';
 import {
 	CreateRoomRequest,
 	GetRoomsRequest,

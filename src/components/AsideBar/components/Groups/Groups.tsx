@@ -5,7 +5,7 @@ import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { roomRoute } from '@/routes';
-import { routes } from '@/const';
+import { getParams, popups } from '@/const';
 import { CommonProps } from '@/types';
 import { GroupsList } from './components';
 
@@ -24,7 +24,7 @@ export const Groups: React.FC<GroupsProps> = React.memo(function Groups(props) {
 				className={styles.button}
 				to={roomRoute}
 				params={params}
-				query={{ [routes.GET_PARAMS.popup]: routes.POPUPS.createGroup }}
+				query={{ [getParams.popup]: popups.createGroup }}
 				component={Link}>
 				{t('actions.create')}
 			</Button>

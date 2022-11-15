@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { MainLayout } from '@/layouts/MainLayout';
+import { MainLayout } from '@/layouts';
 import { Tasks } from '@/components/Tasks';
 import { AsideBar } from '@/components/AsideBar';
 

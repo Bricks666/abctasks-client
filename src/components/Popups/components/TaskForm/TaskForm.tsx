@@ -4,14 +4,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { getGroupsQuery } from '@/models/groups';
-import { statuses } from '@/models/tasks';
+import { getGroupsQuery, statuses } from '@/models';
 import { CommonProps } from '@/types';
-import { Field } from '@/ui/Field';
+import { Field, GroupLabel } from '@/shared/components';
 import { validationScheme } from './validator';
 import { TaskFormValues } from './types';
 import { buttonSx, fieldSx, fromSx } from './styles';
-import { GroupLabel } from '@/shared/components/GroupLabel';
 
 export interface TaskFormProps extends CommonProps {
 	readonly defaultValues: TaskFormValues;

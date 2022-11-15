@@ -3,12 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { SubmitHandler } from 'react-hook-form';
 import { useUnit } from 'effector-react';
 import { useMutation } from '@farfetched/react';
-import { closeCreateGroupPopup } from '@/models/routing';
-import { createGroupMutation } from '@/models/groups';
+import { createGroupMutation, closeCreateGroupPopup } from '@/models';
 import { BasePopupProps, CommonProps } from '@/types';
 import { useParam } from '@/hooks';
 import { roomRoute } from '@/routes';
-import { MainPopup } from '@/ui/MainPopup';
+import { MainPopup } from '@/shared/components';
 import { GroupForm, GroupFormValues } from '../GroupForm';
 import { defaultFormValues } from './data';
 

@@ -3,9 +3,8 @@ import { Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
 import { useQuery } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
-import { getProgressQuery } from '@/models/progress';
-import { $GroupsMap } from '@/models/groups';
-import { ui } from '@/const';
+import { $GroupsMap, getProgressQuery } from '@/models';
+import { getEmptyArray } from '@/const';
 import { CommonProps } from '@/types';
 import { TaskProgress } from './TaskProgress';
 import { SkeletonTaskProgress } from './SkeletonTaskProgress';
@@ -25,7 +24,7 @@ export const TasksProgress: React.FC<CommonProps> = ({ className }) => {
 			</Typography>
 			<StyledList spacing={1.5}>
 				{isLoading
-					? ui.getEmptyArray(2).map((_, i) => <SkeletonTaskProgress key={i} />)
+					? getEmptyArray(2).map((_, i) => <SkeletonTaskProgress key={i} />)
 					: progresses.map((progress) => {
 							const group = groups[progress.groupId];
 							if (!group) {

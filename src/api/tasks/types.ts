@@ -1,5 +1,5 @@
-import { AccessOptions } from '@/packages/request';
-import { TaskStatus } from '@/models/tasks';
+import { AccessOptions } from '@/packages';
+import { TaskStatus } from '@/models';
 
 export interface GetTaskRequest {
 	readonly id: number;

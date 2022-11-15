@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { AuthLayout } from '@/layouts/AuthLayout';
+import { AuthLayout } from '@/layouts';
 import { RegistrationForm } from '@/components/RegistrationForm';
 import { CommonProps } from '@/types';
 import { usePageTitle } from '@/hooks';

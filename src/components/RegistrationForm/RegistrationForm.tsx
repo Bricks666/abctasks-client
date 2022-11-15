@@ -5,11 +5,11 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@farfetched/react';
 import { RegistrationRequest } from '@/api';
-import { registrationMutation } from '@/models/auth';
+import { registrationMutation } from '@/models';
 import { CommonProps } from '@/types';
+import { Field } from '@/shared/components';
 import { validationSchema } from './validator';
 import { StyledForm } from './styles';
-import { Field } from '@/ui/Field';
 
 const initialValues: RegistrationRequest = {
 	login: '',

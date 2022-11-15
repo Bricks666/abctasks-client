@@ -11,14 +11,13 @@ import {
 import { Link } from 'atomic-router-react';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
-import { removeRoomMutation, Room } from '@/models/rooms';
+import { removeRoomMutation, Room } from '@/models';
 import { roomRoute, roomsRoute } from '@/routes';
+import { getParams, popups } from '@/const';
 import { CommonProps } from '@/types';
-import { EditMenu } from '@/ui/EditMenu';
-import { MenuOption } from '@/shared/components/MenuItem';
+import { EditMenu, MenuOption } from '@/shared/components';
 
 import styles from './RoomCard.module.css';
-import { routes } from '@/const';
 
 export interface RoomCardProps extends CommonProps, Room {}
 
@@ -37,8 +36,8 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 				to: roomsRoute,
 				params: {},
 				query: {
-					[routes.GET_PARAMS.popup]: routes.POPUPS.updateRoom,
-					[routes.GET_PARAMS.roomId]: id,
+					[getParams.popup]: popups.updateRoom,
+					[getParams.roomId]: id,
 				},
 			},
 			{

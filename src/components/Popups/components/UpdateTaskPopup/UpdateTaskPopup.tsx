@@ -3,14 +3,19 @@ import { useMutation } from '@farfetched/react';
 import { useGate, useUnit } from 'effector-react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { getTaskQuery, TaskGate, updateTaskMutation } from '@/models/tasks';
+import {
+	$taskId,
+	closeUpdateTaskPopup,
+	getTaskQuery,
+	TaskGate,
+	updateTaskMutation,
+} from '@/models';
 import { BasePopupProps, CommonProps } from '@/types';
+import { roomRoute } from '@/routes';
 import { useParam } from '@/hooks';
-import { MainPopup } from '@/ui/MainPopup';
+import { MainPopup } from '@/shared/components';
 import { TaskFormValues } from '../TaskForm';
 import { StyledForm, StyledSkeleton } from './styles';
-import { roomRoute } from '@/routes';
-import { $taskId, closeUpdateTaskPopup } from '@/models/routing';
 
 export interface UpdateTaskPopupProps extends CommonProps, BasePopupProps {}
 

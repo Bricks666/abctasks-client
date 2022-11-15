@@ -2,12 +2,11 @@ import * as React from 'react';
 import { SxProps, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
-import { routes } from '@/const';
+import { TaskStatus } from '@/models';
 import { roomRoute } from '@/routes';
 import { CommonProps } from '@/types';
-import { EditMenu } from '@/ui/EditMenu';
-import { MenuOption } from '@/shared/components/MenuItem';
-import { TaskStatus } from '@/models/tasks/types';
+import { getParams, popups } from '@/const';
+import { EditMenu, MenuOption } from '@/shared/components';
 import { StyledWrapper } from './styles';
 
 export interface TaskListHeaderComponent extends CommonProps {
@@ -33,8 +32,8 @@ export const TaskListHeader: React.FC<
 				to: roomRoute,
 				params: { id: roomId },
 				query: {
-					[routes.GET_PARAMS.popup]: routes.POPUPS.createTask,
-					[routes.GET_PARAMS.taskStatus]: columnStatus,
+					[getParams.popup]: popups.createTask,
+					[getParams.taskStatus]: columnStatus,
 				},
 			},
 		],

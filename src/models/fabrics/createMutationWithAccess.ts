@@ -7,7 +7,7 @@ import {
 } from '@farfetched/core';
 import { Effect } from 'effector';
 import { StaticOrReactive } from '@farfetched/core/misc/sourced';
-import { AccessOptions, StandardFailError } from '@/packages/request';
+import { AccessOptions, StandardFailError } from '@/packages';
 import { attachWithAccessToken, WithoutAccess } from './attachWithAccessToken';
 import { attachRemoteOperationWithAccess } from './attachRemoteOperationWithAccess';
 

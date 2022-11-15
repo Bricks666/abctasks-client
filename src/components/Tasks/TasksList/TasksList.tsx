@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useMutation } from '@farfetched/react';
-import { TaskStatus, Task, updateTaskMutation } from '@/models/tasks';
+import { TaskStatus, Task, updateTaskMutation } from '@/models';
 import { useParam } from '@/hooks';
 import { roomRoute } from '@/routes';
-import { ui } from '@/const';
+import { getEmptyArray } from '@/const';
 import { CommonProps } from '@/types';
 import { TaskListHeader } from './TaskListHeader';
 import { TaskCard } from './TaskCard';
@@ -54,7 +54,7 @@ export const TasksList: React.FC<TasksListProps> = ({
 			</TaskListHeader>
 			<StyledList spacing={1}>
 				{loading
-					? ui.getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />)
+					? getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />)
 					: tasks.map((task) => <TaskCard {...task} key={task.id} />)}
 			</StyledList>
 		</StyledWrapper>

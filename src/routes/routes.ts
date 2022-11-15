@@ -1,5 +1,6 @@
 import { ComponentType, lazy } from 'react';
 import { createRoute, UnmappedRouteObject } from 'atomic-router';
+import { paths } from '@/const';
 
 export const roomsRoute = createRoute();
 export const roomRoute = createRoute<{ id: number }>();
@@ -17,22 +18,22 @@ interface Route extends UnmappedRouteObject<any> {
 
 export const routes: Route[] = [
 	{
-		path: '/rooms',
+		path: paths.rooms,
 		Component: RoomsPage,
 		route: roomsRoute,
 	},
 	{
-		path: '/rooms/:id',
+		path: paths.room,
 		Component: RoomPage,
 		route: roomRoute,
 	},
 	{
-		path: '/login',
+		path: paths.login,
 		Component: LoginPage,
 		route: loginRoute,
 	},
 	{
-		path: '/registration',
+		path: paths.registration,
 		Component: RegistrationPage,
 		route: registrationRoute,
 	},

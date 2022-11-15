@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Skeleton, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
-import { getRoomQuery } from '@/models/rooms';
+import { getRoomQuery } from '@/models';
 import { CommonProps } from '@/types';
 import { StyledWrapper, titleSx } from './styled';
 

@@ -1,4 +1,4 @@
-import { AccessOptions } from '@/packages/request';
+import { AccessOptions } from '@/packages';
 
 export type GetRoomsRequest = Required<AccessOptions>;
 

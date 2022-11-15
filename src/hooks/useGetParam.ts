@@ -1,5 +1,5 @@
 import { useStoreMap } from 'effector-react';
-import { router } from '@/models/routing';
+import { router } from '@/models';
 
 export const useGetParam = <T extends string | number = string>(
 	paramName: string

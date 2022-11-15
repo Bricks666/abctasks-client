@@ -1,5 +1,5 @@
-import { fetcher } from '@/packages/request';
-import { Group } from '@/models/groups';
+import { fetcher } from '@/packages';
+import { Group } from '@/models';
 import { StandardResponse } from '@/types';
 import {
 	CreateGroupRequest,

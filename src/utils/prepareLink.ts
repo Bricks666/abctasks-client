@@ -1,5 +1,5 @@
 import { Query, AddType } from '@/types';
-import { Location } from '@/models/routing';
+import { Location } from '@/models';
 import { prepareQuery } from './prepareQuery';
 
 export interface PrepareLinkParams {

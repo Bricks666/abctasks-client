@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { TasksGate } from '@/models/tasks';
-import { GroupsGate } from '@/models/groups';
-import { ActivityGate } from '@/models/activities';
-import { ProgressGate } from '@/models/progress';
-import { RoomGate } from '@/models/rooms';
+import {
+	TasksGate,
+	GroupsGate,
+	ActivityGate,
+	ProgressGate,
+	RoomGate,
+} from '@/models';
+import { roomRoute } from '@/routes';
 import { usePageTitle, useParam } from '@/hooks';
 import { CommonProps } from '@/types';
 import { RoomHeader } from '@/components/RoomHeader';
-import { roomRoute } from '@/routes';
 import { StyledAside, StyledLayout, StyledTasks } from './styles';
 
 const RoomPage: React.FC<CommonProps> = (props) => {

@@ -1,7 +1,7 @@
 import { sample } from 'effector';
 import { HistoryPushParams, querySync, redirect } from 'atomic-router';
 import { roomRoute, roomsRoute } from '@/routes';
-import { routes } from '@/const';
+import { getParams, popups } from '@/const';
 import {
 	$groupId,
 	$location,
@@ -26,16 +26,16 @@ import {
 querySync({
 	controls,
 	source: {
-		[routes.GET_PARAMS.popup]: $popups,
+		[getParams.popup]: $popups,
 	},
 });
 
 querySync({
 	controls,
 	source: {
-		[routes.GET_PARAMS.groupId]: $groupId,
-		[routes.GET_PARAMS.taskId]: $taskId,
-		[routes.GET_PARAMS.taskStatus]: $taskStatus,
+		[getParams.groupId]: $groupId,
+		[getParams.taskId]: $taskId,
+		[getParams.taskStatus]: $taskStatus,
 	},
 	route: roomRoute,
 });
@@ -43,7 +43,7 @@ querySync({
 querySync({
 	controls,
 	source: {
-		[routes.GET_PARAMS.roomId]: $roomId,
+		[getParams.roomId]: $roomId,
 	},
 	route: roomsRoute,
 });
@@ -59,37 +59,37 @@ sample({
 
 sample({
 	clock: closeUpdateGroupPopup,
-	fn: () => routes.POPUPS.updateGroup,
+	fn: () => popups.updateGroup,
 	target: removePopup,
 });
 
 sample({
 	clock: closeCreateGroupPopup,
-	fn: () => routes.POPUPS.createGroup,
+	fn: () => popups.createGroup,
 	target: removePopup,
 });
 
 sample({
 	clock: closeCreateTaskPopup,
-	fn: () => routes.POPUPS.createTask,
+	fn: () => popups.createTask,
 	target: removePopup,
 });
 
 sample({
 	clock: closeUpdateTaskPopup,
-	fn: () => routes.POPUPS.updateTask,
+	fn: () => popups.updateTask,
 	target: removePopup,
 });
 
 sample({
 	clock: closeCreateRoomPopup,
-	fn: () => routes.POPUPS.createRoom,
+	fn: () => popups.createRoom,
 	target: removePopup,
 });
 
 sample({
 	clock: closeUpdateRoomPopup,
-	fn: () => routes.POPUPS.updateRoom,
+	fn: () => popups.updateRoom,
 	target: removePopup,
 });
 

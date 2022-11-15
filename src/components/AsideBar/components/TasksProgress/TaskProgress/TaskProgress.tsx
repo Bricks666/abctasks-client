@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { Progress } from '@/models/progress/types';
+import { Progress, Group } from '@/models';
 import { CommonProps } from '@/types';
 import { StyledLegend, StyledProgress } from './styles';
-import { Group } from '@/models/groups';
 
 export interface TaskProgressComponent
 	extends CommonProps,

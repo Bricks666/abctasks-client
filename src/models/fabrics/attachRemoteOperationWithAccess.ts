@@ -3,7 +3,7 @@ import { sample } from 'effector';
 import { createDomain } from 'effector-logger';
 import { InvalidDataError } from '@farfetched/core';
 import { RemoteOperation } from '@farfetched/core/remote_operation/type';
-import { AccessOptions, StandardFailError } from '@/packages/request';
+import { AccessOptions, StandardFailError } from '@/packages';
 import { authApi } from '@/api';
 import { StandardResponse } from '@/types';
 import { Tokens, $AccessToken } from '../auth';

@@ -4,9 +4,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
-import { Activity, ActivityType } from '@/models/activities';
+import { Activity, ActivityType } from '@/models';
 import { Color, CommonProps } from '@/types';
-import { DateTime } from '@/ui/DateTime';
+import { DateTime } from '@/shared/components';
 import { StyledAvatar, StyledCard, StyledCardContent } from './styles';
 
 export interface ActivityCardProps extends CommonProps, Activity {}

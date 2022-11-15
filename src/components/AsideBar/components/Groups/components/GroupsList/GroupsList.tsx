@@ -13,12 +13,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { getGroupsQuery, removeGroupMutation } from '@/models/groups';
+import { getGroupsQuery, removeGroupMutation } from '@/models';
 import { roomRoute } from '@/routes';
 import { useParam } from '@/hooks';
+import { getEmptyArray, getParams, popups } from '@/const';
 import { CommonProps } from '@/types';
-import { routes, ui } from '@/const';
-import { GroupLabel } from '@/shared/components/GroupLabel';
+import { GroupLabel } from '@/shared/components';
 
 import styles from './GroupsList.module.css';
 
@@ -42,8 +42,8 @@ export const GroupsList: React.FC<GroupsListProps> = React.memo(
 								to={roomRoute}
 								params={{ id: roomId }}
 								query={{
-									[routes.GET_PARAMS.popup]: routes.POPUPS.updateGroup,
-									[routes.GET_PARAMS.groupId]: group.id,
+									[getParams.popup]: popups.updateGroup,
+									[getParams.groupId]: group.id,
 								}}
 								component={Link}>
 								<EditIcon />
@@ -58,7 +58,7 @@ export const GroupsList: React.FC<GroupsListProps> = React.memo(
 						</ListItemSecondaryAction>
 					</ListItem>
 			  ))
-			: ui.getEmptyArray(4).map((_, i) => (
+			: getEmptyArray(4).map((_, i) => (
 					<ListItem key={i}>
 						<Skeleton width='100%' height='1rem + 4px' />
 					</ListItem>

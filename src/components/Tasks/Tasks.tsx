@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { TaskStatus, Task } from '@/models/tasks/types';
+import { TaskStatus, Task } from '@/models';
 import { useGroupedTasks } from '@/hooks';
 import { CommonProps } from '@/types';
 import { TasksList } from './TasksList';

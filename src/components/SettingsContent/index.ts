@@ -1,1 +1,0 @@
-export { SettingsContent } from './SettingsContent';

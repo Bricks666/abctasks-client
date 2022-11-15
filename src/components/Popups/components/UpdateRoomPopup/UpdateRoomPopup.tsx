@@ -3,11 +3,15 @@ import { useGate, useUnit } from 'effector-react';
 import { useMutation } from '@farfetched/react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { getRoomQuery, RoomGate, updateRoomMutation } from '@/models/rooms';
-import { $roomId, closeUpdateRoomPopup } from '@/models/routing';
+import {
+	getRoomQuery,
+	RoomGate,
+	updateRoomMutation,
+	$roomId,
+	closeUpdateRoomPopup,
+} from '@/models';
 import { BasePopupProps } from '@/types';
-import { MainPopup } from '@/ui/MainPopup';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
+import { MainPopup, LoadingIndicator } from '@/shared/components';
 import { RoomForm, RoomFormValues } from '../RoomForm';
 
 import styles from './UpdateRoomPopup.module.css';

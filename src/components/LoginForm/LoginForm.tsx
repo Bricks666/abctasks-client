@@ -5,7 +5,7 @@ import { useMutation } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
 import { LoginRequest } from '@/api';
-import { loginMutation } from '@/models/auth';
+import { loginMutation } from '@/models';
 import { CommonProps } from '@/types';
 import { Checkbox, Field } from '@/shared/components';
 import { validationSchema } from './validator';
