@@ -2,8 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import * as en from './locales/en';
-import * as ru from './locales/ru';
+import * as resources from './locales';
 
 i18n
 	.use(Backend)
@@ -15,10 +14,7 @@ i18n
 		interpolation: {
 			escapeValue: false,
 		},
-		resources: {
-			en,
-			ru,
-		},
+		resources,
 	});
 
 export { i18n };

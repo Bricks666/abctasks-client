@@ -1,3 +1,3 @@
-import { Room } from '@/models/rooms';
+import { Room } from '@/models';
 
 export interface RoomFormValues extends Pick<Room, 'description' | 'name'> {}

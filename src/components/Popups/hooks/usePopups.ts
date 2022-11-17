@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useUnit } from 'effector-react';
-import { $popups } from '@/models/routing';
+import { $popups } from '@/models';
 
 const parsePopups = (popups: string | null) => {
 	return popups ? popups.split(',') : [];

@@ -20,7 +20,7 @@ import {
 	UpdateTaskRequest,
 	RemoveTaskRequest,
 } from '@/api';
-import { StandardFailError } from '@/packages/request';
+import { StandardFailError } from '@/packages';
 import { getIsSuccessResponseValidator, dataExtractor } from '../utils';
 import { createMutationWithAccess } from '../fabrics';
 

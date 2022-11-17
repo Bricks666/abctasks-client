@@ -2,10 +2,9 @@ import * as React from 'react';
 import { useUnit } from 'effector-react';
 import { useMutation } from '@farfetched/react';
 import { useTranslation } from 'react-i18next';
-import { createRoomMutation } from '@/models/rooms';
-import { closeCreateRoomPopup } from '@/models/routing';
+import { closeCreateRoomPopup, createRoomMutation } from '@/models';
 import { BasePopupProps } from '@/types';
-import { MainPopup } from '@/ui/MainPopup';
+import { MainPopup } from '@/shared/components';
 import { RoomForm, RoomFormValues } from '../RoomForm';
 
 import styles from './CreateRoomPopup.module.css';

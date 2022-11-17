@@ -2,8 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { AppBar, Toolbar } from '@mui/material';
 import { CommonProps } from '@/types';
-import { ProfileLink } from './ProfileLink';
-import { NavigationBreadcrumbs } from './NavigationBreadcrumbs';
+import { NavigationBreadcrumbs, ProfileLink } from './components';
 
 import styles from './Header.module.css';
 

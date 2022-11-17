@@ -1,17 +1,11 @@
 import { ComponentType, lazy } from 'react';
-import { createRoute, redirect, UnmappedRouteObject } from 'atomic-router';
+import { createRoute, UnmappedRouteObject } from 'atomic-router';
+import { paths } from '@/const';
 
 export const roomsRoute = createRoute();
 export const roomRoute = createRoute<{ id: number }>();
 export const loginRoute = createRoute();
 export const registrationRoute = createRoute();
-export const notFoundRoute = createRoute();
-roomRoute.$params.watch(console.debug);
-
-redirect({
-	clock: notFoundRoute.opened,
-	route: roomsRoute,
-});
 
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
@@ -24,22 +18,22 @@ interface Route extends UnmappedRouteObject<any> {
 
 export const routes: Route[] = [
 	{
-		path: '/rooms',
+		path: paths.rooms,
 		Component: RoomsPage,
 		route: roomsRoute,
 	},
 	{
-		path: '/rooms/:id',
+		path: paths.room,
 		Component: RoomPage,
 		route: roomRoute,
 	},
 	{
-		path: '/login',
+		path: paths.login,
 		Component: LoginPage,
 		route: loginRoute,
 	},
 	{
-		path: '/registration',
+		path: paths.registration,
 		Component: RegistrationPage,
 		route: registrationRoute,
 	},

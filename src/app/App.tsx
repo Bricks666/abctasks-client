@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { useGate, useUnit } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { AuthGate, authQuery } from '@/models/auth';
-import { Popups } from '@/components/Popups';
-import { AppRoutes } from '@/components/AppRoutes';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
-import { LoadingWrapper } from '@/ui/LoadingWrapper';
+import { AuthGate, authQuery } from '@/models';
+import { Popups, AppRoutes } from '@/components';
+import { LoadingWrapper, LoadingIndicator } from '@/shared/components';
 
 import styles from './App.module.css';
 

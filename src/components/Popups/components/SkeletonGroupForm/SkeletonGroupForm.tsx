@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import { Skeleton } from '@mui/material';
 import { CommonProps } from '@/types';
-import { SkeletonGroupLabel } from '@/components/SkeletonGroupLabel';
+import { SkeletonGroupLabel } from '@/shared/components/SkeletonGroupLabel';
 
 import styles from './SkeletonGroupForm.module.css';
 

@@ -1,6 +1,6 @@
+import { fetcher } from '@/packages';
+import { AuthResponse, Tokens } from '@/models';
 import { VoidResponse, StandardResponse } from '@/types';
-import { AuthResponse, Tokens } from '@/models/auth';
-import { fetcher } from '@/packages/request';
 import { LoginRequest, RegistrationRequest } from './types';
 
 const authFetcher = fetcher.create({

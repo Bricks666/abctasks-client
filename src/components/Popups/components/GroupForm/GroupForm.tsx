@@ -5,8 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
 import { CommonProps } from '@/types';
-import { GroupLabel } from '@/ui/GroupLabel';
-import { Field } from '@/ui/Field';
+import { Field, GroupLabel } from '@/shared/components';
 import { validatingScheme } from './validator';
 import { GroupFormValues } from './types';
 

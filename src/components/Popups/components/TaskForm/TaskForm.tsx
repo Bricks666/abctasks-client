@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { Box, Button, MenuItem, Skeleton } from '@mui/material';
+import cn from 'classnames';
+import { Button, MenuItem, Skeleton } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { getGroupsQuery } from '@/models/groups';
-import { statuses } from '@/models/tasks';
+import { getGroupsQuery, statuses } from '@/models';
 import { CommonProps } from '@/types';
-import { Field } from '@/ui/Field';
+import { Field, GroupLabel } from '@/shared/components';
 import { validationScheme } from './validator';
 import { TaskFormValues } from './types';
-import { buttonSx, fieldSx, fromSx } from './styles';
-import { GroupLabel } from '@/ui/GroupLabel';
+
+import styles from './TaskForm.module.css';
 
 export interface TaskFormProps extends CommonProps {
 	readonly defaultValues: TaskFormValues;
@@ -33,11 +33,9 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 	const disableButton = !isDirty || isSubmitting;
 
 	return (
-		<Box
-			className={className}
-			onSubmit={handleSubmit(onSubmit)}
-			component='form'
-			sx={fromSx}>
+		<form
+			className={cn(styles.form, className)}
+			onSubmit={handleSubmit(onSubmit)}>
 			{groupsLoading ? (
 				<Skeleton height='3em' />
 			) : (
@@ -57,16 +55,16 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 				))}
 			</Field>
 			<Field
+				className={styles.field}
 				name='content'
 				control={control}
 				label={t('task.content')}
 				multiline
 				disabled={isSubmitting}
-				sx={fieldSx}
 			/>
-			<Button type='submit' disabled={disableButton} sx={buttonSx}>
+			<Button className={styles.button} type='submit' disabled={disableButton}>
 				{buttonText}
 			</Button>
-		</Box>
+		</form>
 	);
 });

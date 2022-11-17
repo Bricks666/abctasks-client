@@ -1,6 +1,6 @@
-import { fetcher } from '@/packages/request';
+import { fetcher } from '@/packages';
+import { Task } from '@/models';
 import { StandardResponse } from '@/types';
-import { Task } from '@/models/tasks';
 import {
 	GetTaskRequest,
 	CreateTaskRequest,

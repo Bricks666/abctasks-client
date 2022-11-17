@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Route as AtomicRoute } from 'atomic-router-react';
 import { CommonProps } from '@/types';
 import { routes } from '@/routes';
-import { LoadingIndicator } from '@/ui/LoadingIndicator';
-import { LoadingWrapper } from '@/ui/LoadingWrapper';
+import { LoadingIndicator, LoadingWrapper } from '@/shared/components';
 
 import styles from './AppRoutes.module.css';
 

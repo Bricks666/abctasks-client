@@ -1,5 +1,5 @@
-import { Progress } from '@/models/progress';
-import { fetcher } from '@/packages/request';
+import { fetcher } from '@/packages';
+import { Progress } from '@/models';
 import { StandardResponse } from '@/types';
 
 const progressFetcher = fetcher.create({

@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Typography } from '@mui/material';
+import { Link } from 'atomic-router-react';
+import { Button, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { registrationRoute } from '@/routes';
 import { usePageTitle } from '@/hooks';
 import { CommonProps } from '@/types';
-import { AuthLayout } from '@/layouts/AuthLayout';
-import { LoginForm } from '@/components/LoginForm';
-import { StyledLink } from './styles';
+import { AuthLayout } from '@/layouts';
+import { LoginForm } from '@/components';
+
+import styles from './LoginPage.module.css';
 
 const LoginPage: React.FC<CommonProps> = ({ className }) => {
 	const { t } = useTranslation('login');
@@ -17,7 +20,9 @@ const LoginPage: React.FC<CommonProps> = ({ className }) => {
 				{t('title')}
 			</Typography>
 			<LoginForm />
-			<StyledLink to='/registration'>{t('actions.registration')}</StyledLink>
+			<Button className={styles.button} to={registrationRoute} component={Link}>
+				{t('actions.registration')}
+			</Button>
 		</AuthLayout>
 	);
 };

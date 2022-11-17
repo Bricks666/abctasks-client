@@ -12,7 +12,7 @@ import {
 } from '@farfetched/core/misc/sourced';
 import { Serialize } from '@farfetched/core/serialization/type';
 import { Validator } from '@farfetched/core/validation/type';
-import { AccessOptions, StandardFailError } from '@/packages/request';
+import { AccessOptions, StandardFailError } from '@/packages';
 import { attachWithAccessToken, WithoutAccess } from './attachWithAccessToken';
 import { attachRemoteOperationWithAccess } from './attachRemoteOperationWithAccess';
 

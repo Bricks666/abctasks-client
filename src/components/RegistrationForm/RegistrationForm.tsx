@@ -1,15 +1,17 @@
 import * as React from 'react';
+import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@farfetched/react';
 import { RegistrationRequest } from '@/api';
-import { registrationMutation } from '@/models/auth';
+import { registrationMutation } from '@/models';
 import { CommonProps } from '@/types';
+import { Field } from '@/shared/components';
 import { validationSchema } from './validator';
-import { StyledForm } from './styles';
-import { Field } from '@/ui/Field';
+
+import styles from './RegistrationForm.module.css';
 
 const initialValues: RegistrationRequest = {
 	login: '',
@@ -26,8 +28,8 @@ export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 	});
 	const { isSubmitting, isDirty } = formState;
 	return (
-		<StyledForm
-			className={className}
+		<form
+			className={cn(styles.form, className)}
 			onSubmit={handleSubmit(registration.start)}>
 			<Field
 				name='login'
@@ -58,6 +60,6 @@ export const RegistrationForm: React.FC<CommonProps> = ({ className }) => {
 				variant='outlined'>
 				{t('actions.submit')}
 			</Button>
-		</StyledForm>
+		</form>
 	);
 };

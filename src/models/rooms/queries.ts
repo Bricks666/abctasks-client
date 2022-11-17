@@ -1,7 +1,7 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array, Boolean } from 'runtypes';
-import { StandardFailError } from '@/packages/request';
+import { StandardFailError } from '@/packages';
 import {
 	CreateRoomRequest,
 	GetRoomsRequest,

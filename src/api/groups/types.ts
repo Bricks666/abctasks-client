@@ -1,4 +1,4 @@
-import { AccessOptions } from '@/packages/request';
+import { AccessOptions } from '@/packages';
 import { HEX } from '@/types';
 
 export interface CreateGroupRequest extends Required<AccessOptions> {

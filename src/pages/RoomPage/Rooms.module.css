@@ -1,0 +1,53 @@
+.layout {
+	display: grid;
+	grid-template-columns: var(--room-page-template-columns);
+	grid-template-rows: min-content 1fr;
+	gap: 1em;
+
+	overflow: hidden;
+}
+.tasks {
+	grid-column: var(--room-page-grid-column);
+
+	height: 100%;
+}
+
+@media (min-width: 1300px) {
+	.layout {
+		--room-page-template-columns: 4fr 1fr;
+
+		height: 100vh;
+	}
+
+	.tasks {
+		grid-row: 2;
+	}
+
+	.aside {
+		grid-row: 1 / -1;
+
+		border-left: 1px solid #d9e0e9;
+	}
+}
+
+@media (max-width: 1300px) {
+	.layout {
+		--room-page-template-columns: 1fr;
+	}
+
+	.tasks {
+		--room-page-grid-column: span 2;
+	}
+
+	.aside {
+		grid-template-columns: repeat(2, 1fr);
+		grid-row: 3;
+		gap: 10px;
+	}
+}
+
+@media (max-width: 600px) {
+	.aside {
+		grid-template-columns: 1fr;
+	}
+}

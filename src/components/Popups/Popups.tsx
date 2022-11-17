@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { routes } from '@/const';
+import { popups } from '@/const';
 import { BasePopupProps } from '@/types';
 import {
 	CreateTaskPopup,
@@ -12,12 +12,12 @@ import {
 import { usePopups } from './hooks';
 
 const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
-	[routes.POPUPS.createTask]: CreateTaskPopup,
-	[routes.POPUPS.updateTask]: UpdateTaskPopup,
-	[routes.POPUPS.createGroup]: CreateGroupPopup,
-	[routes.POPUPS.updateGroup]: UpdateGroupPopup,
-	[routes.POPUPS.createRoom]: CreateRoomPopup,
-	[routes.POPUPS.updateRoom]: UpdateRoomPopup,
+	[popups.createTask]: CreateTaskPopup,
+	[popups.updateTask]: UpdateTaskPopup,
+	[popups.createGroup]: CreateGroupPopup,
+	[popups.updateGroup]: UpdateGroupPopup,
+	[popups.createRoom]: CreateRoomPopup,
+	[popups.updateRoom]: UpdateRoomPopup,
 };
 
 export const Popups = () => {

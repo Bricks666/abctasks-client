@@ -1,4 +1,4 @@
-export const GET_PARAMS = {
+export const getParams = {
 	popup: 'popup',
 	taskStatus: 'task-status',
 	taskId: 'task-id',
@@ -7,7 +7,7 @@ export const GET_PARAMS = {
 	tab: 'tab',
 } as const;
 
-export const POPUPS = {
+export const popups = {
 	createTask: 'create-task',
 	updateTask: 'update-task',
 	groups: 'groups',
@@ -17,13 +17,10 @@ export const POPUPS = {
 	updateRoom: 'update-room',
 } as const;
 
-export const ROUTES = {
-	ROOMS: 'rooms',
-	ROOM: 'rooms/:id',
-	LOGIN: 'login',
-	REGISTRATION: 'registration',
-	SETTINGS: 'settings/*',
-	SETTINGS_PROFILE: 'profile',
-	SETTINGS_GENERIC: 'generic',
-	NOT_FOUND: '*',
+export const paths = {
+	rooms: '/rooms',
+	room: '/rooms/:id',
+	login: '/login',
+	registration: '/registration',
+	settings: '/settings/:tab',
 } as const;

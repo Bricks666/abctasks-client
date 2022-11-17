@@ -1,0 +1,83 @@
+.indicatorContainer {
+	padding: calc(var(--size) / 2);
+}
+
+.circleGroup {
+	display: flex;
+	align-items: end;
+	min-height: calc(var(--size) * 3);
+
+	column-gap: calc(var(--size) / 2);
+}
+
+.circle {
+	position: relative;
+
+	display: inline-block;
+
+	width: var(--size);
+	height: var(--size);
+
+	border-radius: 50%;
+
+	background-color: var(--background-color);
+
+	animation-name: jump;
+	animation-duration: var(--duration);
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-delay: var(--delay);
+
+	--duration: 0.95s;
+}
+
+.small {
+	--size: 20px;
+}
+
+.medium {
+	--size: 30px;
+}
+
+.large {
+	--size: 40px;
+}
+
+.circle1 {
+	--background-color: #2e87ba;
+
+	--delay: 0;
+}
+
+.circle2 {
+	--background-color: #13854e;
+
+	--delay: calc(var(--duration) / 4);
+}
+
+.circle3 {
+	--background-color: #2d86ba;
+
+	--delay: calc(var(--duration) / 4 * 2);
+}
+
+.circle4 {
+	--background-color: #a734ba;
+	--delay: calc(var(--duration) / 4 * 3);
+}
+
+@keyframes jump {
+	from {
+		transform: translateY(0);
+		animation-timing-function: ease-out;
+	}
+	50% {
+		transform: translateY(calc(-2 * var(--size)));
+		animation-timing-function: ease-in;
+	}
+
+	to {
+		transform: translateY(0);
+		animation-timing-function: ease-out;
+	}
+}

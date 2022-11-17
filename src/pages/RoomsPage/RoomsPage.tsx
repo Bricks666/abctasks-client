@@ -2,12 +2,11 @@ import * as React from 'react';
 import cn from 'classnames';
 import { useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { RoomsGate } from '@/models/rooms';
+import { RoomsGate } from '@/models';
 import { usePageTitle } from '@/hooks';
 import { CommonProps } from '@/types';
-import { MainLayout } from '@/layouts/MainLayout';
-import { RoomList } from '@/components/RoomList';
-import { RoomsHeader } from '@/components/RoomsHeader';
+import { MainLayout } from '@/layouts';
+import { RoomList, RoomsHeader } from '@/components';
 
 import styles from './RoomsPage.module.css';
 
