@@ -35,9 +35,8 @@ export const ActivityCard: React.FC<ActivityCardProps> = (props) => {
 		<Card className={cn(styles.card, className)}>
 			<CardContent className={styles.cardContent}>
 				<Avatar
-					className={styles.avatar}
-					alt={t(`activities.type.${type}`)}
-					color={colorMap[type]}>
+					className={cn(styles.avatar, styles[colorMap[type]])}
+					alt={t(`activities.type.${type}`)}>
 					{iconMap[type]}
 				</Avatar>
 				<div>

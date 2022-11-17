@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { StyledEngineProvider, ThemeProvider } from '@mui/material';
+import {
+	Experimental_CssVarsProvider as CssVarsProvider,
+	StyledEngineProvider,
+} from '@mui/material';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'atomic-router-react';
 import { createBrowserHistory } from 'history';
@@ -22,12 +25,12 @@ router.setHistory(history);
 
 root.render(
 	<RouterProvider router={router}>
-		<ThemeProvider theme={theme}>
+		<CssVarsProvider theme={theme}>
 			<StyledEngineProvider injectFirst>
 				<ErrorBoundary>
 					<App />
 				</ErrorBoundary>
 			</StyledEngineProvider>
-		</ThemeProvider>
+		</CssVarsProvider>
 	</RouterProvider>
 );

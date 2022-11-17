@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material';
+import { experimental_extendTheme as extendTheme } from '@mui/material';
 
-export const theme = createTheme({
+export const theme = extendTheme({
 	shape: {
 		borderRadius: 8,
 	},
