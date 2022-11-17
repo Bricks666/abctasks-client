@@ -6,7 +6,7 @@ import { createBrowserHistory } from 'history';
 import { App } from '@/app';
 import { router } from '@/models';
 import { theme } from '@/types';
-import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { ErrorBoundary } from '@/components';
 import '@/models/init';
 import '@/i18n';
 

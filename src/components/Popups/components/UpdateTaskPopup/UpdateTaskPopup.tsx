@@ -14,8 +14,10 @@ import { BasePopupProps, CommonProps } from '@/types';
 import { roomRoute } from '@/routes';
 import { useParam } from '@/hooks';
 import { MainPopup } from '@/shared/components';
-import { TaskFormValues } from '../TaskForm';
-import { StyledForm, StyledSkeleton } from './styles';
+import { TaskForm, TaskFormValues } from '../TaskForm';
+import { SkeletonTaskForm } from '../SkeletonTaskForm';
+
+import styles from './UpdateTaskPopup.module.css';
 
 export interface UpdateTaskPopupProps extends CommonProps, BasePopupProps {}
 
@@ -52,9 +54,10 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	return (
 		<MainPopup {...props} onClose={onClose} header={t('task.updateTitle')}>
 			{loading ? (
-				<StyledSkeleton />
+				<SkeletonTaskForm className={styles.taskForm} />
 			) : (
-				<StyledForm
+				<TaskForm
+					className={styles.taskForm}
 					onSubmit={onSubmit}
 					defaultValues={defaultValues}
 					buttonText={t('actions.save', { ns: 'common' })}

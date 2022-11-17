@@ -15,7 +15,7 @@ export const RoomsHeader: React.FC<CommonProps> = ({ className }) => {
 	const options = React.useMemo<MenuOption<any>[]>(
 		() => [
 			{
-				label: 'Create room',
+				label: t('actions.create', { ns: 'common' }),
 				to: roomsRoute,
 				params: {},
 				query: {

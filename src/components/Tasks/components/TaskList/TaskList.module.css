@@ -1,0 +1,13 @@
+.wrapper {
+	height: 100%;
+}
+
+.innerWrapper {
+	height: 100%;
+
+	overflow-y: auto;
+}
+
+.list {
+	height: 100%;
+}

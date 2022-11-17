@@ -1,0 +1,10 @@
+.title {
+	display: flex;
+	justify-content: space-between;
+}
+
+.progress {
+	height: 10px;
+
+	border-radius: 8px;
+}

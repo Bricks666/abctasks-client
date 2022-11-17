@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useQuery } from '@farfetched/react';
 import { getRoomsQuery } from '@/models';
-import { RoomCard } from './RoomCard';
 import { getEmptyArray } from '@/const';
-import { SkeletonRoomCard } from './SkeletonRoomCard';
+import { RoomCard, SkeletonRoomCard } from './components';
 
 import styles from './RoomList.module.css';
 

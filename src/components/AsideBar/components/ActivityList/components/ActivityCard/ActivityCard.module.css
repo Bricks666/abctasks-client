@@ -1,0 +1,11 @@
+.card {
+	overflow: unset;
+}
+
+.avatar {
+}
+
+.cardContent {
+	display: flex;
+	column-gap: 1.25em;
+}

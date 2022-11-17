@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { CommonProps } from '@/types';
-import { TasksProgress, ActivitiesList, Groups } from './components';
+import { TasksProgress, ActivityList, Groups } from './components';
 
 import styles from './AsideBar.module.css';
 
@@ -27,7 +27,7 @@ export const AsideBar: React.FC<AsideBarProps> = React.memo(function AsideBar(
 				</TabList>
 				<TabPanel className={styles.panel} value='progress'>
 					<TasksProgress className={styles.progress} />
-					<ActivitiesList />
+					<ActivityList />
 				</TabPanel>
 				<TabPanel className={styles.panel} value='groups'>
 					<Groups />

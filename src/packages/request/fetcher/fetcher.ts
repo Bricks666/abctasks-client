@@ -98,6 +98,6 @@ export class Fetcher extends BaseFetcher<AxiosInstance, BaseFetcherOptions> {
 }
 
 export const fetcher = new Fetcher({
-	baseURL: api.api,
+	baseURL: api,
 	credentials: true,
 });

@@ -1,11 +1,13 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import * as React from 'react';
+import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { TaskStatus, Task } from '@/models';
 import { useGroupedTasks } from '@/hooks';
 import { CommonProps } from '@/types';
-import { TasksList } from './TasksList';
-import { StyledWrapper } from './styles';
+import { TaskList } from './components';
+
+import styles from './Tasks.module.css';
 
 export interface Column {
 	readonly headerCode: string;
@@ -13,12 +15,13 @@ export interface Column {
 	readonly status: TaskStatus;
 }
 
-export const Tasks: React.FC<CommonProps> = ({ className }) => {
+export const Tasks: React.FC<CommonProps> = (props) => {
+	const { className } = props;
 	const { t } = useTranslation('task');
 	const { data: tasks } = useGroupedTasks();
 	/*
-TODO: Пересмотреть распределение на колонки
-*/
+  TODO: Пересмотреть распределение на колонки
+  */
 	const columns = React.useMemo<Column[]>(
 		() => [
 			{
@@ -46,15 +49,15 @@ TODO: Пересмотреть распределение на колонки
 	);
 
 	return (
-		<StyledWrapper className={className}>
+		<section className={cn(styles.wrapper, className)}>
 			{columns.map(({ headerCode, status, tasks }) => (
-				<TasksList
+				<TaskList
 					tasks={tasks}
 					columnStatus={status}
 					header={t(`statuses.${headerCode}`)}
 					key={headerCode}
 				/>
 			))}
-		</StyledWrapper>
+		</section>
 	);
 };

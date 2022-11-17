@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cn from 'classnames';
 import { useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -9,10 +10,12 @@ import {
 	RoomGate,
 } from '@/models';
 import { roomRoute } from '@/routes';
+import { MainLayout } from '@/layouts';
 import { usePageTitle, useParam } from '@/hooks';
 import { CommonProps } from '@/types';
-import { RoomHeader } from '@/components/RoomHeader';
-import { StyledAside, StyledLayout, StyledTasks } from './styles';
+import { AsideBar, RoomHeader, Tasks } from '@/components';
+
+import styles from './Rooms.module.css';
 
 const RoomPage: React.FC<CommonProps> = (props) => {
 	const { className } = props;
@@ -26,11 +29,11 @@ const RoomPage: React.FC<CommonProps> = (props) => {
 	usePageTitle(t('title'));
 
 	return (
-		<StyledLayout className={className}>
+		<MainLayout className={cn(styles.layout, className)}>
 			<RoomHeader />
-			<StyledTasks />
-			<StyledAside />
-		</StyledLayout>
+			<Tasks className={styles.tasks} />
+			<AsideBar className={styles.aside} />
+		</MainLayout>
 	);
 };
 

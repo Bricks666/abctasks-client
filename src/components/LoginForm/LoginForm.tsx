@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cn from 'classnames';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@farfetched/react';
@@ -9,7 +10,8 @@ import { loginMutation } from '@/models';
 import { CommonProps } from '@/types';
 import { Checkbox, Field } from '@/shared/components';
 import { validationSchema } from './validator';
-import { fieldSx, StyledWrapper } from './styles';
+
+import styles from './LoginForm.module.css';
 
 const initialValue: LoginRequest = {
 	login: '',
@@ -27,22 +29,24 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 	const { isDirty, isSubmitting } = formState;
 
 	return (
-		<StyledWrapper className={className} onSubmit={handleSubmit(login.start)}>
+		<form
+			className={cn(styles.form, className)}
+			onSubmit={handleSubmit(login.start)}>
 			<Field
+				className={styles.field}
 				name='login'
 				control={control}
 				label={t('fields.login')}
 				disabled={isSubmitting}
-				sx={fieldSx}
 			/>
 
 			<Field
+				className={styles.field}
 				name='password'
 				control={control}
 				label={t('fields.password')}
 				type='password'
 				disabled={isSubmitting}
-				sx={fieldSx}
 			/>
 			<Checkbox
 				name='rememberMe'
@@ -55,6 +59,6 @@ export const LoginForm: React.FC<CommonProps> = ({ className }) => {
 				variant='outlined'>
 				{t('actions.submit')}
 			</Button>
-		</StyledWrapper>
+		</form>
 	);
 };

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CommonProps } from '@/types';
-import { Header } from '@/components/Header';
+import { Header } from '@/components';
 
 import styles from './MainLayout.module.css';
 

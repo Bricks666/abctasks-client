@@ -7,3 +7,4 @@ export * from './LoadingIndicator';
 export * from './LoadingWrapper';
 export * from './MainPopup';
 export * from './MenuItem';
+export * from './SkeletonGroupLabel';
