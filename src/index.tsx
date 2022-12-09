@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
 	Experimental_CssVarsProvider as CssVarsProvider,
-	StyledEngineProvider,
+	StyledEngineProvider
 } from '@mui/material';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'atomic-router-react';
@@ -34,3 +34,5 @@ root.render(
 		</CssVarsProvider>
 	</RouterProvider>
 );
+
+console.debug(import.meta.env);

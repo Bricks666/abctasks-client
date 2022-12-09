@@ -1,4 +1,4 @@
-import { Validator } from '@farfetched/core/validation/type';
+import { Validator } from '@farfetched/core';
 import { StandardResponse, StandardSuccessResponse } from '@/types';
 
 export const getIsSuccessResponseValidator = <T>(): Validator<
@@ -6,6 +6,8 @@ export const getIsSuccessResponseValidator = <T>(): Validator<
 	unknown,
 	void
 > => {
-	return (data): data is StandardSuccessResponse<T> =>
-		data.errorMessage === null;
+	return (
+		data
+	): data is { result: StandardSuccessResponse<T>; params: unknown } =>
+		data.result.errorMessage === null;
 };

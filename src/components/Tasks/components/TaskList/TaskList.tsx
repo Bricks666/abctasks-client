@@ -14,7 +14,7 @@ import styles from './TaskList.module.css';
 export interface TaskListProps extends CommonProps {
 	readonly tasks: Task[] | null;
 	readonly columnStatus: TaskStatus;
-	readonly header?: string;
+	readonly header?: string | null;
 }
 const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 	evt.preventDefault();

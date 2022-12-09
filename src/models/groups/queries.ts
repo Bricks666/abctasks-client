@@ -5,12 +5,12 @@ import { StandardFailError } from '@/packages';
 import {
 	CreateGroupRequest,
 	UpdateGroupRequest,
-	RemoveGroupRequest,
+	RemoveGroupRequest
 } from '@/api';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,
-	StandardSuccessResponse,
+	StandardSuccessResponse
 } from '@/types';
 import { dataExtractor, getIsSuccessResponseValidator } from '../utils';
 import { Group, group } from './types';
@@ -18,7 +18,7 @@ import {
 	createGroupFx,
 	getGroupsFx,
 	removeGroupFx,
-	updateGroupFx,
+	updateGroupFx
 } from './units';
 import { createMutationWithAccess } from '../fabrics';
 
@@ -29,6 +29,7 @@ export const getGroupsQuery = createQuery<
 	StandardSuccessResponse<Group[]>,
 	Group[]
 >({
+	initialData: [],
 	effect: getGroupsFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(group))),
 	validate: getIsSuccessResponseValidator(),

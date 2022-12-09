@@ -29,14 +29,14 @@ const iconMap: Record<ActivityType, React.ReactNode> = {
 };
 
 export const ActivityCard: React.FC<ActivityCardProps> = (props) => {
-	const { type, sphere, className, createdAt } = props;
-	const { t } = useTranslation('room');
+	const { type, sphere, className, createdAt, } = props;
+	const { t, } = useTranslation('room');
 	return (
 		<Card className={cn(styles.card, className)}>
 			<CardContent className={styles.cardContent}>
 				<Avatar
 					className={cn(styles.avatar, styles[colorMap[type]])}
-					alt={t(`activities.type.${type}`)}>
+					alt={t(`activities.type.${type}`)!}>
 					{iconMap[type]}
 				</Avatar>
 				<div>

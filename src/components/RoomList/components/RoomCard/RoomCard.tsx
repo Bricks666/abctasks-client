@@ -6,7 +6,7 @@ import {
 	CardActions,
 	CardContent,
 	CardHeader,
-	Typography,
+	Typography
 } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import { useMutation } from '@farfetched/react';
@@ -27,12 +27,12 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 	className,
 	description,
 }) => {
-	const { t } = useTranslation('rooms');
+	const { t, } = useTranslation('rooms');
 	const removeRoom = useMutation(removeRoomMutation);
 	const options = React.useMemo<MenuOption<object>[]>(
 		() => [
 			{
-				label: t('actions.update', { ns: 'common' }),
+				label: t('actions.update', { ns: 'common', }),
 				to: roomsRoute,
 				params: {},
 				query: {
@@ -41,9 +41,9 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 				},
 			},
 			{
-				label: t('actions.remove', { ns: 'common' }),
-				onClick: () => removeRoom.start({ id }),
-			},
+				label: t('actions.remove', { ns: 'common', }),
+				onClick: () => removeRoom.start({ id, }),
+			}
 		],
 		[id]
 	);
@@ -60,7 +60,11 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 				</Typography>
 			</CardContent>
 			<CardActions>
-				<Button variant='text' to={roomRoute} params={{ id }} component={Link}>
+				<Button
+					variant='text'
+					to={roomRoute as any}
+					params={{ id, }}
+					component={Link}>
 					Перейти
 				</Button>
 			</CardActions>

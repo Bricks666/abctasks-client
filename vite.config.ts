@@ -20,16 +20,15 @@ export default defineConfig({
 	css: {
 		devSourcemap: true,
 	},
-	logLevel: 'error',
 	plugins: [
+		react(),
 		babel({
 			babelrc: true,
-			configFile: './configs/.babelrc',
+			configFile: true,
 			babelHelpers: 'bundled',
 			browserslistConfigFile: true,
 			extensions: ['.ts', '.tsx'],
 		}),
-		react(),
-		splitVendorChunkPlugin(),
+		splitVendorChunkPlugin()
 	],
 });

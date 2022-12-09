@@ -2,13 +2,13 @@ import * as React from 'react';
 import {
 	FormControlLabel,
 	Checkbox as CheckboxMUI,
-	CheckboxProps as MUICheckboxProps,
+	CheckboxProps as MUICheckboxProps
 } from '@mui/material';
 import {
 	FieldValues,
 	useController,
 	UseControllerProps,
-	UseControllerReturn,
+	UseControllerReturn
 } from 'react-hook-form';
 import { CommonProps } from '@/types';
 
@@ -19,7 +19,7 @@ export interface CheckboxProps<FormValues extends FieldValues>
 			MUICheckboxProps,
 			keyof UseControllerProps | keyof UseControllerReturn
 		> {
-	readonly label?: string;
+	readonly label?: string | null;
 }
 
 export const Checkbox = <FormValues extends FieldValues>(
@@ -34,7 +34,7 @@ export const Checkbox = <FormValues extends FieldValues>(
 		shouldUnregister,
 		...rest
 	} = props;
-	const { field } = useController({
+	const { field, } = useController({
 		name,
 		control,
 		defaultValue,

@@ -3,8 +3,6 @@
 	grid-template-columns: var(--room-page-template-columns);
 	grid-template-rows: min-content 1fr;
 	gap: 1em;
-
-	overflow: hidden;
 }
 .tasks {
 	grid-column: var(--room-page-grid-column);

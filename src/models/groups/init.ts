@@ -6,7 +6,7 @@ import {
 	createGroupMutation,
 	getGroupsQuery,
 	removeGroupMutation,
-	updateGroupMutation,
+	updateGroupMutation
 } from './queries';
 import {
 	getGroupsFx,
@@ -14,7 +14,7 @@ import {
 	removeGroupFx,
 	updateGroupFx,
 	GroupsGate,
-	$GroupsMap,
+	$GroupsMap
 } from './units';
 import { createGroupsMap } from './utils';
 
@@ -26,10 +26,7 @@ removeGroupFx.use(groupsApi.remove);
 sample({
 	clock: createGroupMutation.finished.success,
 	source: getGroupsQuery.$data,
-	fn: (groups, { data: { data } }) => {
-		if (!groups) {
-			return null;
-		}
+	fn: (groups, { result: { data, }, }) => {
 		return [...groups, data];
 	},
 	target: getGroupsQuery.$data,
@@ -38,10 +35,7 @@ sample({
 sample({
 	clock: updateGroupMutation.finished.success,
 	source: getGroupsQuery.$data,
-	fn: (groups, { data: { data } }) => {
-		if (!groups) {
-			return null;
-		}
+	fn: (groups, { result: { data, }, }) => {
 		return groups.map((group) => {
 			if (group.id === data.id) {
 				return data;
@@ -55,11 +49,11 @@ sample({
 sample({
 	clock: removeGroupMutation.finished.success,
 	source: getGroupsQuery.$data,
-	fn: (groups, { data: { data }, params }) => {
+	fn: (groups, { result: { data, }, params, }) => {
 		if (!groups || !data) {
 			return groups;
 		}
-		const { id } = params;
+		const { id, } = params;
 		return groups.filter((group) => group.id !== id);
 	},
 	target: getGroupsQuery.$data,
@@ -67,7 +61,7 @@ sample({
 
 sample({
 	clock: GroupsGate.open,
-	fn: ({ roomId }) => roomId,
+	fn: ({ roomId, }) => roomId,
 	target: getGroupsQuery.start,
 });
 

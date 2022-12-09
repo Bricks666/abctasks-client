@@ -3,10 +3,10 @@ import {
 	Contract,
 	createMutation,
 	InvalidDataError,
-	Mutation,
+	Mutation
 } from '@farfetched/core';
 import { Effect } from 'effector';
-import { StaticOrReactive } from '@farfetched/core/misc/sourced';
+import { StaticOrReactive } from '@farfetched/core/src/misc/sourced';
 import { AccessOptions, StandardFailError } from '@/packages';
 import { attachWithAccessToken, WithoutAccess } from './attachWithAccessToken';
 import { attachRemoteOperationWithAccess } from './attachRemoteOperationWithAccess';
@@ -29,8 +29,8 @@ export const createMutationWithAccess = <
 	ContractData extends Data,
 	Error extends StandardFailError
 >(
-	options: CreateMutationWithAccessOptions<Params, Data, ContractData, Error>
-): Mutation<WithoutAccess<Params>, ContractData, Error | InvalidDataError> => {
+		options: CreateMutationWithAccessOptions<Params, Data, ContractData, Error>
+	): Mutation<WithoutAccess<Params>, ContractData, Error | InvalidDataError> => {
 	const { effect, ...rest } = options;
 	const attached = attachWithAccessToken({
 		effect,
