@@ -16,7 +16,7 @@ import styles from './CreateGroupPopup.module.css';
 export interface CreateGroupPopupProps extends CommonProps, BasePopupProps {}
 
 export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
-	const { t } = useTranslation('popups');
+	const { t, } = useTranslation('popups');
 	const roomId = useParam(roomRoute, 'id');
 	const onClose = useUnit(closeCreateGroupPopup);
 	const createGroup = useMutation(createGroupMutation);
@@ -34,13 +34,12 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 		<MainPopup
 			{...props}
 			onClose={() => onClose()}
-			header={t('group.createTitle')}
-			alt={t('group.createTitle')}>
+			header={t('group.createTitle')}>
 			<GroupForm
 				className={styles.form}
 				onSubmit={onSubmit}
 				defaultValues={defaultFormValues}
-				buttonText={t('actions.create', { ns: 'common' })}
+				buttonText={t('actions.create', { ns: 'common', })}
 			/>
 		</MainPopup>
 	);

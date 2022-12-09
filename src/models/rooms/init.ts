@@ -9,14 +9,14 @@ import {
 	removeRoomFx,
 	updateRoomFx,
 	RoomsGate,
-	RoomGate,
+	RoomGate
 } from './units';
 import {
 	createRoomMutation,
 	removeRoomMutation,
 	getRoomsQuery,
 	updateRoomMutation,
-	getRoomQuery,
+	getRoomQuery
 } from './queries';
 
 getRoomsFx.use(roomsApi.getAll);
@@ -29,7 +29,7 @@ sample({
 	clock: [
 		removeRoomMutation.finished.success,
 		updateRoomMutation.finished.success,
-		createRoomMutation.finished.success,
+		createRoomMutation.finished.success
 	],
 	fn: () => ({}),
 	target: getRoomsQuery.start,
@@ -53,6 +53,8 @@ sample({
 
 sample({
 	clock: RoomGate.open,
-	fn: ({ roomId }) => roomId,
+	fn: ({ roomId, }) => roomId,
 	target: getRoomQuery.start,
 });
+
+getRoomsQuery.finished.finally.watch(console.log);

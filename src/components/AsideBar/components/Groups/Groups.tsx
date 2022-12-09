@@ -14,17 +14,17 @@ import styles from './Groups.module.css';
 export interface GroupsProps extends CommonProps {}
 
 export const Groups: React.FC<GroupsProps> = React.memo(function Groups(props) {
-	const { className } = props;
-	const { t } = useTranslation('common');
+	const { className, } = props;
+	const { t, } = useTranslation('common');
 	const params = useUnit(roomRoute.$params);
 
 	return (
 		<section className={cn(styles.groups, className)}>
 			<Button
 				className={styles.button}
-				to={roomRoute}
+				to={roomRoute as any}
 				params={params}
-				query={{ [getParams.popup]: popups.createGroup }}
+				query={{ [getParams.popup]: popups.createGroup, }}
 				component={Link}>
 				{t('actions.create')}
 			</Button>

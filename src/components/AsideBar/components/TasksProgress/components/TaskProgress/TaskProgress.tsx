@@ -4,7 +4,7 @@ import {
 	LinearProgress,
 	linearProgressClasses,
 	SxProps,
-	Typography,
+	Typography
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Progress, Group } from '@/models';
@@ -27,7 +27,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 			secondColor,
 			name,
 		} = props;
-		const { t } = useTranslation('room');
+		const { t, } = useTranslation('room');
 
 		const value = (completedCount / totalCount) * 100;
 
@@ -51,10 +51,12 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 					variant='determinate'
 					value={value}
 					valueBuffer={100}
-					aria-label={t('taskProgress.progressAria', {
-						name,
-						completed: completedCount,
-					})}
+					aria-label={
+						t('taskProgress.progressAria', {
+							name,
+							completed: completedCount,
+						})!
+					}
 					sx={sx}
 				/>
 			</div>

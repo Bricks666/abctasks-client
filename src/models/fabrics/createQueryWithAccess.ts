@@ -4,14 +4,12 @@ import {
 	createQuery,
 	InvalidDataError,
 	Query,
-} from '@farfetched/core';
-import { Effect } from 'effector';
-import {
-	StaticOrReactive,
 	TwoArgsDynamicallySourcedField,
-} from '@farfetched/core/misc/sourced';
-import { Serialize } from '@farfetched/core/serialization/type';
-import { Validator } from '@farfetched/core/validation/type';
+	Validator
+} from '@farfetched/core';
+import { StaticOrReactive } from '@farfetched/core/src/misc/sourced';
+import { Serialize } from '@farfetched/core/src/serialization/type';
+import { Effect } from 'effector';
 import { AccessOptions, StandardFailError } from '@/packages';
 import { attachWithAccessToken, WithoutAccess } from './attachWithAccessToken';
 import { attachRemoteOperationWithAccess } from './attachRemoteOperationWithAccess';
@@ -48,7 +46,7 @@ export const createQueryWithAccess = <
 	MapDataSource = void,
 	ValidationSource = void
 >(
-	options: CreateQueryWithAccessOptions<
+		options: CreateQueryWithAccessOptions<
 		Params,
 		Response,
 		Error,
@@ -57,7 +55,7 @@ export const createQueryWithAccess = <
 		MapDataSource,
 		ValidationSource
 	>
-): Query<WithoutAccess<Params>, MappedData, Error | InvalidDataError> => {
+	): Query<WithoutAccess<Params>, MappedData, Error | InvalidDataError> => {
 	const { effect, ...rest } = options;
 	const attached = attachWithAccessToken({
 		effect,

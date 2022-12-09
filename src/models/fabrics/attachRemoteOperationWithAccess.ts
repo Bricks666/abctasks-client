@@ -2,7 +2,7 @@
 import { sample } from 'effector';
 import { createDomain } from 'effector-logger';
 import { InvalidDataError } from '@farfetched/core';
-import { RemoteOperation } from '@farfetched/core/remote_operation/type';
+import { RemoteOperation } from '@farfetched/core/src/remote_operation/type';
 import { AccessOptions, StandardFailError } from '@/packages';
 import { authApi } from '@/api';
 import { StandardResponse } from '@/types';
@@ -17,15 +17,15 @@ export const attachRemoteOperationWithAccess = <
 	MappedData,
 	Meta
 >(
-	remoteOperation: RemoteOperation<
+		remoteOperation: RemoteOperation<
 		WithoutAccess<Params>,
 		MappedData,
 		Error | InvalidDataError,
 		Meta
 	>
-): void => {
+	): void => {
 	// eslint-disable-next-line no-underscore-dangle
-	const { name } = remoteOperation.__.executeFx;
+	const { name, } = remoteOperation.__.executeFx;
 
 	const $IsRetry = AttachWithDomain.store<boolean>(false, {
 		name: `IsRetry-${name}`,
@@ -44,10 +44,10 @@ export const attachRemoteOperationWithAccess = <
 	sample({
 		clock: remoteOperation.finished.failure,
 		source: $IsRetry,
-		filter: (isRetry, { error }) => {
+		filter: (isRetry, { error, }) => {
 			return !isRetry && 'statusCode' in error && error.statusCode === 401;
 		},
-		fn: (_, { params }) => params,
+		fn: (_, { params, }) => params,
 		target: [$LastParams, refreshFx],
 	});
 

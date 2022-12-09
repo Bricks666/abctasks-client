@@ -7,14 +7,14 @@ import {
 	removeTaskFx,
 	updateTaskFx,
 	TasksGate,
-	TaskGate,
+	TaskGate
 } from './units';
 import {
 	createTaskMutation,
 	getTaskQuery,
 	getTasksQuery,
 	removeTaskMutation,
-	updateTaskMutation,
+	updateTaskMutation
 } from './queries';
 import { closeCreateTaskPopup, closeUpdateTaskPopup } from '../routing';
 
@@ -27,10 +27,7 @@ removeTaskFx.use(tasksApi.remove);
 sample({
 	clock: createTaskMutation.finished.success,
 	source: getTasksQuery.$data,
-	fn: (tasks, { data: { data } }) => {
-		if (!tasks) {
-			return null;
-		}
+	fn: (tasks, { result: { data, }, }) => {
 		return [...tasks, data];
 	},
 	target: getTasksQuery.$data,
@@ -39,10 +36,7 @@ sample({
 sample({
 	clock: updateTaskMutation.finished.success,
 	source: getTasksQuery.$data,
-	fn: (tasks, { data: { data } }) => {
-		if (!tasks) {
-			return null;
-		}
+	fn: (tasks, { result: { data, }, }) => {
 		return tasks.map((task) => (task.id === data.id ? data : task));
 	},
 	target: getTasksQuery.$data,
@@ -51,7 +45,7 @@ sample({
 sample({
 	clock: removeTaskMutation.finished.success,
 	source: getTasksQuery.$data,
-	fn: (tasks, { params, data: { data } }) => {
+	fn: (tasks, { params, result: { data, }, }) => {
 		if (!tasks || !data) {
 			return tasks;
 		}
@@ -62,7 +56,7 @@ sample({
 
 sample({
 	clock: TasksGate.open,
-	fn: ({ roomId }) => roomId,
+	fn: ({ roomId, }) => roomId,
 	target: getTasksQuery.start,
 });
 

@@ -1,4 +1,4 @@
-import { forward, sample } from 'effector';
+import { sample } from 'effector';
 import { redirect } from 'atomic-router';
 import { authApi } from '@/api';
 import { loginRoute, roomsRoute } from '@/routes';
@@ -9,13 +9,13 @@ import {
 	AuthGate,
 	loginFx,
 	logoutFx,
-	registrationFx,
+	registrationFx
 } from './units';
 import {
 	authQuery,
 	loginMutation,
 	logoutMutation,
-	registrationMutation,
+	registrationMutation
 } from './queries';
 import { goToState, saveCurrentLocation } from '../routing';
 
@@ -25,22 +25,21 @@ registrationFx.use(authApi.registration);
 logoutFx.use(authApi.logout);
 
 sample({
-	clock: authQuery.finished.success,
-	source: authQuery.$data,
-	fn: (data) => data!.data.user,
+	clock: [authQuery.finished.success, loginMutation.finished.success],
+	fn: ({ result, }) => result.data.user,
 	target: $AuthUser,
 });
 
 sample({
 	clock: authQuery.finished.success,
-	source: authQuery.$data,
-	fn: (data) => data!.data.tokens.accessToken,
+	fn: ({ result, }) => result.data.tokens.accessToken,
 	target: $AccessToken,
 });
 
-forward({
-	from: loginMutation.finished.success,
-	to: authQuery.start,
+sample({
+	clock: loginMutation.finished.success,
+	fn: ({ result, }) => result.data.user,
+	target: $AuthUser,
 });
 
 sample({
@@ -62,7 +61,7 @@ redirect({
 redirect({
 	clock: [
 		logoutMutation.finished.success,
-		registrationMutation.finished.success,
+		registrationMutation.finished.success
 	],
 	route: loginRoute,
 });
@@ -76,3 +75,5 @@ redirect({
 	clock: authQuery.finished.failure,
 	route: loginRoute,
 });
+
+authQuery.finished.failure.watch(console.log);

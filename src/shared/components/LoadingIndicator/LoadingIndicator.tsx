@@ -7,11 +7,11 @@ import styles from './LoadingIndicator.module.css';
 
 export interface LoadingIndicatorProps extends CommonProps {
 	readonly size?: Size;
-	readonly text?: string;
+	readonly text?: string | null;
 }
 
 export const LoadingIndicator: React.FC<LoadingIndicatorProps> = (props) => {
-	const { className, text, size = 'medium' } = props;
+	const { className, text, size = 'medium', } = props;
 	const classes = cn(styles.indicatorContainer, styles[size]);
 
 	return (

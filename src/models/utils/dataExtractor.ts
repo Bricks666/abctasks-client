@@ -1,5 +1,9 @@
 import { StandardSuccessResponse } from '@/types';
 
-export const dataExtractor = <T>(response: StandardSuccessResponse<T>): T => {
-	return response.data;
+export const dataExtractor = <T>({
+	result,
+}: {
+	result: StandardSuccessResponse<T>;
+}): T => {
+	return result.data;
 };

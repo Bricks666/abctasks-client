@@ -18,7 +18,7 @@ export interface UpdateGroupPopupProps extends CommonProps, BasePopupProps {}
 export const UpdateGroupPopup: React.FC<
 	React.PropsWithChildren<UpdateGroupPopupProps>
 > = (props) => {
-	const { t } = useTranslation('popups');
+	const { t, } = useTranslation('popups');
 	const roomId = useParam(roomRoute, 'id');
 	const id = useUnit($groupId);
 	const onClose = useUnit(closeUpdateGroupPopup);
@@ -50,8 +50,7 @@ export const UpdateGroupPopup: React.FC<
 		<MainPopup
 			{...props}
 			onClose={() => onClose()}
-			header={t('group.updateTitle')}
-			alt={t('group.updateTitle')}>
+			header={t('group.updateTitle')}>
 			{isLoading ? (
 				<SkeletonGroupForm className={styles.form} />
 			) : (
@@ -59,7 +58,7 @@ export const UpdateGroupPopup: React.FC<
 					className={styles.form}
 					defaultValues={changeGroup}
 					onSubmit={onSubmit}
-					buttonText={t('actions.save', { ns: 'common' })}
+					buttonText={t('actions.save', { ns: 'common', })}
 				/>
 			)}
 		</MainPopup>

@@ -4,7 +4,7 @@ import { Array, Boolean } from 'runtypes';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,
-	StandardSuccessResponse,
+	StandardSuccessResponse
 } from '@/types';
 import { Task, task } from './types';
 import {
@@ -12,13 +12,13 @@ import {
 	getTaskFx,
 	getTasksFx,
 	removeTaskFx,
-	updateTaskFx,
+	updateTaskFx
 } from './units';
 import {
 	GetTaskRequest,
 	CreateTaskRequest,
 	UpdateTaskRequest,
-	RemoveTaskRequest,
+	RemoveTaskRequest
 } from '@/api';
 import { StandardFailError } from '@/packages';
 import { getIsSuccessResponseValidator, dataExtractor } from '../utils';
@@ -31,6 +31,7 @@ export const getTasksQuery = createQuery<
 	StandardSuccessResponse<Task[]>,
 	Task[]
 >({
+	initialData: [],
 	effect: getTasksFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(task))),
 	validate: getIsSuccessResponseValidator(),
