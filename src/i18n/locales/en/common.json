@@ -1,0 +1,12 @@
+{
+	"loading": "Loading...",
+	"none": "None",
+	"actions": {
+		"create": "Create",
+		"update": "Update",
+		"save": "Save",
+		"remove": "Remove",
+		"exit": "Exit",
+		"close": "Close"
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"statuses": {
+		"ready": "Ready",
+		"in progress": "In progress",
+		"review": "Need review",
+		"done": "Done"
+	}
+}

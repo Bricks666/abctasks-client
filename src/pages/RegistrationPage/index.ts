@@ -1,1 +1,1 @@
-export { RegistrationPage as default } from "./RegistrationPage";
+export { default } from './RegistrationPage';

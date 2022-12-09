@@ -1,31 +1,8 @@
-.tasks {
+.wrapper {
 	display: grid;
-	grid-template-columns: var(--template-columns);
-	column-gap: 1.5rem;
-}
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1.5rem;
 
-.loading {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 1000px) {
-	.tasks {
-		--template-columns: repeat(4, 1fr);
-	}
-}
-
-@media (max-width: 1000px) {
-	.tasks {
-		--template-columns: repeat(2, 1fr);
-
-		row-gap: 1.5rem;
-	}
-}
-
-@media (max-width: 600px) {
-	.tasks {
-		--template-columns: 1fr;
-
-		row-gap: 1.5rem;
-	}
+	height: 100%;
+	width: 100%;
 }

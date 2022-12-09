@@ -1,24 +1,19 @@
-import React, { FC } from "react";
-import { ContentLayout } from "@/ui/ContentLayout";
-import { Text } from "@/ui/Text";
-import { usePageTitle } from "@/hooks";
-import { SettingsNavigation } from "@/components/SettingsNavigation";
-import { Block } from "@/ui/Block";
-import { SettingsContent } from "@/components/SettingsContent";
+import * as React from 'react';
+import { Typography } from '@mui/material';
+import { usePageTitle } from '@/hooks';
+import { MainLayout } from '@/layouts';
 
-import SettingsPageNavigation from "./SettingsPage.module.css";
+import SettingsPageNavigation from './SettingsPage.module.css';
 
-export const SettingsPage: FC = () => {
-	usePageTitle("Settings");
+const SettingsPage: React.FC = () => {
+	usePageTitle('Settings');
 	return (
-		<main>
-			<ContentLayout className={SettingsPageNavigation.page}>
-				<Block className={SettingsPageNavigation.header}>
-					<Text component="h2">Settings</Text>
-				</Block>
-				<SettingsNavigation />
-				<SettingsContent />
-			</ContentLayout>
-		</main>
+		<MainLayout>
+			<div className={SettingsPageNavigation.header}>
+				<Typography component='h2'>Settings</Typography>
+			</div>
+		</MainLayout>
 	);
 };
+
+export default SettingsPage;

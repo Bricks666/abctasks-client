@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-columns: 1fr 4fr;
 	grid-template-rows: max-content auto;
-  row-gap: 10px;
+	row-gap: 10px;
 	column-gap: 20px;
 
 	min-height: 100vh;

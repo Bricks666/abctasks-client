@@ -1,9 +1,10 @@
-import { useCallback, useState } from "react";
+import * as React from 'react';
+import { VoidFunction } from '@/types';
 
 export const useToggle = (defaultValue = false): [boolean, VoidFunction] => {
-	const [isToggle, setIsToggle] = useState(defaultValue);
+	const [isToggle, setIsToggle] = React.useState(defaultValue);
 
-	const toggle = useCallback(() => {
+	const toggle = React.useCallback(() => {
 		setIsToggle(!isToggle);
 	}, [isToggle]);
 

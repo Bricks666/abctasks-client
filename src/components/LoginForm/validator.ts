@@ -1,35 +1,35 @@
-import Joi from "joi";
-import { LoginRequest } from "@/interfaces/requests";
+import Joi from 'joi';
+import { LoginRequest } from '@/api';
 import {
 	allowedSymbolsRegExp,
-	MAX_LOGIN_PASSWORD_LENGTH,
-	MIN_LOGIN_PASSWORD_LENGTH,
-} from "@/const";
+	maxLoginPasswordLength,
+	minLoginPasswordLength,
+} from '@/const';
 
 export const validationSchema = Joi.object<LoginRequest>({
 	login: Joi.string()
 		.pattern(allowedSymbolsRegExp)
-		.min(MIN_LOGIN_PASSWORD_LENGTH)
-		.max(MAX_LOGIN_PASSWORD_LENGTH)
+		.min(minLoginPasswordLength)
+		.max(maxLoginPasswordLength)
 		.required()
 		.messages({
-			"string.empty": "Login must be provided",
-			"string.pattern.base":
-				"Login can only contain latins alphas, numeric and !, *, (, ), _, +",
-			"string.min": `Login must contain minimum ${MIN_LOGIN_PASSWORD_LENGTH} symbols`,
-			"string.max": `Login must contain maximum ${MAX_LOGIN_PASSWORD_LENGTH} symbols`,
+			'string.empty': 'Login must be provided',
+			'string.pattern.base':
+				'Login can only contain latins alphas, numeric and !, *, (, ), _, +',
+			'string.min': `Login must contain minimum ${minLoginPasswordLength} symbols`,
+			'string.max': `Login must contain maximum ${maxLoginPasswordLength} symbols`,
 		}),
 	password: Joi.string()
 		.pattern(allowedSymbolsRegExp)
-		.min(MIN_LOGIN_PASSWORD_LENGTH)
-		.max(MAX_LOGIN_PASSWORD_LENGTH)
+		.min(minLoginPasswordLength)
+		.max(maxLoginPasswordLength)
 		.required()
 		.messages({
-			"string.empty": "Password must be provided",
-			"string.pattern.base":
-				"Password can only contain latins alphas, numeric and !, *, (, ), _, +",
-			"string.min": `Password must contain minimum ${MIN_LOGIN_PASSWORD_LENGTH} symbols`,
-			"string.max": `Password must contain maximum ${MAX_LOGIN_PASSWORD_LENGTH} symbols`,
+			'string.empty': 'Password must be provided',
+			'string.pattern.base':
+				'Password can only contain latins alphas, numeric and !, *, (, ), _, +',
+			'string.min': `Password must contain minimum ${minLoginPasswordLength} symbols`,
+			'string.max': `Password must contain maximum ${maxLoginPasswordLength} symbols`,
 		}),
-	remember: Joi.boolean(),
+	rememberMe: Joi.boolean(),
 });

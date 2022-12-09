@@ -1,28 +1,29 @@
-import React, { FC } from "react";
-import { useTranslation } from "react-i18next";
-import { LoginForm } from "@/components/LoginForm";
-import { SaveLink } from "@/components/SaveLink";
-import { ClassNameProps } from "@/interfaces/common";
-import { ContentLayout } from "@/ui/ContentLayout";
-import { Text } from "@/ui/Text";
-import { usePageTitle } from "@/hooks";
+import * as React from 'react';
+import { Link } from 'atomic-router-react';
+import { Button, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { registrationRoute } from '@/routes';
+import { usePageTitle } from '@/hooks';
+import { CommonProps } from '@/types';
+import { AuthLayout } from '@/layouts';
+import { LoginForm } from '@/components';
 
-import LoginPageStyle from "./LoginPage.module.css";
+import styles from './LoginPage.module.css';
 
-export const LoginPage: FC<ClassNameProps> = ({ className }) => {
-	const { t } = useTranslation("login");
-	usePageTitle(t("title"));
+const LoginPage: React.FC<CommonProps> = ({ className }) => {
+	const { t } = useTranslation('login');
+	usePageTitle(t('title'));
+
 	return (
-		<main className={className}>
-			<ContentLayout className={LoginPageStyle.layout}>
-				<Text className={LoginPageStyle.header} component="h2" align="center">
-					{t("title")}
-				</Text>
-				<LoginForm className={LoginPageStyle.form} />
-				<SaveLink className={LoginPageStyle.link} to="/registration">
-					{t("links.registration")}
-				</SaveLink>
-			</ContentLayout>
-		</main>
+		<AuthLayout className={className}>
+			<Typography variant='h3' component='h2' align='center'>
+				{t('title')}
+			</Typography>
+			<LoginForm />
+			<Button className={styles.button} to={registrationRoute} component={Link}>
+				{t('actions.registration')}
+			</Button>
+		</AuthLayout>
 	);
 };
+export default LoginPage;

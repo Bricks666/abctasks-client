@@ -1,55 +1,43 @@
-import React, { ComponentType, Suspense, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { POPUPS } from "@/const";
-import { usePopups } from "@/hooks";
-import { CreateTaskPopup } from "../CreateTaskPopup";
-import { EditTaskPopup } from "../EditTaskPopup";
-import { GroupsPopup } from "../GroupsPopup";
-import { EditGroupPopup } from "../EditGroupPopup";
-import { CreateGroupPopup } from "../CreateGroupPopup";
-import { BasePopup } from "@/interfaces/common";
-import { LoadingIndicator } from "@/ui/LoadingIndicator";
+import * as React from 'react';
+import { popups } from '@/const';
+import { BasePopupProps } from '@/types';
+import {
+	CreateTaskPopup,
+	UpdateTaskPopup,
+	UpdateGroupPopup,
+	CreateGroupPopup,
+	CreateRoomPopup,
+	UpdateRoomPopup,
+} from './components';
+import { usePopups } from './hooks';
 
-const popupsMap: Record<string, ComponentType<BasePopup>> = {
-	[POPUPS.createTask]: CreateTaskPopup,
-	[POPUPS.editTask]: EditTaskPopup,
-	[POPUPS.groups]: GroupsPopup,
-	[POPUPS.createGroup]: CreateGroupPopup,
-	[POPUPS.editGroup]: EditGroupPopup,
+const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
+	[popups.createTask]: CreateTaskPopup,
+	[popups.updateTask]: UpdateTaskPopup,
+	[popups.createGroup]: CreateGroupPopup,
+	[popups.updateGroup]: UpdateGroupPopup,
+	[popups.createRoom]: CreateRoomPopup,
+	[popups.updateRoom]: UpdateRoomPopup,
 };
 
 export const Popups = () => {
 	const { mountedPopups, popups } = usePopups();
 
-	useEffect(() => {
-		if (mountedPopups.length) {
-			document.body.classList.add("popup_open");
-			return () => {
-				document.body.classList.remove("popup_open");
-			};
-		}
-	}, [mountedPopups.length]);
 	return (
 		<>
-			<Outlet />
-			<Suspense fallback={<LoadingIndicator />}>
-				{mountedPopups.map((mountedPopup, index) => {
-					const Component = popupsMap[mountedPopup];
+			{mountedPopups.map((mountedPopup) => {
+				const Component = popupsMap[mountedPopup];
 
-					if (!Component) {
-						return null;
-					}
-					const isUp = mountedPopups.length - 1 === index;
-
-					return (
-						<Component
-							isOpen={popups.includes(mountedPopup)}
-							isFocus={isUp}
-							key={mountedPopup}
-						/>
-					);
-				})}
-			</Suspense>
+				if (!Component) {
+					return null;
+				}
+				return (
+					<Component
+						isOpen={popups.includes(mountedPopup)}
+						key={mountedPopup}
+					/>
+				);
+			})}
 		</>
 	);
 };

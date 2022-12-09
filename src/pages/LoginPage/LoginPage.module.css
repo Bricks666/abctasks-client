@@ -1,34 +1,5 @@
-.layout {
-	display: grid;
+.button {
+	justify-self: end;
 
-	grid-template-columns: var(--template-columns);
-	grid-template-rows: repeat(3, min-content);
-	row-gap: 1.5rem;
-}
-
-.header {
-	justify-self: center;
-}
-
-@media (min-width: 600px) {
-	.layout {
-		--template-columns: 1fr 600px 1fr;
-	}
-	.header {
-		grid-column: 2;
-	}
-
-	.form {
-		grid-column: 2;
-	}
-
-	.link {
-		grid-column: 2;
-	}
-}
-
-@media (max-width: 600px) {
-	.layout {
-		--template-columns: 1fr;
-	}
+	width: max-content;
 }

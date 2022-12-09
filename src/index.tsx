@@ -1,19 +1,38 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import { App } from "./components/App";
-import "./models/init";
-import "./i18n";
+import * as React from 'react';
+import {
+	Experimental_CssVarsProvider as CssVarsProvider,
+	StyledEngineProvider
+} from '@mui/material';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'atomic-router-react';
+import { createBrowserHistory } from 'history';
+import { App } from '@/app';
+import { router } from '@/models';
+import { theme } from '@/types';
+import { ErrorBoundary } from '@/components';
+import '@/models/init';
+import '@/i18n';
 
-import "./index.css";
+import './index.css';
 
-const root = document.getElementById("root");
-
-ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</React.StrictMode>,
-	root
+const root = ReactDOM.createRoot(
+	document.getElementById('root') as HTMLElement
 );
+
+const history = createBrowserHistory();
+
+router.setHistory(history);
+
+root.render(
+	<RouterProvider router={router}>
+		<CssVarsProvider theme={theme}>
+			<StyledEngineProvider injectFirst>
+				<ErrorBoundary>
+					<App />
+				</ErrorBoundary>
+			</StyledEngineProvider>
+		</CssVarsProvider>
+	</RouterProvider>
+);
+
+console.debug(import.meta.env);

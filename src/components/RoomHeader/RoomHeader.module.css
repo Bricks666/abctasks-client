@@ -1,11 +1,12 @@
-.block {
-	display: flex;
-
+.header {
+	display: grid;
+	grid-template-columns: 1fr max-content;
+	column-gap: 1em;
 	align-items: center;
 
-	padding: 1em;
+	padding: 2rem 0;
 }
 
-.header {
-  margin-right: auto;
+.title {
+	font-weight: 700;
 }

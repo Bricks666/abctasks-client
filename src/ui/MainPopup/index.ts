@@ -1,1 +1,0 @@
-export { MainPopup } from "./MainPopup";

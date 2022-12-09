@@ -1,34 +1,40 @@
-import { ComponentType, lazy } from "react";
-import { HomePage } from "@/pages";
-import { ROUTES } from "@/const";
+import { ComponentType, lazy } from 'react';
+import { createRoute, UnmappedRouteObject } from 'atomic-router';
+import { paths } from '@/const';
 
-interface Route {
-	readonly path: string;
+export const roomsRoute = createRoute();
+export const roomRoute = createRoute<{ id: number }>();
+export const loginRoute = createRoute();
+export const registrationRoute = createRoute();
+
+const LoginPage = lazy(() => import('@/pages/LoginPage'));
+const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
+const RoomsPage = lazy(() => import('@/pages/RoomsPage'));
+const RoomPage = lazy(() => import('@/pages/RoomPage'));
+
+interface Route extends UnmappedRouteObject<any> {
 	readonly Component: ComponentType;
-	readonly isOnlyAuth?: true;
 }
-
-const Login = lazy(() => import("@/pages/LoginPage"));
-const Registration = lazy(() => import("@/pages/RegistrationPage"));
-const Settings = lazy(() => import("@/pages/SettingsPage"));
 
 export const routes: Route[] = [
 	{
-		path: ROUTES.HOMEPAGE,
-		Component: HomePage,
-		isOnlyAuth: true,
+		path: paths.rooms,
+		Component: RoomsPage,
+		route: roomsRoute,
 	},
 	{
-		path: ROUTES.LOGIN,
-		Component: Login,
+		path: paths.room,
+		Component: RoomPage,
+		route: roomRoute,
 	},
 	{
-		path: ROUTES.REGISTRATION,
-		Component: Registration,
+		path: paths.login,
+		Component: LoginPage,
+		route: loginRoute,
 	},
 	{
-		path: ROUTES.SETTINGS,
-		Component: Settings,
-		isOnlyAuth: true,
+		path: paths.registration,
+		Component: RegistrationPage,
+		route: registrationRoute,
 	},
 ];

@@ -1,1 +1,0 @@
-export { UpdateProfile } from "./UpdateProfile";

@@ -1,20 +1,21 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import { ClassNameProps } from "@/interfaces/common";
-import { Block } from "@/ui/Block";
-import { ContentLayout } from "@/ui/ContentLayout";
-import { ProfileLink } from "./ProfileLink";
+import * as React from 'react';
+import cn from 'classnames';
+import { AppBar, Toolbar } from '@mui/material';
+import { CommonProps } from '@/types';
+import { NavigationBreadcrumbs, ProfileLink } from './components';
 
-import HeaderStyle from "./Header.module.css";
+import styles from './Header.module.css';
 
-export const Header: FC<ClassNameProps> = ({ className }) => {
+export const Header: React.FC<CommonProps> = ({ className }) => {
 	return (
-		<header className={classNames(HeaderStyle.header, className)}>
-			<ContentLayout>
-				<Block className={HeaderStyle.layout}>
-					<ProfileLink className={HeaderStyle.avatar} />
-				</Block>
-			</ContentLayout>
-		</header>
+		<AppBar
+			className={cn(styles.header, className)}
+			position='static'
+			color='transparent'>
+			<Toolbar className={styles.bar}>
+				<NavigationBreadcrumbs />
+				<ProfileLink className={styles.avatar} />
+			</Toolbar>
+		</AppBar>
 	);
 };
