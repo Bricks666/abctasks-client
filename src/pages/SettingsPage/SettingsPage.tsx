@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { Typography } from '@mui/material';
+import * as React from 'react';
+import SettingsPageNavigation from './SettingsPage.module.css';
 import { usePageTitle } from '@/hooks';
 import { MainLayout } from '@/layouts';
-
-import SettingsPageNavigation from './SettingsPage.module.css';
 
 const SettingsPage: React.FC = () => {
 	usePageTitle('Settings');

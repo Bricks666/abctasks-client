@@ -1,17 +1,17 @@
-import * as React from 'react';
 import { Button, Typography } from '@mui/material';
 import { Link } from 'atomic-router-react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { loginRoute } from '@/routes';
-import { AuthLayout } from '@/layouts';
-import { RegistrationForm } from '@/components';
-import { CommonProps } from '@/types';
-import { usePageTitle } from '@/hooks';
-
+import { RegistrationForm } from '@/features/auth';
+import { usePageTitle } from '@/shared/hooks';
+import { AuthLayout } from '@/shared/layouts';
+import { routes } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import styles from './RegistrationPage.module.css';
 
-const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
-	const { t } = useTranslation('registration');
+const RegistrationPage: React.FC<CommonProps> = (props) => {
+	const { className, } = props;
+	const { t, } = useTranslation('registration');
 
 	usePageTitle(t('title'));
 
@@ -21,7 +21,7 @@ const RegistrationPage: React.FC<CommonProps> = ({ className }) => {
 				{t('title')}
 			</Typography>
 			<RegistrationForm />
-			<Button className={styles.button} to={loginRoute} component={Link}>
+			<Button className={styles.button} to={routes.login} component={Link}>
 				{t('actions.login')}
 			</Button>
 		</AuthLayout>
