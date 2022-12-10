@@ -1,6 +1,6 @@
+import { Location } from '@/shared/models';
+import { Query, AddType } from '@/shared/types';
 import { prepareQuery } from './prepareQuery';
-import { Location } from '@/models';
-import { Query, AddType } from '@/types';
 
 export interface PrepareLinkParams {
 	readonly path?: string;

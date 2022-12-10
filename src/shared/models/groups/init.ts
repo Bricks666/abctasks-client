@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { sample } from 'effector';
+import { groupsApi } from '@/shared/api';
 import {
 	closeCreateGroupPopup,
 	closeUpdateGroupPopup
@@ -19,7 +20,6 @@ import {
 	$GroupsMap
 } from './units';
 import { createGroupsMap } from './utils';
-import { groupsApi } from '@/api';
 
 getGroupsFx.use(groupsApi.getAll);
 createGroupFx.use(groupsApi.create);

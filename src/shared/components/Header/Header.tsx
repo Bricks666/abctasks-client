@@ -1,10 +1,10 @@
 import { AppBar, Toolbar } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { CommonProps } from '@/shared/types';
 import { NavigationBreadcrumbs, ProfileLink } from './components';
 
 import styles from './Header.module.css';
-import { CommonProps } from '@/types';
 
 export const Header: React.FC<CommonProps> = ({ className, }) => {
 	return (

@@ -4,12 +4,12 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { roomRoute } from '@/shared/configs';
 import { getParams, popups } from '@/shared/const';
+import { CommonProps } from '@/shared/types';
 import { GroupsList } from './components';
 
 import styles from './Groups.module.css';
-import { roomRoute } from '@/routes';
-import { CommonProps } from '@/types';
 
 export interface GroupsProps extends CommonProps {}
 

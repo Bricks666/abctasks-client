@@ -1,4 +1,4 @@
-import { StandardSuccessResponse } from '@/types';
+import { StandardSuccessResponse } from '@/shared/types';
 
 export const dataExtractor = <T>({
 	result,

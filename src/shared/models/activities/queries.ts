@@ -1,14 +1,14 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array } from 'runtypes';
-import { dataExtractor } from '../utils/dataExtractor';
-import { activity, Activity } from './types';
-import { getActivitiesFx } from './units';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse
-} from '@/types';
+} from '@/shared/types';
+import { dataExtractor } from '../utils/dataExtractor';
+import { activity, Activity } from './types';
+import { getActivitiesFx } from './units';
 
 export const getActivitiesQuery = createQuery<
 	number,

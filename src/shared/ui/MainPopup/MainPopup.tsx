@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import * as React from 'react';
-import { CommonProps, VoidFunction } from '@/types';
+import { CommonProps, VoidFunction } from '@/shared/types';
 
 export interface MainPopupProps extends CommonProps {
 	readonly isOpen: boolean;

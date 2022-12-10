@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
+import { CommonProps } from '@/shared/types';
 import styles from './LoadingWrapper.module.css';
-import { CommonProps } from '@/types';
 
 export interface LoadingWrapperProps extends CommonProps {
 	readonly isLoading: boolean;

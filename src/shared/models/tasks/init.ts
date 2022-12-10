@@ -1,4 +1,5 @@
 import { sample } from 'effector';
+import { tasksApi } from '@/shared/api';
 import {
 	closeCreateTaskPopup,
 	closeUpdateTaskPopup
@@ -19,7 +20,6 @@ import {
 	TasksGate,
 	TaskGate
 } from './units';
-import { tasksApi } from '@/api';
 
 getTasksFx.use(tasksApi.getAll);
 getTaskFx.use(tasksApi.getOne);

@@ -1,5 +1,5 @@
-import { TaskStatus } from '@/models';
-import { AccessOptions } from '@/packages';
+import { TaskStatus } from '@/shared/models';
+import { AccessOptions } from '@/shared/packages';
 
 export interface GetTaskRequest {
 	readonly id: number;

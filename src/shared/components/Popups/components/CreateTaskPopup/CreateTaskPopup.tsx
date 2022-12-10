@@ -3,17 +3,17 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MainPopup } from '@/shared/ui';
-import { TaskForm, TaskFormValues } from '../TaskForm';
-import styles from './CreateTaskPopup.module.css';
-import { useParam } from '@/hooks';
+import { roomRoute } from '@/shared/configs';
+import { useParam } from '@/shared/lib';
 import {
 	$taskStatus,
 	closeCreateTaskPopup,
 	createTaskMutation
-} from '@/models';
-import { roomRoute } from '@/routes';
-import { BasePopupProps, CommonProps } from '@/types';
+} from '@/shared/models';
+import { BasePopupProps, CommonProps } from '@/shared/types';
+import { MainPopup } from '@/shared/ui';
+import { TaskForm, TaskFormValues } from '../TaskForm';
+import styles from './CreateTaskPopup.module.css';
 
 export interface CreateTaskPopupProps extends CommonProps, BasePopupProps {}
 

@@ -1,8 +1,8 @@
 import { Skeleton } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { CommonProps } from '@/shared/types';
 import styles from './SkeletonTaskForm.module.css';
-import { CommonProps } from '@/types';
 
 export interface SkeletonTaskFormProps extends CommonProps {}
 

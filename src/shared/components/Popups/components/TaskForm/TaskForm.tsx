@@ -5,12 +5,12 @@ import cn from 'classnames';
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { getGroupsQuery, statuses } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import { Field, GroupLabel } from '@/shared/ui';
 import styles from './TaskForm.module.css';
 import { TaskFormValues } from './types';
 import { validationScheme } from './validator';
-import { getGroupsQuery, statuses } from '@/models';
-import { CommonProps } from '@/types';
 
 export interface TaskFormProps extends CommonProps {
 	readonly defaultValues: TaskFormValues;

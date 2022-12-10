@@ -1,7 +1,18 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array, Boolean } from 'runtypes';
-import { createMutationWithAccess } from '../fabrics';
+import {
+	CreateGroupRequest,
+	UpdateGroupRequest,
+	RemoveGroupRequest
+} from '@/shared/api';
+import { StandardFailError } from '@/shared/packages';
+import {
+	getStandardSuccessResponse,
+	StandardResponse,
+	StandardSuccessResponse
+} from '@/shared/types';
+import { createMutationWithAccess } from '../../lib/fabrics';
 import { dataExtractor, getIsSuccessResponseValidator } from '../utils';
 import { Group, group } from './types';
 import {
@@ -10,17 +21,6 @@ import {
 	removeGroupFx,
 	updateGroupFx
 } from './units';
-import {
-	CreateGroupRequest,
-	UpdateGroupRequest,
-	RemoveGroupRequest
-} from '@/api';
-import { StandardFailError } from '@/packages';
-import {
-	getStandardSuccessResponse,
-	StandardResponse,
-	StandardSuccessResponse
-} from '@/types';
 
 export const getGroupsQuery = createQuery<
 	number,

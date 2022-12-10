@@ -10,7 +10,7 @@ import {
 	UseControllerProps,
 	UseControllerReturn
 } from 'react-hook-form';
-import { CommonProps } from '@/types';
+import { CommonProps } from '@/shared/types';
 
 export interface CheckboxProps<FormValues extends FieldValues>
 	extends CommonProps,

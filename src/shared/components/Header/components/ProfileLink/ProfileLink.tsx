@@ -3,10 +3,10 @@ import { Avatar, Menu } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useToggle } from '@/shared/lib';
+import { $AuthUser, logoutMutation } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import { MenuOption, MenuItem } from '@/shared/ui';
-import { useToggle } from '@/hooks';
-import { $AuthUser, logoutMutation } from '@/models';
-import { CommonProps } from '@/types';
 
 export const ProfileLink: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('header');

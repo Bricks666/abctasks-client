@@ -1,4 +1,5 @@
 import { sample } from 'effector';
+import { activitiesApi } from '@/shared/api';
 import {
 	createGroupMutation,
 	removeGroupMutation,
@@ -11,7 +12,6 @@ import {
 } from '../tasks';
 import { getActivitiesQuery } from './queries';
 import { getActivitiesFx, ActivityGate } from './units';
-import { activitiesApi } from '@/api';
 
 getActivitiesFx.use(activitiesApi.getAll);
 

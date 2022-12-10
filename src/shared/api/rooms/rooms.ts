@@ -1,11 +1,11 @@
+import { AccessOptions, fetcher } from '@/shared/packages';
+import { StandardResponse } from '@/shared/types';
 import {
 	CreateRoomRequest,
 	RemoveRoomRequest,
+	Room,
 	UpdateRoomRequest
 } from './types';
-import { Room } from '@/models';
-import { AccessOptions, fetcher } from '@/packages';
-import { StandardResponse } from '@/types';
 
 const roomsFetcher = fetcher.create({
 	baseURL: 'rooms',

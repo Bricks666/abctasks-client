@@ -1,9 +1,9 @@
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Tab } from '@mui/material';
 import * as React from 'react';
+import { CommonProps } from '@/shared/types';
 import styles from './AsideBar.module.css';
 import { TasksProgress, ActivityList, Groups } from './components';
-import { CommonProps } from '@/types';
 
 export interface AsideBarProps extends CommonProps {}
 

@@ -1,1 +1,0 @@
-export { RoomsHeader } from './RoomsHeader';

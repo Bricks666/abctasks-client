@@ -2,13 +2,13 @@ import { useMutation } from '@farfetched/react';
 import { Stack } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { roomRoute } from '@/shared/configs';
 import { getEmptyArray } from '@/shared/const';
+import { useParam } from '@/shared/lib';
+import { TaskStatus, Task, updateTaskMutation } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import { SkeletonTaskCard, TaskCard, TaskListHeader } from './components';
 import styles from './TaskList.module.css';
-import { useParam } from '@/hooks';
-import { TaskStatus, Task, updateTaskMutation } from '@/models';
-import { roomRoute } from '@/routes';
-import { CommonProps } from '@/types';
 
 export interface TaskListProps extends CommonProps {
 	readonly tasks: Task[] | null;

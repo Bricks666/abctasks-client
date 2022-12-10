@@ -4,11 +4,11 @@ import cn from 'classnames';
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
 import styles from './RoomForm.module.css';
 import { RoomFormValues } from './types';
 import { validatingScheme } from './validator';
-import { CommonProps } from '@/types';
 
 export interface RoomFormProps extends CommonProps {
 	readonly onSubmit: SubmitHandler<RoomFormValues>;

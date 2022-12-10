@@ -3,9 +3,9 @@ import { Link as AtomicLink } from 'atomic-router-react';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { router } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import { breadcrumbsMap } from './data';
-import { router } from '@/models';
-import { CommonProps } from '@/types';
 
 export interface NavigationBreadcrumbsProps extends CommonProps {}
 

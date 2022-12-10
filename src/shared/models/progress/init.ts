@@ -1,4 +1,5 @@
 import { sample } from 'effector';
+import { progressApi } from '@/shared/api';
 import { removeGroupMutation, updateGroupMutation } from '../groups';
 import {
 	createTaskMutation,
@@ -7,7 +8,6 @@ import {
 } from '../tasks';
 import { getProgressQuery } from './queries';
 import { getProgressFx, ProgressGate } from './units';
-import { progressApi } from '@/api';
 
 getProgressFx.use(progressApi.getAll);
 

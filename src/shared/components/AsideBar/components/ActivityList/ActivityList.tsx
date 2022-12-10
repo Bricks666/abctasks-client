@@ -4,10 +4,10 @@ import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { getEmptyArray } from '@/shared/const';
+import { getActivitiesQuery } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import styles from './ActivityList.module.css';
 import { SkeletonActivityCard, ActivityCard } from './components';
-import { getActivitiesQuery } from '@/models';
-import { CommonProps } from '@/types';
 
 export const ActivityList: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('room');

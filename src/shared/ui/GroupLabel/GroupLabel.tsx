@@ -1,9 +1,9 @@
 import { SxProps, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { Group } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import styles from './GroupLabel.module.css';
-import { Group } from '@/models';
-import { CommonProps } from '@/types';
 
 export interface GroupLabelProps
 	extends CommonProps,

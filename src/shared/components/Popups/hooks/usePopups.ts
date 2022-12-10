@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react';
 import { useEffect, useMemo, useState } from 'react';
-import { $popups } from '@/models';
+import { $popups } from '@/shared/models';
 
 const parsePopups = (popups: string | null) => {
 	return popups ? popups.split(',') : [];

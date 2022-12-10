@@ -1,12 +1,12 @@
+import { Task } from '@/shared/models';
+import { fetcher } from '@/shared/packages';
+import { StandardResponse } from '@/shared/types';
 import {
 	GetTaskRequest,
 	CreateTaskRequest,
 	UpdateTaskRequest,
 	RemoveTaskRequest
 } from './types';
-import { Task } from '@/models';
-import { fetcher } from '@/packages';
-import { StandardResponse } from '@/types';
 
 const tasksFetcher = fetcher.create({
 	baseURL: 'tasks',

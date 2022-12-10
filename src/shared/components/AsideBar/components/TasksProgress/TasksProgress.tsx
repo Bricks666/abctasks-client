@@ -5,11 +5,11 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { getEmptyArray } from '@/shared/const';
+import { $GroupsMap, getProgressQuery } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import { SkeletonTaskProgress, TaskProgress } from './components';
 
 import styles from './TasksProgress.module.css';
-import { $GroupsMap, getProgressQuery } from '@/models';
-import { CommonProps } from '@/types';
 
 export const TasksProgress: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('room');

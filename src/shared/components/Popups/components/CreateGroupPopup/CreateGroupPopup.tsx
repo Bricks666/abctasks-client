@@ -3,14 +3,14 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { roomRoute } from '@/shared/configs';
+import { useParam } from '@/shared/lib';
+import { createGroupMutation, closeCreateGroupPopup } from '@/shared/models';
+import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 import { GroupForm, GroupFormValues } from '../GroupForm';
 import styles from './CreateGroupPopup.module.css';
 import { defaultFormValues } from './data';
-import { useParam } from '@/hooks';
-import { createGroupMutation, closeCreateGroupPopup } from '@/models';
-import { roomRoute } from '@/routes';
-import { BasePopupProps, CommonProps } from '@/types';
 
 export interface CreateGroupPopupProps extends CommonProps, BasePopupProps {}
 

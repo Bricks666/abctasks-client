@@ -1,6 +1,6 @@
-import { Progress } from '@/models';
-import { fetcher } from '@/packages';
-import { StandardResponse } from '@/types';
+import { Progress } from '@/shared/models';
+import { fetcher } from '@/shared/packages';
+import { StandardResponse } from '@/shared/types';
 
 const progressFetcher = fetcher.create({
 	baseURL: 'progress',

@@ -13,12 +13,12 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { roomRoute } from '@/shared/configs';
 import { getEmptyArray, getParams, popups } from '@/shared/const';
+import { useParam } from '@/shared/lib';
+import { getGroupsQuery, removeGroupMutation } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import { GroupLabel } from '@/shared/ui';
-import { useParam } from '@/hooks';
-import { getGroupsQuery, removeGroupMutation } from '@/models';
-import { roomRoute } from '@/routes';
-import { CommonProps } from '@/types';
 
 export interface GroupsListProps extends CommonProps {}
 

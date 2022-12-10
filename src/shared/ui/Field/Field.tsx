@@ -6,7 +6,7 @@ import {
 	UseControllerProps,
 	UseControllerReturn
 } from 'react-hook-form';
-import { CommonProps } from '@/types';
+import { CommonProps } from '@/shared/types';
 
 export interface FieldProps<FormValues extends FieldValues>
 	extends CommonProps,

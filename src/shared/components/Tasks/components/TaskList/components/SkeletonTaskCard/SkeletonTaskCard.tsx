@@ -7,8 +7,8 @@ import {
 	Typography
 } from '@mui/material';
 import * as React from 'react';
+import { CommonProps } from '@/shared/types';
 import { SkeletonGroupLabel } from '@/shared/ui/SkeletonGroupLabel';
-import { CommonProps } from '@/types';
 
 export interface SkeletonTaskCardProps extends CommonProps {
 	readonly contentLinesCount?: number;

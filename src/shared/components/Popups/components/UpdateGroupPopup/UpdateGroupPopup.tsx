@@ -3,15 +3,19 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { roomRoute } from '@/shared/configs';
+import { useGroup, useParam } from '@/shared/lib';
+import {
+	$groupId,
+	closeUpdateGroupPopup,
+	updateGroupMutation
+} from '@/shared/models';
+import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 import { GroupForm, GroupFormValues } from '../GroupForm';
 import { SkeletonGroupForm } from '../SkeletonGroupForm';
 
 import styles from './UpdateGroupPopup.module.css';
-import { useGroup, useParam } from '@/hooks';
-import { $groupId, closeUpdateGroupPopup, updateGroupMutation } from '@/models';
-import { roomRoute } from '@/routes';
-import { BasePopupProps, CommonProps } from '@/types';
 
 export interface UpdateGroupPopupProps extends CommonProps, BasePopupProps {}
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { popups } from '@/shared/const';
+import { BasePopupProps } from '@/shared/types';
 import {
 	CreateTaskPopup,
 	UpdateTaskPopup,
@@ -9,7 +10,6 @@ import {
 	UpdateRoomPopup
 } from './components';
 import { usePopups } from './hooks';
-import { BasePopupProps } from '@/types';
 
 const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
 	[popups.createTask]: CreateTaskPopup,

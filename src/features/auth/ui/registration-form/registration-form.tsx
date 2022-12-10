@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { RegistrationRequest } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
-import { registrationModel } from '../../models';
+import { registrationModel } from '../../model';
 import styles from './registration-form.module.css';
 import { validationSchema } from './validator';
 

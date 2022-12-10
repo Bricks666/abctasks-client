@@ -1,5 +1,5 @@
 import { Validator } from '@farfetched/core';
-import { StandardResponse, StandardSuccessResponse } from '@/types';
+import { StandardResponse, StandardSuccessResponse } from '@/shared/types';
 
 export const getIsSuccessResponseValidator = <T>(): Validator<
 	StandardResponse<T>,

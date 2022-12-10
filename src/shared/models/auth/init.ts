@@ -1,5 +1,7 @@
 import { redirect } from 'atomic-router';
 import { sample } from 'effector';
+import { authApi } from '@/shared/api';
+import { loginRoute, roomsRoute } from '@/shared/configs';
 import { goToState, saveCurrentLocation } from '../../configs/routes';
 import {
 	authQuery,
@@ -16,8 +18,6 @@ import {
 	logoutFx,
 	registrationFx
 } from './units';
-import { authApi } from '@/api';
-import { loginRoute, roomsRoute } from '@/routes';
 
 authFx.use(authApi.auth);
 loginFx.use(authApi.login);

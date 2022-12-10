@@ -1,11 +1,11 @@
+import { Group } from '@/shared/models';
+import { fetcher } from '@/shared/packages';
+import { StandardResponse } from '@/shared/types';
 import {
 	CreateGroupRequest,
 	UpdateGroupRequest,
 	RemoveGroupRequest
 } from './types';
-import { Group } from '@/models';
-import { fetcher } from '@/packages';
-import { StandardResponse } from '@/types';
 
 const groupsFetcher = fetcher.create({
 	baseURL: 'groups',

@@ -8,7 +8,7 @@ import { LoadingWrapper, LoadingIndicator } from '@/shared/ui';
 import styles from './App.module.css';
 import { withProviders } from './providers';
 
-export const App: React.FC = withProviders(() => {
+export const App = withProviders(() => {
 	const status = useUnit(authQuery.$status);
 	const { t, } = useTranslation('common');
 	useGate(AuthGate);

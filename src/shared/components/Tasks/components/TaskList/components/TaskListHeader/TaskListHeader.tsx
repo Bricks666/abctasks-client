@@ -3,12 +3,12 @@ import { Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { roomRoute } from '@/shared/configs';
 import { getParams, popups } from '@/shared/const';
+import { TaskStatus } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import { EditMenu, MenuOption } from '@/shared/ui';
 import styles from './TaskListHeader.module.css';
-import { TaskStatus } from '@/models';
-import { roomRoute } from '@/routes';
-import { CommonProps } from '@/types';
 
 export interface TaskListHeaderComponent extends CommonProps {
 	readonly columnStatus: TaskStatus;

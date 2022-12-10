@@ -1,14 +1,14 @@
 import { createQuery, createMutation } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Boolean } from 'runtypes';
-import { getIsSuccessResponseValidator } from '../utils/isSuccessResponse';
-import { authResponse, AuthResponse } from './types';
-import { authFx, logoutFx } from './units';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse
-} from '@/types';
+} from '@/shared/types';
+import { getIsSuccessResponseValidator } from '../utils/isSuccessResponse';
+import { authResponse, AuthResponse } from './types';
+import { authFx, logoutFx } from './units';
 
 export const authQuery = createQuery<
 	void,

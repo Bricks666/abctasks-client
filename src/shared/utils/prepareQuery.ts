@@ -1,4 +1,4 @@
-import { Query, AddType } from '@/types';
+import { Query, AddType } from '@/shared/types';
 
 export const prepareQuery = (
 	query: Query,

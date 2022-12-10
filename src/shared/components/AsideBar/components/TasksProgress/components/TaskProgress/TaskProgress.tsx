@@ -7,9 +7,9 @@ import {
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Progress, Group } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import styles from './TaskProgress.module.css';
-import { Progress, Group } from '@/models';
-import { CommonProps } from '@/types';
 
 export interface TaskProgressComponent
 	extends CommonProps,

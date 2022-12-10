@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Header } from '@/shared/components';
 
+import { CommonProps } from '@/shared/types';
 import styles from './MainLayout.module.css';
-import { CommonProps } from '@/types';
 
 export interface MainLayoutProps extends CommonProps {}
 

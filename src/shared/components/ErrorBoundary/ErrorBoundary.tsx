@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CommonProps } from '@/types';
+import { CommonProps } from '@/shared/types';
 
 export interface ErrorBoundaryProps extends CommonProps {}
 

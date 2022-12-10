@@ -1,15 +1,21 @@
-import { AccessOptions } from '@/packages';
+import { Record, Number, String, Static } from 'runtypes';
+import { AccessOptions } from '@/shared/packages';
 
 export type GetRoomsRequest = Required<AccessOptions>;
 
-export interface GetRoomRequest extends AccessOptions {
-	readonly id: number;
-}
+export const room = Record({
+	id: Number,
+	name: String,
+	description: String,
+}).asReadonly();
 
-export interface CreateRoomRequest extends Required<AccessOptions> {
-	readonly name: string;
-	readonly description: string;
-}
+export interface Room extends Static<typeof room> {}
+
+export interface GetRoomRequest extends AccessOptions, Pick<Room, 'id'> {}
+
+export interface CreateRoomRequest
+	extends Required<AccessOptions>,
+		Pick<Room, 'description' | 'name'> {}
 export interface UpdateRoomRequest
 	extends Omit<Partial<CreateRoomRequest>, 'accessToken'>,
 		Required<AccessOptions> {

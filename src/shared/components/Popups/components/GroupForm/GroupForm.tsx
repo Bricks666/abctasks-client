@@ -4,11 +4,11 @@ import cn from 'classnames';
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { CommonProps } from '@/shared/types';
 import { Field, GroupLabel } from '@/shared/ui';
 import styles from './GroupForm.module.css';
 import { GroupFormValues } from './types';
 import { validatingScheme } from './validator';
-import { CommonProps } from '@/types';
 
 export interface GroupFormProps extends CommonProps {
 	readonly defaultValues: GroupFormValues;

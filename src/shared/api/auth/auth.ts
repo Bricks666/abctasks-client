@@ -1,5 +1,5 @@
+import { fetcher } from '@/shared/packages';
 import { StandardResponse, VoidResponse } from '@/shared/types';
-import { fetcher } from '../packages';
 import {
 	AuthResponse,
 	LoginRequest,

@@ -5,7 +5,11 @@ import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { roomRoute } from '@/shared/configs';
 import { getParams, popups } from '@/shared/const';
+import { useGroup } from '@/shared/lib';
+import { removeTaskMutation, Task } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import {
 	GroupLabel,
 	MenuOption,
@@ -14,10 +18,6 @@ import {
 	SkeletonGroupLabel
 } from '@/shared/ui';
 import styles from './TaskCard.module.css';
-import { useGroup } from '@/hooks';
-import { removeTaskMutation, Task } from '@/models';
-import { roomRoute } from '@/routes';
-import { CommonProps } from '@/types';
 
 export interface TaskCardProps extends CommonProps, Task {}
 

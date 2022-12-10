@@ -1,7 +1,19 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array, Boolean } from 'runtypes';
-import { createMutationWithAccess } from '../fabrics';
+import {
+	GetTaskRequest,
+	CreateTaskRequest,
+	UpdateTaskRequest,
+	RemoveTaskRequest
+} from '@/shared/api';
+import { StandardFailError } from '@/shared/packages';
+import {
+	getStandardSuccessResponse,
+	StandardResponse,
+	StandardSuccessResponse
+} from '@/shared/types';
+import { createMutationWithAccess } from '../../lib/fabrics';
 import { getIsSuccessResponseValidator, dataExtractor } from '../utils';
 import { Task, task } from './types';
 import {
@@ -11,18 +23,6 @@ import {
 	removeTaskFx,
 	updateTaskFx
 } from './units';
-import {
-	GetTaskRequest,
-	CreateTaskRequest,
-	UpdateTaskRequest,
-	RemoveTaskRequest
-} from '@/api';
-import { StandardFailError } from '@/packages';
-import {
-	getStandardSuccessResponse,
-	StandardResponse,
-	StandardSuccessResponse
-} from '@/types';
 
 export const getTasksQuery = createQuery<
 	number,

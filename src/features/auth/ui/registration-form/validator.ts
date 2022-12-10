@@ -1,10 +1,10 @@
 import Joi from 'joi';
+import { RegistrationRequest } from '@/shared/api';
 import {
 	allowedSymbolsRegExp,
 	maxLoginPasswordLength,
 	minLoginPasswordLength
 } from '@/shared/const';
-import { RegistrationRequest } from '@/api';
 
 export const validationSchema = Joi.object<RegistrationRequest>({
 	login: Joi.string()

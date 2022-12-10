@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import * as React from 'react';
+import { usePageTitle } from '@/shared/lib';
 import SettingsPageNavigation from './SettingsPage.module.css';
-import { usePageTitle } from '@/hooks';
 import { MainLayout } from '@/layouts';
 
 const SettingsPage: React.FC = () => {

@@ -1,15 +1,15 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { Array } from 'runtypes';
-import { getIsSuccessResponseValidator, dataExtractor } from '../utils';
-import { Progress, progress } from './types';
-import { getProgressFx } from './units';
-import { StandardFailError } from '@/packages';
+import { StandardFailError } from '@/shared/packages';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,
 	StandardSuccessResponse
-} from '@/types';
+} from '@/shared/types';
+import { getIsSuccessResponseValidator, dataExtractor } from '../utils';
+import { Progress, progress } from './types';
+import { getProgressFx } from './units';
 
 export const getProgressQuery = createQuery<
 	number,

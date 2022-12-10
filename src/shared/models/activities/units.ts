@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector';
 import { createGate } from 'effector-react';
+import { StandardResponse, InRoomRequest } from '@/shared/types';
 import { Activity } from './types';
-import { StandardResponse, InRoomRequest } from '@/types';
 
 export const ActivitiesDomain = createDomain('ActivitiesDomain');
 

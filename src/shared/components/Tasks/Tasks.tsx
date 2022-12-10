@@ -2,11 +2,11 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGroupedTasks } from '@/shared/lib';
+import { TaskStatus, Task } from '@/shared/models';
+import { CommonProps } from '@/shared/types';
 import { TaskList } from './components';
 import styles from './Tasks.module.css';
-import { useGroupedTasks } from '@/hooks';
-import { TaskStatus, Task } from '@/models';
-import { CommonProps } from '@/types';
 
 export interface Column {
 	readonly headerCode: string;

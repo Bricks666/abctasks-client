@@ -1,14 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createDomain } from 'effector';
 import { createGate } from 'effector-react';
-import { Group, GroupsMap } from './types';
 import {
 	CreateGroupRequest,
 	UpdateGroupRequest,
 	RemoveGroupRequest
-} from '@/api';
-import { StandardFailError } from '@/packages';
-import { StandardResponse, InRoomRequest } from '@/types';
+} from '@/shared/api';
+import { StandardFailError } from '@/shared/packages';
+import { StandardResponse, InRoomRequest } from '@/shared/types';
+import { Group, GroupsMap } from './types';
 
 export const GroupsDomain = createDomain('GroupsDomain');
 
