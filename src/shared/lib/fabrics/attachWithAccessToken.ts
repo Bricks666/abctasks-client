@@ -1,7 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { Effect, Store, attach } from 'effector';
+import { tokenModel } from '@/shared/configs';
+/* eslint-disable import/no-extraneous-dependencies */
 import { AccessOptions, StandardFailError } from '@/shared/packages';
-import { $AccessToken } from '../../models/auth/units';
 
 export interface AttachWithAccessTokenOptions<
 	Params extends Required<AccessOptions>,
@@ -32,7 +32,7 @@ export const attachWithAccessToken = <
 		Effect<Params, Done, Fail>
 	>({
 		effect,
-		source: $AccessToken,
+		source: tokenModel.$token,
 		mapParams: (params, accessToken): Params =>
 			({
 				...params,

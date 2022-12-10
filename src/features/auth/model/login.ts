@@ -1,7 +1,13 @@
 import { createMutation } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
-import { authResponse, AuthResponse, LoginRequest } from '@/shared/api';
+import { authModel } from '@/entities/auth';
+import {
+	authApi,
+	authResponse,
+	AuthResponse,
+	LoginRequest
+} from '@/shared/api';
 import { tokenModel } from '@/shared/configs';
 import {
 	StandardResponse,
@@ -15,6 +21,7 @@ export const loginFx = loginDomain.effect<
 	LoginRequest,
 	StandardResponse<AuthResponse>
 >('loginFx');
+loginFx.use(authApi.login);
 
 export const loginMutation = createMutation<
 	LoginRequest,
@@ -30,4 +37,10 @@ sample({
 	clock: loginMutation.finished.success,
 	fn: ({ result, }) => result.data.tokens.accessToken,
 	target: tokenModel.setToken,
+});
+
+sample({
+	clock: loginMutation.finished.success,
+	fn: ({ result, }) => result.data.user,
+	target: authModel.setAuthUser,
 });

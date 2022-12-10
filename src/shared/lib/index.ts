@@ -1,4 +1,3 @@
-export * from './usePrepareLink';
 export * from './useGetParam';
 export * from './usePageTitle';
 export * from './useGroupedTasks';
