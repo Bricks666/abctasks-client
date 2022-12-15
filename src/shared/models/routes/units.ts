@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createRouterControls } from 'atomic-router';
 import { createDomain } from 'effector';
-import { TaskStatus } from '../../models/tasks';
 import { Location } from './types';
 
 export const QueriesDomain = createDomain();
@@ -10,9 +9,7 @@ export const controls = createRouterControls();
 
 export const $popups = QueriesDomain.store<string>('');
 export const $roomId = QueriesDomain.store<null | number>(null);
-export const $taskId = QueriesDomain.store<null | number>(null);
 export const $groupId = QueriesDomain.store<null | number>(null);
-export const $taskStatus = QueriesDomain.store<null | TaskStatus>(null);
 export const $location = QueriesDomain.store<Location>({
 	path: '/rooms',
 	query: {},

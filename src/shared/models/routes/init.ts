@@ -5,8 +5,6 @@ import {
 	$location,
 	$popups,
 	$roomId,
-	$taskId,
-	$taskStatus,
 	closeCreateGroupPopup,
 	closeCreateRoomPopup,
 	closeCreateTaskPopup,
@@ -95,21 +93,6 @@ sample({
 sample({
 	clock: [closeUpdateGroupPopup, closeCreateGroupPopup],
 	target: $groupId.reinit!,
-});
-
-sample({
-	clock: [closeCreateTaskPopup, closeUpdateTaskPopup],
-	target: $taskId.reinit!,
-});
-
-sample({
-	clock: [closeCreateTaskPopup, closeUpdateTaskPopup],
-	target: $taskId.reinit!,
-});
-
-sample({
-	clock: [closeUpdateTaskPopup],
-	target: $taskStatus.reinit!,
 });
 
 sample({
