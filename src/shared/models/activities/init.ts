@@ -1,10 +1,10 @@
 import { sample } from 'effector';
-import { activitiesApi } from '@/shared/api';
 import {
-	createGroupMutation,
-	removeGroupMutation,
-	updateGroupMutation
-} from '../groups';
+	createGroupModel,
+	removeGroupModel,
+	updateGroupModel
+} from '@/features/groups';
+import { activitiesApi } from '@/shared/api';
 import {
 	createTaskMutation,
 	removeTaskMutation,
@@ -20,9 +20,9 @@ sample({
 		createTaskMutation.finished.success,
 		updateTaskMutation.finished.success,
 		removeTaskMutation.finished.success,
-		createGroupMutation.finished.success,
-		updateGroupMutation.finished.success,
-		removeGroupMutation.finished.success
+		createGroupModel.createGroupMutation.finished.success,
+		updateGroupModel.updateGroupMutation.finished.success,
+		removeGroupModel.removeGroupMutation.finished.success
 	],
 	fn: ({ params: { roomId, }, }) => {
 		return roomId;

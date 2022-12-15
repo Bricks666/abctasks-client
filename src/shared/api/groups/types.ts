@@ -1,12 +1,20 @@
+import { Record, Number, String, Static } from 'runtypes';
 import { AccessOptions } from '@/shared/packages';
-import { HEX } from '@/shared/types';
+import { hex } from '@/shared/types';
 
-export interface CreateGroupRequest extends Required<AccessOptions> {
-	readonly roomId: number;
-	readonly name: string;
-	readonly mainColor: HEX;
-	readonly secondColor: HEX;
-}
+export const group = Record({
+	id: Number,
+	roomId: Number,
+	name: String,
+	mainColor: hex,
+	secondColor: hex,
+});
+
+export interface Group extends Static<typeof group> {}
+
+export interface CreateGroupRequest
+	extends Required<AccessOptions>,
+		Omit<Group, 'id'> {}
 
 export interface UpdateGroupRequest
 	extends Partial<Omit<CreateGroupRequest, 'roomId' | 'accessToken'>>,

@@ -3,9 +3,9 @@ import { Link } from 'atomic-router-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginForm } from '@/features/auth';
+import { routes } from '@/shared/configs';
 import { AuthLayout } from '@/shared/layouts';
 import { usePageTitle } from '@/shared/lib';
-import { routes } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 import styles from './LoginPage.module.css';
 

@@ -1,14 +1,9 @@
 import * as React from 'react';
+import { CreateGroupPopup, UpdateGroupPopup } from '@/widgets/groups';
+import { CreateRoomPopup, UpdateRoomPopup } from '@/widgets/rooms';
 import { popups } from '@/shared/const';
 import { BasePopupProps } from '@/shared/types';
-import {
-	CreateTaskPopup,
-	UpdateTaskPopup,
-	UpdateGroupPopup,
-	CreateGroupPopup,
-	CreateRoomPopup,
-	UpdateRoomPopup
-} from './components';
+import { CreateTaskPopup, UpdateTaskPopup } from './components';
 import { usePopups } from './hooks';
 
 const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {

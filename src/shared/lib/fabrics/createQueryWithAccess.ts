@@ -28,6 +28,7 @@ export interface CreateQueryWithAccessOptions<
 		MappedData,
 		MapDataSource
 	>;
+	readonly initialValue?: MappedData;
 	readonly validate?: Validator<ContractData, Params, ValidationSource>;
 	readonly name?: string;
 }
@@ -50,7 +51,12 @@ export const createQueryWithAccess = <
 		MapDataSource,
 		ValidationSource
 	>
-	): Query<WithoutAccess<Params>, MappedData, Error | InvalidDataError> => {
+	): Query<
+	WithoutAccess<Params>,
+	MappedData,
+	Error | InvalidDataError,
+	MappedData
+> => {
 	const { effect, ...rest } = options;
 	const attached = attachWithAccessToken({
 		effect,

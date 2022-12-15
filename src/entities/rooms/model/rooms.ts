@@ -41,6 +41,7 @@ export const getRoomsQuery = createQueryWithAccess<
 	StandardSuccessResponse<Room[]>,
 	Room[]
 >({
+	initialValue: [],
 	effect: getRoomsFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(room))),
 	validate: getIsSuccessResponseValidator(),

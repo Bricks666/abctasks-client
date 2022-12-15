@@ -1,3 +1,3 @@
-export * as createModel from './create';
-export * as removeModel from './remove';
-export * as updateModel from './update';
+export * as createRoomModel from './create';
+export * as removeRoomModel from './remove';
+export * as updateRoomModel from './update';

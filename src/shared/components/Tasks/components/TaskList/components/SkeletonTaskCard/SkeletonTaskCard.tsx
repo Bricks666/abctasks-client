@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import * as React from 'react';
 import { CommonProps } from '@/shared/types';
-import { SkeletonGroupLabel } from '@/shared/ui/SkeletonGroupLabel';
 
 export interface SkeletonTaskCardProps extends CommonProps {
 	readonly contentLinesCount?: number;
@@ -20,7 +19,7 @@ export const SkeletonTaskCard: React.FC<SkeletonTaskCardProps> = React.memo(
 		const lines = Array(contentLinesCount).fill(0);
 		return (
 			<Card className={className}>
-				<CardHeader title={<SkeletonGroupLabel />} />
+				<CardHeader title={<Skeleton height='1.5em' width='50%' />} />
 				<CardContent>
 					{lines.map((_, i) => (
 						<Typography key={i}>

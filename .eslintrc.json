@@ -57,7 +57,7 @@
 		],
 		"no-restricted-exports": "off",
 		"prefer-arrow-callback": "off",
-		"no-shadow": "warn",
+		"no-shadow": "off",
 		"default-param-last": "warn",
 
 		/* REACT */

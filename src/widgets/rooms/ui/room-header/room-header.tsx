@@ -6,7 +6,7 @@ import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
-import styles from './RoomHeader.module.css';
+import styles from './room-header.module.css';
 
 export const RoomHeader: React.FC<CommonProps> = (props) => {
 	const { className, } = props;

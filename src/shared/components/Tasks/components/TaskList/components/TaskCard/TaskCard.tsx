@@ -5,18 +5,12 @@ import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { roomRoute } from '@/shared/configs';
+import { GroupLabel, SkeletonGroupLabel, useGroup } from '@/entities/groups';
+import { routes } from '@/shared/configs';
 import { getParams, popups } from '@/shared/const';
-import { useGroup } from '@/shared/lib';
 import { removeTaskMutation, Task } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
-import {
-	GroupLabel,
-	MenuOption,
-	DateTime,
-	EditMenu,
-	SkeletonGroupLabel
-} from '@/shared/ui';
+import { MenuOption, DateTime, EditMenu } from '@/shared/ui';
 import styles from './TaskCard.module.css';
 
 export interface TaskCardProps extends CommonProps, Task {}
@@ -48,7 +42,7 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 			{
 				icon: <EditIcon />,
 				label: t('actions.update'),
-				to: roomRoute,
+				to: routes.room,
 				params: {
 					id: roomId,
 				},
