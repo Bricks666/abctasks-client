@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ErrorBoundary } from '@/shared/components';
+import { ErrorBoundary } from '@/widgets/page';
 
 export const withErrorBoundary =
 	(Component: React.ComponentType): React.ComponentType =>

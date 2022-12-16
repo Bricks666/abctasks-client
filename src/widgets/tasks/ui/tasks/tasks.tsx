@@ -2,8 +2,8 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGroupedTasks } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
-import { useGroupedTasks } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { TaskList } from '../task-list';
 

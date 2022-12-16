@@ -3,4 +3,4 @@ export * from './rooms';
 export * from './tasks';
 export * from './groups';
 export * from './activities';
-export * from './progress';
+export * from './progresses';
