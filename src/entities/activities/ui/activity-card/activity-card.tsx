@@ -5,10 +5,10 @@ import { Avatar, Card, CardContent, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Activity, ActivityType } from '@/shared/models';
+import { Activity, ActivityType } from '@/shared/api';
 import { Color, CommonProps } from '@/shared/types';
 import { DateTime } from '@/shared/ui';
-import styles from './ActivityCard.module.css';
+import styles from './activity-card.module.css';
 
 export interface ActivityCardProps extends CommonProps, Activity {}
 

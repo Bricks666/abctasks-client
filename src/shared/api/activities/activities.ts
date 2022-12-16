@@ -1,6 +1,6 @@
-import { Activity } from '@/shared/models';
 import { fetcher } from '@/shared/packages';
 import { StandardResponse } from '@/shared/types';
+import { Activity } from './types';
 
 const activitiesFetcher = fetcher.create({
 	baseURL: 'activities',

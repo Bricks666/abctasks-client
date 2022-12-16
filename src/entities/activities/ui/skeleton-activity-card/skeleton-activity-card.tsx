@@ -2,7 +2,7 @@ import { Avatar, Card, CardContent, Skeleton } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/shared/types';
-import styles from './SkeletonActivityCard.module.css';
+import styles from './skeleton-activity-card.module.css';
 
 export interface SkeletonActivityCardProps extends CommonProps {}
 

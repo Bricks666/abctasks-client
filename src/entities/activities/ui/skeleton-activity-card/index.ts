@@ -1,4 +1,4 @@
 export {
 	SkeletonActivityCard,
 	type SkeletonActivityCardProps
-} from './SkeletonActivityCard';
+} from './skeleton-activity-card';

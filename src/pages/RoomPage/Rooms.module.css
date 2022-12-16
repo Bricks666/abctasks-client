@@ -10,6 +10,22 @@
 	height: 100%;
 }
 
+.panel {
+	display: grid;
+	grid-template-rows: max-content 1fr;
+	gap: 2em;
+
+	padding: 1em 0;
+}
+
+.panel[hidden] {
+	display: none;
+}
+
+.progress {
+	max-height: 300px;
+}
+
 @media (min-width: 1300px) {
 	.layout {
 		--room-page-template-columns: 4fr 1fr;
