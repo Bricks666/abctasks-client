@@ -10,9 +10,9 @@ import {
 } from '@/features/groups';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
-import { closeCreateGroupPopup } from '@/shared/models/routes';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
+import { createGroupPopupModel } from '../../model';
 import styles from './create-group-popup.module.css';
 import { defaultFormValues } from './data';
 
@@ -21,7 +21,7 @@ export interface CreateGroupPopupProps extends CommonProps, BasePopupProps {}
 export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
 	const roomId = useParam(routes.room, 'id');
-	const onClose = useUnit(closeCreateGroupPopup);
+	const onClose = useUnit(createGroupPopupModel.close);
 	const createGroup = useMutation(createGroupModel.createGroupMutation);
 
 	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(

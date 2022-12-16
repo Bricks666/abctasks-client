@@ -1,9 +1,12 @@
 import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
+import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { GetRoomsRequest, room, Room, roomsApi } from '@/shared/api';
+import { controls, routes } from '@/shared/configs';
+import { getParams } from '@/shared/const';
 import { createQueryWithAccess } from '@/shared/lib';
 import {
 	getIsSuccessResponseValidator,
@@ -19,6 +22,7 @@ import {
 
 export const roomsDomain = createDomain();
 
+export const $roomId = roomsDomain.store<null | number>(null);
 export const getRoomsFx = roomsDomain.effect<
 	GetRoomsRequest,
 	StandardResponse<Room[]>,
@@ -90,4 +94,12 @@ cache(getRoomsQuery, {
 
 cache(getRoomQuery, {
 	staleAfter: '15min',
+});
+
+querySync({
+	controls,
+	route: routes.rooms,
+	source: {
+		[getParams.roomId]: $roomId,
+	},
 });

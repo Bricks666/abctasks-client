@@ -1,9 +1,12 @@
 import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
+import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { group, Group, groupsApi } from '@/shared/api';
+import { controls, routes } from '@/shared/configs';
+import { getParams } from '@/shared/const';
 import {
 	getIsSuccessResponseValidator,
 	dataExtractor
@@ -22,12 +25,8 @@ export interface GroupsMap {
 	[id: number]: Group | undefined;
 }
 
-export const $groupsMap = groupsDomain.store<GroupsMap>(
-	{},
-	{
-		name: 'GroupsMap',
-	}
-);
+export const $groupsMap = groupsDomain.store<GroupsMap>({});
+export const $groupId = groupsDomain.store<null | number>(null);
 export const invalidateCache = groupsDomain.event();
 export const getGroupsFx = groupsDomain.effect<
 	number,
@@ -79,4 +78,12 @@ sample({
 cache(getGroupsQuery, {
 	staleAfter: '15min',
 	purge: invalidateCache,
+});
+
+querySync({
+	controls,
+	route: routes.room,
+	source: {
+		[getParams.groupId]: $groupId,
+	},
 });

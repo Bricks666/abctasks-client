@@ -9,12 +9,12 @@ import {
 	SkeletonGroupForm,
 	updateGroupModel
 } from '@/features/groups';
-import { useGroup } from '@/entities/groups';
+import { groupsModel, useGroup } from '@/entities/groups';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
-import { $groupId, closeUpdateGroupPopup } from '@/shared/models/routes';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
+import { updateGroupPopupModel } from '../../model';
 import styles from './update-group-popup.module.css';
 
 export interface UpdateGroupPopupProps extends CommonProps, BasePopupProps {}
@@ -24,8 +24,8 @@ export const UpdateGroupPopup: React.FC<
 > = (props) => {
 	const { t, } = useTranslation('popups');
 	const roomId = useParam(routes.room, 'id');
-	const id = useUnit($groupId);
-	const onClose = useUnit(closeUpdateGroupPopup);
+	const id = useUnit(groupsModel.$groupId);
+	const onClose = useUnit(updateGroupPopupModel.close);
 	const group = useGroup(Number(id));
 	const updateGroup = useMutation(updateGroupModel.updateGroupMutation);
 	const isLoading = !group && id !== null;

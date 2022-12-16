@@ -2,9 +2,9 @@ import * as React from 'react';
 import { CreateGroupPopup, UpdateGroupPopup } from '@/widgets/groups';
 import { CreateRoomPopup, UpdateRoomPopup } from '@/widgets/rooms';
 import { CreateTaskPopup, UpdateTaskPopup } from '@/widgets/tasks';
+import { usePopups } from '@/entities/popups';
 import { popups } from '@/shared/const';
 import { BasePopupProps } from '@/shared/types';
-import { usePopups } from './hooks';
 
 const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
 	[popups.createTask]: CreateTaskPopup,
@@ -15,24 +15,26 @@ const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
 	[popups.updateRoom]: UpdateRoomPopup,
 };
 
-export const Popups = () => {
-	const { mountedPopups, popups, } = usePopups();
+export const withPopups =
+	(Component: React.ComponentType): React.ComponentType =>
+		() => {
+			const { mountedPopups, popups, } = usePopups();
+			return (
+				<>
+					<Component />
+					{mountedPopups.map((mountedPopup) => {
+						const Component = popupsMap[mountedPopup];
 
-	return (
-		<>
-			{mountedPopups.map((mountedPopup) => {
-				const Component = popupsMap[mountedPopup];
-
-				if (!Component) {
-					return null;
-				}
-				return (
-					<Component
-						isOpen={popups.includes(mountedPopup)}
-						key={mountedPopup}
-					/>
-				);
-			})}
-		</>
-	);
-};
+						if (!Component) {
+							return null;
+						}
+						return (
+							<Component
+								isOpen={popups.includes(mountedPopup)}
+								key={mountedPopup}
+							/>
+						);
+					})}
+				</>
+			);
+		};

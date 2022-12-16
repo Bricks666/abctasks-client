@@ -3,7 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, combine, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { User, AuthResponse, authResponse, authApi } from '@/shared/api';
-import { getIsSuccessResponseValidator } from '@/shared/models/utils';
+import { getIsSuccessResponseValidator } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,

@@ -4,18 +4,18 @@ import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { RoomForm, RoomFormValues, updateRoomModel } from '@/features/rooms';
-import { useRoom } from '@/entities/rooms';
-import { $roomId, closeUpdateRoomPopup } from '@/shared/models/routes';
+import { roomsModel, useRoom } from '@/entities/rooms';
 import { BasePopupProps } from '@/shared/types';
 import { MainPopup, LoadingIndicator } from '@/shared/ui';
 
+import { updateRoomPopupModel } from '../../model';
 import styles from './update-room-popup.module.css';
 
 export const UpdateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
-	const roomId = useUnit($roomId);
+	const roomId = useUnit(roomsModel.$roomId);
 	const { data: room, } = useRoom(roomId!);
-	const onClose = useUnit(closeUpdateRoomPopup);
+	const onClose = useUnit(updateRoomPopupModel.close);
 	const updateRoom = useMutation(updateRoomModel.updateRoomMutation);
 
 	const loading = !room;

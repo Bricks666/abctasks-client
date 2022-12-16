@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react';
 import { useEffect, useMemo, useState } from 'react';
-import { $popups } from '@/shared/models';
+import { popupsModel } from '../model';
 
 const parsePopups = (popups: string | null) => {
 	return popups ? popups.split(',') : [];
@@ -9,7 +9,7 @@ const parsePopups = (popups: string | null) => {
 let timeoutId: null | number = null;
 
 export const usePopups = () => {
-	const rawPopups = useUnit($popups);
+	const rawPopups = useUnit(popupsModel.$popups);
 	const [mountedPopups, setMountedPopups] = useState<string[]>(() =>
 		parsePopups(rawPopups)
 	);

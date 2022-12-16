@@ -1,19 +1,19 @@
 import { createDomain, sample } from 'effector';
+import { groupsModel } from '@/entities/groups';
 import { popupsModel } from '@/entities/popups';
-import { tasksModel } from '@/entities/tasks';
 import { popups } from '@/shared/const';
 
-const updateTaskPopupDomain = createDomain();
+const createGroupPopupDomain = createDomain();
 
-export const close = updateTaskPopupDomain.event();
+export const close = createGroupPopupDomain.event();
 
 sample({
 	clock: close,
-	fn: () => popups.updateTask,
+	fn: () => popups.createGroup,
 	target: popupsModel.close,
 });
 
 sample({
 	clock: close,
-	target: tasksModel.$selectedTaskId.reinit!,
+	target: groupsModel.$groupId.reinit!,
 });
