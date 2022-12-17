@@ -4,9 +4,9 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginForm } from '@/features/auth';
 import { routes } from '@/shared/configs';
-import { AuthLayout } from '@/shared/layouts';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+import { AuthLayout } from '@/shared/ui';
 import styles from './LoginPage.module.css';
 
 const LoginPage: React.FC<CommonProps> = ({ className, }) => {

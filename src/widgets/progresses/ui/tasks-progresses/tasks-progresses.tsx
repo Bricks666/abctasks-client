@@ -9,7 +9,7 @@ import {
 	TaskProgress,
 	useProgresses
 } from '@/entities/progresses';
-import { getEmptyArray } from '@/shared/const';
+import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
 import styles from './tasks-progresses.module.css';

@@ -5,7 +5,7 @@ import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { activitiesApi } from '@/shared/api';
 import { Activity, activity } from '@/shared/api/activities/types';
-import { dataExtractor } from '@/shared/models/utils';
+import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,

@@ -3,8 +3,7 @@ import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { routes } from '@/shared/configs';
-import { getParams, popups } from '@/shared/const';
+import { routes, getParams, popups } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
 export interface CreateGroupButtonProps extends CommonProps {}

@@ -5,13 +5,12 @@ import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { GetRoomsRequest, room, Room, roomsApi } from '@/shared/api';
-import { controls, routes } from '@/shared/configs';
-import { getParams } from '@/shared/const';
-import { createQueryWithAccess } from '@/shared/lib';
+import { controls, routes, getParams } from '@/shared/configs';
 import {
+	createQueryWithAccess,
 	getIsSuccessResponseValidator,
 	dataExtractor
-} from '@/shared/models/utils';
+} from '@/shared/lib';
 import { StandardFailError } from '@/shared/packages';
 import {
 	StandardResponse,

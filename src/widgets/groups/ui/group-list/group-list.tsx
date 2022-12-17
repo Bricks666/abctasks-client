@@ -8,8 +8,7 @@ import cn from 'classnames';
 import * as React from 'react';
 import { GroupCardActions } from '@/features/groups';
 import { GroupLabel, useGroups } from '@/entities/groups';
-import { routes } from '@/shared/configs';
-import { getEmptyArray } from '@/shared/const';
+import { routes, getEmptyArray } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 

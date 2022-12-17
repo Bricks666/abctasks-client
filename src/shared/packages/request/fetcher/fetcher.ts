@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { api } from '@/shared/const';
+import { api } from '@/shared/configs';
 import { BaseFetcher, BaseFetcherOptions } from '../base';
 import { StandardFailError } from '../error';
 import { BaseRequestOptions, BodyRequestOptions } from './types';

@@ -1,7 +1,7 @@
 import { createDomain, sample } from 'effector';
 import { popupsModel } from '@/entities/popups';
 import { tasksModel } from '@/entities/tasks';
-import { popups } from '@/shared/const';
+import { popups } from '@/shared/configs';
 
 const createTaskPopupDomain = createDomain();
 

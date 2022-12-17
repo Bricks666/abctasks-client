@@ -1,7 +1,7 @@
 import { createDomain, sample } from 'effector';
 import { groupsModel } from '@/entities/groups';
 import { popupsModel } from '@/entities/popups';
-import { popups } from '@/shared/const';
+import { popups } from '@/shared/configs';
 
 const createGroupPopupDomain = createDomain();
 

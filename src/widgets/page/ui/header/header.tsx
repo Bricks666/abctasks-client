@@ -1,20 +1,22 @@
 import { AppBar, Toolbar } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { ProfileMenu } from '@/features/auth';
 import { CommonProps } from '@/shared/types';
-import { NavigationBreadcrumbs, ProfileLink } from './components';
 
-import styles from './Header.module.css';
+import styles from './header.module.css';
 
-export const Header: React.FC<CommonProps> = ({ className, }) => {
+export interface HeaderProps extends CommonProps {}
+
+export const Header: React.FC<HeaderProps> = (props) => {
+	const { className, } = props;
 	return (
 		<AppBar
 			className={cn(styles.header, className)}
 			position='static'
 			color='transparent'>
 			<Toolbar className={styles.bar}>
-				<NavigationBreadcrumbs />
-				<ProfileLink className={styles.avatar} />
+				<ProfileMenu className={styles.avatar} />
 			</Toolbar>
 		</AppBar>
 	);

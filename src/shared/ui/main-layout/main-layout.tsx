@@ -1,19 +1,20 @@
 import * as React from 'react';
-import { Header } from '@/shared/components';
-
 import { CommonProps } from '@/shared/types';
-import styles from './MainLayout.module.css';
 
-export interface MainLayoutProps extends CommonProps {}
+import styles from './main-layout.module.css';
+
+export interface MainLayoutProps extends CommonProps {
+	readonly header: React.ReactElement;
+}
 
 export const MainLayout: React.FC<React.PropsWithChildren<MainLayoutProps>> = (
 	props
 ) => {
-	const { className, children, } = props;
+	const { className, children, header, } = props;
 
 	return (
 		<section className={styles.layout}>
-			<Header />
+			{header}
 			<main className={className}>{children}</main>
 		</section>
 	);

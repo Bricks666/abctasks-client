@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import * as React from 'react';
 import { usePageTitle } from '@/shared/lib';
 import SettingsPageNavigation from './SettingsPage.module.css';
-import { MainLayout } from '@/layouts';
+import { MainLayout } from '@/ui';
 
 const SettingsPage: React.FC = () => {
 	usePageTitle('Settings');

@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { allowedSymbolsRegExp } from '@/shared/const';
+import { allowedSymbolsRegExp } from '@/shared/configs';
 import { GroupFormValues } from './types';
 
 const colorPattern = /#[0-9a-fA-F]{6}/;

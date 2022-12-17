@@ -16,11 +16,3 @@ export const popups = {
 	createRoom: 'create-room',
 	updateRoom: 'update-room',
 } as const;
-
-export const paths = {
-	rooms: '/rooms',
-	room: '/rooms/:id',
-	login: '/login',
-	registration: '/registration',
-	settings: '/settings/:tab',
-} as const;

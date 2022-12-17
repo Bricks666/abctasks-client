@@ -1,14 +1,14 @@
-import { useQuery } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Button, MenuItem, Skeleton } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { getGroupsQuery, statuses } from '@/shared/models';
+import { GroupLabel, useGroups } from '@/entities/groups';
+import { statuses } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
-import { Field, GroupLabel } from '@/shared/ui';
-import styles from './TaskForm.module.css';
+import { Field } from '@/shared/ui';
+import styles from './task-form.module.css';
 import { TaskFormValues } from './types';
 import { validationScheme } from './validator';
 
@@ -16,11 +16,12 @@ export interface TaskFormProps extends CommonProps {
 	readonly defaultValues: TaskFormValues;
 	readonly buttonText: string;
 	readonly onSubmit: SubmitHandler<TaskFormValues>;
+	readonly roomId: number;
 }
 
 export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
-	const { buttonText, defaultValues, onSubmit, className, } = props;
-	const { data: groups, } = useQuery(getGroupsQuery);
+	const { buttonText, defaultValues, onSubmit, className, roomId, } = props;
+	const { data: groups, } = useGroups(roomId);
 	const { t, } = useTranslation('popups');
 	const { handleSubmit, formState, control, } = useForm<TaskFormValues>({
 		resolver: joiResolver(validationScheme),

@@ -3,6 +3,7 @@ import { RouterProvider } from 'atomic-router-react';
 import { createBrowserHistory } from 'history';
 import * as React from 'react';
 import { routes, controls } from '@/shared/configs';
+import { LoadingIndicator } from '@/shared/ui';
 
 const router = createHistoryRouter({
 	routes: [
@@ -33,7 +34,9 @@ export const withRouter =
 		() => {
 			return (
 				<RouterProvider router={router}>
-					<Component />
+					<React.Suspense fallback={<LoadingIndicator size='large' />}>
+						<Component />
+					</React.Suspense>
 				</RouterProvider>
 			);
 		};

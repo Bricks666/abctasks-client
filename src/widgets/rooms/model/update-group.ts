@@ -1,6 +1,6 @@
 import { createDomain, sample } from 'effector';
 import { popupsModel } from '@/entities/popups';
-import { popups } from '@/shared/const';
+import { popups } from '@/shared/configs';
 
 const updateRoomPopupDomain = createDomain();
 

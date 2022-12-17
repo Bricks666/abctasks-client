@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { io, Socket } from 'socket.io-client';
-import { api } from '@/shared/const';
+import { api } from '@/shared/configs';
 import { BaseFetcher } from '../base';
 import { ConnectionOptions, CallBack } from './types';
 

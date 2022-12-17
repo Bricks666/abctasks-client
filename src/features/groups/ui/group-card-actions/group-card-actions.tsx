@@ -5,8 +5,7 @@ import { IconButton } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import { t } from 'i18next';
 import * as React from 'react';
-import { routes } from '@/shared/configs';
-import { getParams, popups } from '@/shared/const';
+import { routes, getParams, popups } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 import { removeGroupModel } from '../../model';
 

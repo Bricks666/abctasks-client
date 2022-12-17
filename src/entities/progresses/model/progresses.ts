@@ -4,10 +4,7 @@ import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { progress, Progress, progressApi } from '@/shared/api';
-import {
-	getIsSuccessResponseValidator,
-	dataExtractor
-} from '@/shared/models/utils';
+import { getIsSuccessResponseValidator, dataExtractor } from '@/shared/lib';
 import { StandardFailError } from '@/shared/packages';
 import {
 	StandardResponse,

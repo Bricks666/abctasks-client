@@ -2,9 +2,9 @@ import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { RoomList, RoomsHeader } from '@/widgets/rooms';
-import { MainLayout } from '@/shared/layouts';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+import { MainLayout } from '@/shared/ui';
 
 import styles from './RoomsPage.module.css';
 

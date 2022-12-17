@@ -3,7 +3,7 @@ import { CreateGroupPopup, UpdateGroupPopup } from '@/widgets/groups';
 import { CreateRoomPopup, UpdateRoomPopup } from '@/widgets/rooms';
 import { CreateTaskPopup, UpdateTaskPopup } from '@/widgets/tasks';
 import { usePopups } from '@/entities/popups';
-import { popups } from '@/shared/const';
+import { popups } from '@/shared/configs';
 import { BasePopupProps } from '@/shared/types';
 
 const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {

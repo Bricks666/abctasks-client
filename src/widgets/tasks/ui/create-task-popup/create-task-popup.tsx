@@ -11,7 +11,7 @@ import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 import { createTaskPopupModel } from '../../model';
 
-import styles from './CreateTaskPopup.module.css';
+import styles from './create-task-popup.module.css';
 
 export interface CreateTaskPopupProps extends CommonProps, BasePopupProps {}
 
@@ -46,6 +46,7 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 			<TaskForm
 				className={styles.form}
 				onSubmit={onSubmit}
+				roomId={roomId}
 				defaultValues={defaultState}
 				buttonText={t('actions.create', { ns: 'common', })}
 			/>

@@ -4,7 +4,7 @@ import {
 	allowedSymbolsRegExp,
 	maxLoginPasswordLength,
 	minLoginPasswordLength
-} from '@/shared/const';
+} from '@/shared/configs';
 
 export const validationSchema = Joi.object<LoginRequest>({
 	login: Joi.string()

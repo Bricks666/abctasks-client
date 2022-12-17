@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { allowedSymbolsRegExp } from '@/shared/const';
+import { allowedSymbolsRegExp } from '@/shared/configs';
 import { TaskFormValues } from './types';
 
 export const validationScheme = Joi.object<TaskFormValues>({

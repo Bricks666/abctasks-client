@@ -5,12 +5,8 @@ import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { group, Group, groupsApi } from '@/shared/api';
-import { controls, routes } from '@/shared/configs';
-import { getParams } from '@/shared/const';
-import {
-	getIsSuccessResponseValidator,
-	dataExtractor
-} from '@/shared/models/utils';
+import { controls, routes, getParams } from '@/shared/configs';
+import { getIsSuccessResponseValidator, dataExtractor } from '@/shared/lib';
 import { StandardFailError } from '@/shared/packages';
 import {
 	getStandardSuccessResponse,
