@@ -96,6 +96,3 @@ querySync({
 	},
 	route: routes.room,
 });
-
-getTasksQuery.$data.watch(console.debug);
-getTaskQuery.finished.failure.watch(console.debug);

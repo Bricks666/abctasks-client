@@ -60,11 +60,6 @@ sample({
 });
 
 sample({
-	clock: GroupsGate.close,
-	target: invalidateCache,
-});
-
-sample({
 	source: getGroupsQuery.$data,
 	fn: (data) =>
 		Object.values(data).reduce<GroupsMap>((map, group) => {

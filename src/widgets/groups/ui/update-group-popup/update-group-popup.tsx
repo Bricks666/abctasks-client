@@ -26,7 +26,7 @@ export const UpdateGroupPopup: React.FC<
 	const roomId = useParam(routes.room, 'id');
 	const id = useUnit(groupsModel.$groupId);
 	const onClose = useUnit(updateGroupPopupModel.close);
-	const group = useGroup(Number(id));
+	const { data: group, } = useGroup(roomId, Number(id));
 	const updateGroup = useMutation(updateGroupModel.updateGroupMutation);
 	const isLoading = !group && id !== null;
 
