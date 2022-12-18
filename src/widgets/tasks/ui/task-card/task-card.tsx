@@ -7,13 +7,13 @@ import { CommonProps } from '@/shared/types';
 
 export interface TaskCardProps extends CommonProps, Task {}
 
-export const TaskCard: React.FC<TaskCardProps> = (props) => {
+export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 	const { groupId, id, roomId, } = props;
 
-	const group = useGroup(groupId);
+	const group = useGroup(roomId, groupId);
 
 	const actions = <TaskCardActions roomId={roomId} taskId={id} />;
 	const groupLabel = group ? <GroupLabel {...group} /> : <SkeletonGroupLabel />;
 
 	return <TemplateTaskCard actions={actions} group={groupLabel} {...props} />;
-};
+});

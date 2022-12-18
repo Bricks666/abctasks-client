@@ -1,4 +1,5 @@
 import { createDomain, sample } from 'effector';
+import { createTaskModel } from '@/features/tasks';
 import { popupsModel } from '@/entities/popups';
 import { tasksModel } from '@/entities/tasks';
 import { popups } from '@/shared/configs';
@@ -19,4 +20,9 @@ sample({
 		tasksModel.$selectedTaskId.reinit!,
 		tasksModel.$selectedStatus.reinit!
 	],
+});
+
+sample({
+	clock: createTaskModel.createTaskMutation.finished.success,
+	target: close,
 });

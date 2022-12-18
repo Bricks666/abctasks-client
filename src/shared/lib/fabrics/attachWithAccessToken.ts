@@ -1,7 +1,7 @@
 import { Effect, Store, attach } from 'effector';
 import { tokenModel } from '@/shared/configs';
 /* eslint-disable import/no-extraneous-dependencies */
-import { AccessOptions, StandardFailError } from '@/shared/packages';
+import { AccessOptions, StandardFailError } from '@/shared/lib';
 
 export interface AttachWithAccessTokenOptions<
 	Params extends Required<AccessOptions>,

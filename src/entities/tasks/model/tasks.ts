@@ -6,8 +6,11 @@ import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { Task, GetTaskRequest, tasksApi, task, TaskStatus } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
-import { getIsSuccessResponseValidator, dataExtractor } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import {
+	getIsSuccessResponseValidator,
+	dataExtractor,
+	StandardFailError
+} from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
@@ -93,3 +96,6 @@ querySync({
 	},
 	route: routes.room,
 });
+
+getTasksQuery.$data.watch(console.debug);
+getTaskQuery.finished.failure.watch(console.debug);

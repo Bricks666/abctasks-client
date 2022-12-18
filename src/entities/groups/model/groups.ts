@@ -6,8 +6,11 @@ import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { group, Group, groupsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
-import { getIsSuccessResponseValidator, dataExtractor } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import {
+	getIsSuccessResponseValidator,
+	dataExtractor,
+	StandardFailError
+} from '@/shared/lib';
 import {
 	getStandardSuccessResponse,
 	InRoomRequest,

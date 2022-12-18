@@ -1,4 +1,5 @@
 import { createDomain, sample } from 'effector';
+import { createRoomModel } from '@/features/rooms';
 import { popupsModel } from '@/entities/popups';
 import { popups } from '@/shared/configs';
 
@@ -10,4 +11,9 @@ sample({
 	clock: close,
 	fn: () => popups.createRoom,
 	target: popupsModel.close,
+});
+
+sample({
+	clock: createRoomModel.createRoomMutation.finished.success,
+	target: close,
 });

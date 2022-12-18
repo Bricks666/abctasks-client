@@ -3,7 +3,7 @@ import { InvalidDataError, Query, Mutation } from '@farfetched/core';
 import { sample, createDomain } from 'effector';
 import { authApi, Tokens } from '@/shared/api';
 import { tokenModel } from '@/shared/configs';
-import { AccessOptions, StandardFailError } from '@/shared/packages';
+import { AccessOptions, StandardFailError } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
 import { WithoutAccess } from './attachWithAccessToken';
 

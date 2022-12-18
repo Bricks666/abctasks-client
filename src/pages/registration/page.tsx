@@ -7,7 +7,8 @@ import { routes } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { AuthLayout } from '@/shared/ui';
-import styles from './RegistrationPage.module.css';
+
+import styles from './styles.module.css';
 
 const RegistrationPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;

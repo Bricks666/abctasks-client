@@ -1,23 +1,27 @@
 import { Stack, Typography } from '@mui/material';
 import cn from 'classnames';
-import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { groupsModel } from '@/entities/groups';
+import { useGroupsMap } from '@/entities/groups';
 import {
 	SkeletonTaskProgress,
 	TaskProgress,
 	useProgresses
 } from '@/entities/progresses';
-import { getEmptyArray } from '@/shared/configs';
+import { getEmptyArray, routes } from '@/shared/configs';
+import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
 import styles from './tasks-progresses.module.css';
 
-export const TasksProgress: React.FC<CommonProps> = ({ className, }) => {
+export interface TasksProgressProps extends CommonProps {}
+
+export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
+	const { className, } = props;
 	const { t, } = useTranslation('room');
-	const { data: progresses, } = useProgresses();
-	const groups = useUnit(groupsModel.$groupsMap);
+	const roomId = useParam(routes.room, 'id');
+	const { data: progresses, } = useProgresses(roomId);
+	const { data: groups, } = useGroupsMap(roomId);
 
 	const isLoading = !groups || !progresses;
 

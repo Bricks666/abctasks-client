@@ -1,9 +1,9 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { groupsModel } from '@/entities/groups';
+import { progressesModel } from '@/entities/progresses';
 import { UpdateGroupRequest, Group, groupsApi, group } from '@/shared/api';
-import { createMutationWithAccess } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
@@ -38,4 +38,10 @@ sample({
 		);
 	},
 	target: [groupsModel.getGroupsQuery.$data, groupsModel.invalidateCache],
+});
+
+sample({
+	clock: updateGroupMutation.finished.success,
+	fn: ({ params, }) => params.roomId,
+	target: progressesModel.getProgressQuery.start,
 });

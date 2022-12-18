@@ -1,9 +1,9 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
+import { progressesModel } from '@/entities/progresses';
 import { getTasksQuery } from '@/entities/tasks/model/tasks';
 import { UpdateTaskRequest, Task, tasksApi, task } from '@/shared/api';
-import { createMutationWithAccess } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
@@ -36,4 +36,10 @@ sample({
 		return tasks.map((task) => (task.id === data.id ? data : task));
 	},
 	target: getTasksQuery.$data,
+});
+
+sample({
+	clock: updateTaskMutation.finished.success,
+	fn: ({ params, }) => params.roomId,
+	target: progressesModel.getProgressQuery.start,
 });

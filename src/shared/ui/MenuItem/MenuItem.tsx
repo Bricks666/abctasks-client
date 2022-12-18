@@ -41,6 +41,7 @@ export const MenuItem = <P extends object>(
 	const itemButtonProps = to
 		? { component: Link, to, params, query, onClick, }
 		: { onClick, component: 'button', };
+	console.log(itemButtonProps, label);
 	return (
 		<MenuItemMUI {...rest} {...(itemButtonProps as any)}>
 			{icon && <ListItemIcon>{icon}</ListItemIcon>}

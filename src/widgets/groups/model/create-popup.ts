@@ -1,4 +1,5 @@
 import { createDomain, sample } from 'effector';
+import { createGroupModel } from '@/features/groups';
 import { groupsModel } from '@/entities/groups';
 import { popupsModel } from '@/entities/popups';
 import { popups } from '@/shared/configs';
@@ -16,4 +17,9 @@ sample({
 sample({
 	clock: close,
 	target: groupsModel.$groupId.reinit!,
+});
+
+sample({
+	clock: createGroupModel.createGroupMutation.finished.success,
+	target: close,
 });

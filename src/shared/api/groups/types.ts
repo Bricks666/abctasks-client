@@ -1,5 +1,5 @@
 import { Record, Number, String, Static } from 'runtypes';
-import { AccessOptions } from '@/shared/packages';
+import { AccessOptions } from '@/shared/lib';
 import { hex } from '@/shared/types';
 
 export const group = Record({

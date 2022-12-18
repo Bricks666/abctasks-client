@@ -11,7 +11,7 @@ export interface TaskListHeaderComponent extends CommonProps {
 
 export const TaskListHeader: React.FC<
 	React.PropsWithChildren<TaskListHeaderComponent>
-> = (props) => {
+> = React.memo((props) => {
 	const { children, className, actions, } = props;
 
 	return (
@@ -22,4 +22,4 @@ export const TaskListHeader: React.FC<
 			{actions}
 		</header>
 	);
-};
+});

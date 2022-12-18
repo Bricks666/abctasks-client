@@ -9,9 +9,9 @@ import { controls, routes, getParams } from '@/shared/configs';
 import {
 	createQueryWithAccess,
 	getIsSuccessResponseValidator,
-	dataExtractor
+	dataExtractor,
+	StandardFailError
 } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
 import {
 	StandardResponse,
 	InRoomRequest,

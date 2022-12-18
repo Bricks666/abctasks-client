@@ -2,9 +2,9 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { Boolean } from 'runtypes';
 import { groupsModel } from '@/entities/groups';
+import { progressesModel } from '@/entities/progresses';
 import { RemoveGroupRequest, groupsApi } from '@/shared/api';
-import { createMutationWithAccess } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
@@ -39,4 +39,10 @@ sample({
 		return groups.filter((group) => group.id !== params.id);
 	},
 	target: [groupsModel.getGroupsQuery.$data, groupsModel.invalidateCache],
+});
+
+sample({
+	clock: removeGroupMutation.finished.success,
+	fn: ({ params, }) => params.roomId,
+	target: progressesModel.getProgressQuery.start,
 });

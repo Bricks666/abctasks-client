@@ -1,8 +1,7 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { CreateRoomRequest, room, Room, roomsApi } from '@/shared/api';
-import { createMutationWithAccess } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	getStandardSuccessResponse,
 	StandardResponse,

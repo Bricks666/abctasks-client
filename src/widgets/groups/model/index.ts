@@ -1,2 +1,2 @@
-export * as createGroupPopupModel from './create-group';
-export * as updateGroupPopupModel from './update-group';
+export * as createGroupPopupModel from './create-popup';
+export * as updateGroupPopupModel from './update-popup';

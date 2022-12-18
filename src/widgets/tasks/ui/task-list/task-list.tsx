@@ -47,7 +47,12 @@ export const TaskList: React.FC<TaskListProps> = (props) => {
 			spacing={1}
 			onDrop={onDrop}
 			onDragOver={onDragOver}>
-			<TaskListHeader actions={<TaskListActions />}>{header}</TaskListHeader>
+			<TaskListHeader
+				actions={
+					<TaskListActions roomId={roomId} columnStatus={columnStatus} />
+				}>
+				{header}
+			</TaskListHeader>
 			<Stack className={styles.list} spacing={1} component='main'>
 				{loading
 					? getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />)

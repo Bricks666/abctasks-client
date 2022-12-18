@@ -1,11 +1,11 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { Boolean } from 'runtypes';
+import { progressesModel } from '@/entities/progresses';
 import { tasksModel } from '@/entities/tasks';
 import { getTasksQuery } from '@/entities/tasks/model/tasks';
 import { RemoveTaskRequest, tasksApi } from '@/shared/api';
-import { createMutationWithAccess } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
@@ -41,4 +41,10 @@ sample({
 		return tasks.filter((task) => task.id !== params.id);
 	},
 	target: getTasksQuery.$data,
+});
+
+sample({
+	clock: removeTaskMutation.finished.success,
+	fn: ({ params, }) => params.roomId,
+	target: progressesModel.getProgressQuery.start,
 });

@@ -1,9 +1,9 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { groupsModel } from '@/entities/groups';
+import { progressesModel } from '@/entities/progresses';
 import { CreateGroupRequest, group, Group, groupsApi } from '@/shared/api';
-import { createMutationWithAccess } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
@@ -36,4 +36,10 @@ sample({
 		return [...groups, result.data];
 	},
 	target: [groupsModel.getGroupsQuery.$data, groupsModel.invalidateCache],
+});
+
+sample({
+	clock: createGroupMutation.finished.success,
+	fn: ({ params, }) => params.roomId,
+	target: progressesModel.getProgressQuery.start,
 });

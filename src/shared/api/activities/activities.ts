@@ -1,4 +1,4 @@
-import { fetcher } from '@/shared/packages';
+import { fetcher } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
 import { Activity } from './types';
 

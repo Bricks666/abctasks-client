@@ -1,10 +1,10 @@
-import { Groups } from '@mui/icons-material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Tab } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityList } from '@/widgets/activities';
+import { Groups } from '@/widgets/groups';
 import { Header } from '@/widgets/page';
 import { TasksProgress } from '@/widgets/progresses';
 import { RoomHeader } from '@/widgets/rooms';
@@ -12,7 +12,8 @@ import { Tasks } from '@/widgets/tasks';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
-import styles from './Rooms.module.css';
+
+import styles from './styles.module.css';
 
 const RoomPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;

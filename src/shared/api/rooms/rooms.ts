@@ -1,4 +1,4 @@
-import { AccessOptions, fetcher } from '@/shared/packages';
+import { AccessOptions, fetcher } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
 import {
 	CreateRoomRequest,

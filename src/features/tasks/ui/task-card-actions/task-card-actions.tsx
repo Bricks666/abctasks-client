@@ -13,40 +13,42 @@ export interface TaskCardActionsProps extends CommonProps {
 	readonly taskId: number;
 }
 
-export const TaskCardActions: React.FC<TaskCardActionsProps> = (props) => {
-	const { className, taskId, roomId, } = props;
-	const { t, } = useTranslation('common');
-	const removeTask = useMutation(removeTaskModel.removeTaskMutation);
+export const TaskCardActions: React.FC<TaskCardActionsProps> = React.memo(
+	(props) => {
+		const { className, taskId, roomId, } = props;
+		const { t, } = useTranslation('common');
+		const removeTask = useMutation(removeTaskModel.removeTaskMutation);
 
-	const options = React.useMemo<MenuOption<any>[]>(
-		() => [
-			{
-				icon: <EditIcon />,
-				label: t('actions.update'),
-				to: routes.room,
-				params: {
-					id: roomId,
+		const options = React.useMemo<MenuOption<any>[]>(
+			() => [
+				{
+					icon: <EditIcon />,
+					label: t('actions.update'),
+					to: routes.room,
+					params: {
+						id: roomId,
+					},
+					query: {
+						[getParams.popup]: popups.updateTask,
+						[getParams.taskId]: taskId,
+					},
 				},
-				query: {
-					[getParams.popup]: popups.updateTask,
-					[getParams.taskId]: taskId,
-				},
-			},
-			{
-				icon: <DeleteIcon />,
-				label: t('actions.remove'),
-				onClick: () => removeTask.start({ id: taskId, roomId, }),
-			}
-		],
-		[taskId, roomId]
-	);
+				{
+					icon: <DeleteIcon />,
+					label: t('actions.remove'),
+					onClick: () => removeTask.start({ id: taskId, roomId, }),
+				}
+			],
+			[taskId, roomId]
+		);
 
-	return (
-		<EditMenu
-			className={className}
-			options={options}
-			size='small'
-			alt="Open task's edit menu "
-		/>
-	);
-};
+		return (
+			<EditMenu
+				className={className}
+				options={options}
+				size='small'
+				alt="Open task's edit menu "
+			/>
+		);
+	}
+);

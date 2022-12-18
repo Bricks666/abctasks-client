@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { Record, Number, String, Static, Union, Literal } from 'runtypes';
-import { AccessOptions } from '@/shared/packages';
+import { AccessOptions } from '@/shared/lib';
 
 export const taskStatus = Union(
 	Literal('done'),

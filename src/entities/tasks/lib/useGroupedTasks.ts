@@ -1,7 +1,6 @@
-import { useQuery } from '@farfetched/react';
 import * as React from 'react';
 import { GroupedByStatusTasks, Task, TaskStatus } from '@/shared/api';
-import { tasksModel } from '../model';
+import { useTasks } from './useTasks';
 
 const createGrouper = (status: TaskStatus) => {
 	return (state: Task[]) => {
@@ -9,8 +8,8 @@ const createGrouper = (status: TaskStatus) => {
 	};
 };
 
-export const useGroupedTasks = () => {
-	const { data: tasks, ...rest } = useQuery(tasksModel.getTasksQuery);
+export const useGroupedTasks = (roomId: number) => {
+	const { data: tasks, ...rest } = useTasks(roomId);
 
 	const data = React.useMemo<GroupedByStatusTasks | null>(() => {
 		if (!tasks) {

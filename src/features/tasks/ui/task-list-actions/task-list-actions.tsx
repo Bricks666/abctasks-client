@@ -11,31 +11,33 @@ export interface TaskListActionsProps extends CommonProps {
 	readonly roomId: number;
 }
 
-export const TaskListActions: React.FC<TaskListActionsProps> = (props) => {
-	const { className, columnStatus, roomId, } = props;
-	const { t, } = useTranslation('common');
+export const TaskListActions: React.FC<TaskListActionsProps> = React.memo(
+	(props) => {
+		const { className, columnStatus, roomId, } = props;
+		const { t, } = useTranslation('common');
 
-	const options = React.useMemo<MenuOption<any>[]>(
-		() => [
-			{
-				icon: <AddIcon />,
-				label: t('actions.create'),
-				to: routes.room,
-				params: { id: roomId, },
-				query: {
-					[getParams.popup]: popups.createTask,
-					[getParams.taskStatus]: columnStatus,
-				},
-			}
-		],
-		[columnStatus]
-	);
+		const options = React.useMemo<MenuOption<any>[]>(
+			() => [
+				{
+					icon: <AddIcon />,
+					label: t('actions.create'),
+					to: routes.room,
+					params: { id: roomId, },
+					query: {
+						[getParams.popup]: popups.createTask,
+						[getParams.taskStatus]: columnStatus,
+					},
+				}
+			],
+			[columnStatus]
+		);
 
-	return (
-		<EditMenu
-			className={className}
-			options={options}
-			alt="Open tasks list's edit menu"
-		/>
-	);
-};
+		return (
+			<EditMenu
+				className={className}
+				options={options}
+				alt="Open tasks list's edit menu"
+			/>
+		);
+	}
+);

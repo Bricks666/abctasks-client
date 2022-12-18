@@ -5,7 +5,7 @@ import {
 	Mutation
 } from '@farfetched/core';
 import { Effect } from 'effector';
-import { AccessOptions, StandardFailError } from '@/shared/packages';
+import { AccessOptions, StandardFailError } from '@/shared/lib';
 import { attachRemoteOperationWithAccess } from './attachRemoteOperationWithAccess';
 import { attachWithAccessToken, WithoutAccess } from './attachWithAccessToken';
 

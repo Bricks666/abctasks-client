@@ -7,7 +7,8 @@ import { routes } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { AuthLayout } from '@/shared/ui';
-import styles from './LoginPage.module.css';
+
+import styles from './styles.module.css';
 
 const LoginPage: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('login');

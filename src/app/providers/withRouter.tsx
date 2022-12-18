@@ -1,4 +1,4 @@
-import { createHistoryRouter } from 'atomic-router';
+import { createHistoryRouter, redirect } from 'atomic-router';
 import { RouterProvider } from 'atomic-router-react';
 import { createBrowserHistory } from 'history';
 import * as React from 'react';
@@ -25,6 +25,10 @@ const router = createHistoryRouter({
 		}
 	],
 	controls,
+});
+redirect({
+	clock: router.routeNotFound,
+	route: routes.rooms,
 });
 
 router.setHistory(createBrowserHistory());

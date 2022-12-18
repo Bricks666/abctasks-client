@@ -1,11 +1,9 @@
-import { useStoreMap } from 'effector-react';
-import { groupsModel } from '../model';
+import { useMemo } from 'react';
+import { useGroupsMap } from './useGroupsMap';
 
-export const useGroup = (groupId: number) => {
-	return useStoreMap({
-		store: groupsModel.$groupsMap,
-		fn: (groups, [groupId]) => groups[groupId],
-		keys: [groupId],
-		defaultValue: null,
-	});
+export const useGroup = (roomId: number, groupId: number) => {
+	const { data: groupsMap, } = useGroupsMap(roomId);
+	return useMemo(() => {
+		return groupsMap[groupId] ?? null;
+	}, [groupsMap, groupId]);
 };

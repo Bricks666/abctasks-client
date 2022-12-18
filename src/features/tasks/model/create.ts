@@ -1,10 +1,10 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
+import { progressesModel } from '@/entities/progresses';
 import { tasksModel } from '@/entities/tasks';
 import { getTasksQuery } from '@/entities/tasks/model/tasks';
 import { CreateTaskRequest, Task, tasksApi, task } from '@/shared/api';
-import { createMutationWithAccess } from '@/shared/lib';
-import { StandardFailError } from '@/shared/packages';
+import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
@@ -37,4 +37,10 @@ sample({
 		return [...tasks, data];
 	},
 	target: getTasksQuery.$data,
+});
+
+sample({
+	clock: createTaskMutation.finished.success,
+	fn: ({ params, }) => params.roomId,
+	target: progressesModel.getProgressQuery.start,
 });

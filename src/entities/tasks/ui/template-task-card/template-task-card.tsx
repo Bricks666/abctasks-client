@@ -29,9 +29,8 @@ export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 			[status, id]
 		);
 
-		const onDragEnd = React.useCallback<React.DragEventHandler>((evt) => {
+		const onDragEnd = React.useCallback<React.DragEventHandler>(() => {
 			setIsDrag(false);
-			evt.dataTransfer.clearData();
 		}, []);
 
 		return (
