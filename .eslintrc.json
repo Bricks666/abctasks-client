@@ -14,7 +14,8 @@
 		"plugin:import/warnings",
 		"plugin:import/typescript",
 		"airbnb",
-		"prettier"
+		"prettier",
+		"@feature-sliced"
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
@@ -56,7 +57,7 @@
 		],
 		"no-restricted-exports": "off",
 		"prefer-arrow-callback": "off",
-		"no-shadow": "warn",
+		"no-shadow": "off",
 		"default-param-last": "warn",
 
 		/* REACT */

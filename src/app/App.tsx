@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { useGate, useUnit } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { AuthGate, authQuery } from '@/models';
-import { Popups, AppRoutes } from '@/components';
-import { LoadingWrapper, LoadingIndicator } from '@/shared/components';
-
+import '@/processes/auth';
+import { Pages } from '@/pages';
+import { useAuth } from '@/entities/auth';
+import { LoadingWrapper, LoadingIndicator } from '@/shared/ui';
 import styles from './App.module.css';
+import { withProviders } from './providers';
 
-export const App: React.FC = () => {
-	const status = useUnit(authQuery.$status);
-	const { t } = useTranslation('common');
-	useGate(AuthGate);
+import './index.css';
+
+export const App = withProviders(() => {
+	const { status, } = useAuth();
+	const { t, } = useTranslation('common');
 
 	const isLoading = status === 'initial' || status === 'pending';
 
@@ -19,8 +20,7 @@ export const App: React.FC = () => {
 			className={styles.loading}
 			isLoading={isLoading}
 			loadingIndicator={<LoadingIndicator text={t('loading')} />}>
-			<AppRoutes />
-			<Popups />
+			<Pages />
 		</LoadingWrapper>
 	);
-};
+});
