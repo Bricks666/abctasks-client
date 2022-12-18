@@ -12,6 +12,7 @@ import { Tasks } from '@/widgets/tasks';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
+import './model';
 
 import styles from './styles.module.css';
 
