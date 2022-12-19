@@ -7,6 +7,7 @@ import { routes } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { AuthLayout } from '@/shared/ui';
+import './model';
 
 import styles from './styles.module.css';
 

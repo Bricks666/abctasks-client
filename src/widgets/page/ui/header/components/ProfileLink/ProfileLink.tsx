@@ -3,17 +3,18 @@ import { Avatar, Menu } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { logoutModel } from '@/features/auth';
+import { authModel } from '@/entities/auth';
 import { useToggle } from '@/shared/lib';
-import { $AuthUser, logoutMutation } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, MenuItem } from '@/shared/ui';
 
 export const ProfileLink: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('header');
-	const user = useUnit($AuthUser);
+	const user = useUnit(authModel.$authUser);
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
-	const logout = useMutation(logoutMutation);
+	const logout = useMutation(logoutModel.logoutMutation);
 
 	const options: MenuOption<object>[] = React.useMemo(
 		() => [

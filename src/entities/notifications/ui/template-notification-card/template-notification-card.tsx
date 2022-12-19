@@ -17,7 +17,7 @@ export const TemplateNotificationCard: React.FC<
 		<Snackbar
 			className={className}
 			onClose={onClose}
-			autoHideDuration={5000}
+			autoHideDuration={1500}
 			open>
 			<Alert severity={variant} variant='filled' onClose={onClose}>
 				{content}

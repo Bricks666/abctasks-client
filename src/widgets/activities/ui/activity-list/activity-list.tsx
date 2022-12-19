@@ -16,8 +16,8 @@ export const ActivityList: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room');
 	const roomId = useParam(routes.room, 'id');
-	const { data: activities, } = useActivities(roomId);
-	const isLoading = !activities;
+	const { data: activities, status, } = useActivities(roomId);
+	const isLoading = activities.length === 0 && status !== 'done';
 
 	return (
 		<Stack className={cn(styles.wrapper, className)} spacing={1.5}>

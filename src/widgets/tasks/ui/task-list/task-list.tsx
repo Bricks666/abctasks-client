@@ -13,7 +13,8 @@ import { TaskCard } from '../task-card';
 import styles from './task-list.module.css';
 
 export interface TaskListProps extends CommonProps {
-	readonly tasks: Task[] | null;
+	readonly tasks: Task[];
+	readonly isLoading: boolean;
 	readonly columnStatus: TaskStatus;
 	readonly header?: string | null;
 }
@@ -21,7 +22,7 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 	evt.preventDefault();
 
 export const TaskList: React.FC<TaskListProps> = (props) => {
-	const { tasks, className, columnStatus, header, } = props;
+	const { tasks, className, columnStatus, header, isLoading, } = props;
 	const roomId = useParam(routes.room, 'id');
 	const moveTask = useMutation(updateTaskModel.updateTaskMutation);
 	const onDrop = React.useCallback<React.DragEventHandler>(
@@ -39,8 +40,6 @@ export const TaskList: React.FC<TaskListProps> = (props) => {
 		[roomId, columnStatus]
 	);
 
-	const loading = !tasks;
-
 	return (
 		<Stack
 			className={cn(styles.wrapper, className)}
@@ -54,7 +53,7 @@ export const TaskList: React.FC<TaskListProps> = (props) => {
 				{header}
 			</TaskListHeader>
 			<Stack className={styles.list} spacing={1} component='main'>
-				{loading
+				{isLoading
 					? getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />)
 					: tasks.map((task) => <TaskCard {...task} key={task.id} />)}
 			</Stack>

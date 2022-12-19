@@ -24,9 +24,9 @@ export interface GroupsMap {
 	[id: number]: Group | undefined;
 }
 
-export const $groupsMap = groupsDomain.store<GroupsMap>({});
 export const $groupId = groupsDomain.store<null | number>(null);
 export const invalidateCache = groupsDomain.event();
+export const reset = groupsDomain.event();
 export const getGroupsFx = groupsDomain.effect<
 	number,
 	StandardResponse<Group[]>,
@@ -47,6 +47,12 @@ export const getGroupsQuery = createQuery<
 	validate: getIsSuccessResponseValidator(),
 	mapData: dataExtractor,
 });
+export const $groupsMap = getGroupsQuery.$data.map((data) =>
+	Object.values(data).reduce<GroupsMap>((map, group) => {
+		map[group.id] = group;
+		return map;
+	}, {})
+);
 
 export const GroupsGate = createGate<InRoomRequest>({
 	domain: groupsDomain,
@@ -57,16 +63,6 @@ sample({
 	clock: GroupsGate.open,
 	fn: ({ roomId, }) => roomId,
 	target: getGroupsQuery.start,
-});
-
-sample({
-	source: getGroupsQuery.$data,
-	fn: (data) =>
-		Object.values(data).reduce<GroupsMap>((map, group) => {
-			map[group.id] = group;
-			return map;
-		}, {}),
-	target: $groupsMap,
 });
 
 cache(getGroupsQuery, {
@@ -80,4 +76,9 @@ querySync({
 	source: {
 		[getParams.groupId]: $groupId,
 	},
+});
+
+sample({
+	clock: reset,
+	target: [invalidateCache, getGroupsQuery.reset],
 });

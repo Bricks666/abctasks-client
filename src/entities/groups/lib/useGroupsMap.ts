@@ -3,10 +3,10 @@ import { groupsModel } from '../model';
 import { useGroups } from './useGroups';
 
 export const useGroupsMap = (roomId: number) => {
-	const state = useGroups(roomId);
+	const query = useGroups(roomId);
 	const data = useUnit(groupsModel.$groupsMap);
 	return {
-		...state,
+		...query,
 		data,
 	};
 };

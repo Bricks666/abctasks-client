@@ -6,6 +6,7 @@ import { RoomList, RoomsHeader } from '@/widgets/rooms';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
+import './model';
 
 import styles from './styles.module.css';
 

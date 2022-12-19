@@ -9,12 +9,9 @@ const createGrouper = (status: TaskStatus) => {
 };
 
 export const useGroupedTasks = (roomId: number) => {
-	const { data: tasks, ...rest } = useTasks(roomId);
+	const { data: tasks, ...query } = useTasks(roomId);
 
-	const data = React.useMemo<GroupedByStatusTasks | null>(() => {
-		if (!tasks) {
-			return null;
-		}
+	const data = React.useMemo<GroupedByStatusTasks>(() => {
 		return {
 			ready: createGrouper('ready')(tasks),
 			done: createGrouper('done')(tasks),
@@ -25,6 +22,6 @@ export const useGroupedTasks = (roomId: number) => {
 
 	return {
 		data,
-		...rest,
+		...query,
 	};
 };

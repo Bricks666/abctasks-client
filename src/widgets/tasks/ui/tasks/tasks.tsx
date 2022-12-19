@@ -12,7 +12,7 @@ import { TaskList } from '../task-list';
 import styles from './tasks.module.css';
 
 export interface Column {
-	readonly tasks: Task[] | null;
+	readonly tasks: Task[];
 	readonly status: TaskStatus;
 }
 
@@ -20,26 +20,26 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('task');
 	const roomId = useParam(routes.room, 'id');
-	const { data: tasks, } = useGroupedTasks(roomId);
+	const { data: tasks, status: tasksStatus, } = useGroupedTasks(roomId);
 	/*
   TODO: Пересмотреть распределение на колонки
   */
 	const columns = React.useMemo<Column[]>(
 		() => [
 			{
-				tasks: tasks?.ready || null,
+				tasks: tasks.ready,
 				status: 'ready',
 			},
 			{
-				tasks: tasks?.['in progress'] || null,
+				tasks: tasks['in progress'],
 				status: 'in progress',
 			},
 			{
-				tasks: tasks?.needReview || null,
+				tasks: tasks.needReview,
 				status: 'review',
 			},
 			{
-				tasks: tasks?.done || null,
+				tasks: tasks.done,
 				status: 'done',
 			}
 		],
@@ -51,6 +51,7 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 			{columns.map(({ status, tasks, }) => (
 				<TaskList
 					tasks={tasks}
+					isLoading={tasks.length === 0 && tasksStatus !== 'done'}
 					columnStatus={status}
 					header={t(`statuses.${status}`)}
 					key={status}
