@@ -21,6 +21,9 @@ import { GroupsMap } from './types';
 
 export const groupsDomain = createDomain();
 
+export const add = groupsDomain.event<Group>();
+export const update = groupsDomain.event<Group>();
+export const remove = groupsDomain.event<Pick<Group, 'id'>>();
 export const $id = groupsDomain.store<null | number>(null);
 export const invalidateCache = groupsDomain.event();
 export const reset = groupsDomain.event();
@@ -28,7 +31,7 @@ export const handlerFx = groupsDomain.effect<
 	number,
 	StandardResponse<Group[]>,
 	StandardFailError
->('getGroupsFx');
+>();
 handlerFx.use(groupsApi.getAll);
 
 export const query = createQuery<
@@ -74,4 +77,25 @@ querySync({
 sample({
 	clock: reset,
 	target: query.reset,
+});
+
+sample({
+	clock: add,
+	source: query.$data,
+	fn: (groups, group) => [...groups, group],
+	target: query.$data,
+});
+
+sample({
+	clock: update,
+	source: query.$data,
+	fn: (groups, group) => groups.map((g) => (g.id === group.id ? group : g)),
+	target: query.$data,
+});
+
+sample({
+	clock: remove,
+	source: query.$data,
+	fn: (groups, { id, }) => groups.filter((group) => group.id !== id),
+	target: query.$data,
 });

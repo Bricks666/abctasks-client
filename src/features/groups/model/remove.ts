@@ -32,10 +32,7 @@ export const mutation = createMutationWithAccess<
 
 sample({
 	clock: mutation.finished.success,
-	source: groupsModel.query.$data,
-	filter: (_, { result, }) => globalThis.Boolean(result.data),
-	fn: (groups, { params, }) => {
-		return groups.filter((group) => group.id !== params.id);
-	},
-	target: [groupsModel.query.$data],
+	filter: ({ result, }) => globalThis.Boolean(result.data),
+	fn: ({ params, }) => params,
+	target: groupsModel.remove,
 });

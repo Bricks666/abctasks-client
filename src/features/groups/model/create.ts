@@ -30,9 +30,6 @@ export const mutation = createMutationWithAccess<
 
 sample({
 	clock: mutation.finished.success,
-	source: groupsModel.query.$data,
-	fn: (groups, { result, }) => {
-		return [...groups, result.data];
-	},
-	target: [groupsModel.query.$data],
+	fn: ({ result, }) => result.data,
+	target: groupsModel.add,
 });

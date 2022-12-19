@@ -1,4 +1,4 @@
-import { cache, createQuery } from '@farfetched/core';
+import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
@@ -16,8 +16,6 @@ import {
 
 const taskDomain = createDomain();
 
-export const reset = taskDomain.event();
-export const invalidateCache = taskDomain.event();
 export const handlerFx = taskDomain.effect<
 	GetTaskRequest,
 	StandardResponse<Task>,
@@ -48,10 +46,6 @@ sample({
 });
 
 sample({
-	clock: reset,
+	clock: Gate.close,
 	target: query.reset,
-});
-
-cache(query, {
-	purge: invalidateCache,
 });

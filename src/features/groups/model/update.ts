@@ -30,11 +30,6 @@ export const mutation = createMutationWithAccess<
 
 sample({
 	clock: mutation.finished.success,
-	source: groupsModel.query.$data,
-	fn: (groups, { result, }) => {
-		return groups.map((group) =>
-			group.id === result.data.id ? result.data : group
-		);
-	},
-	target: [groupsModel.query.$data],
+	fn: ({ result, }) => result.data,
+	target: groupsModel.update,
 });

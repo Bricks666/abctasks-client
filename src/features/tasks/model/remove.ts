@@ -1,8 +1,7 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { Boolean } from 'runtypes';
-import { taskModel, tasksModel } from '@/entities/tasks';
-import { query } from '@/entities/tasks/model/tasks';
+import { tasksModel } from '@/entities/tasks';
 import { RemoveTaskRequest, tasksApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
@@ -32,17 +31,7 @@ export const mutation = createMutationWithAccess<
 
 sample({
 	clock: mutation.finished.success,
-	source: tasksModel.query.$data,
-	fn: (tasks, { params, result: { data, }, }) => {
-		if (!data) {
-			return tasks;
-		}
-		return tasks.filter((task) => task.id !== params.id);
-	},
-	target: query.$data,
-});
-
-sample({
-	clock: mutation.finished.success,
-	target: [tasksModel.invalidateCache, taskModel.invalidateCache],
+	filter: ({ result, }) => result.data,
+	fn: ({ params, }) => params,
+	target: tasksModel.remove,
 });

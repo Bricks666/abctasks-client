@@ -35,5 +35,5 @@ sample({
 	fn: ({ params, }) => {
 		return params;
 	},
-	target: [roomsModel.remove],
+	target: roomsModel.remove,
 });

@@ -13,9 +13,7 @@ import {
 	InRoomRequest
 } from '@/shared/types';
 
-const activitiesDomain = createDomain('ActivitiesDomain');
-export const reset = activitiesDomain.event();
-export const invalidateCache = activitiesDomain.event();
+const activitiesDomain = createDomain();
 export const handlerFx = activitiesDomain.effect<
 	number,
 	StandardResponse<Activity[]>
@@ -40,11 +38,6 @@ export const Gate = createGate<InRoomRequest>({
 });
 
 sample({
-	clock: reset,
-	target: [query.reset, invalidateCache],
-});
-
-sample({
 	clock: Gate.open,
 	fn: ({ roomId, }) => roomId,
 	target: query.start,
@@ -52,5 +45,5 @@ sample({
 
 sample({
 	clock: Gate.close,
-	target: reset,
+	target: query.reset,
 });
