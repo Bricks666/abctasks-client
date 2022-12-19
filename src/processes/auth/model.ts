@@ -4,7 +4,7 @@ import { authModel } from '@/entities/auth';
 import { routes } from '@/shared/configs';
 
 redirect({
-	clock: [authModel.authQuery.finished.failure],
+	clock: [authModel.query.finished.failure],
 	route: routes.login,
 });
 

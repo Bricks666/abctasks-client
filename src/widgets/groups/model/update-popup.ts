@@ -16,10 +16,10 @@ sample({
 
 sample({
 	clock: close,
-	target: groupsModel.$groupId.reinit!,
+	target: groupsModel.$id.reinit!,
 });
 
 sample({
-	clock: updateGroupModel.updateGroupMutation.finished.success,
+	clock: updateGroupModel.mutation.finished.success,
 	target: close,
 });

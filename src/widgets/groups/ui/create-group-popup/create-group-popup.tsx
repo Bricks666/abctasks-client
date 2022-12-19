@@ -22,7 +22,7 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
 	const roomId = useParam(routes.room, 'id');
 	const onClose = useUnit(createGroupPopupModel.close);
-	const createGroup = useMutation(createGroupModel.createGroupMutation);
+	const createGroup = useMutation(createGroupModel.mutation);
 
 	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(
 		(values) => {

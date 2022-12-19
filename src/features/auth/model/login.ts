@@ -42,5 +42,5 @@ sample({
 sample({
 	clock: loginMutation.finished.success,
 	fn: ({ result, }) => result.data.user,
-	target: authModel.setAuthUser,
+	target: authModel.setUser,
 });

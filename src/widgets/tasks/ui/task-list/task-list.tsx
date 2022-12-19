@@ -24,7 +24,7 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 export const TaskList: React.FC<TaskListProps> = (props) => {
 	const { tasks, className, columnStatus, header, isLoading, } = props;
 	const roomId = useParam(routes.room, 'id');
-	const moveTask = useMutation(updateTaskModel.updateTaskMutation);
+	const moveTask = useMutation(updateTaskModel.mutation);
 	const onDrop = React.useCallback<React.DragEventHandler>(
 		(evt) => {
 			const id = +evt.dataTransfer.getData('taskId');

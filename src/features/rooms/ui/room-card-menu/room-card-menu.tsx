@@ -13,7 +13,7 @@ export interface RoomCardMenuProps extends CommonProps {
 export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 	const { id, className, } = props;
 	const { t, } = useTranslation('rooms');
-	const removeRoom = useMutation(removeRoomModel.removeRoomMutation);
+	const removeRoom = useMutation(removeRoomModel.mutation);
 	const options = React.useMemo<MenuOption<object>[]>(
 		() => [
 			{

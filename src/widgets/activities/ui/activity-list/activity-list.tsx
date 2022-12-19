@@ -12,7 +12,7 @@ import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import styles from './activity-list.module.css';
 
-export const ActivityList: React.FC<CommonProps> = (props) => {
+export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room');
 	const roomId = useParam(routes.room, 'id');
@@ -35,4 +35,4 @@ export const ActivityList: React.FC<CommonProps> = (props) => {
 			</Stack>
 		</Stack>
 	);
-};
+});

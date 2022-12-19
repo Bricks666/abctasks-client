@@ -11,7 +11,7 @@ import { MenuOption, MenuItem } from '@/shared/ui';
 
 export const ProfileLink: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('header');
-	const user = useUnit(authModel.$authUser);
+	const user = useUnit(authModel.$user);
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
 	const logout = useMutation(logoutModel.logoutMutation);

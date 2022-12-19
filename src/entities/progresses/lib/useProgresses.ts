@@ -3,9 +3,9 @@ import { useGate, useUnit } from 'effector-react';
 import { progressesModel } from '../model';
 
 export const useProgresses = (roomId: number) => {
-	useGate(progressesModel.ProgressGate, { roomId, });
-	const query = useQuery(progressesModel.getProgressQuery);
-	const status = useUnit(progressesModel.getProgressQuery.$status);
+	useGate(progressesModel.Gate, { roomId, });
+	const query = useQuery(progressesModel.query);
+	const status = useUnit(progressesModel.query.$status);
 	return {
 		...query,
 		status,

@@ -3,9 +3,9 @@ import { useGate, useUnit } from 'effector-react';
 import { tasksModel } from '../model';
 
 export const useTasks = (roomId: number) => {
-	useGate(tasksModel.TasksGate, { roomId, });
-	const query = useQuery(tasksModel.getTasksQuery);
-	const status = useUnit(tasksModel.getTasksQuery.$status);
+	useGate(tasksModel.Gate, { roomId, });
+	const query = useQuery(tasksModel.query);
+	const status = useUnit(tasksModel.query.$status);
 	return {
 		...query,
 		status,

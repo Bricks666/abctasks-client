@@ -17,24 +17,21 @@ import {
 	StandardResponse,
 	StandardSuccessResponse
 } from '@/shared/types';
+import { GroupsMap } from './types';
 
-export const groupsDomain = createDomain('GroupsDomain');
+export const groupsDomain = createDomain();
 
-export interface GroupsMap {
-	[id: number]: Group | undefined;
-}
-
-export const $groupId = groupsDomain.store<null | number>(null);
+export const $id = groupsDomain.store<null | number>(null);
 export const invalidateCache = groupsDomain.event();
 export const reset = groupsDomain.event();
-export const getGroupsFx = groupsDomain.effect<
+export const handlerFx = groupsDomain.effect<
 	number,
 	StandardResponse<Group[]>,
 	StandardFailError
 >('getGroupsFx');
-getGroupsFx.use(groupsApi.getAll);
+handlerFx.use(groupsApi.getAll);
 
-export const getGroupsQuery = createQuery<
+export const query = createQuery<
 	number,
 	StandardResponse<Group[]>,
 	StandardFailError,
@@ -42,43 +39,39 @@ export const getGroupsQuery = createQuery<
 	Group[]
 >({
 	initialData: [],
-	effect: getGroupsFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(group))),
 	validate: getIsSuccessResponseValidator(),
 	mapData: dataExtractor,
 });
-export const $groupsMap = getGroupsQuery.$data.map((data) =>
+export const $groupsMap = query.$data.map((data) =>
 	Object.values(data).reduce<GroupsMap>((map, group) => {
 		map[group.id] = group;
 		return map;
 	}, {})
 );
 
-export const GroupsGate = createGate<InRoomRequest>({
+export const Gate = createGate<InRoomRequest>({
 	domain: groupsDomain,
-	name: 'groupsGate',
 });
 
 sample({
-	clock: GroupsGate.open,
+	clock: Gate.open,
 	fn: ({ roomId, }) => roomId,
-	target: getGroupsQuery.start,
+	target: query.start,
 });
 
-cache(getGroupsQuery, {
-	staleAfter: '15min',
-	purge: invalidateCache,
-});
+cache(query);
 
 querySync({
 	controls,
 	route: routes.room,
 	source: {
-		[getParams.groupId]: $groupId,
+		[getParams.groupId]: $id,
 	},
 });
 
 sample({
 	clock: reset,
-	target: [invalidateCache, getGroupsQuery.reset],
+	target: query.reset,
 });

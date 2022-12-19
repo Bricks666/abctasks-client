@@ -16,7 +16,7 @@ export interface GroupCardActionsProps extends CommonProps {
 
 export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
 	const { groupId, roomId, className, } = props;
-	const removeGroup = useMutation(removeGroupModel.removeGroupMutation);
+	const removeGroup = useMutation(removeGroupModel.mutation);
 
 	return (
 		<div className={className}>

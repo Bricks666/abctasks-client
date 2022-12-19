@@ -8,5 +8,5 @@ export const removeNotification = removeNotificationDomain.event();
 sample({
 	clock: removeNotification,
 	fn: () => null,
-	target: notificationModel.$lastNotification,
+	target: notificationModel.$last,
 });

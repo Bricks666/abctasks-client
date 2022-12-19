@@ -3,8 +3,8 @@ import { useGate, useUnit } from 'effector-react';
 import { authModel } from '../model';
 
 export const useAuth = () => {
-	useGate(authModel.AuthGate);
-	const query = useQuery(authModel.authQuery);
-	const status = useUnit(authModel.authQuery.$status);
+	useGate(authModel.Gate);
+	const query = useQuery(authModel.query);
+	const status = useUnit(authModel.query.$status);
 	return { status, ...query, };
 };

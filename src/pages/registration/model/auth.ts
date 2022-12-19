@@ -9,6 +9,6 @@ redirect({
 });
 
 redirect({
-	clock: authModel.authQuery.finished.success,
+	clock: authModel.query.finished.success,
 	route: routes.rooms,
 });

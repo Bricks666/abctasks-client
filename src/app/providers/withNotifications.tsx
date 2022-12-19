@@ -6,7 +6,7 @@ import { notificationModel } from '@/entities/notifications';
 export const withNotifications =
 	(Component: React.ComponentType): React.ComponentType =>
 		() => {
-			const notification = useUnit(notificationModel.$lastNotification);
+			const notification = useUnit(notificationModel.$last);
 			return (
 				<>
 					<Component />

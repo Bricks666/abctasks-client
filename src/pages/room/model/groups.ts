@@ -9,7 +9,7 @@ import { groupsModel } from '@/entities/groups';
 import { routes } from '@/shared/configs';
 
 sample({
-	clock: createGroupModel.createGroupMutation.finished.success,
+	clock: createGroupModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Group was created successfully',
 		variant: 'success' as const,
@@ -18,7 +18,7 @@ sample({
 });
 
 sample({
-	clock: createGroupModel.createGroupMutation.finished.failure,
+	clock: createGroupModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Group was not created',
 		variant: 'error' as const,
@@ -27,7 +27,7 @@ sample({
 });
 
 sample({
-	clock: removeGroupModel.removeGroupMutation.finished.success,
+	clock: removeGroupModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Group was removed successfully',
 		variant: 'success' as const,
@@ -36,7 +36,7 @@ sample({
 });
 
 sample({
-	clock: removeGroupModel.removeGroupMutation.finished.failure,
+	clock: removeGroupModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Group was not removed',
 		variant: 'error' as const,
@@ -45,7 +45,7 @@ sample({
 });
 
 sample({
-	clock: updateGroupModel.updateGroupMutation.finished.success,
+	clock: updateGroupModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Group was update successfully',
 		variant: 'success' as const,
@@ -54,7 +54,7 @@ sample({
 });
 
 sample({
-	clock: updateGroupModel.updateGroupMutation.finished.failure,
+	clock: updateGroupModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Group was not update',
 		variant: 'error' as const,

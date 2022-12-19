@@ -31,5 +31,5 @@ sample({
 	clock: logoutMutation.finished.success,
 	filter: ({ result, }) => globalThis.Boolean(result.data),
 	fn: () => null,
-	target: authModel.setAuthUser,
+	target: authModel.setUser,
 });

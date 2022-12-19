@@ -7,7 +7,7 @@ import {
 } from '@/features/tasks';
 
 sample({
-	clock: createTaskModel.createTaskMutation.finished.success,
+	clock: createTaskModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Task was created successfully',
 		variant: 'success' as const,
@@ -16,7 +16,7 @@ sample({
 });
 
 sample({
-	clock: createTaskModel.createTaskMutation.finished.failure,
+	clock: createTaskModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Task was not created',
 		variant: 'error' as const,
@@ -25,7 +25,7 @@ sample({
 });
 
 sample({
-	clock: removeTaskModel.removeTaskMutation.finished.success,
+	clock: removeTaskModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Task was removed successfully',
 		variant: 'success' as const,
@@ -34,7 +34,7 @@ sample({
 });
 
 sample({
-	clock: removeTaskModel.removeTaskMutation.finished.failure,
+	clock: removeTaskModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Task was not removed',
 		variant: 'error' as const,
@@ -43,7 +43,7 @@ sample({
 });
 
 sample({
-	clock: updateTaskModel.updateTaskMutation.finished.success,
+	clock: updateTaskModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Task was update successfully',
 		variant: 'success' as const,
@@ -52,7 +52,7 @@ sample({
 });
 
 sample({
-	clock: updateTaskModel.updateTaskMutation.finished.failure,
+	clock: updateTaskModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Task was not update',
 		variant: 'error' as const,

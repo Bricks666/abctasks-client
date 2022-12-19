@@ -7,5 +7,5 @@ export const setNotification = createNotificationDomain.event<Notification>();
 
 sample({
 	clock: setNotification,
-	target: notificationModel.$lastNotification,
+	target: notificationModel.$last,
 });

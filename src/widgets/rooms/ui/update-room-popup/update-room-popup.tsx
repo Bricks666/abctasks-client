@@ -13,10 +13,10 @@ import styles from './update-room-popup.module.css';
 
 export const UpdateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
-	const roomId = useUnit(roomsModel.$roomId);
+	const roomId = useUnit(roomsModel.$id);
 	const { data: room, } = useRoom(roomId!);
 	const onClose = useUnit(updateRoomPopupModel.close);
-	const updateRoom = useMutation(updateRoomModel.updateRoomMutation);
+	const updateRoom = useMutation(updateRoomModel.mutation);
 
 	const loading = !room;
 	const onSubmit = React.useCallback<SubmitHandler<RoomFormValues>>(

@@ -1,10 +1,10 @@
-import { createQuery } from '@farfetched/core';
+import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
-import { Task, GetTaskRequest, tasksApi, task, TaskStatus } from '@/shared/api';
+import { Task, tasksApi, task, TaskStatus } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
 import {
 	getIsSuccessResponseValidator,
@@ -23,24 +23,19 @@ const tasksDomain = createDomain();
 /**
  * Может стоит перенести на уровень виджета(??)
  */
-export const $selectedTaskId = tasksDomain.store<number | null>(null);
-export const $selectedStatus = tasksDomain.store<TaskStatus | null>(null);
-
-export const getTasksFx = tasksDomain.effect<
+export const $id = tasksDomain.store<number | null>(null);
+export const $status = tasksDomain.store<TaskStatus | null>(null);
+export const reset = tasksDomain.event();
+export const invalidateCache = tasksDomain.event();
+export const handlerFx = tasksDomain.effect<
 	number,
 	StandardResponse<Task[]>,
 	StandardFailError
->('getTasksFx');
+>();
 
-export const getTaskFx = tasksDomain.effect<
-	GetTaskRequest,
-	StandardResponse<Task>,
-	StandardFailError
->('getTaskFx');
-getTasksFx.use(tasksApi.getAll);
-getTaskFx.use(tasksApi.getOne);
+handlerFx.use(tasksApi.getAll);
 
-export const getTasksQuery = createQuery<
+export const query = createQuery<
 	number,
 	StandardResponse<Task[]>,
 	StandardFailError,
@@ -48,51 +43,37 @@ export const getTasksQuery = createQuery<
 	Task[]
 >({
 	initialData: [],
-	effect: getTasksFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(task))),
 	validate: getIsSuccessResponseValidator(),
 	mapData: dataExtractor,
 });
 
-export const getTaskQuery = createQuery<
-	GetTaskRequest,
-	StandardResponse<Task>,
-	StandardFailError,
-	StandardSuccessResponse<Task>,
-	Task
->({
-	effect: getTaskFx,
-	contract: runtypeContract(getStandardSuccessResponse(task)),
-	validate: getIsSuccessResponseValidator(),
-	mapData: dataExtractor,
-});
-
-export const TasksGate = createGate<InRoomRequest>({
+export const Gate = createGate<InRoomRequest>({
 	domain: tasksDomain,
-	name: 'tasksGate',
-});
-
-export const TaskGate = createGate<GetTaskRequest>({
-	domain: tasksDomain,
-	name: 'taskGate',
 });
 
 sample({
-	clock: TasksGate.open,
+	clock: Gate.open,
 	fn: ({ roomId, }) => roomId,
-	target: getTasksQuery.start,
+	target: query.start,
 });
 
 sample({
-	clock: TaskGate.open,
-	target: getTaskQuery.start,
+	clock: reset,
+	target: invalidateCache,
+});
+
+cache(query, {
+	staleAfter: '15min',
+	purge: invalidateCache,
 });
 
 querySync({
 	controls,
 	source: {
-		[getParams.taskId]: $selectedTaskId,
-		[getParams.taskStatus]: $selectedStatus,
+		[getParams.taskId]: $id,
+		[getParams.taskStatus]: $status,
 	},
 	route: routes.room,
 });

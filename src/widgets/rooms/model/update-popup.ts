@@ -14,6 +14,6 @@ sample({
 });
 
 sample({
-	clock: updateRoomModel.updateRoomMutation.finished.success,
+	clock: updateRoomModel.mutation.finished.success,
 	target: close,
 });

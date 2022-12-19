@@ -17,7 +17,7 @@ const defaultValues: RoomFormValues = {
 export const CreateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
 	const onClose = useUnit(createRoomPopupModel.close);
-	const createRoom = useMutation(createRoomModel.createRoomMutation);
+	const createRoom = useMutation(createRoomModel.mutation);
 
 	return (
 		<MainPopup

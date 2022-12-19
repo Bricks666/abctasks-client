@@ -7,7 +7,7 @@ import {
 } from '@/features/rooms';
 
 sample({
-	clock: createRoomModel.createRoomMutation.finished.success,
+	clock: createRoomModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Room was created successfully',
 		variant: 'success' as const,
@@ -16,7 +16,7 @@ sample({
 });
 
 sample({
-	clock: createRoomModel.createRoomMutation.finished.failure,
+	clock: createRoomModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Room was not created',
 		variant: 'error' as const,
@@ -25,7 +25,7 @@ sample({
 });
 
 sample({
-	clock: removeRoomModel.removeRoomMutation.finished.success,
+	clock: removeRoomModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Room was removed successfully',
 		variant: 'success' as const,
@@ -34,7 +34,7 @@ sample({
 });
 
 sample({
-	clock: removeRoomModel.removeRoomMutation.finished.failure,
+	clock: removeRoomModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Room was not removed',
 		variant: 'error' as const,
@@ -43,7 +43,7 @@ sample({
 });
 
 sample({
-	clock: updateRoomModel.updateRoomMutation.finished.success,
+	clock: updateRoomModel.mutation.finished.success,
 	fn: () => ({
 		content: 'Room was update successfully',
 		variant: 'success' as const,
@@ -52,7 +52,7 @@ sample({
 });
 
 sample({
-	clock: updateRoomModel.updateRoomMutation.finished.failure,
+	clock: updateRoomModel.mutation.finished.failure,
 	fn: () => ({
 		content: 'Room was not update',
 		variant: 'error' as const,

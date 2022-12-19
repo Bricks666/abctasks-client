@@ -17,7 +17,7 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 	const { groupId, id, roomId, } = props;
 
 	const { data: group, } = useGroup(roomId, groupId);
-	const status = useUnit(groupsModel.getGroupsQuery.$status);
+	const status = useUnit(groupsModel.query.$status);
 	const isLoading = status === 'initial' || status === 'pending';
 
 	if (!isLoading && !group) {
