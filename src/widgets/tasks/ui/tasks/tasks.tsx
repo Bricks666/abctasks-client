@@ -4,8 +4,6 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGroupedTasks } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
-import { routes } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { TaskList } from '../task-list';
 
@@ -19,8 +17,7 @@ export interface Column {
 export const Tasks: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('task');
-	const roomId = useParam(routes.room, 'id');
-	const { data: tasks, status: tasksStatus, } = useGroupedTasks(roomId);
+	const { data: tasks, status: tasksStatus, } = useGroupedTasks();
 	/*
   TODO: Пересмотреть распределение на колонки
   */

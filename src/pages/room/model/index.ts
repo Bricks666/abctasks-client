@@ -1,5 +1,7 @@
-export * from './groups';
-export * from './tasks';
-export * from './activities';
-export * from './progresses';
-export * from './rooms';
+import './groups';
+import './tasks';
+import './activities';
+import './progresses';
+import './rooms';
+
+export * as pageModel from './page';

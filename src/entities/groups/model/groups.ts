@@ -2,7 +2,6 @@ import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
-import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { group, Group, groupsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
@@ -13,7 +12,6 @@ import {
 } from '@/shared/lib';
 import {
 	getStandardSuccessResponse,
-	InRoomRequest,
 	StandardResponse,
 	StandardSuccessResponse
 } from '@/shared/types';
@@ -53,16 +51,6 @@ export const $groupsMap = query.$data.map((data) =>
 		return map;
 	}, {})
 );
-
-export const Gate = createGate<InRoomRequest>({
-	domain: groupsDomain,
-});
-
-sample({
-	clock: Gate.open,
-	fn: ({ roomId, }) => roomId,
-	target: query.start,
-});
 
 cache(query);
 

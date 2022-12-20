@@ -1,7 +1,6 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
-import { createGate } from 'effector-react';
+import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 import { activitiesApi } from '@/shared/api';
 import { Activity, activity } from '@/shared/api/activities/types';
@@ -9,8 +8,7 @@ import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse,
-	InRoomRequest
+	getStandardSuccessResponse
 } from '@/shared/types';
 
 const activitiesDomain = createDomain();
@@ -31,19 +29,4 @@ export const query = createQuery<
 	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(activity))),
 	mapData: dataExtractor,
-});
-
-export const Gate = createGate<InRoomRequest>({
-	domain: activitiesDomain,
-});
-
-sample({
-	clock: Gate.open,
-	fn: ({ roomId, }) => roomId,
-	target: query.start,
-});
-
-sample({
-	clock: Gate.close,
-	target: query.reset,
 });

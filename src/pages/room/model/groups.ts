@@ -7,6 +7,7 @@ import {
 import { createNotificationModel } from '@/features/notifications';
 import { groupsModel } from '@/entities/groups';
 import { routes } from '@/shared/configs';
+import { loadedWithRouteParams } from './page';
 
 sample({
 	clock: createGroupModel.mutation.finished.success,
@@ -63,7 +64,12 @@ sample({
 });
 
 sample({
-	clock: routes.room.$isOpened,
-	filter: (open) => !open,
-	target: [groupsModel.reset],
+	clock: routes.room.closed,
+	target: groupsModel.query.reset,
+});
+
+sample({
+	clock: [routes.room.opened, loadedWithRouteParams],
+	fn: ({ params, }) => params.id,
+	target: groupsModel.query.start,
 });

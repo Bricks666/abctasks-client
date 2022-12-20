@@ -8,8 +8,8 @@ const createGrouper = (status: TaskStatus) => {
 	};
 };
 
-export const useGroupedTasks = (roomId: number) => {
-	const { data: tasks, ...query } = useTasks(roomId);
+export const useGroupedTasks = () => {
+	const { data: tasks, ...query } = useTasks();
 
 	const data = React.useMemo<GroupedByStatusTasks>(() => {
 		return {

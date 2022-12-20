@@ -2,7 +2,6 @@ import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
-import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { Task, tasksApi, task, TaskStatus } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
@@ -14,8 +13,7 @@ import {
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse,
-	InRoomRequest
+	getStandardSuccessResponse
 } from '@/shared/types';
 
 const tasksDomain = createDomain();
@@ -48,16 +46,6 @@ export const query = createQuery<
 	contract: runtypeContract(getStandardSuccessResponse(Array(task))),
 	validate: getIsSuccessResponseValidator(),
 	mapData: dataExtractor,
-});
-
-export const Gate = createGate<InRoomRequest>({
-	domain: tasksDomain,
-});
-
-sample({
-	clock: Gate.open,
-	fn: ({ roomId, }) => roomId,
-	target: query.start,
 });
 
 cache(query);

@@ -12,7 +12,7 @@ import { Tasks } from '@/widgets/tasks';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
-import './model';
+import { pageModel } from './model';
 
 import styles from './styles.module.css';
 
@@ -48,5 +48,7 @@ const RoomPage: React.FC<CommonProps> = (props) => {
 		</MainLayout>
 	);
 };
+
+pageModel.loaded();
 
 export default RoomPage;

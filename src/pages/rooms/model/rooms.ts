@@ -5,6 +5,9 @@ import {
 	removeRoomModel,
 	updateRoomModel
 } from '@/features/rooms';
+import { roomsModel } from '@/entities/rooms';
+import { routes } from '@/shared/configs';
+import { loadedWithRouteParams } from './page';
 
 sample({
 	clock: createRoomModel.mutation.finished.success,
@@ -58,4 +61,14 @@ sample({
 		variant: 'error' as const,
 	}),
 	target: createNotificationModel.setNotification,
+});
+
+sample({
+	clock: routes.rooms.closed,
+	target: roomsModel.query.reset,
+});
+
+sample({
+	clock: [routes.rooms.opened, loadedWithRouteParams],
+	target: roomsModel.query.start,
 });

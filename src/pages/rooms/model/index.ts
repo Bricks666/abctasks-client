@@ -1,1 +1,3 @@
-export * from './rooms';
+import './rooms';
+
+export * as pageModel from './page';

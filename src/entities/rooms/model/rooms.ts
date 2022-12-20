@@ -2,7 +2,6 @@ import { cache } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
-import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { GetRoomsRequest, room, Room, roomsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
@@ -45,20 +44,7 @@ export const query = createQueryWithAccess<
 	mapData: dataExtractor,
 });
 
-export const Gate = createGate<void>({
-	domain: roomsDomain,
-});
-
-sample({
-	clock: Gate.open,
-	fn: () => ({}),
-	target: query.start,
-});
-
-cache(query, {
-	staleAfter: '15min',
-	purge: Gate.close,
-});
+cache(query);
 
 querySync({
 	controls,

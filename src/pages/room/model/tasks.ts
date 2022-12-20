@@ -5,6 +5,9 @@ import {
 	removeTaskModel,
 	updateTaskModel
 } from '@/features/tasks';
+import { tasksModel } from '@/entities/tasks';
+import { routes } from '@/shared/configs';
+import { loadedWithRouteParams } from './page';
 
 sample({
 	clock: createTaskModel.mutation.finished.success,
@@ -58,4 +61,15 @@ sample({
 		variant: 'error' as const,
 	}),
 	target: createNotificationModel.setNotification,
+});
+
+sample({
+	clock: routes.room.closed,
+	target: tasksModel.query.reset,
+});
+
+sample({
+	clock: [routes.room.opened, loadedWithRouteParams],
+	fn: ({ params, }) => params.id,
+	target: tasksModel.query.start,
 });
