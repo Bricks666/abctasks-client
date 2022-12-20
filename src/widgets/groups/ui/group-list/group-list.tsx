@@ -18,9 +18,10 @@ export const GroupList: React.FC<GroupListProps> = React.memo(
 	function GroupList(props) {
 		const { className, } = props;
 		const roomId = useParam(routes.room, 'id');
-		const { data: groups, } = useGroups(roomId);
+		const { data: groups, status, } = useGroups(roomId);
+		const isLoading = groups.length === 0 && status !== 'done';
 
-		const items = groups
+		const items = !isLoading
 			? groups.map((group) => (
 				<ListItem key={group.id}>
 					<GroupLabel {...group} />
@@ -31,7 +32,7 @@ export const GroupList: React.FC<GroupListProps> = React.memo(
 			  ))
 			: getEmptyArray(4).map((_, i) => (
 				<ListItem key={i}>
-					<Skeleton width='100%' height='1rem + 4px' />
+					<Skeleton width='100%' height='1.5em' />
 				</ListItem>
 			  ));
 

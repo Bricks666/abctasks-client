@@ -12,12 +12,12 @@ import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import styles from './activity-list.module.css';
 
-export const ActivityList: React.FC<CommonProps> = (props) => {
+export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room');
 	const roomId = useParam(routes.room, 'id');
-	const { data: activities, } = useActivities(roomId);
-	const isLoading = !activities;
+	const { data: activities, status, } = useActivities(roomId);
+	const isLoading = activities.length === 0 && status !== 'done';
 
 	return (
 		<Stack className={cn(styles.wrapper, className)} spacing={1.5}>
@@ -35,4 +35,4 @@ export const ActivityList: React.FC<CommonProps> = (props) => {
 			</Stack>
 		</Stack>
 	);
-};
+});

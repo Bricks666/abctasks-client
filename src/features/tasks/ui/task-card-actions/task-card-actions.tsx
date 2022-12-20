@@ -17,7 +17,7 @@ export const TaskCardActions: React.FC<TaskCardActionsProps> = React.memo(
 	(props) => {
 		const { className, taskId, roomId, } = props;
 		const { t, } = useTranslation('common');
-		const removeTask = useMutation(removeTaskModel.removeTaskMutation);
+		const removeTask = useMutation(removeTaskModel.mutation);
 
 		const options = React.useMemo<MenuOption<any>[]>(
 			() => [

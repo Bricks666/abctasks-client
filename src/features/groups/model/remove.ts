@@ -2,7 +2,6 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { Boolean } from 'runtypes';
 import { groupsModel } from '@/entities/groups';
-import { progressesModel } from '@/entities/progresses';
 import { RemoveGroupRequest, groupsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
@@ -13,36 +12,27 @@ import {
 
 const removeGroupDomain = createDomain();
 
-export const removeGroupFx = removeGroupDomain.effect<
+export const handlerFx = removeGroupDomain.effect<
 	RemoveGroupRequest,
 	StandardResponse<boolean>,
 	StandardFailError
 >('removeGroupFx');
 
-removeGroupFx.use(groupsApi.remove);
+handlerFx.use(groupsApi.remove);
 
-export const removeGroupMutation = createMutationWithAccess<
+export const mutation = createMutationWithAccess<
 	RemoveGroupRequest,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	StandardFailError
 >({
-	effect: removeGroupFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
 });
 
 sample({
-	clock: removeGroupMutation.finished.success,
-	source: groupsModel.getGroupsQuery.$data,
-	filter: (_, { result, }) => globalThis.Boolean(result.data),
-	fn: (groups, { params, }) => {
-		return groups.filter((group) => group.id !== params.id);
-	},
-	target: [groupsModel.getGroupsQuery.$data, groupsModel.invalidateCache],
-});
-
-sample({
-	clock: removeGroupMutation.finished.success,
-	fn: ({ params, }) => params.roomId,
-	target: progressesModel.getProgressQuery.start,
+	clock: mutation.finished.success,
+	filter: ({ result, }) => globalThis.Boolean(result.data),
+	fn: ({ params, }) => params,
+	target: groupsModel.remove,
 });

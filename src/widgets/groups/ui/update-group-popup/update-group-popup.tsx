@@ -24,10 +24,10 @@ export const UpdateGroupPopup: React.FC<
 > = (props) => {
 	const { t, } = useTranslation('popups');
 	const roomId = useParam(routes.room, 'id');
-	const id = useUnit(groupsModel.$groupId);
+	const id = useUnit(groupsModel.$id);
 	const onClose = useUnit(updateGroupPopupModel.close);
 	const { data: group, } = useGroup(roomId, Number(id));
-	const updateGroup = useMutation(updateGroupModel.updateGroupMutation);
+	const updateGroup = useMutation(updateGroupModel.mutation);
 	const isLoading = !group && id !== null;
 
 	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(

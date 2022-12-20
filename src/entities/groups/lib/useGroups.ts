@@ -1,8 +1,12 @@
 import { useQuery } from '@farfetched/react';
-import { useGate } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { groupsModel } from '../model';
 
-export const useGroups = (roomId: number) => {
-	useGate(groupsModel.GroupsGate, { roomId, });
-	return useQuery(groupsModel.getGroupsQuery);
+export const useGroups = () => {
+	const query = useQuery(groupsModel.query);
+	const status = useUnit(groupsModel.query.$status);
+	return {
+		...query,
+		status,
+	};
 };

@@ -16,35 +16,34 @@ import {
 	InRoomRequest
 } from '@/shared/types';
 
-export const progressDomain = createDomain('ProgressDomain');
+export const progressDomain = createDomain();
 
-export const getProgressFx = progressDomain.effect<
+export const handlerFx = progressDomain.effect<
 	number,
 	StandardResponse<Progress[]>,
 	StandardFailError
->('getProgressFx');
-getProgressFx.use(progressApi.getAll);
+>();
+handlerFx.use(progressApi.getAll);
 
-export const getProgressQuery = createQuery<
+export const query = createQuery<
 	number,
 	StandardResponse<Progress[]>,
 	StandardFailError,
 	StandardSuccessResponse<Progress[]>,
 	Progress[]
 >({
-	effect: getProgressFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(progress))),
 	validate: getIsSuccessResponseValidator(),
 	mapData: dataExtractor,
 });
 
-export const ProgressGate = createGate<InRoomRequest>({
+export const Gate = createGate<InRoomRequest>({
 	domain: progressDomain,
-	name: 'progressGate',
 });
 
 sample({
-	clock: ProgressGate.open,
+	clock: Gate.open,
 	fn: ({ roomId, }) => roomId,
-	target: getProgressQuery.start,
+	target: query.start,
 });

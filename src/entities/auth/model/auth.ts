@@ -10,46 +10,46 @@ import {
 	getStandardSuccessResponse
 } from '@/shared/types';
 
-export const authDomain = createDomain('AuthDomain');
+export const authDomain = createDomain();
 
-export const $authUser = authDomain.store<User | null>(null);
-export const $isAuth = combine($authUser, (state) => !!state);
-export const setAuthUser = authDomain.event<User | null>();
+export const $user = authDomain.store<User | null>(null);
+export const $isAuth = combine($user, (state) => !!state);
+export const setUser = authDomain.event<User | null>();
 
-export const authFx = authDomain.effect<void, StandardResponse<AuthResponse>>(
-	'authFx'
-);
-authFx.use(authApi.auth);
+export const handlerFx = authDomain.effect<
+	void,
+	StandardResponse<AuthResponse>
+>();
+handlerFx.use(authApi.auth);
 
-export const authQuery = createQuery<
+export const query = createQuery<
 	void,
 	StandardResponse<AuthResponse>,
 	Error,
 	StandardSuccessResponse<AuthResponse>,
 	void
 >({
-	effect: authFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(authResponse)),
 	validate: getIsSuccessResponseValidator(),
 });
 
-export const AuthGate = createGate({
+export const Gate = createGate({
 	domain: authDomain,
-	name: 'authGate',
 });
 
 sample({
-	clock: setAuthUser,
-	target: $authUser,
+	clock: setUser,
+	target: $user,
 });
 
 sample({
-	clock: [authQuery.finished.success],
+	clock: [query.finished.success],
 	fn: ({ result, }) => result.data.user,
-	target: setAuthUser,
+	target: setUser,
 });
 
 sample({
-	clock: AuthGate.open,
-	target: [authQuery.start],
+	clock: Gate.open,
+	target: [query.start],
 });

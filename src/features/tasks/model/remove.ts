@@ -1,9 +1,7 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { Boolean } from 'runtypes';
-import { progressesModel } from '@/entities/progresses';
 import { tasksModel } from '@/entities/tasks';
-import { getTasksQuery } from '@/entities/tasks/model/tasks';
 import { RemoveTaskRequest, tasksApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
@@ -14,37 +12,26 @@ import {
 
 const removeTaskDomain = createDomain();
 
-export const removeTaskFx = removeTaskDomain.effect<
+export const handlerFx = removeTaskDomain.effect<
 	RemoveTaskRequest,
 	StandardResponse<boolean>,
 	StandardFailError
 >('removeTaskFx');
-removeTaskFx.use(tasksApi.remove);
+handlerFx.use(tasksApi.remove);
 
-export const removeTaskMutation = createMutationWithAccess<
+export const mutation = createMutationWithAccess<
 	RemoveTaskRequest,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	StandardFailError
 >({
-	effect: removeTaskFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
 });
 
 sample({
-	clock: removeTaskMutation.finished.success,
-	source: tasksModel.getTasksQuery.$data,
-	fn: (tasks, { params, result: { data, }, }) => {
-		if (!data) {
-			return tasks;
-		}
-		return tasks.filter((task) => task.id !== params.id);
-	},
-	target: getTasksQuery.$data,
-});
-
-sample({
-	clock: removeTaskMutation.finished.success,
-	fn: ({ params, }) => params.roomId,
-	target: progressesModel.getProgressQuery.start,
+	clock: mutation.finished.success,
+	filter: ({ result, }) => result.data,
+	fn: ({ params, }) => params,
+	target: tasksModel.remove,
 });

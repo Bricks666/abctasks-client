@@ -1,7 +1,6 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
-import { createGate } from 'effector-react';
+import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 import { activitiesApi } from '@/shared/api';
 import { Activity, activity } from '@/shared/api/activities/types';
@@ -9,19 +8,17 @@ import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse,
-	InRoomRequest
+	getStandardSuccessResponse
 } from '@/shared/types';
 
-export const activitiesDomain = createDomain('ActivitiesDomain');
-
-export const getActivitiesFx = activitiesDomain.effect<
+const activitiesDomain = createDomain();
+export const handlerFx = activitiesDomain.effect<
 	number,
 	StandardResponse<Activity[]>
->('getActivitiesFx');
-getActivitiesFx.use(activitiesApi.getAll);
+>();
+handlerFx.use(activitiesApi.getAll);
 
-export const getActivitiesQuery = createQuery<
+export const query = createQuery<
 	number,
 	StandardResponse<Activity[]>,
 	Error,
@@ -29,18 +26,7 @@ export const getActivitiesQuery = createQuery<
 	Activity[]
 >({
 	initialData: [],
-	effect: getActivitiesFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(Array(activity))),
 	mapData: dataExtractor,
-});
-
-export const ActivityGate = createGate<InRoomRequest>({
-	domain: activitiesDomain,
-	name: 'activitiesGate',
-});
-
-sample({
-	clock: ActivityGate.open,
-	fn: ({ roomId, }) => roomId,
-	target: getActivitiesQuery.start,
 });

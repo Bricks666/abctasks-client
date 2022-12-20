@@ -1,8 +1,12 @@
 import { useQuery } from '@farfetched/react';
-import { useGate } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { activitiesModel } from '../model';
 
-export const useActivities = (roomId: number) => {
-	useGate(activitiesModel.ActivityGate, { roomId, });
-	return useQuery(activitiesModel.getActivitiesQuery);
+export const useActivities = () => {
+	const query = useQuery(activitiesModel.query);
+	const status = useUnit(activitiesModel.query.$status);
+	return {
+		...query,
+		status,
+	};
 };

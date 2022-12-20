@@ -1,7 +1,6 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { groupsModel } from '@/entities/groups';
-import { progressesModel } from '@/entities/progresses';
 import { CreateGroupRequest, group, Group, groupsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
@@ -12,34 +11,25 @@ import {
 
 const createGroupDomain = createDomain();
 
-export const createGroupFx = createGroupDomain.effect<
+export const handlerFx = createGroupDomain.effect<
 	CreateGroupRequest,
 	StandardResponse<Group>,
 	StandardFailError
 >('createGroupFx');
-createGroupFx.use(groupsApi.create);
+handlerFx.use(groupsApi.create);
 
-export const createGroupMutation = createMutationWithAccess<
+export const mutation = createMutationWithAccess<
 	CreateGroupRequest,
 	StandardResponse<Group>,
 	StandardSuccessResponse<Group>,
 	StandardFailError
 >({
-	effect: createGroupFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(group)),
 });
 
 sample({
-	clock: createGroupMutation.finished.success,
-	source: groupsModel.getGroupsQuery.$data,
-	fn: (groups, { result, }) => {
-		return [...groups, result.data];
-	},
-	target: [groupsModel.getGroupsQuery.$data, groupsModel.invalidateCache],
-});
-
-sample({
-	clock: createGroupMutation.finished.success,
-	fn: ({ params, }) => params.roomId,
-	target: progressesModel.getProgressQuery.start,
+	clock: mutation.finished.success,
+	fn: ({ result, }) => result.data,
+	target: groupsModel.add,
 });

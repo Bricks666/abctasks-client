@@ -16,13 +16,10 @@ sample({
 
 sample({
 	clock: close,
-	target: [
-		tasksModel.$selectedTaskId.reinit!,
-		tasksModel.$selectedStatus.reinit!
-	],
+	target: [tasksModel.$id.reinit!, tasksModel.$status.reinit!],
 });
 
 sample({
-	clock: createTaskModel.createTaskMutation.finished.success,
+	clock: createTaskModel.mutation.finished.success,
 	target: close,
 });

@@ -1,7 +1,6 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
-import { progressesModel } from '@/entities/progresses';
-import { getTasksQuery } from '@/entities/tasks/model/tasks';
+import { tasksModel } from '@/entities/tasks';
 import { UpdateTaskRequest, Task, tasksApi, task } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
@@ -12,34 +11,25 @@ import {
 
 const updateTaskDomain = createDomain();
 
-export const updateTaskFx = updateTaskDomain.effect<
+export const handlerFx = updateTaskDomain.effect<
 	UpdateTaskRequest,
 	StandardResponse<Task>,
 	StandardFailError
 >('updateTaskFx');
-updateTaskFx.use(tasksApi.update);
+handlerFx.use(tasksApi.update);
 
-export const updateTaskMutation = createMutationWithAccess<
+export const mutation = createMutationWithAccess<
 	UpdateTaskRequest,
 	StandardResponse<Task>,
 	StandardSuccessResponse<Task>,
 	StandardFailError
 >({
-	effect: updateTaskFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(task)),
 });
 
 sample({
-	clock: updateTaskMutation.finished.success,
-	source: getTasksQuery.$data,
-	fn: (tasks, { result: { data, }, }) => {
-		return tasks.map((task) => (task.id === data.id ? data : task));
-	},
-	target: getTasksQuery.$data,
-});
-
-sample({
-	clock: updateTaskMutation.finished.success,
-	fn: ({ params, }) => params.roomId,
-	target: progressesModel.getProgressQuery.start,
+	clock: mutation.finished.success,
+	fn: ({ result, }) => result.data,
+	target: tasksModel.update,
 });

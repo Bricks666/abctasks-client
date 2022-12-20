@@ -1,5 +1,6 @@
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain } from 'effector';
+import { createDomain, sample } from 'effector';
+import { roomsModel } from '@/entities/rooms';
 import { CreateRoomRequest, room, Room, roomsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
@@ -10,19 +11,25 @@ import {
 
 const createRoomsDomain = createDomain();
 
-export const createRoomFx = createRoomsDomain.effect<
+export const handlerFx = createRoomsDomain.effect<
 	CreateRoomRequest,
 	StandardResponse<Room>,
 	StandardFailError
 >('createRoomFx');
-createRoomFx.use(roomsApi.create);
+handlerFx.use(roomsApi.create);
 
-export const createRoomMutation = createMutationWithAccess<
+export const mutation = createMutationWithAccess<
 	CreateRoomRequest,
 	StandardResponse<Room>,
 	StandardSuccessResponse<Room>,
 	StandardFailError
 >({
-	effect: createRoomFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(room)),
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: ({ result, }) => result.data,
+	target: roomsModel.add,
 });

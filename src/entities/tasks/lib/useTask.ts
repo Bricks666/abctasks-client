@@ -1,8 +1,8 @@
 import { useQuery } from '@farfetched/react';
 import { useGate } from 'effector-react';
-import { tasksModel } from '../model';
+import { taskModel } from '../model';
 
 export const useTask = (taskId: number, roomId: number) => {
-	useGate(tasksModel.TaskGate, { id: taskId, roomId, });
-	return useQuery(tasksModel.getTaskQuery);
+	useGate(taskModel.Gate, { id: taskId, roomId, });
+	return useQuery(taskModel.query);
 };
