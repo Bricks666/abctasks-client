@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps, Size } from '@/shared/types';
-import styles from './LoadingIndicator.module.css';
+import styles from './loading-indicator.module.css';
 
 export interface LoadingIndicatorProps extends CommonProps {
 	readonly size?: Size;
