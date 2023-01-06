@@ -1,4 +1,4 @@
-import { useMutation } from '@farfetched/react';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { routes, getParams, popups } from '@/shared/configs';
@@ -13,8 +13,8 @@ export interface RoomCardMenuProps extends CommonProps {
 export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 	const { id, className, } = props;
 	const { t, } = useTranslation('rooms');
-	const removeRoom = useMutation(removeRoomModel.mutation);
-	const exitRoom = useMutation(exitRoomModel.mutation);
+	const removeRoom = useUnit(removeRoomModel.mutation);
+	const exitRoom = useUnit(exitRoomModel.mutation);
 	const options = React.useMemo<MenuOption<object>[]>(
 		() => [
 			{

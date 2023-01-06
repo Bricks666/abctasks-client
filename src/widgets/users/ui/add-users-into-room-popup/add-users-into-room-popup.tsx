@@ -1,4 +1,3 @@
-import { useQuery } from '@farfetched/react';
 import { List, ListItem } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
@@ -22,7 +21,7 @@ export const AddUsersIntoRoomPopup: React.FC<AddUsersIntoRoomPopupProps> = (
 ) => {
 	const { isOpen, } = props;
 
-	const users = useQuery(searchedUsersModel.query);
+	const users = useUnit(searchedUsersModel.query);
 	const roomId = useParam(routes.room, 'id');
 	const onClose = useUnit(addUserPopupModel.close);
 

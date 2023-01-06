@@ -1,6 +1,6 @@
-import { useMutation } from '@farfetched/react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { routes, getParams, popups } from '@/shared/configs';
@@ -17,7 +17,7 @@ export const TaskCardActions: React.FC<TaskCardActionsProps> = React.memo(
 	(props) => {
 		const { className, taskId, roomId, } = props;
 		const { t, } = useTranslation('common');
-		const removeTask = useMutation(removeTaskModel.mutation);
+		const removeTask = useUnit(removeTaskModel.mutation);
 
 		const options = React.useMemo<MenuOption<any>[]>(
 			() => [

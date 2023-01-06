@@ -1,4 +1,3 @@
-import { useMutation } from '@farfetched/react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -20,7 +19,7 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 	const roomId = useParam(routes.room, 'id');
 	const status = useUnit(tasksModel.$status) || 'ready';
 	const onClose = useUnit(createTaskPopupModel.close);
-	const createTask = useMutation(createTaskModel.mutation);
+	const createTask = useUnit(createTaskModel.mutation);
 
 	const onSubmit = React.useCallback<SubmitHandler<TaskFormValues>>(
 		(values) => {

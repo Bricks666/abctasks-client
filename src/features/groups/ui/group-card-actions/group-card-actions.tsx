@@ -1,8 +1,8 @@
-import { useMutation } from '@farfetched/react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import { Link } from 'atomic-router-react';
+import { useUnit } from 'effector-react';
 import { t } from 'i18next';
 import * as React from 'react';
 import { routes, getParams, popups } from '@/shared/configs';
@@ -16,7 +16,7 @@ export interface GroupCardActionsProps extends CommonProps {
 
 export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
 	const { groupId, roomId, className, } = props;
-	const removeGroup = useMutation(removeGroupModel.mutation);
+	const removeGroup = useUnit(removeGroupModel.mutation);
 
 	return (
 		<div className={className}>

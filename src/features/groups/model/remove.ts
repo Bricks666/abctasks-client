@@ -1,5 +1,6 @@
+import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { createDomain } from 'effector';
 import { Boolean } from 'runtypes';
 import { groupsModel } from '@/entities/groups';
 import { RemoveGroupRequest, groupsApi } from '@/shared/api';
@@ -30,9 +31,27 @@ export const mutation = createMutationWithAccess<
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
 });
 
-sample({
-	clock: mutation.finished.success,
-	filter: ({ result, }) => globalThis.Boolean(result.data),
-	fn: ({ params, }) => params,
-	target: groupsModel.remove,
+update(groupsModel.query, {
+	on: mutation,
+	by: {
+		success: ({ query, mutation, }) => {
+			if (!query) {
+				return {
+					result: [],
+				};
+			}
+
+			if ('error' in query) {
+				return {
+					error: query.error,
+					refetch: true,
+				};
+			}
+
+			return {
+				result: query.result.filter((group) => group.id !== mutation.params.id),
+				refetch: true,
+			};
+		},
+	},
 });

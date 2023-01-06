@@ -1,4 +1,3 @@
-import { useMutation } from '@farfetched/react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -27,7 +26,7 @@ export const UpdateGroupPopup: React.FC<
 	const id = useUnit(groupsModel.$id);
 	const onClose = useUnit(updateGroupPopupModel.close);
 	const { data: group, } = useGroup(Number(id));
-	const updateGroup = useMutation(updateGroupModel.mutation);
+	const updateGroup = useUnit(updateGroupModel.mutation);
 	const isLoading = !group && id !== null;
 
 	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(

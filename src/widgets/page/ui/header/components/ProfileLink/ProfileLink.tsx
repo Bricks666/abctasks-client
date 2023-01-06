@@ -1,4 +1,3 @@
-import { useMutation } from '@farfetched/react';
 import { Avatar, Menu } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
@@ -14,7 +13,7 @@ export const ProfileLink: React.FC<CommonProps> = ({ className, }) => {
 	const user = useUnit(authModel.$user);
 	const [isOpen, toggle] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
-	const logout = useMutation(logoutModel.logoutMutation);
+	const logout = useUnit(logoutModel.logoutMutation);
 
 	const options: MenuOption<object>[] = React.useMemo(
 		() => [
