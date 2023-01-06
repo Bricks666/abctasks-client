@@ -1,7 +1,9 @@
 import { AccessOptions, fetcher } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
 import {
+	AddUserRoomRequest,
 	CreateRoomRequest,
+	ExitRoomRequest,
 	RemoveRoomRequest,
 	Room,
 	UpdateRoomRequest
@@ -57,6 +59,32 @@ export const remove = async ({ id, accessToken, }: RemoveRoomRequest) => {
 		path: {
 			url: [id, 'remove'],
 		},
+		accessToken,
+	});
+};
+
+export const addUser = async ({
+	id,
+	userId,
+	accessToken,
+}: AddUserRoomRequest) => {
+	return roomsFetcher.put<StandardResponse<boolean>>({
+		path: {
+			url: [id, 'exit'],
+		},
+		body: {
+			userId,
+		},
+		accessToken,
+	});
+};
+
+export const exit = async ({ id, accessToken, }: ExitRoomRequest) => {
+	return roomsFetcher.put<StandardResponse<boolean>>({
+		path: {
+			url: [id, 'exit'],
+		},
+		body: {},
 		accessToken,
 	});
 };

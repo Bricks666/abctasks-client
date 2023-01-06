@@ -7,16 +7,14 @@ import {
 	SkeletonActivityCard,
 	useActivities
 } from '@/entities/activities';
-import { routes, getEmptyArray } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
+import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 import styles from './activity-list.module.css';
 
 export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room');
-	const roomId = useParam(routes.room, 'id');
-	const { data: activities, status, } = useActivities(roomId);
+	const { data: activities, status, } = useActivities();
 	const isLoading = activities.length === 0 && status !== 'done';
 
 	return (
@@ -28,7 +26,7 @@ export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 				{isLoading
 					? getEmptyArray(4).map((_, i) => <SkeletonActivityCard key={i} />)
 					: activities
-						.slice(0, 10)
+						.slice(0, 5)
 						.map((activity) => (
 							<ActivityCard {...activity} key={activity.id} />
 						))}

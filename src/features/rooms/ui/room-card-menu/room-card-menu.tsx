@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { routes, getParams, popups } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, EditMenu } from '@/shared/ui';
-import { removeRoomModel } from '../../model';
+import { exitRoomModel, removeRoomModel } from '../../model';
 
 export interface RoomCardMenuProps extends CommonProps {
 	readonly id: number;
@@ -14,6 +14,7 @@ export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 	const { id, className, } = props;
 	const { t, } = useTranslation('rooms');
 	const removeRoom = useMutation(removeRoomModel.mutation);
+	const exitRoom = useMutation(exitRoomModel.mutation);
 	const options = React.useMemo<MenuOption<object>[]>(
 		() => [
 			{
@@ -24,6 +25,10 @@ export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 					[getParams.popup]: popups.updateRoom,
 					[getParams.roomId]: id,
 				},
+			},
+			{
+				label: 'Exit',
+				onClick: () => exitRoom.start({ id, }),
 			},
 			{
 				label: t('actions.remove', { ns: 'common', }),

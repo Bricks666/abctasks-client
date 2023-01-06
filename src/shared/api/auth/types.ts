@@ -6,7 +6,7 @@ export const user = Record({
 	photo: String.nullable(),
 }).asReadonly();
 
-export type User = Static<typeof user>;
+export interface User extends Static<typeof user> {}
 
 export const tokens = Record({
 	accessToken: String,

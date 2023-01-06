@@ -13,8 +13,9 @@ import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
 import { pageModel } from './model';
-
 import styles from './styles.module.css';
+import { UserList } from './ui';
+
 
 const RoomPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
@@ -35,6 +36,7 @@ const RoomPage: React.FC<CommonProps> = (props) => {
 					<TabList onChange={onChange} variant='fullWidth'>
 						<Tab label='Прогресс' value='progress' />
 						<Tab label='Группы' value='groups' />
+						<Tab label='Пользователи' value='users' />
 					</TabList>
 					<TabPanel className={styles.panel} value='progress'>
 						<TasksProgress className={styles.progress} />
@@ -42,6 +44,9 @@ const RoomPage: React.FC<CommonProps> = (props) => {
 					</TabPanel>
 					<TabPanel className={styles.panel} value='groups'>
 						<Groups />
+					</TabPanel>
+					<TabPanel className={styles.panel} value='users'>
+						<UserList />
 					</TabPanel>
 				</TabContext>
 			</div>

@@ -28,8 +28,8 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 				status: 'ready',
 			},
 			{
-				tasks: tasks['in progress'],
-				status: 'in progress',
+				tasks: tasks.in_progress,
+				status: 'in_progress',
 			},
 			{
 				tasks: tasks.needReview,
@@ -43,12 +43,14 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 		[tasks]
 	);
 
+	const isLoading = tasksStatus === 'initial' || tasksStatus === 'pending';
+
 	return (
 		<section className={cn(styles.wrapper, className)}>
 			{columns.map(({ status, tasks, }) => (
 				<TaskList
 					tasks={tasks}
-					isLoading={tasks.length === 0 && tasksStatus !== 'done'}
+					isLoading={isLoading}
 					columnStatus={status}
 					header={t(`statuses.${status}`)}
 					key={status}

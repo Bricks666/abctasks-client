@@ -1,7 +1,7 @@
 {
 	"statuses": {
 		"ready": "Ready",
-		"in progress": "In progress",
+		"in_progress": "In progress",
 		"review": "Need review",
 		"done": "Done"
 	}

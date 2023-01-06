@@ -30,3 +30,5 @@ export const query = createQuery<
 	contract: runtypeContract(getStandardSuccessResponse(Array(activity))),
 	mapData: dataExtractor,
 });
+
+query.finished.finally.watch(console.log);
