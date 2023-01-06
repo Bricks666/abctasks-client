@@ -1,0 +1,5 @@
+.list {
+	max-width: 500px;
+
+	overflow: scroll;
+}

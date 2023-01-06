@@ -1,5 +1,6 @@
 import { AccessOptions, fetcher } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
+import { User } from '../auth';
 import {
 	AddUserRoomRequest,
 	CreateRoomRequest,
@@ -68,9 +69,9 @@ export const addUser = async ({
 	userId,
 	accessToken,
 }: AddUserRoomRequest) => {
-	return roomsFetcher.put<StandardResponse<boolean>>({
+	return roomsFetcher.put<StandardResponse<User>>({
 		path: {
-			url: [id, 'exit'],
+			url: [id, 'add-user'],
 		},
 		body: {
 			userId,

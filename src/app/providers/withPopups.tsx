@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CreateGroupPopup, UpdateGroupPopup } from '@/widgets/groups';
 import { CreateRoomPopup, UpdateRoomPopup } from '@/widgets/rooms';
 import { CreateTaskPopup, UpdateTaskPopup } from '@/widgets/tasks';
+import { AddUsersIntoRoomPopup } from '@/widgets/users';
 import { usePopups } from '@/entities/popups';
 import { popups } from '@/shared/configs';
 import { BasePopupProps } from '@/shared/types';
@@ -13,6 +14,7 @@ const popupsMap: Record<string, React.ComponentType<BasePopupProps>> = {
 	[popups.updateGroup]: UpdateGroupPopup,
 	[popups.createRoom]: CreateRoomPopup,
 	[popups.updateRoom]: UpdateRoomPopup,
+	[popups.addUser]: AddUsersIntoRoomPopup,
 };
 
 export const withPopups =

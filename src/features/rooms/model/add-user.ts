@@ -1,6 +1,6 @@
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
-import { AddUserRoomRequest, user, User } from '@/shared/api';
+import { AddUserRoomRequest, roomsApi, user, User } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardSuccessResponse } from '@/shared/types';
 
@@ -11,6 +11,8 @@ const handlerFx = addUserRoomDomain.effect<
 	StandardResponse<User>,
 	StandardFailError
 >();
+
+handlerFx.use(roomsApi.addUser);
 
 export const mutation = createMutationWithAccess({
 	effect: handlerFx,

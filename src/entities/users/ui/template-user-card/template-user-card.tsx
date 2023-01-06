@@ -8,18 +8,21 @@ import styles from './template-user-card.module.css';
 
 export interface TemplateUserCardProps extends CommonProps, User {
 	readonly actions?: React.ReactElement | null;
+	readonly onClick?: React.MouseEventHandler;
+	readonly extra?: React.ReactElement | null;
 }
 
 export const TemplateUserCard: React.FC<TemplateUserCardProps> = (props) => {
-	const { login, actions, className, photo, } = props;
+	const { login, actions, className, photo, onClick, extra, } = props;
 
 	return (
-		<Card className={cn(styles.card, className)}>
+		<Card className={cn(styles.card, className)} onClick={onClick}>
 			<CardHeader
 				avatar={<Avatar src={photo || ''} alt={login} />}
 				title={login}
 				action={actions}
 			/>
+			{extra}
 		</Card>
 	);
 };

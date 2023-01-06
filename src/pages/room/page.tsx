@@ -9,13 +9,13 @@ import { Header } from '@/widgets/page';
 import { TasksProgress } from '@/widgets/progresses';
 import { RoomHeader } from '@/widgets/rooms';
 import { Tasks } from '@/widgets/tasks';
+import { OpenSearchUserPopup } from '@/features/rooms';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
 import { pageModel } from './model';
 import styles from './styles.module.css';
 import { UserList } from './ui';
-
 
 const RoomPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
@@ -46,6 +46,7 @@ const RoomPage: React.FC<CommonProps> = (props) => {
 						<Groups />
 					</TabPanel>
 					<TabPanel className={styles.panel} value='users'>
+						<OpenSearchUserPopup />
 						<UserList />
 					</TabPanel>
 				</TabContext>

@@ -6,3 +6,4 @@ export * from './fabrics';
 export * from './dataExtractor';
 export * from './isSuccessResponse';
 export * from './request';
+export * from './useDebounceValue';
