@@ -15,7 +15,7 @@ export const useGroupedTasks = () => {
 		return {
 			ready: createGrouper('ready')(tasks),
 			done: createGrouper('done')(tasks),
-			'in progress': createGrouper('in progress')(tasks),
+			in_progress: createGrouper('in_progress')(tasks),
 			needReview: createGrouper('review')(tasks),
 		};
 	}, [tasks]);

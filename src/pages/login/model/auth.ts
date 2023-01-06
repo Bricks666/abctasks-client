@@ -4,11 +4,9 @@ import { authModel } from '@/entities/auth';
 import { routes } from '@/shared/configs';
 
 redirect({
-	clock: authModel.query.finished.success,
-	route: routes.rooms,
-});
-
-redirect({
-	clock: loginModel.loginMutation.finished.success,
+	clock: [
+		authModel.query.finished.success,
+		loginModel.loginMutation.finished.success
+	],
 	route: routes.rooms,
 });

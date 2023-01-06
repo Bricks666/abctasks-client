@@ -4,7 +4,7 @@ import { AccessOptions } from '@/shared/lib';
 
 export const taskStatus = Union(
 	Literal('done'),
-	Literal('in progress'),
+	Literal('in_progress'),
 	Literal('review'),
 	Literal('ready')
 );
@@ -12,7 +12,7 @@ export const taskStatus = Union(
 export type TaskStatus = Static<typeof taskStatus>;
 export const statuses: TaskStatus[] = [
 	'done',
-	'in progress',
+	'in_progress',
 	'ready',
 	'review'
 ];
@@ -31,7 +31,7 @@ export interface Task extends Static<typeof task> {}
 
 export interface GroupedByStatusTasks {
 	readonly ready: Task[];
-	readonly 'in progress': Task[];
+	readonly in_progress: Task[];
 	readonly needReview: Task[];
 	readonly done: Task[];
 }

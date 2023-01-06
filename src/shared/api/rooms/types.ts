@@ -25,3 +25,12 @@ export interface UpdateRoomRequest
 export interface RemoveRoomRequest extends Required<AccessOptions> {
 	readonly id: number;
 }
+
+export interface AddUserRoomRequest extends Required<AccessOptions> {
+	readonly id: number;
+	readonly userId: number;
+}
+
+export interface ExitRoomRequest extends Required<AccessOptions> {
+	readonly id: number;
+}

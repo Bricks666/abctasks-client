@@ -18,7 +18,7 @@ export const GroupList: React.FC<GroupListProps> = React.memo(
 	function GroupList(props) {
 		const { className, } = props;
 		const roomId = useParam(routes.room, 'id');
-		const { data: groups, status, } = useGroups(roomId);
+		const { data: groups, status, } = useGroups();
 		const isLoading = groups.length === 0 && status !== 'done';
 
 		const items = !isLoading

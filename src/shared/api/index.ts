@@ -4,3 +4,4 @@ export * from './tasks';
 export * from './groups';
 export * from './activities';
 export * from './progresses';
+export * from './users';

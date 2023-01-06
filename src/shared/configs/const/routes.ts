@@ -15,4 +15,5 @@ export const popups = {
 	updateGroup: 'update-group',
 	createRoom: 'create-room',
 	updateRoom: 'update-room',
+	addUser: 'add-user',
 } as const;

@@ -1,7 +1,7 @@
 {
 	"statuses": {
 		"ready": "В ожидании",
-		"in progress": "В прогрессе",
+		"in_progress": "В прогрессе",
 		"review": "Проверка",
 		"done": "Выполнено"
 	}
