@@ -1,3 +1,6 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import ExitRoomIcon from '@mui/icons-material/MeetingRoom';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,14 +28,17 @@ export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 					[getParams.popup]: popups.updateRoom,
 					[getParams.roomId]: id,
 				},
+				icon: <EditIcon />,
 			},
 			{
 				label: 'Exit',
 				onClick: () => exitRoom.start({ id, }),
+				icon: <ExitRoomIcon />,
 			},
 			{
 				label: t('actions.remove', { ns: 'common', }),
 				onClick: () => removeRoom.start({ id, }),
+				icon: <DeleteIcon />,
 			}
 		],
 		[id]

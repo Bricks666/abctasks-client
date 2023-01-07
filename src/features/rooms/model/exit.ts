@@ -1,7 +1,7 @@
 import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
-import { Boolean } from 'runtypes';
+import { Literal } from 'runtypes';
 import { /* roomModel,  */ roomsModel } from '@/entities/rooms';
 import { ExitRoomRequest, roomsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
@@ -19,7 +19,7 @@ handlerFx.use(roomsApi.exit);
 
 export const mutation = createMutationWithAccess({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
+	contract: runtypeContract(getStandardSuccessResponse(Literal(true))),
 });
 
 update(roomsModel.query, {

@@ -12,18 +12,18 @@ import {
 
 const registrationDomain = createDomain();
 
-export const registrationFx = registrationDomain.effect<
+export const handlerFx = registrationDomain.effect<
 	RegistrationRequest,
 	StandardResponse<VoidResponse>
->('registrationFx');
-registrationFx.use(authApi.registration);
+>();
+handlerFx.use(authApi.registration);
 
-export const registrationMutation = createMutation<
+export const mutation = createMutation<
 	RegistrationRequest,
 	StandardResponse<VoidResponse>,
 	StandardSuccessResponse<VoidResponse>,
 	Error
 >({
-	effect: registrationFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(voidResponse)),
 });

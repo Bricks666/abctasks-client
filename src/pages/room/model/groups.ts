@@ -64,11 +64,6 @@ sample({
 });
 
 sample({
-	clock: routes.room.closed,
-	target: groupsModel.query.reset,
-});
-
-sample({
 	clock: [routes.room.opened, loadedWithRouteParams],
 	fn: ({ params, }) => params.id,
 	target: groupsModel.query.start,

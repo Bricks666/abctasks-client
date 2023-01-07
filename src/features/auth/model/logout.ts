@@ -1,7 +1,7 @@
 import { createMutation } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
-import { Boolean } from 'runtypes';
+import { Literal } from 'runtypes';
 import { authModel } from '@/entities/auth';
 import { authApi } from '@/shared/api';
 import {
@@ -24,7 +24,7 @@ export const logoutMutation = createMutation<
 	Error
 >({
 	effect: logoutFx,
-	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
+	contract: runtypeContract(getStandardSuccessResponse(Literal(true))),
 });
 
 sample({

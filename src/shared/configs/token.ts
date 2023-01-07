@@ -10,3 +10,5 @@ sample({
 	clock: setToken,
 	target: $token,
 });
+
+$token.watch(console.log);

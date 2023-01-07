@@ -1,8 +1,4 @@
-import {
-	ListItemIcon,
-	ListItemText,
-	MenuItem as MenuItemMUI
-} from '@mui/material';
+import { ListItemIcon, MenuItem as MenuItemMUI } from '@mui/material';
 import { RouteInstance, RouteQuery } from 'atomic-router';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
@@ -39,12 +35,12 @@ export const MenuItem = <P extends object>(
 ) => {
 	const { label, icon, onClick, to, params, query, ...rest } = props;
 	const itemButtonProps = to
-		? { component: Link, to, params, query, onClick, }
-		: { onClick, component: 'button', };
+		? { component: Link, to, params, query, }
+		: { onClick, };
 	return (
 		<MenuItemMUI {...rest} {...(itemButtonProps as any)}>
-			{icon && <ListItemIcon>{icon}</ListItemIcon>}
-			<ListItemText>{label}</ListItemText>
+			{icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+			{label}
 		</MenuItemMUI>
 	);
 };

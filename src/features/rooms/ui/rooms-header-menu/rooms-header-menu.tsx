@@ -1,3 +1,4 @@
+import AddIcon from '@mui/icons-material/Add';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { routes, getParams, popups } from '@/shared/configs';
@@ -19,6 +20,7 @@ export const RoomsHeaderMenu: React.FC<RoomsHeaderMenuProps> = (props) => {
 				query: {
 					[getParams.popup]: popups.createRoom,
 				},
+				icon: <AddIcon />,
 			}
 		],
 		[]

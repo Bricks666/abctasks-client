@@ -6,12 +6,12 @@ import { routes, getParams, popups } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, EditMenu } from '@/shared/ui';
 
-export interface TaskListActionsProps extends CommonProps {
+export interface TaskColumnMenuProps extends CommonProps {
 	readonly columnStatus: TaskStatus;
 	readonly roomId: number;
 }
 
-export const TaskListActions: React.FC<TaskListActionsProps> = React.memo(
+export const TaskColumnMenu: React.FC<TaskColumnMenuProps> = React.memo(
 	(props) => {
 		const { className, columnStatus, roomId, } = props;
 		const { t, } = useTranslation('common');

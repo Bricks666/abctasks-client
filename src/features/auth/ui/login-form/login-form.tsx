@@ -20,7 +20,7 @@ const initialValue: LoginRequest = {
 
 export const LoginForm: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('login');
-	const login = useUnit(loginModel.loginMutation);
+	const login = useUnit(loginModel.mutation);
 	const { handleSubmit, formState, control, } = useForm<LoginRequest>({
 		defaultValues: initialValue,
 		resolver: joiResolver(validationSchema),

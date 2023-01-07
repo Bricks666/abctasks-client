@@ -20,7 +20,7 @@ const initialValues: RegistrationRequest = {
 
 export const RegistrationForm: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('registration');
-	const registration = useUnit(registrationModel.registrationMutation);
+	const registration = useUnit(registrationModel.mutation);
 	const { control, handleSubmit, formState, } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),

@@ -7,7 +7,7 @@ import { routes } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { AuthLayout } from '@/shared/ui';
-import './model';
+import { pageModel } from './model';
 
 import styles from './styles.module.css';
 
@@ -29,5 +29,7 @@ const RegistrationPage: React.FC<CommonProps> = (props) => {
 		</AuthLayout>
 	);
 };
+
+pageModel.loaded();
 
 export default RegistrationPage;

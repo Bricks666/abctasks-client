@@ -1,7 +1,7 @@
 import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
-import { Boolean } from 'runtypes';
+import { Literal } from 'runtypes';
 import { groupsModel } from '@/entities/groups';
 import { RemoveGroupRequest, groupsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
@@ -28,7 +28,7 @@ export const mutation = createMutationWithAccess<
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
+	contract: runtypeContract(getStandardSuccessResponse(Literal(true))),
 });
 
 update(groupsModel.query, {
