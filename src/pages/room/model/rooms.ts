@@ -10,6 +10,5 @@ sample({
 
 sample({
 	clock: [routes.room.opened, loadedWithRouteParams],
-	fn: ({ params, }) => params.id,
 	target: roomsModel.query.start,
 });

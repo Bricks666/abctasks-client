@@ -1,5 +1,5 @@
 import { AccessOptions, fetcher } from '@/shared/lib';
-import { StandardResponse } from '@/shared/types';
+import { InRoomRequest, StandardResponse } from '@/shared/types';
 import { User } from '../auth';
 import {
 	AddUserRoomRequest,
@@ -61,6 +61,14 @@ export const remove = async ({ id, accessToken, }: RemoveRoomRequest) => {
 			url: [id, 'remove'],
 		},
 		accessToken,
+	});
+};
+
+export const getUsers = async ({ roomId, }: InRoomRequest) => {
+	return roomsFetcher.get<StandardResponse<User[]>>({
+		path: {
+			url: [roomId, 'users'],
+		},
 	});
 };
 

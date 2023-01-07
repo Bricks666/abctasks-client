@@ -1,7 +1,8 @@
+import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { createDomain } from 'effector';
 import { Boolean } from 'runtypes';
-import { roomsModel } from '@/entities/rooms';
+import { /* roomModel,  */ roomsModel } from '@/entities/rooms';
 import { ExitRoomRequest, roomsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardSuccessResponse } from '@/shared/types';
@@ -21,9 +22,30 @@ export const mutation = createMutationWithAccess({
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
 });
 
-sample({
-	clock: mutation.finished.success,
-	filter: ({ result, }) => result.data,
-	fn: ({ params, }) => params,
-	target: roomsModel.remove,
+update(roomsModel.query, {
+	on: mutation,
+	by: {
+		success: ({ query, mutation, }) => {
+			if (!query) {
+				return {
+					result: [],
+				};
+			}
+
+			if ('error' in query) {
+				return {
+					error: query.error,
+				};
+			}
+
+			return {
+				result: query.result.filter((room) => room.id !== mutation.params.id),
+			};
+		},
+	},
 });
+
+/*
+TODO: Сделать обновление и кеширование
+*/
+// update(roomModel.query)

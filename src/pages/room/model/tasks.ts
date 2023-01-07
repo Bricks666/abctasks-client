@@ -63,10 +63,10 @@ sample({
 	target: createNotificationModel.setNotification,
 });
 
-sample({
-	clock: routes.room.closed,
-	target: tasksModel.query.reset,
-});
+// sample({
+// 	clock: routes.room.closed,
+// 	target: tasksModel.query.reset,
+// });
 
 sample({
 	clock: [routes.room.opened, loadedWithRouteParams],

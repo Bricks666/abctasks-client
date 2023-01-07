@@ -1,5 +1,6 @@
+import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { createDomain } from 'effector';
 import { Boolean } from 'runtypes';
 import { roomsModel } from '@/entities/rooms';
 import { RemoveRoomRequest, roomsApi } from '@/shared/api';
@@ -12,7 +13,7 @@ import {
 
 const removeRoomDomain = createDomain();
 
-export const handlerFx = removeRoomDomain.effect<
+const handlerFx = removeRoomDomain.effect<
 	RemoveRoomRequest,
 	StandardResponse<boolean>,
 	StandardFailError
@@ -29,11 +30,25 @@ export const mutation = createMutationWithAccess<
 	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
 });
 
-sample({
-	clock: mutation.finished.success,
-	filter: ({ result, }) => result.data,
-	fn: ({ params, }) => {
-		return params;
+update(roomsModel.query, {
+	on: mutation,
+	by: {
+		success: ({ query, mutation, }) => {
+			if (!query) {
+				return {
+					result: [],
+				};
+			}
+
+			if ('error' in query) {
+				return {
+					error: query.error,
+				};
+			}
+
+			return {
+				result: query.result.filter((room) => room.id !== mutation.params.id),
+			};
+		},
 	},
-	target: roomsModel.remove,
 });

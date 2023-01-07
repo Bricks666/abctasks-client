@@ -12,7 +12,7 @@ import {
 
 const createGroupDomain = createDomain();
 
-export const handlerFx = createGroupDomain.effect<
+const handlerFx = createGroupDomain.effect<
 	CreateGroupRequest,
 	StandardResponse<Group>,
 	StandardFailError
@@ -42,13 +42,11 @@ update(groupsModel.query, {
 			if ('error' in query) {
 				return {
 					error: query.error,
-					refetch: true,
 				};
 			}
 
 			return {
 				result: [...query.result, mutation.result.data],
-				refetch: true,
 			};
 		},
 	},

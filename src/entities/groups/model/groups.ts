@@ -22,7 +22,7 @@ export const groupsDomain = createDomain();
 export const $id = groupsDomain.store<null | number>(null);
 export const invalidateCache = groupsDomain.event();
 export const reset = groupsDomain.event();
-export const handlerFx = groupsDomain.effect<
+const handlerFx = groupsDomain.effect<
 	number,
 	StandardResponse<Group[]>,
 	StandardFailError

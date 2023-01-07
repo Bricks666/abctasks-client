@@ -13,7 +13,7 @@ import {
 
 const removeGroupDomain = createDomain();
 
-export const handlerFx = removeGroupDomain.effect<
+const handlerFx = removeGroupDomain.effect<
 	RemoveGroupRequest,
 	StandardResponse<boolean>,
 	StandardFailError
@@ -44,13 +44,11 @@ update(groupsModel.query, {
 			if ('error' in query) {
 				return {
 					error: query.error,
-					refetch: true,
 				};
 			}
 
 			return {
 				result: query.result.filter((group) => group.id !== mutation.params.id),
-				refetch: true,
 			};
 		},
 	},
