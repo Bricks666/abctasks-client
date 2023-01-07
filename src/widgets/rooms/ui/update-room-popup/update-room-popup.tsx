@@ -36,7 +36,7 @@ export const UpdateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	return (
 		<MainPopup
 			{...props}
-			header={t('room.updateTitle')}
+			title={t('room.updateTitle')}
 			onClose={() => onClose()}>
 			{loading ? (
 				<LoadingIndicator />

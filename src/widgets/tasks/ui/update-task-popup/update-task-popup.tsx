@@ -49,7 +49,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	const loading = !task;
 
 	return (
-		<MainPopup {...props} onClose={onClose} header={t('task.updateTitle')}>
+		<MainPopup {...props} onClose={onClose} title={t('task.updateTitle')}>
 			{loading ? (
 				<SkeletonTaskForm className={styles.taskForm} />
 			) : (

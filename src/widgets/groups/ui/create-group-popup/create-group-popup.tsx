@@ -34,7 +34,7 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 	);
 
 	return (
-		<MainPopup {...props} onClose={onClose} header={t('group.createTitle')}>
+		<MainPopup {...props} onClose={onClose} title={t('group.createTitle')}>
 			<GroupForm
 				className={styles.form}
 				onSubmit={onSubmit}

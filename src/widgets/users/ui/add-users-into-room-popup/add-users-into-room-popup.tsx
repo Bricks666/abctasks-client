@@ -26,7 +26,7 @@ export const AddUsersIntoRoomPopup: React.FC<AddUsersIntoRoomPopupProps> = (
 	const onClose = useUnit(addUserPopupModel.close);
 
 	return (
-		<MainPopup isOpen={isOpen} onClose={onClose} header='Add user'>
+		<MainPopup isOpen={isOpen} onClose={onClose} title='Add user'>
 			<SearchUserForm onSearch={users.start} debounceTimeout={300} />
 			<List className={styles.list}>
 				{users.data.map((user) => (

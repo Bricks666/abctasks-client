@@ -14,7 +14,7 @@ import { logoutModel } from '../../model';
 export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('header');
 	const user = useUnit(authModel.$user);
-	const [isOpen, toggle] = useToggle(false);
+	const [isOpen, { toggle, }] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
 	const logout = useUnit(logoutModel.logoutMutation);
 

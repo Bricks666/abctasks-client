@@ -41,7 +41,7 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 	);
 
 	return (
-		<MainPopup {...props} header={t('task.createTitle')} onClose={onClose}>
+		<MainPopup {...props} title={t('task.createTitle')} onClose={onClose}>
 			<TaskForm
 				className={styles.form}
 				onSubmit={onSubmit}

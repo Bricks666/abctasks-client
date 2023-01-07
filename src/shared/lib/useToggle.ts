@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { VoidFunction } from '@/shared/types';
 
-export const useToggle = (defaultValue = false): [boolean, VoidFunction] => {
-	const [isToggle, setIsToggle] = React.useState(defaultValue);
+export const useToggle = (defaultValue = false) => {
+	const [toggled, setToggled] = React.useState(defaultValue);
 
 	const toggle = React.useCallback(() => {
-		setIsToggle(!isToggle);
-	}, [isToggle]);
+		setToggled((toggled) => !toggled);
+	}, []);
 
-	return [isToggle, toggle];
+	const toggleOn = React.useCallback(() => setToggled(true), []);
+
+	const toggleOff = React.useCallback(() => setToggled(false), []);
+
+	return [toggled, { toggle, toggleOff, toggleOn, }] as const;
 };

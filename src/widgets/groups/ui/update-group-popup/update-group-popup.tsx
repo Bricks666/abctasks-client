@@ -50,7 +50,7 @@ export const UpdateGroupPopup: React.FC<
 	);
 
 	return (
-		<MainPopup {...props} onClose={onClose} header={t('group.updateTitle')}>
+		<MainPopup {...props} onClose={onClose} title={t('group.updateTitle')}>
 			{isLoading ? (
 				<SkeletonGroupForm className={styles.form} />
 			) : (

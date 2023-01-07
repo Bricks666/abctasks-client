@@ -21,7 +21,7 @@ export const CreateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	return (
 		<MainPopup
 			{...props}
-			header={t('room.updateTitle')}
+			title={t('room.updateTitle')}
 			onClose={() => onClose()}>
 			<RoomForm
 				className={styles.form}

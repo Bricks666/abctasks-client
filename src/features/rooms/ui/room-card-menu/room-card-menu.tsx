@@ -5,8 +5,9 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { routes, getParams, popups } from '@/shared/configs';
+import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { MenuOption, EditMenu } from '@/shared/ui';
+import { MenuOption, EditMenu, Confirm } from '@/shared/ui';
 import { exitRoomModel, removeRoomModel } from '../../model';
 
 export interface RoomCardMenuProps extends CommonProps {
@@ -18,6 +19,23 @@ export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 	const { t, } = useTranslation('rooms');
 	const removeRoom = useUnit(removeRoomModel.mutation);
 	const exitRoom = useUnit(exitRoomModel.mutation);
+	const [
+		removeToggled,
+		{ toggleOff: toggleRemoveOff, toggleOn: toggleRemoveOn, }
+	] = useToggle(false);
+	const [exitToggled, { toggleOff: toggleExitOff, toggleOn: toggleExitOn, }] =
+		useToggle(false);
+
+	const onRemoveAgree = React.useCallback(() => {
+		removeRoom.start({ id, });
+		toggleRemoveOff();
+	}, [toggleRemoveOff, id]);
+
+	const onExitAgree = React.useCallback(() => {
+		exitRoom.start({ id, });
+		toggleExitOff();
+	}, [toggleExitOff, id]);
+
 	const options = React.useMemo<MenuOption<object>[]>(
 		() => [
 			{
@@ -32,16 +50,40 @@ export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 			},
 			{
 				label: 'Exit',
-				onClick: () => exitRoom.start({ id, }),
+				onClick: toggleExitOn,
 				icon: <ExitRoomIcon />,
 			},
 			{
 				label: t('actions.remove', { ns: 'common', }),
-				onClick: () => removeRoom.start({ id, }),
+				onClick: toggleRemoveOn,
 				icon: <DeleteIcon />,
 			}
 		],
 		[id]
 	);
-	return <EditMenu className={className} options={options} />;
+	return (
+		<>
+			<EditMenu className={className} options={options} />
+			<Confirm
+				isOpen={exitToggled}
+				onClose={toggleExitOff}
+				title='Are you sure?'
+				content='Don you want to exit this room?'
+				agreeText='Exit'
+				onAgree={onExitAgree}
+				disagreeText='Cancel'
+				onDisagree={toggleExitOff}
+			/>
+			<Confirm
+				isOpen={removeToggled}
+				onClose={toggleRemoveOff}
+				title='Are you sure?'
+				content='Don you want to delete this room? All tasks and groups will be deleted'
+				agreeText='Delete'
+				onAgree={onRemoveAgree}
+				disagreeText='Cancel'
+				onDisagree={toggleRemoveOff}
+			/>
+		</>
+	);
 };
