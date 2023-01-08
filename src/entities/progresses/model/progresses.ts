@@ -18,7 +18,7 @@ import {
 
 export const progressDomain = createDomain();
 
-export const handlerFx = progressDomain.effect<
+const handlerFx = progressDomain.effect<
 	number,
 	StandardResponse<Progress[]>,
 	StandardFailError

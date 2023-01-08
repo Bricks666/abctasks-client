@@ -8,3 +8,4 @@ export * from './main-popup';
 export * from './menu-item';
 export * from './auth-layout';
 export * from './main-layout';
+export * from './confirm';

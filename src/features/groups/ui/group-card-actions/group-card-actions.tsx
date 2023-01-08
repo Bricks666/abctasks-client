@@ -1,12 +1,14 @@
-import { useMutation } from '@farfetched/react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import { Link } from 'atomic-router-react';
+import { useUnit } from 'effector-react';
 import { t } from 'i18next';
 import * as React from 'react';
 import { routes, getParams, popups } from '@/shared/configs';
+import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+import { Confirm } from '@/shared/ui';
 import { removeGroupModel } from '../../model';
 
 export interface GroupCardActionsProps extends CommonProps {
@@ -16,7 +18,13 @@ export interface GroupCardActionsProps extends CommonProps {
 
 export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
 	const { groupId, roomId, className, } = props;
-	const removeGroup = useMutation(removeGroupModel.mutation);
+	const removeGroup = useUnit(removeGroupModel.mutation);
+	const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
+
+	const onAgree = React.useCallback(() => {
+		removeGroup.start({ id: groupId, roomId, });
+		toggleOff();
+	}, [toggleOff, groupId, roomId]);
 
 	return (
 		<div className={className}>
@@ -32,10 +40,21 @@ export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
 				<EditIcon />
 			</IconButton>
 			<IconButton
-				onClick={() => removeGroup.start({ id: groupId, roomId, })}
+				onClick={toggleOn}
 				title={t('actions.remove', { ns: 'common', })!}>
 				<DeleteIcon />
 			</IconButton>
+
+			<Confirm
+				isOpen={toggled}
+				onClose={toggleOff}
+				title='Are you sure?'
+				content='Don you want to delete this group? All tasks with this groups will be deleted'
+				agreeText='Delete'
+				onAgree={onAgree}
+				disagreeText='Cancel'
+				onDisagree={toggleOff}
+			/>
 		</div>
 	);
 };

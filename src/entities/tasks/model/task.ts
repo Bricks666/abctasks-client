@@ -16,7 +16,7 @@ import {
 
 const taskDomain = createDomain();
 
-export const handlerFx = taskDomain.effect<
+const handlerFx = taskDomain.effect<
 	GetTaskRequest,
 	StandardResponse<Task>,
 	StandardFailError

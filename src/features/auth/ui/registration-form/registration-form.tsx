@@ -1,7 +1,7 @@
-import { useMutation } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,7 @@ const initialValues: RegistrationRequest = {
 
 export const RegistrationForm: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('registration');
-	const registration = useMutation(registrationModel.registrationMutation);
+	const registration = useUnit(registrationModel.mutation);
 	const { control, handleSubmit, formState, } = useForm<RegistrationRequest>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),

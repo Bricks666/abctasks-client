@@ -1,5 +1,6 @@
+import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { createDomain } from 'effector';
 import { groupsModel } from '@/entities/groups';
 import { UpdateGroupRequest, Group, groupsApi, group } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
@@ -11,7 +12,7 @@ import {
 
 const updateGroupDomain = createDomain();
 
-export const handlerFx = updateGroupDomain.effect<
+const handlerFx = updateGroupDomain.effect<
 	UpdateGroupRequest,
 	StandardResponse<Group>,
 	StandardFailError
@@ -28,8 +29,27 @@ export const mutation = createMutationWithAccess<
 	contract: runtypeContract(getStandardSuccessResponse(group)),
 });
 
-sample({
-	clock: mutation.finished.success,
-	fn: ({ result, }) => result.data,
-	target: groupsModel.update,
+update(groupsModel.query, {
+	on: mutation,
+	by: {
+		success: ({ query, mutation, }) => {
+			if (!query) {
+				return {
+					result: [],
+				};
+			}
+
+			if ('error' in query) {
+				return {
+					error: query.error,
+				};
+			}
+
+			return {
+				result: query.result.map((group) =>
+					group.id === mutation.result.data.id ? mutation.result.data : group
+				),
+			};
+		},
+	},
 });

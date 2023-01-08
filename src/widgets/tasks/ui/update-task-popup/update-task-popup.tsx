@@ -1,4 +1,3 @@
-import { useMutation } from '@farfetched/react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -26,7 +25,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	const id = useUnit(tasksModel.$id)!;
 	const onClose = useUnit(updateTaskPopupModel.close);
 	const { data: task, } = useTask(id, roomId);
-	const updateTask = useMutation(updateTaskModel.mutation);
+	const updateTask = useUnit(updateTaskModel.mutation);
 
 	const onSubmit = React.useCallback<SubmitHandler<TaskFormValues>>(
 		(values) => {
@@ -50,7 +49,7 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	const loading = !task;
 
 	return (
-		<MainPopup {...props} onClose={onClose} header={t('task.updateTitle')}>
+		<MainPopup {...props} onClose={onClose} title={t('task.updateTitle')}>
 			{loading ? (
 				<SkeletonTaskForm className={styles.taskForm} />
 			) : (

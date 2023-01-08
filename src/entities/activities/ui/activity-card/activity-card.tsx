@@ -45,7 +45,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = (props) => {
 							sphere: sphere.name,
 						})}
 					</Typography>
-					<DateTime date={createdAt} format='MMM DD' />
+					<DateTime date={createdAt} format='HH:mm MMM DD' />
 				</div>
 			</CardContent>
 		</Card>

@@ -48,7 +48,7 @@ export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 				<CardContent>
 					<Typography className={styles.content}>{content}</Typography>
 					<div>
-						<DateTime date={createdAt} format='MMM DD' />
+						<DateTime date={createdAt} format='HH:mm DD MMM' />
 						<Typography variant='body2' component='span'>
 							0
 						</Typography>

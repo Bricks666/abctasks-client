@@ -1,4 +1,3 @@
-import { useMutation } from '@farfetched/react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,12 +16,12 @@ const defaultValues: RoomFormValues = {
 export const CreateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
 	const onClose = useUnit(createRoomPopupModel.close);
-	const createRoom = useMutation(createRoomModel.mutation);
+	const createRoom = useUnit(createRoomModel.mutation);
 
 	return (
 		<MainPopup
 			{...props}
-			header={t('room.updateTitle')}
+			title={t('room.updateTitle')}
 			onClose={() => onClose()}>
 			<RoomForm
 				className={styles.form}

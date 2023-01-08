@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { TaskCardActions } from '@/features/tasks';
+import { TaskCardMenu } from '@/features/tasks';
 import {
 	GroupLabel,
 	groupsModel,
@@ -24,7 +24,7 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 		return null;
 	}
 
-	const actions = <TaskCardActions roomId={roomId} taskId={id} />;
+	const actions = <TaskCardMenu roomId={roomId} taskId={id} />;
 	const groupLabel = !isLoading ? (
 		<GroupLabel {...group!} />
 	) : (

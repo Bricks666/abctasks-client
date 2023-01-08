@@ -1,8 +1,8 @@
-import { useMutation } from '@farfetched/react';
 import { Stack } from '@mui/material';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { TaskListActions, updateTaskModel } from '@/features/tasks';
+import { TaskColumnMenu, updateTaskModel } from '@/features/tasks';
 import { SkeletonTaskCard, TaskListHeader } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
 import { routes, getEmptyArray } from '@/shared/configs';
@@ -24,7 +24,7 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 export const TaskList: React.FC<TaskListProps> = (props) => {
 	const { tasks, className, columnStatus, header, isLoading, } = props;
 	const roomId = useParam(routes.room, 'id');
-	const moveTask = useMutation(updateTaskModel.mutation);
+	const moveTask = useUnit(updateTaskModel.mutation);
 	const onDrop = React.useCallback<React.DragEventHandler>(
 		(evt) => {
 			const id = +evt.dataTransfer.getData('taskId');
@@ -48,7 +48,7 @@ export const TaskList: React.FC<TaskListProps> = (props) => {
 			onDragOver={onDragOver}>
 			<TaskListHeader
 				actions={
-					<TaskListActions roomId={roomId} columnStatus={columnStatus} />
+					<TaskColumnMenu roomId={roomId} columnStatus={columnStatus} />
 				}>
 				{header}
 			</TaskListHeader>

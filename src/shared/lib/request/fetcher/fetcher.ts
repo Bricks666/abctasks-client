@@ -1,17 +1,12 @@
-import axios, { AxiosInstance } from 'axios';
 import { api } from '@/shared/configs';
 import { BaseFetcher, BaseFetcherOptions } from '../base';
 import { StandardFailError } from '../error';
 import { BaseRequestOptions, BodyRequestOptions } from './types';
 
-export class Fetcher extends BaseFetcher<AxiosInstance, BaseFetcherOptions> {
+export class Fetcher extends BaseFetcher<typeof fetch, BaseFetcherOptions> {
 	constructor(options: BaseFetcherOptions) {
-		const { baseURL, credentials, } = options;
 		super(options);
-		super.instance = axios.create({
-			baseURL,
-			withCredentials: credentials,
-		});
+		super.instance = fetch.bind(globalThis);
 	}
 
 	override create(options: BaseFetcherOptions): Fetcher {
@@ -29,13 +24,16 @@ export class Fetcher extends BaseFetcher<AxiosInstance, BaseFetcherOptions> {
 		const { path, accessToken, headers = {}, } = options;
 		const url = this.createPath(path);
 		try {
-			const { data, } = await this.instance.get(url, {
+			const response = await this.instance(url, {
+				method: 'GET',
+				credentials: this.credentials ? 'include' : 'omit',
+				mode: 'cors',
 				headers: {
 					...headers,
 					Authorization: `Bearer ${accessToken}`,
 				},
 			});
-			return data;
+			return response.json();
 		} catch (error) {
 			Fetcher.#throwError(error);
 		}
@@ -45,13 +43,18 @@ export class Fetcher extends BaseFetcher<AxiosInstance, BaseFetcherOptions> {
 		const { path, accessToken, headers = {}, body, } = options;
 		const url = this.createPath(path);
 		try {
-			const { data, } = await this.instance.post(url, body, {
+			const response = await this.instance(url, {
+				method: 'POST',
+				body: JSON.stringify(body),
+				credentials: this.credentials ? 'include' : 'omit',
+				mode: 'cors',
 				headers: {
+					'Content-Type': 'application/json',
 					...headers,
 					Authorization: `Bearer ${accessToken}`,
 				},
 			});
-			return data;
+			return response.json();
 		} catch (error) {
 			Fetcher.#throwError(error);
 		}
@@ -61,13 +64,18 @@ export class Fetcher extends BaseFetcher<AxiosInstance, BaseFetcherOptions> {
 		const { path, accessToken, headers = {}, body, } = options;
 		const url = this.createPath(path);
 		try {
-			const { data, } = await this.instance.put(url, body, {
+			const response = await this.instance(url, {
+				method: 'PUT',
+				body: JSON.stringify(body),
+				credentials: this.credentials ? 'include' : 'omit',
+				mode: 'cors',
 				headers: {
+					'Content-Type': 'application/json',
 					...headers,
 					Authorization: `Bearer ${accessToken}`,
 				},
 			});
-			return data;
+			return response.json();
 		} catch (error) {
 			Fetcher.#throwError(error);
 		}
@@ -77,13 +85,16 @@ export class Fetcher extends BaseFetcher<AxiosInstance, BaseFetcherOptions> {
 		const { path, accessToken, headers = {}, } = options;
 		const url = this.createPath(path);
 		try {
-			const { data, } = await this.instance.delete(url, {
+			const response = await this.instance(url, {
+				method: 'delete',
+				credentials: this.credentials ? 'include' : 'omit',
+				mode: 'cors',
 				headers: {
 					...headers,
 					Authorization: `Bearer ${accessToken}`,
 				},
 			});
-			return data;
+			return response.json();
 		} catch (error) {
 			Fetcher.#throwError(error);
 		}

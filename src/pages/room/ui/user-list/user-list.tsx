@@ -1,6 +1,7 @@
 import { List, ListItem } from '@mui/material';
 import * as React from 'react';
-import { TemplateUserCard, useUsersInRoom } from '@/entities/users';
+import { useUsersInRoom } from '@/entities/rooms';
+import { TemplateUserCard } from '@/entities/users';
 import { CommonProps } from '@/shared/types';
 
 export interface UserListProps extends CommonProps {}

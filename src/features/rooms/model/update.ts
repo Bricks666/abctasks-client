@@ -1,5 +1,6 @@
+import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { createDomain } from 'effector';
 import { roomsModel } from '@/entities/rooms';
 import { UpdateRoomRequest, Room, roomsApi, room } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
@@ -11,7 +12,7 @@ import {
 
 const updateRoomDomain = createDomain();
 
-export const handlerFx = updateRoomDomain.effect<
+const handlerFx = updateRoomDomain.effect<
 	UpdateRoomRequest,
 	StandardResponse<Room>,
 	StandardFailError
@@ -28,8 +29,27 @@ export const mutation = createMutationWithAccess<
 	contract: runtypeContract(getStandardSuccessResponse(room)),
 });
 
-sample({
-	clock: mutation.finished.success,
-	fn: ({ result, }) => result.data,
-	target: roomsModel.update,
+update(roomsModel.query, {
+	on: mutation,
+	by: {
+		success: ({ query, mutation, }) => {
+			if (!query) {
+				return {
+					result: [],
+				};
+			}
+
+			if ('error' in query) {
+				return {
+					error: query.error,
+				};
+			}
+
+			return {
+				result: query.result.map((room) =>
+					room.id === mutation.result.data.id ? mutation.result.data : room
+				),
+			};
+		},
+	},
 });

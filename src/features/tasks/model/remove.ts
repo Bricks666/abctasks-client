@@ -1,6 +1,7 @@
+import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
-import { Boolean } from 'runtypes';
+import { createDomain } from 'effector';
+import { Literal } from 'runtypes';
 import { tasksModel } from '@/entities/tasks';
 import { RemoveTaskRequest, tasksApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
@@ -12,7 +13,7 @@ import {
 
 const removeTaskDomain = createDomain();
 
-export const handlerFx = removeTaskDomain.effect<
+const handlerFx = removeTaskDomain.effect<
 	RemoveTaskRequest,
 	StandardResponse<boolean>,
 	StandardFailError
@@ -26,12 +27,28 @@ export const mutation = createMutationWithAccess<
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Boolean)),
+	contract: runtypeContract(getStandardSuccessResponse(Literal(true))),
 });
 
-sample({
-	clock: mutation.finished.success,
-	filter: ({ result, }) => result.data,
-	fn: ({ params, }) => params,
-	target: tasksModel.remove,
+update(tasksModel.query, {
+	on: mutation,
+	by: {
+		success: ({ query, mutation, }) => {
+			if (!query) {
+				return {
+					result: [],
+				};
+			}
+
+			if ('error' in query) {
+				return {
+					error: query.error,
+				};
+			}
+
+			return {
+				result: query.result.filter((task) => task.id !== mutation.params.id),
+			};
+		},
+	},
 });

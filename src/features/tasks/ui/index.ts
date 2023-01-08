@@ -1,4 +1,4 @@
-export * from './task-card-actions';
-export * from './task-list-actions';
+export * from './task-card-menu';
+export * from './task-column-menu';
 export * from './task-form';
 export * from './skeleton-task-form';

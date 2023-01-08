@@ -1,4 +1,3 @@
-import { useMutation } from '@farfetched/react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -22,7 +21,7 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
 	const roomId = useParam(routes.room, 'id');
 	const onClose = useUnit(createGroupPopupModel.close);
-	const createGroup = useMutation(createGroupModel.mutation);
+	const createGroup = useUnit(createGroupModel.mutation);
 
 	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(
 		(values) => {
@@ -35,7 +34,7 @@ export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 	);
 
 	return (
-		<MainPopup {...props} onClose={onClose} header={t('group.createTitle')}>
+		<MainPopup {...props} onClose={onClose} title={t('group.createTitle')}>
 			<GroupForm
 				className={styles.form}
 				onSubmit={onSubmit}

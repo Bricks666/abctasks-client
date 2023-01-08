@@ -12,7 +12,7 @@ import {
 } from '@/shared/types';
 
 const activitiesDomain = createDomain();
-export const handlerFx = activitiesDomain.effect<
+const handlerFx = activitiesDomain.effect<
 	number,
 	StandardResponse<Activity[]>
 >();
@@ -30,5 +30,3 @@ export const query = createQuery<
 	contract: runtypeContract(getStandardSuccessResponse(Array(activity))),
 	mapData: dataExtractor,
 });
-
-query.finished.finally.watch(console.log);

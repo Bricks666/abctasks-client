@@ -1,15 +1,30 @@
 import { sample } from 'effector';
-import { roomsModel } from '@/entities/rooms';
+import { addUserRoomModel } from '@/features/rooms';
+import { notificationModel } from '@/entities/notifications';
+import { usersInRoomModel } from '@/entities/rooms';
 import { routes } from '@/shared/configs';
 import { loadedWithRouteParams } from './page';
 
 sample({
-	clock: routes.room.closed,
-	target: roomsModel.query.reset,
+	clock: addUserRoomModel.mutation.finished.success,
+	fn: () => ({
+		variant: 'success' as const,
+		content: 'User was added succesfully',
+	}),
+	target: notificationModel.$last,
+});
+
+sample({
+	clock: addUserRoomModel.mutation.finished.failure,
+	fn: () => ({
+		variant: 'error' as const,
+		content: 'User was not added',
+	}),
+	target: notificationModel.$last,
 });
 
 sample({
 	clock: [routes.room.opened, loadedWithRouteParams],
-	fn: ({ params, }) => params.id,
-	target: roomsModel.query.start,
+	fn: ({ params, }) => ({ roomId: params.id, }),
+	target: usersInRoomModel.query.start,
 });

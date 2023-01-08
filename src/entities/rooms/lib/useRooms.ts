@@ -1,6 +1,6 @@
-import { useQuery } from '@farfetched/react';
+import { useUnit } from 'effector-react';
 import { roomsModel } from '../model';
 
 export const useRooms = () => {
-	return useQuery(roomsModel.query);
+	return useUnit(roomsModel.query);
 };

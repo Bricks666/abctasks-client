@@ -1,6 +1,6 @@
-import { useMutation } from '@farfetched/react';
 import AddIcon from '@mui/icons-material/Add';
 import { IconButton } from '@mui/material';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { CommonProps } from '@/shared/types';
 import { addUserRoomModel } from '../../model';
@@ -14,7 +14,7 @@ export const AddUserButton: React.FC<AddUserButtonProps> = React.memo(
 	(props) => {
 		const { roomId, userId, } = props;
 
-		const addUser = useMutation(addUserRoomModel.mutation);
+		const addUser = useUnit(addUserRoomModel.mutation);
 		const onClick = () => {
 			addUser.start({
 				id: roomId,

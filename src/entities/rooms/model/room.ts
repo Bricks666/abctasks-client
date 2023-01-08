@@ -16,7 +16,7 @@ import {
 } from '@/shared/types';
 
 const roomDomain = createDomain();
-export const handlerFx = roomDomain.effect<
+const handlerFx = roomDomain.effect<
 	number,
 	StandardResponse<Room>,
 	StandardFailError

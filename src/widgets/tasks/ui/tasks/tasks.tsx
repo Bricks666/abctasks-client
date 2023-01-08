@@ -17,7 +17,7 @@ export interface Column {
 export const Tasks: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('task');
-	const { data: tasks, status: tasksStatus, } = useGroupedTasks();
+	const { data: tasks, pending, stale, } = useGroupedTasks();
 	/*
   TODO: Пересмотреть распределение на колонки
   */
@@ -43,7 +43,7 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 		[tasks]
 	);
 
-	const isLoading = tasksStatus === 'initial' || tasksStatus === 'pending';
+	const isLoading = pending && !stale;
 
 	return (
 		<section className={cn(styles.wrapper, className)}>

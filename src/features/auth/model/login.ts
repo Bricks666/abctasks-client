@@ -17,30 +17,30 @@ import {
 
 const loginDomain = createDomain();
 
-export const loginFx = loginDomain.effect<
+const handlerFx = loginDomain.effect<
 	LoginRequest,
 	StandardResponse<AuthResponse>
->('loginFx');
-loginFx.use(authApi.login);
+>();
+handlerFx.use(authApi.login);
 
-export const loginMutation = createMutation<
+export const mutation = createMutation<
 	LoginRequest,
 	StandardResponse<AuthResponse>,
 	StandardSuccessResponse<AuthResponse>,
 	Error
 >({
-	effect: loginFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardSuccessResponse(authResponse)),
 });
 
 sample({
-	clock: loginMutation.finished.success,
+	clock: mutation.finished.success,
 	fn: ({ result, }) => result.data.tokens.accessToken,
 	target: tokenModel.setToken,
 });
 
 sample({
-	clock: loginMutation.finished.success,
+	clock: mutation.finished.success,
 	fn: ({ result, }) => result.data.user,
 	target: authModel.setUser,
 });

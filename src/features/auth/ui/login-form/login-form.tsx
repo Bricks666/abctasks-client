@@ -1,7 +1,7 @@
-import { useMutation } from '@farfetched/react';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,7 @@ const initialValue: LoginRequest = {
 
 export const LoginForm: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('login');
-	const login = useMutation(loginModel.loginMutation);
+	const login = useUnit(loginModel.mutation);
 	const { handleSubmit, formState, control, } = useForm<LoginRequest>({
 		defaultValues: initialValue,
 		resolver: joiResolver(validationSchema),

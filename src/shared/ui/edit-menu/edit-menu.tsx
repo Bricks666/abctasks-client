@@ -14,7 +14,7 @@ export interface EditMenuProps extends CommonProps {
 
 export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
 	const { options, className, size, alt, } = props;
-	const [isOpen, toggle] = useToggle();
+	const [isOpen, { toggle, }] = useToggle();
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
 	return (
 		<div className={className}>
