@@ -3,24 +3,23 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
-import { GetRoomsRequest, room, Room, roomsApi } from '@/shared/api';
+import { GetRoomsParams, room, Room, roomsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
 import {
 	createQueryWithAccess,
-	getIsSuccessResponseValidator,
 	dataExtractor,
 	StandardFailError
 } from '@/shared/lib';
 import {
 	StandardResponse,
-	getStandardSuccessResponse,
+	getStandardResponse,
 	StandardSuccessResponse
 } from '@/shared/types';
 
 export const roomsDomain = createDomain();
 export const $id = roomsDomain.store<null | number>(null);
 const handlerFx = roomsDomain.effect<
-	GetRoomsRequest,
+	GetRoomsParams,
 	StandardResponse<Room[]>,
 	StandardFailError
 >();
@@ -28,7 +27,7 @@ const handlerFx = roomsDomain.effect<
 handlerFx.use(roomsApi.getAll);
 
 export const query = createQueryWithAccess<
-	GetRoomsRequest,
+	GetRoomsParams,
 	StandardResponse<Room[]>,
 	StandardFailError,
 	StandardSuccessResponse<Room[]>,
@@ -36,8 +35,8 @@ export const query = createQueryWithAccess<
 >({
 	initialValue: [],
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(room))),
-	validate: getIsSuccessResponseValidator(),
+	contract: runtypeContract(getStandardResponse(Array(room))),
+
 	mapData: dataExtractor,
 });
 

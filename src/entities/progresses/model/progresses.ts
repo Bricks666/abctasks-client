@@ -4,16 +4,12 @@ import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Array } from 'runtypes';
 import { progress, Progress, progressApi } from '@/shared/api';
-import {
-	getIsSuccessResponseValidator,
-	dataExtractor,
-	StandardFailError
-} from '@/shared/lib';
+import { dataExtractor, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse,
-	InRoomRequest
+	getStandardResponse,
+	InRoomParams
 } from '@/shared/types';
 
 export const progressDomain = createDomain();
@@ -33,12 +29,12 @@ export const query = createQuery<
 	Progress[]
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(progress))),
-	validate: getIsSuccessResponseValidator(),
+	contract: runtypeContract(getStandardResponse(Array(progress))),
+
 	mapData: dataExtractor,
 });
 
-export const Gate = createGate<InRoomRequest>({
+export const Gate = createGate<InRoomParams>({
 	domain: progressDomain,
 });
 

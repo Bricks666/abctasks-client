@@ -5,8 +5,8 @@ import { Array } from 'runtypes';
 import { roomsApi, user, User } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
 import {
-	getStandardSuccessResponse,
-	InRoomRequest,
+	getStandardResponse,
+	InRoomParams,
 	StandardFailResponse,
 	StandardResponse,
 	StandardSuccessResponse
@@ -15,7 +15,7 @@ import {
 const usersInRoom = createDomain();
 
 const handlerFx = usersInRoom.effect<
-	InRoomRequest,
+	InRoomParams,
 	StandardResponse<User[]>,
 	StandardFailResponse
 >();
@@ -23,7 +23,7 @@ const handlerFx = usersInRoom.effect<
 handlerFx.use(roomsApi.getUsers);
 
 export const query = createQuery<
-	InRoomRequest,
+	InRoomParams,
 	StandardResponse<User[]>,
 	StandardFailResponse,
 	StandardSuccessResponse<User[]>,
@@ -31,6 +31,6 @@ export const query = createQuery<
 >({
 	initialData: [],
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(user))),
+	contract: runtypeContract(getStandardResponse(Array(user))),
 	mapData: dataExtractor,
 });

@@ -1,10 +1,10 @@
 import { RouteInstance } from 'atomic-router';
 import { useStoreMap } from 'effector-react';
 
-export const useParam = <P extends object>(
+export const useParam = <P extends object, K extends keyof P>(
 	route: RouteInstance<P>,
-	param: keyof P
-): P[keyof P] => {
+	param: K
+): P[K] => {
 	return useStoreMap({
 		store: route.$params,
 		fn: (state, [key]) => {

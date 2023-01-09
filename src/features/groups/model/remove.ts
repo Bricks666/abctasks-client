@@ -3,18 +3,18 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
 import { groupsModel } from '@/entities/groups';
-import { RemoveGroupRequest, groupsApi } from '@/shared/api';
+import { RemoveGroupParams, groupsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const removeGroupDomain = createDomain();
 
 const handlerFx = removeGroupDomain.effect<
-	RemoveGroupRequest,
+	RemoveGroupParams,
 	StandardResponse<boolean>,
 	StandardFailError
 >('removeGroupFx');
@@ -22,13 +22,13 @@ const handlerFx = removeGroupDomain.effect<
 handlerFx.use(groupsApi.remove);
 
 export const mutation = createMutationWithAccess<
-	RemoveGroupRequest,
+	RemoveGroupParams,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Literal(true))),
+	contract: runtypeContract(getStandardResponse(Literal(true))),
 });
 
 update(groupsModel.query, {

@@ -8,7 +8,7 @@ import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const activitiesDomain = createDomain();
@@ -27,6 +27,6 @@ export const query = createQuery<
 >({
 	initialData: [],
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(activity))),
+	contract: runtypeContract(getStandardResponse(Array(activity))),
 	mapData: dataExtractor,
 });

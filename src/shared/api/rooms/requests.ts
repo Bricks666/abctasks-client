@@ -1,13 +1,13 @@
 import { AccessOptions, fetcher } from '@/shared/lib';
-import { InRoomRequest, StandardResponse } from '@/shared/types';
+import { InRoomParams, StandardResponse } from '@/shared/types';
 import { User } from '../auth';
 import {
-	AddUserRoomRequest,
-	CreateRoomRequest,
-	ExitRoomRequest,
-	RemoveRoomRequest,
+	AddUserRoomParams,
+	CreateRoomParams,
+	ExitRoomParams,
+	RemoveRoomParams,
 	Room,
-	UpdateRoomRequest
+	UpdateRoomParams
 } from './types';
 
 const roomsFetcher = fetcher.create({
@@ -31,7 +31,7 @@ export const getOne = async (id: number) => {
 	});
 };
 
-export const create = async ({ accessToken, ...body }: CreateRoomRequest) => {
+export const create = async ({ accessToken, ...body }: CreateRoomParams) => {
 	return roomsFetcher.post<StandardResponse<Room>>({
 		path: {
 			url: 'create',
@@ -45,7 +45,7 @@ export const update = async ({
 	id,
 	accessToken,
 	...body
-}: UpdateRoomRequest) => {
+}: UpdateRoomParams) => {
 	return roomsFetcher.put<StandardResponse<Room>>({
 		path: {
 			url: [id, 'update'],
@@ -55,7 +55,7 @@ export const update = async ({
 	});
 };
 
-export const remove = async ({ id, accessToken, }: RemoveRoomRequest) => {
+export const remove = async ({ id, accessToken, }: RemoveRoomParams) => {
 	return roomsFetcher.delete<StandardResponse<boolean>>({
 		path: {
 			url: [id, 'remove'],
@@ -64,7 +64,7 @@ export const remove = async ({ id, accessToken, }: RemoveRoomRequest) => {
 	});
 };
 
-export const getUsers = async ({ roomId, }: InRoomRequest) => {
+export const getUsers = async ({ roomId, }: InRoomParams) => {
 	return roomsFetcher.get<StandardResponse<User[]>>({
 		path: {
 			url: [roomId, 'users'],
@@ -76,7 +76,7 @@ export const addUser = async ({
 	id,
 	userId,
 	accessToken,
-}: AddUserRoomRequest) => {
+}: AddUserRoomParams) => {
 	return roomsFetcher.put<StandardResponse<User>>({
 		path: {
 			url: [id, 'add-user'],
@@ -88,7 +88,7 @@ export const addUser = async ({
 	});
 };
 
-export const exit = async ({ id, accessToken, }: ExitRoomRequest) => {
+export const exit = async ({ id, accessToken, }: ExitRoomParams) => {
 	return roomsFetcher.put<StandardResponse<boolean>>({
 		path: {
 			url: [id, 'exit'],

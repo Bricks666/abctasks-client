@@ -1,9 +1,9 @@
 import { fetcher } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
 import {
-	CreateGroupRequest,
-	UpdateGroupRequest,
-	RemoveGroupRequest,
+	CreateGroupParams,
+	UpdateGroupParams,
+	RemoveGroupParams,
 	Group
 } from './types';
 
@@ -23,7 +23,7 @@ export const create = async ({
 	roomId,
 	accessToken,
 	...body
-}: CreateGroupRequest) => {
+}: CreateGroupParams) => {
 	return groupsFetcher.post<StandardResponse<Group>>({
 		accessToken,
 		path: {
@@ -38,7 +38,7 @@ export const update = async ({
 	roomId,
 	accessToken,
 	...body
-}: UpdateGroupRequest) => {
+}: UpdateGroupParams) => {
 	return groupsFetcher.put<StandardResponse<Group>>({
 		accessToken,
 		path: {
@@ -52,7 +52,7 @@ export const remove = async ({
 	roomId,
 	accessToken,
 	id,
-}: RemoveGroupRequest) => {
+}: RemoveGroupParams) => {
 	return groupsFetcher.delete<StandardResponse<boolean>>({
 		accessToken,
 		path: {

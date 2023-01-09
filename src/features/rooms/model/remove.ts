@@ -3,31 +3,31 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
 import { roomsModel } from '@/entities/rooms';
-import { RemoveRoomRequest, roomsApi } from '@/shared/api';
+import { RemoveRoomParams, roomsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const removeRoomDomain = createDomain();
 
 const handlerFx = removeRoomDomain.effect<
-	RemoveRoomRequest,
+	RemoveRoomParams,
 	StandardResponse<boolean>,
 	StandardFailError
 >('removeRoomFx');
 handlerFx.use(roomsApi.remove);
 
 export const mutation = createMutationWithAccess<
-	RemoveRoomRequest,
+	RemoveRoomParams,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Literal(true))),
+	contract: runtypeContract(getStandardResponse(Literal(true))),
 });
 
 update(roomsModel.query, {

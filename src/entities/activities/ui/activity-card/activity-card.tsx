@@ -6,16 +6,13 @@ import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Activity, ActivityAction } from '@/shared/api';
-import { Color, CommonProps } from '@/shared/types';
+import { CommonProps } from '@/shared/types';
 import { DateTime } from '@/shared/ui';
 import styles from './activity-card.module.css';
 
 export interface ActivityCardProps extends CommonProps, Activity {}
 
-const colorMap: Record<
-	ActivityAction,
-	Exclude<Color, 'primary' | 'secondary' | 'dark'>
-> = {
+const colorMap: Record<ActivityAction, 'success' | 'error' | 'warning'> = {
 	create: 'success',
 	remove: 'error',
 	update: 'warning',

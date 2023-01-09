@@ -5,13 +5,9 @@ import { createDomain, sample } from 'effector';
 import { Array } from 'runtypes';
 import { group, Group, groupsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
+import { dataExtractor, StandardFailError } from '@/shared/lib';
 import {
-	getIsSuccessResponseValidator,
-	dataExtractor,
-	StandardFailError
-} from '@/shared/lib';
-import {
-	getStandardSuccessResponse,
+	getStandardResponse,
 	StandardResponse,
 	StandardSuccessResponse
 } from '@/shared/types';
@@ -38,8 +34,8 @@ export const query = createQuery<
 >({
 	initialData: [],
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(group))),
-	validate: getIsSuccessResponseValidator(),
+	contract: runtypeContract(getStandardResponse(Array(group))),
+
 	mapData: dataExtractor,
 });
 export const $groupsMap = query.$data.map((data) =>

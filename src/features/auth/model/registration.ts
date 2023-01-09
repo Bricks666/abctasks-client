@@ -1,29 +1,27 @@
 import { createMutation } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
-import { authApi, RegistrationRequest } from '@/shared/api';
+import { authApi, RegistrationParams, user, User } from '@/shared/api';
 import {
 	StandardResponse,
-	VoidResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse,
-	voidResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const registrationDomain = createDomain();
 
 export const handlerFx = registrationDomain.effect<
-	RegistrationRequest,
-	StandardResponse<VoidResponse>
+	RegistrationParams,
+	StandardResponse<User>
 >();
 handlerFx.use(authApi.registration);
 
 export const mutation = createMutation<
-	RegistrationRequest,
-	StandardResponse<VoidResponse>,
-	StandardSuccessResponse<VoidResponse>,
+	RegistrationParams,
+	StandardResponse<User>,
+	StandardSuccessResponse<User>,
 	Error
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(voidResponse)),
+	contract: runtypeContract(getStandardResponse(user)),
 });

@@ -4,11 +4,11 @@ import { createDomain, combine, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { User, AuthResponse, authResponse, authApi } from '@/shared/api';
 import { tokenModel } from '@/shared/configs';
-import { getIsSuccessResponseValidator } from '@/shared/lib';
+import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const authDomain = createDomain();
@@ -25,11 +25,11 @@ export const query = createQuery<
 	StandardResponse<AuthResponse>,
 	Error,
 	StandardSuccessResponse<AuthResponse>,
-	void
+	AuthResponse
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(authResponse)),
-	validate: getIsSuccessResponseValidator(),
+	contract: runtypeContract(getStandardResponse(authResponse)),
+	mapData: dataExtractor,
 });
 
 export const Gate = createGate({
@@ -43,13 +43,13 @@ sample({
 
 sample({
 	clock: [query.finished.success],
-	fn: ({ result, }) => result.data.user,
+	fn: ({ result, }) => result.user,
 	target: setUser,
 });
 
 sample({
 	clock: query.finished.success,
-	fn: ({ result, }) => result.data.tokens.accessToken,
+	fn: ({ result, }) => result.tokens.accessToken,
 	target: tokenModel.setToken,
 });
 
@@ -57,5 +57,3 @@ sample({
 	clock: Gate.open,
 	target: [query.start],
 });
-
-query.finished.success.watch(console.log);

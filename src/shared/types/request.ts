@@ -1,3 +1,3 @@
-export interface InRoomRequest {
+export interface InRoomParams {
 	readonly roomId: number;
 }

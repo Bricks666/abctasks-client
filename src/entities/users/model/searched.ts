@@ -5,7 +5,7 @@ import { Array } from 'runtypes';
 import { LoginSearchQuery, user, User, usersApi } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
 import {
-	getStandardSuccessResponse,
+	getStandardResponse,
 	StandardFailResponse,
 	StandardResponse,
 	StandardSuccessResponse
@@ -30,6 +30,6 @@ export const query = createQuery<
 >({
 	initialData: [],
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(user))),
+	contract: runtypeContract(getStandardResponse(Array(user))),
 	mapData: dataExtractor,
 });

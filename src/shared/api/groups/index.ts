@@ -1,2 +1,2 @@
-export * as groupsApi from './groups';
+export * as groupsApi from './requests';
 export * from './types';

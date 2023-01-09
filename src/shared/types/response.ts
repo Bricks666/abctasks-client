@@ -1,34 +1,13 @@
-import { Runtype, Record, Null, Number, String, Static, Union } from 'runtypes';
+import { Runtype, Record, Number } from 'runtypes';
 
-export const getStandardSuccessResponse = <RT>(T: Runtype<RT>) => {
+export const getStandardResponse = <RT>(T: Runtype<RT>) => {
 	return Record({
 		data: T,
-		errorMessage: Null,
 		statusCode: Number,
 	}).asReadonly();
 };
 
-export interface StandardSuccessResponse<T> {
+export interface StandardResponse<T> {
 	readonly data: T;
-	readonly errorMessage: null;
 	readonly statusCode: number;
 }
-
-export const standardFailResponse = Record({
-	data: Null,
-	errorMessage: String,
-	statusCode: Number,
-}).asReadonly();
-
-export type StandardFailResponse = Static<typeof standardFailResponse>;
-
-export const getStandardResponse = <RT>(T: Runtype<RT>) => {
-	return Union(getStandardSuccessResponse(T), standardFailResponse);
-};
-
-export type StandardResponse<T> =
-	| StandardFailResponse
-	| StandardSuccessResponse<T>;
-
-export const voidResponse = Record({});
-export type VoidResponse = Static<typeof voidResponse>;

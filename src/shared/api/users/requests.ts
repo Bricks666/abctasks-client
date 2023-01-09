@@ -1,5 +1,5 @@
 import { fetcher } from '@/shared/lib';
-import { InRoomRequest, StandardResponse } from '@/shared/types';
+import { InRoomParams, StandardResponse } from '@/shared/types';
 import { User } from '../auth';
 import { LoginSearchQuery } from './types';
 
@@ -8,7 +8,7 @@ const usersFetcher = fetcher.create({
 });
 
 export const getAllInRoom = async (
-	params: InRoomRequest
+	params: InRoomParams
 ): Promise<StandardResponse<User[]>> => {
 	return usersFetcher.get({
 		path: {

@@ -5,14 +5,14 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { RegistrationRequest } from '@/shared/api';
+import { RegistrationParams } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
 import { registrationModel } from '../../model';
 import styles from './registration-form.module.css';
 import { validationSchema } from './validator';
 
-const initialValues: RegistrationRequest = {
+const initialValues: RegistrationParams = {
 	login: '',
 	password: '',
 	repeatPassword: '',
@@ -21,7 +21,7 @@ const initialValues: RegistrationRequest = {
 export const RegistrationForm: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('registration');
 	const registration = useUnit(registrationModel.mutation);
-	const { control, handleSubmit, formState, } = useForm<RegistrationRequest>({
+	const { control, handleSubmit, formState, } = useForm<RegistrationParams>({
 		defaultValues: initialValues,
 		resolver: joiResolver(validationSchema),
 	});

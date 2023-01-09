@@ -1,2 +1,2 @@
-export * as tasksApi from './tasks';
+export * as tasksApi from './requests';
 export * from './types';

@@ -4,8 +4,8 @@ import { CommonProps } from '@/shared/types';
 export interface ErrorBoundaryProps extends CommonProps {}
 
 export class ErrorBoundary extends React.Component<React.PropsWithChildren> {
-	componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-		console.log(errorInfo, error);
+	componentDidCatch(error: Error): void {
+		console.log(error);
 	}
 
 	static getDerivedStateFromError() {

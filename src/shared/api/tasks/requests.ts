@@ -1,10 +1,10 @@
 import { fetcher } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
 import {
-	GetTaskRequest,
-	CreateTaskRequest,
-	UpdateTaskRequest,
-	RemoveTaskRequest,
+	GetTaskParams,
+	CreateTaskParams,
+	UpdateTaskParams,
+	RemoveTaskParams,
 	Task
 } from './types';
 
@@ -20,7 +20,7 @@ export const getAll = async (roomId: number) => {
 	});
 };
 
-export const getOne = async ({ roomId, id, }: GetTaskRequest) => {
+export const getOne = async ({ roomId, id, }: GetTaskParams) => {
 	return tasksFetcher.get<StandardResponse<Task>>({
 		path: {
 			url: [roomId, id],
@@ -32,7 +32,7 @@ export const create = async ({
 	roomId,
 	accessToken,
 	...body
-}: CreateTaskRequest) => {
+}: CreateTaskParams) => {
 	return tasksFetcher.post<StandardResponse<Task>>({
 		accessToken,
 		path: {
@@ -47,7 +47,7 @@ export const update = async ({
 	roomId,
 	accessToken,
 	...body
-}: UpdateTaskRequest) => {
+}: UpdateTaskParams) => {
 	return tasksFetcher.put<StandardResponse<Task>>({
 		accessToken,
 		path: {
@@ -57,11 +57,7 @@ export const update = async ({
 	});
 };
 
-export const remove = async ({
-	roomId,
-	id,
-	accessToken,
-}: RemoveTaskRequest) => {
+export const remove = async ({ roomId, id, accessToken, }: RemoveTaskParams) => {
 	return tasksFetcher.delete<StandardResponse<boolean>>({
 		accessToken,
 		path: {

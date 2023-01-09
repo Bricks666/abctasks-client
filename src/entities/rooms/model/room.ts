@@ -3,16 +3,12 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Room, roomsApi, room } from '@/shared/api';
-import {
-	StandardFailError,
-	getIsSuccessResponseValidator,
-	dataExtractor
-} from '@/shared/lib';
+import { StandardFailError, dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse,
-	InRoomRequest
+	getStandardResponse,
+	InRoomParams
 } from '@/shared/types';
 
 const roomDomain = createDomain();
@@ -32,12 +28,12 @@ export const query = createQuery<
 	Room
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(room)),
-	validate: getIsSuccessResponseValidator(),
+	contract: runtypeContract(getStandardResponse(room)),
+
 	mapData: dataExtractor,
 });
 
-export const Gate = createGate<InRoomRequest>({
+export const Gate = createGate<InRoomParams>({
 	domain: roomDomain,
 });
 

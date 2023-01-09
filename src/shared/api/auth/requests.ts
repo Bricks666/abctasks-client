@@ -1,17 +1,18 @@
 import { fetcher } from '@/shared/lib';
-import { StandardResponse, VoidResponse } from '@/shared/types';
+import { StandardResponse } from '@/shared/types';
 import {
 	AuthResponse,
-	LoginRequest,
-	RegistrationRequest,
-	Tokens
+	LoginParams,
+	RegistrationParams,
+	Tokens,
+	User
 } from './types';
 
 const authFetcher = fetcher.create({
 	baseURL: 'auth',
 });
 
-export const login = async (body: LoginRequest) => {
+export const login = async (body: LoginParams) => {
 	return authFetcher.post<StandardResponse<AuthResponse>>({
 		path: { url: 'login', },
 		body,
@@ -24,8 +25,8 @@ export const auth = async () => {
 	});
 };
 
-export const registration = async (body: RegistrationRequest) => {
-	return authFetcher.post<StandardResponse<VoidResponse>>({
+export const registration = async (body: RegistrationParams) => {
+	return authFetcher.post<StandardResponse<User>>({
 		path: { url: 'registration', },
 		body,
 	});

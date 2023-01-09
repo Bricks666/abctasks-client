@@ -7,7 +7,7 @@ import { authApi } from '@/shared/api';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const logoutDomain = createDomain();
@@ -24,7 +24,7 @@ export const logoutMutation = createMutation<
 	Error
 >({
 	effect: logoutFx,
-	contract: runtypeContract(getStandardSuccessResponse(Literal(true))),
+	contract: runtypeContract(getStandardResponse(Literal(true))),
 });
 
 sample({

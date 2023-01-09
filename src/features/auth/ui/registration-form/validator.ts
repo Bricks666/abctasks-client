@@ -1,12 +1,12 @@
 import Joi from 'joi';
-import { RegistrationRequest } from '@/shared/api';
+import { RegistrationParams } from '@/shared/api';
 import {
 	allowedSymbolsRegExp,
 	maxLoginPasswordLength,
 	minLoginPasswordLength
 } from '@/shared/configs';
 
-export const validationSchema = Joi.object<RegistrationRequest>({
+export const validationSchema = Joi.object<RegistrationParams>({
 	login: Joi.string()
 		.pattern(allowedSymbolsRegExp)
 		.min(minLoginPasswordLength)

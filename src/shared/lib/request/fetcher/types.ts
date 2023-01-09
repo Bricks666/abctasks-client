@@ -1,10 +1,10 @@
 import { AccessOptions, Path } from '../types';
 
-export interface BaseRequestOptions extends AccessOptions {
+export interface BaseParamsOptions extends AccessOptions {
 	readonly path: Path;
 	readonly headers?: Headers;
 }
 
-export interface BodyRequestOptions<B> extends BaseRequestOptions {
+export interface BodyParamsOptions<B> extends BaseParamsOptions {
 	readonly body: B;
 }

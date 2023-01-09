@@ -1,7 +1,7 @@
 import { Record, Number, String, Static } from 'runtypes';
 import { AccessOptions } from '@/shared/lib';
 
-export type GetRoomsRequest = Required<AccessOptions>;
+export type GetRoomsParams = Required<AccessOptions>;
 
 export const room = Record({
 	id: Number,
@@ -11,26 +11,26 @@ export const room = Record({
 
 export interface Room extends Static<typeof room> {}
 
-export interface GetRoomRequest extends AccessOptions, Pick<Room, 'id'> {}
+export interface GetRoomParams extends AccessOptions, Pick<Room, 'id'> {}
 
-export interface CreateRoomRequest
+export interface CreateRoomParams
 	extends Required<AccessOptions>,
 		Pick<Room, 'description' | 'name'> {}
-export interface UpdateRoomRequest
-	extends Omit<Partial<CreateRoomRequest>, 'accessToken'>,
+export interface UpdateRoomParams
+	extends Omit<Partial<CreateRoomParams>, 'accessToken'>,
 		Required<AccessOptions> {
 	readonly id: number;
 }
 
-export interface RemoveRoomRequest extends Required<AccessOptions> {
+export interface RemoveRoomParams extends Required<AccessOptions> {
 	readonly id: number;
 }
 
-export interface AddUserRoomRequest extends Required<AccessOptions> {
+export interface AddUserRoomParams extends Required<AccessOptions> {
 	readonly id: number;
 	readonly userId: number;
 }
 
-export interface ExitRoomRequest extends Required<AccessOptions> {
+export interface ExitRoomParams extends Required<AccessOptions> {
 	readonly id: number;
 }

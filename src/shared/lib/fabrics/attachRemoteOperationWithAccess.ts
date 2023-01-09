@@ -4,10 +4,10 @@ import { sample, createDomain } from 'effector';
 import { authApi, Tokens } from '@/shared/api';
 import { tokenModel } from '@/shared/configs';
 import { AccessOptions, StandardFailError } from '@/shared/lib';
-import { StandardResponse } from '@/shared/types';
+import { StandardResponse, StandardSuccessResponse } from '@/shared/types';
 import { WithoutAccess } from './attachWithAccessToken';
 
-const AttachWithDomain = createDomain();
+const remoteOperationDomain = createDomain();
 
 export const attachRemoteOperationWithAccess = <
 	Params extends Required<AccessOptions>,
@@ -22,18 +22,19 @@ export const attachRemoteOperationWithAccess = <
 	// eslint-disable-next-line no-underscore-dangle
 	const { name, } = remoteOperation.__.executeFx;
 
-	const $IsRetry = AttachWithDomain.store<boolean>(false, {
+	const $IsRetry = remoteOperationDomain.store<boolean>(false, {
 		name: `IsRetry-${name}`,
 	});
-	const $LastParams = AttachWithDomain.store<WithoutAccess<Params> | null>(
+	const $LastParams = remoteOperationDomain.store<WithoutAccess<Params> | null>(
 		null,
 		{
 			name: `LastParams-${name}`,
 		}
 	);
-	const refreshFx = AttachWithDomain.effect<void, StandardResponse<Tokens>>(
-		`refreshFx-${name}`
-	);
+	const refreshFx = remoteOperationDomain.effect<
+		void,
+		StandardResponse<Tokens>
+	>(`refreshFx-${name}`);
 	refreshFx.use(authApi.refresh);
 
 	/**
@@ -57,9 +58,10 @@ export const attachRemoteOperationWithAccess = <
 
 	sample({
 		clock: refreshFx.doneData,
-		filter: (data) => data.data !== null,
-		fn: (data) => data.data!.accessToken,
-		target: tokenModel.$token,
+		filter: (result): result is StandardSuccessResponse<Tokens> =>
+			'data' in result,
+		fn: (result) => result.data!.accessToken,
+		target: tokenModel.setToken,
 	});
 
 	sample({

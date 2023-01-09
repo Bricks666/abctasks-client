@@ -2,31 +2,31 @@ import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { tasksModel } from '@/entities/tasks';
-import { UpdateTaskRequest, Task, tasksApi, task } from '@/shared/api';
+import { UpdateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const updateTaskDomain = createDomain();
 
 const handlerFx = updateTaskDomain.effect<
-	UpdateTaskRequest,
+	UpdateTaskParams,
 	StandardResponse<Task>,
 	StandardFailError
->('updateTaskFx');
+>();
 handlerFx.use(tasksApi.update);
 
 export const mutation = createMutationWithAccess<
-	UpdateTaskRequest,
+	UpdateTaskParams,
 	StandardResponse<Task>,
 	StandardSuccessResponse<Task>,
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(task)),
+	contract: runtypeContract(getStandardResponse(task)),
 });
 
 update(tasksModel.query, {
@@ -45,9 +45,6 @@ update(tasksModel.query, {
 				};
 			}
 
-			console.log('[MUTATION]', mutation);
-			console.log('[QUERY]', query);
-
 			return {
 				result: query.result.map((task) =>
 					task.id === mutation.result.data.id ? mutation.result.data : task
@@ -56,5 +53,3 @@ update(tasksModel.query, {
 		},
 	},
 });
-
-tasksModel.query.$data.watch(console.log);

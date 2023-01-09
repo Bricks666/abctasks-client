@@ -38,10 +38,10 @@ export const Confirm: React.FC<ConfirmProps> = (props) => {
 				<DialogContentText className={className}>{content}</DialogContentText>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={onDisagree} color='error'>
+				<Button onClick={onDisagree} color='primary' autoFocus>
 					{disagreeText}
 				</Button>
-				<Button onClick={onAgree} color='primary'>
+				<Button onClick={onAgree} color='error'>
 					{agreeText}
 				</Button>
 			</DialogActions>

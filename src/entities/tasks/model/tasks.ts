@@ -5,15 +5,11 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 import { Task, tasksApi, task, TaskStatus } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
-import {
-	getIsSuccessResponseValidator,
-	dataExtractor,
-	StandardFailError
-} from '@/shared/lib';
+import { dataExtractor, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const tasksDomain = createDomain();
@@ -40,8 +36,8 @@ export const query = createQuery<
 >({
 	initialData: [],
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Array(task))),
-	validate: getIsSuccessResponseValidator(),
+	contract: runtypeContract(getStandardResponse(Array(task))),
+
 	mapData: dataExtractor,
 });
 

@@ -2,31 +2,31 @@ import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { tasksModel } from '@/entities/tasks';
-import { CreateTaskRequest, Task, tasksApi, task } from '@/shared/api';
+import { CreateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const createTaskDomain = createDomain();
 
 const handlerFx = createTaskDomain.effect<
-	CreateTaskRequest,
+	CreateTaskParams,
 	StandardResponse<Task>,
 	StandardFailError
 >('createTaskFx');
 handlerFx.use(tasksApi.create);
 
 export const mutation = createMutationWithAccess<
-	CreateTaskRequest,
+	CreateTaskParams,
 	StandardResponse<Task>,
 	StandardSuccessResponse<Task>,
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(task)),
+	contract: runtypeContract(getStandardResponse(task)),
 });
 
 update(tasksModel.query, {

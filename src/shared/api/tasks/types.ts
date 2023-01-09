@@ -40,23 +40,23 @@ export type StatusNamesStore = {
 	readonly [key in keyof GroupedByStatusTasks]: TaskStatus;
 };
 
-export interface GetTaskRequest {
+export interface GetTaskParams {
 	readonly id: number;
 	readonly roomId: number;
 }
 
-export interface CreateTaskRequest
+export interface CreateTaskParams
 	extends Required<AccessOptions>,
 		Pick<Task, 'roomId' | 'groupId' | 'content' | 'status'> {}
 
-export interface UpdateTaskRequest
-	extends Partial<Omit<CreateTaskRequest, 'accessToken'>>,
+export interface UpdateTaskParams
+	extends Partial<Omit<CreateTaskParams, 'accessToken'>>,
 		Required<AccessOptions> {
 	readonly id: number;
 	readonly roomId: number;
 }
 
-export interface RemoveTaskRequest extends Required<AccessOptions> {
+export interface RemoveTaskParams extends Required<AccessOptions> {
 	readonly id: number;
 	readonly roomId: number;
 }

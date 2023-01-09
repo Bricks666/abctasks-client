@@ -3,31 +3,31 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
 import { tasksModel } from '@/entities/tasks';
-import { RemoveTaskRequest, tasksApi } from '@/shared/api';
+import { RemoveTaskParams, tasksApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
 	StandardSuccessResponse,
-	getStandardSuccessResponse
+	getStandardResponse
 } from '@/shared/types';
 
 const removeTaskDomain = createDomain();
 
 const handlerFx = removeTaskDomain.effect<
-	RemoveTaskRequest,
+	RemoveTaskParams,
 	StandardResponse<boolean>,
 	StandardFailError
 >('removeTaskFx');
 handlerFx.use(tasksApi.remove);
 
 export const mutation = createMutationWithAccess<
-	RemoveTaskRequest,
+	RemoveTaskParams,
 	StandardResponse<boolean>,
 	StandardSuccessResponse<boolean>,
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(Literal(true))),
+	contract: runtypeContract(getStandardResponse(Literal(true))),
 });
 
 update(tasksModel.query, {

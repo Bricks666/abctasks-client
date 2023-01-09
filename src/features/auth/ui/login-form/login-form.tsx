@@ -5,14 +5,14 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { LoginRequest } from '@/shared/api';
+import { LoginParams } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { Checkbox, Field } from '@/shared/ui';
 import { loginModel } from '../../model';
 import styles from './login-form.module.css';
 import { validationSchema } from './validator';
 
-const initialValue: LoginRequest = {
+const initialValue: LoginParams = {
 	login: '',
 	password: '',
 	rememberMe: false,
@@ -21,7 +21,7 @@ const initialValue: LoginRequest = {
 export const LoginForm: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('login');
 	const login = useUnit(loginModel.mutation);
-	const { handleSubmit, formState, control, } = useForm<LoginRequest>({
+	const { handleSubmit, formState, control, } = useForm<LoginParams>({
 		defaultValues: initialValue,
 		resolver: joiResolver(validationSchema),
 	});

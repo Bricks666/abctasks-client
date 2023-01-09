@@ -12,18 +12,18 @@ export const group = Record({
 
 export interface Group extends Static<typeof group> {}
 
-export interface CreateGroupRequest
+export interface CreateGroupParams
 	extends Required<AccessOptions>,
 		Omit<Group, 'id'> {}
 
-export interface UpdateGroupRequest
-	extends Partial<Omit<CreateGroupRequest, 'roomId' | 'accessToken'>>,
+export interface UpdateGroupParams
+	extends Partial<Omit<CreateGroupParams, 'roomId' | 'accessToken'>>,
 		Required<AccessOptions> {
 	readonly id: number;
 	readonly roomId: number;
 }
 
-export interface RemoveGroupRequest extends Required<AccessOptions> {
+export interface RemoveGroupParams extends Required<AccessOptions> {
 	readonly id: number;
 	readonly roomId: number;
 }
