@@ -25,11 +25,9 @@ export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 			<Stack className={styles.list} spacing={1}>
 				{isLoading
 					? getEmptyArray(4).map((_, i) => <SkeletonActivityCard key={i} />)
-					: activities
-						.slice(0, 5)
-						.map((activity) => (
-							<ActivityCard {...activity} key={activity.id} />
-						))}
+					: activities.map((activity) => (
+						<ActivityCard {...activity} key={activity.id} />
+					  ))}
 			</Stack>
 		</Stack>
 	);

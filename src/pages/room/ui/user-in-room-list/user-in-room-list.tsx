@@ -4,9 +4,9 @@ import { useUsersInRoom } from '@/entities/rooms';
 import { TemplateUserCard } from '@/entities/users';
 import { CommonProps } from '@/shared/types';
 
-export interface UserListProps extends CommonProps {}
+export interface UserInRoomListProps extends CommonProps {}
 
-export const UserList: React.FC<UserListProps> = (props) => {
+export const UserInRoomList: React.FC<UserInRoomListProps> = (props) => {
 	const { className, } = props;
 
 	const { data: users, } = useUsersInRoom();

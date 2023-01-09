@@ -2,10 +2,10 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { TaskColumn } from '@/widgets/tasks';
 import { useGroupedTasks } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
-import { TaskList } from '../task-list';
 
 import styles from './tasks.module.css';
 
@@ -48,7 +48,7 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 	return (
 		<section className={cn(styles.wrapper, className)}>
 			{columns.map(({ status, tasks, }) => (
-				<TaskList
+				<TaskColumn
 					tasks={tasks}
 					isLoading={isLoading}
 					columnStatus={status}

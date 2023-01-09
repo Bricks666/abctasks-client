@@ -20,7 +20,7 @@ const router = createHistoryRouter({
 			route: routes.rooms,
 		},
 		{
-			path: '/rooms/:id',
+			path: '/rooms/:id/:tab?',
 			route: routes.room,
 		}
 	],

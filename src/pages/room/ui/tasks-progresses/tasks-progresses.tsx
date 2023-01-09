@@ -8,8 +8,7 @@ import {
 	TaskProgress,
 	useProgresses
 } from '@/entities/progresses';
-import { getEmptyArray, routes } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
+import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
 import styles from './tasks-progresses.module.css';
@@ -19,9 +18,8 @@ export interface TasksProgressProps extends CommonProps {}
 export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room');
-	const roomId = useParam(routes.room, 'id');
-	const { data: progresses, } = useProgresses(roomId);
-	const { data: groups, } = useGroupsMap(roomId);
+	const { data: progresses, } = useProgresses();
+	const { data: groups, } = useGroupsMap();
 
 	const isLoading = !groups || !progresses;
 

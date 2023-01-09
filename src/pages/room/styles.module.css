@@ -1,25 +1,13 @@
 .layout {
 	display: grid;
-	grid-template-columns: var(--room-page-template-columns);
-	grid-template-rows: min-content 1fr;
+	/* grid-template-columns: var(--room-page-template-columns); */
+	grid-template-rows: max-content max-content 1fr;
 	gap: 1em;
 }
 .tasks {
 	grid-column: var(--room-page-grid-column);
 
 	height: 100%;
-}
-
-.panel {
-	display: grid;
-	grid-template-rows: max-content 1fr;
-	gap: 2em;
-
-	padding: 1em 0;
-}
-
-.panel[hidden] {
-	display: none;
 }
 
 .progress {

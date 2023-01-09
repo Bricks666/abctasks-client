@@ -3,14 +3,14 @@ import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/shared/types';
 
-import styles from './task-list-header.module.css';
+import styles from './task-column-header.module.css';
 
-export interface TaskListHeaderComponent extends CommonProps {
+export interface TaskColumnHeaderComponent extends CommonProps {
 	readonly actions: React.ReactElement;
 }
 
-export const TaskListHeader: React.FC<
-	React.PropsWithChildren<TaskListHeaderComponent>
+export const TaskColumnHeader: React.FC<
+	React.PropsWithChildren<TaskColumnHeaderComponent>
 > = React.memo((props) => {
 	const { children, className, actions, } = props;
 

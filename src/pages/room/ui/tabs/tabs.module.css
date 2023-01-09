@@ -1,0 +1,25 @@
+.panel {
+	display: grid;
+	gap: 2em;
+
+	padding: 1em 0;
+}
+
+.panel[hidden] {
+	display: none;
+}
+
+.tasksBlock {
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	gap: 1em;
+
+	height: 100%;
+	width: 100%;
+}
+
+@media (max-width: 1300px) {
+	.tasksBlock {
+		grid-template-columns: 1fr;
+	}
+}

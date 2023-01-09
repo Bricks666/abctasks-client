@@ -7,3 +7,9 @@
 	margin: 0 auto;
 	padding: 2em;
 }
+
+@media (max-width: 600px) {
+	.layout {
+		padding: 1em;
+	}
+}
