@@ -9,6 +9,7 @@ import { OpenSearchUserPopup } from '@/features/rooms';
 import { routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 import { ActivityList } from '../activity-list';
+import { LastActivities } from '../last-activities';
 import { Tasks } from '../tasks';
 import { TasksProgress } from '../tasks-progresses';
 import { UserInRoomList } from '../user-in-room-list';
@@ -57,7 +58,10 @@ export const Tabs: React.FC<CommonProps> = () => {
 			<TabPanel className={styles.panel} value='tasks'>
 				<div className={styles.tasksBlock}>
 					<Tasks />
-					<TasksProgress />
+					<div className={styles.aside}>
+						<TasksProgress />
+						<LastActivities />
+					</div>
 				</div>
 			</TabPanel>
 			<TabPanel className={styles.panel} value='activities'>

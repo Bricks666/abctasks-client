@@ -18,6 +18,12 @@
 	width: 100%;
 }
 
+.aside {
+	display: grid;
+	gap: 1.5em;
+	grid-template-rows: max-content 1fr;
+}
+
 @media (max-width: 1300px) {
 	.tasksBlock {
 		grid-template-columns: 1fr;
