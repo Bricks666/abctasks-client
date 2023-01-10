@@ -12,26 +12,26 @@ import { Confirm } from '@/shared/ui';
 import { removeGroupModel } from '../../model';
 
 export interface GroupCardActionsProps extends CommonProps {
-	readonly roomId: number;
 	readonly groupId: number;
 }
 
 export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
-	const { groupId, roomId, className, } = props;
+	const { groupId, className, } = props;
+	const params = useUnit(routes.room.$params);
 	const removeGroup = useUnit(removeGroupModel.mutation);
 	const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
 
 	const onAgree = React.useCallback(() => {
-		removeGroup.start({ id: groupId, roomId, });
+		removeGroup.start({ id: groupId, roomId: params.id, });
 		toggleOff();
-	}, [toggleOff, groupId, roomId]);
+	}, [toggleOff, groupId, params.id]);
 
 	return (
 		<div className={className}>
 			<IconButton
 				title={t('actions.update', { ns: 'common', })!}
 				to={routes.room as any}
-				params={{ id: roomId, }}
+				params={params}
 				query={{
 					[getParams.popup]: popups.updateGroup,
 					[getParams.groupId]: groupId,
@@ -44,7 +44,6 @@ export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
 				title={t('actions.remove', { ns: 'common', })!}>
 				<DeleteIcon />
 			</IconButton>
-
 			<Confirm
 				isOpen={toggled}
 				onClose={toggleOff}

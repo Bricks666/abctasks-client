@@ -45,7 +45,6 @@ export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 			<TaskForm
 				className={styles.form}
 				onSubmit={onSubmit}
-				roomId={roomId}
 				defaultValues={defaultState}
 				buttonText={t('actions.create', { ns: 'common', })}
 			/>

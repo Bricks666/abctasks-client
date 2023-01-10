@@ -27,15 +27,16 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	const moveTask = useUnit(updateTaskModel.mutation);
 	const onDrop = React.useCallback<React.DragEventHandler>(
 		(evt) => {
-			const id = +evt.dataTransfer.getData('taskId');
+			const id = Number(evt.dataTransfer.getData('taskId'));
 			const status = evt.dataTransfer.getData('status');
-			if (status !== columnStatus && roomId != null) {
-				moveTask.start({
-					status: columnStatus as TaskStatus,
-					roomId: Number(roomId),
-					id,
-				});
+			if (status === columnStatus || !Number.isInteger(id) || !status) {
+				return;
 			}
+			moveTask.start({
+				status: columnStatus as TaskStatus,
+				roomId: Number(roomId),
+				id,
+			});
 		},
 		[roomId, columnStatus]
 	);

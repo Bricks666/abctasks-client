@@ -1,4 +1,4 @@
-import { Link as MUILink } from '@mui/material';
+import { Button } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
 import { routes } from '@/shared/configs';
@@ -11,13 +11,13 @@ export const AllActivitiesInRoom: React.FC<CommonProps> = React.memo(
 		const id = useParam(routes.room, 'id');
 
 		return (
-			<MUILink
+			<Button
 				className={className}
 				to={routes.room as any}
 				params={{ id, tab: 'activities', }}
 				component={Link}>
 				Посмотреть все
-			</MUILink>
+			</Button>
 		);
 	}
 );

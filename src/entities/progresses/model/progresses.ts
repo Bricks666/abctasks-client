@@ -7,7 +7,6 @@ import { progress, Progress, progressApi } from '@/shared/api';
 import { dataExtractor, StandardFailError } from '@/shared/lib';
 import {
 	StandardResponse,
-	StandardSuccessResponse,
 	getStandardResponse,
 	InRoomParams
 } from '@/shared/types';
@@ -25,9 +24,10 @@ export const query = createQuery<
 	number,
 	StandardResponse<Progress[]>,
 	StandardFailError,
-	StandardSuccessResponse<Progress[]>,
+	StandardResponse<Progress[]>,
 	Progress[]
 >({
+	initialData: [],
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Array(progress))),
 

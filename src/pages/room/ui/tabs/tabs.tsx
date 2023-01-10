@@ -5,14 +5,14 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Tab } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { OpenSearchUserPopup } from '@/features/rooms';
 import { routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 import { ActivityList } from '../activity-list';
+import { Groups } from '../groups';
 import { LastActivities } from '../last-activities';
 import { Tasks } from '../tasks';
 import { TasksProgress } from '../tasks-progresses';
-import { UserInRoomList } from '../user-in-room-list';
+import { UsersInRoom } from '../users-in-room';
 
 import styles from './tabs.module.css';
 
@@ -37,18 +37,28 @@ export const Tabs: React.FC<CommonProps> = () => {
 		<TabContext value={tab}>
 			<TabList onChange={onChange} variant='scrollable' scrollButtons='auto'>
 				<Tab
+					className={styles.tab}
 					icon={<ListAltIcon />}
 					iconPosition='start'
 					label='Задачи'
 					value='tasks'
 				/>
 				<Tab
+					className={styles.tab}
+					icon={<ListAltIcon />}
+					iconPosition='start'
+					label='Группы'
+					value='groups'
+				/>
+				<Tab
+					className={styles.tab}
 					icon={<AssessmentIcon />}
 					iconPosition='start'
 					label='Активности'
 					value='activities'
 				/>
 				<Tab
+					className={styles.tab}
 					icon={<PeopleIcon />}
 					iconPosition='start'
 					label='Пользователи'
@@ -64,6 +74,9 @@ export const Tabs: React.FC<CommonProps> = () => {
 					</div>
 				</div>
 			</TabPanel>
+			<TabPanel className={styles.panel} value='groups'>
+				<Groups />
+			</TabPanel>
 			<TabPanel className={styles.panel} value='activities'>
 				{/*
         TODO: Заменить на фильтры и  фильтрованный список
@@ -71,8 +84,7 @@ export const Tabs: React.FC<CommonProps> = () => {
 				<ActivityList />
 			</TabPanel>
 			<TabPanel className={styles.panel} value='users'>
-				<OpenSearchUserPopup />
-				<UserInRoomList />
+				<UsersInRoom />
 			</TabPanel>
 		</TabContext>
 	);

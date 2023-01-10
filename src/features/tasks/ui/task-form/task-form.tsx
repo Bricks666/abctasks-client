@@ -16,12 +16,11 @@ export interface TaskFormProps extends CommonProps {
 	readonly defaultValues: TaskFormValues;
 	readonly buttonText: string;
 	readonly onSubmit: SubmitHandler<TaskFormValues>;
-	readonly roomId: number;
 }
 
 export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
-	const { buttonText, defaultValues, onSubmit, className, roomId, } = props;
-	const { data: groups, } = useGroups(roomId);
+	const { buttonText, defaultValues, onSubmit, className, } = props;
+	const { data: groups, } = useGroups();
 	const { t, } = useTranslation('popups');
 	const { handleSubmit, formState, control, } = useForm<TaskFormValues>({
 		resolver: joiResolver(validationScheme),

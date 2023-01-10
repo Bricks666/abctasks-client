@@ -6,11 +6,7 @@ import { Array } from 'runtypes';
 import { Task, tasksApi, task, TaskStatus } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
 import { dataExtractor, StandardFailError } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const tasksDomain = createDomain();
 
@@ -31,7 +27,7 @@ export const query = createQuery<
 	number,
 	StandardResponse<Task[]>,
 	StandardFailError,
-	StandardSuccessResponse<Task[]>,
+	StandardResponse<Task[]>,
 	Task[]
 >({
 	initialData: [],
