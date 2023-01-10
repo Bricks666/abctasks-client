@@ -1,7 +1,7 @@
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActivitiesFilters } from '@/features/activities';
 import {
 	ActivityCard,
 	SkeletonActivityCard,
@@ -16,7 +16,6 @@ import styles from './activity-list.module.css';
 
 export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
-	const { t, } = useTranslation('room');
 	const roomId = useParam(routes.room, 'id');
 	const { data: activities, pending, error, start, } = useActivities();
 
@@ -26,7 +25,7 @@ export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 
 	if (isError) {
 		const onRetry = () => {
-			start(roomId);
+			start({ roomId, });
 		};
 
 		children = (
@@ -54,9 +53,7 @@ export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 
 	return (
 		<Stack className={cn(styles.wrapper, className)} spacing={1.5}>
-			<Typography className={styles.title} variant='body2' component='h3'>
-				{t('activities.title')}
-			</Typography>
+			<ActivitiesFilters />
 			{children}
 		</Stack>
 	);

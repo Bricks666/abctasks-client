@@ -1,4 +1,6 @@
 import { sample } from 'effector';
+import { debounce } from 'patronum';
+import { activitiesFiltersModel } from '@/features/activities';
 import {
 	createGroupModel,
 	removeGroupModel,
@@ -22,7 +24,7 @@ sample({
 		removeGroupModel.mutation.finished.success,
 		updateGroupModel.mutation.finished.success
 	],
-	fn: ({ params, }) => params.roomId,
+	fn: ({ params, }) => ({ roomId: params.roomId, }),
 	target: [activitiesModel.query.start],
 });
 
@@ -33,6 +35,29 @@ sample({
 
 sample({
 	clock: [routes.room.opened, loadedWithRouteParams],
-	fn: ({ params, }) => params.id,
+	fn: ({ params, }) => ({ roomId: params.id, }),
 	target: activitiesModel.query.start,
+});
+
+sample({
+	clock: debounce({
+		source: activitiesFiltersModel.form.$values,
+		timeout: 250,
+	}),
+	source: routes.room.$params,
+	fn: (params, data) => ({
+		roomId: params.id,
+		sphereName: data.sphereName,
+		action: data.action,
+		activistId: data.activist?.id,
+		before: data.before,
+		after: data.after,
+	}),
+	target: activitiesModel.query.start,
+});
+
+sample({
+	clock: routes.room.updated,
+	filter: ({ params, }) => params.tab !== 'activities',
+	target: activitiesFiltersModel.form.reset,
 });

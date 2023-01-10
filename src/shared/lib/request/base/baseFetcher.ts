@@ -1,4 +1,5 @@
 import { Path } from '../types';
+import { normalizeQuery } from './lib';
 import { BaseFetcherOptions } from './types';
 
 export abstract class BaseFetcher<I, CO> {
@@ -45,7 +46,7 @@ export abstract class BaseFetcher<I, CO> {
 			typeof url === 'string' || typeof url === 'number'
 				? [this.baseURL, url]
 				: [this.baseURL, ...url];
-		const params = new URLSearchParams(query);
+		const params = new URLSearchParams(normalizeQuery(query));
 		const stringParams = params.toString();
 		const search = stringParams ? `?${stringParams}` : '';
 		return `${newURL.join('/')}${search}`;

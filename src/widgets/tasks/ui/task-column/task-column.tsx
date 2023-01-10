@@ -2,7 +2,7 @@ import { Stack } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { TaskColumnMenu, updateTaskModel } from '@/features/tasks';
+import { TaskColumnActions, updateTaskModel } from '@/features/tasks';
 import { SkeletonTaskCard, TaskColumnHeader } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
 import { routes, getEmptyArray } from '@/shared/configs';
@@ -49,7 +49,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 			onDragOver={onDragOver}>
 			<TaskColumnHeader
 				actions={
-					<TaskColumnMenu roomId={roomId} columnStatus={columnStatus} />
+					<TaskColumnActions roomId={roomId} columnStatus={columnStatus} />
 				}>
 				{header}
 			</TaskColumnHeader>

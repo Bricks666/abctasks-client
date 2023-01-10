@@ -21,7 +21,7 @@ export const LastActivities: React.FC<CommonProps> = (props) => {
 
 	if (isError) {
 		const onRetry = () => {
-			start(roomId);
+			start({ roomId, });
 		};
 
 		children = (
