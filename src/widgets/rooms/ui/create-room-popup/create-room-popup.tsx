@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { createRoomModel, RoomFormValues, RoomForm } from '@/features/rooms';
 import { BasePopupProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
-
 import { createRoomPopupModel } from '../../model';
+
 import styles from './create-room-popup.module.css';
 
 const defaultValues: RoomFormValues = {
@@ -21,7 +21,7 @@ export const CreateRoomPopup: React.FC<BasePopupProps> = (props) => {
 	return (
 		<MainPopup
 			{...props}
-			title={t('room.updateTitle')}
+			title={t('room.createTitle')}
 			onClose={() => onClose()}>
 			<RoomForm
 				className={styles.form}
