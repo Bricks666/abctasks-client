@@ -53,6 +53,7 @@ const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
     */
 		const { items, limit, totalCount, } = activities.data;
 		const pageCount = Math.ceil(totalCount / limit);
+		const hasPages = !!pageCount;
 
 		children = (
 			<>
@@ -63,17 +64,19 @@ const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 							<ActivityCard {...activity} key={activity.id} />
 						  ))}
 				</section>
-				<Pagination
-					className={styles.pagination}
-					count={pageCount}
-					page={page}
-					onChange={(_, page) => pageChanged(page)}
-					color='primary'
-					size='large'
-					renderItem={(item) => {
-						return <PaginationItem {...item} role='link' />;
-					}}
-				/>
+				{hasPages ? (
+					<Pagination
+						className={styles.pagination}
+						count={pageCount}
+						page={page}
+						onChange={(_, page) => pageChanged(page)}
+						color='primary'
+						size='large'
+						renderItem={(item) => {
+							return <PaginationItem {...item} role='link' />;
+						}}
+					/>
+				) : null}
 			</>
 		);
 	}
