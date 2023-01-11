@@ -1,5 +1,5 @@
 import { fetcher } from '@/shared/lib';
-import { StandardResponse } from '@/shared/types';
+import { ItemsResponse, StandardResponse } from '@/shared/types';
 import { Activity, GetActivitiesInRoomParams } from './types';
 
 const activitiesFetcher = fetcher.create({
@@ -10,7 +10,7 @@ export const getAll = async ({
 	roomId,
 	...query
 }: GetActivitiesInRoomParams) => {
-	return activitiesFetcher.get<StandardResponse<Activity[]>>({
+	return activitiesFetcher.get<StandardResponse<ItemsResponse<Activity>>>({
 		path: {
 			url: roomId,
 			query,

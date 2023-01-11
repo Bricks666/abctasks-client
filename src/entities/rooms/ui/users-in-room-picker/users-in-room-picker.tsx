@@ -5,8 +5,8 @@ import { CommonProps } from '@/shared/types';
 import { useUsersInRoom } from '../../lib';
 
 export interface UsersInRoomPickerProps extends CommonProps {
-	readonly onChange: (value: User | null) => void;
-	readonly value: User | null;
+	readonly onChange: (value: number | null) => void;
+	readonly value: number | null;
 	readonly error?: boolean;
 	readonly helperText?: string;
 	readonly label?: string;
@@ -18,14 +18,16 @@ export const UsersInRoomPicker: React.FC<UsersInRoomPickerProps> = React.memo(
 		const users = useUsersInRoom();
 
 		const changeHandler = (evt: unknown, value: User | null) => {
-			onChange(value);
+			onChange(value?.id ?? null);
 		};
+
+		const user = users.data.find((user) => user.id === Number(value)) ?? null;
 
 		return (
 			<Autocomplete
 				className={className}
 				options={users.data}
-				value={value}
+				value={user}
 				getOptionLabel={(user) => user.login}
 				loading={users.pending}
 				onChange={changeHandler}

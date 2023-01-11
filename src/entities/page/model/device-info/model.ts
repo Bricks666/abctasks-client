@@ -1,5 +1,4 @@
 import { createDomain, sample } from 'effector';
-import { debug } from 'patronum';
 import { calculateDevice } from './lib';
 import { Devices } from './types';
 
@@ -38,5 +37,3 @@ sample({
 	clock: [calculateDeviceFx.doneData, subscribeFx.doneData],
 	target: $device,
 });
-
-debug(calculateDeviceFx, subscribeFx, $device);

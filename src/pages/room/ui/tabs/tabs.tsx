@@ -3,15 +3,16 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleIcon from '@mui/icons-material/People';
 import { TabContext, TabList } from '@mui/lab';
 import { Tab } from '@mui/material';
-import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { routes } from '@/shared/configs';
+import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
 import styles from './tabs.module.css';
 
-export const Tabs: React.FC<CommonProps> = () => {
-	const { id, tab = 'tasks', } = useUnit(routes.room.base.$params);
+export const Tabs: React.FC<CommonProps> = React.memo(() => {
+	const tab = useParam(routes.room.base, 'tab') || 'tasks';
+	const id = useParam(routes.room.base, 'id');
 
 	const onChange = React.useCallback(
 		(_evt: unknown, value: string) => {
@@ -60,4 +61,4 @@ export const Tabs: React.FC<CommonProps> = () => {
 			</TabList>
 		</TabContext>
 	);
-};
+});

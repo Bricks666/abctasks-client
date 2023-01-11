@@ -1,7 +1,6 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
-import { Array } from 'runtypes';
 import {
 	Activity,
 	activity,
@@ -9,24 +8,29 @@ import {
 	activitiesApi
 } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
-import { StandardResponse, getStandardResponse } from '@/shared/types';
+import {
+	StandardResponse,
+	getStandardResponse,
+	ItemsResponse,
+	getItemsResponse
+} from '@/shared/types';
 
 const activitiesDomain = createDomain();
 const handlerFx = activitiesDomain.effect<
 	GetActivitiesInRoomParams,
-	StandardResponse<Activity[]>
+	StandardResponse<ItemsResponse<Activity>>
 >();
 handlerFx.use(activitiesApi.getAll);
 
 export const query = createQuery<
 	GetActivitiesInRoomParams,
-	StandardResponse<Activity[]>,
+	StandardResponse<ItemsResponse<Activity>>,
 	Error,
-	StandardResponse<Activity[]>,
-	Activity[]
+	StandardResponse<ItemsResponse<Activity>>,
+	ItemsResponse<Activity>
 >({
-	initialData: [],
+	initialData: { items: [], totalCount: 0, limit: 50, },
 	effect: handlerFx,
-	contract: runtypeContract(getStandardResponse(Array(activity))),
+	contract: runtypeContract(getStandardResponse(getItemsResponse(activity))),
 	mapData: dataExtractor,
 });

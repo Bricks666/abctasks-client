@@ -1,19 +1,17 @@
 import { createDomain } from 'effector';
 import { createForm } from 'effector-forms';
-import { GetActivitiesInRoomParams, User } from '@/shared/api';
+import { GetActivitiesInRoomParams } from '@/shared/api';
 
 const activitiesFiltersDomain = createDomain();
 
 interface ActivitiesFiltersForm
 	extends Required<
-		Omit<GetActivitiesInRoomParams, 'roomId' | 'activistId' | 'count' | 'page'>
-	> {
-	readonly activist: User | null;
-}
+		Omit<GetActivitiesInRoomParams, 'roomId' | 'count' | 'page'>
+	> {}
 
 export const form = createForm<ActivitiesFiltersForm>({
 	fields: {
-		activist: {
+		activistId: {
 			init: null,
 		},
 		after: {

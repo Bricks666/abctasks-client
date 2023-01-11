@@ -1,4 +1,4 @@
-import { Pagination } from '@mui/material';
+import { Pagination, PaginationItem } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
@@ -13,10 +13,10 @@ import {
 } from '@/entities/activities';
 import { deviceInfoModel } from '@/entities/page';
 import { getEmptyArray, routes } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
+import { useParam, useQueryParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
-import { pageModel } from './model';
+import { pageChanged, pageModel } from './model';
 
 import styles from './page.module.css';
 
@@ -28,7 +28,7 @@ const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 		deviceInfoModel.$isMobile,
 		deviceInfoModel.$isTabletVertical
 	]);
-
+	const page = parseInt(useQueryParam('page', '1'), 10);
 	const isError = !!activities.error;
 	const showMobileFilters = isMobile || isTabletVertical;
 
@@ -51,20 +51,28 @@ const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 		/*
     Сделать виртуальный список
     */
+		const { items, limit, totalCount, } = activities.data;
+		const pageCount = Math.ceil(totalCount / limit);
+
 		children = (
 			<>
 				<section className={styles.list}>
 					{activities.pending
 						? getEmptyArray(25).map((_, i) => <SkeletonActivityCard key={i} />)
-						: activities.data.map((activity) => (
+						: items.map((activity) => (
 							<ActivityCard {...activity} key={activity.id} />
 						  ))}
 				</section>
 				<Pagination
 					className={styles.pagination}
-					count={15}
+					count={pageCount}
+					page={page}
+					onChange={(_, page) => pageChanged(page)}
 					color='primary'
 					size='large'
+					renderItem={(item) => {
+						return <PaginationItem {...item} role='link' />;
+					}}
 				/>
 			</>
 		);

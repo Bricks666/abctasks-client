@@ -2,7 +2,6 @@ import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
-import { debug } from 'patronum';
 import { Array } from 'runtypes';
 import { group, Group, groupsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
@@ -56,5 +55,3 @@ sample({
 	clock: reset,
 	target: query.reset,
 });
-
-debug(query.$data, query.$error, $groupsMap);

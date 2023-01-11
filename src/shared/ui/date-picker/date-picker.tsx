@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import {
 	DatePicker as MUIDatePicker,
 	DatePickerProps as MUIDatePIckerProps
@@ -7,7 +8,7 @@ import { CommonProps } from '@/shared/types';
 
 export interface DatePickerProps<TInputDate, TDate>
 	extends CommonProps,
-		Omit<MUIDatePIckerProps<TInputDate, TDate>, 'onChange'> {
+		Omit<MUIDatePIckerProps<TInputDate, TDate>, 'onChange' | 'renderInput'> {
 	readonly onChange: (date: string | null) => void;
 }
 
@@ -27,6 +28,12 @@ export const DatePicker = React.memo(
 
 			onChange(newDate);
 		};
-		return <MUIDatePicker {...rest} onChange={handleChange as any} />;
+		return (
+			<MUIDatePicker
+				{...rest}
+				onChange={handleChange as any}
+				renderInput={(params) => <TextField {...params} />}
+			/>
+		);
 	}
 );

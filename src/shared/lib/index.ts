@@ -6,3 +6,4 @@ export * from './fabrics';
 export * from './data-extractor';
 export * from './request';
 export * from './useDebounceValue';
+export * from './useQueryParam';
