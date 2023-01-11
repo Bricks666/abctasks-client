@@ -15,6 +15,14 @@ import './index.css';
 export const App = withProviders(() => {
 	const status = useUnit(authModel.query.$status);
 	const { t, } = useTranslation('common');
+	const { started, stopped, } = useUnit(pageModel);
+
+	React.useEffect(() => {
+		started();
+		return () => {
+			stopped();
+		};
+	}, [started, stopped]);
 
 	const isLoading = status === 'initial' || status === 'pending';
 
@@ -37,4 +45,4 @@ export const App = withProviders(() => {
 	);
 });
 
-pageModel.loaded();
+pageModel.started();

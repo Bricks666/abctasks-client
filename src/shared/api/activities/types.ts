@@ -1,5 +1,5 @@
 import { Literal, Number, Record, Static, String, Union } from 'runtypes';
-import { InRoomParams } from '@/shared/types';
+import { InRoomParams, PaginationParams } from '@/shared/types';
 
 export const activityAction = Union(
 	Literal('update'),
@@ -26,7 +26,9 @@ export const activity = Record({
 
 export interface Activity extends Static<typeof activity> {}
 
-export interface GetActivitiesInRoomParams extends InRoomParams {
+export interface GetActivitiesInRoomParams
+	extends InRoomParams,
+		PaginationParams {
 	readonly activistId?: number | null;
 	readonly sphereName?: string | null;
 	readonly before?: string | null;

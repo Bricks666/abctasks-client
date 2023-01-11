@@ -1,4 +1,5 @@
 import { createDomain, sample } from 'effector';
+import { debug } from 'patronum';
 import { calculateDevice } from './lib';
 import { Devices } from './types';
 
@@ -24,15 +25,18 @@ const calculateDeviceFx = deviceInfoDomain.effect<unknown, Devices>(
 	calculateDevice
 );
 
-export const subscribeFx = deviceInfoDomain.effect(() =>
-	window.addEventListener('resize', calculateDeviceFx)
-);
+export const subscribeFx = deviceInfoDomain.effect(() => {
+	window.addEventListener('resize', calculateDeviceFx);
+	return calculateDevice();
+});
 
 export const unsubscribeFx = deviceInfoDomain.effect(() =>
 	window.removeEventListener('resize', calculateDeviceFx)
 );
 
 sample({
-	clock: calculateDeviceFx.doneData,
+	clock: [calculateDeviceFx.doneData, subscribeFx.doneData],
 	target: $device,
 });
+
+debug(calculateDeviceFx, subscribeFx, $device);

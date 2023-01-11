@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Pagination } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
@@ -17,9 +17,9 @@ import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
 
-import styles from './activity-list.module.css';
+import styles from './activities.module.css';
 
-export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
+export const Activities: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
 	const roomId = useParam(routes.room, 'id');
 	const activities = useActivities();
@@ -51,20 +51,28 @@ export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
     Сделать виртуальный список
     */
 		children = (
-			<Stack className={styles.list} spacing={1}>
-				{activities.pending
-					? getEmptyArray(4).map((_, i) => <SkeletonActivityCard key={i} />)
-					: activities.data.map((activity) => (
-						<ActivityCard {...activity} key={activity.id} />
-					  ))}
-			</Stack>
+			<>
+				<section className={styles.list}>
+					{activities.pending
+						? getEmptyArray(25).map((_, i) => <SkeletonActivityCard key={i} />)
+						: activities.data.map((activity) => (
+							<ActivityCard {...activity} key={activity.id} />
+						  ))}
+				</section>
+				<Pagination
+					className={styles.pagination}
+					count={15}
+					color='primary'
+					size='large'
+				/>
+			</>
 		);
 	}
 
 	return (
-		<Stack className={cn(styles.wrapper, className)} spacing={1.5}>
+		<div className={cn(styles.wrapper, className)}>
 			{showMobileFilters ? <MobileActivitiesFilters /> : <ActivitiesFilters />}
 			{children}
-		</Stack>
+		</div>
 	);
 });

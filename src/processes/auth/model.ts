@@ -16,6 +16,6 @@ redirect({
 });
 
 sample({
-	clock: pageModel.loaded,
+	clock: pageModel.started,
 	target: authModel.query.start,
 });

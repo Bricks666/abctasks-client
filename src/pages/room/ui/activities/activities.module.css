@@ -1,0 +1,25 @@
+.wrapper {
+	display: grid;
+	gap: 1.5em;
+
+	overflow-y: auto;
+}
+
+.title {
+	font-weight: 700;
+	padding: 0 1em;
+}
+
+.list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1em;
+
+	overflow-y: scroll;
+
+	padding: 1em;
+}
+
+.pagination {
+	justify-self: center;
+}

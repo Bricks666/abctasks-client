@@ -39,19 +39,23 @@ sample({
 	target: activitiesModel.query.start,
 });
 
+const activitiesFiltersChanges = debounce({
+	source: activitiesFiltersModel.form.$values,
+	timeout: 250,
+}).map((form) => ({
+	sphereName: form.sphereName,
+	action: form.action,
+	activistId: form.activist?.id,
+	before: form.before,
+	after: form.after,
+}));
+
 sample({
-	clock: debounce({
-		source: activitiesFiltersModel.form.$values,
-		timeout: 250,
-	}),
+	clock: activitiesFiltersChanges,
 	source: routes.room.$params,
-	fn: (params, data) => ({
+	fn: (params, form) => ({
 		roomId: params.id,
-		sphereName: data.sphereName,
-		action: data.action,
-		activistId: data.activist?.id,
-		before: data.before,
-		after: data.after,
+		...form,
 	}),
 	target: activitiesModel.query.start,
 });

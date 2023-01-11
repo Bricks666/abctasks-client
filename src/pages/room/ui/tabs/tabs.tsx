@@ -7,7 +7,7 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
-import { ActivityList } from '../activity-list';
+import { Activities } from '../activities';
 import { Groups } from '../groups';
 import { LastActivities } from '../last-activities';
 import { Tasks } from '../tasks';
@@ -81,7 +81,7 @@ export const Tabs: React.FC<CommonProps> = () => {
 				{/*
         TODO: Заменить на фильтры и  фильтрованный список
         */}
-				<ActivityList />
+				<Activities />
 			</TabPanel>
 			<TabPanel className={styles.panel} value='users'>
 				<UsersInRoom />

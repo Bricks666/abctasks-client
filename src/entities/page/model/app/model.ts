@@ -2,4 +2,5 @@ import { createDomain } from 'effector';
 
 const pageDomain = createDomain();
 
-export const loaded = pageDomain.event();
+export const started = pageDomain.event();
+export const stopped = pageDomain.event();

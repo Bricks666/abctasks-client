@@ -5,7 +5,9 @@ import { GetActivitiesInRoomParams, User } from '@/shared/api';
 const activitiesFiltersDomain = createDomain();
 
 interface ActivitiesFiltersForm
-	extends Required<Omit<GetActivitiesInRoomParams, 'roomId' | 'activistId'>> {
+	extends Required<
+		Omit<GetActivitiesInRoomParams, 'roomId' | 'activistId' | 'count' | 'page'>
+	> {
 	readonly activist: User | null;
 }
 
