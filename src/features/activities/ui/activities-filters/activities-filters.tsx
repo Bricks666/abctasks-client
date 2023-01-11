@@ -10,7 +10,9 @@ import { activitiesFiltersModel } from '../../model';
 
 import styles from './activities-filters.module.css';
 
-export const ActivitiesFilters: React.FC<CommonProps> = (props) => {
+export interface ActivitiesFiltersProps extends CommonProps {}
+
+export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 	const { className, } = props;
 
 	const { fields, reset, } = useForm(activitiesFiltersModel.form);

@@ -1,12 +1,17 @@
 import { Stack } from '@mui/material';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { ActivitiesFilters } from '@/features/activities';
+import {
+	ActivitiesFilters,
+	MobileActivitiesFilters
+} from '@/features/activities';
 import {
 	ActivityCard,
 	SkeletonActivityCard,
 	useActivities
 } from '@/entities/activities';
+import { deviceInfoModel } from '@/entities/page';
 import { getEmptyArray, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -17,15 +22,20 @@ import styles from './activity-list.module.css';
 export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
 	const roomId = useParam(routes.room, 'id');
-	const { data: activities, pending, error, start, } = useActivities();
+	const activities = useActivities();
+	const [isMobile, isTabletVertical] = useUnit([
+		deviceInfoModel.$isMobile,
+		deviceInfoModel.$isTabletVertical
+	]);
 
-	const isError = !!error;
+	const isError = !!activities.error;
+	const showMobileFilters = isMobile || isTabletVertical;
 
 	let children: React.ReactElement | null = null;
 
 	if (isError) {
 		const onRetry = () => {
-			start({ roomId, });
+			activities.start({ roomId, });
 		};
 
 		children = (
@@ -42,9 +52,9 @@ export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
     */
 		children = (
 			<Stack className={styles.list} spacing={1}>
-				{pending
+				{activities.pending
 					? getEmptyArray(4).map((_, i) => <SkeletonActivityCard key={i} />)
-					: activities.map((activity) => (
+					: activities.data.map((activity) => (
 						<ActivityCard {...activity} key={activity.id} />
 					  ))}
 			</Stack>
@@ -53,7 +63,7 @@ export const ActivityList: React.FC<CommonProps> = React.memo((props) => {
 
 	return (
 		<Stack className={cn(styles.wrapper, className)} spacing={1.5}>
-			<ActivitiesFilters />
+			{showMobileFilters ? <MobileActivitiesFilters /> : <ActivitiesFilters />}
 			{children}
 		</Stack>
 	);

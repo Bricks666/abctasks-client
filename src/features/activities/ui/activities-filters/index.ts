@@ -1,1 +1,4 @@
-export { ActivitiesFilters } from './activities-filters';
+export {
+	ActivitiesFilters,
+	type ActivitiesFiltersProps
+} from './activities-filters';

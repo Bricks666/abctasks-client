@@ -1,8 +1,11 @@
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import '@/processes/auth';
+import '@/processes/device-info-handle';
 import { Pages } from '@/pages';
-import { useAuth } from '@/entities/auth';
+import { authModel } from '@/entities/auth';
+import { pageModel } from '@/entities/page';
 import { LoadingWrapper, LoadingIndicator } from '@/shared/ui';
 import styles from './app.module.css';
 import { withProviders } from './providers';
@@ -10,7 +13,7 @@ import { withProviders } from './providers';
 import './index.css';
 
 export const App = withProviders(() => {
-	const { status, } = useAuth();
+	const status = useUnit(authModel.query.$status);
 	const { t, } = useTranslation('common');
 
 	const isLoading = status === 'initial' || status === 'pending';
@@ -33,3 +36,5 @@ export const App = withProviders(() => {
 		</LoadingWrapper>
 	);
 });
+
+pageModel.loaded();
