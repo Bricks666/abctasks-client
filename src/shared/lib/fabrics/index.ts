@@ -11,3 +11,4 @@ export {
 	createQueryWithAccess,
 	type CreateQueryWithAccessOptions
 } from './createQueryWithAccess';
+export * from './create-page-load-model';

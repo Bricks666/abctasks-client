@@ -16,7 +16,7 @@ export interface CreateTaskPopupProps extends CommonProps, BasePopupProps {}
 
 export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
-	const roomId = useParam(routes.room, 'id');
+	const roomId = useParam(routes.room.tasks, 'id');
 	const status = useUnit(tasksModel.$status) || 'ready';
 	const onClose = useUnit(createTaskPopupModel.close);
 	const createTask = useUnit(createTaskModel.mutation);

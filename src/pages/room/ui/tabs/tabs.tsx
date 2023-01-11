@@ -1,36 +1,29 @@
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleIcon from '@mui/icons-material/People';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { TabContext, TabList } from '@mui/lab';
 import { Tab } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
-import { Activities } from '../activities';
-import { Groups } from '../groups';
-import { LastActivities } from '../last-activities';
-import { Tasks } from '../tasks';
-import { TasksProgress } from '../tasks-progresses';
-import { UsersInRoom } from '../users-in-room';
 
 import styles from './tabs.module.css';
 
 export const Tabs: React.FC<CommonProps> = () => {
-	const { id, tab = 'tasks', } = useUnit(routes.room.$params);
-	const query = useUnit(routes.room.$query);
+	const { id, tab = 'tasks', } = useUnit(routes.room.base.$params);
 
 	const onChange = React.useCallback(
 		(_evt: unknown, value: string) => {
-			routes.room.navigate({
+			routes.room.base.navigate({
 				params: {
 					id,
 					tab: value,
 				},
-				query,
+				query: {},
 			});
 		},
-		[id, query]
+		[id]
 	);
 
 	return (
@@ -65,27 +58,6 @@ export const Tabs: React.FC<CommonProps> = () => {
 					value='users'
 				/>
 			</TabList>
-			<TabPanel className={styles.panel} value='tasks'>
-				<div className={styles.tasksBlock}>
-					<Tasks />
-					<div className={styles.aside}>
-						<TasksProgress />
-						<LastActivities />
-					</div>
-				</div>
-			</TabPanel>
-			<TabPanel className={styles.panel} value='groups'>
-				<Groups />
-			</TabPanel>
-			<TabPanel className={styles.panel} value='activities'>
-				{/*
-        TODO: Заменить на фильтры и  фильтрованный список
-        */}
-				<Activities />
-			</TabPanel>
-			<TabPanel className={styles.panel} value='users'>
-				<UsersInRoom />
-			</TabPanel>
 		</TabContext>
 	);
 };

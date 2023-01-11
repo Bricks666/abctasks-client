@@ -6,7 +6,7 @@ import { useUnit } from 'effector-react';
 import { t } from 'i18next';
 import * as React from 'react';
 import { routes, getParams, popups } from '@/shared/configs';
-import { useToggle } from '@/shared/lib';
+import { useParam, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Confirm } from '@/shared/ui';
 import { removeGroupModel } from '../../model';
@@ -17,21 +17,21 @@ export interface GroupCardActionsProps extends CommonProps {
 
 export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
 	const { groupId, className, } = props;
-	const params = useUnit(routes.room.$params);
+	const roomId = useParam(routes.room.groups, 'id');
 	const removeGroup = useUnit(removeGroupModel.mutation);
 	const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
 
 	const onAgree = React.useCallback(() => {
-		removeGroup.start({ id: groupId, roomId: params.id, });
+		removeGroup.start({ id: groupId, roomId, });
 		toggleOff();
-	}, [toggleOff, groupId, params.id]);
+	}, [toggleOff, groupId, roomId]);
 
 	return (
 		<div className={className}>
 			<IconButton
 				title={t('actions.update', { ns: 'common', })!}
-				to={routes.room as any}
-				params={params}
+				to={routes.room.groups as any}
+				params={{ id: roomId, }}
 				query={{
 					[getParams.popup]: popups.updateGroup,
 					[getParams.groupId]: groupId,

@@ -42,6 +42,7 @@ export abstract class BaseFetcher<I, CO> {
 
 	createPath(path: Path): string {
 		const { url, query = {}, } = path;
+		console.log(url, query);
 		const newURL: Array<string | number> =
 			typeof url === 'string' || typeof url === 'number'
 				? [this.baseURL, url]

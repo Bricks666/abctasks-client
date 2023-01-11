@@ -18,7 +18,7 @@ export const TaskColumnActions: React.FC<TaskColumnActionsProps> = React.memo(
 		return (
 			<IconButton
 				className={className}
-				to={routes.room as any}
+				to={routes.room.tasks as any}
 				params={{ id: roomId, }}
 				query={{
 					[getParams.popup]: popups.createTask,

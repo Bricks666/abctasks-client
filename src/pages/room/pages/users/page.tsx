@@ -9,14 +9,14 @@ import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
 
-import styles from './users-in-room.module.css';
+import styles from './page.module.css';
 
-export interface UserInRoomProps extends CommonProps {}
+export interface UsersPageProps extends CommonProps {}
 
-export const UsersInRoom: React.FC<UserInRoomProps> = (props) => {
+const UsersPage: React.FC<UsersPageProps> = (props) => {
 	const { className, } = props;
 	const users = useUsersInRoom();
-	const roomId = useParam(routes.room, 'id');
+	const roomId = useParam(routes.room.users, 'id');
 	const isError = !!users.error;
 
 	if (isError) {
@@ -47,3 +47,5 @@ export const UsersInRoom: React.FC<UserInRoomProps> = (props) => {
 		</div>
 	);
 };
+
+export default UsersPage;

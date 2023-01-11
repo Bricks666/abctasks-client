@@ -22,7 +22,7 @@ export const UpdateGroupPopup: React.FC<
 	React.PropsWithChildren<UpdateGroupPopupProps>
 > = (props) => {
 	const { t, } = useTranslation('popups');
-	const roomId = useParam(routes.room, 'id');
+	const roomId = useParam(routes.room.groups, 'id');
 	const id = useUnit(groupsModel.$id);
 	const onClose = useUnit(updateGroupPopupModel.close);
 	const { data: group, } = useGroup(Number(id));

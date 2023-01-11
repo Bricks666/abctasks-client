@@ -9,10 +9,10 @@ export interface OpenSearchUserPopupProps extends CommonProps {}
 
 export const OpenSearchUserPopup: React.FC<OpenSearchUserPopupProps> =
 	React.memo(() => {
-		const params = useUnit(routes.room.$params);
+		const params = useUnit(routes.room.users.$params);
 		return (
 			<Button
-				to={routes.room as any}
+				to={routes.room.users as any}
 				params={params}
 				query={{
 					[getParams.popup]: popups.addUser,

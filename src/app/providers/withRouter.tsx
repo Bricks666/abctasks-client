@@ -20,8 +20,24 @@ const router = createHistoryRouter({
 			route: routes.rooms,
 		},
 		{
-			path: '/rooms/:id/:tab?',
-			route: routes.room,
+			path: '/rooms/:id/:tab',
+			route: routes.room.base,
+		},
+		{
+			path: '/rooms/:id/tasks',
+			route: routes.room.tasks,
+		},
+		{
+			path: '/rooms/:id/groups',
+			route: routes.room.groups,
+		},
+		{
+			path: '/rooms/:id/activities',
+			route: routes.room.activities,
+		},
+		{
+			path: '/rooms/:id/users',
+			route: routes.room.users,
 		}
 	],
 	controls,

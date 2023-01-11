@@ -22,7 +22,7 @@ export const AddUsersIntoRoomPopup: React.FC<AddUsersIntoRoomPopupProps> = (
 	const { isOpen, } = props;
 
 	const users = useUnit(searchedUsersModel.query);
-	const roomId = useParam(routes.room, 'id');
+	const roomId = useParam(routes.room.users, 'id');
 	const onClose = useUnit(addUserPopupModel.close);
 
 	return (

@@ -7,6 +7,7 @@ import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
 import { pageModel } from './model';
+import { Pages } from './pages';
 import styles from './styles.module.css';
 import { Tabs } from './ui';
 
@@ -19,6 +20,9 @@ const RoomPage: React.FC<CommonProps> = (props) => {
 		<MainLayout className={cn(styles.layout, className)} header={<Header />}>
 			<RoomHeader />
 			<Tabs />
+			<div className={styles.content}>
+				<Pages />
+			</div>
 		</MainLayout>
 	);
 };

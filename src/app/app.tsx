@@ -44,5 +44,3 @@ export const App = withProviders(() => {
 		</LoadingWrapper>
 	);
 });
-
-pageModel.started();

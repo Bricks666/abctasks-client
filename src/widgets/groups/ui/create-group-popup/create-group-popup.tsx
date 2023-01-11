@@ -19,7 +19,7 @@ export interface CreateGroupPopupProps extends CommonProps, BasePopupProps {}
 
 export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
-	const roomId = useParam(routes.room, 'id');
+	const roomId = useParam(routes.room.groups, 'id');
 	const onClose = useUnit(createGroupPopupModel.close);
 	const createGroup = useUnit(createGroupModel.mutation);
 

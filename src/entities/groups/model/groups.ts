@@ -2,15 +2,12 @@ import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
+import { debug } from 'patronum';
 import { Array } from 'runtypes';
 import { group, Group, groupsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
 import { dataExtractor, StandardFailError } from '@/shared/lib';
-import {
-	getStandardResponse,
-	StandardResponse,
-	StandardSuccessResponse
-} from '@/shared/types';
+import { getStandardResponse, StandardResponse } from '@/shared/types';
 import { GroupsMap } from './types';
 
 export const groupsDomain = createDomain();
@@ -29,7 +26,7 @@ export const query = createQuery<
 	number,
 	StandardResponse<Group[]>,
 	StandardFailError,
-	StandardSuccessResponse<Group[]>,
+	StandardResponse<Group[]>,
 	Group[]
 >({
 	initialData: [],
@@ -49,7 +46,7 @@ cache(query);
 
 querySync({
 	controls,
-	route: routes.room,
+	route: routes.room.groups,
 	source: {
 		[getParams.groupId]: $id,
 	},
@@ -60,4 +57,4 @@ sample({
 	target: query.reset,
 });
 
-cache(query);
+debug(query.$data, query.$error, $groupsMap);

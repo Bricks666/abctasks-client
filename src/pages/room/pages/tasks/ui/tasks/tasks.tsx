@@ -19,36 +19,36 @@ export interface Column {
 export const Tasks: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('task');
-	const roomId = useParam(routes.room, 'id');
-	const { data: tasks, pending, stale, error, start, } = useGroupedTasks();
+	const roomId = useParam(routes.room.tasks, 'id');
+	const tasks = useGroupedTasks();
 	/*
   TODO: Пересмотреть распределение на колонки
   */
 	const columns: Column[] = [
 		{
-			tasks: tasks.ready,
+			tasks: tasks.data.ready,
 			status: 'ready',
 		},
 		{
-			tasks: tasks.in_progress,
+			tasks: tasks.data.in_progress,
 			status: 'in_progress',
 		},
 		{
-			tasks: tasks.needReview,
+			tasks: tasks.data.needReview,
 			status: 'review',
 		},
 		{
-			tasks: tasks.done,
+			tasks: tasks.data.done,
 			status: 'done',
 		}
 	];
 
-	const isLoading = pending && !stale;
-	const isError = !!error;
+	const isLoading = tasks.pending;
+	const isError = !!tasks.error;
 
 	if (isError) {
 		const onRetry = () => {
-			start(roomId);
+			tasks.start(roomId);
 		};
 
 		return (
@@ -65,6 +65,7 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 		<section className={cn(styles.wrapper, className)}>
 			{columns.map(({ status, tasks, }) => (
 				<TaskColumn
+					roomId={roomId}
 					tasks={tasks}
 					isLoading={isLoading}
 					columnStatus={status}

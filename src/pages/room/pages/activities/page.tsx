@@ -16,12 +16,13 @@ import { getEmptyArray, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
+import { pageModel } from './model';
 
-import styles from './activities.module.css';
+import styles from './page.module.css';
 
-export const Activities: React.FC<CommonProps> = React.memo((props) => {
+const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
-	const roomId = useParam(routes.room, 'id');
+	const roomId = useParam(routes.room.activities, 'id');
 	const activities = useActivities();
 	const [isMobile, isTabletVertical] = useUnit([
 		deviceInfoModel.$isMobile,
@@ -76,3 +77,7 @@ export const Activities: React.FC<CommonProps> = React.memo((props) => {
 		</div>
 	);
 });
+
+pageModel.loaded();
+
+export default ActivitiesPage;

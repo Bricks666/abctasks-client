@@ -11,17 +11,17 @@ import styles from './last-activities.module.css';
 
 export const LastActivities: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
-	const roomId = useParam(routes.room, 'id');
-	const { data: activities, error, pending, start, } = useActivities();
+	const roomId = useParam(routes.room.tasks, 'id');
+	const activities = useActivities();
 
-	const isEmpty = !activities.length && !pending;
-	const isError = !!error;
+	const isEmpty = !activities.data.length && !activities.pending;
+	const isError = !!activities.error;
 
 	let children: React.ReactElement | null = null;
 
 	if (isError) {
 		const onRetry = () => {
-			start({ roomId, });
+			activities.start({ roomId, });
 		};
 
 		children = (
@@ -36,7 +36,7 @@ export const LastActivities: React.FC<CommonProps> = (props) => {
 		children = (
 			<>
 				<Stack className={styles.list} spacing={0.5}>
-					{activities.slice(0, 5).map((activity) => (
+					{activities.data.slice(0, 5).map((activity) => (
 						<ActivityCard {...activity} key={activity.id} />
 					))}
 				</Stack>

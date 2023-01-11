@@ -8,13 +8,13 @@ import { CommonProps } from '@/shared/types';
 export const AllActivitiesInRoom: React.FC<CommonProps> = React.memo(
 	(props) => {
 		const { className, } = props;
-		const id = useParam(routes.room, 'id');
+		const roomId = useParam(routes.room.tasks, 'id');
 
 		return (
 			<Button
 				className={className}
-				to={routes.room as any}
-				params={{ id, tab: 'activities', }}
+				to={routes.room.activities as any}
+				params={{ id: roomId, }}
 				component={Link}>
 				Посмотреть все
 			</Button>

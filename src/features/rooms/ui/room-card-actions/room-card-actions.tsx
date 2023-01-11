@@ -14,7 +14,7 @@ export const RoomCardActions: React.FC<RoomCardActionsProps> = (props) => {
 		<Button
 			className={className}
 			variant='text'
-			to={routes.room as any}
+			to={routes.room.tasks as any}
 			params={{ id, }}
 			component={Link}>
 			Перейти

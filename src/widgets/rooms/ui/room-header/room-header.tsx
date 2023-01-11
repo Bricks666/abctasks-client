@@ -10,14 +10,13 @@ import styles from './room-header.module.css';
 
 export const RoomHeader: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
-	const id = useParam(routes.room, 'id');
-	const { data: room, } = useRoom(id);
-	const isLoading = !room;
+	const id = useParam(routes.room.base, 'id');
+	const { data: room, pending, } = useRoom(id);
 
 	return (
 		<header className={cn(styles.header, className)}>
 			<Typography className={styles.title} variant='h4' component='h1'>
-				{isLoading ? <Skeleton width='15em' /> : room.name}
+				{pending ? <Skeleton width='15em' /> : room?.name}
 			</Typography>
 		</header>
 	);

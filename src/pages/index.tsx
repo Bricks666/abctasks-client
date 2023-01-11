@@ -18,7 +18,7 @@ const Routes = createRoutesView({
 			view: RegistrationPage,
 		},
 		{
-			route: routes.room,
+			route: routes.room.base,
 			view: RoomPage,
 		},
 		{

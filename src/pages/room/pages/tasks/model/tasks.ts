@@ -7,7 +7,7 @@ import {
 } from '@/features/tasks';
 import { tasksModel } from '@/entities/tasks';
 import { routes } from '@/shared/configs';
-import { loadedWithRouteParams } from './page';
+import { loadedWithRouteState } from './page';
 
 sample({
 	clock: createTaskModel.mutation.finished.success,
@@ -64,7 +64,7 @@ sample({
 });
 
 sample({
-	clock: [routes.room.opened, loadedWithRouteParams],
+	clock: [routes.room.tasks.opened, loadedWithRouteState],
 	fn: ({ params, }) => params.id,
 	target: tasksModel.query.start,
 });

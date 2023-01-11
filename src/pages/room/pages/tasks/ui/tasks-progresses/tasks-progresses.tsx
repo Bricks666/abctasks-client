@@ -20,7 +20,7 @@ export interface TasksProgressProps extends CommonProps {}
 export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room');
-	const roomId = useParam(routes.room, 'id');
+	const roomId = useParam(routes.room.tasks, 'id');
 	const progresses = useProgresses();
 	const groups = useGroupsMap();
 

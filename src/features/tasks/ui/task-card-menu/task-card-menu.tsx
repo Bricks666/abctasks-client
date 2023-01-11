@@ -25,7 +25,7 @@ export const TaskCardMenu: React.FC<TaskCardMenuProps> = React.memo((props) => {
 			{
 				icon: <EditIcon />,
 				label: t('actions.update'),
-				to: routes.room,
+				to: routes.room.tasks,
 				params: {
 					id: roomId,
 				},

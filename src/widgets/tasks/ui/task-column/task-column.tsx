@@ -5,8 +5,7 @@ import * as React from 'react';
 import { TaskColumnActions, updateTaskModel } from '@/features/tasks';
 import { SkeletonTaskCard, TaskColumnHeader } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
-import { routes, getEmptyArray } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
+import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 import { TaskCard } from '../task-card';
 
@@ -14,6 +13,7 @@ import styles from './task-column.module.css';
 
 export interface TaskColumnProps extends CommonProps {
 	readonly tasks: Task[];
+	readonly roomId: number;
 	readonly isLoading: boolean;
 	readonly columnStatus: TaskStatus;
 	readonly header?: string | null;
@@ -22,8 +22,7 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 	evt.preventDefault();
 
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
-	const { tasks, className, columnStatus, header, isLoading, } = props;
-	const roomId = useParam(routes.room, 'id');
+	const { tasks, className, columnStatus, header, isLoading, roomId, } = props;
 	const moveTask = useUnit(updateTaskModel.mutation);
 	const onDrop = React.useCallback<React.DragEventHandler>(
 		(evt) => {

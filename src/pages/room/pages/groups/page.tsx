@@ -12,14 +12,17 @@ import { getEmptyArray, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
+import { pageModel } from './model';
 
-export interface GroupsProps extends CommonProps {}
+export interface GroupsPageProps extends CommonProps {}
 
-export const Groups: React.FC<GroupsProps> = React.memo(function Groups(props) {
+const GroupsPage: React.FC<GroupsPageProps> = React.memo(function GroupsPage(
+	props
+) {
 	const { className, } = props;
 	const groups = useGroups();
-	const roomId = useParam(routes.room, 'id');
-	const isLoading = groups.pending && !groups.stale;
+	const roomId = useParam(routes.room.groups, 'id');
+	const isLoading = groups.pending;
 	const isError = !!groups.error;
 
 	/*
@@ -45,7 +48,7 @@ export const Groups: React.FC<GroupsProps> = React.memo(function Groups(props) {
 	let items: React.ReactElement[] | null = null;
 
 	if (isLoading) {
-		items = getEmptyArray(4).map((_, i) => (
+		items = getEmptyArray(10).map((_, i) => (
 			<ListItem key={i}>
 				<Skeleton width='100%' height='1.5em' />
 			</ListItem>
@@ -68,3 +71,7 @@ export const Groups: React.FC<GroupsProps> = React.memo(function Groups(props) {
 		</Stack>
 	);
 });
+
+pageModel.loaded();
+
+export default GroupsPage;

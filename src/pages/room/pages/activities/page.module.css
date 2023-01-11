@@ -1,8 +1,6 @@
 .wrapper {
 	display: grid;
 	gap: 1.5em;
-
-	overflow-y: auto;
 }
 
 .title {

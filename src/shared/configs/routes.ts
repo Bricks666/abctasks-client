@@ -2,7 +2,13 @@ import { createRoute, createRouterControls } from 'atomic-router';
 
 export const routes = {
 	rooms: createRoute(),
-	room: createRoute<{ id: number; tab?: string }>(),
+	room: {
+		base: createRoute<{ id: number; tab: string }>(),
+		tasks: createRoute<{ id: number }>(),
+		groups: createRoute<{ id: number }>(),
+		activities: createRoute<{ id: number }>(),
+		users: createRoute<{ id: number }>(),
+	},
 	login: createRoute(),
 	registration: createRoute(),
 };
