@@ -1,0 +1,31 @@
+.container {
+	position: fixed;
+	z-index: var(--mui-zIndex-snackbar);
+
+	width: max-content;
+	height: 'auto';
+	max-height: '100%';
+	width: 'auto';
+}
+
+.horizontal__left {
+	left: 1em;
+}
+
+.horizontal__center {
+	left: 50%;
+
+	transform: translateX(-50%);
+}
+
+.horizontal__right {
+	right: 1em;
+}
+
+.vertical__top {
+	top: 1em;
+}
+
+.vertical__bottom {
+	bottom: 1em;
+}
