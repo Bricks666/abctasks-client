@@ -14,7 +14,7 @@ sample({
 		createTaskModel.mutation.finished.success,
 		removeTaskModel.mutation.finished.success
 	],
-	fn: ({ params, }) => params.roomId,
+	fn: ({ params, }) => ({ roomId: params.roomId, }),
 	target: progressesModel.query.start,
 });
 
@@ -25,6 +25,6 @@ sample({
 
 sample({
 	clock: [routes.room.tasks.opened, loadedWithRouteState],
-	fn: ({ params, }) => params.id,
+	fn: ({ params, }) => ({ roomId: params.id, }),
 	target: progressesModel.query.start,
 });
