@@ -1,11 +1,11 @@
 import { querySync } from 'atomic-router';
 import { createEvent, createStore, sample } from 'effector';
-import { debounce, debug } from 'patronum';
+import { debounce } from 'patronum';
 import { activitiesFiltersModel } from '@/features/activities';
-import { activitiesModel } from '@/entities/activities';
+import { activitiesInRoomModel } from '@/entities/activities';
 import { GetActivitiesInRoomParams } from '@/shared/api';
 import { routes, controls } from '@/shared/configs';
-import { loaded, loadedWithRouteState } from './page';
+import { loaded, loadedWithRouteState } from './page-load';
 
 const currentRoute = routes.room.activities;
 
@@ -42,7 +42,7 @@ sample({
 		page: page ? Number(page) : 1,
 		...values,
 	}),
-	target: activitiesModel.query.start,
+	target: activitiesInRoomModel.query.start,
 });
 
 sample({
@@ -57,7 +57,7 @@ sample({
 		page: query.page,
 		sphereName: query.sphereName,
 	}),
-	target: activitiesModel.query.start,
+	target: activitiesInRoomModel.query.start,
 });
 
 sample({
@@ -92,5 +92,3 @@ sample({
 	source: controls.$query,
 	target: setForm,
 });
-
-debug($page);

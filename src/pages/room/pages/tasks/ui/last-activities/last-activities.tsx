@@ -1,18 +1,19 @@
 import { Stack, Typography } from '@mui/material';
 import * as React from 'react';
 import { AllActivitiesInRoom } from '@/features/activities';
-import { ActivityCard, useActivities } from '@/entities/activities';
+import { ActivityCard } from '@/entities/activities';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
+import { useLastActivities } from '../../lib';
 
 import styles from './last-activities.module.css';
 
 export const LastActivities: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const roomId = useParam(routes.room.tasks, 'id');
-	const activities = useActivities();
+	const activities = useLastActivities();
 	const { items, } = activities.data;
 	const isEmpty = !items.length && !activities.pending;
 	const isError = !!activities.error;
@@ -36,7 +37,7 @@ export const LastActivities: React.FC<CommonProps> = (props) => {
 		children = (
 			<>
 				<Stack className={styles.list} spacing={0.5}>
-					{items.slice(0, 5).map((activity) => (
+					{items.map((activity) => (
 						<ActivityCard {...activity} key={activity.id} />
 					))}
 				</Stack>

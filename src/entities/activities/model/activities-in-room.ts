@@ -1,4 +1,4 @@
-import { createQuery } from '@farfetched/core';
+import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import {
@@ -34,3 +34,5 @@ export const query = createQuery<
 	contract: runtypeContract(getStandardResponse(getItemsResponse(activity))),
 	mapData: dataExtractor,
 });
+
+cache(query);

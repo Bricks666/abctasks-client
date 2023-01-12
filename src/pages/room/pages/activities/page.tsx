@@ -9,7 +9,7 @@ import {
 import {
 	ActivityCard,
 	SkeletonActivityCard,
-	useActivities
+	useActivitiesInRoom
 } from '@/entities/activities';
 import { deviceInfoModel } from '@/entities/page';
 import { getEmptyArray, routes } from '@/shared/configs';
@@ -23,7 +23,7 @@ import styles from './page.module.css';
 const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
 	const roomId = useParam(routes.room.activities, 'id');
-	const activities = useActivities();
+	const activities = useActivitiesInRoom();
 	const [isMobile, isTabletVertical] = useUnit([
 		deviceInfoModel.$isMobile,
 		deviceInfoModel.$isTabletVertical

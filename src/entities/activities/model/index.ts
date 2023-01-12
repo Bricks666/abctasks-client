@@ -1,1 +1,1 @@
-export * as activitiesModel from './activities';
+export * as activitiesInRoomModel from './activities-in-room';

@@ -1,2 +1,2 @@
-export * as pageModel from './page';
-export * from './activities';
+export * as pageModel from './page-load';
+export * from './activities-filters';

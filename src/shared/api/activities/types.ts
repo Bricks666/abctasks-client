@@ -35,3 +35,7 @@ export interface GetActivitiesInRoomParams
 	readonly after?: string | null;
 	readonly action?: ActivityAction | null;
 }
+
+export interface GetLastActivitiesInRoomParams extends InRoomParams {
+	readonly count: number;
+}

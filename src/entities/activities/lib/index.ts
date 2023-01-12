@@ -1,1 +1,1 @@
-export * from './useActivities';
+export * from './useActivitiesInRoom';

@@ -1,7 +1,7 @@
 import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
-import { createDomain, sample } from 'effector';
+import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 import { group, Group, groupsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
@@ -12,8 +12,6 @@ import { GroupsMap } from './types';
 export const groupsDomain = createDomain();
 
 export const $id = groupsDomain.store<null | number>(null);
-export const invalidateCache = groupsDomain.event();
-export const reset = groupsDomain.event();
 const handlerFx = groupsDomain.effect<
 	number,
 	StandardResponse<Group[]>,
@@ -49,9 +47,4 @@ querySync({
 	source: {
 		[getParams.groupId]: $id,
 	},
-});
-
-sample({
-	clock: reset,
-	target: query.reset,
 });
