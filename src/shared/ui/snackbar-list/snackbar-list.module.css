@@ -29,3 +29,24 @@
 .vertical__bottom {
 	bottom: 1em;
 }
+
+.item {
+	width: 100%;
+}
+
+@media (max-width: 500px) {
+	.container {
+		width: unset;
+	}
+
+	.horizontal__center {
+		transform: none;
+	}
+
+	.horizontal__right,
+	.horizontal__center,
+	.horizontal__left {
+		right: 1em;
+		left: 1em;
+	}
+}

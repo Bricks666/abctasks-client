@@ -1,23 +1,20 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { NotificationCard } from '@/widgets/notifications';
-import { notificationModel } from '@/entities/notifications';
-import { NotificationList } from '@/shared/ui';
+import { notificationsModel } from '@/entities/notifications';
+import { SnackbarList } from '@/shared/ui';
 
 export const withNotifications =
 	(Component: React.ComponentType): React.ComponentType =>
 		() => {
-			const notification = useUnit(notificationModel.$last);
-			const { notifications, position, } = useUnit({
-				notifications: notificationModel.$notifications,
-				position: notificationModel.$position,
+			const { items, position, } = useUnit({
+				items: notificationsModel.$items,
+				position: notificationsModel.$position,
 			});
 			return (
 				<>
 					<Component />
-					{notification ? <NotificationCard {...notification} /> : null}
-					<NotificationList
-						notifications={notifications}
+					<SnackbarList
+						items={items}
 						position={position}
 						domRootSelector='#root'
 					/>

@@ -1,23 +1,23 @@
 import { Collapse, Portal, Stack } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
-import { Notification, Position } from '@/shared/lib';
+import { Position, Snackbar } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { NotificationCard } from '../notification-card';
+import { NotificationCard } from '../snackbar-item';
 
-import styles from './notification-list.module.css';
+import styles from './snackbar-list.module.css';
 
-export interface NotificationListProps extends CommonProps {
-	readonly notifications: Notification[];
+export interface SnackbarListProps extends CommonProps {
+	readonly items: Snackbar[];
 	readonly position: Position;
 	readonly domRootSelector?: string;
 }
 
-export const NotificationList: React.FC<NotificationListProps> = (props) => {
-	const { notifications, position, domRootSelector, className, } = props;
+export const SnackbarList: React.FC<SnackbarListProps> = (props) => {
+	const { items, position, domRootSelector, className, } = props;
 	const { horizontal, vertical, } = position;
 
-	const isEmpty = !notifications.length;
+	const isEmpty = !items.length;
 
 	const classes = cn(
 		styles.container,
@@ -29,8 +29,12 @@ export const NotificationList: React.FC<NotificationListProps> = (props) => {
 	const list = (
 		<Collapse className={classes} in={!isEmpty} mountOnEnter unmountOnExit>
 			<Stack direction='column-reverse' alignItems='flex-end' spacing={1}>
-				{notifications.map((notification) => (
-					<NotificationCard {...notification} key={notification.instanceId} />
+				{items.map((snackbar) => (
+					<NotificationCard
+						className={styles.item}
+						{...snackbar}
+						key={snackbar.id}
+					/>
 				))}
 			</Stack>
 		</Collapse>

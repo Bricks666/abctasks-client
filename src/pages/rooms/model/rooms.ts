@@ -1,10 +1,10 @@
 import { sample } from 'effector';
-import { createNotificationModel } from '@/features/notifications';
 import {
 	createRoomModel,
 	removeRoomModel,
 	updateRoomModel
 } from '@/features/rooms';
+import { notificationsModel } from '@/entities/notifications';
 import { roomsModel } from '@/entities/rooms';
 import { routes } from '@/shared/configs';
 import { loadedWithRouteParams } from './page';
@@ -12,55 +12,55 @@ import { loadedWithRouteParams } from './page';
 sample({
 	clock: createRoomModel.mutation.finished.success,
 	fn: () => ({
-		content: 'Room was created successfully',
-		variant: 'success' as const,
+		message: 'Room was created successfully',
+		color: 'success' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: createRoomModel.mutation.finished.failure,
 	fn: () => ({
-		content: 'Room was not created',
-		variant: 'error' as const,
+		message: 'Room was not created',
+		color: 'error' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: removeRoomModel.mutation.finished.success,
 	fn: () => ({
-		content: 'Room was removed successfully',
-		variant: 'success' as const,
+		message: 'Room was removed successfully',
+		color: 'success' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: removeRoomModel.mutation.finished.failure,
 	fn: () => ({
-		content: 'Room was not removed',
-		variant: 'error' as const,
+		message: 'Room was not removed',
+		color: 'error' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: updateRoomModel.mutation.finished.success,
 	fn: () => ({
-		content: 'Room was update successfully',
-		variant: 'success' as const,
+		message: 'Room was update successfully',
+		color: 'success' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: updateRoomModel.mutation.finished.failure,
 	fn: () => ({
-		content: 'Room was not update',
-		variant: 'error' as const,
+		message: 'Room was not update',
+		color: 'error' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({

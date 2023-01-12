@@ -12,4 +12,3 @@ export {
 	type CreateQueryWithAccessOptions
 } from './createQueryWithAccess';
 export * from './create-page-load-model';
-export * from './create-notifications-model';

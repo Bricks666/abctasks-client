@@ -4,20 +4,18 @@ import {
 	removeTaskModel,
 	updateTaskModel
 } from '@/features/tasks';
-import { notificationModel } from '@/entities/notifications';
+import { notificationsModel } from '@/entities/notifications';
 import { tasksModel } from '@/entities/tasks';
 import { routes } from '@/shared/configs';
-import { Notification } from '@/shared/lib';
 import { loadedWithRouteState } from './page';
 
 sample({
 	clock: createTaskModel.mutation.finished.success,
-	fn: () =>
-		({
-			message: 'Task was created successfully',
-			color: 'success' as const,
-		} as Notification),
-	target: notificationModel.create,
+	fn: () => ({
+		message: 'Task was created successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
 });
 
 sample({
@@ -26,7 +24,7 @@ sample({
 		message: 'Task was not created',
 		color: 'error' as const,
 	}),
-	target: notificationModel.create,
+	target: notificationsModel.create,
 });
 
 sample({
@@ -35,7 +33,7 @@ sample({
 		message: 'Task was removed successfully',
 		color: 'success' as const,
 	}),
-	target: notificationModel.create,
+	target: notificationsModel.create,
 });
 
 sample({
@@ -44,7 +42,7 @@ sample({
 		message: 'Task was not removed',
 		color: 'error' as const,
 	}),
-	target: notificationModel.create,
+	target: notificationsModel.create,
 });
 
 sample({
@@ -53,7 +51,7 @@ sample({
 		message: 'Task was update successfully',
 		color: 'success' as const,
 	}),
-	target: notificationModel.create,
+	target: notificationsModel.create,
 });
 
 sample({
@@ -62,7 +60,7 @@ sample({
 		message: 'Task was not update',
 		color: 'error' as const,
 	}),
-	target: notificationModel.create,
+	target: notificationsModel.create,
 });
 
 sample({

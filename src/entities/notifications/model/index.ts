@@ -1,2 +1,1 @@
-export * as notificationModel from './notifications';
-export * from './types';
+export * as notificationsModel from './notifications';

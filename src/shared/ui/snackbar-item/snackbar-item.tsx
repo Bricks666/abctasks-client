@@ -1,18 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Alert, Slide } from '@mui/material';
 import * as React from 'react';
-import { Notification } from '@/shared/lib';
+import { Snackbar } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
-export interface NotificationCardProps extends CommonProps, Notification {}
+export interface SnackbarItemProps extends CommonProps, Snackbar {}
 
-export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
+export const SnackbarItem: React.FC<SnackbarItemProps> = (props) => {
 	const {
-		slideDirection,
+		direction,
 		onMounted,
 		onUnmounted,
 		message,
 		open,
 		duration,
+		id: _,
 		...rest
 	} = props;
 	return (
@@ -20,7 +22,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
 			in={open}
 			onExited={onUnmounted}
 			onEntered={onMounted}
-			direction={slideDirection}
+			direction={direction}
 			timeout={duration}
 			mountOnEnter
 			unmountOnExit>

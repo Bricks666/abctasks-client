@@ -5,5 +5,6 @@ declare const styles: {
 	readonly horizontal__right: string;
 	readonly vertical__top: string;
 	readonly vertical__bottom: string;
+	readonly item: string;
 };
 export = styles;

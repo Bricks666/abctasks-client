@@ -4,63 +4,63 @@ import {
 	removeGroupModel,
 	updateGroupModel
 } from '@/features/groups';
-import { createNotificationModel } from '@/features/notifications';
 import { groupsModel } from '@/entities/groups';
+import { notificationsModel } from '@/entities/notifications';
 import { routes } from '@/shared/configs';
 import { loadedWithRouteState } from './page';
 
 sample({
 	clock: createGroupModel.mutation.finished.success,
 	fn: () => ({
-		content: 'Group was created successfully',
-		variant: 'success' as const,
+		message: 'Group was created successfully',
+		color: 'success' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: createGroupModel.mutation.finished.failure,
 	fn: () => ({
-		content: 'Group was not created',
-		variant: 'error' as const,
+		message: 'Group was not created',
+		color: 'error' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: removeGroupModel.mutation.finished.success,
 	fn: () => ({
-		content: 'Group was removed successfully',
-		variant: 'success' as const,
+		message: 'Group was removed successfully',
+		color: 'success' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: removeGroupModel.mutation.finished.failure,
 	fn: () => ({
-		content: 'Group was not removed',
-		variant: 'error' as const,
+		message: 'Group was not removed',
+		color: 'error' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: updateGroupModel.mutation.finished.success,
 	fn: () => ({
-		content: 'Group was update successfully',
-		variant: 'success' as const,
+		message: 'Group was update successfully',
+		color: 'success' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({
 	clock: updateGroupModel.mutation.finished.failure,
 	fn: () => ({
-		content: 'Group was not update',
-		variant: 'error' as const,
+		message: 'Group was not update',
+		color: 'error' as const,
 	}),
-	target: createNotificationModel.setNotification,
+	target: notificationsModel.create,
 });
 
 sample({

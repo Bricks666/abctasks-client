@@ -1,15 +1,7 @@
-import { createDomain } from 'effector';
-import { debug } from 'patronum';
-import { createNotificationsModel } from '@/shared/lib';
-import { Notification } from './types';
+import { createSnackbarStackModel } from '@/shared/lib';
 
-const notificationsDomain = createDomain();
-
-export const $last = notificationsDomain.store<null | Notification>(null);
-
-export const { $notifications, create, $position, } = createNotificationsModel({
+export const { $items, create, $position, } = createSnackbarStackModel({
 	maxCount: 5,
-	timeout: 50000,
+	timeout: 500000,
+	variant: 'filled',
 });
-
-debug($notifications, create);

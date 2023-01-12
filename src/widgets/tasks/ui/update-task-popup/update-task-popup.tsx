@@ -8,9 +8,9 @@ import {
 	TaskFormValues,
 	updateTaskModel
 } from '@/features/tasks';
-import { tasksModel, useTask } from '@/entities/tasks';
-import { routes } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
+import { useTask } from '@/entities/tasks';
+import { getParams, routes } from '@/shared/configs';
+import { useParam, useQueryParam } from '@/shared/lib';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 import { updateTaskPopupModel } from '../../model';
@@ -22,7 +22,7 @@ export interface UpdateTaskPopupProps extends CommonProps, BasePopupProps {}
 export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	const { t, } = useTranslation('popups');
 	const roomId = useParam(routes.room.tasks, 'id');
-	const id = useUnit(tasksModel.$id)!;
+	const id = Number(useQueryParam(getParams.taskId, null));
 	const onClose = useUnit(updateTaskPopupModel.close);
 	const { data: task, } = useTask(id, roomId);
 	const updateTask = useUnit(updateTaskModel.mutation);
@@ -47,6 +47,8 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 		[task]
 	);
 	const loading = !task;
+
+	console.log(task, roomId, id);
 
 	return (
 		<MainPopup {...props} onClose={onClose} title={t('task.updateTitle')}>
