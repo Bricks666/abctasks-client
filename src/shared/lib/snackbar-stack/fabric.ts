@@ -13,7 +13,8 @@ import {
 	CreateSnackbarOptions,
 	FabricConfig,
 	Snackbar,
-	SnackbarStackModel
+	SnackbarStackModel,
+	StaticFabricConfig
 } from './types';
 
 /**
@@ -46,7 +47,7 @@ export const createSnackbarStackModel = (
 		$position,
 		$maxCount,
 		(baseConfig, position, maxCount) =>
-			({ ...baseConfig, position, maxCount, } as FabricConfig)
+			({ ...baseConfig, position, maxCount, } as StaticFabricConfig)
 	);
 
 	const $items = createStore<Snackbar[]>([]);

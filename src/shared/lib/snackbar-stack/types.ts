@@ -104,7 +104,7 @@ export interface SnackbarStackModel {
 	 *
 	 * @public
 	 */
-	readonly $config: Store<FabricConfig>;
+	readonly $config: Store<StaticFabricConfig>;
 	/**
 	 * Create a new snack
 	 *

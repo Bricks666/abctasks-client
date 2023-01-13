@@ -5,8 +5,4 @@ export const hex = Template`#${String.withConstraint(
 )}`;
 export type HEX = Static<typeof hex>;
 
-export interface CommonProps {
-	className?: string;
-}
-
 export type VoidFunction = () => void;

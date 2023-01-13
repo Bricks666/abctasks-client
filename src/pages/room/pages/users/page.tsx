@@ -1,10 +1,12 @@
 import { List, ListItem } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { Popups, PopupsProps } from '@/widgets/page';
+import { AddUsersIntoRoomPopup } from '@/widgets/users';
 import { OpenSearchUserPopup } from '@/features/rooms';
 import { useUsersInRoom } from '@/entities/rooms';
 import { TemplateUserCard } from '@/entities/users';
-import { routes } from '@/shared/configs';
+import { popups, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
@@ -12,6 +14,10 @@ import { RetryLoadingSlat } from '@/shared/ui';
 import styles from './page.module.css';
 
 export interface UsersPageProps extends CommonProps {}
+
+const popupMap: PopupsProps['popupMap'] = {
+	[popups.addUser]: AddUsersIntoRoomPopup,
+};
 
 const UsersPage: React.FC<UsersPageProps> = (props) => {
 	const { className, } = props;
@@ -44,6 +50,7 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 					</ListItem>
 				))}
 			</List>
+			<Popups popupMap={popupMap} />
 		</div>
 	);
 };

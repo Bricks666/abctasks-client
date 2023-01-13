@@ -1,6 +1,6 @@
 import { Collapse, Portal, Stack } from '@mui/material';
 import cn from 'classnames';
-import { useUnit } from 'effector-react';
+import { useStoreMap, useUnit } from 'effector-react';
 import * as React from 'react';
 import { getSlideDirection, SnackbarStackModel } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -15,7 +15,8 @@ export interface SnackbarListProps extends CommonProps {
 
 export const SnackbarList: React.FC<SnackbarListProps> = (props) => {
 	const { domRootSelector, className, model, } = props;
-	const { items, position, close, unmounted, mounted, } = useUnit(model);
+	const { items, close, unmounted, mounted, } = useUnit(model);
+	const position = useStoreMap(model.$config, (config) => config.position);
 	const { horizontal, vertical, } = position;
 
 	const isEmpty = !items.length;
