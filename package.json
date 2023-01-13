@@ -6,8 +6,8 @@
 	"scripts": {
 		"dev": "vite --host",
 		"build": "tsc && vite build",
-		"b": "set API_HOST=asas npm run build",
 		"preview": "vite preview",
+		"test": "npx vitest run",
 		"lint": "eslint --ext .tsx,.ts src",
 		"lint:fix": "eslint --ext .tsx,.ts src --fix",
 		"prettier": "prettier --write --config ./.prettierrc src",
@@ -74,6 +74,7 @@
 		"lint-staged": "^13.1.0",
 		"typed-css-modules": "^0.7.2",
 		"typescript": "^4.9.4",
-		"vite": "^4.0.4"
+		"vite": "^4.0.4",
+		"vitest": "^0.27.1"
 	}
 }

@@ -1,20 +1,21 @@
 import { Collapse, Portal, Stack } from '@mui/material';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { Position, Snackbar } from '@/shared/lib';
+import { getSlideDirection, SnackbarStackModel } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { NotificationCard } from '../snackbar-item';
 
 import styles from './snackbar-list.module.css';
 
 export interface SnackbarListProps extends CommonProps {
-	readonly items: Snackbar[];
-	readonly position: Position;
+	readonly model: SnackbarStackModel;
 	readonly domRootSelector?: string;
 }
 
 export const SnackbarList: React.FC<SnackbarListProps> = (props) => {
-	const { items, position, domRootSelector, className, } = props;
+	const { domRootSelector, className, model, } = props;
+	const { items, position, close, unmounted, mounted, } = useUnit(model);
 	const { horizontal, vertical, } = position;
 
 	const isEmpty = !items.length;
@@ -26,6 +27,8 @@ export const SnackbarList: React.FC<SnackbarListProps> = (props) => {
 		className
 	);
 
+	const direction = getSlideDirection(position);
+
 	const list = (
 		<Collapse className={classes} in={!isEmpty} mountOnEnter unmountOnExit>
 			<Stack direction='column-reverse' alignItems='flex-end' spacing={1}>
@@ -33,6 +36,10 @@ export const SnackbarList: React.FC<SnackbarListProps> = (props) => {
 					<NotificationCard
 						className={styles.item}
 						{...snackbar}
+						direction={direction}
+						onClose={close}
+						onMounted={mounted}
+						onUnmounted={unmounted}
 						key={snackbar.id}
 					/>
 				))}

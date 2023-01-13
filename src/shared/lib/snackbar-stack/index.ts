@@ -1,4 +1,4 @@
-export { createSnackbarStackModel } from './create-snackbar-stack-model';
+export { createSnackbarStackModel } from './fabric';
 export type {
 	Snackbar,
 	Position,
@@ -8,5 +8,7 @@ export type {
 	Duration,
 	Horizontal,
 	Variant,
-	Vertical
+	Vertical,
+	SnackbarStackModel
 } from './types';
+export { getSlideDirection } from './lib';

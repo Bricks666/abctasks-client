@@ -1,7 +1,10 @@
 import { createSnackbarStackModel } from '@/shared/lib';
 
-export const { $items, create, $position, } = createSnackbarStackModel({
+export const notifications = createSnackbarStackModel({
 	maxCount: 5,
-	timeout: 500000,
+	timeout: 2000,
 	variant: 'filled',
+	closable: true,
 });
+
+export const { $items, create, $position, } = notifications;
