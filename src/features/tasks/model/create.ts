@@ -4,11 +4,7 @@ import { createDomain } from 'effector';
 import { tasksModel } from '@/entities/tasks';
 import { CreateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const createTaskDomain = createDomain();
 
@@ -22,7 +18,7 @@ handlerFx.use(tasksApi.create);
 export const mutation = createMutationWithAccess<
 	CreateTaskParams,
 	StandardResponse<Task>,
-	StandardSuccessResponse<Task>,
+	StandardResponse<Task>,
 	StandardFailError
 >({
 	effect: handlerFx,

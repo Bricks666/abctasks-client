@@ -1,61 +1,56 @@
-import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
 import cn from 'classnames';
-import { useUnit } from 'effector-react';
+import { useForm } from 'effector-forms';
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { LoginParams } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { Checkbox, Field } from '@/shared/ui';
 import { loginModel } from '../../model';
 import styles from './login-form.module.css';
-import { validationSchema } from './validator';
 
-const initialValue: LoginParams = {
-	login: '',
-	password: '',
-	rememberMe: false,
-};
-
-export const LoginForm: React.FC<CommonProps> = ({ className, }) => {
+export const LoginForm: React.FC<CommonProps> = (props) => {
+	const { className, } = props;
 	const { t, } = useTranslation('login');
-	const login = useUnit(loginModel.mutation);
-	const { handleSubmit, formState, control, } = useForm<LoginParams>({
-		defaultValues: initialValue,
-		resolver: joiResolver(validationSchema),
-	});
-	const { isDirty, isSubmitting, } = formState;
+	const { fields, submit, isDirty, } = useForm(loginModel.form);
+
+	const { login, password, rememberMe, } = fields;
+
+	const onSubmit: React.FormEventHandler = (e) => {
+		e.preventDefault();
+		submit();
+	};
 
 	return (
-		<form
-			className={cn(styles.form, className)}
-			onSubmit={handleSubmit(login.start)}>
+		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
 			<Field
 				className={styles.field}
-				name='login'
-				control={control}
+				value={login.value}
+				onChange={login.onChange}
+				onBlur={login.onBlur}
+				errorText={login.errorText()}
+				isValid={login.isValid}
+				name={login.name}
 				label={t('fields.login')}
-				disabled={isSubmitting}
 			/>
 
 			<Field
 				className={styles.field}
-				name='password'
-				control={control}
+				value={password.value}
+				onChange={password.onChange}
+				onBlur={password.onBlur}
+				errorText={password.errorText()}
+				isValid={password.isValid}
+				name={password.name}
 				label={t('fields.password')}
 				type='password'
-				disabled={isSubmitting}
 			/>
 			<Checkbox
-				name='rememberMe'
-				control={control}
+				value={rememberMe.value}
+				onChange={rememberMe.onChange}
+				name={rememberMe.name}
 				label={t('fields.remember')}
 			/>
-			<Button
-				type='submit'
-				disabled={!isDirty || isSubmitting}
-				variant='outlined'>
+			<Button type='submit' disabled={!isDirty} variant='outlined'>
 				{t('actions.submit')}
 			</Button>
 		</form>

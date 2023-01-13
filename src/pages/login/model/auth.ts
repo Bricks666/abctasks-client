@@ -1,4 +1,5 @@
 import { redirect } from 'atomic-router';
+import { sample } from 'effector';
 import { loginModel } from '@/features/auth';
 import { authModel } from '@/entities/auth';
 import { routes } from '@/shared/configs';
@@ -11,4 +12,9 @@ redirect({
 		loadedAndAuthSuccess
 	],
 	route: routes.rooms,
+});
+
+sample({
+	clock: routes.login.closed,
+	target: loginModel.form.reset,
 });

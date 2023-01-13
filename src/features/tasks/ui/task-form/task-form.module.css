@@ -14,3 +14,18 @@
 	grid-column: 2;
 	justify-self: end;
 }
+
+
+@media (max-width: 500px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .field {
+    grid-column: 1;
+  }
+
+  .button {
+    grid-column: 1;
+  }
+}

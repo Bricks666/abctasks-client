@@ -3,49 +3,28 @@ import {
 	Checkbox as CheckboxMUI,
 	CheckboxProps as MUICheckboxProps
 } from '@mui/material';
+import { ConnectedField } from 'effector-forms';
 import * as React from 'react';
-import {
-	FieldValues,
-	useController,
-	UseControllerProps,
-	UseControllerReturn
-} from 'react-hook-form';
+
 import { CommonProps } from '@/shared/types';
 
-export interface CheckboxProps<FormValues extends FieldValues>
+export interface CheckboxProps
 	extends CommonProps,
-		UseControllerProps<FormValues>,
-		Omit<
-			MUICheckboxProps,
-			keyof UseControllerProps | keyof UseControllerReturn
-		> {
+		Pick<ConnectedField<any>, 'name' | 'onChange' | 'value'>,
+		Omit<MUICheckboxProps, keyof ConnectedField<any>> {
 	readonly label?: string | null;
 }
 
-export const Checkbox = <FormValues extends FieldValues>(
-	props: CheckboxProps<FormValues>
-) => {
-	const {
-		label,
-		name,
-		control,
-		defaultValue,
-		rules,
-		shouldUnregister,
-		...rest
-	} = props;
-	const { field, } = useController({
-		name,
-		control,
-		defaultValue,
-		rules,
-		shouldUnregister,
-	});
-	const { ref, ...controls } = field;
+export const Checkbox: React.FC<CheckboxProps> = React.memo((props) => {
+	const { label, onChange, ...rest } = props;
+
+	const handleChange: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
+		onChange(evt.target.checked);
+	};
 	return (
 		<FormControlLabel
-			control={<CheckboxMUI {...rest} {...controls} inputRef={ref} />}
+			control={<CheckboxMUI {...rest} onChange={handleChange} />}
 			label={label}
 		/>
 	);
-};
+});

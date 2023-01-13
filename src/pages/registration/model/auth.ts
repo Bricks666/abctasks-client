@@ -1,4 +1,5 @@
 import { redirect } from 'atomic-router';
+import { sample } from 'effector';
 import { registrationModel } from '@/features/auth';
 import { authModel } from '@/entities/auth';
 import { routes } from '@/shared/configs';
@@ -12,4 +13,9 @@ redirect({
 redirect({
 	clock: [authModel.query.finished.success, loadedAndAuthSuccess],
 	route: routes.rooms,
+});
+
+sample({
+	clock: routes.registration.closed,
+	target: registrationModel.form.reset,
 });
