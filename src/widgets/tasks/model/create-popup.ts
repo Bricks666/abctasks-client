@@ -1,25 +1,30 @@
-import { createDomain, sample } from 'effector';
-import { createTaskModel } from '@/features/tasks';
-import { popupsModel } from '@/entities/popups';
+import { sample } from 'effector';
+import { createTaskModel, taskFormModel } from '@/features/tasks';
+import { createPopupControlModel } from '@/entities/popups';
 import { tasksModel } from '@/entities/tasks';
-import { popupsMap } from '@/shared/configs';
+import { popupsMap, routes } from '@/shared/configs';
 
-const createTaskPopupDomain = createDomain();
-
-export const close = createTaskPopupDomain.event();
+export const { close, $isOpen, } = createPopupControlModel(popupsMap.createTask);
 
 sample({
 	clock: close,
-	fn: () => popupsMap.createTask,
-	target: popupsModel.close,
+	target: tasksModel.$status.reinit!,
 });
 
 sample({
 	clock: close,
-	target: [tasksModel.$id.reinit!, tasksModel.$status.reinit!],
+	target: taskFormModel.form.reset,
 });
 
 sample({
 	clock: createTaskModel.mutation.finished.success,
 	target: close,
+});
+
+sample({
+	clock: taskFormModel.form.formValidated,
+	source: routes.room.tasks.$params,
+	filter: $isOpen,
+	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
+	target: createTaskModel.mutation.start,
 });

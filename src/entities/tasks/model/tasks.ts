@@ -45,5 +45,5 @@ querySync({
 		[getParams.taskId]: $id,
 		[getParams.taskStatus]: $status,
 	},
-	route: routes.room.groups,
+	route: routes.room.tasks,
 });

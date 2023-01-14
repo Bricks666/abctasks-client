@@ -1,4 +1,5 @@
 import { sample } from 'effector';
+import { and } from 'patronum';
 import { roomFormModel, updateRoomModel } from '@/features/rooms';
 import { createPopupControlModel } from '@/entities/popups';
 import { roomModel, roomsModel } from '@/entities/rooms';
@@ -24,7 +25,7 @@ sample({
 sample({
 	clock: roomFormModel.form.formValidated,
 	source: roomsModel.$id,
-	filter: $isOpen,
+	filter: and($isOpen, roomsModel.$id),
 	fn: (roomId, values) => {
 		return { ...values, id: Number(roomId), };
 	},
