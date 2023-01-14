@@ -3,7 +3,7 @@ import { IconButton } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
 import { TaskStatus } from '@/shared/api';
-import { routes, getParams, popups } from '@/shared/configs';
+import { routes, getParams, popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
 export interface TaskColumnActionsProps extends CommonProps {
@@ -21,7 +21,7 @@ export const TaskColumnActions: React.FC<TaskColumnActionsProps> = React.memo(
 				to={routes.room.tasks as any}
 				params={{ id: roomId, }}
 				query={{
-					[getParams.popup]: popups.createTask,
+					[getParams.popup]: popupsMap.createTask,
 					[getParams.taskStatus]: columnStatus,
 				}}
 				component={Link}>

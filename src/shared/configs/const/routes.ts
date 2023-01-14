@@ -7,7 +7,7 @@ export const getParams = {
 	tab: 'tab',
 } as const;
 
-export const popups = {
+export const popupsMap = {
 	createTask: 'create-task',
 	updateTask: 'update-task',
 	groups: 'groups',

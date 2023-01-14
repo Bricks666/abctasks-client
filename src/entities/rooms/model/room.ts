@@ -6,7 +6,6 @@ import { Room, roomsApi, room } from '@/shared/api';
 import { StandardFailError, dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
-	StandardSuccessResponse,
 	getStandardResponse,
 	InRoomParams
 } from '@/shared/types';
@@ -16,15 +15,13 @@ const handlerFx = roomDomain.effect<
 	number,
 	StandardResponse<Room>,
 	StandardFailError
->();
-
-handlerFx.use(roomsApi.getOne);
+>(roomsApi.getOne);
 
 export const query = createQuery<
 	number,
 	StandardResponse<Room>,
 	StandardFailError,
-	StandardSuccessResponse<Room>,
+	StandardResponse<Room>,
 	Room
 >({
 	effect: handlerFx,

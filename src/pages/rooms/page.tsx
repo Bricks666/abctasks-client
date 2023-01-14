@@ -8,7 +8,7 @@ import {
 	RoomsHeader,
 	UpdateRoomPopup
 } from '@/widgets/rooms';
-import { popups } from '@/shared/configs';
+import { popupsMap } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
@@ -17,8 +17,8 @@ import { pageModel } from './model';
 import styles from './styles.module.css';
 
 const popupMap: PopupsProps['popupMap'] = {
-	[popups.createRoom]: CreateRoomPopup,
-	[popups.updateRoom]: UpdateRoomPopup,
+	[popupsMap.createRoom]: CreateRoomPopup,
+	[popupsMap.updateRoom]: UpdateRoomPopup,
 };
 
 const RoomsPage: React.FC<CommonProps> = (props) => {

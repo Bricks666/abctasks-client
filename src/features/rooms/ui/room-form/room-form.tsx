@@ -1,48 +1,55 @@
-import { joiResolver } from '@hookform/resolvers/joi';
 import { Button, Stack } from '@mui/material';
 import cn from 'classnames';
+import { useForm } from 'effector-forms';
 import * as React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
+import { roomFormModel } from '../../model';
+
 import styles from './room-form.module.css';
-import { RoomFormValues } from './types';
-import { validatingScheme } from './validator';
 
 export interface RoomFormProps extends CommonProps {
-	readonly onSubmit: SubmitHandler<RoomFormValues>;
 	readonly buttonText: string;
-	readonly defaultValues: RoomFormValues;
 }
 
-export const RoomForm: React.FC<RoomFormProps> = ({
-	onSubmit,
-	className,
-	defaultValues,
-	buttonText,
-}) => {
+export const RoomForm: React.FC<RoomFormProps> = (props) => {
+	const { className, buttonText, } = props;
 	const { t, } = useTranslation('popups');
-	const { formState, handleSubmit, control, } = useForm<RoomFormValues>({
-		resolver: joiResolver(validatingScheme),
-		defaultValues,
-	});
-	const { isDirty, isSubmitting, } = formState;
-	const disabled = !isDirty || isSubmitting;
+	const { submit, fields, isDirty, } = useForm(roomFormModel.form);
+
+	const { description, name, } = fields;
+
+	const onSubmit: React.FormEventHandler = (e) => {
+		e.preventDefault();
+		submit();
+	};
 
 	return (
 		<Stack
 			className={cn(styles.form, className)}
 			spacing={1}
-			onSubmit={handleSubmit(onSubmit)}
+			onSubmit={onSubmit}
 			component='form'>
-			<Field name='name' control={control} label={t('room.name')} />
 			<Field
-				name='description'
-				control={control}
+				value={name.value}
+				onChange={name.onChange}
+				onBlur={name.onBlur}
+				errorText={name.errorText()}
+				isValid={name.isValid}
+				name={name.name}
+				label={t('room.name')}
+			/>
+			<Field
+				value={description.value}
+				onChange={description.onChange}
+				onBlur={description.onBlur}
+				errorText={description.errorText()}
+				isValid={description.isValid}
+				name={description.name}
 				label={t('room.description')}
 			/>
-			<Button className={styles.button} disabled={disabled} type='submit'>
+			<Button className={styles.button} disabled={!isDirty} type='submit'>
 				{buttonText}
 			</Button>
 		</Stack>

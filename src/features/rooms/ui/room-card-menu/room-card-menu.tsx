@@ -4,7 +4,7 @@ import ExitRoomIcon from '@mui/icons-material/MeetingRoom';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { routes, getParams, popups } from '@/shared/configs';
+import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, EditMenu, Confirm } from '@/shared/ui';
@@ -43,7 +43,7 @@ export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 				to: routes.rooms,
 				params: {},
 				query: {
-					[getParams.popup]: popups.updateRoom,
+					[getParams.popup]: popupsMap.updateRoom,
 					[getParams.roomId]: id,
 				},
 				icon: <EditIcon />,

@@ -18,7 +18,7 @@ export const Field: React.FC<FieldProps> = React.memo((props) => {
 	const handleChange: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
 		onChange(evt.target.value);
 	};
-	console.log(props);
+
 	return (
 		<TextField
 			{...rest}

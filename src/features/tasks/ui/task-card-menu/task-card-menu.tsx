@@ -3,7 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { routes, getParams, popups } from '@/shared/configs';
+import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, EditMenu, Confirm } from '@/shared/ui';
@@ -30,7 +30,7 @@ export const TaskCardMenu: React.FC<TaskCardMenuProps> = React.memo((props) => {
 					id: roomId,
 				},
 				query: {
-					[getParams.popup]: popups.updateTask,
+					[getParams.popup]: popupsMap.updateTask,
 					[getParams.taskId]: taskId,
 				},
 			},

@@ -5,7 +5,7 @@ import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 import { t } from 'i18next';
 import * as React from 'react';
-import { routes, getParams, popups } from '@/shared/configs';
+import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useParam, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Confirm } from '@/shared/ui';
@@ -33,7 +33,7 @@ export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
 				to={routes.room.groups as any}
 				params={{ id: roomId, }}
 				query={{
-					[getParams.popup]: popups.updateGroup,
+					[getParams.popup]: popupsMap.updateGroup,
 					[getParams.groupId]: groupId,
 				}}
 				component={Link}>

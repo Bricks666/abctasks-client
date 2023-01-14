@@ -10,7 +10,7 @@ import { CreateGroupPopup, UpdateGroupPopup } from '@/widgets/groups';
 import { Popups, PopupsProps } from '@/widgets/page';
 import { CreateGroupButton, GroupCardActions } from '@/features/groups';
 import { useGroups, GroupLabel } from '@/entities/groups';
-import { getEmptyArray, popups, routes } from '@/shared/configs';
+import { getEmptyArray, popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
@@ -19,8 +19,8 @@ import { pageModel } from './model';
 export interface GroupsPageProps extends CommonProps {}
 
 const popupMap: PopupsProps['popupMap'] = {
-	[popups.createGroup]: CreateGroupPopup,
-	[popups.updateGroup]: UpdateGroupPopup,
+	[popupsMap.createGroup]: CreateGroupPopup,
+	[popupsMap.updateGroup]: UpdateGroupPopup,
 };
 
 const GroupsPage: React.FC<GroupsPageProps> = React.memo(function GroupsPage(

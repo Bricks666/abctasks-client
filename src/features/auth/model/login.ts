@@ -78,9 +78,7 @@ export const form = createForm<LoginParams>({
 });
 
 sample({
-	clock: form.submit,
-	source: form.$values,
-	filter: form.$isValid,
+	clock: form.formValidated,
 	target: mutation.start,
 });
 

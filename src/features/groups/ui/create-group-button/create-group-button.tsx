@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { routes, getParams, popups } from '@/shared/configs';
+import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
@@ -19,7 +19,7 @@ export const CreateGroupButton: React.FC<CreateGroupButtonProps> = React.memo(
 				className={className}
 				to={routes.room.groups as any}
 				params={{ id: roomId, }}
-				query={{ [getParams.popup]: popups.createGroup, }}
+				query={{ [getParams.popup]: popupsMap.createGroup, }}
 				component={Link}>
 				{t('actions.create')}
 			</Button>

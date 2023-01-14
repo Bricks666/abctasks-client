@@ -1,4 +1,7 @@
 .card {
+	display: grid;
+	grid-template-rows: max-content 1fr max-content;
+
 	min-width: 200px;
 	height: min(max-content, 300px);
 

@@ -4,11 +4,7 @@ import { createDomain } from 'effector';
 import { roomsModel } from '@/entities/rooms';
 import { UpdateRoomParams, Room, roomsApi, room } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const updateRoomDomain = createDomain();
 
@@ -16,13 +12,12 @@ const handlerFx = updateRoomDomain.effect<
 	UpdateRoomParams,
 	StandardResponse<Room>,
 	StandardFailError
->('updateRoomFx');
-handlerFx.use(roomsApi.update);
+>(roomsApi.update);
 
 export const mutation = createMutationWithAccess<
 	UpdateRoomParams,
 	StandardResponse<Room>,
-	StandardSuccessResponse<Room>,
+	StandardResponse<Room>,
 	StandardFailError
 >({
 	effect: handlerFx,

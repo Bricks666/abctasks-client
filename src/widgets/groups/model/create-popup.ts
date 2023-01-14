@@ -2,7 +2,7 @@ import { createDomain, sample } from 'effector';
 import { createGroupModel } from '@/features/groups';
 import { groupsModel } from '@/entities/groups';
 import { popupsModel } from '@/entities/popups';
-import { popups } from '@/shared/configs';
+import { popupsMap } from '@/shared/configs';
 
 const createGroupPopupDomain = createDomain();
 
@@ -10,7 +10,7 @@ export const close = createGroupPopupDomain.event();
 
 sample({
 	clock: close,
-	fn: () => popups.createGroup,
+	fn: () => popupsMap.createGroup,
 	target: popupsModel.close,
 });
 

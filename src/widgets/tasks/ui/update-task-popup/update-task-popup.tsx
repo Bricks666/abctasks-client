@@ -48,8 +48,6 @@ export const UpdateTaskPopup: React.FC<UpdateTaskPopupProps> = (props) => {
 	);
 	const loading = !task;
 
-	console.log(task, roomId, id);
-
 	return (
 		<MainPopup {...props} onClose={onClose} title={t('task.updateTitle')}>
 			{loading ? (
