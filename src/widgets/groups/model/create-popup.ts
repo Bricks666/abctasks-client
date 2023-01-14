@@ -1,25 +1,28 @@
-import { createDomain, sample } from 'effector';
-import { createGroupModel } from '@/features/groups';
-import { groupsModel } from '@/entities/groups';
-import { popupsModel } from '@/entities/popups';
-import { popupsMap } from '@/shared/configs';
+import { sample } from 'effector';
+import { createGroupModel, groupFormModel } from '@/features/groups';
+import { createPopupControlModel } from '@/entities/popups';
+import { popupsMap, routes } from '@/shared/configs';
 
-const createGroupPopupDomain = createDomain();
+export const { close, $isOpen, } = createPopupControlModel(
+	popupsMap.createGroup
+);
 
-export const close = createGroupPopupDomain.event();
-
-sample({
-	clock: close,
-	fn: () => popupsMap.createGroup,
-	target: popupsModel.close,
-});
-
-sample({
-	clock: close,
-	target: groupsModel.$id.reinit!,
-});
+const { formValidated, reset, } = groupFormModel.form;
 
 sample({
 	clock: createGroupModel.mutation.finished.success,
 	target: close,
+});
+
+sample({
+	clock: close,
+	target: reset,
+});
+
+sample({
+	clock: formValidated,
+	source: routes.room.groups.$params,
+	filter: $isOpen,
+	fn: (params, values) => ({ ...values, roomId: params.id, }),
+	target: createGroupModel.mutation.start,
 });

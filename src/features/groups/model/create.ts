@@ -4,11 +4,7 @@ import { createDomain } from 'effector';
 import { groupsModel } from '@/entities/groups';
 import { CreateGroupParams, group, Group, groupsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const createGroupDomain = createDomain();
 
@@ -16,13 +12,12 @@ const handlerFx = createGroupDomain.effect<
 	CreateGroupParams,
 	StandardResponse<Group>,
 	StandardFailError
->('createGroupFx');
-handlerFx.use(groupsApi.create);
+>(groupsApi.create);
 
 export const mutation = createMutationWithAccess<
 	CreateGroupParams,
 	StandardResponse<Group>,
-	StandardSuccessResponse<Group>,
+	StandardResponse<Group>,
 	StandardFailError
 >({
 	effect: handlerFx,

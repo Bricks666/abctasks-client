@@ -4,11 +4,7 @@ import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { GetTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { StandardFailError, dataExtractor } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const taskDomain = createDomain();
 
@@ -16,14 +12,13 @@ const handlerFx = taskDomain.effect<
 	GetTaskParams,
 	StandardResponse<Task>,
 	StandardFailError
->();
-handlerFx.use(tasksApi.getOne);
+>(tasksApi.getOne);
 
 export const query = createQuery<
 	GetTaskParams,
 	StandardResponse<Task>,
 	StandardFailError,
-	StandardSuccessResponse<Task>,
+	StandardResponse<Task>,
 	Task
 >({
 	effect: handlerFx,

@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { TaskColumnActions, updateTaskModel } from '@/features/tasks';
+import { useGroupsMap } from '@/entities/groups';
 import { SkeletonTaskCard, TaskColumnHeader } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
 import { getEmptyArray } from '@/shared/configs';
@@ -24,6 +25,7 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	const { tasks, className, columnStatus, header, isLoading, roomId, } = props;
 	const moveTask = useUnit(updateTaskModel.mutation);
+	const groupsMap = useGroupsMap();
 	const onDrop = React.useCallback<React.DragEventHandler>(
 		(evt) => {
 			const id = Number(evt.dataTransfer.getData('taskId'));
@@ -40,6 +42,20 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 		[roomId, columnStatus]
 	);
 
+	let items: React.ReactElement[];
+
+	if (isLoading) {
+		items = getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />);
+	} else {
+		items = tasks.map((task) => (
+			<TaskCard
+				{...task}
+				group={groupsMap.data[task.groupId] ?? null}
+				key={task.id}
+			/>
+		));
+	}
+
 	return (
 		<Stack
 			className={cn(styles.wrapper, className)}
@@ -53,9 +69,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 				{header}
 			</TaskColumnHeader>
 			<Stack className={styles.list} spacing={1} component='main'>
-				{isLoading
-					? getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />)
-					: tasks.map((task) => <TaskCard {...task} key={task.id} />)}
+				{items}
 			</Stack>
 		</Stack>
 	);

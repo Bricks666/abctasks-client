@@ -1,18 +1,15 @@
-import { createDomain, sample } from 'effector';
-import { updateGroupModel } from '@/features/groups';
-import { groupsModel } from '@/entities/groups';
-import { popupsModel } from '@/entities/popups';
-import { popupsMap } from '@/shared/configs';
+import { sample } from 'effector';
+import { and } from 'patronum';
+import { groupFormModel, updateGroupModel } from '@/features/groups';
+import { groupModel, groupsModel } from '@/entities/groups';
+import { createPopupControlModel } from '@/entities/popups';
+import { popupsMap, routes } from '@/shared/configs';
 
-const updateGroupPopupDomain = createDomain();
+export const { close, $isOpen, } = createPopupControlModel(
+	popupsMap.updateGroup
+);
 
-export const close = updateGroupPopupDomain.event();
-
-sample({
-	clock: close,
-	fn: () => popupsMap.updateGroup,
-	target: popupsModel.close,
-});
+const { fields, setForm, reset, formValidated, } = groupFormModel.form;
 
 sample({
 	clock: close,
@@ -20,6 +17,39 @@ sample({
 });
 
 sample({
+	clock: close,
+	target: reset,
+});
+
+sample({
 	clock: updateGroupModel.mutation.finished.success,
 	target: close,
+});
+
+sample({
+	clock: formValidated,
+	source: { params: routes.room.groups.$params, id: groupsModel.$id, },
+	filter: and($isOpen, groupsModel.$id),
+	fn: ({ params, id, }, values) => ({
+		...values,
+		id: Number(id),
+		roomId: params.id,
+	}),
+	target: updateGroupModel.mutation.start,
+});
+
+sample({
+	clock: groupModel.query.finished.success,
+	fn: ({ result, }) => result,
+	target: setForm,
+});
+
+sample({
+	clock: groupModel.query.finished.success,
+	fn: () => false,
+	target: [
+		fields.name.$isDirty,
+		fields.mainColor.$isDirty,
+		fields.secondColor.$isDirty
+	],
 });

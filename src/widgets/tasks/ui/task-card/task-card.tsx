@@ -1,22 +1,18 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { TaskCardMenu } from '@/features/tasks';
-import {
-	GroupLabel,
-	groupsModel,
-	SkeletonGroupLabel,
-	useGroup
-} from '@/entities/groups';
+import { GroupLabel, groupsModel, SkeletonGroupLabel } from '@/entities/groups';
 import { TemplateTaskCard } from '@/entities/tasks';
-import { Task } from '@/shared/api';
+import { Group, Task } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 
-export interface TaskCardProps extends CommonProps, Task {}
+export interface TaskCardProps extends CommonProps, Task {
+	readonly group: Group | null;
+}
 
 export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
-	const { groupId, id, roomId, } = props;
+	const { group, id, roomId, } = props;
 
-	const { data: group, } = useGroup(groupId);
 	const status = useUnit(groupsModel.query.$status);
 	const isLoading = status === 'initial' || status === 'pending';
 
@@ -25,11 +21,7 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 	}
 
 	const actions = <TaskCardMenu roomId={roomId} taskId={id} />;
-	const groupLabel = !isLoading ? (
-		<GroupLabel {...group!} />
-	) : (
-		<SkeletonGroupLabel />
-	);
+	const groupLabel = group ? <GroupLabel {...group} /> : <SkeletonGroupLabel />;
 
-	return <TemplateTaskCard actions={actions} group={groupLabel} {...props} />;
+	return <TemplateTaskCard {...props} actions={actions} group={groupLabel} />;
 });

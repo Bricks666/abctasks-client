@@ -1,13 +1,7 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import {
-	GroupForm,
-	GroupFormValues,
-	SkeletonGroupForm,
-	updateGroupModel
-} from '@/features/groups';
+import { GroupForm, SkeletonGroupForm } from '@/features/groups';
 import { groupsModel, useGroup } from '@/entities/groups';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
@@ -25,29 +19,8 @@ export const UpdateGroupPopup: React.FC<
 	const roomId = useParam(routes.room.groups, 'id');
 	const id = useUnit(groupsModel.$id);
 	const onClose = useUnit(updateGroupPopupModel.close);
-	const { data: group, } = useGroup(Number(id));
-	const updateGroup = useUnit(updateGroupModel.mutation);
-	const isLoading = !group && id !== null;
-
-	const onSubmit = React.useCallback<SubmitHandler<GroupFormValues>>(
-		(values) => {
-			updateGroup.start({
-				...values,
-				roomId: Number(roomId),
-				id: Number(id),
-			});
-		},
-		[id, roomId]
-	);
-
-	const changeGroup = React.useMemo<GroupFormValues>(
-		() => ({
-			mainColor: group?.mainColor || '',
-			name: group?.name || '',
-			secondColor: group?.secondColor || '',
-		}),
-		[group]
-	);
+	const { data: group, } = useGroup(Number(id), roomId);
+	const isLoading = !group;
 
 	return (
 		<MainPopup {...props} onClose={onClose} title={t('group.updateTitle')}>
@@ -56,8 +29,6 @@ export const UpdateGroupPopup: React.FC<
 			) : (
 				<GroupForm
 					className={styles.form}
-					defaultValues={changeGroup}
-					onSubmit={onSubmit}
 					buttonText={t('actions.save', { ns: 'common', })}
 				/>
 			)}

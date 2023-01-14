@@ -1,11 +1,7 @@
-import { useMemo } from 'react';
-import { useGroupsMap } from './useGroupsMap';
+import { useGate, useUnit } from 'effector-react';
+import { groupModel } from '../model';
 
-export const useGroup = (groupId: number) => {
-	const { data: groupsMap, ...query } = useGroupsMap();
-	const data = useMemo(() => {
-		return groupsMap[groupId] ?? null;
-	}, [groupsMap, groupId]);
-
-	return { ...query, data, };
+export const useGroup = (groupId: number, roomId: number) => {
+	useGate(groupModel.Gate, { id: groupId, roomId, });
+	return useUnit(groupModel.query);
 };

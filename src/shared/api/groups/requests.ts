@@ -1,6 +1,7 @@
 import { fetcher } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
 import {
+	GetGroupParams,
 	CreateGroupParams,
 	UpdateGroupParams,
 	RemoveGroupParams,
@@ -15,6 +16,14 @@ export const getAll = async (roomId: number) => {
 	return groupsFetcher.get<StandardResponse<Group[]>>({
 		path: {
 			url: roomId,
+		},
+	});
+};
+
+export const getOne = async ({ roomId, id, }: GetGroupParams) => {
+	return groupsFetcher.get<StandardResponse<Group>>({
+		path: {
+			url: [roomId, id],
 		},
 	});
 };
