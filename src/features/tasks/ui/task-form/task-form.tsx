@@ -4,7 +4,7 @@ import { useForm } from 'effector-forms';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { GroupsSelect } from '@/entities/groups';
-import { StatusesSelect } from '@/entities/tasks';
+import { StatusSelect } from '@/entities/tasks';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
 import { taskFormModel } from '../../model';
@@ -38,7 +38,7 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 				name={groupId.name}
 				label={t(`task.group`)}
 			/>
-			<StatusesSelect
+			<StatusSelect
 				value={status.value}
 				onChange={status.onChange}
 				onBlur={status.onBlur}

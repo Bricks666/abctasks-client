@@ -1,14 +1,14 @@
 import { sample } from 'effector';
 import { createTaskModel, taskFormModel } from '@/features/tasks';
 import { createPopupControlModel } from '@/entities/popups';
-import { tasksModel } from '@/entities/tasks';
+import { tasksInRoomModel } from '@/entities/tasks';
 import { popupsMap, routes } from '@/shared/configs';
 
 export const { close, $isOpen, } = createPopupControlModel(popupsMap.createTask);
 
 sample({
 	clock: close,
-	target: tasksModel.$status.reinit!,
+	target: tasksInRoomModel.$status.reinit!,
 });
 
 sample({

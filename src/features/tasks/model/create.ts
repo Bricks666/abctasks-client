@@ -1,7 +1,7 @@
 import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
-import { tasksModel } from '@/entities/tasks';
+import { tasksInRoomModel } from '@/entities/tasks';
 import { CreateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -25,7 +25,7 @@ export const mutation = createMutationWithAccess<
 	contract: runtypeContract(getStandardResponse(task)),
 });
 
-update(tasksModel.query, {
+update(tasksInRoomModel.query, {
 	on: mutation,
 	by: {
 		success: ({ query, mutation, }) => {

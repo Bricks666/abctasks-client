@@ -5,17 +5,19 @@ import {
 	CreateTaskParams,
 	UpdateTaskParams,
 	RemoveTaskParams,
-	Task
+	Task,
+	GetTasksParams
 } from './types';
 
 const tasksFetcher = fetcher.create({
 	baseURL: 'tasks',
 });
 
-export const getAll = async (roomId: number) => {
+export const getAllInRoom = async ({ roomId, ...query }: GetTasksParams) => {
 	return tasksFetcher.get<StandardResponse<Task[]>>({
 		path: {
 			url: roomId,
+			query,
 		},
 	});
 };

@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react';
-import { tasksModel } from '../model';
+import { tasksInRoomModel } from '../model';
 
 export const useTasks = () => {
-	return useUnit(tasksModel.query);
+	return useUnit(tasksInRoomModel.query);
 };

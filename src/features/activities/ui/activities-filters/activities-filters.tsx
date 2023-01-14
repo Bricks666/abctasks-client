@@ -38,7 +38,10 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 				label='User'
 				value={activistId.value}
 				onChange={activistId.onChange}
-				error={activistId.hasError()}
+				onBlur={activistId.onBlur}
+				errorText={activistId.errorText()}
+				isValid={activistId.isValid}
+				name={activistId.name}
 			/>
 			<DatePicker
 				label='Happened after date'

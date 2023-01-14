@@ -1,14 +1,21 @@
 import { sample } from 'effector';
+import { debounce } from 'patronum';
 import {
 	createTaskModel,
 	removeTaskModel,
+	tasksFiltersModel,
 	updateTaskModel
 } from '@/features/tasks';
 import { notificationsModel } from '@/entities/notifications';
-import { tasksModel } from '@/entities/tasks';
+import { tasksInRoomModel } from '@/entities/tasks';
 import { routes } from '@/shared/configs';
 import { loadedWithRouteState } from './page';
 
+const { $values, } = tasksFiltersModel.form;
+const currentRoute = routes.room.tasks;
+/**
+ * TODO: Вынести в модель уведомлений
+ */
 sample({
 	clock: createTaskModel.mutation.finished.success,
 	fn: () => ({
@@ -64,7 +71,19 @@ sample({
 });
 
 sample({
-	clock: [routes.room.tasks.opened, loadedWithRouteState],
-	fn: ({ params, }) => params.id,
-	target: tasksModel.query.start,
+	clock: [currentRoute.opened, loadedWithRouteState],
+	fn: ({ params, }) => ({ roomId: params.id, }),
+	target: tasksInRoomModel.query.start,
+});
+
+const valuesChanged = debounce({
+	source: $values,
+	timeout: 250,
+});
+
+sample({
+	clock: valuesChanged,
+	source: currentRoute.$params,
+	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
+	target: tasksInRoomModel.query.start,
 });

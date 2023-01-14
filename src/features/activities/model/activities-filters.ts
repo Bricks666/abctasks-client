@@ -23,6 +23,5 @@ export const form = createForm<ActivitiesFiltersForm>({
 		sphereName: { init: null, },
 		action: { init: null, },
 	},
-	validateOn: ['submit'],
 	domain: activitiesFiltersDomain,
 });

@@ -7,7 +7,13 @@
 	width: 100%;
 }
 
+.tasks {
+	grid-column: 1;
+}
+
 .aside {
+	grid-row: span 2;
+
 	display: grid;
 	gap: 1.5em;
 	grid-template-rows: max-content 1fr;

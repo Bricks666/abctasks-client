@@ -1,20 +1,18 @@
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete } from '@mui/material';
 import * as React from 'react';
 import { User } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
+import { Field, FieldProps } from '@/shared/ui';
 import { useUsersInRoom } from '../../lib';
 
-export interface UsersInRoomPickerProps extends CommonProps {
+export interface UsersInRoomPickerProps extends CommonProps, FieldProps {
 	readonly onChange: (value: number | null) => void;
 	readonly value: number | null;
-	readonly error?: boolean;
-	readonly helperText?: string;
-	readonly label?: string;
 }
 
 export const UsersInRoomPicker: React.FC<UsersInRoomPickerProps> = React.memo(
 	(props) => {
-		const { onChange, value, className, error, label, helperText, } = props;
+		const { onChange, value, className, ...rest } = props;
 		const users = useUsersInRoom();
 
 		const changeHandler = (evt: unknown, value: User | null) => {
@@ -32,14 +30,7 @@ export const UsersInRoomPicker: React.FC<UsersInRoomPickerProps> = React.memo(
 				loading={users.pending}
 				onChange={changeHandler}
 				renderInput={(params) => {
-					return (
-						<TextField
-							{...params}
-							error={error}
-							label={label}
-							helperText={helperText}
-						/>
-					);
+					return <Field {...params} {...rest} />;
 				}}
 			/>
 		);
