@@ -3,3 +3,4 @@ export * from './tasks';
 export * from './progresses';
 export * from './groups';
 export * as lastActivitiesModel from './activities';
+export * from './notifications';

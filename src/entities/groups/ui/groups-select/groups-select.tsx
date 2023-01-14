@@ -10,7 +10,6 @@ export interface GroupsSelectProps
 		Omit<FieldProps, 'select'> {
 	readonly hasEmptyOption?: boolean;
 	readonly emptyOptionText?: string;
-	readonly emptyOptionValue?: number | string;
 }
 
 export const GroupsSelect: React.FC<GroupsSelectProps> = React.memo((props) => {

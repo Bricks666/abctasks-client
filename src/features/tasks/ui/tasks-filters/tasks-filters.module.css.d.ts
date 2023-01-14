@@ -1,6 +1,5 @@
 declare const styles: {
 	readonly wrapper: string;
-	readonly tasks: string;
-	readonly aside: string;
+	readonly button: string;
 };
 export = styles;

@@ -5,6 +5,13 @@ export const getParams = {
 	groupId: 'group-id',
 	roomId: 'room-id',
 	tab: 'tab',
+	userId: 'user-id',
+	before: 'bfr',
+	after: 'afr',
+	action: 'act',
+	sphereName: 'sphere-name',
+	count: 'cnt',
+	page: 'p',
 } as const;
 
 export const popupsMap = {

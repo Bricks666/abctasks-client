@@ -1,8 +1,10 @@
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { Popups, PopupsProps } from '@/widgets/page';
 import { CreateTaskPopup, UpdateTaskPopup } from '@/widgets/tasks';
-import { TasksFilters } from '@/features/tasks';
+import { MobileTasksFilters, TasksFilters } from '@/features/tasks';
+import { deviceInfoModel } from '@/entities/page';
 import { popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 import { pageModel } from './model';
@@ -16,9 +18,15 @@ const popupMap: PopupsProps['popupMap'] = {
 
 const TasksPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
+	const [isMobile, isTabletHorizontal] = useUnit([
+		deviceInfoModel.$isMobile,
+		deviceInfoModel.$isTabletVertical
+	]);
+	const showMobile = isMobile || isTabletHorizontal;
+
 	return (
-		<div className={cn(styles.tasksBlock, className)}>
-			<TasksFilters />
+		<div className={cn(styles.wrapper, className)}>
+			{showMobile ? <MobileTasksFilters /> : <TasksFilters />}
 			<Tasks className={styles.tasks} />
 			<div className={styles.aside}>
 				<TasksProgress />

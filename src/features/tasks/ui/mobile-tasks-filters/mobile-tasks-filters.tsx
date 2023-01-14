@@ -4,16 +4,16 @@ import { Button, Collapse } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useToggle } from '@/shared/lib';
-import {
-	ActivitiesFilters,
-	ActivitiesFiltersProps
-} from '../activities-filters';
+import { CommonProps } from '@/shared/types';
+import { TasksFilters, TasksFiltersProps } from '../tasks-filters';
 
-import styles from './mobile-activities-filters.module.css';
+import styles from './mobile-tasks-filters.module.css';
 
-export interface MobileActivitiesFiltersProps extends ActivitiesFiltersProps {}
+export interface MobileTasksFiltersProps
+	extends CommonProps,
+		TasksFiltersProps {}
 
-export const MobileActivitiesFilters: React.FC<MobileActivitiesFiltersProps> = (
+export const MobileTasksFilters: React.FC<MobileTasksFiltersProps> = (
 	props
 ) => {
 	const { className, } = props;
@@ -27,7 +27,7 @@ export const MobileActivitiesFilters: React.FC<MobileActivitiesFiltersProps> = (
 				Фильтры
 			</Button>
 			<Collapse in={open}>
-				<ActivitiesFilters />
+				<TasksFilters />
 			</Collapse>
 		</div>
 	);

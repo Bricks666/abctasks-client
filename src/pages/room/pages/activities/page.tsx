@@ -12,7 +12,7 @@ import {
 	useActivitiesInRoom
 } from '@/entities/activities';
 import { deviceInfoModel } from '@/entities/page';
-import { getEmptyArray, routes } from '@/shared/configs';
+import { getEmptyArray, getParams, routes } from '@/shared/configs';
 import { useParam, useQueryParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
@@ -28,7 +28,7 @@ const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 		deviceInfoModel.$isMobile,
 		deviceInfoModel.$isTabletVertical
 	]);
-	const page = parseInt(useQueryParam('page', '1'), 10);
+	const page = parseInt(useQueryParam(getParams.page, '1'), 10);
 	const isError = !!activities.error;
 	const showMobileFilters = isMobile || isTabletVertical;
 

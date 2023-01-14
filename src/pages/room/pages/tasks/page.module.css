@@ -1,6 +1,7 @@
-.tasksBlock {
+.wrapper {
 	display: grid;
 	grid-template-columns: 4fr 1fr;
+	grid-template-areas: '. aside' 'tasks aside' '. aside';
 	gap: 1em;
 
 	height: 100%;
@@ -8,11 +9,11 @@
 }
 
 .tasks {
-	grid-column: 1;
+	grid-area: tasks;
 }
 
 .aside {
-	grid-row: span 2;
+	grid-area: aside;
 
 	display: grid;
 	gap: 1.5em;
@@ -20,7 +21,8 @@
 }
 
 @media (max-width: 1300px) {
-	.tasksBlock {
+	.wrapper {
 		grid-template-columns: 1fr;
+		grid-template-areas: '.' 'tasks' 'aside';
 	}
 }

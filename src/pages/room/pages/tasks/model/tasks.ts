@@ -1,78 +1,26 @@
+import { querySync } from 'atomic-router';
 import { sample } from 'effector';
 import { debounce } from 'patronum';
-import {
-	createTaskModel,
-	removeTaskModel,
-	tasksFiltersModel,
-	updateTaskModel
-} from '@/features/tasks';
-import { notificationsModel } from '@/entities/notifications';
+import { tasksFiltersModel } from '@/features/tasks';
 import { tasksInRoomModel } from '@/entities/tasks';
-import { routes } from '@/shared/configs';
-import { loadedWithRouteState } from './page';
+import { routes, controls, getParams } from '@/shared/configs';
+import { loaded, loadedWithRouteState } from './page';
 
-const { $values, } = tasksFiltersModel.form;
+const { $values, setForm, reset, fields, } = tasksFiltersModel.form;
 const currentRoute = routes.room.tasks;
 /**
  * TODO: Вынести в модель уведомлений
  */
-sample({
-	clock: createTaskModel.mutation.finished.success,
-	fn: () => ({
-		message: 'Task was created successfully',
-		color: 'success' as const,
-	}),
-	target: notificationsModel.create,
-});
-
-sample({
-	clock: createTaskModel.mutation.finished.failure,
-	fn: () => ({
-		message: 'Task was not created',
-		color: 'error' as const,
-	}),
-	target: notificationsModel.create,
-});
-
-sample({
-	clock: removeTaskModel.mutation.finished.success,
-	fn: () => ({
-		message: 'Task was removed successfully',
-		color: 'success' as const,
-	}),
-	target: notificationsModel.create,
-});
-
-sample({
-	clock: removeTaskModel.mutation.finished.failure,
-	fn: () => ({
-		message: 'Task was not removed',
-		color: 'error' as const,
-	}),
-	target: notificationsModel.create,
-});
-
-sample({
-	clock: updateTaskModel.mutation.finished.success,
-	fn: () => ({
-		message: 'Task was update successfully',
-		color: 'success' as const,
-	}),
-	target: notificationsModel.create,
-});
-
-sample({
-	clock: updateTaskModel.mutation.finished.failure,
-	fn: () => ({
-		message: 'Task was not update',
-		color: 'error' as const,
-	}),
-	target: notificationsModel.create,
-});
 
 sample({
 	clock: [currentRoute.opened, loadedWithRouteState],
-	fn: ({ params, }) => ({ roomId: params.id, }),
+	fn: ({ params, query, }) => ({
+		roomId: params.id,
+		authorId: query[getParams.userId],
+		groupId: query[getParams.userId],
+		before: query[getParams.before],
+		after: query[getParams.after],
+	}),
 	target: tasksInRoomModel.query.start,
 });
 
@@ -86,4 +34,33 @@ sample({
 	source: currentRoute.$params,
 	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
 	target: tasksInRoomModel.query.start,
+});
+
+sample({
+	clock: currentRoute.closed,
+	target: reset,
+});
+
+querySync({
+	controls,
+	source: {
+		[getParams.userId]: fields.authorId.$value,
+		[getParams.groupId]: fields.groupId.$value,
+		[getParams.after]: fields.after.$value,
+		[getParams.before]: fields.before.$value,
+	},
+	clock: [valuesChanged],
+	route: currentRoute,
+});
+
+sample({
+	clock: loaded,
+	source: controls.$query,
+	fn: (query) => ({
+		authorId: query[getParams.userId],
+		groupId: query[getParams.userId],
+		before: query[getParams.before],
+		after: query[getParams.after],
+	}),
+	target: setForm,
 });
