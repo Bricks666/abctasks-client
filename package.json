@@ -21,7 +21,6 @@
 		"@emotion/styled": "^11.10.4",
 		"@farfetched/core": "^0.6.2",
 		"@farfetched/runtypes": "^0.6.2",
-		"@hookform/resolvers": "^2.8.8",
 		"@mui/icons-material": "^5.11.0",
 		"@mui/lab": "^5.0.0-alpha.108",
 		"@mui/material": "^5.11.3",
@@ -42,7 +41,6 @@
 		"patronum": "^1.14.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-hook-form": "^7.41.5",
 		"react-i18next": "^12.1.1",
 		"runtypes": "^6.6.0",
 		"socket.io-client": "^4.5.4"
@@ -62,7 +60,6 @@
 		"@typescript-eslint/eslint-plugin": "^5.48.0",
 		"@typescript-eslint/parser": "^5.48.0",
 		"@vitejs/plugin-react": "^3.0.1",
-		"browserslist": "^4.21.4",
 		"eslint": "^8.31.0",
 		"eslint-config-airbnb": "^19.0.4",
 		"eslint-config-prettier": "^8.6.0",

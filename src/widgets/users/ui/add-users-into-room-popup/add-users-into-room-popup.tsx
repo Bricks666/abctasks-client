@@ -27,7 +27,7 @@ export const AddUsersIntoRoomPopup: React.FC<AddUsersIntoRoomPopupProps> = (
 
 	return (
 		<MainPopup isOpen={isOpen} onClose={onClose} title='Add user'>
-			<SearchUserForm onSearch={users.start} debounceTimeout={300} />
+			<SearchUserForm />
 			<List className={styles.list}>
 				{users.data.map((user) => (
 					<ListItem key={user.id}>

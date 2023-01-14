@@ -1,18 +1,14 @@
-import { createDomain, sample } from 'effector';
+import { sample } from 'effector';
+import { debounce, debug } from 'patronum';
 import { addUserRoomModel } from '@/features/rooms';
-import { popupsModel } from '@/entities/popups';
+import { searchUserModel } from '@/features/users';
+import { createPopupControlModel } from '@/entities/popups';
 import { searchedUsersModel } from '@/entities/users';
 import { popupsMap } from '@/shared/configs';
 
-const addUsersPopupDomain = createDomain();
+export const { close, $isOpen, } = createPopupControlModel(popupsMap.addUser);
 
-export const close = addUsersPopupDomain.event();
-
-sample({
-	clock: close,
-	fn: () => popupsMap.addUser,
-	target: popupsModel.close,
-});
+const { $values, reset, } = searchUserModel.form;
 
 sample({
 	clock: addUserRoomModel.mutation.finished.success,
@@ -21,5 +17,20 @@ sample({
 
 sample({
 	clock: close,
-	target: searchedUsersModel.query.reset,
+	target: [searchedUsersModel.query.reset, reset],
+});
+
+debug(searchUserModel.form.$values, searchedUsersModel.query.$data);
+
+const debouncedSearch = sample({
+	clock: debounce({
+		timeout: 150,
+		source: $values,
+	}),
+	filter: $isOpen,
+});
+
+sample({
+	clock: debouncedSearch,
+	target: searchedUsersModel.query.start,
 });
