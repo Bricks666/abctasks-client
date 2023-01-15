@@ -9,7 +9,7 @@ import * as React from 'react';
 
 export const theme = extendTheme({
 	shape: {
-		borderRadius: 8,
+		// borderRadius: 8,
 	},
 	spacing: (tab: number) => `${tab}rem`,
 });

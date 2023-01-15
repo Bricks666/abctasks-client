@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
 import { GroupsSelect } from '@/entities/groups';
-import { UsersInRoomPicker } from '@/entities/rooms';
+import { UsersInRoomPicker } from '@/entities/users';
 import { CommonProps } from '@/shared/types';
 import { DatePicker } from '@/shared/ui';
 import { tasksFiltersModel } from '../../model';
@@ -24,7 +24,7 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 				value={groupId.value}
 				onChange={groupId.onChange}
 				onBlur={groupId.onBlur}
-				errorText={groupId.errorText()}
+				helperText={groupId.errorText()}
 				isValid={groupId.isValid}
 				name={groupId.name}
 				label='Group'
@@ -35,7 +35,7 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 				value={authorId.value}
 				onChange={authorId.onChange}
 				onBlur={authorId.onBlur}
-				errorText={authorId.errorText()}
+				helperText={authorId.errorText()}
 				isValid={authorId.isValid}
 				name={authorId.name}
 				label='User'

@@ -35,7 +35,7 @@ export const RoomForm: React.FC<RoomFormProps> = (props) => {
 				value={name.value}
 				onChange={name.onChange}
 				onBlur={name.onBlur}
-				errorText={name.errorText()}
+				helperText={name.errorText()}
 				isValid={name.isValid}
 				name={name.name}
 				label={t('room.name')}
@@ -44,7 +44,7 @@ export const RoomForm: React.FC<RoomFormProps> = (props) => {
 				value={description.value}
 				onChange={description.onChange}
 				onBlur={description.onBlur}
-				errorText={description.errorText()}
+				helperText={description.errorText()}
 				isValid={description.isValid}
 				name={description.name}
 				label={t('room.description')}

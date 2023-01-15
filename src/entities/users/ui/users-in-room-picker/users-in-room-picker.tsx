@@ -4,6 +4,7 @@ import { User } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 import { useUsersInRoom } from '../../lib';
+import { TemplateUserCard } from '../template-user-card';
 
 export interface UsersInRoomPickerProps extends CommonProps, FieldProps {
 	readonly onChange: (value: number | null) => void;
@@ -29,6 +30,9 @@ export const UsersInRoomPicker: React.FC<UsersInRoomPickerProps> = React.memo(
 				getOptionLabel={(user) => user.login}
 				loading={users.pending}
 				onChange={changeHandler}
+				renderOption={(params, option) => (
+					<TemplateUserCard {...params} {...option} />
+				)}
 				renderInput={(params) => {
 					return <Field {...params} {...rest} />;
 				}}

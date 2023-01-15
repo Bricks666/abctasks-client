@@ -11,22 +11,13 @@ export interface FieldProps
 				'isValid' | 'name' | 'onChange' | 'onBlur' | 'value'
 			>
 		>,
-		Omit<TextFieldProps, keyof ConnectedField<any>> {
-	readonly errorText?: string;
-}
+		Omit<TextFieldProps, keyof ConnectedField<any>> {}
 
 export const Field: React.FC<FieldProps> = React.memo((props) => {
-	const { isValid, errorText, onChange, ...rest } = props;
+	const { isValid, onChange, ...rest } = props;
 	const handleChange: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
 		onChange?.(evt.target.value);
 	};
 
-	return (
-		<TextField
-			{...rest}
-			onChange={handleChange}
-			error={!isValid}
-			helperText={errorText}
-		/>
-	);
+	return <TextField {...rest} onChange={handleChange} error={!isValid} />;
 });

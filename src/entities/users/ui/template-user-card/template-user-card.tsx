@@ -1,4 +1,10 @@
-import { Card, CardHeader } from '@mui/material';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+	ListItem,
+	ListItemAvatar,
+	ListItemProps,
+	ListItemText
+} from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { User } from '@/shared/api';
@@ -7,27 +13,27 @@ import { UserAvatar } from '../user-avatar';
 
 import styles from './template-user-card.module.css';
 
-export interface TemplateUserCardProps extends CommonProps, User {
+export interface TemplateUserCardProps
+	extends CommonProps,
+		User,
+		Omit<ListItemProps, keyof CommonProps | keyof User> {
 	readonly actions?: React.ReactElement | null;
-	readonly onClick?: React.MouseEventHandler;
 	readonly extra?: React.ReactElement | null;
 }
 
 export const TemplateUserCard: React.FC<TemplateUserCardProps> = (props) => {
-	const { login, actions, className, photo, onClick, extra, } = props;
+	const { login, actions, className, photo, extra, id: _id, ...rest } = props;
 
 	return (
-		<Card
+		<ListItem
 			className={cn(styles.card, className)}
-			onClick={onClick}
-			variant='outlined'>
-			<CardHeader
-				avatar={<UserAvatar login={login} photo={photo} />}
-				title={login}
-				subheader='email'
-				action={actions}
-			/>
+			secondaryAction={actions}
+			{...rest}>
+			<ListItemAvatar>
+				<UserAvatar login={login} photo={photo} />
+			</ListItemAvatar>
+			<ListItemText primary={login} />
 			{extra}
-		</Card>
+		</ListItem>
 	);
 };

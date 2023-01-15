@@ -15,7 +15,9 @@ export const Header: React.FC<HeaderProps> = (props) => {
 		<AppBar
 			className={cn(styles.header, className)}
 			position='static'
-			color='transparent'>
+			color='transparent'
+			elevation={0}
+			variant='outlined'>
 			<Toolbar className={styles.bar}>
 				<Navigation />
 				<ProfileMenu className={styles.avatar} />

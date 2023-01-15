@@ -1,24 +1,26 @@
-import { Button } from '@mui/material';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import { IconButton } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { getParams, popupsMap, routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
-export interface OpenSearchUserPopupProps extends CommonProps {}
+export interface OpenAddUserIntoRoomPopupProps extends CommonProps {}
 
-export const OpenSearchUserPopup: React.FC<OpenSearchUserPopupProps> =
+export const OpenAddUserIntoRoomPopup: React.FC<OpenAddUserIntoRoomPopupProps> =
 	React.memo(() => {
 		const params = useUnit(routes.room.users.$params);
 		return (
-			<Button
+			<IconButton
 				to={routes.room.users as any}
 				params={params}
 				query={{
 					[getParams.popup]: popupsMap.addUser,
 				}}
+				color='primary'
 				component={Link}>
-				Add into room
-			</Button>
+				<PersonAddAlt1Icon />
+			</IconButton>
 		);
 	});

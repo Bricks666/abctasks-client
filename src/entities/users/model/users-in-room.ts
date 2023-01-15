@@ -2,20 +2,26 @@ import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
-import { LoginSearchQuery, user, User, usersApi } from '@/shared/api';
+import { roomsApi, user, User } from '@/shared/api';
 import { dataExtractor, StandardFailError } from '@/shared/lib';
-import { getStandardResponse, StandardResponse } from '@/shared/types';
+import {
+	getStandardResponse,
+	InRoomParams,
+	StandardResponse
+} from '@/shared/types';
 
-const searchedUsersDomain = createDomain();
+const usersInRoom = createDomain();
 
-const handlerFx = searchedUsersDomain.effect<
-	LoginSearchQuery,
+const handlerFx = usersInRoom.effect<
+	InRoomParams,
 	StandardResponse<User[]>,
 	StandardFailError
->(usersApi.getAllIncludeLogin);
+>();
+
+handlerFx.use(roomsApi.getUsers);
 
 export const query = createQuery<
-	LoginSearchQuery,
+	InRoomParams,
 	StandardResponse<User[]>,
 	StandardFailError,
 	StandardResponse<User[]>,
@@ -26,3 +32,7 @@ export const query = createQuery<
 	contract: runtypeContract(getStandardResponse(Array(user))),
 	mapData: dataExtractor,
 });
+
+export const $ids = query.$data.map((users) => users.map((user) => user.id));
+export const $count = query.$data.map((users) => users.length);
+export const $hasError = query.$error.map((error) => !!error);

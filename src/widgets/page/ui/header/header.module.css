@@ -1,11 +1,10 @@
 .header {
-	box-shadow: none;
 }
 
 .bar {
 	gap: 1em;
 
-	padding: 0;
+	padding: 0 1em;
 }
 
 .avatar {

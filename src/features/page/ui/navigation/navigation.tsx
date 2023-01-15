@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Link as MUILink } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import cn from 'classnames';
 import * as React from 'react';
@@ -23,9 +23,13 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
 			<ul className={styles.list}>
 				{items.map((item) => (
 					<li key={item.label}>
-						<Button to={item.route} component={Link}>
+						<MUILink
+							to={item.route}
+							underline='hover'
+							variant='body1'
+							component={Link}>
 							{item.label}
-						</Button>
+						</MUILink>
 					</li>
 				))}
 			</ul>

@@ -1,33 +1,33 @@
-import { List, ListItem } from '@mui/material';
+import { Container } from '@mui/material';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { Popups, PopupsProps } from '@/widgets/page';
-import { AddUsersIntoRoomPopup } from '@/widgets/users';
-import { OpenSearchUserPopup } from '@/features/rooms';
-import { useUsersInRoom } from '@/entities/rooms';
-import { TemplateUserCard } from '@/entities/users';
+import { AddUsersIntoRoom } from '@/features/rooms';
+import { usersInRoomModel } from '@/entities/users';
 import { popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
-
+import './model';
 import styles from './page.module.css';
+import { UserList, UsersHeader } from './ui';
 
 export interface UsersPageProps extends CommonProps {}
 
 const popupMap: PopupsProps['popupMap'] = {
-	[popupsMap.addUser]: AddUsersIntoRoomPopup,
+	[popupsMap.addUser]: AddUsersIntoRoom,
 };
 
 const UsersPage: React.FC<UsersPageProps> = (props) => {
 	const { className, } = props;
-	const users = useUsersInRoom();
 	const roomId = useParam(routes.room.users, 'id');
-	const isError = !!users.error;
+	const isError = useUnit(usersInRoomModel.$hasError);
+	const start = useUnit(usersInRoomModel.query.start);
 
 	if (isError) {
 		const onRetry = () => {
-			users.start({ roomId, });
+			start({ roomId, });
 		};
 
 		return (
@@ -41,17 +41,11 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 	}
 
 	return (
-		<div className={cn(styles.wrapper, className)}>
-			<OpenSearchUserPopup />
-			<List>
-				{users.data.map((user) => (
-					<ListItem key={user.id}>
-						<TemplateUserCard {...user} />
-					</ListItem>
-				))}
-			</List>
+		<Container className={cn(styles.wrapper, className)}>
+			<UsersHeader />
+			<UserList />
 			<Popups popupMap={popupMap} />
-		</div>
+		</Container>
 	);
 };
 

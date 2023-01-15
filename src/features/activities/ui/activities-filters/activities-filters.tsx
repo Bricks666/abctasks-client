@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
 import { ActivitiesActions, ActivitiesSpheres } from '@/entities/activities';
-import { UsersInRoomPicker } from '@/entities/rooms';
+import { UsersInRoomPicker } from '@/entities/users';
 import { CommonProps } from '@/shared/types';
 import { DatePicker } from '@/shared/ui';
 import { activitiesFiltersModel } from '../../model';
@@ -39,7 +39,7 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 				value={activistId.value}
 				onChange={activistId.onChange}
 				onBlur={activistId.onBlur}
-				errorText={activistId.errorText()}
+				helperText={activistId.errorText()}
 				isValid={activistId.isValid}
 				name={activistId.name}
 			/>

@@ -33,7 +33,7 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 				value={groupId.value}
 				onChange={groupId.onChange}
 				onBlur={groupId.onBlur}
-				errorText={groupId.errorText()}
+				helperText={groupId.errorText()}
 				isValid={groupId.isValid}
 				name={groupId.name}
 				label={t(`task.group`)}
@@ -42,7 +42,7 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 				value={status.value}
 				onChange={status.onChange}
 				onBlur={status.onBlur}
-				errorText={status.errorText()}
+				helperText={status.errorText()}
 				isValid={status.isValid}
 				name={status.name}
 				label={t(`task.status`)}
@@ -52,7 +52,7 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 				value={content.value}
 				onChange={content.onChange}
 				onBlur={content.onBlur}
-				errorText={content.errorText()}
+				helperText={content.errorText()}
 				isValid={content.isValid}
 				name={content.name}
 				label={t('task.content')}

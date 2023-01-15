@@ -1,9 +1,6 @@
 import { sample } from 'effector';
 import { addUserRoomModel } from '@/features/rooms';
 import { notificationsModel } from '@/entities/notifications';
-import { usersInRoomModel } from '@/entities/rooms';
-import { routes } from '@/shared/configs';
-import { loadedWithRouteState } from './page';
 
 sample({
 	clock: addUserRoomModel.mutation.finished.success,
@@ -21,10 +18,4 @@ sample({
 		message: 'User was not added',
 	}),
 	target: notificationsModel.create,
-});
-
-sample({
-	clock: [routes.room.base.opened, loadedWithRouteState],
-	fn: ({ params, }) => ({ roomId: params.id, }),
-	target: usersInRoomModel.query.start,
 });

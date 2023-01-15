@@ -27,7 +27,7 @@ export const LoginForm: React.FC<CommonProps> = (props) => {
 				value={login.value}
 				onChange={login.onChange}
 				onBlur={login.onBlur}
-				errorText={login.errorText()}
+				helperText={login.errorText()}
 				isValid={login.isValid}
 				name={login.name}
 				label={t('fields.login')}
@@ -38,7 +38,7 @@ export const LoginForm: React.FC<CommonProps> = (props) => {
 				value={password.value}
 				onChange={password.onChange}
 				onBlur={password.onBlur}
-				errorText={password.errorText()}
+				helperText={password.errorText()}
 				isValid={password.isValid}
 				name={password.name}
 				label={t('fields.password')}

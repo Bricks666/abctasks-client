@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import * as React from 'react';
 import { CommonProps } from '@/shared/types';
 
@@ -13,9 +14,9 @@ export const MainLayout: React.FC<React.PropsWithChildren<MainLayoutProps>> = (
 	const { className, children, header, } = props;
 
 	return (
-		<section className={styles.layout}>
+		<section>
 			{header}
-			<main className={className}>{children}</main>
+			<main className={cn(styles.layout, className)}>{children}</main>
 		</section>
 	);
 };

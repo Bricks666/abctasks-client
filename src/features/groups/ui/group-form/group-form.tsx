@@ -37,7 +37,7 @@ export const GroupForm: React.FC<GroupFormProps> = (props) => {
 				value={name.value}
 				onChange={name.onChange}
 				onBlur={name.onBlur}
-				errorText={name.errorText()}
+				helperText={name.errorText()}
 				isValid={name.isValid}
 				name={name.name}
 				label={t('group.name')}
@@ -46,7 +46,7 @@ export const GroupForm: React.FC<GroupFormProps> = (props) => {
 				value={mainColor.value}
 				onChange={mainColor.onChange}
 				onBlur={mainColor.onBlur}
-				errorText={mainColor.errorText()}
+				helperText={mainColor.errorText()}
 				isValid={mainColor.isValid}
 				name={mainColor.name}
 				label={t('group.mainColor')}
@@ -56,7 +56,7 @@ export const GroupForm: React.FC<GroupFormProps> = (props) => {
 				value={secondColor.value}
 				onChange={secondColor.onChange}
 				onBlur={secondColor.onBlur}
-				errorText={secondColor.errorText()}
+				helperText={secondColor.errorText()}
 				isValid={secondColor.isValid}
 				name={secondColor.name}
 				label={t('group.secondaryColor')}
