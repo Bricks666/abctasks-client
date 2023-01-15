@@ -1,18 +1,18 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { TaskForm } from '@/features/tasks';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
-import { createTaskPopupModel } from '../../model';
+import { createTaskModel } from '../../model';
+import { TaskForm } from '../task-form';
 
-import styles from './create-task-popup.module.css';
+import styles from './create-task.module.css';
 
-export interface CreateTaskPopupProps extends CommonProps, BasePopupProps {}
+export interface CreateTaskProps extends CommonProps, BasePopupProps {}
 
-export const CreateTaskPopup: React.FC<CreateTaskPopupProps> = (props) => {
+export const CreateTask: React.FC<CreateTaskProps> = (props) => {
 	const { t, } = useTranslation('popups');
-	const onClose = useUnit(createTaskPopupModel.close);
+	const onClose = useUnit(createTaskModel.close);
 
 	return (
 		<MainPopup {...props} title={t('task.createTitle')} onClose={onClose}>

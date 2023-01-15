@@ -6,9 +6,13 @@ import {
 	Stack
 } from '@mui/material';
 import * as React from 'react';
-import { CreateGroupPopup, UpdateGroupPopup } from '@/widgets/groups';
 import { Popups, PopupsProps } from '@/widgets/page';
-import { CreateGroupButton, GroupCardActions } from '@/features/groups';
+import {
+	CreateGroup,
+	CreateGroupButton,
+	GroupCardActions,
+	UpdateGroup
+} from '@/features/groups';
 import { useGroups, GroupLabel } from '@/entities/groups';
 import { getEmptyArray, popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
@@ -19,8 +23,8 @@ import { pageModel } from './model';
 export interface GroupsPageProps extends CommonProps {}
 
 const popupMap: PopupsProps['popupMap'] = {
-	[popupsMap.createGroup]: CreateGroupPopup,
-	[popupsMap.updateGroup]: UpdateGroupPopup,
+	[popupsMap.createGroup]: CreateGroup,
+	[popupsMap.updateGroup]: UpdateGroup,
 };
 
 const GroupsPage: React.FC<GroupsPageProps> = React.memo(function GroupsPage(

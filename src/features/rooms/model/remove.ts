@@ -5,11 +5,7 @@ import { Literal } from 'runtypes';
 import { roomsModel } from '@/entities/rooms';
 import { RemoveRoomParams, roomsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const removeRoomDomain = createDomain();
 
@@ -17,13 +13,12 @@ const handlerFx = removeRoomDomain.effect<
 	RemoveRoomParams,
 	StandardResponse<boolean>,
 	StandardFailError
->('removeRoomFx');
-handlerFx.use(roomsApi.remove);
+>(roomsApi.remove);
 
 export const mutation = createMutationWithAccess<
 	RemoveRoomParams,
 	StandardResponse<boolean>,
-	StandardSuccessResponse<boolean>,
+	StandardResponse<boolean>,
 	StandardFailError
 >({
 	effect: handlerFx,

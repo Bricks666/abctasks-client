@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { OpenAddUserIntoRoomPopup } from '@/features/rooms';
+import { AddUserButton } from '@/features/rooms';
 import { usersInRoomModel } from '@/entities/users';
 import { CommonProps } from '@/shared/types';
 
@@ -23,8 +23,7 @@ export const UsersHeader: React.FC<UsersHeaderProps> = (props) => {
 				</Typography>
 				<Typography>{count} count</Typography>
 			</div>
-
-			<OpenAddUserIntoRoomPopup />
+			<AddUserButton />
 		</div>
 	);
 };

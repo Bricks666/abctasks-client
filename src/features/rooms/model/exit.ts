@@ -13,9 +13,7 @@ const handlerFx = exitRoomDomain.effect<
 	ExitRoomParams,
 	StandardResponse<boolean>,
 	StandardFailError
->();
-
-handlerFx.use(roomsApi.exit);
+>(roomsApi.exit);
 
 export const mutation = createMutationWithAccess({
 	effect: handlerFx,

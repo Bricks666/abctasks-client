@@ -1,14 +1,14 @@
 import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain } from 'effector';
-import { tasksInRoomModel } from '@/entities/tasks';
+import { createDomain, sample } from 'effector';
+import { and, debug } from 'patronum';
+import { createPopupControlModel } from '@/entities/popups';
+import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 import { UpdateTaskParams, Task, tasksApi, task } from '@/shared/api';
+import { popupsMap, routes } from '@/shared/configs';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
+import { form } from './form';
 
 const updateTaskDomain = createDomain();
 
@@ -16,18 +16,59 @@ const handlerFx = updateTaskDomain.effect<
 	UpdateTaskParams,
 	StandardResponse<Task>,
 	StandardFailError
->();
-handlerFx.use(tasksApi.update);
+>(tasksApi.update);
 
 export const mutation = createMutationWithAccess<
 	UpdateTaskParams,
 	StandardResponse<Task>,
-	StandardSuccessResponse<Task>,
+	StandardResponse<Task>,
 	StandardFailError
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(task)),
 });
+
+export const { close, $isOpen, } = createPopupControlModel(popupsMap.updateTask);
+
+const { fields, formValidated, setForm, reset, } = form;
+
+sample({
+	clock: close,
+	target: [tasksInRoomModel.$id.reinit!, reset],
+});
+
+sample({
+	clock: mutation.finished.success,
+	target: close,
+});
+
+sample({
+	clock: formValidated,
+	source: { id: tasksInRoomModel.$id, params: routes.room.tasks.$params, },
+	filter: and($isOpen, tasksInRoomModel.$id),
+	fn: ({ id, params, }, values) => {
+		return { ...values, id: Number(id), roomId: params.id, };
+	},
+	target: mutation.start,
+});
+
+sample({
+	clock: taskModel.query.finished.success,
+	fn: ({ result, }) => result,
+	target: setForm,
+});
+
+sample({
+	clock: taskModel.query.finished.success,
+	fn: () => false,
+	target: [
+		fields.content.$isDirty,
+		fields.groupId.$isDirty,
+		fields.status.$isDirty
+	],
+});
+
+debug(and($isOpen, tasksInRoomModel.$id), tasksInRoomModel.$id, $isOpen);
 
 update(tasksInRoomModel.query, {
 	on: mutation,

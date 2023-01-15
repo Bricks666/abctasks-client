@@ -3,11 +3,13 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Header, Popups, PopupsProps } from '@/widgets/page';
 import {
-	CreateRoomPopup,
+	/**
+	 * Перенести на уровень страницы
+	 */
 	RoomList,
-	RoomsHeader,
-	UpdateRoomPopup
+	RoomsHeader
 } from '@/widgets/rooms';
+import { CreateRoom, UpdateRoom } from '@/features/rooms';
 import { popupsMap } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -17,8 +19,8 @@ import { pageModel } from './model';
 import styles from './styles.module.css';
 
 const popupMap: PopupsProps['popupMap'] = {
-	[popupsMap.createRoom]: CreateRoomPopup,
-	[popupsMap.updateRoom]: UpdateRoomPopup,
+	[popupsMap.createRoom]: CreateRoom,
+	[popupsMap.updateRoom]: UpdateRoom,
 };
 
 const RoomsPage: React.FC<CommonProps> = (props) => {

@@ -1,4 +1,10 @@
-import { Card, CardContent, CardHeader, Typography } from '@mui/material';
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardProps,
+	Typography
+} from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { Task } from '@/shared/api';
@@ -9,7 +15,8 @@ import styles from './template-task-card.module.css';
 
 export interface TemplateTaskCardProps
 	extends CommonProps,
-		Pick<Task, 'content' | 'createdAt' | 'status' | 'id'> {
+		Pick<Task, 'content' | 'createdAt' | 'status' | 'id'>,
+		Omit<CardProps, keyof Task> {
 	readonly actions: React.ReactElement;
 	readonly group: React.ReactElement;
 }
@@ -19,6 +26,9 @@ export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 		const { className, content, createdAt, id, status, actions, group, } = props;
 		const [isDrag, setIsDrag] = React.useState(false);
 
+		/**
+		 * Может стоит вынести на уровень карты, а не шаблона
+		 */
 		const onDragStart = React.useCallback<React.DragEventHandler>(
 			(evt) => {
 				evt.dataTransfer.clearData();

@@ -28,9 +28,6 @@ export const GroupForm: React.FC<GroupFormProps> = (props) => {
 
 	return (
 		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
-			{/*
-        TODO: Подумать над тем, как должен выглядеть лейбл
-        */}
 			<GroupLabel {...values} />
 			<Field
 				className={styles.input}

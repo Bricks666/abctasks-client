@@ -2,8 +2,12 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { Popups, PopupsProps } from '@/widgets/page';
-import { CreateTaskPopup, UpdateTaskPopup } from '@/widgets/tasks';
-import { MobileTasksFilters, TasksFilters } from '@/features/tasks';
+import {
+	CreateTask,
+	MobileTasksFilters,
+	TasksFilters,
+	UpdateTask
+} from '@/features/tasks';
 import { deviceInfoModel } from '@/entities/page';
 import { popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
@@ -12,8 +16,8 @@ import styles from './page.module.css';
 import { Tasks, TasksProgress, LastActivities } from './ui';
 
 const popupMap: PopupsProps['popupMap'] = {
-	[popupsMap.createTask]: CreateTaskPopup,
-	[popupsMap.updateTask]: UpdateTaskPopup,
+	[popupsMap.createTask]: CreateTask,
+	[popupsMap.updateTask]: UpdateTask,
 };
 
 const TasksPage: React.FC<CommonProps> = (props) => {

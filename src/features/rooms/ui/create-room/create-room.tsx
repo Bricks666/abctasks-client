@@ -1,16 +1,18 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { RoomForm } from '@/features/rooms';
-import { BasePopupProps } from '@/shared/types';
+import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
-import { createRoomPopupModel } from '../../model';
+import { createRoomModel } from '../../model';
+import { RoomForm } from '../room-form';
 
-import styles from './create-room-popup.module.css';
+import styles from './create-room.module.css';
 
-export const CreateRoomPopup: React.FC<BasePopupProps> = (props) => {
+export interface CreateRoomProps extends CommonProps, BasePopupProps {}
+
+export const CreateRoom: React.FC<CreateRoomProps> = (props) => {
 	const { t, } = useTranslation('popups');
-	const onClose = useUnit(createRoomPopupModel.close);
+	const onClose = useUnit(createRoomModel.close);
 
 	return (
 		<MainPopup {...props} title={t('room.createTitle')} onClose={onClose}>

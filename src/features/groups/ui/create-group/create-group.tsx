@@ -1,18 +1,18 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { GroupForm } from '@/features/groups';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
-import { createGroupPopupModel } from '../../model';
+import { createGroupModel } from '../../model';
+import { GroupForm } from '../group-form';
 
-import styles from './create-group-popup.module.css';
+import styles from './create-group.module.css';
 
-export interface CreateGroupPopupProps extends CommonProps, BasePopupProps {}
+export interface CreateGroupProps extends CommonProps, BasePopupProps {}
 
-export const CreateGroupPopup: React.FC<CreateGroupPopupProps> = (props) => {
+export const CreateGroup: React.FC<CreateGroupProps> = (props) => {
 	const { t, } = useTranslation('popups');
-	const onClose = useUnit(createGroupPopupModel.close);
+	const onClose = useUnit(createGroupModel.close);
 
 	return (
 		<MainPopup {...props} onClose={onClose} title={t('group.createTitle')}>
