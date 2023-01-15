@@ -17,10 +17,14 @@ export const TemplateUserCard: React.FC<TemplateUserCardProps> = (props) => {
 	const { login, actions, className, photo, onClick, extra, } = props;
 
 	return (
-		<Card className={cn(styles.card, className)} onClick={onClick}>
+		<Card
+			className={cn(styles.card, className)}
+			onClick={onClick}
+			variant='outlined'>
 			<CardHeader
 				avatar={<UserAvatar login={login} photo={photo} />}
 				title={login}
+				subheader='email'
 				action={actions}
 			/>
 			{extra}

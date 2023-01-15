@@ -1,13 +1,17 @@
 .card {
 	display: grid;
-	grid-template-rows: max-content 1fr max-content;
+	grid-template-rows: max-content max-content 1fr max-content;
 
 	min-width: 200px;
-	height: min(max-content, 300px);
-
-	padding: 1em;
+	height: 300px;
 
 	overflow-y: scroll;
+
+	transition: box-shadow 250ms ease-in-out;
+}
+
+.card:hover {
+	box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
 }
 
 .header {
@@ -15,5 +19,16 @@
 }
 
 .content {
+	padding: 1em;
+
+	height: 100%;
+
 	overflow-y: scroll;
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+
+	padding: 1em;
 }

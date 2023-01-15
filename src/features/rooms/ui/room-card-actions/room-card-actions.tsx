@@ -13,10 +13,11 @@ export const RoomCardActions: React.FC<RoomCardActionsProps> = (props) => {
 	return (
 		<Button
 			className={className}
-			variant='text'
+			variant='contained'
 			to={routes.room.tasks as any}
 			params={{ id, }}
-			component={Link}>
+			component={Link}
+			disableElevation>
 			Перейти
 		</Button>
 	);

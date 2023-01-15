@@ -1,6 +1,11 @@
 .card {
-	min-width: 200px;
-	height: min(max-content, 300px);
+	height: 300px;
+}
 
+.actions {
+	padding: 1em;
+}
+
+.content {
 	padding: 1em;
 }

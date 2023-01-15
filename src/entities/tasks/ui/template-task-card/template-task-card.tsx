@@ -38,6 +38,7 @@ export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 				className={cn(styles.card, { [styles.drag]: isDrag, }, className)}
 				onDragStart={onDragStart}
 				onDragEnd={onDragEnd}
+				variant='outlined'
 				draggable
 				component='article'>
 				<CardHeader

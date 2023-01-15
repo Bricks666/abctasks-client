@@ -1,5 +1,7 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Avatar } from '@mui/material';
 import * as React from 'react';
+import { stringToColor } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
 export interface UserAvatarProps extends CommonProps {
@@ -9,10 +11,12 @@ export interface UserAvatarProps extends CommonProps {
 
 export const UserAvatar: React.FC<UserAvatarProps> = (props) => {
 	const { login, photo, className, } = props;
-	const shortLogin = login.slice(0, 3);
 	return (
-		<Avatar className={className} src={photo ?? ''}>
-			{shortLogin}
+		<Avatar
+			className={className}
+			src={photo ?? ''}
+			sx={{ backgroundColor: stringToColor(login), }}>
+			<AccountCircleIcon />
 		</Avatar>
 	);
 };

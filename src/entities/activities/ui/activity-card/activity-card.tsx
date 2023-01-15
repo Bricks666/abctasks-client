@@ -28,7 +28,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = (props) => {
 	const { action, sphere, className, createdAt, } = props;
 	const { t, } = useTranslation('room');
 	return (
-		<Card className={cn(styles.card, className)}>
+		<Card className={cn(styles.card, className)} variant='outlined'>
 			<CardContent className={styles.cardContent}>
 				<Avatar
 					className={cn(styles.avatar, styles[colorMap[action]])}

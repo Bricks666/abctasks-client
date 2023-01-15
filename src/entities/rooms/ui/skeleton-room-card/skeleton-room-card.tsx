@@ -16,13 +16,14 @@ export const SkeletonRoomCard: React.FC<SkeletonRoomCardProps> = React.memo(
 	function SkeletonRoomCard(props) {
 		const { className, } = props;
 		return (
-			<Card className={cn(styles.card, className)}>
-				<CardHeader title={<Skeleton width='6em' />} />
-				<CardContent>
-					<Skeleton width='100%' height='2.5em' />
+			<Card className={cn(styles.card, className)} variant='outlined'>
+				<Skeleton sx={{ height: 100, }} variant='rectangular' animation='wave' />
+				<CardHeader title={<Skeleton width='6em' />} animation='wave' />
+				<CardContent className={styles.content}>
+					<Skeleton width='100%' height='2.5em' animation='wave' />
 				</CardContent>
-				<CardActions>
-					<Skeleton width='100%' height='2em' />
+				<CardActions className={styles.actions}>
+					<Skeleton width='100%' height='2em' animation='wave' />
 				</CardActions>
 			</Card>
 		);

@@ -30,3 +30,7 @@ body {
 
 	font-size: 1px;
 }
+
+.MuiSkeleton-root {
+  transform: scale(1);
+}
