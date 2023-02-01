@@ -1,4 +1,11 @@
-import { Link as MUILink } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import {
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemIcon,
+	ListItemText
+} from '@mui/material';
 import { Link } from 'atomic-router-react';
 import cn from 'classnames';
 import * as React from 'react';
@@ -11,6 +18,7 @@ const items = [
 	{
 		route: routes.rooms,
 		label: i18n.t('title', { ns: 'rooms', }),
+		icon: <HomeIcon />,
 	}
 ];
 
@@ -20,19 +28,22 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
 	const { className, } = props;
 	return (
 		<nav className={cn(styles.navigation, className)}>
-			<ul className={styles.list}>
+			<List className={styles.list}>
 				{items.map((item) => (
-					<li key={item.label}>
-						<MUILink
-							to={item.route}
-							underline='hover'
-							variant='body1'
-							component={Link}>
-							{item.label}
-						</MUILink>
-					</li>
+					<ListItem key={item.label} disablePadding>
+						<ListItemButton to={item.route} component={Link}>
+							<ListItemIcon>{item.icon}</ListItemIcon>
+							<ListItemText
+								primaryTypographyProps={{
+									variant: 'subtitle1',
+									component: 'p',
+								}}
+								primary={item.label}
+							/>
+						</ListItemButton>
+					</ListItem>
 				))}
-			</ul>
+			</List>
 		</nav>
 	);
 };

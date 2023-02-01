@@ -29,7 +29,11 @@ export const Tabs: React.FC<CommonProps> = React.memo(() => {
 
 	return (
 		<TabContext value={tab}>
-			<TabList onChange={onChange} variant='scrollable' scrollButtons='auto'>
+			<TabList
+				className={styles.list}
+				onChange={onChange}
+				variant='scrollable'
+				scrollButtons='auto'>
 				<Tab
 					className={styles.tab}
 					icon={<ListAltIcon />}

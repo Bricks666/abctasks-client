@@ -4,13 +4,11 @@ import { CommonProps } from '@/shared/types';
 
 import styles from './main-layout.module.css';
 
-export interface MainLayoutProps extends CommonProps {
+export interface MainLayoutProps extends CommonProps, React.PropsWithChildren {
 	readonly header: React.ReactElement;
 }
 
-export const MainLayout: React.FC<React.PropsWithChildren<MainLayoutProps>> = (
-	props
-) => {
+export const MainLayout: React.FC<MainLayoutProps> = (props) => {
 	const { className, children, header, } = props;
 
 	return (

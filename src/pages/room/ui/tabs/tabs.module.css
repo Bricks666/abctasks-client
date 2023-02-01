@@ -1,3 +1,7 @@
+.list {
+  overflow-x: auto;
+}
+
 .tab {
 	min-height: auto;
 }
