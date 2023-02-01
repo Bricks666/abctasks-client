@@ -11,7 +11,7 @@ import styles from './registration-form.module.css';
 export const RegistrationForm: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('registration');
-	const { fields, isDirty, submit, } = useForm(registrationModel.form);
+	const { fields, submit, } = useForm(registrationModel.form);
 	const { login, password, repeatPassword, } = fields;
 
 	const onSubmit: React.FormEventHandler = (e) => {
@@ -53,7 +53,7 @@ export const RegistrationForm: React.FC<CommonProps> = (props) => {
 				label={t('fields.passwordRepeat')}
 				autoComplete='new-password'
 			/>
-			<Button disabled={!isDirty} type='submit' variant='outlined'>
+			<Button type='submit' variant='outlined'>
 				{t('actions.submit')}
 			</Button>
 		</form>

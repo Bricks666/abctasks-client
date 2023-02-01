@@ -1,7 +1,7 @@
 .form {
 	display: grid;
 	grid-template-columns: var(--login-form-template-columns);
-	gap: 10px;
+	gap: 1em;
 }
 
 .field {

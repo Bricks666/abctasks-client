@@ -31,5 +31,4 @@ export interface LoginParams {
 export interface RegistrationParams {
 	readonly login: string;
 	readonly password: string;
-	readonly repeatPassword: string;
 }

@@ -11,7 +11,7 @@ import styles from './login-form.module.css';
 export const LoginForm: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('login');
-	const { fields, submit, isDirty, } = useForm(loginModel.form);
+	const { fields, submit, } = useForm(loginModel.form);
 
 	const { login, password, rememberMe, } = fields;
 
@@ -50,7 +50,7 @@ export const LoginForm: React.FC<CommonProps> = (props) => {
 				name={rememberMe.name}
 				label={t('fields.remember')}
 			/>
-			<Button type='submit' disabled={!isDirty} variant='outlined'>
+			<Button type='submit' variant='outlined'>
 				{t('actions.submit')}
 			</Button>
 		</form>

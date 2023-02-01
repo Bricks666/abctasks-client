@@ -16,7 +16,7 @@ export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 	const room = useRoom(roomId!);
 	const onClose = useUnit(updateRoomModel.close);
 
-	const loading = !room.pending;
+	const loading = room.pending;
 
 	return (
 		<MainPopup {...props} title={t('room.updateTitle')} onClose={onClose}>

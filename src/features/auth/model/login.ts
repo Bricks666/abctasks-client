@@ -3,6 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
+import { splitMap } from 'patronum';
 import { authModel } from '@/entities/auth';
 import { authApi, authResponse, AuthResponse, LoginParams } from '@/shared/api';
 import {
@@ -92,4 +93,51 @@ sample({
 	clock: mutation.finished.success,
 	fn: ({ result, }) => result.data.user,
 	target: authModel.setUser,
+});
+
+const errors = splitMap({
+	source: mutation.finished.failure,
+	cases: {
+		incorrectPassword: ({ error, }) => {
+			if ((error as any).statusCode === 401) {
+				return 'Incorrect password';
+			}
+		},
+
+		userNotFound: ({ error, }) => {
+			if ((error as any).statusCode === 404) {
+				return 'User was not found';
+			}
+		},
+	},
+});
+
+sample({
+	clock: errors.userNotFound,
+	fn: () => false,
+	target: form.fields.login.$isValid,
+});
+
+sample({
+	clock: errors.userNotFound,
+	fn: (message) => ({
+		rule: 'server',
+		errorText: message,
+	}),
+	target: form.fields.login.addError,
+});
+
+sample({
+	clock: errors.incorrectPassword,
+	fn: () => false,
+	target: form.fields.password.$isValid,
+});
+
+sample({
+	clock: errors.incorrectPassword,
+	fn: (message) => ({
+		rule: 'server',
+		errorText: message,
+	}),
+	target: form.fields.password.addError,
 });

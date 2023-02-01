@@ -1,9 +1,10 @@
-import { createEvent, sample } from 'effector';
+import { createEvent, createStore, sample } from 'effector';
 import { popupsModel } from '../model';
 
 export const createPopupControlModel = (popup: string) => {
-	const $isOpen = popupsModel.$popups.map((popups) => popups.includes(popup));
+	const $isOpen = createStore<boolean>(false);
 	const close = createEvent();
+	const opened = createEvent();
 
 	sample({
 		clock: close,
@@ -11,5 +12,23 @@ export const createPopupControlModel = (popup: string) => {
 		target: popupsModel.close,
 	});
 
-	return { $isOpen, close, };
+	sample({
+		clock: popupsModel.$popups,
+		filter: (popups) => popups.includes(popup),
+		target: opened,
+	});
+
+	sample({
+		clock: opened,
+		fn: () => true,
+		target: $isOpen,
+	});
+
+	sample({
+		clock: close,
+		fn: () => false,
+		target: $isOpen,
+	});
+
+	return { $isOpen, close, opened, };
 };

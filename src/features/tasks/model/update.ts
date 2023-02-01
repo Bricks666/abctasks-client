@@ -1,7 +1,7 @@
 import { update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
-import { and, debug } from 'patronum';
+import { combine, createDomain, sample } from 'effector';
+import { and } from 'patronum';
 import { createPopupControlModel } from '@/entities/popups';
 import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 import { UpdateTaskParams, Task, tasksApi, task } from '@/shared/api';
@@ -28,7 +28,15 @@ export const mutation = createMutationWithAccess<
 	contract: runtypeContract(getStandardResponse(task)),
 });
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.updateTask);
+export const { close, $isOpen, opened, } = createPopupControlModel(
+	popupsMap.updateTask
+);
+
+const $routeParams = combine(
+	tasksInRoomModel.$id,
+	routes.room.tasks.$params,
+	(id, params) => ({ id: Number(id), roomId: params.id, })
+);
 
 const { fields, formValidated, setForm, reset, } = form;
 
@@ -43,11 +51,17 @@ sample({
 });
 
 sample({
+	clock: opened,
+	source: $routeParams,
+	target: taskModel.query.start,
+});
+
+sample({
 	clock: formValidated,
-	source: { id: tasksInRoomModel.$id, params: routes.room.tasks.$params, },
+	source: $routeParams,
 	filter: and($isOpen, tasksInRoomModel.$id),
-	fn: ({ id, params, }, values) => {
-		return { ...values, id: Number(id), roomId: params.id, };
+	fn: (routeParams, values) => {
+		return { ...values, ...routeParams, };
 	},
 	target: mutation.start,
 });
@@ -67,8 +81,6 @@ sample({
 		fields.status.$isDirty
 	],
 });
-
-debug(and($isOpen, tasksInRoomModel.$id), tasksInRoomModel.$id, $isOpen);
 
 update(tasksInRoomModel.query, {
 	on: mutation,

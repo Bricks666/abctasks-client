@@ -3,6 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
+import { splitMap } from 'patronum';
 import { authApi, RegistrationParams, user, User } from '@/shared/api';
 import {
 	allowedSymbolsRegExp,
@@ -17,8 +18,7 @@ const registrationDomain = createDomain();
 const handlerFx = registrationDomain.effect<
 	RegistrationParams,
 	StandardResponse<User>
->();
-handlerFx.use(authApi.registration);
+>(authApi.registration);
 
 export const mutation = createMutation<
 	RegistrationParams,
@@ -30,7 +30,11 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(user)),
 });
 
-const schemas = {
+interface RegistrationFormParams extends RegistrationParams {
+	readonly repeatPassword: string;
+}
+
+const schemas = Joi.object<RegistrationFormParams>({
 	login: Joi.string()
 		.pattern(allowedSymbolsRegExp)
 		.min(minLoginPasswordLength)
@@ -55,31 +59,37 @@ const schemas = {
 			'string.min': `Password must contain minimum ${minLoginPasswordLength} symbols`,
 			'string.max': `Password must contain maximum ${maxLoginPasswordLength} symbols`,
 		}),
-	repeatPassword: Joi.string() /* .valid(Joi.ref('password')) */
-		.messages({
-			'any.only': 'Password must be equal',
-		}),
-};
+	repeatPassword: Joi.string().messages({
+		'any.only': 'Password must be equal',
+	}),
+});
 
-export const form = createForm<RegistrationParams>({
+export const form = createForm<RegistrationFormParams>({
 	fields: {
 		login: {
 			init: '',
-			rules: [createRuleFromSchema('login', schemas.login)],
+			rules: [createRuleFromSchema('login', schemas.extract('login'))],
 		},
 		password: {
 			init: '',
-			rules: [createRuleFromSchema('password', schemas.password)],
+			rules: [createRuleFromSchema('password', schemas.extract('password'))],
 		},
 		repeatPassword: {
 			init: '',
-			rules: [createRuleFromSchema('repeatPassword', schemas.repeatPassword)],
+			rules: [
+				createRuleFromSchema(
+					'repeatPassword',
+					schemas.extract('repeatPassword')
+				)
+			],
 		},
 	},
 });
 
 sample({
 	clock: form.formValidated,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	fn: ({ repeatPassword: _, ...rest }) => rest,
 	target: mutation.start,
 });
 
@@ -87,4 +97,30 @@ sample({
 	clock: mutation.finished.failure,
 	fn: () => '',
 	target: [form.fields.password.$value, form.fields.repeatPassword.$value],
+});
+
+const errors = splitMap({
+	source: mutation.finished.failure,
+	cases: {
+		userAlreadyRegistered: ({ error, }) => {
+			if ((error as any).statusCode === 409) {
+				return 'User already registered';
+			}
+		},
+	},
+});
+
+sample({
+	clock: errors.userAlreadyRegistered,
+	fn: () => false,
+	target: form.fields.login.$isValid,
+});
+
+sample({
+	clock: errors.userAlreadyRegistered,
+	fn: (message) => ({
+		rule: 'server',
+		errorText: message,
+	}),
+	target: form.fields.login.addError,
 });
