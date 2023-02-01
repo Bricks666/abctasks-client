@@ -10,11 +10,7 @@ import {
 	dataExtractor,
 	StandardFailError
 } from '@/shared/lib';
-import {
-	StandardResponse,
-	getStandardResponse,
-	StandardSuccessResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 export const roomsDomain = createDomain();
 export const $id = roomsDomain.store<null | number>(null);
@@ -22,18 +18,16 @@ const handlerFx = roomsDomain.effect<
 	GetRoomsParams,
 	StandardResponse<Room[]>,
 	StandardFailError
->();
-
-handlerFx.use(roomsApi.getAll);
+>(roomsApi.getAll);
 
 export const query = createQueryWithAccess<
 	GetRoomsParams,
 	StandardResponse<Room[]>,
 	StandardFailError,
-	StandardSuccessResponse<Room[]>,
+	StandardResponse<Room[]>,
 	Room[]
 >({
-	initialValue: [],
+	initialData: [],
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Array(room))),
 

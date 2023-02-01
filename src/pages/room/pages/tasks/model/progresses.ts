@@ -5,8 +5,7 @@ import {
 	updateTaskModel
 } from '@/features/tasks';
 import { progressesModel } from '@/entities/progresses';
-import { routes } from '@/shared/configs';
-import { loadedWithRouteState } from './page';
+import { currentRoute, loadedWithRouteState } from './page';
 
 sample({
 	clock: [
@@ -19,12 +18,12 @@ sample({
 });
 
 sample({
-	clock: routes.room.tasks.closed,
+	clock: currentRoute.closed,
 	target: progressesModel.query.reset,
 });
 
 sample({
-	clock: [routes.room.tasks.opened, loadedWithRouteState],
+	clock: [currentRoute.opened, currentRoute.updated, loadedWithRouteState],
 	fn: ({ params, }) => ({ roomId: params.id, }),
 	target: progressesModel.query.start,
 });

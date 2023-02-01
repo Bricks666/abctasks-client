@@ -7,7 +7,6 @@ import {
 	updateTaskModel
 } from '@/features/tasks';
 import { Activity, activitiesApi, activity } from '@/shared/api';
-import { routes } from '@/shared/configs';
 import { dataExtractor } from '@/shared/lib';
 import {
 	InRoomParams,
@@ -16,7 +15,7 @@ import {
 	getStandardResponse,
 	getItemsResponse
 } from '@/shared/types';
-import { loadedWithRouteState } from './page';
+import { currentRoute, loadedWithRouteState } from './page';
 
 const activitiesDomain = createDomain();
 const handlerFx = activitiesDomain.effect<
@@ -50,7 +49,7 @@ sample({
 });
 
 sample({
-	clock: [routes.room.tasks.opened, loadedWithRouteState],
+	clock: [currentRoute.opened, currentRoute.updated, loadedWithRouteState],
 	fn: ({ params, }) => ({ roomId: params.id, }),
 	target: query.start,
 });

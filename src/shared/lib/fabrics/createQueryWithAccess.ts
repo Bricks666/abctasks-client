@@ -28,7 +28,7 @@ export interface CreateQueryWithAccessOptions<
 		MappedData,
 		MapDataSource
 	>;
-	readonly initialValue?: MappedData;
+	readonly initialData?: MappedData;
 	readonly validate?: Validator<ContractData, Params, ValidationSource>;
 	readonly name?: string;
 }

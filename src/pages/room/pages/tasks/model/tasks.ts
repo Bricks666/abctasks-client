@@ -1,19 +1,17 @@
 import { querySync } from 'atomic-router';
 import { sample } from 'effector';
-import { debounce } from 'patronum';
 import { tasksFiltersModel } from '@/features/tasks';
 import { tasksInRoomModel } from '@/entities/tasks';
-import { routes, controls, getParams } from '@/shared/configs';
-import { loaded, loadedWithRouteState } from './page';
+import { controls, getParams } from '@/shared/configs';
+import { currentRoute, loaded, loadedWithRouteState } from './page';
 
-const { $values, setForm, reset, fields, } = tasksFiltersModel.form;
-const currentRoute = routes.room.tasks;
+const { formValidated, setForm, reset, fields, } = tasksFiltersModel.form;
 /**
  * TODO: Вынести в модель уведомлений
  */
 
 sample({
-	clock: [currentRoute.opened, loadedWithRouteState],
+	clock: [currentRoute.opened, currentRoute.updated, loadedWithRouteState],
 	fn: ({ params, query, }) => ({
 		roomId: params.id,
 		authorId: query[getParams.userId],
@@ -24,13 +22,8 @@ sample({
 	target: tasksInRoomModel.query.start,
 });
 
-const valuesChanged = debounce({
-	source: $values,
-	timeout: 250,
-});
-
 sample({
-	clock: valuesChanged,
+	clock: [formValidated, reset],
 	source: currentRoute.$params,
 	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
 	target: tasksInRoomModel.query.start,
@@ -49,7 +42,7 @@ querySync({
 		[getParams.after]: fields.after.$value,
 		[getParams.before]: fields.before.$value,
 	},
-	clock: [valuesChanged],
+	clock: [formValidated, reset],
 	route: currentRoute,
 });
 

@@ -48,7 +48,7 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 
 	if (isError) {
 		const onRetry = () => {
-			tasks.start(roomId);
+			tasks.start({ roomId, });
 		};
 
 		return (

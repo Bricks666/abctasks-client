@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { TextField, TextFieldProps } from '@mui/material';
 import {
 	DatePicker as MUIDatePicker,
 	DatePickerProps as MUIDatePIckerProps
@@ -10,13 +10,14 @@ export interface DatePickerProps<TInputDate, TDate>
 	extends CommonProps,
 		Omit<MUIDatePIckerProps<TInputDate, TDate>, 'onChange' | 'renderInput'> {
 	readonly onChange: (date: string | null) => void;
+	readonly size?: TextFieldProps['size'];
 }
 
 export const DatePicker = React.memo(
 	<TInputDate, TDate = TInputDate>(
 		props: DatePickerProps<TInputDate, TDate>
 	): React.ReactElement => {
-		const { onChange, ...rest } = props;
+		const { onChange, size, ...rest } = props;
 		const handleChange = (date: { $d: Date } | null) => {
 			let newDate: string | null;
 
@@ -32,7 +33,7 @@ export const DatePicker = React.memo(
 			<MUIDatePicker
 				{...rest}
 				onChange={handleChange as any}
-				renderInput={(params) => <TextField {...params} />}
+				renderInput={(params) => <TextField {...params} size={size} />}
 			/>
 		);
 	}

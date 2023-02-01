@@ -1,4 +1,5 @@
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import LabelIcon from '@mui/icons-material/Label';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleIcon from '@mui/icons-material/People';
 import { TabContext, TabList } from '@mui/lab';
@@ -43,7 +44,7 @@ export const Tabs: React.FC<CommonProps> = React.memo(() => {
 				/>
 				<Tab
 					className={styles.tab}
-					icon={<ListAltIcon />}
+					icon={<LabelIcon />}
 					iconPosition='start'
 					label='Группы'
 					value='groups'

@@ -23,7 +23,7 @@ export const RoomHeader: React.FC<CommonProps> = (props) => {
 					<Typography className={styles.title} variant='h6' component='h1'>
 						{pending ? <Skeleton width='15em' /> : room?.name}
 					</Typography>
-					<Typography variant='body2'>
+					<Typography className={styles.description} variant='body2'>
 						{pending ? <Skeleton width='15em' /> : room?.description}
 					</Typography>
 				</div>

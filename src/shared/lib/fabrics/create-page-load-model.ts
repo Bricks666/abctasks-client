@@ -6,6 +6,7 @@ export interface PageLoadModel<T extends RouteParams> {
 	readonly loadedWithRouteState: Event<RouteParamsAndQuery<T>>;
 	readonly mounted: Event<void>;
 	readonly unmounted: Event<void>;
+	readonly currentRoute: RouteInstance<T>;
 }
 
 export const createPageLoadModel = <T extends RouteParams>(
@@ -22,5 +23,11 @@ export const createPageLoadModel = <T extends RouteParams>(
 		target: loadedWithRouteState,
 	});
 
-	return { loaded, loadedWithRouteState, mounted, unmounted, };
+	return {
+		loaded,
+		loadedWithRouteState,
+		mounted,
+		unmounted,
+		currentRoute: route,
+	};
 };

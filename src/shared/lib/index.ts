@@ -10,3 +10,4 @@ export * from './useQueryParam';
 export * from './snackbar-stack';
 export * from './create-rule-from-schema';
 export * from './string-to-color';
+export * from './use-submit';
