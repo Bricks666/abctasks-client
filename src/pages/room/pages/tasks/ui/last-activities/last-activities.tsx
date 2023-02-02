@@ -1,4 +1,5 @@
 import { Stack, Typography } from '@mui/material';
+import cn from 'classnames';
 import * as React from 'react';
 import { AllActivitiesInRoom } from '@/features/activities';
 import { ActivityCard } from '@/entities/activities';
@@ -36,7 +37,7 @@ export const LastActivities: React.FC<CommonProps> = (props) => {
 	} else {
 		children = (
 			<>
-				<Stack className={styles.list} spacing={0.5}>
+				<Stack spacing={0.5}>
 					{items.map((activity) => (
 						<ActivityCard {...activity} key={activity.id} />
 					))}
@@ -47,8 +48,8 @@ export const LastActivities: React.FC<CommonProps> = (props) => {
 	}
 
 	return (
-		<Stack className={className} spacing={1.5}>
-			<Typography className={styles.title} variant='body2' component='h2'>
+		<Stack className={cn(styles.wrapper, className)} spacing={1.5}>
+			<Typography variant='h6' component='h2' fontWeight={700}>
 				Последние активности
 			</Typography>
 			{children}

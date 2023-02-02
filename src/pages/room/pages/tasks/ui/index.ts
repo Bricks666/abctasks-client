@@ -1,3 +1,3 @@
-export * from './last-activities';
 export * from './tasks';
-export * from './tasks-progresses';
+export * from './aside';
+export * from './mobile-aside';

@@ -1,12 +1,12 @@
-.title {
+.wrapper {
 	padding: 0 1em;
+}
 
+.title {
 	font-weight: 700;
 }
 
 .list {
-	padding: 0 1em;
-
 	overflow: scroll;
 }
 

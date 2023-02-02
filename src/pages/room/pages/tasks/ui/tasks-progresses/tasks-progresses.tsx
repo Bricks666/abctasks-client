@@ -81,7 +81,7 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 			component='section'>
 			<Typography
 				className={styles.title}
-				variant='h5'
+				variant='h6'
 				component='h2'
 				fontWeight={700}>
 				{t('taskProgress.title')}

@@ -1,6 +1,6 @@
 .wrapper {
 	display: grid;
-	grid-template-columns: 4fr 1fr;
+	grid-template-columns: 6fr 400px;
 	grid-template-areas: '. aside' 'tasks aside' '. aside';
 	gap: 1em;
 
@@ -14,15 +14,15 @@
 
 .aside {
 	grid-area: aside;
-
-	display: grid;
-	gap: 1.5em;
-	grid-template-rows: max-content 1fr;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1440px) {
 	.wrapper {
 		grid-template-columns: 1fr;
-		grid-template-areas: '.' 'tasks' 'aside';
+		grid-template-areas: '.' 'tasks';
+	}
+
+	.tasks {
+		padding-bottom: 1.5em;
 	}
 }

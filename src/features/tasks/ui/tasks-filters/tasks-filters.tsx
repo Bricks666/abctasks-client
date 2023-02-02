@@ -1,5 +1,5 @@
 import TuneIcon from '@mui/icons-material/Tune';
-import { Button, IconButton, Popover } from '@mui/material';
+import { Button, IconButton, Popover, Tooltip } from '@mui/material';
 import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
@@ -34,9 +34,11 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 
 	return (
 		<>
-			<IconButton onClick={toggle} ref={setRef}>
-				<TuneIcon />
-			</IconButton>
+			<Tooltip title='Фильтры задач'>
+				<IconButton onClick={toggle} ref={setRef}>
+					<TuneIcon />
+				</IconButton>
+			</Tooltip>
 			<Popover
 				open={open}
 				onClose={toggleOff}
