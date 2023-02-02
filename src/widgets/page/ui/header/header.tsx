@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
 					<div className={styles.center}>{centerContent}</div>
 				) : null}
 				<div className={cn(styles.right, styles.side)}>
-					{rightContent} <ProfileMenu className={styles.avatar} />
+					{rightContent} <ProfileMenu />
 				</div>
 			</Toolbar>
 		</AppBar>

@@ -1,10 +1,4 @@
-import {
-	ListItem,
-	ListItemSecondaryAction,
-	Skeleton,
-	List,
-	Stack
-} from '@mui/material';
+import { ListItem, Skeleton, List, Stack, Container } from '@mui/material';
 import * as React from 'react';
 import { Popups, PopupsProps } from '@/widgets/page';
 import {
@@ -13,7 +7,7 @@ import {
 	GroupCardActions,
 	UpdateGroup
 } from '@/features/groups';
-import { useGroups, GroupLabel } from '@/entities/groups';
+import { useGroups, GroupListItem } from '@/entities/groups';
 import { getEmptyArray, popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -66,21 +60,22 @@ const GroupsPage: React.FC<GroupsPageProps> = React.memo(function GroupsPage(
 		));
 	} else {
 		items = groups.data.map((group) => (
-			<ListItem key={group.id}>
-				<GroupLabel {...group} />
-				<ListItemSecondaryAction>
-					<GroupCardActions groupId={group.id} />
-				</ListItemSecondaryAction>
-			</ListItem>
+			<GroupListItem
+				{...group}
+				actions={<GroupCardActions groupId={group.id} />}
+				key={group.id}
+			/>
 		));
 	}
 
 	return (
-		<Stack className={className} spacing={1}>
-			<CreateGroupButton />
-			<List>{items}</List>
-			<Popups popupMap={popupMap} />
-		</Stack>
+		<Container>
+			<Stack className={className} spacing={1}>
+				<CreateGroupButton />
+				<List>{items}</List>
+				<Popups popupMap={popupMap} />
+			</Stack>
+		</Container>
 	);
 });
 

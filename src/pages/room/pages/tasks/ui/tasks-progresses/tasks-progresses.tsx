@@ -47,7 +47,7 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 		);
 	} else if (isProgressesError) {
 		const onRetry = () => {
-			progresses.start(roomId);
+			progresses.start({ roomId, });
 		};
 		children = (
 			<RetryLoadingSlat
@@ -79,7 +79,11 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 			className={cn(styles.wrapper, className)}
 			spacing={1.5}
 			component='section'>
-			<Typography className={styles.title} variant='body2' component='h2'>
+			<Typography
+				className={styles.title}
+				variant='h5'
+				component='h2'
+				fontWeight={700}>
 				{t('taskProgress.title')}
 			</Typography>
 			{children}

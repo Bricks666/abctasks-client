@@ -43,7 +43,7 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 		}
 	];
 
-	const isLoading = tasks.pending;
+	const isLoading = tasks.pending && !tasks.stale;
 	const isError = !!tasks.error;
 
 	if (isError) {

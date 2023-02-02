@@ -85,18 +85,13 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 						size='medium'
 					/>
 					<Button
-						className={styles.button}
 						onClick={onReset}
 						type='reset'
 						variant='outlined'
 						color='primary'>
 						Reset
 					</Button>
-					<Button
-						className={styles.button}
-						type='submit'
-						variant='contained'
-						color='primary'>
+					<Button type='submit' variant='contained' color='primary'>
 						Apply
 					</Button>
 				</form>

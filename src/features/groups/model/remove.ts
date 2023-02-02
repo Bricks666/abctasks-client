@@ -5,11 +5,7 @@ import { Literal } from 'runtypes';
 import { groupsModel } from '@/entities/groups';
 import { RemoveGroupParams, groupsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const removeGroupDomain = createDomain();
 
@@ -17,14 +13,12 @@ const handlerFx = removeGroupDomain.effect<
 	RemoveGroupParams,
 	StandardResponse<boolean>,
 	StandardFailError
->('removeGroupFx');
-
-handlerFx.use(groupsApi.remove);
+>(groupsApi.remove);
 
 export const mutation = createMutationWithAccess<
 	RemoveGroupParams,
 	StandardResponse<boolean>,
-	StandardSuccessResponse<boolean>,
+	StandardResponse<boolean>,
 	StandardFailError
 >({
 	effect: handlerFx,

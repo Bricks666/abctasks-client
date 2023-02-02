@@ -4,23 +4,18 @@ import { createDomain, sample } from 'effector';
 import { Literal } from 'runtypes';
 import { authModel } from '@/entities/auth';
 import { authApi } from '@/shared/api';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const logoutDomain = createDomain();
 
 export const logoutFx = logoutDomain.effect<void, StandardResponse<boolean>>(
-	'logoutFx'
+	authApi.logout
 );
-logoutFx.use(authApi.logout);
 
 export const logoutMutation = createMutation<
 	void,
 	StandardResponse<boolean>,
-	StandardSuccessResponse<boolean>,
+	StandardResponse<boolean>,
 	Error
 >({
 	effect: logoutFx,

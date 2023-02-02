@@ -19,5 +19,11 @@ export const Field: React.FC<FieldProps> = React.memo((props) => {
 		onChange?.(evt.target.value);
 	};
 
-	return <TextField {...rest} onChange={handleChange} error={!isValid} />;
+	return (
+		<TextField
+			{...(rest as TextFieldProps)}
+			onChange={handleChange}
+			error={!isValid}
+		/>
+	);
 });

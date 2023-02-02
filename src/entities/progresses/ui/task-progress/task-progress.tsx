@@ -28,7 +28,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 		} = props;
 		const { t, } = useTranslation('room');
 
-		const value = (completedCount / totalCount) * 100;
+		const value = (Number(completedCount) / Number(totalCount)) * 100;
 
 		const sx: SxProps = {
 			backgroundColor: secondColor,

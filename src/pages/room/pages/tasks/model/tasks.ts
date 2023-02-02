@@ -6,10 +6,10 @@ import { controls, getParams } from '@/shared/configs';
 import { currentRoute, loaded, loadedWithRouteState } from './page';
 
 const { formValidated, setForm, reset, fields, } = tasksFiltersModel.form;
-/**
- * TODO: Вынести в модель уведомлений
- */
 
+/**
+ * TODO: Сделать обертку над роутом, чтобы отслеживать отдельно изменения параметров
+ */
 sample({
 	clock: [currentRoute.opened, currentRoute.updated, loadedWithRouteState],
 	fn: ({ params, query, }) => ({

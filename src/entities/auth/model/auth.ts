@@ -5,11 +5,7 @@ import { createGate } from 'effector-react';
 import { User, AuthResponse, authResponse, authApi } from '@/shared/api';
 import { tokenModel } from '@/shared/configs';
 import { dataExtractor } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const authDomain = createDomain();
 
@@ -24,7 +20,7 @@ export const query = createQuery<
 	void,
 	StandardResponse<AuthResponse>,
 	Error,
-	StandardSuccessResponse<AuthResponse>,
+	StandardResponse<AuthResponse>,
 	AuthResponse
 >({
 	effect: handlerFx,

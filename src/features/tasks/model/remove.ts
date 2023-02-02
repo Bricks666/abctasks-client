@@ -5,11 +5,7 @@ import { Literal } from 'runtypes';
 import { tasksInRoomModel } from '@/entities/tasks';
 import { RemoveTaskParams, tasksApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardResponse
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const removeTaskDomain = createDomain();
 
@@ -17,13 +13,12 @@ const handlerFx = removeTaskDomain.effect<
 	RemoveTaskParams,
 	StandardResponse<boolean>,
 	StandardFailError
->('removeTaskFx');
-handlerFx.use(tasksApi.remove);
+>(tasksApi.remove);
 
 export const mutation = createMutationWithAccess<
 	RemoveTaskParams,
 	StandardResponse<boolean>,
-	StandardSuccessResponse<boolean>,
+	StandardResponse<boolean>,
 	StandardFailError
 >({
 	effect: handlerFx,
