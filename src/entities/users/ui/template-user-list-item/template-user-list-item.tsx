@@ -11,9 +11,9 @@ import { User } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { UserAvatar } from '../user-avatar';
 
-import styles from './template-user-card.module.css';
+import styles from './template-user-list-item.module.css';
 
-export interface TemplateUserCardProps
+export interface TemplateUserListItemProps
 	extends CommonProps,
 		User,
 		Omit<ListItemProps, keyof CommonProps | keyof User> {
@@ -21,7 +21,9 @@ export interface TemplateUserCardProps
 	readonly extra?: React.ReactElement | null;
 }
 
-export const TemplateUserCard: React.FC<TemplateUserCardProps> = (props) => {
+export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
+	props
+) => {
 	const { login, actions, className, photo, extra, id: _id, ...rest } = props;
 
 	return (
@@ -32,7 +34,10 @@ export const TemplateUserCard: React.FC<TemplateUserCardProps> = (props) => {
 			<ListItemAvatar>
 				<UserAvatar login={login} photo={photo} />
 			</ListItemAvatar>
-			<ListItemText primary={login} />
+			<ListItemText
+				primary={login}
+				primaryTypographyProps={{ variant: 'subtitle1', component: 'p', }}
+			/>
 			{extra}
 		</ListItem>
 	);

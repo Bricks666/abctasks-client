@@ -5,7 +5,7 @@ import { useForm } from 'effector-forms';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { addUserRoomModel } from '@/features/rooms';
-import { TemplateUserCard, UserSearch } from '@/entities/users';
+import { TemplateUserListItem, UserSearch } from '@/entities/users';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 
@@ -38,7 +38,7 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 			<form className={styles.form} onSubmit={onSubmit}>
 				{user.value ? (
 					<Paper variant='outlined'>
-						<TemplateUserCard
+						<TemplateUserListItem
 							{...user.value}
 							actions={
 								<IconButton onClick={user.reset as any}>
@@ -57,6 +57,7 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 					/>
 				)}
 				<LoadingButton
+					type='submit'
 					variant='contained'
 					disabled={!user.value}
 					loading={isLoading}

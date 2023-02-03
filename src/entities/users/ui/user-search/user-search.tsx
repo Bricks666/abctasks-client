@@ -6,7 +6,7 @@ import { CommonProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 import { useSearchedUsers } from '../../lib';
 import { searchUserModel } from '../../model';
-import { TemplateUserCard } from '../template-user-card';
+import { TemplateUserListItem } from '../template-user-list-item';
 
 export interface UserSearchProps extends CommonProps, FieldProps {
 	readonly onChange?: (user: User | null) => unknown;
@@ -35,7 +35,7 @@ export const UserSearch: React.FC<UserSearchProps> = (props) => {
 			}}
 			onClose={reset}
 			renderOption={(props, option) => (
-				<TemplateUserCard {...props} {...option} />
+				<TemplateUserListItem {...props} {...option} />
 			)}
 			renderInput={(params) => <Field {...params} {...rest} />}
 		/>

@@ -1,26 +1,20 @@
 .layout {
 	display: grid;
-	grid-template-rows: max-content max-content 1fr;
 	gap: 1em;
 }
 
-
 .content {
-  padding: 1em;
+	padding: 1em;
 }
 
 @media (min-width: 1300px) {
 	.layout {
 		--room-page-template-columns: 4fr 1fr;
-
-		height: 100vh;
 	}
-
 }
 
 @media (max-width: 1300px) {
 	.layout {
 		--room-page-template-columns: 1fr;
 	}
-
 }

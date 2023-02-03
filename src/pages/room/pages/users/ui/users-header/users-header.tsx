@@ -16,14 +16,14 @@ export const UsersHeader: React.FC<UsersHeaderProps> = (props) => {
 	const count = useUnit(usersInRoomModel.$count);
 
 	return (
-		<div className={cn(styles.wrapper, className)}>
+		<header className={cn(styles.wrapper, className)}>
 			<div className={styles.text}>
-				<Typography variant='h5' component='h3'>
+				<Typography variant='h5' component='h3' fontWeight={700}>
 					Users
 				</Typography>
 				<Typography>{count} count</Typography>
 			</div>
 			<AddUserButton />
-		</div>
+		</header>
 	);
 };

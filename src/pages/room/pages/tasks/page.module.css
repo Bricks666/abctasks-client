@@ -1,7 +1,8 @@
 .wrapper {
 	display: grid;
 	grid-template-columns: 6fr 400px;
-	grid-template-areas: '. aside' 'tasks aside' '. aside';
+	grid-template-rows: max-content 1fr;
+	grid-template-areas: '. aside' 'tasks aside';
 	gap: 1em;
 
 	height: 100%;

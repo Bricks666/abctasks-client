@@ -1,3 +1,7 @@
+.wrapper {
+	height: 100%;
+}
+
 .layout {
 	display: grid;
 	gap: 2em;
