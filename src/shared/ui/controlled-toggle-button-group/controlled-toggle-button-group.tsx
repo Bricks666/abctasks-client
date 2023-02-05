@@ -35,7 +35,7 @@ export const ControlledToggleButtonGroup: React.FC<
 			<ToggleButtonGroup onChange={changeHandle} {...rest} id={id}>
 				{children}
 			</ToggleButtonGroup>
-			<FormHelperText>{helperText}</FormHelperText>
+			{helperText ? <FormHelperText>{helperText}</FormHelperText> : null}
 		</FormControl>
 	);
 };

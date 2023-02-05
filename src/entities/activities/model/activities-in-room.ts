@@ -35,4 +35,9 @@ export const query = createQuery<
 	mapData: dataExtractor,
 });
 
+export const $hasItems = query.$data.map((data) => !!data.totalCount);
+export const $pageCount = query.$data.map((data) =>
+	Math.ceil(data.totalCount / data.limit)
+);
+
 cache(query);

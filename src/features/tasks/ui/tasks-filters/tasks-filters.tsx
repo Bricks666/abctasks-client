@@ -1,5 +1,4 @@
-import TuneIcon from '@mui/icons-material/Tune';
-import { Button, IconButton, Popover, Tooltip } from '@mui/material';
+import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
@@ -7,7 +6,7 @@ import { GroupsSelect } from '@/entities/groups';
 import { UsersInRoomPicker } from '@/entities/users';
 import { useSubmit, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { DatePicker } from '@/shared/ui';
+import { DatePicker, FiltersPopover } from '@/shared/ui';
 import { tasksFiltersModel } from '../../model';
 
 import styles from './tasks-filters.module.css';
@@ -17,8 +16,7 @@ export interface TasksFiltersProps extends CommonProps {}
 export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 	const { className, } = props;
 
-	const [open, { toggle, toggleOff, }] = useToggle();
-	const [ref, setRef] = React.useState<HTMLElement | null>(null);
+	const [open, { toggleOn, toggleOff, }] = useToggle();
 	const { fields, reset, submit, } = useForm(tasksFiltersModel.form);
 	const { after, authorId, before, groupId, } = fields;
 
@@ -33,24 +31,12 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 	};
 
 	return (
-		<>
-			<Tooltip title='Фильтры задач'>
-				<IconButton onClick={toggle} ref={setRef}>
-					<TuneIcon />
-				</IconButton>
-			</Tooltip>
-			<Popover
-				open={open}
-				onClose={toggleOff}
-				anchorEl={ref}
-				anchorOrigin={{
-					horizontal: 'right',
-					vertical: 'bottom',
-				}}
-				transformOrigin={{
-					horizontal: 'right',
-					vertical: 'top',
-				}}>
+		<FiltersPopover
+			title='Фильтры задач'
+			open={open}
+			onClose={toggleOff}
+			onOpen={toggleOn}
+			filters={
 				<form className={cn(styles.wrapper, className)} onSubmit={onSubmit}>
 					<GroupsSelect
 						value={groupId.value}
@@ -97,7 +83,7 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 						Apply
 					</Button>
 				</form>
-			</Popover>
-		</>
+			}
+		/>
 	);
 };

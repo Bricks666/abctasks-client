@@ -1,6 +1,5 @@
 import { querySync } from 'atomic-router';
 import { createEvent, createStore, sample } from 'effector';
-import { debounce } from 'patronum';
 import { activitiesFiltersModel } from '@/features/activities';
 import { activitiesInRoomModel } from '@/entities/activities';
 import { GetActivitiesInRoomParams } from '@/shared/api';
@@ -12,10 +11,14 @@ const currentRoute = routes.room.activities;
 const $page = createStore<null | string>(null);
 export const pageChanged = createEvent<null | number>();
 
-const { $values, fields, setForm, } = activitiesFiltersModel.form;
-const activitiesFiltersChanges = debounce({
-	source: $values,
-	timeout: 250,
+const { fields, setForm, formValidated, reset, $values, } =
+	activitiesFiltersModel.form;
+
+const formApplied = createEvent<void>();
+
+sample({
+	clock: [formValidated, reset],
+	target: formApplied,
 });
 
 sample({
@@ -25,23 +28,25 @@ sample({
 });
 
 sample({
-	clock: activitiesFiltersChanges,
+	clock: formApplied,
 	fn: () => null,
-	target: pageChanged,
+	target: $page,
 });
 
 sample({
-	clock: [activitiesFiltersChanges, pageChanged],
+	clock: [formApplied, pageChanged],
 	source: {
 		params: currentRoute.$params,
-		values: $values,
 		page: $page,
+		values: $values,
 	},
-	fn: ({ params, values, page, }): GetActivitiesInRoomParams => ({
-		roomId: params.id,
-		page: page ? Number(page) : 1,
-		...values,
-	}),
+	fn: ({ params, values, page, }): GetActivitiesInRoomParams => {
+		return {
+			roomId: params.id,
+			...values,
+			page: page ? Number(page) : 1,
+		};
+	},
 	target: activitiesInRoomModel.query.start,
 });
 
@@ -70,7 +75,6 @@ querySync({
 	source: {
 		[getParams.page]: $page,
 	},
-	clock: pageChanged,
 	route: currentRoute,
 });
 
@@ -83,7 +87,7 @@ querySync({
 		[getParams.before]: fields.before.$value,
 		[getParams.sphereName]: fields.sphereName.$value,
 	},
-	clock: [activitiesFiltersChanges],
+	clock: formApplied,
 	route: currentRoute,
 });
 
