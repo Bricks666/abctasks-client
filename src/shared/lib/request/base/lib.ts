@@ -8,7 +8,7 @@ export const normalizeQuery = (
 			return object;
 		}
 
-		object[key] = value as string;
+		object[key] = value;
 		return object;
 	}, {} as Record<string, string>);
 };

@@ -1,5 +1,5 @@
-import { Group } from '@/shared/api';
+import { Tag } from '@/shared/api';
 
 export interface GroupsMap {
-	[id: number]: Group | undefined;
+	[id: number]: Tag | undefined;
 }

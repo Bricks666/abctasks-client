@@ -2,7 +2,7 @@ import { Record, Number, String, Static } from 'runtypes';
 import { AccessOptions } from '@/shared/lib';
 import { hex, InRoomParams } from '@/shared/types';
 
-export const group = Record({
+export const tag = Record({
 	id: Number,
 	roomId: Number,
 	name: String,
@@ -10,24 +10,24 @@ export const group = Record({
 	secondColor: hex,
 });
 
-export interface Group extends Static<typeof group> {}
+export interface Tag extends Static<typeof tag> {}
 
-export interface GetGroupParams extends InRoomParams {
+export interface GetTagParams extends InRoomParams {
 	readonly id: number;
 }
 
-export interface CreateGroupParams
+export interface CreateTagParams
 	extends Required<AccessOptions>,
-		Omit<Group, 'id'> {}
+		Omit<Tag, 'id'> {}
 
-export interface UpdateGroupParams
-	extends Partial<Omit<CreateGroupParams, 'roomId' | 'accessToken'>>,
+export interface UpdateTagParams
+	extends Partial<Omit<CreateTagParams, 'roomId' | 'accessToken'>>,
 		Required<AccessOptions> {
 	readonly id: number;
 	readonly roomId: number;
 }
 
-export interface RemoveGroupParams extends Required<AccessOptions> {
+export interface RemoveTagParams extends Required<AccessOptions> {
 	readonly id: number;
 	readonly roomId: number;
 }

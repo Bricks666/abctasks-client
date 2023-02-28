@@ -12,7 +12,7 @@ export interface StandardResponse<T> {
 	readonly statusCode: number;
 }
 
-export const getItemsResponse = <RT>(T: Runtype<RT>) => {
+export const getPaginationResponse = <RT>(T: Runtype<RT>) => {
 	return Record({
 		items: Array(T),
 		totalCount: Number,
@@ -20,7 +20,7 @@ export const getItemsResponse = <RT>(T: Runtype<RT>) => {
 	}).asReadonly();
 };
 
-export interface ItemsResponse<T> {
+export interface PaginationResponse<T> {
 	readonly items: T[];
 	readonly totalCount: number;
 	readonly limit: number;

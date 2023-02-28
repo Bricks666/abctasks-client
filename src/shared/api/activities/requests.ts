@@ -1,7 +1,9 @@
 import { fetcher } from '@/shared/lib';
-import { ItemsResponse, StandardResponse } from '@/shared/types';
+import { PaginationResponse, StandardResponse } from '@/shared/types';
 import {
 	Activity,
+	ActivityAction,
+	ActivitySphere,
 	GetActivitiesInRoomParams,
 	GetLastActivitiesInRoomParams
 } from './types';
@@ -14,7 +16,7 @@ export const getAll = async ({
 	roomId,
 	...query
 }: GetActivitiesInRoomParams) => {
-	return activitiesFetcher.get<StandardResponse<ItemsResponse<Activity>>>({
+	return activitiesFetcher.get<StandardResponse<PaginationResponse<Activity>>>({
 		path: {
 			url: roomId,
 			query,
@@ -26,12 +28,28 @@ export const getLast = async ({
 	roomId,
 	count,
 }: GetLastActivitiesInRoomParams) => {
-	return activitiesFetcher.get<StandardResponse<ItemsResponse<Activity>>>({
+	return activitiesFetcher.get<StandardResponse<PaginationResponse<Activity>>>({
 		path: {
 			url: roomId,
 			query: {
 				count,
 			},
+		},
+	});
+};
+
+export const getActions = async () => {
+	return activitiesFetcher.get<StandardResponse<ActivityAction[]>>({
+		path: {
+			url: 'actions/all',
+		},
+	});
+};
+
+export const getSpheres = async () => {
+	return activitiesFetcher.get<StandardResponse<ActivitySphere[]>>({
+		path: {
+			url: 'spheres/all',
 		},
 	});
 };

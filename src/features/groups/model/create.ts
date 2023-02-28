@@ -3,7 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { groupsModel } from '@/entities/groups';
 import { createPopupControlModel } from '@/entities/popups';
-import { CreateGroupParams, group, Group, groupsApi } from '@/shared/api';
+import { CreateTagParams, tag, Tag, tagsApi } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -18,19 +18,19 @@ export const { close, $isOpen, } = createPopupControlModel(
 const { formValidated, reset, } = form;
 
 const handlerFx = createGroupDomain.effect<
-	CreateGroupParams,
-	StandardResponse<Group>,
+	CreateTagParams,
+	StandardResponse<Tag>,
 	StandardFailError
->(groupsApi.create);
+>(tagsApi.create);
 
 export const mutation = createMutationWithAccess<
-	CreateGroupParams,
-	StandardResponse<Group>,
-	StandardResponse<Group>,
+	CreateTagParams,
+	StandardResponse<Tag>,
+	StandardResponse<Tag>,
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardResponse(group)),
+	contract: runtypeContract(getStandardResponse(tag)),
 });
 
 sample({

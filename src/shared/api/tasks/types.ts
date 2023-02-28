@@ -1,5 +1,13 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import { Record, Number, String, Static, Union, Literal } from 'runtypes';
+import {
+	Record,
+	Number,
+	String,
+	Static,
+	Union,
+	Literal,
+	Array
+} from 'runtypes';
 import { AccessOptions } from '@/shared/lib';
 import { InRoomParams } from '@/shared/types';
 
@@ -20,12 +28,14 @@ export const statuses: TaskStatus[] = [
 
 export const task = Record({
 	id: Number,
-	groupId: Number,
 	roomId: Number,
+	tagIds: Array(Number),
 	authorId: Number,
+	title: String,
+	description: String.nullable(),
 	status: taskStatus,
-	content: String,
 	createdAt: String,
+	updatedAt: String.nullable(),
 });
 
 export interface Task extends Static<typeof task> {}
@@ -54,7 +64,7 @@ export interface GetTaskParams extends InRoomParams {
 
 export interface CreateTaskParams
 	extends Required<AccessOptions>,
-		Pick<Task, 'roomId' | 'groupId' | 'content' | 'status'> {}
+		Pick<Task, 'roomId' | 'tagIds' | 'title' | 'status' | 'description'> {}
 
 export interface UpdateTaskParams
 	extends Partial<Omit<CreateTaskParams, 'accessToken'>>,

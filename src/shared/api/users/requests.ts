@@ -1,7 +1,7 @@
 import { fetcher } from '@/shared/lib';
 import { InRoomParams, StandardResponse } from '@/shared/types';
 import { User } from '../auth';
-import { LoginSearchQuery } from './types';
+import { SearchUsersQuery } from './types';
 
 const usersFetcher = fetcher.create({
 	baseURL: 'users',
@@ -20,14 +20,14 @@ export const getAllInRoom = async (
 	});
 };
 
-export const getAllIncludeLogin = async (
-	params: LoginSearchQuery
+export const searchUsers = async (
+	params: SearchUsersQuery
 ): Promise<StandardResponse<User[]>> => {
 	return usersFetcher.get({
 		path: {
 			url: '',
 			query: {
-				login: params.login,
+				username: params.username,
 			},
 		},
 	});

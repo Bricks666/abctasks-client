@@ -3,20 +3,20 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
 import { groupsModel } from '@/entities/groups';
-import { RemoveGroupParams, groupsApi } from '@/shared/api';
+import { RemoveTagParams, tagsApi } from '@/shared/api';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const removeGroupDomain = createDomain();
 
 const handlerFx = removeGroupDomain.effect<
-	RemoveGroupParams,
+	RemoveTagParams,
 	StandardResponse<boolean>,
 	StandardFailError
->(groupsApi.remove);
+>(tagsApi.remove);
 
 export const mutation = createMutationWithAccess<
-	RemoveGroupParams,
+	RemoveTagParams,
 	StandardResponse<boolean>,
 	StandardResponse<boolean>,
 	StandardFailError

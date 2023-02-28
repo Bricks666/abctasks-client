@@ -3,11 +3,11 @@ import * as React from 'react';
 import { TaskCardMenu } from '@/features/tasks';
 import { GroupLabel, groupsModel, SkeletonGroupLabel } from '@/entities/groups';
 import { TemplateTaskCard } from '@/entities/tasks';
-import { Group, Task } from '@/shared/api';
+import { Tag, Task } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 
 export interface TaskCardProps extends CommonProps, Task {
-	readonly group: Group | null;
+	readonly group: Tag | null;
 }
 
 export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {

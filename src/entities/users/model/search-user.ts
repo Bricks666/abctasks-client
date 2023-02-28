@@ -3,20 +3,20 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, createEvent, sample } from 'effector';
 import { debounce } from 'patronum';
 import { Array } from 'runtypes';
-import { LoginSearchQuery, user, User, usersApi } from '@/shared/api';
+import { SearchUsersQuery, user, User, usersApi } from '@/shared/api';
 import { dataExtractor, StandardFailError } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 const searchUserDomain = createDomain();
 
 const handlerFx = searchUserDomain.effect<
-	LoginSearchQuery,
+	SearchUsersQuery,
 	StandardResponse<User[]>,
 	StandardFailError
->(usersApi.getAllIncludeLogin);
+>(usersApi.searchUsers);
 
 export const query = createQuery<
-	LoginSearchQuery,
+	SearchUsersQuery,
 	StandardResponse<User[]>,
 	StandardFailError,
 	StandardResponse<User[]>,

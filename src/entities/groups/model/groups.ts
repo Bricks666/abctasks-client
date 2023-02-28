@@ -3,7 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
-import { group, Group, groupsApi } from '@/shared/api';
+import { tag, Tag, tagsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
 import { dataExtractor, StandardFailError } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
@@ -14,21 +14,21 @@ export const groupsDomain = createDomain();
 export const $id = groupsDomain.store<null | number>(null);
 const handlerFx = groupsDomain.effect<
 	number,
-	StandardResponse<Group[]>,
+	StandardResponse<Tag[]>,
 	StandardFailError
 >();
-handlerFx.use(groupsApi.getAll);
+handlerFx.use(tagsApi.getAll);
 
 export const query = createQuery<
 	number,
-	StandardResponse<Group[]>,
+	StandardResponse<Tag[]>,
 	StandardFailError,
-	StandardResponse<Group[]>,
-	Group[]
+	StandardResponse<Tag[]>,
+	Tag[]
 >({
 	initialData: [],
 	effect: handlerFx,
-	contract: runtypeContract(getStandardResponse(Array(group))),
+	contract: runtypeContract(getStandardResponse(Array(tag))),
 
 	mapData: dataExtractor,
 });

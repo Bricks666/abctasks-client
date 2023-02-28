@@ -18,7 +18,7 @@ const handlerFx = usersInRoom.effect<
 	StandardFailError
 >();
 
-handlerFx.use(roomsApi.getUsers);
+handlerFx.use(roomsApi.getMembers);
 
 export const query = createQuery<
 	InRoomParams,

@@ -4,7 +4,7 @@ import { createDomain, sample } from 'effector';
 import { and } from 'patronum';
 import { groupsModel, groupModel } from '@/entities/groups';
 import { createPopupControlModel } from '@/entities/popups';
-import { UpdateGroupParams, Group, groupsApi, group } from '@/shared/api';
+import { UpdateTagParams, Tag, tagsApi, tag } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
 import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -13,19 +13,19 @@ import { form } from './form';
 const updateGroupDomain = createDomain();
 
 const handlerFx = updateGroupDomain.effect<
-	UpdateGroupParams,
-	StandardResponse<Group>,
+	UpdateTagParams,
+	StandardResponse<Tag>,
 	StandardFailError
->(groupsApi.update);
+>(tagsApi.update);
 
 export const mutation = createMutationWithAccess<
-	UpdateGroupParams,
-	StandardResponse<Group>,
-	StandardResponse<Group>,
+	UpdateTagParams,
+	StandardResponse<Tag>,
+	StandardResponse<Tag>,
 	StandardFailError
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardResponse(group)),
+	contract: runtypeContract(getStandardResponse(tag)),
 });
 
 export const { close, $isOpen, } = createPopupControlModel(

@@ -11,8 +11,6 @@
 		"lint": "eslint --ext .tsx,.ts src",
 		"lint:fix": "eslint --ext .tsx,.ts src --fix",
 		"prettier": "prettier --write --config ./.prettierrc src",
-		"gen:component": "generate-react component",
-		"gen:page": "generate-react component --type=page",
 		"prepare": "husky install",
 		"gen:css-types": "tcm src"
 	},
@@ -42,8 +40,7 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-i18next": "^12.1.4",
-		"runtypes": "^6.6.0",
-		"socket.io-client": "^4.5.4"
+		"runtypes": "^6.6.0"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.20.7",

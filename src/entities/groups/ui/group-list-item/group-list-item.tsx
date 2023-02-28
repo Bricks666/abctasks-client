@@ -1,10 +1,10 @@
 import { ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material';
 import * as React from 'react';
-import { Group } from '@/shared/api';
+import { Tag } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { GroupLabel } from '../group-label';
 
-export interface GroupListItemProps extends CommonProps, Group {
+export interface GroupListItemProps extends CommonProps, Tag {
 	readonly actions?: React.ReactElement | null;
 }
 

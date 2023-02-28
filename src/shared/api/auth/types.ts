@@ -2,6 +2,7 @@ import { Record, String, Static, Number } from 'runtypes';
 
 export const user = Record({
 	id: Number,
+	email: String,
 	login: String,
 	photo: String.nullable(),
 }).asReadonly();
@@ -31,4 +32,8 @@ export interface LoginParams {
 export interface RegistrationParams {
 	readonly login: string;
 	readonly password: string;
+}
+
+export interface ActivateParams {
+	readonly token: string;
 }

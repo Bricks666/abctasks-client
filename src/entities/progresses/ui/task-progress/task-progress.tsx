@@ -7,14 +7,14 @@ import {
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Progress, Group } from '@/shared/api';
+import { Progress, Tag } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import styles from './task-progress.module.css';
 
 export interface TaskProgressComponent
 	extends CommonProps,
 		Omit<Progress, 'groupId'>,
-		Pick<Group, 'mainColor' | 'secondColor' | 'name'> {}
+		Pick<Tag, 'mainColor' | 'secondColor' | 'name'> {}
 
 export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 	(props) => {

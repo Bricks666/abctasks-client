@@ -11,28 +11,30 @@ import { dataExtractor } from '@/shared/lib';
 import {
 	InRoomParams,
 	StandardResponse,
-	ItemsResponse,
+	PaginationResponse,
 	getStandardResponse,
-	getItemsResponse
+	getPaginationResponse
 } from '@/shared/types';
 import { currentRoute, loadedWithRouteState } from './page';
 
 const activitiesDomain = createDomain();
 const handlerFx = activitiesDomain.effect<
 	InRoomParams,
-	StandardResponse<ItemsResponse<Activity>>
+	StandardResponse<PaginationResponse<Activity>>
 >(({ roomId, }) => activitiesApi.getLast({ roomId, count: 5, }));
 
 export const query = createQuery<
 	InRoomParams,
-	StandardResponse<ItemsResponse<Activity>>,
+	StandardResponse<PaginationResponse<Activity>>,
 	Error,
-	StandardResponse<ItemsResponse<Activity>>,
-	ItemsResponse<Activity>
+	StandardResponse<PaginationResponse<Activity>>,
+	PaginationResponse<Activity>
 >({
 	initialData: { items: [], totalCount: 0, limit: 5, },
 	effect: handlerFx,
-	contract: runtypeContract(getStandardResponse(getItemsResponse(activity))),
+	contract: runtypeContract(
+		getStandardResponse(getPaginationResponse(activity))
+	),
 	mapData: dataExtractor,
 });
 

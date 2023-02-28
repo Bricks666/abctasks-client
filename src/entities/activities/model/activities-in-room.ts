@@ -11,27 +11,29 @@ import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
-	ItemsResponse,
-	getItemsResponse
+	PaginationResponse,
+	getPaginationResponse
 } from '@/shared/types';
 
 const activitiesDomain = createDomain();
 const handlerFx = activitiesDomain.effect<
 	GetActivitiesInRoomParams,
-	StandardResponse<ItemsResponse<Activity>>
+	StandardResponse<PaginationResponse<Activity>>
 >();
 handlerFx.use(activitiesApi.getAll);
 
 export const query = createQuery<
 	GetActivitiesInRoomParams,
-	StandardResponse<ItemsResponse<Activity>>,
+	StandardResponse<PaginationResponse<Activity>>,
 	Error,
-	StandardResponse<ItemsResponse<Activity>>,
-	ItemsResponse<Activity>
+	StandardResponse<PaginationResponse<Activity>>,
+	PaginationResponse<Activity>
 >({
 	initialData: { items: [], totalCount: 0, limit: 50, },
 	effect: handlerFx,
-	contract: runtypeContract(getStandardResponse(getItemsResponse(activity))),
+	contract: runtypeContract(
+		getStandardResponse(getPaginationResponse(activity))
+	),
 	mapData: dataExtractor,
 });
 
