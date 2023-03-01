@@ -1,0 +1,15 @@
+.avatar {
+	background-color: var(--activity-card-avatar-color);
+}
+
+.error {
+	--activity-card-avatar-color: var(--mui-palette-error-light);
+}
+
+.warning {
+	--activity-card-avatar-color: var(--mui-palette-warning-light);
+}
+
+.success {
+	--activity-card-avatar-color: var(--mui-palette-success-light);
+}

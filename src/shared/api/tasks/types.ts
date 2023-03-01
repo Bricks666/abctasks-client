@@ -9,7 +9,7 @@ import {
 	Array
 } from 'runtypes';
 import { AccessOptions } from '@/shared/lib';
-import { InRoomParams } from '@/shared/types';
+import { DatesFiltersParams, InRoomParams } from '@/shared/types';
 
 export const taskStatus = Union(
 	Literal('done'),
@@ -51,11 +51,9 @@ export type StatusNamesStore = {
 	readonly [key in keyof GroupedByStatusTasks]: TaskStatus;
 };
 
-export interface GetTasksParams extends InRoomParams {
-	readonly authorId?: number | null;
-	readonly groupId?: number | null;
-	readonly before?: string | null;
-	readonly after?: string | null;
+export interface GetTasksParams extends InRoomParams, DatesFiltersParams {
+	readonly authorIds: number[];
+	readonly tagIds?: number[];
 }
 
 export interface GetTaskParams extends InRoomParams {

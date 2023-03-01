@@ -6,6 +6,10 @@ import {
 	removeTaskModel,
 	updateTaskModel
 } from '@/features/tasks';
+import {
+	activityActionsModel,
+	activitySpheresModel
+} from '@/entities/activities';
 import { Activity, activitiesApi, activity } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
 import {
@@ -54,4 +58,9 @@ sample({
 	clock: [currentRoute.opened, currentRoute.updated, loadedWithRouteState],
 	fn: ({ params, }) => ({ roomId: params.id, }),
 	target: query.start,
+});
+
+sample({
+	clock: query.start,
+	target: [activityActionsModel.query.start, activitySpheresModel.query.start],
 });

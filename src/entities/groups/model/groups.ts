@@ -45,6 +45,6 @@ querySync({
 	controls,
 	route: routes.room.groups,
 	source: {
-		[getParams.groupId]: $id,
+		[getParams.tagId]: $id,
 	},
 });

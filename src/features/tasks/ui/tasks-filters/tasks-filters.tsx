@@ -18,7 +18,7 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 
 	const [open, { toggleOn, toggleOff, }] = useToggle();
 	const { fields, reset, submit, } = useForm(tasksFiltersModel.form);
-	const { after, authorId, before, groupId, } = fields;
+	const { after, authorIds, before, tagIds: groupId, } = fields;
 
 	const onSubmit = useSubmit(() => {
 		submit();
@@ -51,12 +51,12 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 						hasEmptyOption
 					/>
 					<UsersInRoomPicker
-						value={authorId.value}
-						onChange={authorId.onChange}
-						onBlur={authorId.onBlur}
-						helperText={authorId.errorText()}
-						isValid={authorId.isValid}
-						name={authorId.name}
+						value={authorIds.value}
+						onChange={authorIds.onChange}
+						onBlur={authorIds.onBlur}
+						helperText={authorIds.errorText()}
+						isValid={authorIds.isValid}
+						name={authorIds.name}
 						label='User'
 						size='medium'
 					/>

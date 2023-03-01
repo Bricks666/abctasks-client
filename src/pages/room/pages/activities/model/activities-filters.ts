@@ -1,7 +1,11 @@
 import { querySync } from 'atomic-router';
 import { createEvent, createStore, sample } from 'effector';
 import { activitiesFiltersModel } from '@/features/activities';
-import { activitiesInRoomModel } from '@/entities/activities';
+import {
+	activitiesInRoomModel,
+	activityActionsModel,
+	activitySpheresModel
+} from '@/entities/activities';
 import { GetActivitiesInRoomParams } from '@/shared/api';
 import { routes, controls, getParams } from '@/shared/configs';
 import { loaded, loadedWithRouteState } from './page-load';
@@ -54,11 +58,11 @@ sample({
 	clock: [currentRoute.opened, loadedWithRouteState],
 	fn: ({ params, query, }): GetActivitiesInRoomParams => ({
 		roomId: params.id,
-		activistId: query[getParams.userId],
-		action: query[getParams.action],
+		activistIds: query[getParams.userId],
+		actionIds: query[getParams.actionId],
 		after: query[getParams.after],
 		before: query[getParams.before],
-		sphereName: query[getParams.sphereName],
+		sphereIds: query[getParams.sphereId],
 		count: query[getParams.count],
 		page: query[getParams.page],
 	}),
@@ -81,11 +85,11 @@ querySync({
 querySync({
 	controls,
 	source: {
-		[getParams.userId]: fields.activistId.$value,
-		[getParams.action]: fields.action.$value,
+		[getParams.userId]: fields.activistIds.$value,
+		[getParams.actionId]: fields.actionIds.$value,
 		[getParams.after]: fields.after.$value,
 		[getParams.before]: fields.before.$value,
-		[getParams.sphereName]: fields.sphereName.$value,
+		[getParams.sphereId]: fields.sphereIds.$value,
 	},
 	clock: formApplied,
 	route: currentRoute,
@@ -94,14 +98,20 @@ querySync({
 sample({
 	clock: loaded,
 	source: controls.$query,
-	fn: (query) => ({
-		activistId: query[getParams.userId],
-		action: query[getParams.action],
-		after: query[getParams.after],
-		before: query[getParams.before],
-		sphereName: query[getParams.sphereName],
-		count: query[getParams.count],
-		page: query[getParams.page],
-	}),
+	fn: (query) =>
+		({
+			activistIds: query[getParams.userId],
+			actionIds: query[getParams.actionId],
+			after: query[getParams.after],
+			before: query[getParams.before],
+			sphereIds: query[getParams.sphereId],
+			count: query[getParams.count],
+			page: query[getParams.page],
+		} as activitiesFiltersModel.ActivitiesFiltersForm),
 	target: setForm,
+});
+
+sample({
+	clock: activitiesInRoomModel.query.start,
+	target: [activityActionsModel.query.start, activitySpheresModel.query.start],
 });

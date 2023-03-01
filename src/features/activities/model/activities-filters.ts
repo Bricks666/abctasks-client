@@ -4,15 +4,15 @@ import { GetActivitiesInRoomParams } from '@/shared/api';
 
 const activitiesFiltersDomain = createDomain();
 
-interface ActivitiesFiltersForm
+export interface ActivitiesFiltersForm
 	extends Required<
-		Omit<GetActivitiesInRoomParams, 'roomId' | 'count' | 'page'>
+		Omit<GetActivitiesInRoomParams, 'roomId' | 'count' | 'page' | 'by' | 'type'>
 	> {}
 
 export const form = createForm<ActivitiesFiltersForm>({
 	fields: {
-		activistId: {
-			init: null,
+		activistIds: {
+			init: [],
 		},
 		after: {
 			init: null,
@@ -20,8 +20,8 @@ export const form = createForm<ActivitiesFiltersForm>({
 		before: {
 			init: null,
 		},
-		sphereName: { init: null, },
-		action: { init: null, },
+		sphereIds: { init: [], },
+		actionIds: { init: [], },
 	},
 	domain: activitiesFiltersDomain,
 });

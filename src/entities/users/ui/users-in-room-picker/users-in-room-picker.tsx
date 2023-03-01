@@ -7,8 +7,8 @@ import { useUsersInRoom } from '../../lib';
 import { TemplateUserListItem } from '../template-user-list-item';
 
 export interface UsersInRoomPickerProps extends CommonProps, FieldProps {
-	readonly onChange: (value: number | null) => void;
-	readonly value: number | null;
+	readonly onChange: (value: number[]) => void;
+	readonly value: number[];
 }
 
 export const UsersInRoomPicker: React.FC<UsersInRoomPickerProps> = React.memo(
@@ -16,17 +16,17 @@ export const UsersInRoomPicker: React.FC<UsersInRoomPickerProps> = React.memo(
 		const { onChange, value, className, ...rest } = props;
 		const users = useUsersInRoom();
 
-		const changeHandler = (evt: unknown, value: User | null) => {
-			onChange(value?.id ?? null);
+		const changeHandler = (_: unknown, users: User[]) => {
+			onChange(users.map((user) => user.id));
 		};
 
-		const user = users.data.find((user) => user.id === Number(value)) ?? null;
+		const selected = users.data.filter((user) => value.includes(user.id));
 
 		return (
 			<Autocomplete
 				className={className}
 				options={users.data}
-				value={user}
+				value={selected}
 				getOptionLabel={(user) => user.login}
 				loading={users.pending}
 				onChange={changeHandler}
@@ -36,6 +36,7 @@ export const UsersInRoomPicker: React.FC<UsersInRoomPickerProps> = React.memo(
 				renderInput={(params) => {
 					return <Field {...params} {...rest} />;
 				}}
+				multiple
 			/>
 		);
 	}

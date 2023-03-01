@@ -10,6 +10,11 @@ export interface PaginationParams {
 export type SortDirection = 'asc' | 'desc';
 
 export interface SortParams {
-	readonly by: string;
-	readonly type: SortDirection;
+	readonly by?: string | null;
+	readonly type?: SortDirection | null;
+}
+
+export interface DatesFiltersParams {
+	readonly before?: string | null;
+	readonly after?: string | null;
 }

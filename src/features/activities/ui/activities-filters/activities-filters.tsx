@@ -2,7 +2,10 @@ import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
-import { ActivitiesActions, ActivitiesSpheres } from '@/entities/activities';
+import {
+	ActivitiesActionsPicker,
+	ActivitiesSpheresPicker
+} from '@/entities/activities';
 import { UsersInRoomPicker } from '@/entities/users';
 import { useSubmit, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -18,7 +21,7 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 
 	const [open, { toggleOff, toggleOn, }] = useToggle();
 	const { fields, reset, submit, } = useForm(activitiesFiltersModel.form);
-	const { action, activistId, after, before, sphereName, } = fields;
+	const { actionIds, activistIds, after, before, sphereIds, } = fields;
 
 	const onSubmit = useSubmit(() => {
 		submit();
@@ -38,28 +41,28 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 			title='Фильтры активностей'
 			filters={
 				<form className={cn(styles.form, className)} onSubmit={onSubmit}>
-					<ActivitiesActions
+					<ActivitiesActionsPicker
 						label='Action type'
-						value={action.value}
-						onChange={action.onChange}
-						error={action.hasError()}
+						value={actionIds.value}
+						onChange={actionIds.onChange}
+						error={actionIds.hasError()}
 						fullWidth
 					/>
-					<ActivitiesSpheres
+					<ActivitiesSpheresPicker
 						label='Activities spheres'
-						value={sphereName.value}
-						onChange={sphereName.onChange}
-						error={sphereName.hasError()}
+						value={sphereIds.value}
+						onChange={sphereIds.onChange}
+						error={sphereIds.hasError()}
 						fullWidth
 					/>
 					<UsersInRoomPicker
 						label='User'
-						value={activistId.value}
-						onChange={activistId.onChange}
-						onBlur={activistId.onBlur}
-						helperText={activistId.errorText()}
-						isValid={activistId.isValid}
-						name={activistId.name}
+						value={activistIds.value}
+						onChange={activistIds.onChange}
+						onBlur={activistIds.onBlur}
+						helperText={activistIds.errorText()}
+						isValid={activistIds.isValid}
+						name={activistIds.name}
 					/>
 					<DatePicker
 						label='Happened after date'

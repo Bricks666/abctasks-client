@@ -11,14 +11,14 @@ export const form = createForm<TasksFiltersValues>({
 		after: {
 			init: null,
 		},
-		authorId: {
-			init: null,
+		authorIds: {
+			init: [],
 		},
 		before: {
 			init: null,
 		},
-		groupId: {
-			init: null,
+		tagIds: {
+			init: [],
 		},
 	},
 	domain: tasksFilters,

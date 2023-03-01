@@ -34,7 +34,7 @@ export const GroupCardActions: React.FC<GroupCardActionsProps> = (props) => {
 				params={{ id: roomId, }}
 				query={{
 					[getParams.popup]: popupsMap.updateGroup,
-					[getParams.groupId]: groupId,
+					[getParams.tagId]: groupId,
 				}}
 				component={Link}>
 				<EditIcon />

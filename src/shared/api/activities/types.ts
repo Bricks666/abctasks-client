@@ -1,5 +1,10 @@
 import { Number, Record, Static, String } from 'runtypes';
-import { InRoomParams, PaginationParams, SortParams } from '@/shared/types';
+import {
+	DatesFiltersParams,
+	InRoomParams,
+	PaginationParams,
+	SortParams
+} from '@/shared/types';
 
 export const activityAction = Record({
 	id: Number,
@@ -21,6 +26,9 @@ export const activity = Record({
 	activistId: Number,
 	actionId: Number,
 	sphereId: Number,
+	sphere: activitySphere,
+	action: activityAction,
+	createdAt: String,
 }).asReadonly();
 
 export interface Activity extends Static<typeof activity> {}
@@ -28,12 +36,11 @@ export interface Activity extends Static<typeof activity> {}
 export interface GetActivitiesInRoomParams
 	extends InRoomParams,
 		PaginationParams,
-		SortParams {
-	readonly activistIds?: number[] | null;
-	readonly sphereIds?: number[] | null;
-	readonly actionIds?: number[] | null;
-	readonly before?: string | null;
-	readonly after?: string | null;
+		SortParams,
+		DatesFiltersParams {
+	readonly activistIds?: number[];
+	readonly sphereIds?: number[];
+	readonly actionIds?: number[];
 }
 
 export interface GetLastActivitiesInRoomParams extends InRoomParams {

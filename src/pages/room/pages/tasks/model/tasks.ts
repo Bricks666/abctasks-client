@@ -38,7 +38,7 @@ querySync({
 	controls,
 	source: {
 		[getParams.userId]: fields.authorId.$value,
-		[getParams.groupId]: fields.groupId.$value,
+		[getParams.tagId]: fields.tagIds.$value,
 		[getParams.after]: fields.after.$value,
 		[getParams.before]: fields.before.$value,
 	},
