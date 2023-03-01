@@ -13,7 +13,7 @@ export const LoginForm: React.FC<CommonProps> = (props) => {
 	const { t, } = useTranslation('login');
 	const { fields, submit, } = useForm(loginModel.form);
 
-	const { login, password, rememberMe, } = fields;
+	const { email, password, rememberMe, } = fields;
 
 	const onSubmit: React.FormEventHandler = (e) => {
 		e.preventDefault();
@@ -24,13 +24,13 @@ export const LoginForm: React.FC<CommonProps> = (props) => {
 		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
 			<Field
 				className={styles.field}
-				value={login.value}
-				onChange={login.onChange}
-				onBlur={login.onBlur}
-				helperText={login.errorText()}
-				isValid={login.isValid}
-				name={login.name}
-				label={t('fields.login')}
+				value={email.value}
+				onChange={email.onChange}
+				onBlur={email.onBlur}
+				helperText={email.errorText()}
+				isValid={email.isValid}
+				name={email.name}
+				label='Email'
 			/>
 
 			<Field

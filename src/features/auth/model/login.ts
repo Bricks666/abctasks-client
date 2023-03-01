@@ -33,8 +33,8 @@ export const mutation = createMutation<
 });
 
 const schemas = {
-	login: Joi.string()
-		.pattern(allowedSymbolsRegExp)
+	email: Joi.string()
+		.email()
 		.min(minLoginPasswordLength)
 		.max(maxLoginPasswordLength)
 		.required()
@@ -62,9 +62,9 @@ const schemas = {
 
 export const form = createForm<LoginParams>({
 	fields: {
-		login: {
+		email: {
 			init: '',
-			rules: [createRuleFromSchema('login', schemas.login)],
+			rules: [createRuleFromSchema('login', schemas.email)],
 		},
 		password: {
 			init: '',
@@ -115,7 +115,7 @@ const errors = splitMap({
 sample({
 	clock: errors.userNotFound,
 	fn: () => false,
-	target: form.fields.login.$isValid,
+	target: form.fields.email.$isValid,
 });
 
 sample({
@@ -124,7 +124,7 @@ sample({
 		rule: 'server',
 		errorText: message,
 	}),
-	target: form.fields.login.addError,
+	target: form.fields.email.addError,
 });
 
 sample({

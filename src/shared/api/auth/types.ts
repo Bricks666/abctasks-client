@@ -24,13 +24,13 @@ export const authResponse = Record({
 export interface AuthResponse extends Static<typeof authResponse> {}
 
 export interface LoginParams {
-	readonly login: string;
+	readonly email: string;
 	readonly password: string;
 	readonly rememberMe: boolean;
 }
 
 export interface RegistrationParams {
-	readonly login: string;
+	readonly email: string;
 	readonly password: string;
 }
 

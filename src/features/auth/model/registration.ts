@@ -35,10 +35,10 @@ interface RegistrationFormParams extends RegistrationParams {
 }
 
 const schemas = Joi.object<RegistrationFormParams>({
-	login: Joi.string()
-		.pattern(allowedSymbolsRegExp)
+	email: Joi.string()
 		.min(minLoginPasswordLength)
 		.max(maxLoginPasswordLength)
+		.email()
 		.required()
 		.messages({
 			'string.empty': 'Login must be provided',
@@ -66,7 +66,7 @@ const schemas = Joi.object<RegistrationFormParams>({
 
 export const form = createForm<RegistrationFormParams>({
 	fields: {
-		login: {
+		email: {
 			init: '',
 			rules: [createRuleFromSchema('login', schemas.extract('login'))],
 		},
@@ -113,7 +113,7 @@ const errors = splitMap({
 sample({
 	clock: errors.userAlreadyRegistered,
 	fn: () => false,
-	target: form.fields.login.$isValid,
+	target: form.fields.email.$isValid,
 });
 
 sample({
@@ -122,5 +122,5 @@ sample({
 		rule: 'server',
 		errorText: message,
 	}),
-	target: form.fields.login.addError,
+	target: form.fields.email.addError,
 });

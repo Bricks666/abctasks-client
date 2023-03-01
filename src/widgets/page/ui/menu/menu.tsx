@@ -8,18 +8,15 @@ import {
 	List,
 	ListSubheader
 } from '@mui/material';
-import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { Navigation } from '@/features/page';
 import { RoomListItem, useRooms } from '@/entities/rooms';
-import { menuModel } from '../../model';
+import { useToggle } from '@/shared/lib';
 
 import styles from './menu.module.css';
 
 export const Menu: React.FC = () => {
-	const isOpen = useUnit(menuModel.$isOpen);
-	const close = useUnit(menuModel.close);
-	const open = useUnit(menuModel.open);
+	const [isOpen, { toggleOff: close, toggleOn: open, }] = useToggle();
 	const rooms = useRooms();
 
 	return (

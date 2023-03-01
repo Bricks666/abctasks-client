@@ -10,7 +10,10 @@ export const routes = {
 		users: createRoute<{ id: number }>(),
 	},
 	login: createRoute(),
-	registration: createRoute(),
+	registration: {
+		base: createRoute(),
+		tanks: createRoute(),
+	},
 };
 
 export const controls = createRouterControls();

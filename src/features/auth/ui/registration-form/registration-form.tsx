@@ -12,7 +12,7 @@ export const RegistrationForm: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('registration');
 	const { fields, submit, } = useForm(registrationModel.form);
-	const { login, password, repeatPassword, } = fields;
+	const { email, password, repeatPassword, } = fields;
 
 	const onSubmit: React.FormEventHandler = (e) => {
 		e.preventDefault();
@@ -22,13 +22,13 @@ export const RegistrationForm: React.FC<CommonProps> = (props) => {
 	return (
 		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
 			<Field
-				value={login.value}
-				onChange={login.onChange}
-				onBlur={login.onBlur}
-				helperText={login.errorText()}
-				isValid={login.isValid}
-				name={login.name}
-				label={t('fields.login')}
+				value={email.value}
+				onChange={email.onChange}
+				onBlur={email.onBlur}
+				helperText={email.errorText()}
+				isValid={email.isValid}
+				name={email.name}
+				label='Email'
 				autoComplete='new-password'
 			/>
 			<Field
