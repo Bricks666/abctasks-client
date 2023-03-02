@@ -35,13 +35,13 @@ export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
 		return null;
 	}
 
-	const { login, photo, } = user;
+	const { username, photo, } = user;
 
 	return (
 		<div className={className}>
 			<Tooltip title='Profile settings'>
 				<IconButton onClick={toggle} ref={setReference}>
-					<UserAvatar login={login} photo={photo} />
+					<UserAvatar username={username} photo={photo} />
 				</IconButton>
 			</Tooltip>
 

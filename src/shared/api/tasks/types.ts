@@ -52,7 +52,7 @@ export type StatusNamesStore = {
 };
 
 export interface GetTasksParams extends InRoomParams, DatesFiltersParams {
-	readonly authorIds: number[];
+	readonly authorIds?: number[];
 	readonly tagIds?: number[];
 }
 

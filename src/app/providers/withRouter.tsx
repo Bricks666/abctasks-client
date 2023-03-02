@@ -13,7 +13,11 @@ const router = createHistoryRouter({
 		},
 		{
 			path: '/registration',
-			route: routes.registration,
+			route: routes.registration.base,
+		},
+		{
+			path: '/registration/thanks',
+			route: routes.registration.tanks,
 		},
 		{
 			path: '/rooms',

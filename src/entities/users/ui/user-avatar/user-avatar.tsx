@@ -6,16 +6,16 @@ import { CommonProps } from '@/shared/types';
 
 export interface UserAvatarProps extends CommonProps {
 	readonly photo: string | null;
-	readonly login: string;
+	readonly username: string;
 }
 
 export const UserAvatar: React.FC<UserAvatarProps> = (props) => {
-	const { login, photo, className, } = props;
+	const { username, photo, className, } = props;
 	return (
 		<Avatar
 			className={className}
 			src={photo ?? ''}
-			sx={{ backgroundColor: stringToColor(login), }}>
+			sx={{ backgroundColor: stringToColor(username), }}>
 			<AccountCircleIcon />
 		</Avatar>
 	);

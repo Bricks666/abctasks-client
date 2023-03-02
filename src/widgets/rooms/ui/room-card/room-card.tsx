@@ -7,11 +7,11 @@ import { CommonProps } from '@/shared/types';
 export interface RoomCardProps extends CommonProps, Room {}
 
 export const RoomCard: React.FC<RoomCardProps> = (props) => {
-	const { id, } = props;
+	const { id, canChange, } = props;
 	return (
 		<TemplateRoomCard
 			{...props}
-			menu={<RoomCardMenu id={id} />}
+			menu={canChange ? <RoomCardMenu id={id} /> : null}
 			actions={<RoomCardActions id={id} />}
 		/>
 	);

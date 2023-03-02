@@ -14,8 +14,8 @@ sample({
 	clock: [currentRoute.opened, currentRoute.updated, loadedWithRouteState],
 	fn: ({ params, query, }) => ({
 		roomId: params.id,
-		authorId: query[getParams.userId],
-		groupId: query[getParams.userId],
+		authorIds: query[getParams.userId],
+		tagIds: query[getParams.userId],
 		before: query[getParams.before],
 		after: query[getParams.after],
 	}),
@@ -37,7 +37,7 @@ sample({
 querySync({
 	controls,
 	source: {
-		[getParams.userId]: fields.authorId.$value,
+		[getParams.userId]: fields.authorIds.$value,
 		[getParams.tagId]: fields.tagIds.$value,
 		[getParams.after]: fields.after.$value,
 		[getParams.before]: fields.before.$value,
@@ -51,7 +51,7 @@ sample({
 	source: controls.$query,
 	fn: (query) => ({
 		authorId: query[getParams.userId],
-		groupId: query[getParams.userId],
+		tagIds: query[getParams.userId],
 		before: query[getParams.before],
 		after: query[getParams.after],
 	}),

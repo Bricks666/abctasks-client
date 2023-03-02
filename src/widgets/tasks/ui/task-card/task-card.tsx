@@ -23,5 +23,5 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 	const actions = <TaskCardMenu roomId={roomId} taskId={id} />;
 	const groupLabel = group ? <GroupLabel {...group} /> : <SkeletonGroupLabel />;
 
-	return <TemplateTaskCard {...props} actions={actions} group={groupLabel} />;
+	return <TemplateTaskCard {...props} actions={actions} tags={groupLabel} />;
 });

@@ -21,17 +21,14 @@ export class Fetcher extends BaseFetcher<typeof fetch, BaseFetcherOptions> {
 	}
 
 	async get<R>(options: BaseParamsOptions): Promise<R> {
-		const { path, accessToken, headers = {}, } = options;
+		const { path, accessToken, headers = new Headers(), } = options;
 		const url = this.createPath(path);
 
 		const response = await this.instance(url, {
 			method: 'GET',
 			credentials: this.credentials ? 'include' : 'omit',
 			mode: 'cors',
-			headers: {
-				...headers,
-				Authorization: `Bearer ${accessToken}`,
-			},
+			headers: prepareHeaders(headers, accessToken),
 		});
 
 		if (!response.ok) {
@@ -42,7 +39,7 @@ export class Fetcher extends BaseFetcher<typeof fetch, BaseFetcherOptions> {
 	}
 
 	async post<R, B = any>(options: BodyParamsOptions<B>): Promise<R> {
-		const { path, accessToken, headers = {}, body, } = options;
+		const { path, accessToken, headers = new Headers(), body, } = options;
 		const url = this.createPath(path);
 
 		const response = await this.instance(url, {
@@ -52,8 +49,7 @@ export class Fetcher extends BaseFetcher<typeof fetch, BaseFetcherOptions> {
 			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json',
-				...headers,
-				Authorization: `Bearer ${accessToken}`,
+				...prepareHeaders(headers, accessToken),
 			},
 		});
 
@@ -65,7 +61,7 @@ export class Fetcher extends BaseFetcher<typeof fetch, BaseFetcherOptions> {
 	}
 
 	async put<R, B = any>(options: BodyParamsOptions<B>): Promise<R> {
-		const { path, accessToken, headers = {}, body, } = options;
+		const { path, accessToken, headers = new Headers(), body, } = options;
 		const url = this.createPath(path);
 
 		const response = await this.instance(url, {
@@ -75,8 +71,7 @@ export class Fetcher extends BaseFetcher<typeof fetch, BaseFetcherOptions> {
 			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json',
-				...headers,
-				Authorization: `Bearer ${accessToken}`,
+				...prepareHeaders(headers, accessToken),
 			},
 		});
 
@@ -88,17 +83,14 @@ export class Fetcher extends BaseFetcher<typeof fetch, BaseFetcherOptions> {
 	}
 
 	async delete<R>(options: BaseParamsOptions): Promise<R> {
-		const { path, accessToken, headers = {}, } = options;
+		const { path, accessToken, headers = new Headers(), } = options;
 		const url = this.createPath(path);
 
 		const response = await this.instance(url, {
 			method: 'delete',
 			credentials: this.credentials ? 'include' : 'omit',
 			mode: 'cors',
-			headers: {
-				...headers,
-				Authorization: `Bearer ${accessToken}`,
-			},
+			headers: prepareHeaders(headers, accessToken),
 		});
 
 		if (!response.ok) {
@@ -108,6 +100,23 @@ export class Fetcher extends BaseFetcher<typeof fetch, BaseFetcherOptions> {
 		return response.json();
 	}
 }
+
+const prepareHeaders = (
+	headers: Headers,
+	accessToken?: string | null
+): Headers => {
+	if (headers.get('authorization')) {
+		return headers;
+	}
+
+	if (!accessToken) {
+		return headers;
+	}
+
+	headers.set('authorization', `Bearer ${accessToken}`);
+
+	return headers;
+};
 
 export const fetcher = new Fetcher({
 	baseURL: api,

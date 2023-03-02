@@ -30,6 +30,8 @@ export const query = createQuery<
 	mapData: dataExtractor,
 });
 
+export const $canChange = query.$data.map((room) => room?.canChange || false);
+
 export const Gate = createGate<InRoomParams>({
 	domain: roomDomain,
 });

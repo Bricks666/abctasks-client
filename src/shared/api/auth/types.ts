@@ -3,7 +3,7 @@ import { Record, String, Static, Number } from 'runtypes';
 export const user = Record({
 	id: Number,
 	email: String,
-	login: String,
+	username: String,
 	photo: String.nullable(),
 }).asReadonly();
 

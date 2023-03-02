@@ -38,7 +38,7 @@ const schemas = Joi.object<RegistrationFormParams>({
 	email: Joi.string()
 		.min(minLoginPasswordLength)
 		.max(maxLoginPasswordLength)
-		.email()
+		.email({ tlds: { allow: false, }, })
 		.required()
 		.messages({
 			'string.empty': 'Login must be provided',
@@ -68,7 +68,7 @@ export const form = createForm<RegistrationFormParams>({
 	fields: {
 		email: {
 			init: '',
-			rules: [createRuleFromSchema('login', schemas.extract('login'))],
+			rules: [createRuleFromSchema('email', schemas.extract('email'))],
 		},
 		password: {
 			init: '',

@@ -15,15 +15,26 @@ import styles from './template-task-card.module.css';
 
 export interface TemplateTaskCardProps
 	extends CommonProps,
-		Pick<Task, 'content' | 'createdAt' | 'status' | 'id'>,
+		Pick<Task, 'title' | 'description' | 'createdAt' | 'status' | 'id'>,
 		Omit<CardProps, keyof Task> {
 	readonly actions: React.ReactElement;
-	readonly group: React.ReactElement;
+	readonly tags: React.ReactElement | React.ReactElement[];
+	readonly draggable: boolean;
 }
 
 export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 	(props) => {
-		const { className, content, createdAt, id, status, actions, group, } = props;
+		const {
+			className,
+			createdAt,
+			id,
+			status,
+			actions,
+			tags,
+			title,
+			description,
+			draggable,
+		} = props;
 		const [isDrag, setIsDrag] = React.useState(false);
 
 		/**
@@ -49,15 +60,16 @@ export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 				onDragStart={onDragStart}
 				onDragEnd={onDragEnd}
 				variant='outlined'
-				draggable
+				draggable={draggable}
 				component='article'>
 				<CardHeader
 					action={actions}
-					title={group}
+					title={title}
+					subheader={tags}
 					titleTypographyProps={{ component: 'div', }}
 				/>
 				<CardContent>
-					<Typography className={styles.content}>{content}</Typography>
+					<Typography className={styles.content}>{description}</Typography>
 					<div>
 						<DateTime date={createdAt} format='HH:mm DD MMM' />
 						<Typography variant='body2' component='span'>

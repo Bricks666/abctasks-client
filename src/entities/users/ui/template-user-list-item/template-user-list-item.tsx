@@ -24,7 +24,15 @@ export interface TemplateUserListItemProps
 export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
 	props
 ) => {
-	const { login, actions, className, photo, extra, id: _id, ...rest } = props;
+	const {
+		username,
+		actions,
+		className,
+		photo,
+		extra,
+		id: _id,
+		...rest
+	} = props;
 
 	return (
 		<ListItem
@@ -32,10 +40,10 @@ export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
 			secondaryAction={actions}
 			{...rest}>
 			<ListItemAvatar>
-				<UserAvatar login={login} photo={photo} />
+				<UserAvatar username={username} photo={photo} />
 			</ListItemAvatar>
 			<ListItemText
-				primary={login}
+				primary={username}
 				primaryTypographyProps={{ variant: 'subtitle1', component: 'p', }}
 			/>
 			{extra}

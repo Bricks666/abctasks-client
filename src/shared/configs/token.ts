@@ -1,4 +1,5 @@
 import { createDomain, sample } from 'effector';
+import { debug } from 'patronum';
 
 const tokensDomain = createDomain();
 
@@ -10,3 +11,5 @@ sample({
 	clock: setToken,
 	target: $token,
 });
+
+debug($token);

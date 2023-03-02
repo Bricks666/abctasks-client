@@ -34,7 +34,7 @@ export const mutation = createMutation<
 
 const schemas = {
 	email: Joi.string()
-		.email()
+		.email({ tlds: { allow: false, }, })
 		.min(minLoginPasswordLength)
 		.max(maxLoginPasswordLength)
 		.required()
@@ -64,7 +64,7 @@ export const form = createForm<LoginParams>({
 	fields: {
 		email: {
 			init: '',
-			rules: [createRuleFromSchema('login', schemas.email)],
+			rules: [createRuleFromSchema('email', schemas.email)],
 		},
 		password: {
 			init: '',

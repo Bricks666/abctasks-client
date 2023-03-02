@@ -23,7 +23,7 @@ const LoginPage: React.FC<CommonProps> = ({ className, }) => {
 			<LoginForm />
 			<Button
 				className={styles.button}
-				to={routes.registration}
+				to={routes.registration.base}
 				component={Link}>
 				{t('actions.registration')}
 			</Button>
