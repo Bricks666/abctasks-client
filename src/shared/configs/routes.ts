@@ -5,7 +5,7 @@ export const routes = {
 	room: {
 		base: createRoute<{ id: number; tab: string }>(),
 		tasks: createRoute<{ id: number }>(),
-		groups: createRoute<{ id: number }>(),
+		tags: createRoute<{ id: number }>(),
 		activities: createRoute<{ id: number }>(),
 		users: createRoute<{ id: number }>(),
 	},

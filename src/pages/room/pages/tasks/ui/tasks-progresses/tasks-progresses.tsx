@@ -2,12 +2,12 @@ import { Stack, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGroupsMap } from '@/entities/groups';
 import {
 	SkeletonTaskProgress,
 	TaskProgress,
 	useProgresses
 } from '@/entities/progresses';
+import { useTagsMap } from '@/entities/tags';
 import { getEmptyArray, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -22,12 +22,12 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 	const { t, } = useTranslation('room');
 	const roomId = useParam(routes.room.tasks, 'id');
 	const progresses = useProgresses();
-	const groups = useGroupsMap();
+	const tags = useTagsMap();
 
 	let children: React.ReactElement | null = null;
 	const isLoading =
-		groups.pending || (progresses.pending && !progresses.data.length);
-	const isGroupsError = !!groups.error;
+		tags.pending || (progresses.pending && !progresses.data.length);
+	const isGroupsError = !!tags.error;
 	const isProgressesError = !!progresses.error;
 
 	if (isGroupsError) {
@@ -36,7 +36,7 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
     который будет принимать номер комнаты
     */
 		const onRetry = () => {
-			groups.start(roomId);
+			tags.start(roomId);
 		};
 		children = (
 			<RetryLoadingSlat
@@ -62,7 +62,7 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 				{isLoading
 					? getEmptyArray(2).map((_, i) => <SkeletonTaskProgress key={i} />)
 					: progresses.data.map((progress) => {
-						const group = groups.data[progress.groupId];
+						const group = tags.data[progress.groupId];
 						if (!group) {
 							return null;
 						}

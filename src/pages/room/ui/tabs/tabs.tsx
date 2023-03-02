@@ -46,8 +46,8 @@ export const Tabs: React.FC<CommonProps> = React.memo(() => {
 					className={styles.tab}
 					icon={<LabelIcon />}
 					iconPosition='start'
-					label='Группы'
-					value='groups'
+					label='Теги'
+					value='tags'
 				/>
 				<Tab
 					className={styles.tab}

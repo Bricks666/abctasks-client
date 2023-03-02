@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { TaskColumnActions, updateTaskModel } from '@/features/tasks';
-import { useGroupsMap } from '@/entities/groups';
+import { useTagsMap } from '@/entities/tags';
 import { SkeletonTaskCard, TaskColumnHeader } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
 import { getEmptyArray } from '@/shared/configs';
@@ -25,7 +25,7 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	const { tasks, className, columnStatus, header, isLoading, roomId, } = props;
 	const moveTask = useUnit(updateTaskModel.mutation);
-	const groupsMap = useGroupsMap();
+	const tagsMap = useTagsMap();
 	const onDrop = React.useCallback<React.DragEventHandler>(
 		(evt) => {
 			const id = Number(evt.dataTransfer.getData('taskId'));
@@ -47,13 +47,10 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	if (isLoading) {
 		items = getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />);
 	} else {
-		items = tasks.map((task) => (
-			<TaskCard
-				{...task}
-				group={groupsMap.data[task.groupId] ?? null}
-				key={task.id}
-			/>
-		));
+		items = tasks.map((task) => {
+			const tags = task.tagIds.map((tagId) => tagsMap.data[tagId] ?? null);
+			return <TaskCard {...task} tags={tags} key={task.id} />;
+		});
 	}
 
 	return (

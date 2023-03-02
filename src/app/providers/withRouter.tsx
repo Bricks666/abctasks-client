@@ -32,8 +32,8 @@ const router = createHistoryRouter({
 			route: routes.room.tasks,
 		},
 		{
-			path: '/rooms/:id/groups',
-			route: routes.room.groups,
+			path: '/rooms/:id/tags',
+			route: routes.room.tags,
 		},
 		{
 			path: '/rooms/:id/activities',

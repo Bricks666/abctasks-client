@@ -17,8 +17,8 @@ export interface TemplateTaskCardProps
 	extends CommonProps,
 		Pick<Task, 'title' | 'description' | 'createdAt' | 'status' | 'id'>,
 		Omit<CardProps, keyof Task> {
-	readonly actions: React.ReactElement;
-	readonly tags: React.ReactElement | React.ReactElement[];
+	readonly actions: React.ReactElement | null;
+	readonly tags: React.ReactElement | React.ReactElement[] | null;
 	readonly draggable: boolean;
 }
 

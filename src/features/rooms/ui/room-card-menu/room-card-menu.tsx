@@ -78,7 +78,7 @@ export const RoomCardMenu: React.FC<RoomCardMenuProps> = (props) => {
 				isOpen={removeToggled}
 				onClose={toggleRemoveOff}
 				title='Are you sure?'
-				content='Don you want to delete this room? All tasks and groups will be deleted'
+				content='Don you want to delete this room? All tasks and tags will be deleted'
 				agreeText='Delete'
 				onAgree={onRemoveAgree}
 				disagreeText='Cancel'

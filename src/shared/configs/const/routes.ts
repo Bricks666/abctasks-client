@@ -17,9 +17,9 @@ export const getParams = {
 export const popupsMap = {
 	createTask: 'create-task',
 	updateTask: 'update-task',
-	groups: 'groups',
-	createGroup: 'create-group',
-	updateGroup: 'update-group',
+	tags: 'tags',
+	createTag: 'create-tag',
+	updateTag: 'update-tag',
 	createRoom: 'create-room',
 	updateRoom: 'update-room',
 	addUser: 'add-user',

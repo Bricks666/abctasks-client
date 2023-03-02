@@ -76,8 +76,9 @@ sample({
 	clock: taskModel.query.finished.success,
 	fn: () => false,
 	target: [
-		fields.content.$isDirty,
-		fields.groupId.$isDirty,
+		fields.title.$isDirty,
+		fields.description.$isDirty,
+		fields.tagIds.$isDirty,
 		fields.status.$isDirty
 	],
 });

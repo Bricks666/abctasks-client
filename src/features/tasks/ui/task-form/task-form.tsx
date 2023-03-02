@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { GroupsSelect } from '@/entities/groups';
+import { TagPicker } from '@/entities/tags';
 import { StatusSelect } from '@/entities/tasks';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
@@ -20,7 +20,7 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 	const { t, } = useTranslation('popups');
 	const { fields, submit, isDirty, } = useForm(taskFormModel.form);
 
-	const { content, groupId, status, } = fields;
+	const { tagIds, title, status, } = fields;
 
 	const onSubmit: React.FormEventHandler = (e) => {
 		e.preventDefault();
@@ -29,13 +29,13 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 
 	return (
 		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
-			<GroupsSelect
-				value={groupId.value}
-				onChange={groupId.onChange}
-				onBlur={groupId.onBlur}
-				helperText={groupId.errorText()}
-				isValid={groupId.isValid}
-				name={groupId.name}
+			<TagPicker
+				value={tagIds.value}
+				onChange={tagIds.onChange}
+				onBlur={tagIds.onBlur}
+				helperText={tagIds.errorText()}
+				isValid={tagIds.isValid}
+				name={tagIds.name}
 				label={t(`task.group`)}
 			/>
 			<StatusSelect
@@ -49,12 +49,12 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 			/>
 			<Field
 				className={styles.field}
-				value={content.value}
-				onChange={content.onChange}
-				onBlur={content.onBlur}
-				helperText={content.errorText()}
-				isValid={content.isValid}
-				name={content.name}
+				value={title.value}
+				onChange={title.onChange}
+				onBlur={title.onBlur}
+				helperText={title.errorText()}
+				isValid={title.isValid}
+				name={title.name}
 				label={t('task.content')}
 				multiline
 			/>

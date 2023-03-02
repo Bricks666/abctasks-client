@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
-import { GroupsSelect } from '@/entities/groups';
+import { TagPicker } from '@/entities/tags';
 import { UsersInRoomPicker } from '@/entities/users';
 import { useSubmit, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -38,7 +38,7 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 			onOpen={toggleOn}
 			filters={
 				<form className={cn(styles.wrapper, className)} onSubmit={onSubmit}>
-					<GroupsSelect
+					<TagPicker
 						value={groupId.value}
 						onChange={groupId.onChange}
 						onBlur={groupId.onBlur}

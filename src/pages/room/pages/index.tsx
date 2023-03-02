@@ -4,7 +4,7 @@ import { routes } from '@/shared/configs';
 import { LoadingIndicator, LoadingWrapper } from '@/shared/ui';
 
 export const TasksPage = React.lazy(() => import('./tasks'));
-export const GroupsPage = React.lazy(() => import('./groups'));
+export const TagsPage = React.lazy(() => import('./tags'));
 export const ActivitiesPage = React.lazy(() => import('./activities'));
 export const UsersPage = React.lazy(() => import('./users'));
 
@@ -19,8 +19,8 @@ const Views = createRoutesView({
 			view: ActivitiesPage,
 		},
 		{
-			route: routes.room.groups,
-			view: GroupsPage,
+			route: routes.room.tags,
+			view: TagsPage,
 		},
 		{
 			route: routes.room.users,

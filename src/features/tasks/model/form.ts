@@ -8,15 +8,15 @@ import { createRuleFromSchema } from '@/shared/lib';
 const taskFormDomain = createDomain();
 
 export interface TaskFormValues
-	extends Pick<Task, 'content' | 'status' | 'groupId'> {}
+	extends Pick<Task, 'title' | 'description' | 'status' | 'tagIds'> {}
 
 const schemas = {
-	groupId: Joi.number().required().messages({
-		'number.empty': 'Group must be choose',
-		'number.positive': 'Group must be choose',
+	tagIds: Joi.number().required().messages({
+		'number.empty': 'Tag must be choose',
+		'number.positive': 'Tag must be choose',
 	}),
 	status: Joi.string().required(),
-	content: Joi.string()
+	title: Joi.string()
 		.pattern(allowedSymbolsRegExp)
 		.max(128)
 		.required()
@@ -30,13 +30,17 @@ const schemas = {
 
 export const form = createForm<TaskFormValues>({
 	fields: {
-		content: {
+		title: {
 			init: '',
-			rules: [createRuleFromSchema('content', schemas.content)],
+			rules: [createRuleFromSchema('title', schemas.title)],
 		},
-		groupId: {
-			init: 0,
-			rules: [createRuleFromSchema('groupId', schemas.groupId)],
+		description: {
+			init: '',
+			rules: [createRuleFromSchema('description', schemas.title)],
+		},
+		tagIds: {
+			init: [],
+			rules: [createRuleFromSchema('tagIds', schemas.tagIds)],
 		},
 		status: {
 			init: 'ready',
