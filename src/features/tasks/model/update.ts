@@ -1,4 +1,4 @@
-import { update } from '@farfetched/core';
+import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { combine, createDomain, sample } from 'effector';
 import { and } from 'patronum';
@@ -6,7 +6,6 @@ import { createPopupControlModel } from '@/entities/popups';
 import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 import { UpdateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
-import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 import { form } from './form';
 
@@ -15,14 +14,14 @@ const updateTaskDomain = createDomain();
 const handlerFx = updateTaskDomain.effect<
 	UpdateTaskParams,
 	StandardResponse<Task>,
-	StandardFailError
+	Error
 >(tasksApi.update);
 
-export const mutation = createMutationWithAccess<
+export const mutation = createMutation<
 	UpdateTaskParams,
 	StandardResponse<Task>,
 	StandardResponse<Task>,
-	StandardFailError
+	Error
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(task)),

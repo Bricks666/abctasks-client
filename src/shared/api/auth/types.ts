@@ -1,4 +1,5 @@
 import { Record, String, Static, Number } from 'runtypes';
+import { tokens } from '../request';
 
 export const user = Record({
 	id: Number,
@@ -8,13 +9,6 @@ export const user = Record({
 }).asReadonly();
 
 export interface User extends Static<typeof user> {}
-
-export const tokens = Record({
-	accessToken: String,
-	refreshToken: String,
-}).asReadonly();
-
-export interface Tokens extends Static<typeof tokens> {}
 
 export const authResponse = Record({
 	tokens,

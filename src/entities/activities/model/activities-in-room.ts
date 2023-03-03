@@ -19,8 +19,7 @@ const activitiesDomain = createDomain();
 const handlerFx = activitiesDomain.effect<
 	GetActivitiesInRoomParams,
 	StandardResponse<PaginationResponse<Activity>>
->();
-handlerFx.use(activitiesApi.getAll);
+>(activitiesApi.getAll);
 
 export const query = createQuery<
 	GetActivitiesInRoomParams,

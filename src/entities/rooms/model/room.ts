@@ -3,7 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { Room, roomsApi, room } from '@/shared/api';
-import { StandardFailError, dataExtractor } from '@/shared/lib';
+import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -12,15 +12,15 @@ import {
 
 const roomDomain = createDomain();
 const handlerFx = roomDomain.effect<
-	number,
+	InRoomParams,
 	StandardResponse<Room>,
-	StandardFailError
+	Error
 >(roomsApi.getOne);
 
 export const query = createQuery<
-	number,
+	InRoomParams,
 	StandardResponse<Room>,
-	StandardFailError,
+	Error,
 	StandardResponse<Room>,
 	Room
 >({
@@ -38,7 +38,6 @@ export const Gate = createGate<InRoomParams>({
 
 sample({
 	clock: Gate.state,
-	fn: ({ roomId, }) => roomId,
 	target: query.start,
 });
 

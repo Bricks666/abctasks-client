@@ -5,3 +5,4 @@ export * from './tags';
 export * from './activities';
 export * from './progresses';
 export * from './users';
+export * from './members';

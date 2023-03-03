@@ -3,21 +3,19 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { GetTagParams, Tag, tag, tagsApi } from '@/shared/api';
-import { dataExtractor, StandardFailError } from '@/shared/lib';
+import { dataExtractor, Error } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 const tagDomain = createDomain();
 
-const handlerFx = tagDomain.effect<
-	GetTagParams,
-	StandardResponse<Tag>,
-	StandardFailError
->(tagsApi.getOne);
+const handlerFx = tagDomain.effect<GetTagParams, StandardResponse<Tag>, Error>(
+	tagsApi.getOne
+);
 
 export const query = createQuery<
 	GetTagParams,
 	StandardResponse<Tag>,
-	StandardFailError,
+	Error,
 	StandardResponse<Tag>,
 	Tag
 >({

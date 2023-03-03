@@ -2,8 +2,8 @@ import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
-import { roomsApi, user, User } from '@/shared/api';
-import { dataExtractor, StandardFailError } from '@/shared/lib';
+import { membersApi, user, User } from '@/shared/api';
+import { dataExtractor } from '@/shared/lib';
 import {
 	getStandardResponse,
 	InRoomParams,
@@ -15,15 +15,13 @@ const usersInRoom = createDomain();
 const handlerFx = usersInRoom.effect<
 	InRoomParams,
 	StandardResponse<User[]>,
-	StandardFailError
->();
-
-handlerFx.use(roomsApi.getMembers);
+	Error
+>(membersApi.getAll);
 
 export const query = createQuery<
 	InRoomParams,
 	StandardResponse<User[]>,
-	StandardFailError,
+	Error,
 	StandardResponse<User[]>,
 	User[]
 >({

@@ -3,7 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { GetTaskParams, Task, tasksApi, task } from '@/shared/api';
-import { StandardFailError, dataExtractor } from '@/shared/lib';
+import { Error, dataExtractor } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const taskDomain = createDomain();
@@ -11,13 +11,13 @@ const taskDomain = createDomain();
 const handlerFx = taskDomain.effect<
 	GetTaskParams,
 	StandardResponse<Task>,
-	StandardFailError
+	Error
 >(tasksApi.getOne);
 
 export const query = createQuery<
 	GetTaskParams,
 	StandardResponse<Task>,
-	StandardFailError,
+	Error,
 	StandardResponse<Task>,
 	Task
 >({

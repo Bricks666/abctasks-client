@@ -4,7 +4,6 @@ export * from './useToggle';
 export * from './useParam';
 export * from './fabrics';
 export * from './data-extractor';
-export * from './request';
 export * from './useDebounceValue';
 export * from './useQueryParam';
 export * from './snackbar-stack';

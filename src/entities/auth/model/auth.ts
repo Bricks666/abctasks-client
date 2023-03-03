@@ -13,8 +13,9 @@ export const $user = authDomain.store<User | null>(null);
 export const $isAuth = combine($user, (state) => !!state);
 export const setUser = authDomain.event<User | null>();
 
-const handlerFx = authDomain.effect<void, StandardResponse<AuthResponse>>();
-handlerFx.use(authApi.auth);
+const handlerFx = authDomain.effect<void, StandardResponse<AuthResponse>>(
+	authApi.auth
+);
 
 export const query = createQuery<
 	void,

@@ -1,5 +1,4 @@
 import { Record, Number, String, Static } from 'runtypes';
-import { AccessOptions } from '@/shared/lib';
 import { hex, InRoomParams } from '@/shared/types';
 
 export const tag = Record({
@@ -16,18 +15,14 @@ export interface GetTagParams extends InRoomParams {
 	readonly id: number;
 }
 
-export interface CreateTagParams
-	extends Required<AccessOptions>,
-		Omit<Tag, 'id'> {}
+export interface CreateTagParams extends Omit<Tag, 'id'> {}
 
 export interface UpdateTagParams
-	extends Partial<Omit<CreateTagParams, 'roomId' | 'accessToken'>>,
-		Required<AccessOptions> {
+	extends Partial<Omit<CreateTagParams, 'roomId'>>,
+		InRoomParams {
 	readonly id: number;
-	readonly roomId: number;
 }
 
-export interface RemoveTagParams extends Required<AccessOptions> {
+export interface RemoveTagParams extends InRoomParams {
 	readonly id: number;
-	readonly roomId: number;
 }

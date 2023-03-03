@@ -1,11 +1,11 @@
+import { createMutation } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createForm } from 'effector-forms';
 import { createPopupControlModel } from '@/entities/popups';
 import { searchUserModel } from '@/entities/users';
-import { AddUserRoomParams, roomsApi, user, User } from '@/shared/api';
+import { AddUserRoomParams, membersApi, user, User } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
-import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const addUserRoomDomain = createDomain();
@@ -14,10 +14,9 @@ export const { close, $isOpen, } = createPopupControlModel(popupsMap.addUser);
 const handlerFx = addUserRoomDomain.effect<
 	AddUserRoomParams,
 	StandardResponse<User>,
-	StandardFailError
->(roomsApi.addUser);
-
-export const mutation = createMutationWithAccess({
+	Error
+>(membersApi.invite);
+export const mutation = createMutation({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(user)),
 });
@@ -49,6 +48,6 @@ sample({
 	clock: form.formValidated,
 	source: routes.room.users.$params,
 	filter: (_, values) => Boolean(values.user),
-	fn: (params, values) => ({ userId: values.user!.id, id: params.id, }),
+	fn: (params, values) => ({ userId: values.user!.id, roomId: params.id, }),
 	target: mutation.start,
 });

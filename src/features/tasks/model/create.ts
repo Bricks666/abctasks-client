@@ -1,11 +1,10 @@
-import { update } from '@farfetched/core';
+import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createPopupControlModel } from '@/entities/popups';
 import { tasksInRoomModel } from '@/entities/tasks';
 import { CreateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
-import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 import { form } from './form';
 
@@ -14,15 +13,14 @@ const createTaskDomain = createDomain();
 const handlerFx = createTaskDomain.effect<
 	CreateTaskParams,
 	StandardResponse<Task>,
-	StandardFailError
->('createTaskFx');
-handlerFx.use(tasksApi.create);
+	Error
+>(tasksApi.create);
 
-export const mutation = createMutationWithAccess<
+export const mutation = createMutation<
 	CreateTaskParams,
 	StandardResponse<Task>,
 	StandardResponse<Task>,
-	StandardFailError
+	Error
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(task)),

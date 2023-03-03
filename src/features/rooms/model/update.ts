@@ -1,4 +1,4 @@
-import { update } from '@farfetched/core';
+import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { and } from 'patronum';
@@ -6,7 +6,6 @@ import { createPopupControlModel } from '@/entities/popups';
 import { roomModel, roomsModel } from '@/entities/rooms';
 import { UpdateRoomParams, Room, roomsApi, room } from '@/shared/api';
 import { popupsMap } from '@/shared/configs';
-import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 import { form } from './form';
 
@@ -15,14 +14,14 @@ const updateRoomDomain = createDomain();
 const handlerFx = updateRoomDomain.effect<
 	UpdateRoomParams,
 	StandardResponse<Room>,
-	StandardFailError
+	Error
 >(roomsApi.update);
 
-export const mutation = createMutationWithAccess<
+export const mutation = createMutation<
 	UpdateRoomParams,
 	StandardResponse<Room>,
 	StandardResponse<Room>,
-	StandardFailError
+	Error
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(room)),
@@ -52,7 +51,7 @@ sample({
 	source: roomsModel.$id,
 	filter: and($isOpen, roomsModel.$id),
 	fn: (roomId, values) => {
-		return { ...values, id: Number(roomId), };
+		return { ...values, roomId: Number(roomId), };
 	},
 	target: mutation.start,
 });

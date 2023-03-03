@@ -1,10 +1,9 @@
-import { update } from '@farfetched/core';
+import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
 import { tasksInRoomModel } from '@/entities/tasks';
 import { RemoveTaskParams, tasksApi } from '@/shared/api';
-import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const removeTaskDomain = createDomain();
@@ -12,14 +11,14 @@ const removeTaskDomain = createDomain();
 const handlerFx = removeTaskDomain.effect<
 	RemoveTaskParams,
 	StandardResponse<boolean>,
-	StandardFailError
+	Error
 >(tasksApi.remove);
 
-export const mutation = createMutationWithAccess<
+export const mutation = createMutation<
 	RemoveTaskParams,
 	StandardResponse<boolean>,
 	StandardResponse<boolean>,
-	StandardFailError
+	Error
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Literal(true))),

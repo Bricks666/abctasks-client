@@ -3,7 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 import { progress, Progress, progressApi } from '@/shared/api';
-import { dataExtractor, StandardFailError } from '@/shared/lib';
+import { dataExtractor, Error } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -15,13 +15,13 @@ export const progressDomain = createDomain();
 const handlerFx = progressDomain.effect<
 	InRoomParams,
 	StandardResponse<Progress[]>,
-	StandardFailError
+	Error
 >(progressApi.getAll);
 
 export const query = createQuery<
 	InRoomParams,
 	StandardResponse<Progress[]>,
-	StandardFailError,
+	Error,
 	StandardResponse<Progress[]>,
 	Progress[]
 >({

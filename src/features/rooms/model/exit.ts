@@ -1,21 +1,24 @@
-import { update } from '@farfetched/core';
+import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
-import { /* roomModel,  */ roomsModel } from '@/entities/rooms';
-import { ExitRoomParams, roomsApi } from '@/shared/api';
-import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
-import { StandardResponse, getStandardResponse } from '@/shared/types';
+import { roomsModel } from '@/entities/rooms';
+import { membersApi } from '@/shared/api';
+import {
+	StandardResponse,
+	getStandardResponse,
+	InRoomParams
+} from '@/shared/types';
 
 const exitRoomDomain = createDomain();
 
 const handlerFx = exitRoomDomain.effect<
-	ExitRoomParams,
+	InRoomParams,
 	StandardResponse<boolean>,
-	StandardFailError
->(roomsApi.exit);
+	Error
+>(membersApi.exit);
 
-export const mutation = createMutationWithAccess({
+export const mutation = createMutation({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Literal(true))),
 });
@@ -42,8 +45,3 @@ update(roomsModel.query, {
 		},
 	},
 });
-
-/*
-TODO: Сделать обновление и кеширование
-*/
-// update(roomModel.query)

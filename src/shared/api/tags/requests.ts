@@ -1,5 +1,5 @@
-import { fetcher } from '@/shared/lib';
 import { StandardResponse } from '@/shared/types';
+import { instance } from '../request';
 import {
 	GetTagParams,
 	CreateTagParams,
@@ -8,60 +8,30 @@ import {
 	Tag
 } from './types';
 
-const tagsFetcher = fetcher.create({
-	baseURL: 'tags',
-});
-
 export const getAll = async (roomId: number) => {
-	return tagsFetcher.get<StandardResponse<Tag[]>>({
-		path: {
-			url: roomId,
-		},
-	});
+	return instance.get(`tags/${roomId}`).json<StandardResponse<Tag[]>>();
 };
 
 export const getOne = async ({ roomId, id, }: GetTagParams) => {
-	return tagsFetcher.get<StandardResponse<Tag>>({
-		path: {
-			url: [roomId, id],
-		},
-	});
+	return instance.get(`tags/${roomId}/${id}`).json<StandardResponse<Tag>>();
 };
 
-export const create = async ({
-	roomId,
-	accessToken,
-	...body
-}: CreateTagParams) => {
-	return tagsFetcher.post<StandardResponse<Tag>>({
-		accessToken,
-		path: {
-			url: [roomId, 'create'],
-		},
-		body,
-	});
+export const create = async ({ roomId, ...body }: CreateTagParams) => {
+	return instance
+		.post(`tags/${roomId}/create`, { json: body, })
+		.json<StandardResponse<Tag>>();
 };
 
-export const update = async ({
-	id,
-	roomId,
-	accessToken,
-	...body
-}: UpdateTagParams) => {
-	return tagsFetcher.put<StandardResponse<Tag>>({
-		accessToken,
-		path: {
-			url: [roomId, id, 'update'],
-		},
-		body,
-	});
+export const update = async ({ id, roomId, ...body }: UpdateTagParams) => {
+	return instance
+		.put(`tags/${roomId}/${id}/update`, {
+			json: body,
+		})
+		.json<StandardResponse<Tag>>();
 };
 
-export const remove = async ({ roomId, accessToken, id, }: RemoveTagParams) => {
-	return tagsFetcher.delete<StandardResponse<boolean>>({
-		accessToken,
-		path: {
-			url: [roomId, id, 'remove'],
-		},
-	});
+export const remove = async ({ roomId, id, }: RemoveTagParams) => {
+	return instance
+		.delete(`tags/${roomId}/${id}/remove`)
+		.json<StandardResponse<boolean>>();
 };

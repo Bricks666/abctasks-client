@@ -1,11 +1,10 @@
-import { update } from '@farfetched/core';
+import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createPopupControlModel } from '@/entities/popups';
 import { tagsModel } from '@/entities/tags';
 import { CreateTagParams, tag, Tag, tagsApi } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
-import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 import { form } from './form';
 
@@ -18,14 +17,14 @@ const { formValidated, reset, } = form;
 const handlerFx = createTagDomain.effect<
 	CreateTagParams,
 	StandardResponse<Tag>,
-	StandardFailError
+	Error
 >(tagsApi.create);
 
-export const mutation = createMutationWithAccess<
+export const mutation = createMutation<
 	CreateTagParams,
 	StandardResponse<Tag>,
 	StandardResponse<Tag>,
-	StandardFailError
+	Error
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(tag)),

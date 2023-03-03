@@ -43,6 +43,7 @@ export const ActivitiesActionsPicker: React.FC<ActivitiesActionsPickerProps> =
 				renderInput={(params) => {
 					return <Field {...params} {...rest} />;
 				}}
+				limitTags={2}
 				multiple
 			/>
 		);

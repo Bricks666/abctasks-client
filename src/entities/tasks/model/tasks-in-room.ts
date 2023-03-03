@@ -5,7 +5,7 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 import { Task, tasksApi, task, TaskStatus, GetTasksParams } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
-import { dataExtractor, StandardFailError } from '@/shared/lib';
+import { dataExtractor } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const tasksInRoom = createDomain();
@@ -18,15 +18,13 @@ export const $status = tasksInRoom.store<TaskStatus | null>(null);
 const handlerFx = tasksInRoom.effect<
 	GetTasksParams,
 	StandardResponse<Task[]>,
-	StandardFailError
->();
-
-handlerFx.use(tasksApi.getAllInRoom);
+	Error
+>(tasksApi.getAll);
 
 export const query = createQuery<
 	GetTasksParams,
 	StandardResponse<Task[]>,
-	StandardFailError,
+	Error,
 	StandardResponse<Task[]>,
 	Task[]
 >({

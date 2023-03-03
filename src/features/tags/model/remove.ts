@@ -1,10 +1,9 @@
-import { update } from '@farfetched/core';
+import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
 import { tagsModel } from '@/entities/tags';
 import { RemoveTagParams, tagsApi } from '@/shared/api';
-import { createMutationWithAccess, StandardFailError } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const removeTagDomain = createDomain();
@@ -12,14 +11,14 @@ const removeTagDomain = createDomain();
 const handlerFx = removeTagDomain.effect<
 	RemoveTagParams,
 	StandardResponse<boolean>,
-	StandardFailError
+	Error
 >(tagsApi.remove);
 
-export const mutation = createMutationWithAccess<
+export const mutation = createMutation<
 	RemoveTagParams,
 	StandardResponse<boolean>,
 	StandardResponse<boolean>,
-	StandardFailError
+	Error
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Literal(true))),

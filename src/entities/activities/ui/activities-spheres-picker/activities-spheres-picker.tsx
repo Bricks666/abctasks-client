@@ -39,6 +39,7 @@ export const ActivitiesSpheresPicker: React.FC<ActivitiesSpheresPickerProps> =
 				renderInput={(params) => {
 					return <Field {...params} {...rest} />;
 				}}
+				limitTags={2}
 				multiple
 			/>
 		);

@@ -4,7 +4,7 @@ import { createDomain, createEvent, sample } from 'effector';
 import { debounce } from 'patronum';
 import { Array } from 'runtypes';
 import { SearchUsersQuery, user, User, usersApi } from '@/shared/api';
-import { dataExtractor, StandardFailError } from '@/shared/lib';
+import { dataExtractor, Error } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 const searchUserDomain = createDomain();
@@ -12,13 +12,13 @@ const searchUserDomain = createDomain();
 const handlerFx = searchUserDomain.effect<
 	SearchUsersQuery,
 	StandardResponse<User[]>,
-	StandardFailError
+	Error
 >(usersApi.searchUsers);
 
 export const query = createQuery<
 	SearchUsersQuery,
 	StandardResponse<User[]>,
-	StandardFailError,
+	Error,
 	StandardResponse<User[]>,
 	User[]
 >({

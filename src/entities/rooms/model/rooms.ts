@@ -1,29 +1,29 @@
-import { cache } from '@farfetched/core';
+import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
-import { GetRoomsParams, room, Room, roomsApi } from '@/shared/api';
+import { room, Room, roomsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
+import { dataExtractor } from '@/shared/lib';
 import {
-	createQueryWithAccess,
-	dataExtractor,
-	StandardFailError
-} from '@/shared/lib';
-import { StandardResponse, getStandardResponse } from '@/shared/types';
+	StandardResponse,
+	getStandardResponse,
+	InRoomParams
+} from '@/shared/types';
 
 export const roomsDomain = createDomain();
 export const $id = roomsDomain.store<null | number>(null);
 const handlerFx = roomsDomain.effect<
-	GetRoomsParams,
+	InRoomParams,
 	StandardResponse<Room[]>,
-	StandardFailError
+	Error
 >(roomsApi.getAll);
 
-export const query = createQueryWithAccess<
-	GetRoomsParams,
+export const query = createQuery<
+	InRoomParams,
 	StandardResponse<Room[]>,
-	StandardFailError,
+	Error,
 	StandardResponse<Room[]>,
 	Room[]
 >({

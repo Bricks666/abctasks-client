@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 import {
 	Record,
 	Number,
@@ -8,7 +7,6 @@ import {
 	Literal,
 	Array
 } from 'runtypes';
-import { AccessOptions } from '@/shared/lib';
 import { DatesFiltersParams, InRoomParams } from '@/shared/types';
 
 export const taskStatus = Union(
@@ -47,10 +45,6 @@ export interface GroupedByStatusTasks {
 	readonly done: Task[];
 }
 
-export type StatusNamesStore = {
-	readonly [key in keyof GroupedByStatusTasks]: TaskStatus;
-};
-
 export interface GetTasksParams extends InRoomParams, DatesFiltersParams {
 	readonly authorIds?: number[];
 	readonly tagIds?: number[];
@@ -61,18 +55,17 @@ export interface GetTaskParams extends InRoomParams {
 }
 
 export interface CreateTaskParams
-	extends Required<AccessOptions>,
-		Pick<Task, 'roomId' | 'tagIds' | 'title' | 'status' | 'description'> {}
+	extends Pick<
+		Task,
+		'roomId' | 'tagIds' | 'title' | 'status' | 'description'
+	> {}
 
 export interface UpdateTaskParams
-	extends Partial<Omit<CreateTaskParams, 'accessToken'>>,
-		Required<AccessOptions> {
+	extends Partial<Omit<CreateTaskParams, 'roomId'>>,
+		InRoomParams {
 	readonly id: number;
-	readonly roomId: number;
 }
 
-export interface RemoveTaskParams
-	extends Required<AccessOptions>,
-		InRoomParams {
+export interface RemoveTaskParams extends InRoomParams {
 	readonly id: number;
 }

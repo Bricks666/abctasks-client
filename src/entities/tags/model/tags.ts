@@ -5,23 +5,21 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 import { tag, Tag, tagsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
-import { dataExtractor, StandardFailError } from '@/shared/lib';
+import { dataExtractor, Error } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 import { TagsMap } from './types';
 
 export const tagsDomain = createDomain();
 
 export const $id = tagsDomain.store<null | number>(null);
-const handlerFx = tagsDomain.effect<
-	number,
-	StandardResponse<Tag[]>,
-	StandardFailError
->(tagsApi.getAll);
+const handlerFx = tagsDomain.effect<number, StandardResponse<Tag[]>, Error>(
+	tagsApi.getAll
+);
 
 export const query = createQuery<
 	number,
 	StandardResponse<Tag[]>,
-	StandardFailError,
+	Error,
 	StandardResponse<Tag[]>,
 	Tag[]
 >({
