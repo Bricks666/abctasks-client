@@ -22,7 +22,6 @@ export const TagCardActions: React.FC<TagCardActionsProps> = (props) => {
 	const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
 
 	const onAgree = React.useCallback(() => {
-		console.log('remove');
 		removeTag.start({ id: tagId, roomId, });
 		toggleOff();
 	}, [toggleOff, tagId, roomId]);

@@ -45,24 +45,32 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 						label='Action type'
 						value={actionIds.value}
 						onChange={actionIds.onChange}
-						error={actionIds.hasError()}
+						helperText={actionIds.errorText()}
+						isValid={actionIds.isValid}
+						limitTags={2}
+						multiple
 						fullWidth
 					/>
 					<ActivitiesSpheresPicker
 						label='Activities spheres'
 						value={sphereIds.value}
 						onChange={sphereIds.onChange}
-						error={sphereIds.hasError()}
+						helperText={sphereIds.errorText()}
+						isValid={sphereIds.isValid}
+						limitTags={2}
+						multiple
 						fullWidth
 					/>
 					<UsersInRoomPicker
-						label='User'
 						value={activistIds.value}
 						onChange={activistIds.onChange}
 						onBlur={activistIds.onBlur}
 						helperText={activistIds.errorText()}
 						isValid={activistIds.isValid}
 						name={activistIds.name}
+						label='User'
+						limitTags={1}
+						multiple
 					/>
 					<DatePicker
 						label='Happened after date'

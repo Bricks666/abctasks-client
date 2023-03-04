@@ -31,7 +31,6 @@ export const update = async ({ id, roomId, ...body }: UpdateTagParams) => {
 };
 
 export const remove = async ({ roomId, id, }: RemoveTagParams) => {
-	console.log('remove api');
 	return instance
 		.delete(`tags/${roomId}/${id}/remove`)
 		.json<StandardResponse<boolean>>();

@@ -37,6 +37,8 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 				isValid={tagIds.isValid}
 				name={tagIds.name}
 				label={t(`task.group`)}
+				limitTags={1}
+				multiple
 			/>
 			<StatusSelect
 				value={status.value}

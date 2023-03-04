@@ -14,10 +14,10 @@ export const SkeletonTagForm: React.FC<SkeletonTagFormProps> = React.memo(
 		return (
 			<div className={cn(styles.wrapper, className)}>
 				<SkeletonTagLabel />
-				<Skeleton className={styles.input} height='6em' />
-				<Skeleton className={styles.colorInput} height='6em' />
-				<Skeleton className={styles.colorInput} height='6em' />
-				<Skeleton className={styles.button} height='2em' width='5em' />
+				<Skeleton className={styles.input} height='3em' />
+				<Skeleton className={styles.colorInput} height='3em' />
+				<Skeleton className={styles.colorInput} height='3em' />
+				<Skeleton className={styles.button} height='2em' width='8em' />
 			</div>
 		);
 	}

@@ -11,7 +11,7 @@ export interface TaskFormValues
 	extends Pick<Task, 'title' | 'description' | 'status' | 'tagIds'> {}
 
 const schemas = {
-	tagIds: Joi.number().required().messages({
+	tagIds: Joi.array().items(Joi.number()).required().messages({
 		'number.empty': 'Tag must be choose',
 		'number.positive': 'Tag must be choose',
 	}),
@@ -44,7 +44,7 @@ export const form = createForm<TaskFormValues>({
 		},
 		status: {
 			init: 'ready',
-			rules: [createRuleFromSchema('states', schemas.status)],
+			rules: [createRuleFromSchema('status', schemas.status)],
 		},
 	},
 	domain: taskFormDomain,

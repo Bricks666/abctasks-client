@@ -1,42 +1,48 @@
 import { Autocomplete } from '@mui/material';
 import * as React from 'react';
 import { User } from '@/shared/api';
-import { CommonProps } from '@/shared/types';
+import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
+import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 import { useUsersInRoom } from '../../lib';
 import { TemplateUserListItem } from '../template-user-list-item';
 
-export interface UsersInRoomPickerProps extends CommonProps, FieldProps {
-	readonly onChange: (value: number[]) => void;
-	readonly value: number[];
-}
+export type UsersInRoomPickerProps = CommonProps &
+	PickerProps<number> &
+	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'>;
 
 export const UsersInRoomPicker: React.FC<UsersInRoomPickerProps> = React.memo(
 	(props) => {
-		const { onChange, value, className, ...rest } = props;
+		const { onChange, value, className, multiple, limitTags, ...rest } = props;
 		const users = useUsersInRoom();
 
-		const changeHandler = (_: unknown, users: User[]) => {
-			onChange(users.map((user) => user.id));
-		};
+		const changeHandler = preparePickerHandler<User, 'id', number>(
+			{ multiple, onChange, },
+			'id'
+		);
 
-		const selected = users.data.filter((user) => value.includes(user.id));
+		const selected = preparePickerSelectedValue(
+			{ value, multiple, },
+			users.data,
+			'id'
+		);
 
 		return (
 			<Autocomplete
 				className={className}
 				options={users.data}
-				value={selected}
-				getOptionLabel={(user) => user.login}
+				value={selected as any}
+				onChange={changeHandler as any}
+				getOptionLabel={(user) => user.username}
 				loading={users.pending}
-				onChange={changeHandler}
 				renderOption={(params, option) => (
 					<TemplateUserListItem {...params} {...option} />
 				)}
 				renderInput={(params) => {
 					return <Field {...params} {...rest} />;
 				}}
-				multiple
+				limitTags={limitTags}
+				multiple={multiple}
 			/>
 		);
 	}

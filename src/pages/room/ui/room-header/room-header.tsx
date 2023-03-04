@@ -21,10 +21,14 @@ export const RoomHeader: React.FC<CommonProps> = (props) => {
 			leftContent={
 				<div>
 					<Typography variant='h6' component='h1'>
-						{pending ? <Skeleton width='15em' /> : room?.name}
+						{pending ? (
+							<Skeleton className={styles.titleSkeleton} width='10em' />
+						) : (
+							room?.name
+						)}
 					</Typography>
 					<Typography className={styles.description} variant='body2'>
-						{pending ? <Skeleton width='15em' /> : room?.description}
+						{pending ? <Skeleton width='10em' /> : room?.description}
 					</Typography>
 				</div>
 			}

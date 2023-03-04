@@ -18,7 +18,7 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 
 	const [open, { toggleOn, toggleOff, }] = useToggle();
 	const { fields, reset, submit, } = useForm(tasksFiltersModel.form);
-	const { after, authorIds, before, tagIds: groupId, } = fields;
+	const { after, authorIds, before, tagIds, } = fields;
 
 	const onSubmit = useSubmit(() => {
 		submit();
@@ -39,16 +39,16 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 			filters={
 				<form className={cn(styles.wrapper, className)} onSubmit={onSubmit}>
 					<TagPicker
-						value={groupId.value}
-						onChange={groupId.onChange}
-						onBlur={groupId.onBlur}
-						helperText={groupId.errorText()}
-						isValid={groupId.isValid}
-						name={groupId.name}
+						value={tagIds.value}
+						onChange={tagIds.onChange}
+						onBlur={tagIds.onBlur}
+						helperText={tagIds.errorText()}
+						isValid={tagIds.isValid}
+						name={tagIds.name}
 						label='Group'
-						emptyOptionText='All'
 						size='medium'
-						hasEmptyOption
+						limitTags={1}
+						multiple
 					/>
 					<UsersInRoomPicker
 						value={authorIds.value}
@@ -59,6 +59,8 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 						name={authorIds.name}
 						label='User'
 						size='medium'
+						limitTags={1}
+						multiple
 					/>
 					<DatePicker
 						value={after.value}
