@@ -3,10 +3,6 @@
 	gap: 1em;
 }
 
-.content {
-	padding: 1em;
-}
-
 @media (min-width: 1300px) {
 	.layout {
 		--room-page-template-columns: 4fr 1fr;

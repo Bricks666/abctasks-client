@@ -20,7 +20,7 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 	const { t, } = useTranslation('popups');
 	const { fields, submit, isDirty, } = useForm(taskFormModel.form);
 
-	const { tagIds, title, status, } = fields;
+	const { tagIds, description, status, title, } = fields;
 
 	const onSubmit: React.FormEventHandler = (e) => {
 		e.preventDefault();
@@ -29,6 +29,16 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 
 	return (
 		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
+			<Field
+				className={styles.field}
+				value={title.value}
+				onChange={title.onChange}
+				onBlur={title.onBlur}
+				helperText={title.errorText()}
+				isValid={title.isValid}
+				name={title.name}
+				label='Title'
+			/>
 			<TagPicker
 				value={tagIds.value}
 				onChange={tagIds.onChange}
@@ -51,13 +61,14 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 			/>
 			<Field
 				className={styles.field}
-				value={title.value}
-				onChange={title.onChange}
-				onBlur={title.onBlur}
-				helperText={title.errorText()}
-				isValid={title.isValid}
-				name={title.name}
+				value={description.value}
+				onChange={description.onChange}
+				onBlur={description.onBlur}
+				helperText={description.errorText()}
+				isValid={description.isValid}
+				name={description.name}
 				label={t('task.content')}
+				minRows={5}
 				multiline
 			/>
 			<Button className={styles.button} type='submit' disabled={!isDirty}>

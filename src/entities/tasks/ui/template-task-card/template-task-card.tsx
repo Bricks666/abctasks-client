@@ -1,5 +1,6 @@
 import {
 	Card,
+	CardActions,
 	CardContent,
 	CardHeader,
 	CardProps,
@@ -63,20 +64,27 @@ export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 				draggable={draggable}
 				component='article'>
 				<CardHeader
+					className={styles.header}
 					action={actions}
-					title={title}
-					subheader={tags}
-					titleTypographyProps={{ component: 'div', }}
-				/>
-				<CardContent>
-					<Typography className={styles.content}>{description}</Typography>
-					<div>
-						<DateTime date={createdAt} format='HH:mm DD MMM' />
-						<Typography variant='body2' component='span'>
-							0
+					title={
+						<Typography variant='h5' component='h3'>
+							{title}
 						</Typography>
-					</div>
+					}
+					subheader={tags}
+					disableTypography
+				/>
+				<CardContent className={styles.content}>
+					<Typography className={styles.description} variant='body1'>
+						{description}
+					</Typography>
 				</CardContent>
+				<CardActions>
+					<DateTime date={createdAt} format='HH:mm DD MMM' />
+					<Typography variant='body2' component='span'>
+						0
+					</Typography>
+				</CardActions>
 			</Card>
 		);
 	}

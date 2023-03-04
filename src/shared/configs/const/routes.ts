@@ -23,4 +23,5 @@ export const popupsMap = {
 	createRoom: 'create-room',
 	updateRoom: 'update-room',
 	addUser: 'add-user',
+	task: 'task',
 } as const;

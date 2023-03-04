@@ -26,8 +26,6 @@ export const activity = Record({
 	activistId: Number,
 	actionId: Number,
 	sphereId: Number,
-	sphere: activitySphere,
-	action: activityAction,
 	createdAt: String,
 }).asReadonly();
 

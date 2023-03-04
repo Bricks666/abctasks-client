@@ -18,17 +18,11 @@ export interface TaskProgressComponent
 
 export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 	(props) => {
-		const {
-			completedCount,
-			totalCount,
-			className,
-			mainColor,
-			secondColor,
-			name,
-		} = props;
+		const { donecount, totalcount, className, mainColor, secondColor, name, } =
+			props;
 		const { t, } = useTranslation('room');
 
-		const value = (Number(completedCount) / Number(totalCount)) * 100;
+		const value = (Number(donecount) / Number(totalcount)) * 100;
 
 		const sx: SxProps = {
 			backgroundColor: secondColor,
@@ -42,7 +36,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 				<Typography className={styles.title} variant='body1'>
 					{name}{' '}
 					<Typography component='span' color='#b4b4b4'>
-						{completedCount}/{totalCount}
+						{donecount}/{totalcount}
 					</Typography>
 				</Typography>
 				<LinearProgress
@@ -53,7 +47,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 					aria-label={
 						t('taskProgress.progressAria', {
 							name,
-							completed: completedCount,
+							completed: donecount,
 						})!
 					}
 					sx={sx}

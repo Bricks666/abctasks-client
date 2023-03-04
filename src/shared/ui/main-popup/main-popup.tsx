@@ -1,5 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import {
+	Breakpoint,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -7,23 +8,32 @@ import {
 	IconButton
 } from '@mui/material';
 import * as React from 'react';
-import { CommonProps, VoidFunction } from '@/shared/types';
+import { BasePopupProps, CommonProps, VoidFunction } from '@/shared/types';
 
 import styles from './main-popup.module.css';
 
-export interface MainPopupProps extends CommonProps {
-	readonly isOpen: boolean;
+export interface MainPopupProps extends CommonProps, BasePopupProps {
 	readonly onClose: VoidFunction;
 	readonly title: string;
 	readonly actions?: React.ReactElement;
+	readonly maxWidth?: Breakpoint;
 }
 
 export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = (
 	props
 ) => {
-	const { isOpen, onClose, children, className, title, actions, } = props;
+	const {
+		isOpen,
+		onClose,
+		children,
+		className,
+		title,
+		actions,
+		maxWidth = 'sm',
+	} = props;
+
 	return (
-		<Dialog open={isOpen} onClose={onClose} maxWidth='sm' fullWidth>
+		<Dialog open={isOpen} onClose={onClose} maxWidth={maxWidth} fullWidth>
 			<DialogTitle align='center'>
 				{title}
 				<IconButton className={styles.cross} onClick={onClose}>

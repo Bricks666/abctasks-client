@@ -21,7 +21,7 @@ export const UpdateTag: React.FC<React.PropsWithChildren<UpdateTagProps>> = (
 	const id = useUnit(tagsModel.$id);
 	const onClose = useUnit(updateTagModel.close);
 	const tag = useTag(Number(id), roomId);
-	const isLoading = !tag.data || true;
+	const isLoading = !tag.data;
 
 	return (
 		<MainPopup {...props} onClose={onClose} title={t('group.updateTitle')}>

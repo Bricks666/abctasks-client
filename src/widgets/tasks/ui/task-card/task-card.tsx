@@ -8,6 +8,8 @@ import { Tag, Task } from '@/shared/api';
 import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
+import styles from './task-card.module.css';
+
 export interface TaskCardProps extends CommonProps, Task {
 	readonly tags: Array<Tag | null>;
 }
@@ -15,7 +17,6 @@ export interface TaskCardProps extends CommonProps, Task {
 export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 	const { tags, id, roomId, } = props;
 	const canChange = useUnit(roomModel.$canChange);
-
 	const status = useUnit(tagsModel.query.$status);
 	const isLoading = status === 'initial' || status === 'pending';
 
@@ -39,7 +40,7 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 		<TemplateTaskCard
 			{...props}
 			actions={actions}
-			tags={tagElements}
+			tags={<div className={styles.tags}>{tagElements}</div>}
 			draggable={canChange}
 		/>
 	);

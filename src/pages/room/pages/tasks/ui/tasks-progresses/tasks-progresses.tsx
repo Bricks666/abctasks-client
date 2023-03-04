@@ -62,12 +62,12 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 				{isLoading
 					? getEmptyArray(2).map((_, i) => <SkeletonTaskProgress key={i} />)
 					: progresses.data.map((progress) => {
-						const group = tags.data[progress.groupId];
-						if (!group) {
+						const tag = tags.data[progress.tagId];
+						if (!tag) {
 							return null;
 						}
 						return (
-							<TaskProgress {...progress} {...group} key={progress.groupId} />
+							<TaskProgress {...progress} {...tag} key={progress.tagId} />
 						);
 					  })}
 			</Stack>
