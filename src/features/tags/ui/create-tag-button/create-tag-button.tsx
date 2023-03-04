@@ -1,4 +1,5 @@
-import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { IconButton, Tooltip } from '@mui/material';
 import { RouteInstance } from 'atomic-router';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
@@ -16,14 +17,16 @@ export const CreateTagButton: React.FC<CreateTagButtonProps> = React.memo(
 		const { t, } = useTranslation('common');
 
 		return (
-			<Button
-				className={className}
-				to={routes.room.tags as RouteInstance<any>}
-				params={{ id: roomId, }}
-				query={{ [getParams.popup]: popupsMap.createTag, }}
-				component={Link}>
-				{t('actions.create')}
-			</Button>
+			<Tooltip title={`${t('actions.create')} tag`}>
+				<IconButton
+					className={className}
+					to={routes.room.tags as RouteInstance<any>}
+					params={{ id: roomId, }}
+					query={{ [getParams.popup]: popupsMap.createTag, }}
+					component={Link}>
+					<AddIcon />
+				</IconButton>
+			</Tooltip>
 		);
 	}
 );

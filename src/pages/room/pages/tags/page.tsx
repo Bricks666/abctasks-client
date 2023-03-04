@@ -11,7 +11,7 @@ import { useTags, TagListItem } from '@/entities/tags';
 import { getEmptyArray, popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat } from '@/shared/ui';
+import { RetryLoadingSlat, SectionHeader } from '@/shared/ui';
 import { pageModel } from './model';
 
 export interface TagsPageProps extends CommonProps {}
@@ -67,9 +67,9 @@ const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 	}
 
 	return (
-		<Container>
-			<Stack className={className} spacing={1}>
-				<CreateTagButton />
+		<Container className={className}>
+			<Stack className={className} spacing={1.5}>
+				<SectionHeader title='Tags' actions={<CreateTagButton />} />
 				<List>{items}</List>
 				<Popups popupMap={popupMap} />
 			</Stack>

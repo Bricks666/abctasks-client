@@ -4,7 +4,7 @@ import { createDomain, createEvent, sample } from 'effector';
 import { debounce } from 'patronum';
 import { Array } from 'runtypes';
 import { SearchUsersQuery, user, User, usersApi } from '@/shared/api';
-import { dataExtractor, Error } from '@/shared/lib';
+import { dataExtractor } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 const searchUserDomain = createDomain();
@@ -37,6 +37,6 @@ const debouncedSearchChanged = debounce({
 
 sample({
 	clock: debouncedSearchChanged,
-	fn: (login) => ({ login, }),
+	fn: (username) => ({ username, }),
 	target: query.start,
 });

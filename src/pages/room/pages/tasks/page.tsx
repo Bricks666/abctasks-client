@@ -2,14 +2,14 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { Popups, PopupsProps } from '@/widgets/page';
-import { CreateTask, UpdateTask } from '@/features/tasks';
+import { CreateTask, TasksFilters, UpdateTask } from '@/features/tasks';
 import { deviceInfoModel } from '@/entities/page';
 import { popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
+import { SectionHeader } from '@/shared/ui';
 import { pageModel } from './model';
 import styles from './page.module.css';
 import { Tasks, Aside, MobileAside } from './ui';
-import { TasksHeader } from './ui/tasks-header';
 
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createTask]: CreateTask,
@@ -24,7 +24,15 @@ const TasksPage: React.FC<CommonProps> = (props) => {
 
 	return (
 		<div className={cn(styles.wrapper, className)}>
-			<TasksHeader actions={!showAside ? <MobileAside /> : null} />
+			<SectionHeader
+				title='Tasks'
+				actions={
+					<>
+						{!showAside ? <MobileAside /> : null}
+						<TasksFilters />
+					</>
+				}
+			/>
 			<Tasks className={styles.tasks} />
 			{showAside ? <Aside className={styles.aside} /> : null}
 			<Popups popupMap={popupMap} />

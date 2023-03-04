@@ -3,15 +3,15 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { Popups, PopupsProps } from '@/widgets/page';
-import { AddUsersIntoRoom } from '@/features/rooms';
+import { AddUserButton, AddUsersIntoRoom } from '@/features/rooms';
 import { usersInRoomModel } from '@/entities/users';
 import { popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat } from '@/shared/ui';
+import { RetryLoadingSlat, SectionHeader } from '@/shared/ui';
 import './model';
 import styles from './page.module.css';
-import { UserList, UsersHeader } from './ui';
+import { UserList } from './ui';
 
 export interface UsersPageProps extends CommonProps {}
 
@@ -42,7 +42,7 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 
 	return (
 		<Container className={cn(styles.wrapper, className)}>
-			<UsersHeader />
+			<SectionHeader title='Users' actions={<AddUserButton />} />
 			<UserList />
 			<Popups popupMap={popupMap} />
 		</Container>

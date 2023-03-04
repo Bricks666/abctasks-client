@@ -25,7 +25,7 @@ const activitiesDomain = createDomain();
 const handlerFx = activitiesDomain.effect<
 	InRoomParams,
 	StandardResponse<PaginationResponse<Activity>>
->(({ roomId, }) => activitiesApi.getLast({ roomId, count: 5, }));
+>(({ roomId, }) => activitiesApi.getAll({ roomId, count: 5, }));
 
 export const query = createQuery<
 	InRoomParams,

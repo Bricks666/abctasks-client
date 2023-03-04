@@ -4,6 +4,7 @@ import { VoidFunction } from '../types';
 export const useSubmit = (submit: VoidFunction) => {
 	return useCallback((evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
+		console.log('submit');
 		submit();
 	}, []);
 };

@@ -5,7 +5,7 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 import { tag, Tag, tagsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
-import { dataExtractor, Error } from '@/shared/lib';
+import { dataExtractor } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 import { TagsMap } from './types';
 

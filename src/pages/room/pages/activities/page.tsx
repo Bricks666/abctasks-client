@@ -2,14 +2,15 @@ import { Container } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { ActivitiesFilters } from '@/features/activities';
 import { activitiesInRoomModel } from '@/entities/activities';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat } from '@/shared/ui';
+import { RetryLoadingSlat, SectionHeader } from '@/shared/ui';
 import { pageModel } from './model';
 import styles from './page.module.css';
-import { ActivitiesHeader, ActivitiesPagination, ActivityList } from './ui';
+import { ActivitiesPagination, ActivityList } from './ui';
 
 const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
@@ -44,7 +45,7 @@ const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 
 	return (
 		<Container className={cn(styles.wrapper, className)}>
-			<ActivitiesHeader />
+			<SectionHeader title='Activities' actions={<ActivitiesFilters />} />
 			{children}
 		</Container>
 	);

@@ -15,6 +15,7 @@ export interface TagPickerProps
 export const TagPicker: React.FC<TagPickerProps> = React.memo((props) => {
 	const { className, hasEmptyOption, emptyOptionText, ...rest } = props;
 	const tags = useTags();
+	console.log(tags);
 
 	return tags.pending ? (
 		<Skeleton className={className} height='3em' />

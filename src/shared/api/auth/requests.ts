@@ -1,5 +1,5 @@
 import { StandardResponse } from '@/shared/types';
-import { instance } from '../request';
+import { instance, normalizeQuery } from '../request';
 import {
 	ActivateParams,
 	AuthResponse,
@@ -33,7 +33,7 @@ export const registration = async (body: RegistrationParams) => {
 export const activate = async (query: ActivateParams) => {
 	return instance
 		.put('auth/registration/activate', {
-			searchParams: query as any,
+			searchParams: new URLSearchParams(normalizeQuery(query)),
 		})
 		.json<StandardResponse<boolean>>();
 };

@@ -26,7 +26,7 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 	};
 
 	const buttonText = user.value
-		? `Add ${user.value.login} to the room`
+		? `Add ${user.value.username} to the room`
 		: 'Select user above';
 
 	return (

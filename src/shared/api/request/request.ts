@@ -1,4 +1,5 @@
 import ky from 'ky';
+import { StandardResponse } from '@/shared/types';
 import { api } from '../../configs';
 import { Tokens } from './types';
 
@@ -28,7 +29,11 @@ export const instance = ky.create({
 
 				const body = await response.json();
 
-				if (!('data' in body)) {
+				if (
+					!('data' in body) ||
+					typeof body.data !== 'object' ||
+					body.data === null
+				) {
 					return;
 				}
 				if (!('tokens' in body.data)) {
@@ -45,9 +50,9 @@ export const instance = ky.create({
 					return;
 				}
 
-				const tokens = await instance
+				const { data: tokens, } = await instance
 					.get('auth/refresh', { credentials: 'include', })
-					.json<Tokens>();
+					.json<StandardResponse<Tokens>>();
 
 				token = tokens.accessToken;
 

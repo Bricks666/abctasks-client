@@ -4,8 +4,7 @@ import {
 	Activity,
 	ActivityAction,
 	ActivitySphere,
-	GetActivitiesInRoomParams,
-	GetLastActivitiesInRoomParams
+	GetActivitiesInRoomParams
 } from './types';
 
 export const getAll = async ({
@@ -15,17 +14,6 @@ export const getAll = async ({
 	return instance
 		.get(`activities/${roomId}`, {
 			searchParams: new URLSearchParams(normalizeQuery(query)),
-		})
-		.json<StandardResponse<PaginationResponse<Activity>>>();
-};
-
-export const getLast = async ({
-	roomId,
-	...query
-}: GetLastActivitiesInRoomParams) => {
-	return instance
-		.get(`activities/${roomId}`, {
-			searchParams: query,
 		})
 		.json<StandardResponse<PaginationResponse<Activity>>>();
 };

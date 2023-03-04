@@ -15,3 +15,4 @@ export * from './controlled-toggle-button-group';
 export * from './snackbar-item';
 export * from './snackbar-list';
 export * from './filters-popover';
+export * from './section-header';
