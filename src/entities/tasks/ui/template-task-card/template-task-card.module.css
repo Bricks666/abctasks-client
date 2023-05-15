@@ -2,8 +2,6 @@
 	width: 100%;
 
 	box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
-
-	cursor: move;
 }
 
 .card:hover {
@@ -15,7 +13,7 @@
 }
 
 .header {
-  padding-bottom: 0.5em;
+	padding-bottom: 0.5em;
 }
 .content {
 	padding-top: 0.5em;

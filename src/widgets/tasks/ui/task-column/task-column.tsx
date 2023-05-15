@@ -2,12 +2,13 @@ import { Stack } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { TaskColumnActions, updateTaskModel } from '@/features/tasks';
+import { TaskColumnActions } from '@/features/tasks';
 import { useTagsMap } from '@/entities/tags';
 import { SkeletonTaskCard, TaskColumnHeader } from '@/entities/tasks';
 import { Task, TaskStatus } from '@/shared/api';
 import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
+import { dragTaskModel } from '../../model';
 import { TaskCard } from '../task-card';
 
 import styles from './task-column.module.css';
@@ -24,23 +25,8 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	const { tasks, className, columnStatus, header, isLoading, roomId, } = props;
-	const moveTask = useUnit(updateTaskModel.mutation);
+	const onDrop = useUnit(dragTaskModel.drop);
 	const tagsMap = useTagsMap();
-	const onDrop = React.useCallback<React.DragEventHandler>(
-		(evt) => {
-			const id = Number(evt.dataTransfer.getData('taskId'));
-			const status = evt.dataTransfer.getData('status');
-			if (status === columnStatus || !Number.isInteger(id) || !status) {
-				return;
-			}
-			moveTask.start({
-				status: columnStatus as TaskStatus,
-				roomId: Number(roomId),
-				id,
-			});
-		},
-		[roomId, columnStatus]
-	);
 
 	let items: React.ReactElement[];
 
@@ -58,7 +44,8 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 			className={cn(styles.wrapper, className)}
 			spacing={1}
 			onDrop={onDrop}
-			onDragOver={onDragOver}>
+			onDragOver={onDragOver}
+			data-status={columnStatus}>
 			<TaskColumnHeader
 				actions={
 					<TaskColumnActions roomId={roomId} columnStatus={columnStatus} />

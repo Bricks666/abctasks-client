@@ -1,7 +1,9 @@
 import { querySync } from 'atomic-router';
 import { sample } from 'effector';
-import { tasksFiltersModel } from '@/features/tasks';
+import { dragTaskModel } from '@/widgets/tasks/model';
+import { tasksFiltersModel, updateTaskModel } from '@/features/tasks';
 import { tasksInRoomModel } from '@/entities/tasks';
+import { UpdateTaskParams } from '@/shared/api';
 import { controls, getParams } from '@/shared/configs';
 import { currentRoute, loaded, loadedWithRouteState } from './page';
 
@@ -56,4 +58,18 @@ sample({
 		after: query[getParams.after],
 	}),
 	target: setForm,
+});
+
+sample({
+	clock: dragTaskModel.dropped,
+	source: { id: dragTaskModel.$id, params: currentRoute.$params, },
+	fn: ({ id, params, }, evt) => {
+		const { status, } = evt.currentTarget.dataset;
+		return {
+			id,
+			roomId: params.id,
+			status,
+		} as UpdateTaskParams;
+	},
+	target: updateTaskModel.mutation.start,
 });

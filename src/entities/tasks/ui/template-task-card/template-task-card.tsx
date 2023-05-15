@@ -20,49 +20,18 @@ export interface TemplateTaskCardProps
 		Omit<CardProps, keyof Task> {
 	readonly actions: React.ReactElement | null;
 	readonly tags: React.ReactElement | React.ReactElement[] | null;
-	readonly draggable: boolean;
 }
 
 export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 	(props) => {
-		const {
-			className,
-			createdAt,
-			id,
-			status,
-			actions,
-			tags,
-			title,
-			description,
-			draggable,
-		} = props;
-		const [isDrag, setIsDrag] = React.useState(false);
-
-		/**
-		 * Может стоит вынести на уровень карты, а не шаблона
-		 */
-		const onDragStart = React.useCallback<React.DragEventHandler>(
-			(evt) => {
-				evt.dataTransfer.clearData();
-				evt.dataTransfer.setData('status', status.toString());
-				evt.dataTransfer.setData('taskId', id.toString());
-				setIsDrag(true);
-			},
-			[status, id]
-		);
-
-		const onDragEnd = React.useCallback<React.DragEventHandler>(() => {
-			setIsDrag(false);
-		}, []);
-
+		const { className, createdAt, actions, tags, title, description, ...rest } =
+			props;
 		return (
 			<Card
-				className={cn(styles.card, { [styles.drag]: isDrag, }, className)}
-				onDragStart={onDragStart}
-				onDragEnd={onDragEnd}
+				className={cn(styles.card, className)}
 				variant='outlined'
-				draggable={draggable}
-				component='article'>
+				component='article'
+				{...rest}>
 				<CardHeader
 					className={styles.header}
 					action={actions}
