@@ -3,15 +3,14 @@ import { sample } from 'effector';
 
 import { loginModel } from '@/features/auth';
 
-import { authModel } from '@/entities/auth';
-
 import { routes } from '@/shared/configs';
+import { sessionModel } from '@/shared/models';
 
 import { loadedAndAuthSuccess } from './page';
 
 redirect({
 	clock: [
-		authModel.query.finished.success,
+		sessionModel.query.finished.success,
 		loginModel.mutation.finished.success,
 		loadedAndAuthSuccess
 	],

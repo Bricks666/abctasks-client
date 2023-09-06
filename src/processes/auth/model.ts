@@ -4,13 +4,13 @@ import { not } from 'patronum';
 
 import { logoutModel, registrationModel } from '@/features/auth';
 
-import { authModel } from '@/entities/auth';
 import { pageModel } from '@/entities/page';
 
 import { routes } from '@/shared/configs';
+import { sessionModel } from '@/shared/models';
 
 redirect({
-	clock: [authModel.query.finished.failure],
+	clock: [sessionModel.query.finished.failure],
 	route: routes.login,
 });
 
@@ -21,7 +21,7 @@ redirect({
 
 sample({
 	clock: pageModel.started,
-	target: authModel.query.start,
+	target: sessionModel.query.start,
 });
 
 redirect({

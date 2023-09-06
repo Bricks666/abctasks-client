@@ -5,10 +5,10 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { authModel } from '@/entities/auth';
 import { UserAvatar } from '@/entities/users';
 
 import { useToggle } from '@/shared/lib';
+import { sessionModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, MenuItem } from '@/shared/ui';
 
@@ -16,7 +16,7 @@ import { logoutModel } from '../../model';
 
 export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('header');
-	const user = useUnit(authModel.$user);
+	const user = useUnit(sessionModel.$user);
 	const [isOpen, { toggle, }] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
 	const logout = useUnit(logoutModel.logoutMutation);

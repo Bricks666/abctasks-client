@@ -5,16 +5,14 @@ import { createForm } from 'effector-forms';
 import Joi from 'joi';
 import { splitMap } from 'patronum';
 
-import { authModel } from '@/entities/auth';
-
 import { authApi, authResponse, AuthResponse, LoginParams } from '@/shared/api';
 import {
 	allowedSymbolsRegExp,
 	maxLoginPasswordLength,
-	minLoginPasswordLength,
-	tokenModel
+	minLoginPasswordLength
 } from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';
+import { sessionModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const loginDomain = createDomain();
@@ -87,14 +85,8 @@ sample({
 
 sample({
 	clock: mutation.finished.success,
-	fn: ({ result, }) => result.data.tokens.accessToken,
-	target: tokenModel.setToken,
-});
-
-sample({
-	clock: mutation.finished.success,
 	fn: ({ result, }) => result.data.user,
-	target: authModel.setUser,
+	target: sessionModel.query.start,
 });
 
 const errors = splitMap({

@@ -1,12 +1,11 @@
 import { redirect } from 'atomic-router';
 
-import { authModel } from '@/entities/auth';
-
 import { routes } from '@/shared/configs';
+import { sessionModel } from '@/shared/models';
 
 import { loadedAndAuthSuccess } from './page';
 
 redirect({
-	clock: [authModel.query.finished.success, loadedAndAuthSuccess],
+	clock: [sessionModel.query.finished.success, loadedAndAuthSuccess],
 	route: routes.rooms,
 });
