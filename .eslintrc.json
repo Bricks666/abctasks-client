@@ -125,6 +125,7 @@
 		"react/function-component-definition": "off",
 		"react/no-unused-prop-types": "off",
 		"react/no-array-index-key": "off",
+		"react/react-in-jsx-scope": "off",
 
 		/* IMPORT */
 		"import/order": [

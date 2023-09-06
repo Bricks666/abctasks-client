@@ -10,7 +10,6 @@ import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { AuthLayout } from '@/shared/ui';
 
-import { pageModel } from './model';
 import styles from './styles.module.css';
 
 const LoginPage: React.FC<CommonProps> = ({ className, }) => {
@@ -32,7 +31,5 @@ const LoginPage: React.FC<CommonProps> = ({ className, }) => {
 		</AuthLayout>
 	);
 };
-
-pageModel.loaded();
 
 export default LoginPage;

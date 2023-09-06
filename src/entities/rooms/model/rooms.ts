@@ -7,22 +7,14 @@ import { Array } from 'runtypes';
 import { room, Room, roomsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
 import { dataExtractor } from '@/shared/lib';
-import {
-	StandardResponse,
-	getStandardResponse,
-	InRoomParams
-} from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 export const roomsDomain = createDomain();
 export const $id = roomsDomain.store<null | number>(null);
-const handlerFx = roomsDomain.effect<
-	InRoomParams,
-	StandardResponse<Room[]>,
-	Error
->(roomsApi.getAll);
+const handlerFx = roomsDomain.effect(roomsApi.getAll);
 
 export const query = createQuery<
-	InRoomParams,
+	void,
 	StandardResponse<Room[]>,
 	Error,
 	StandardResponse<Room[]>,

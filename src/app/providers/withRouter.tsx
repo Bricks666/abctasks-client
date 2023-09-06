@@ -1,58 +1,23 @@
-import { createHistoryRouter, redirect } from 'atomic-router';
+import { redirect } from 'atomic-router';
 import { RouterProvider } from 'atomic-router-react';
+import { sample } from 'effector';
 import { createBrowserHistory } from 'history';
 import * as React from 'react';
 
-import { routes, controls } from '@/shared/configs';
+import { router, routes } from '@/shared/configs';
+import { appModel } from '@/shared/models';
 import { LoadingIndicator } from '@/shared/ui';
 
-const router = createHistoryRouter({
-	routes: [
-		{
-			path: '/login',
-			route: routes.login,
-		},
-		{
-			path: '/registration',
-			route: routes.registration.base,
-		},
-		{
-			path: '/registration/thanks',
-			route: routes.registration.tanks,
-		},
-		{
-			path: '/rooms',
-			route: routes.rooms,
-		},
-		{
-			path: '/rooms/:id/:tab',
-			route: routes.room.base,
-		},
-		{
-			path: '/rooms/:id/tasks',
-			route: routes.room.tasks,
-		},
-		{
-			path: '/rooms/:id/tags',
-			route: routes.room.tags,
-		},
-		{
-			path: '/rooms/:id/activities',
-			route: routes.room.activities,
-		},
-		{
-			path: '/rooms/:id/users',
-			route: routes.room.users,
-		}
-	],
-	controls,
-});
 redirect({
 	clock: router.routeNotFound,
 	route: routes.rooms,
 });
 
-router.setHistory(createBrowserHistory());
+sample({
+	clock: appModel.started,
+	fn: () => createBrowserHistory(),
+	target: router.setHistory,
+});
 
 export const withRouter =
 	(Component: React.ComponentType): React.ComponentType =>

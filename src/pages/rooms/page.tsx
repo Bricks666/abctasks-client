@@ -12,7 +12,6 @@ import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout } from '@/shared/ui';
 
-import { pageModel } from './model';
 import styles from './styles.module.css';
 import { RoomsHeader } from './ui';
 
@@ -35,7 +34,5 @@ const RoomsPage: React.FC<CommonProps> = (props) => {
 		</MainLayout>
 	);
 };
-
-pageModel.loaded();
 
 export default RoomsPage;

@@ -18,3 +18,4 @@ export * from './full-width-popup';
 export * from './password-field';
 export * from './form';
 export * from './center';
+export * from './page-loader';
