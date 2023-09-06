@@ -4,8 +4,11 @@ import { Paper, IconButton } from '@mui/material';
 import { useForm } from 'effector-forms';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+
 import { addUserRoomModel } from '@/features/rooms';
+
 import { TemplateUserListItem, UserSearch } from '@/entities/users';
+
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 

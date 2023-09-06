@@ -1,8 +1,10 @@
 import { SxProps, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { Tag } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
+
 import styles from './tag-label.module.css';
 
 export interface TagProps extends CommonProps, Omit<Tag, 'id' | 'roomId'> {}

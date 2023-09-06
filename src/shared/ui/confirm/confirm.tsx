@@ -7,6 +7,7 @@ import {
 	DialogTitle
 } from '@mui/material';
 import * as React from 'react';
+
 import { BasePopupProps, CommonProps, VoidFunction } from '@/shared/types';
 
 export interface ConfirmProps extends BasePopupProps, CommonProps {

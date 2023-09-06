@@ -1,14 +1,18 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { tagsModel, useTag } from '@/entities/tags';
+
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
+
 import { updateTagModel } from '../../model';
 import { SkeletonTagForm } from '../skeleton-tag-form';
 import { TagForm } from '../tag-form';
+
 import styles from './update-tag.module.css';
 
 export interface UpdateTagProps extends CommonProps, BasePopupProps {}

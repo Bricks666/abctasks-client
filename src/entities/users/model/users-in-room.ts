@@ -2,6 +2,7 @@ import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
+
 import { membersApi, user, User } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
 import {

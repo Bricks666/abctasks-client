@@ -1,13 +1,17 @@
 import { querySync } from 'atomic-router';
 import { createEvent, createStore, sample } from 'effector';
+
 import { activitiesFiltersModel } from '@/features/activities';
+
 import {
 	activitiesInRoomModel,
 	activityActionsModel,
 	activitySpheresModel
 } from '@/entities/activities';
+
 import { GetActivitiesInRoomParams } from '@/shared/api';
 import { routes, controls, getParams } from '@/shared/configs';
+
 import { loaded, loadedWithRouteState } from './page-load';
 
 const currentRoute = routes.room.activities;

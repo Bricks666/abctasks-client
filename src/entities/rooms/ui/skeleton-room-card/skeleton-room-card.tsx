@@ -7,7 +7,9 @@ import {
 } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { CommonProps } from '@/shared/types';
+
 import styles from './skeleton-room-card.module.css';
 
 export interface SkeletonRoomCardProps extends CommonProps {}

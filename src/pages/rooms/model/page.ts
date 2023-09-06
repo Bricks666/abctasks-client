@@ -1,4 +1,5 @@
 import { createDomain, sample } from 'effector';
+
 import { routes } from '@/shared/configs';
 
 const roomsPageDomain = createDomain();

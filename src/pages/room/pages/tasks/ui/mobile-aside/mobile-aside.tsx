@@ -2,8 +2,10 @@ import AnalyticsIcon from '@mui/icons-material/Analytics';
 import CloseIcon from '@mui/icons-material/Close';
 import { Drawer, IconButton, Tooltip } from '@mui/material';
 import * as React from 'react';
+
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+
 import { Aside } from '../aside';
 
 import styles from './mobile-aside.module.css';

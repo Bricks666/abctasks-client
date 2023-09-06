@@ -3,10 +3,13 @@ import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { TagPicker } from '@/entities/tags';
 import { StatusSelect } from '@/entities/tasks';
+
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
+
 import { taskFormModel } from '../../model';
 
 import styles from './task-form.module.css';

@@ -1,9 +1,12 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { roomsModel, useRoom } from '@/entities/rooms';
+
 import { BasePopupProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
+
 import { updateRoomModel } from '../../model';
 import { RoomForm } from '../room-form';
 import { SkeletonRoomForm } from '../skeleton-room-form';

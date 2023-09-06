@@ -1,7 +1,9 @@
 import { List, Paper } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { TemplateUserListItem, useUsersInRoom } from '@/entities/users';
+
 import { CommonProps } from '@/shared/types';
 
 import styles from './user-list.module.css';

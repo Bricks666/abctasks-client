@@ -2,6 +2,7 @@ import { createHistoryRouter, redirect } from 'atomic-router';
 import { RouterProvider } from 'atomic-router-react';
 import { createBrowserHistory } from 'history';
 import * as React from 'react';
+
 import { routes, controls } from '@/shared/configs';
 import { LoadingIndicator } from '@/shared/ui';
 

@@ -1,11 +1,14 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
+
 import { createPopupControlModel } from '@/entities/popups';
 import { roomsModel } from '@/entities/rooms';
+
 import { CreateRoomParams, room, Room, roomsApi } from '@/shared/api';
 import { popupsMap } from '@/shared/configs';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
+
 import { form } from './form';
 
 const createRoomsDomain = createDomain();

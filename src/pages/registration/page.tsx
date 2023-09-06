@@ -2,13 +2,15 @@ import { Button, Typography } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { RegistrationForm } from '@/features/auth';
+
 import { routes } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { AuthLayout } from '@/shared/ui';
-import { pageModel } from './model';
 
+import { pageModel } from './model';
 import styles from './styles.module.css';
 
 const RegistrationPage: React.FC<CommonProps> = (props) => {

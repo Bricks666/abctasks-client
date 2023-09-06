@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material';
 import * as React from 'react';
+
 import { Header } from '@/widgets/page';
+
 import { usePageTitle } from '@/shared/lib';
 import { MainLayout } from '@/shared/ui';
 

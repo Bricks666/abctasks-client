@@ -1,6 +1,9 @@
 import * as React from 'react';
+
 import { SkeletonRoomCard, useRooms } from '@/entities/rooms';
+
 import { getEmptyArray } from '@/shared/configs';
+
 import { RoomCard } from '../room-card';
 
 import styles from './room-list.module.css';

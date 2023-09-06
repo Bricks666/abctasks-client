@@ -4,10 +4,12 @@ import ExitRoomIcon from '@mui/icons-material/MeetingRoom';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, EditMenu, Confirm } from '@/shared/ui';
+
 import { exitRoomModel, removeRoomModel } from '../../model';
 
 export interface RoomCardMenuProps extends CommonProps {

@@ -7,8 +7,10 @@ import {
 } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { User } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
+
 import { UserAvatar } from '../user-avatar';
 
 import styles from './template-user-list-item.module.css';

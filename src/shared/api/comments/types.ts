@@ -1,4 +1,5 @@
 import { Number, Record, String, Static } from 'runtypes';
+
 import { InRoomParams } from '@/shared/types';
 
 export const comment = Record({

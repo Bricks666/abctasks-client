@@ -1,10 +1,13 @@
 import { sample } from 'effector';
+
 import {
 	createTaskModel,
 	removeTaskModel,
 	updateTaskModel
 } from '@/features/tasks';
+
 import { progressesModel } from '@/entities/progresses';
+
 import { currentRoute, loadedWithRouteState } from './page';
 
 sample({

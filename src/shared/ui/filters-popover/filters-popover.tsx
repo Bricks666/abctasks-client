@@ -1,6 +1,7 @@
 import TuneIcon from '@mui/icons-material/Tune';
 import { Tooltip, IconButton, Popover } from '@mui/material';
 import * as React from 'react';
+
 import { CommonProps, VoidFunction } from '@/shared/types';
 
 export interface FiltersPopoverProps extends CommonProps {

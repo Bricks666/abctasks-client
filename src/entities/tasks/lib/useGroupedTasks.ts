@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { GroupedByStatusTasks, Task, TaskStatus } from '@/shared/api';
+
 import { useTasks } from './useTasks';
 
 const createGrouper = (status: TaskStatus) => {

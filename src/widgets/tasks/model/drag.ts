@@ -1,5 +1,6 @@
 import { createDomain, sample } from 'effector';
 import { DragEvent } from 'react';
+
 import { TaskStatus } from '@/shared/api';
 
 const dragTaskDomain = createDomain();

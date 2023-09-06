@@ -1,8 +1,11 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { TaskColumn } from '@/widgets/tasks';
+
 import { useGroupedTasks } from '@/entities/tasks';
+
 import { Task, TaskStatus } from '@/shared/api';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';

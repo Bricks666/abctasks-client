@@ -2,12 +2,16 @@ import { Stack } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+
 import { TaskColumnActions } from '@/features/tasks';
+
 import { useTagsMap } from '@/entities/tags';
 import { SkeletonTaskCard, TaskColumnHeader } from '@/entities/tasks';
+
 import { Task, TaskStatus } from '@/shared/api';
 import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
+
 import { dragTaskModel } from '../../model';
 import { TaskCard } from '../task-card';
 

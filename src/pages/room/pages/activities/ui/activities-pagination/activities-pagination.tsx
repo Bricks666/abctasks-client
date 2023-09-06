@@ -1,10 +1,13 @@
 import { Pagination, PaginationItem } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+
 import { activitiesInRoomModel } from '@/entities/activities';
+
 import { getParams } from '@/shared/configs';
 import { useQueryParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+
 import { activitiesPageModel } from '../../model';
 
 export interface ActivitiesPaginationProps extends CommonProps {}

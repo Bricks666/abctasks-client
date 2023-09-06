@@ -2,11 +2,14 @@ import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
+
 import { TagPicker } from '@/entities/tags';
 import { UsersInRoomPicker } from '@/entities/users';
+
 import { useSubmit, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { DatePicker, FiltersPopover } from '@/shared/ui';
+
 import { tasksFiltersModel } from '../../model';
 
 import styles from './tasks-filters.module.css';

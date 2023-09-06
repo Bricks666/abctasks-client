@@ -1,8 +1,11 @@
 import { Typography } from '@mui/material';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Header } from '@/widgets/page';
+
 import { RoomsHeaderActions } from '@/features/rooms';
+
 import { CommonProps } from '@/shared/types';
 
 export const RoomsHeader: React.FC<CommonProps> = (props) => {

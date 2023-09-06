@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
+
 import { Room } from '@/shared/api';
 import { routes } from '@/shared/configs';
 import { stringToColor } from '@/shared/lib';

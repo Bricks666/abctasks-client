@@ -1,14 +1,18 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import '@/processes/auth';
 import '@/processes/device-info-handle';
-import { Pages } from '@/pages';
 import { authModel } from '@/entities/auth';
 import { pageModel } from '@/entities/page';
+
 import { LoadingWrapper, LoadingIndicator } from '@/shared/ui';
+
 import styles from './app.module.css';
 import { withProviders } from './providers';
+
+import { Pages } from '@/pages';
 
 import './index.css';
 

@@ -7,8 +7,10 @@ import {
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Progress, Tag } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
+
 import styles from './task-progress.module.css';
 
 export interface TaskProgressComponent

@@ -1,8 +1,11 @@
 import { AppBar, Toolbar } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { ProfileMenu } from '@/features/auth';
+
 import { CommonProps } from '@/shared/types';
+
 import { Menu } from '../menu';
 
 import styles from './header.module.css';

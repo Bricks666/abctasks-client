@@ -9,8 +9,11 @@ import {
 	ListSubheader
 } from '@mui/material';
 import * as React from 'react';
+
 import { Navigation } from '@/features/page';
+
 import { RoomListItem, useRooms } from '@/entities/rooms';
+
 import { useToggle } from '@/shared/lib';
 
 import styles from './menu.module.css';

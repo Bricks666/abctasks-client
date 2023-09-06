@@ -1,8 +1,10 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
+
 import { createTagModel } from '../../model';
 import { TagForm } from '../tag-form';
 

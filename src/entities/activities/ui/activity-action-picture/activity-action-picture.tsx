@@ -5,6 +5,7 @@ import { Avatar } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { ActivityAction } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 

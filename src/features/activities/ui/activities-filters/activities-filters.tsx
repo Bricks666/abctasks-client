@@ -2,14 +2,17 @@ import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
+
 import {
 	ActivitiesActionsPicker,
 	ActivitiesSpheresPicker
 } from '@/entities/activities';
 import { UsersInRoomPicker } from '@/entities/users';
+
 import { useSubmit, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { DatePicker, FiltersPopover } from '@/shared/ui';
+
 import { activitiesFiltersModel } from '../../model';
 
 import styles from './activities-filters.module.css';

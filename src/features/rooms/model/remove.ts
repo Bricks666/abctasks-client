@@ -2,7 +2,9 @@ import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
+
 import { roomsModel } from '@/entities/rooms';
+
 import { roomsApi } from '@/shared/api';
 import {
 	StandardResponse,

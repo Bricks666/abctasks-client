@@ -1,17 +1,22 @@
 import { ListItem, Skeleton, List, Stack, Container } from '@mui/material';
 import * as React from 'react';
+
 import { Popups, PopupsProps } from '@/widgets/page';
+
 import {
 	CreateTag,
 	CreateTagButton,
 	TagCardActions,
 	UpdateTag
 } from '@/features/tags';
+
 import { useTags, TagListItem } from '@/entities/tags';
+
 import { getEmptyArray, popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat, SectionHeader } from '@/shared/ui';
+
 import { pageModel } from './model';
 
 export interface TagsPageProps extends CommonProps {}

@@ -1,9 +1,11 @@
 import { Autocomplete } from '@mui/material';
 import * as React from 'react';
+
 import { User } from '@/shared/api';
 import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
+
 import { useUsersInRoom } from '../../lib';
 import { TemplateUserListItem } from '../template-user-list-item';
 

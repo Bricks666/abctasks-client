@@ -1,6 +1,7 @@
 import { createDomain } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
+
 import { Room } from '@/shared/api';
 import { createRuleFromSchema } from '@/shared/lib';
 

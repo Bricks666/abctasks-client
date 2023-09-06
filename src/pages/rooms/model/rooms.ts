@@ -1,12 +1,16 @@
 import { sample } from 'effector';
+
 import {
 	createRoomModel,
 	removeRoomModel,
 	updateRoomModel
 } from '@/features/rooms';
+
 import { notificationsModel } from '@/entities/notifications';
 import { roomsModel } from '@/entities/rooms';
+
 import { routes } from '@/shared/configs';
+
 import { loadedWithRouteParams } from './page';
 
 sample({

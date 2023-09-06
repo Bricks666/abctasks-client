@@ -1,4 +1,5 @@
 import { useStoreMap } from 'effector-react';
+
 import { dragTaskModel } from '../model';
 
 export const useTaskCardIsDrag = (id: number): boolean => {

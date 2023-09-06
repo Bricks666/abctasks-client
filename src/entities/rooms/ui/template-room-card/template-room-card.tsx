@@ -9,9 +9,11 @@ import {
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Room } from '@/shared/api';
 import { stringToColor } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+
 import styles from './template-room-card.module.css';
 
 export interface TemplateRoomCardProps extends CommonProps, Room {

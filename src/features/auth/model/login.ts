@@ -4,7 +4,9 @@ import { createDomain, sample } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
 import { splitMap } from 'patronum';
+
 import { authModel } from '@/entities/auth';
+
 import { authApi, authResponse, AuthResponse, LoginParams } from '@/shared/api';
 import {
 	allowedSymbolsRegExp,

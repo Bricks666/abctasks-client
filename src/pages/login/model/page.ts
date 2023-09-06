@@ -1,4 +1,5 @@
 import { createDomain, sample } from 'effector';
+
 import { authModel } from '@/entities/auth';
 
 const pageDomain = createDomain();

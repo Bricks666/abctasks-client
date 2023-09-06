@@ -1,4 +1,5 @@
 import { sample } from 'effector';
+
 import { deviceInfoModel, pageModel } from '@/entities/page';
 
 sample({

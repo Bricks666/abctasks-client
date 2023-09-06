@@ -4,11 +4,14 @@ import { IconButton, Menu, Tooltip } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { authModel } from '@/entities/auth';
 import { UserAvatar } from '@/entities/users';
+
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, MenuItem } from '@/shared/ui';
+
 import { logoutModel } from '../../model';
 
 export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {

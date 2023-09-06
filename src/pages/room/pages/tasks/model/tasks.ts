@@ -1,10 +1,15 @@
 import { querySync } from 'atomic-router';
 import { sample } from 'effector';
-import { dragTaskModel } from '@/widgets/tasks/model';
+
+import { dragTaskModel } from '@/widgets/tasks';
+
 import { tasksFiltersModel, updateTaskModel } from '@/features/tasks';
+
 import { tasksInRoomModel } from '@/entities/tasks';
+
 import { UpdateTaskParams } from '@/shared/api';
 import { controls, getParams } from '@/shared/configs';
+
 import { currentRoute, loaded, loadedWithRouteState } from './page';
 
 const { formValidated, setForm, reset, fields, } = tasksFiltersModel.form;

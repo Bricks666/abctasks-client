@@ -2,6 +2,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { Button, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { CommonProps, VoidFunction } from '@/shared/types';
 
 import styles from './retry-loading-slat.module.css';

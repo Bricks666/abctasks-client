@@ -1,5 +1,6 @@
 import { useUnit } from 'effector-react';
 import { useEffect, useMemo, useState } from 'react';
+
 import { popupsModel } from '../model';
 
 const parsePopups = (popups: string | null) => {

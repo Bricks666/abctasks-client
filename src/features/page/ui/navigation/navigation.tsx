@@ -9,6 +9,7 @@ import {
 import { Link } from 'atomic-router-react';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { i18n, routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 

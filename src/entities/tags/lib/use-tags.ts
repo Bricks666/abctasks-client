@@ -1,4 +1,5 @@
 import { useUnit } from 'effector-react';
+
 import { tagsModel } from '../model';
 
 export const useTags = () => {

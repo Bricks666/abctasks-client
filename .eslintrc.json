@@ -59,54 +59,6 @@
 		"prefer-arrow-callback": "off",
 		"no-shadow": "off",
 		"default-param-last": "warn",
-
-		/* REACT */
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
-		"react/jsx-props-no-spreading": "off",
-		"react/prop-types": "off",
-		"react/require-default-props": "off",
-		"react/jsx-indent": ["error", "tab"],
-		"react/jsx-indent-props": ["error", "tab"],
-		"react/function-component-definition": "off",
-		"react/no-unused-prop-types": "off",
-		"react/no-array-index-key": "off",
-
-		/* IMPORT */
-		"import/order": [
-			"error",
-			{
-				"alphabetize": { "order": "asc", "caseInsensitive": true },
-				"newlines-between": "always",
-				"pathGroups": [
-					{ "group": "internal", "position": "after", "pattern": "@/pages/**" },
-					{
-						"group": "internal",
-						"position": "after",
-						"pattern": "@/widgets/**"
-					},
-					{
-						"group": "internal",
-						"position": "after",
-						"pattern": "@/features/**"
-					},
-					{
-						"group": "internal",
-						"position": "after",
-						"pattern": "@/entities/**"
-					},
-					{ "group": "internal", "position": "after", "pattern": "@/shared/**" }
-				],
-				"pathGroupsExcludedImportTypes": ["builtin"],
-				"groups": [
-					"builtin",
-					"external",
-					"internal",
-					"parent",
-					"sibling",
-					"index"
-				]
-			}
-		],
 		"no-restricted-imports": [
 			"error",
 			{
@@ -162,6 +114,71 @@
 				]
 			}
 		],
+
+		/* REACT */
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
+		"react/jsx-props-no-spreading": "off",
+		"react/prop-types": "off",
+		"react/require-default-props": "off",
+		"react/jsx-indent": ["error", "tab"],
+		"react/jsx-indent-props": ["error", "tab"],
+		"react/function-component-definition": "off",
+		"react/no-unused-prop-types": "off",
+		"react/no-array-index-key": "off",
+
+		/* IMPORT */
+		"import/order": [
+			"error",
+			{
+				"alphabetize": { "order": "asc", "caseInsensitive": true },
+				"newlines-between": "always",
+				"pathGroups": [
+					{ "group": "internal", "position": "after", "pattern": "@/pages/**" },
+					{
+						"group": "internal",
+						"position": "after",
+						"pattern": "@/widgets/**"
+					},
+					{
+						"group": "internal",
+						"position": "after",
+						"pattern": "@/features/**"
+					},
+					{
+						"group": "internal",
+						"position": "after",
+						"pattern": "@/entities/**"
+					},
+					{ "group": "internal", "position": "after", "pattern": "@/shared/**" }
+				],
+				"pathGroupsExcludedImportTypes": ["builtin"],
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					"parent",
+					"sibling",
+					"index"
+				]
+			}
+		],
+		"import/extensions": [
+			"error",
+			"never",
+			{
+				"svg": "always",
+				"webp": "always",
+				"png": "always",
+				"jpeg": "always",
+				"jpg": "always",
+				"avif": "always",
+				"css": "always"
+			}
+		],
+		"import/no-unresolved": 0,
+		"import/prefer-default-export": "off",
+
+		/* BOUNDARIES */
 		"boundaries/element-types": [
 			"warn",
 			{
@@ -191,25 +208,11 @@
 				]
 			}
 		],
-		"import/extensions": [
-			"error",
-			"never",
-			{
-				"svg": "always",
-				"webp": "always",
-				"png": "always",
-				"jpeg": "always",
-				"jpg": "always",
-				"avif": "always",
-				"css": "always"
-			}
-		],
-		"import/no-unresolved": 0,
-		"import/prefer-default-export": "off",
 
 		/* TS */
 		"@typescript-eslint/no-unused-vars": ["error"],
-		"@typescript-eslint/no-empty-interface": ["off"]
+		"@typescript-eslint/no-empty-interface": ["off"],
+		"@typescript-eslint/no-explicit-any": "warn"
 	},
 	"ignorePatterns": ["templates/**/*", "*.css.d.ts", "configs/*"]
 }

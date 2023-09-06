@@ -2,6 +2,7 @@ import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
+
 import { Room, roomsApi, room } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
 import {

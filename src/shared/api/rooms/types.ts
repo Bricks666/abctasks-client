@@ -1,4 +1,5 @@
 import { Record, Number, String, Static, Boolean } from 'runtypes';
+
 import { InRoomParams } from '@/shared/types';
 
 export const room = Record({

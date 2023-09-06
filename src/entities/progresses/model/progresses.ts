@@ -2,6 +2,7 @@ import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
+
 import { progress, Progress, progressApi } from '@/shared/api';
 import { dataExtractor, Error } from '@/shared/lib';
 import {

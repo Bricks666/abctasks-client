@@ -2,6 +2,7 @@ import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
+
 import { activitiesApi, ActivityAction, activityAction } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';

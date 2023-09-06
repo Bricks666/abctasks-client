@@ -1,12 +1,16 @@
 import { sample } from 'effector';
+
 import {
 	createTagModel,
 	removeTagModel,
 	updateTagModel
 } from '@/features/tags';
+
 import { notificationsModel } from '@/entities/notifications';
 import { tagsModel } from '@/entities/tags';
+
 import { routes } from '@/shared/configs';
+
 import { loadedWithRouteState } from './page';
 
 sample({

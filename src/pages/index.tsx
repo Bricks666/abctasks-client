@@ -1,5 +1,6 @@
 import { createRoutesView } from 'atomic-router-react';
 import * as React from 'react';
+
 import { routes } from '@/shared/configs';
 
 const LoginPage = React.lazy(() => import('./login'));

@@ -1,4 +1,5 @@
 import { useStoreMap } from 'effector-react';
+
 import { controls } from '@/shared/configs';
 
 export const useQueryParam = <T extends string | null = null>(

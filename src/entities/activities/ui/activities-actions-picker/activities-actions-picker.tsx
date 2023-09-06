@@ -5,10 +5,12 @@ import {
 	ListItemText
 } from '@mui/material';
 import * as React from 'react';
+
 import { ActivityAction } from '@/shared/api';
 import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
+
 import { useActivityActions } from '../../lib';
 import { ActivityActionPicture } from '../activity-action-picture';
 

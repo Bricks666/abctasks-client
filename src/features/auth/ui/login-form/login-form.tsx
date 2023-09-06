@@ -3,10 +3,13 @@ import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { useSubmit } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Checkbox, Field } from '@/shared/ui';
+
 import { loginModel } from '../../model';
+
 import styles from './login-form.module.css';
 
 export const LoginForm: React.FC<CommonProps> = (props) => {

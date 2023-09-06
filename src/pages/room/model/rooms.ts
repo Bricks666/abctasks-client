@@ -1,7 +1,10 @@
 import { sample } from 'effector';
+
 import { addUserRoomModel } from '@/features/rooms';
+
 import { notificationsModel } from '@/entities/notifications';
 import { roomsModel } from '@/entities/rooms';
+
 import { currentRoute, loadedWithRouteState } from './page';
 
 sample({

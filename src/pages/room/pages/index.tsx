@@ -1,5 +1,6 @@
 import { createRoutesView } from 'atomic-router-react';
 import * as React from 'react';
+
 import { routes } from '@/shared/configs';
 import { LoadingIndicator, LoadingWrapper } from '@/shared/ui';
 

@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
+
 import { CommonProps } from '@/shared/types';
 
 import styles from './main-layout.module.css';

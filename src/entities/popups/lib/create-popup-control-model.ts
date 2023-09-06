@@ -1,4 +1,5 @@
 import { createEvent, createStore, sample } from 'effector';
+
 import { popupsModel } from '../model';
 
 export const createPopupControlModel = (popup: string) => {

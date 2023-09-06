@@ -1,4 +1,5 @@
 import { createDomain, sample } from 'effector';
+
 import { calculateDevice } from './lib';
 import { Devices } from './types';
 

@@ -3,6 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, createEvent, sample } from 'effector';
 import { debounce } from 'patronum';
 import { Array } from 'runtypes';
+
 import { SearchUsersQuery, user, User, usersApi } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';

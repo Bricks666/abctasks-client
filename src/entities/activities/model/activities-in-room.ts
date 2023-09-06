@@ -1,6 +1,7 @@
 import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
+
 import {
 	Activity,
 	activity,

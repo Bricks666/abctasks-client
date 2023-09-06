@@ -2,11 +2,14 @@ import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { and } from 'patronum';
+
 import { createPopupControlModel } from '@/entities/popups';
 import { tagsModel, tagModel } from '@/entities/tags';
+
 import { UpdateTagParams, Tag, tagsApi, tag } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
+
 import { form } from './form';
 
 const updateTagDomain = createDomain();

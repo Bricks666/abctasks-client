@@ -1,9 +1,12 @@
 import { redirect } from 'atomic-router';
 import { sample } from 'effector';
 import { not } from 'patronum';
+
 import { logoutModel, registrationModel } from '@/features/auth';
+
 import { authModel } from '@/entities/auth';
 import { pageModel } from '@/entities/page';
+
 import { routes } from '@/shared/configs';
 
 redirect({

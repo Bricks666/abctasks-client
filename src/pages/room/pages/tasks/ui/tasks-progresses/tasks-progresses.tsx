@@ -2,12 +2,14 @@ import { Stack, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import {
 	SkeletonTaskProgress,
 	TaskProgress,
 	useProgresses
 } from '@/entities/progresses';
 import { useTagsMap } from '@/entities/tags';
+
 import { getEmptyArray, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';

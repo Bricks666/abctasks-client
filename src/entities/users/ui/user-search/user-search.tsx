@@ -1,9 +1,11 @@
 import { Autocomplete } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+
 import { User } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
+
 import { useSearchedUsers } from '../../lib';
 import { searchUserModel } from '../../model';
 import { TemplateUserListItem } from '../template-user-list-item';

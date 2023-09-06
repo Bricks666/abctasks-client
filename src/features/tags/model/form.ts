@@ -1,6 +1,7 @@
 import { createDomain } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
+
 import { Tag } from '@/shared/api';
 import { allowedSymbolsRegExp } from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';

@@ -5,10 +5,12 @@ import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 import { t } from 'i18next';
 import * as React from 'react';
+
 import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useParam, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Confirm } from '@/shared/ui';
+
 import { removeTagModel } from '../../model';
 
 export interface TagCardActionsProps extends CommonProps {

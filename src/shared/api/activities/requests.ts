@@ -1,5 +1,7 @@
 import { PaginationResponse, StandardResponse } from '@/shared/types';
+
 import { instance, normalizeQuery } from '../request';
+
 import {
 	Activity,
 	ActivityAction,

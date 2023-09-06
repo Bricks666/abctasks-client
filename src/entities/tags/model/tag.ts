@@ -2,6 +2,7 @@ import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
+
 import { GetTagParams, Tag, tag, tagsApi } from '@/shared/api';
 import { dataExtractor, Error } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';

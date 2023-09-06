@@ -1,13 +1,17 @@
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+
 import { TaskCardMenu } from '@/features/tasks';
+
 import { roomModel } from '@/entities/rooms';
 import { TagLabel, SkeletonTagLabel } from '@/entities/tags';
 import { TemplateTaskCard } from '@/entities/tasks';
+
 import { Tag, Task } from '@/shared/api';
 import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
+
 import { useTaskCardIsDrag } from '../../lib';
 import { dragTaskModel } from '../../model';
 

@@ -1,4 +1,5 @@
 import { useStoreMap } from 'effector-react';
+
 import { controls } from '../configs';
 
 export const useGetParam = <T extends string | number = string>(

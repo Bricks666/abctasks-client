@@ -1,11 +1,15 @@
 import { Skeleton, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { Header } from '@/widgets/page';
+
 import { useRoom } from '@/entities/rooms';
+
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+
 import { Tabs } from '../tabs';
 
 import styles from './room-header.module.css';

@@ -2,6 +2,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { IconButton, Menu } from '@mui/material';
 import { CommonProps } from '@mui/material/OverridableComponent';
 import * as React from 'react';
+
 import { useToggle } from '@/shared/lib';
 import { Size } from '@/shared/types';
 import { MenuOption, MenuItem } from '@/shared/ui';

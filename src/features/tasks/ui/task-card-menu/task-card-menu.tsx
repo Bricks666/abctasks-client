@@ -3,10 +3,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, EditMenu, Confirm } from '@/shared/ui';
+
 import { removeTaskModel } from '../../model';
 
 export interface TaskCardMenuProps extends CommonProps {

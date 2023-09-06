@@ -1,6 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import * as React from 'react';
+
 import { BasePopupProps, VoidFunction } from '@/shared/types';
 
 import styles from './full-width-popup.module.css';

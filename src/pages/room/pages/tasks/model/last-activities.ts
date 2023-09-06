@@ -1,15 +1,18 @@
 import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
+
 import {
 	createTaskModel,
 	removeTaskModel,
 	updateTaskModel
 } from '@/features/tasks';
+
 import {
 	activityActionsModel,
 	activitySpheresModel
 } from '@/entities/activities';
+
 import { Activity, activitiesApi, activity } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
 import {
@@ -19,6 +22,7 @@ import {
 	getStandardResponse,
 	getPaginationResponse
 } from '@/shared/types';
+
 import { currentRoute, loadedWithRouteState } from './page';
 
 const activitiesDomain = createDomain();

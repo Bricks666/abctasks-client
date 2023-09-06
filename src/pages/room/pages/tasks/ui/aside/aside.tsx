@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import * as React from 'react';
+
 import { CommonProps } from '@/shared/types';
+
 import { LastActivities } from '../last-activities';
 import { TasksProgress } from '../tasks-progresses';
 

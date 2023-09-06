@@ -1,5 +1,6 @@
 import { Skeleton } from '@mui/material';
 import * as React from 'react';
+
 import { CommonProps } from '@/shared/types';
 
 export interface SkeletonTagLabelProps extends CommonProps {}

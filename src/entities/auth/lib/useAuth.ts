@@ -1,4 +1,5 @@
 import { useGate, useUnit } from 'effector-react';
+
 import { authModel } from '../model';
 
 export const useAuth = () => {

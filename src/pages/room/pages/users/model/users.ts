@@ -1,5 +1,7 @@
 import { update } from '@farfetched/core';
+
 import { addUserRoomModel } from '@/features/rooms';
+
 import { usersInRoomModel } from '@/entities/users';
 
 update(usersInRoomModel.query, {

@@ -2,6 +2,7 @@ import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, combine, sample } from 'effector';
 import { createGate } from 'effector-react';
+
 import { User, AuthResponse, authResponse, authApi } from '@/shared/api';
 import { tokenModel } from '@/shared/configs';
 import { dataExtractor } from '@/shared/lib';

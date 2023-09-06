@@ -1,8 +1,10 @@
 import { Autocomplete, ListItem } from '@mui/material';
 import * as React from 'react';
+
 import { Tag } from '@/shared/api';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
+
 import { useTags } from '../../lib';
 import { TagLabel } from '../tag-label';
 

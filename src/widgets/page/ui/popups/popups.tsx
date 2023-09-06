@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { usePopups } from '@/entities/popups';
+
 import { BasePopupProps, CommonProps } from '@/shared/types';
 
 export interface PopupsProps extends CommonProps {

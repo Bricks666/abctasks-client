@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import * as React from 'react';
+
 import { BasePopupProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 

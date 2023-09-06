@@ -3,7 +3,9 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 import { debug } from 'patronum';
 import { Literal } from 'runtypes';
+
 import { tagsModel } from '@/entities/tags';
+
 import { RemoveTagParams, tagsApi } from '@/shared/api';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 

@@ -1,12 +1,16 @@
 import { Stack, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { AllActivitiesInRoom } from '@/features/activities';
+
 import { ActivityCard } from '@/entities/activities';
+
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat } from '@/shared/ui';
+
 import { useLastActivities } from '../../lib';
 
 import styles from './last-activities.module.css';

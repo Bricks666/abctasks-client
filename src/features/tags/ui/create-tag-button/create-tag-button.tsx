@@ -4,6 +4,7 @@ import { RouteInstance } from 'atomic-router';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';

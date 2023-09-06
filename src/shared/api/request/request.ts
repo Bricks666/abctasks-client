@@ -1,6 +1,9 @@
 import ky from 'ky';
+
 import { StandardResponse } from '@/shared/types';
+
 import { api } from '../../configs';
+
 import { Tokens } from './types';
 
 let token: string | null = null;

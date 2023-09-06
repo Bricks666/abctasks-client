@@ -1,5 +1,6 @@
 import { createDomain } from 'effector';
 import { createForm } from 'effector-forms';
+
 import { GetActivitiesInRoomParams } from '@/shared/api';
 
 const activitiesFiltersDomain = createDomain();

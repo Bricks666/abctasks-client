@@ -1,12 +1,15 @@
 import cn from 'classnames';
 import * as React from 'react';
+
 import {
 	useActivitiesInRoom,
 	SkeletonActivityCard,
 	ActivityCard
 } from '@/entities/activities';
+
 import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
+
 import styles from './activity-list.module.css';
 
 export interface ActivityListProps extends CommonProps {}

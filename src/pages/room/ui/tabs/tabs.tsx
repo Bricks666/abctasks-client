@@ -5,6 +5,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import { TabContext, TabList } from '@mui/lab';
 import { Tab } from '@mui/material';
 import * as React from 'react';
+
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';

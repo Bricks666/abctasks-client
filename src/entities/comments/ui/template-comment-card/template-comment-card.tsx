@@ -1,5 +1,6 @@
 import { Card, CardContent, Typography } from '@mui/material';
 import * as React from 'react';
+
 import { Comment } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 

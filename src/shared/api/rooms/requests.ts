@@ -1,5 +1,7 @@
 import { InRoomParams, StandardResponse } from '@/shared/types';
+
 import { instance } from '../request';
+
 import { CreateRoomParams, Room, UpdateRoomParams } from './types';
 
 export const getAll = async () => {

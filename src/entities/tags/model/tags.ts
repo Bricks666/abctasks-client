@@ -3,10 +3,12 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
+
 import { tag, Tag, tagsApi } from '@/shared/api';
 import { controls, routes, getParams } from '@/shared/configs';
 import { dataExtractor } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
+
 import { TagsMap } from './types';
 
 export const tagsDomain = createDomain();

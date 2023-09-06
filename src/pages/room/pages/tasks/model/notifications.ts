@@ -1,9 +1,11 @@
 import { sample } from 'effector';
+
 import {
 	createTaskModel,
 	removeTaskModel,
 	updateTaskModel
 } from '@/features/tasks';
+
 import { notificationsModel } from '@/entities/notifications';
 
 sample({

@@ -8,6 +8,7 @@ import {
 	IconButton
 } from '@mui/material';
 import * as React from 'react';
+
 import { BasePopupProps, CommonProps, VoidFunction } from '@/shared/types';
 
 import styles from './main-popup.module.css';

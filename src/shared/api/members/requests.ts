@@ -1,6 +1,8 @@
 import { InRoomParams, StandardResponse } from '@/shared/types';
+
 import { User } from '../auth';
 import { instance } from '../request';
+
 import {
 	AddUserRoomParams,
 	InviteByHashParams,

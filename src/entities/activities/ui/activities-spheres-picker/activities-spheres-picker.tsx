@@ -1,9 +1,11 @@
 import { Autocomplete } from '@mui/material';
 import * as React from 'react';
+
 import { ActivitySphere } from '@/shared/api';
 import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
+
 import { useActivitySpheres } from '../../lib';
 
 export type ActivitiesSpheresPickerProps = CommonProps &

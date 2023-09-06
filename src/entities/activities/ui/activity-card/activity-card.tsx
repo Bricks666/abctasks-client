@@ -2,10 +2,13 @@ import { Card, CardContent, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Activity } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { DateTime } from '@/shared/ui';
+
 import { ActivityActionPicture } from '../activity-action-picture';
+
 import styles from './activity-card.module.css';
 
 export interface ActivityCardProps extends CommonProps, Activity {}

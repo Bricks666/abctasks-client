@@ -1,4 +1,5 @@
 import { Record, Number, String, Static } from 'runtypes';
+
 import { hex, InRoomParams } from '@/shared/types';
 
 export const tag = Record({

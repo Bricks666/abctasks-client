@@ -2,13 +2,18 @@ import { Container } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+
 import { Popups, PopupsProps } from '@/widgets/page';
+
 import { AddUserButton, AddUsersIntoRoom } from '@/features/rooms';
+
 import { usersInRoomModel } from '@/entities/users';
+
 import { popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { RetryLoadingSlat, SectionHeader } from '@/shared/ui';
+
 import './model';
 import styles from './page.module.css';
 import { UserList } from './ui';

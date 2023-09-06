@@ -1,4 +1,5 @@
-import { useUnit , useGate } from 'effector-react';
+import { useUnit, useGate } from 'effector-react';
+
 import { taskModel } from '../model';
 
 export const useTask = (taskId: number, roomId: number) => {

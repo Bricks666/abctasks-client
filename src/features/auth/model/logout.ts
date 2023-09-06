@@ -2,7 +2,9 @@ import { createMutation } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { Literal } from 'runtypes';
+
 import { authModel } from '@/entities/auth';
+
 import { authApi } from '@/shared/api';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 

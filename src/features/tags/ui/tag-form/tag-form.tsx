@@ -3,10 +3,13 @@ import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { TagLabel } from '@/entities/tags';
+
 import { useSubmit } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
+
 import { tagFormModel } from '../../model';
 
 import styles from './tag-form.module.css';
