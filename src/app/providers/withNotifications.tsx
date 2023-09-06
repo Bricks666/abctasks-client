@@ -1,7 +1,7 @@
 import { SnackbarList } from 'effector-mui-snacks';
 import * as React from 'react';
 
-import { notificationsModel } from '@/entities/notifications';
+import { notificationsModel } from '@/shared/models';
 
 export const withNotifications =
 	(Component: React.ComponentType): React.ComponentType =>

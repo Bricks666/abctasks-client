@@ -2,7 +2,7 @@ import { createRoutesView } from 'atomic-router-react';
 
 import { loginPage } from './login';
 import { registrationPage } from './registration';
-import { thanksRegistrationPage } from './registration-tanks';
+import { thanksRegistrationPage } from './registration-thanks';
 import { roomActivitiesPage } from './room-activities';
 import { roomTagsPage } from './room-tags';
 import { roomTasksPage } from './room-tasks';

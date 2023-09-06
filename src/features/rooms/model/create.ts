@@ -7,6 +7,7 @@ import { roomsModel } from '@/entities/rooms';
 
 import { CreateRoomParams, room, Room, roomsApi } from '@/shared/api';
 import { popupsMap } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 import { form } from './form';
@@ -69,4 +70,22 @@ update(roomsModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		message: 'Room was created successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		message: 'Room was not created',
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

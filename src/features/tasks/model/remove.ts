@@ -1,11 +1,12 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain } from 'effector';
+import { createDomain, sample } from 'effector';
 import { Literal } from 'runtypes';
 
 import { tasksInRoomModel } from '@/entities/tasks';
 
 import { RemoveTaskParams, tasksApi } from '@/shared/api';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const removeTaskDomain = createDomain();
@@ -47,4 +48,22 @@ update(tasksInRoomModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		message: 'Task was removed successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		message: 'Task was not removed',
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

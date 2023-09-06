@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { MainLayout } from '@/shared/ui';
+import { MainLayout, PageLoader } from '@/shared/ui';
 
 import { RoomHeader } from '../room-header';
 
@@ -23,7 +23,9 @@ export const RoomPageLayout: React.FC<RoomPageLayoutProps> = (props) => {
 		<MainLayout
 			className={cn(styles.layout, className)}
 			header={<RoomHeader />}>
-			<div className={styles.content}>{children}</div>
+			<React.Suspense fallback={<PageLoader />}>
+				<div className={styles.content}>{children}</div>
+			</React.Suspense>
 		</MainLayout>
 	);
 };

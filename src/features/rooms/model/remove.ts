@@ -1,11 +1,12 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain } from 'effector';
+import { createDomain, sample } from 'effector';
 import { Literal } from 'runtypes';
 
 import { roomsModel } from '@/entities/rooms';
 
 import { roomsApi } from '@/shared/api';
+import { notificationsModel } from '@/shared/models';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -53,4 +54,22 @@ update(roomsModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		message: 'Room was removed successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		message: 'Room was not removed',
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

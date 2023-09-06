@@ -7,6 +7,7 @@ import { tasksInRoomModel } from '@/entities/tasks';
 
 import { CreateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 import { form } from './form';
@@ -77,4 +78,22 @@ update(tasksInRoomModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		message: 'Task was created successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		message: 'Task was not created',
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

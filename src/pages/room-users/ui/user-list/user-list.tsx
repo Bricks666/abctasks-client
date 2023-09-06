@@ -1,5 +1,4 @@
 import { List, Paper } from '@mui/material';
-import cn from 'classnames';
 import * as React from 'react';
 
 import { TemplateUserListItem, useUsersInRoom } from '@/entities/users';
@@ -15,7 +14,7 @@ export const UserList: React.FC<UserListProps> = (props) => {
 	const users = useUsersInRoom();
 
 	return (
-		<Paper className={cn(className)} variant='outlined'>
+		<Paper className={className}>
 			<List>
 				{users.data.map((user) => (
 					<TemplateUserListItem

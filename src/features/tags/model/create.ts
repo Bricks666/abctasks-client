@@ -7,6 +7,7 @@ import { tagsModel } from '@/entities/tags';
 
 import { CreateTagParams, tag, Tag, tagsApi } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 import { form } from './form';
@@ -72,4 +73,22 @@ update(tagsModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		message: 'Tag was created successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		message: 'Tag was not created',
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

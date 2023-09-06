@@ -8,8 +8,12 @@ import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 
 import { UpdateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
+/**
+ * @todo create fabric for form and call it in needed places
+ */
 import { form } from './form';
 
 const updateTaskDomain = createDomain();
@@ -108,4 +112,22 @@ update(tasksInRoomModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		message: 'Task was update successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		message: 'Task was not update',
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

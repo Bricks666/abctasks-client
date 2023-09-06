@@ -8,6 +8,7 @@ import { roomModel, roomsModel } from '@/entities/rooms';
 
 import { UpdateRoomParams, Room, roomsApi, room } from '@/shared/api';
 import { popupsMap } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 import { form } from './form';
@@ -32,7 +33,7 @@ export const mutation = createMutation<
 
 export const { close, $isOpen, } = createPopupControlModel(popupsMap.updateRoom);
 
-const { formValidated, reset, setForm, fields, } = form;
+const { formValidated, reset, setInitialForm, } = form;
 
 sample({
 	clock: close,
@@ -62,13 +63,7 @@ sample({
 sample({
 	clock: roomModel.query.finished.success,
 	fn: ({ result, }) => result,
-	target: setForm,
-});
-
-sample({
-	clock: roomModel.query.finished.success,
-	fn: () => false,
-	target: [fields.description.$isDirty, fields.name.$isDirty],
+	target: setInitialForm,
 });
 
 update(roomsModel.query, {
@@ -94,4 +89,22 @@ update(roomsModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		message: 'Room was update successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		message: 'Room was not update',
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

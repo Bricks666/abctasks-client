@@ -8,6 +8,7 @@ import { searchUserModel } from '@/entities/users';
 
 import { AddUserRoomParams, membersApi, user, User } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const addUserRoomDomain = createDomain();
@@ -52,4 +53,22 @@ sample({
 	filter: (_, values) => Boolean(values.user),
 	fn: (params, values) => ({ userId: values.user!.id, roomId: params.id, }),
 	target: mutation.start,
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		color: 'success' as const,
+		message: 'User was added succesfully',
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		color: 'error' as const,
+		message: 'User was not added',
+	}),
+	target: notificationsModel.create,
 });

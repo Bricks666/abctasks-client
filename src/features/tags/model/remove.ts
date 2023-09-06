@@ -1,12 +1,12 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain } from 'effector';
-import { debug } from 'patronum';
+import { createDomain, sample } from 'effector';
 import { Literal } from 'runtypes';
 
 import { tagsModel } from '@/entities/tags';
 
 import { RemoveTagParams, tagsApi } from '@/shared/api';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const removeTagDomain = createDomain();
@@ -26,8 +26,6 @@ export const mutation = createMutation<
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Literal(true))),
 });
-
-debug(mutation.start, mutation.finished.success, mutation.finished.failure);
 
 update(tagsModel.query, {
 	on: mutation,
@@ -50,4 +48,22 @@ update(tagsModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	fn: () => ({
+		message: 'Tag was removed successfully',
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	fn: () => ({
+		message: 'Tag was not removed',
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

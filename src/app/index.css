@@ -5,6 +5,10 @@
 }
 
 body {
+	min-height: 100%;
+}
+
+body {
 	margin: 0;
 
 	font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans',
@@ -32,5 +36,5 @@ body {
 }
 
 .MuiSkeleton-root {
-  transform: scale(1);
+	transform: scale(1);
 }
