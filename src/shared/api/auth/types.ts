@@ -1,4 +1,5 @@
 import { Record, String, Static, Number } from 'runtypes';
+
 import { tokens } from '../request';
 
 export const user = Record({
@@ -25,6 +26,7 @@ export interface LoginParams {
 
 export interface RegistrationParams {
 	readonly email: string;
+	readonly username: string;
 	readonly password: string;
 }
 

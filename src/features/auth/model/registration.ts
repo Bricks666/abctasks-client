@@ -4,6 +4,7 @@ import { createDomain, sample } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
 import { splitMap } from 'patronum';
+
 import { authApi, RegistrationParams, user, User } from '@/shared/api';
 import {
 	allowedSymbolsRegExp,
@@ -70,6 +71,9 @@ export const form = createForm<RegistrationFormParams>({
 			init: '',
 			rules: [createRuleFromSchema('email', schemas.extract('email'))],
 		},
+		username: {
+			init: '',
+		},
 		password: {
 			init: '',
 			rules: [createRuleFromSchema('password', schemas.extract('password'))],
@@ -103,6 +107,7 @@ const errors = splitMap({
 	source: mutation.finished.failure,
 	cases: {
 		userAlreadyRegistered: ({ error, }) => {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			if ((error as any).statusCode === 409) {
 				return 'User already registered';
 			}

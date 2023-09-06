@@ -7,13 +7,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import * as React from 'react';
 
-export const theme = extendTheme({
-	shape: {
-		// borderRadius: 8,
-	},
-	spacing: (tab: number) => `${tab}rem`,
-});
-
 export const withGlobalStyles =
 	(Component: React.ComponentType): React.ComponentType =>
 		() => {
@@ -27,3 +20,28 @@ export const withGlobalStyles =
 				</CssVarsProvider>
 			);
 		};
+
+const theme = extendTheme({
+	shape: {
+		// borderRadius: 8,
+	},
+	spacing: (tab: number) => `${tab}rem`,
+
+	components: {
+		MuiButton: {
+			defaultProps: {
+				variant: 'contained',
+				disableElevation: true,
+			},
+		},
+		MuiPaper: {
+			defaultProps: {
+				variant: 'outlined',
+				elevation: 0,
+				sx: {
+					borderWidth: 2,
+				},
+			},
+		},
+	},
+});
