@@ -1,4 +1,4 @@
-import { createSnackbarStackModel } from '@/shared/lib';
+import { createSnackbarStackModel } from 'effector-mui-snacks';
 
 export const notifications = createSnackbarStackModel({
 	maxCount: 3,
