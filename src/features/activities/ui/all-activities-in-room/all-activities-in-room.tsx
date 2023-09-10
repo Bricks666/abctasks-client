@@ -16,6 +16,7 @@ export const AllActivitiesInRoom: React.FC<CommonProps> = React.memo(
 				className={className}
 				to={routes.room.activities as any}
 				params={{ id: roomId, }}
+				variant='text'
 				component={Link}>
 				Посмотреть все
 			</Button>

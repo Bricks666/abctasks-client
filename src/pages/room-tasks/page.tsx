@@ -6,9 +6,8 @@ import { Popups, PopupsProps } from '@/widgets/page';
 
 import { CreateTask, TasksFilters, UpdateTask } from '@/features/tasks';
 
-import { deviceInfoModel } from '@/entities/page';
-
 import { popupsMap } from '@/shared/configs';
+import { deviceInfoModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 import { SectionHeader } from '@/shared/ui';
 

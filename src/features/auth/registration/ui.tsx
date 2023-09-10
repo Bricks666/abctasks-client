@@ -8,14 +8,14 @@ import { useSubmit } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Field, Form, PasswordField } from '@/shared/ui';
 
-import { registrationModel } from '../../model';
-
-import styles from './registration-form.module.css';
+import { form, mutation } from './model';
+import styles from './ui.module.css';
 
 export const RegistrationForm: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('registration');
-	const submit = useUnit(registrationModel.form.submit);
+	const submit = useUnit(form.submit);
+	const pending = useUnit(mutation.$pending);
 
 	const onSubmit = useSubmit(submit);
 
@@ -25,13 +25,15 @@ export const RegistrationForm: React.FC<CommonProps> = (props) => {
 			<Username />
 			<Password />
 			<RepeatPassword />
-			<Button type='submit'>{t('actions.submit')}</Button>
+			<Button type='submit' disabled={pending}>
+				{t('actions.submit')}
+			</Button>
 		</Form>
 	);
 };
 
 const Email: React.FC = () => {
-	const email = useUnit(registrationModel.form.fields.email);
+	const email = useUnit(form.fields.email);
 
 	return (
 		<Field
@@ -48,7 +50,7 @@ const Email: React.FC = () => {
 };
 
 const Username: React.FC = () => {
-	const username = useUnit(registrationModel.form.fields.username);
+	const username = useUnit(form.fields.username);
 
 	return (
 		<Field
@@ -65,7 +67,7 @@ const Username: React.FC = () => {
 };
 
 const Password: React.FC = () => {
-	const password = useUnit(registrationModel.form.fields.password);
+	const password = useUnit(form.fields.password);
 
 	return (
 		<PasswordField
@@ -82,7 +84,7 @@ const Password: React.FC = () => {
 };
 
 const RepeatPassword: React.FC = () => {
-	const repeatPassword = useUnit(registrationModel.form.fields.repeatPassword);
+	const repeatPassword = useUnit(form.fields.repeatPassword);
 
 	return (
 		<PasswordField

@@ -12,14 +12,14 @@ import { sessionModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, MenuItem } from '@/shared/ui';
 
-import { logoutModel } from '../../model';
+import { mutation } from './model';
 
 export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
 	const { t, } = useTranslation('header');
 	const user = useUnit(sessionModel.$user);
 	const [isOpen, { toggle, }] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
-	const logout = useUnit(logoutModel.logoutMutation);
+	const logout = useUnit(mutation);
 
 	const options: MenuOption<object>[] = [
 		{

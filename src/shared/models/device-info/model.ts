@@ -1,5 +1,8 @@
 import { createDomain, sample } from 'effector';
 
+// eslint-disable-next-line no-restricted-imports
+import { started } from '../app';
+
 import { calculateDevice } from './lib';
 import { Devices } from './types';
 
@@ -37,4 +40,9 @@ export const unsubscribeFx = deviceInfoDomain.effect(() =>
 sample({
 	clock: [calculateDeviceFx.doneData, subscribeFx.doneData],
 	target: $device,
+});
+
+sample({
+	clock: started,
+	target: [subscribeFx, calculateDeviceFx],
 });

@@ -1,4 +1,7 @@
 declare const styles: {
-	readonly button: string;
+	readonly layout: string;
+	readonly title: string;
+	readonly link: string;
+	readonly question: string;
 };
 export = styles;

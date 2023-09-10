@@ -23,7 +23,7 @@ export const withGlobalStyles =
 
 const theme = extendTheme({
 	shape: {
-		// borderRadius: 8,
+		borderRadius: 8,
 	},
 	spacing: (tab: number) => `${tab}rem`,
 
@@ -40,6 +40,13 @@ const theme = extendTheme({
 				elevation: 0,
 				sx: {
 					borderWidth: 2,
+				},
+			},
+		},
+		MuiSkeleton: {
+			styleOverrides: {
+				root: {
+					transform: 'scale(1)',
 				},
 			},
 		},

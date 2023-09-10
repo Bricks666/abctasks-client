@@ -9,22 +9,22 @@ import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const logoutDomain = createDomain();
 
-export const logoutFx = logoutDomain.effect<void, StandardResponse<boolean>>(
+const handlerFx = logoutDomain.effect<void, StandardResponse<boolean>>(
 	authApi.logout
 );
 
-export const logoutMutation = createMutation<
+export const mutation = createMutation<
 	void,
 	StandardResponse<boolean>,
 	StandardResponse<boolean>,
 	Error
 >({
-	effect: logoutFx,
+	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Literal(true))),
 });
 
 sample({
-	clock: logoutMutation.finished.success,
+	clock: mutation.finished.success,
 	filter: ({ result, }) => globalThis.Boolean(result.data),
 	target: sessionModel.query.start,
 });
