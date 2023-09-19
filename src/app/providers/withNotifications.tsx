@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import { notificationsModel } from '@/shared/models';
 
+import 'effector-mui-snacks/dist/style.css';
+
 export const withNotifications =
 	(Component: React.ComponentType): React.ComponentType =>
 		() => {
@@ -11,7 +13,7 @@ export const withNotifications =
 					<Component />
 					<SnackbarList
 						model={notificationsModel.notifications}
-						domRootSelector='body'
+						domRootSelector='#root'
 					/>
 				</>
 			);
