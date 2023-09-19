@@ -1,5 +1,13 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import {
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogProps,
+	DialogTitle,
+	IconButton,
+	Slide
+} from '@mui/material';
 import * as React from 'react';
 
 import { BasePopupProps, VoidFunction } from '@/shared/types';
@@ -14,10 +22,14 @@ export interface FullWidthPopupProps
 }
 
 export const FullWidthPopup: React.FC<FullWidthPopupProps> = (props) => {
-	const { isOpen, onClose, title, className, children, } = props;
+	const { isOpen, onClose, title, className, children, slots, } = props;
 
 	return (
-		<Dialog open={isOpen} onClose={onClose} fullScreen>
+		<Dialog
+			open={isOpen}
+			onClose={onClose}
+			TransitionComponent={Transition}
+			fullScreen>
 			<DialogTitle align='center'>
 				{title}
 				<IconButton className={styles.cross} onClick={onClose}>
@@ -25,6 +37,14 @@ export const FullWidthPopup: React.FC<FullWidthPopupProps> = (props) => {
 				</IconButton>
 			</DialogTitle>
 			<DialogContent className={className}>{children}</DialogContent>
+			{slots?.actions ? <DialogActions>{slots.actions}</DialogActions> : null}
 		</Dialog>
 	);
 };
+
+const Transition = React.forwardRef(function Transition(
+	props: NonNullable<DialogProps['TransitionProps']>,
+	ref: React.Ref<unknown>
+) {
+	return <Slide direction='up' ref={ref} {...props} />;
+});

@@ -1,4 +1,3 @@
-import { createDomain } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
 
@@ -6,10 +5,10 @@ import { Task } from '@/shared/api';
 import { allowedSymbolsRegExp } from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';
 
-const taskFormDomain = createDomain();
-
 export interface TaskFormValues
-	extends Pick<Task, 'title' | 'description' | 'status' | 'tagIds'> {}
+	extends Pick<Task, 'title' | 'description' | 'status'> {
+	readonly tagIds: number[];
+}
 
 const schemas = {
 	tagIds: Joi.array().items(Joi.number()).required().messages({
@@ -29,24 +28,25 @@ const schemas = {
 		}),
 };
 
-export const form = createForm<TaskFormValues>({
-	fields: {
-		title: {
-			init: '',
-			rules: [createRuleFromSchema('title', schemas.title)],
+export const createTaskForm = () => {
+	return createForm<TaskFormValues>({
+		fields: {
+			title: {
+				init: '',
+				rules: [createRuleFromSchema('title', schemas.title)],
+			},
+			description: {
+				init: '',
+				rules: [createRuleFromSchema('description', schemas.title)],
+			},
+			tagIds: {
+				init: [],
+				rules: [createRuleFromSchema('tagIds', schemas.tagIds)],
+			},
+			status: {
+				init: 'ready',
+				rules: [createRuleFromSchema('status', schemas.status)],
+			},
 		},
-		description: {
-			init: '',
-			rules: [createRuleFromSchema('description', schemas.title)],
-		},
-		tagIds: {
-			init: [],
-			rules: [createRuleFromSchema('tagIds', schemas.tagIds)],
-		},
-		status: {
-			init: 'ready',
-			rules: [createRuleFromSchema('status', schemas.status)],
-		},
-	},
-	domain: taskFormDomain,
-});
+	});
+};

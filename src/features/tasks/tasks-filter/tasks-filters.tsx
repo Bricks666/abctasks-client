@@ -10,8 +10,7 @@ import { useSubmit, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { DatePicker, FiltersPopover } from '@/shared/ui';
 
-import { tasksFiltersModel } from '../../model';
-
+import { form } from './model';
 import styles from './tasks-filters.module.css';
 
 export interface TasksFiltersProps extends CommonProps {}
@@ -20,7 +19,7 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 	const { className, } = props;
 
 	const [open, { toggleOn, toggleOff, }] = useToggle();
-	const { fields, reset, submit, } = useForm(tasksFiltersModel.form);
+	const { fields, reset, submit, } = useForm(form);
 	const { after, authorIds, before, tagIds, } = fields;
 
 	const onSubmit = useSubmit(() => {
@@ -77,11 +76,7 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 						label='Before'
 						size='medium'
 					/>
-					<Button
-						onClick={onReset}
-						type='reset'
-						variant='outlined'
-						color='primary'>
+					<Button onClick={onReset} type='reset' variant='text' color='primary'>
 						Reset
 					</Button>
 					<Button type='submit' variant='contained' color='primary'>

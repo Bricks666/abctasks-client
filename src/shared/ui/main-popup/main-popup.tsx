@@ -16,7 +16,6 @@ import styles from './main-popup.module.css';
 export interface MainPopupProps extends CommonProps, BasePopupProps {
 	readonly onClose: VoidFunction;
 	readonly title: string;
-	readonly actions?: React.ReactElement;
 	readonly maxWidth?: Breakpoint;
 }
 
@@ -29,7 +28,7 @@ export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = (
 		children,
 		className,
 		title,
-		actions,
+		slots,
 		maxWidth = 'sm',
 	} = props;
 
@@ -42,7 +41,7 @@ export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = (
 				</IconButton>
 			</DialogTitle>
 			<DialogContent className={className}>{children}</DialogContent>
-			{actions ? <DialogActions>{actions}</DialogActions> : null}
+			{slots?.actions ? <DialogActions>{slots.actions}</DialogActions> : null}
 		</Dialog>
 	);
 };

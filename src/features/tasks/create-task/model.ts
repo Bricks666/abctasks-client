@@ -10,7 +10,7 @@ import { popupsMap, routes } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
-import { form } from './form';
+import { createTaskForm } from '../lib';
 
 const createTaskDomain = createDomain();
 
@@ -29,6 +29,8 @@ export const mutation = createMutation<
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(task)),
 });
+
+export const form = createTaskForm();
 
 export const { close, $isOpen, } = createPopupControlModel(popupsMap.createTask);
 
@@ -52,7 +54,6 @@ sample({
 sample({
 	clock: formValidated,
 	source: routes.room.tasks.$params,
-	filter: $isOpen,
 	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
 	target: mutation.start,
 });

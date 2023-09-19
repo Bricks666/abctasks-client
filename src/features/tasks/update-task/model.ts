@@ -1,7 +1,7 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { combine, createDomain, sample } from 'effector';
-import { and } from 'patronum';
+import { empty, not } from 'patronum';
 
 import { createPopupControlModel } from '@/entities/popups';
 import { taskModel, tasksInRoomModel } from '@/entities/tasks';
@@ -11,18 +11,11 @@ import { popupsMap, routes } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
-/**
- * @todo create fabric for form and call it in needed places
- */
-import { form } from './form';
+import { createTaskForm } from '../lib';
 
 const updateTaskDomain = createDomain();
 
-const handlerFx = updateTaskDomain.effect<
-	UpdateTaskParams,
-	StandardResponse<Task>,
-	Error
->(tasksApi.update);
+const handlerFx = updateTaskDomain.effect(tasksApi.update);
 
 export const mutation = createMutation<
 	UpdateTaskParams,
@@ -44,7 +37,9 @@ const $routeParams = combine(
 	(id, params) => ({ id: Number(id), roomId: params.id, })
 );
 
-const { fields, formValidated, setForm, reset, } = form;
+export const form = createTaskForm();
+
+const { formValidated, setInitialForm, reset, } = form;
 
 sample({
 	clock: close,
@@ -65,7 +60,7 @@ sample({
 sample({
 	clock: formValidated,
 	source: $routeParams,
-	filter: and($isOpen, tasksInRoomModel.$id),
+	filter: not(empty(tasksInRoomModel.$id)),
 	fn: (routeParams, values) => {
 		return { ...values, ...routeParams, };
 	},
@@ -75,18 +70,7 @@ sample({
 sample({
 	clock: taskModel.query.finished.success,
 	fn: ({ result, }) => result,
-	target: setForm,
-});
-
-sample({
-	clock: taskModel.query.finished.success,
-	fn: () => false,
-	target: [
-		fields.title.$isDirty,
-		fields.description.$isDirty,
-		fields.tagIds.$isDirty,
-		fields.status.$isDirty
-	],
+	target: setInitialForm,
 });
 
 update(tasksInRoomModel.query, {

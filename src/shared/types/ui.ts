@@ -8,6 +8,7 @@ export interface CommonProps {
 
 export interface BasePopupProps extends CommonProps {
 	readonly isOpen: boolean;
+	readonly slots?: Slots<'actions'>;
 }
 
 interface SinglePickerProps<T> {

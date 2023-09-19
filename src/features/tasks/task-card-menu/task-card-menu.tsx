@@ -9,7 +9,7 @@ import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MenuOption, EditMenu, Confirm } from '@/shared/ui';
 
-import { removeTaskModel } from '../../model';
+import { mutation } from './model';
 
 export interface TaskCardMenuProps extends CommonProps {
 	readonly roomId: number;
@@ -19,7 +19,7 @@ export interface TaskCardMenuProps extends CommonProps {
 export const TaskCardMenu: React.FC<TaskCardMenuProps> = React.memo((props) => {
 	const { className, taskId, roomId, } = props;
 	const { t, } = useTranslation('common');
-	const removeTask = useUnit(removeTaskModel.mutation);
+	const removeTask = useUnit(mutation);
 	const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
 
 	const options = React.useMemo<MenuOption<any>[]>(
