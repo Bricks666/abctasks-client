@@ -32,8 +32,8 @@ const TasksPage: React.FC<CommonProps> = (props) => {
 				title='Tasks'
 				actions={
 					<>
-						{!showAside ? <MobileAside /> : null}
 						<TasksFilters />
+						{!showAside ? <MobileAside /> : null}
 					</>
 				}
 			/>

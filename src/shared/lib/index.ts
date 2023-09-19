@@ -8,5 +8,5 @@ export * from './useDebounceValue';
 export * from './useQueryParam';
 export * from './create-rule-from-schema';
 export * from './string-to-color';
-export * from './use-submit';
+export * from './use-prevent-default';
 export * from './prepare-picker-control';

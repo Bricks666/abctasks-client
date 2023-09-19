@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { TagPicker } from '@/entities/tags';
 import { StatusSelect } from '@/entities/tasks';
 
-import { useSubmit } from '@/shared/lib';
+import { usePreventDefault } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
 
@@ -27,7 +27,7 @@ export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
 	const { buttonText, className, $form, hideButton, buttonDisabled, } = props;
 	const submit = useUnit($form.submit);
 
-	const onSubmit = useSubmit(submit);
+	const onSubmit = usePreventDefault(submit);
 
 	return (
 		<form className={cn(styles.form, className)} onSubmit={onSubmit}>

@@ -1,12 +1,12 @@
 import { Button } from '@mui/material';
 import cn from 'classnames';
-import { useForm } from 'effector-forms';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 
 import { TagPicker } from '@/entities/tags';
 import { UsersInRoomPicker } from '@/entities/users';
 
-import { useSubmit, useToggle } from '@/shared/lib';
+import { usePreventDefault, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { DatePicker, FiltersPopover } from '@/shared/ui';
 
@@ -19,10 +19,10 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 	const { className, } = props;
 
 	const [open, { toggleOn, toggleOff, }] = useToggle();
-	const { fields, reset, submit, } = useForm(form);
-	const { after, authorIds, before, tagIds, } = fields;
+	const reset = useUnit(form.reset);
+	const submit = useUnit(form.submit);
 
-	const onSubmit = useSubmit(() => {
+	const onSubmit = usePreventDefault(() => {
 		submit();
 		toggleOff();
 	});
@@ -40,50 +40,82 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 			onOpen={toggleOn}
 			filters={
 				<form className={cn(styles.wrapper, className)} onSubmit={onSubmit}>
-					<TagPicker
-						value={tagIds.value}
-						onChange={tagIds.onChange}
-						onBlur={tagIds.onBlur}
-						helperText={tagIds.errorText()}
-						isValid={tagIds.isValid}
-						name={tagIds.name}
-						label='Group'
-						size='medium'
-						limitTags={1}
-						multiple
-					/>
-					<UsersInRoomPicker
-						value={authorIds.value}
-						onChange={authorIds.onChange}
-						onBlur={authorIds.onBlur}
-						helperText={authorIds.errorText()}
-						isValid={authorIds.isValid}
-						name={authorIds.name}
-						label='User'
-						size='medium'
-						limitTags={1}
-						multiple
-					/>
-					<DatePicker
-						value={after.value}
-						onChange={after.onChange}
-						label='After'
-						size='medium'
-					/>
-					<DatePicker
-						value={before.value}
-						onChange={before.onChange}
-						label='Before'
-						size='medium'
-					/>
+					<Tags />
+					<Users />
+					<After />
+					<Before />
 					<Button onClick={onReset} type='reset' variant='text' color='primary'>
-						Reset
+						Сбросить
 					</Button>
 					<Button type='submit' variant='contained' color='primary'>
-						Apply
+						Применить
 					</Button>
 				</form>
 			}
+		/>
+	);
+};
+
+const Tags: React.FC = () => {
+	const tagIds = useUnit(form.fields.tagIds);
+
+	return (
+		<TagPicker
+			value={tagIds.value}
+			onChange={tagIds.onChange}
+			onBlur={tagIds.onBlur}
+			helperText={tagIds.errorText}
+			isValid={tagIds.isValid}
+			name='tagIds'
+			label='Группы'
+			size='medium'
+			limitTags={1}
+			multiple
+		/>
+	);
+};
+
+const Users: React.FC = () => {
+	const authorIds = useUnit(form.fields.authorIds);
+
+	return (
+		<UsersInRoomPicker
+			value={authorIds.value}
+			onChange={authorIds.onChange}
+			onBlur={authorIds.onBlur}
+			helperText={authorIds.errorText}
+			isValid={authorIds.isValid}
+			name='authorIds'
+			label='Авторы'
+			size='medium'
+			limitTags={1}
+			multiple
+		/>
+	);
+};
+
+const After: React.FC = () => {
+	const after = useUnit(form.fields.after);
+
+	return (
+		<DatePicker
+			value={after.value}
+			onChange={after.onChange}
+			label='Создано после'
+			size='medium'
+		/>
+	);
+};
+
+const Before: React.FC = () => {
+	const before = useUnit(form.fields.before);
+
+	return (
+		<DatePicker
+			value={before.value}
+			onChange={before.onChange}
+			label='Создано до'
+			size='medium'
 		/>
 	);
 };

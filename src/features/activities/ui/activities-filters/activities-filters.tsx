@@ -9,7 +9,7 @@ import {
 } from '@/entities/activities';
 import { UsersInRoomPicker } from '@/entities/users';
 
-import { useSubmit, useToggle } from '@/shared/lib';
+import { usePreventDefault, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { DatePicker, FiltersPopover } from '@/shared/ui';
 
@@ -26,7 +26,7 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 	const { fields, reset, submit, } = useForm(activitiesFiltersModel.form);
 	const { actionIds, activistIds, after, before, sphereIds, } = fields;
 
-	const onSubmit = useSubmit(() => {
+	const onSubmit = usePreventDefault(() => {
 		submit();
 		toggleOff();
 	});

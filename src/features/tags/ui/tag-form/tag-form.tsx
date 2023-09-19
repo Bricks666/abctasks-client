@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { TagLabel } from '@/entities/tags';
 
-import { useSubmit } from '@/shared/lib';
+import { usePreventDefault } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
 
@@ -25,7 +25,7 @@ export const TagForm: React.FC<TagFormProps> = (props) => {
 
 	const { name, mainColor, secondColor, } = fields;
 
-	const onSubmit = useSubmit(submit);
+	const onSubmit = usePreventDefault(submit);
 
 	return (
 		<form className={cn(styles.form, className)} onSubmit={onSubmit}>

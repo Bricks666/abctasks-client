@@ -17,6 +17,7 @@ import { progressesModel } from '@/entities/progresses';
 import { roomsModel } from '@/entities/rooms';
 import { tagsModel } from '@/entities/tags';
 import { tasksInRoomModel } from '@/entities/tasks';
+import { usersInRoomModel } from '@/entities/users';
 
 import {
 	Activity,
@@ -75,7 +76,7 @@ sample({
 });
 
 sample({
-	clock: [authorizedRoute.opened, authorizedRoute.updated],
+	clock: [authorizedRoute.opened],
 	fn: ({ params, }) => ({ roomId: params.id, }),
 	target: query.start,
 });
@@ -96,20 +97,9 @@ sample({
 		tasksInRoomModel.query.start,
 		activitiesInRoomModel.query.start,
 		tagsModel.query.start,
-		roomsModel.query.start
+		roomsModel.query.start,
+		usersInRoomModel.query.start
 	],
-});
-
-sample({
-	clock: [formValidated, reset],
-	source: authorizedRoute.$params,
-	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
-	target: tasksInRoomModel.query.start,
-});
-
-sample({
-	clock: authorizedRoute.closed,
-	target: reset,
 });
 
 querySync({
@@ -122,6 +112,18 @@ querySync({
 	},
 	clock: [formValidated, reset],
 	route: authorizedRoute,
+});
+
+sample({
+	clock: [formValidated, reset],
+	source: authorizedRoute.$params,
+	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
+	target: tasksInRoomModel.query.start,
+});
+
+sample({
+	clock: authorizedRoute.closed,
+	target: reset,
 });
 
 sample({

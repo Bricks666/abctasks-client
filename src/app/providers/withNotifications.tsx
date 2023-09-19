@@ -11,7 +11,7 @@ export const withNotifications =
 					<Component />
 					<SnackbarList
 						model={notificationsModel.notifications}
-						domRootSelector='#root'
+						domRootSelector='body'
 					/>
 				</>
 			);

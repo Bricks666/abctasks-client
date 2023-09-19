@@ -4,7 +4,7 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useSubmit } from '@/shared/lib';
+import { usePreventDefault } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Checkbox, Field, Form, PasswordField } from '@/shared/ui';
 
@@ -16,7 +16,7 @@ export const LoginForm: React.FC<CommonProps> = (props) => {
 	const { t, } = useTranslation('login');
 	const submit = useUnit(form.submit);
 
-	const onSubmit = useSubmit(submit);
+	const onSubmit = usePreventDefault(submit);
 
 	return (
 		<Form className={cn(styles.form, className)} onSubmit={onSubmit}>
