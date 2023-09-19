@@ -35,7 +35,7 @@ const RegistrationPage: React.FC<CommonProps> = (props) => {
 					</Typography>
 				}
 			/>
-			<RegistrationForm />
+			<RegistrationForm className={styles.form} />
 		</AuthLayout>
 	);
 };

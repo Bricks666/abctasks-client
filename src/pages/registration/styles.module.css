@@ -1,5 +1,9 @@
 .layout {
-	gap: 1em;
+	justify-items: center;
+}
+
+.form {
+	width: clamp(200px, 100%, 500px);
 }
 
 .title {

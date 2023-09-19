@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export type Size = 'small' | 'medium' | 'large';
 
 export interface CommonProps {
@@ -23,3 +25,7 @@ interface MultiplePickerProps<T> {
 }
 
 export type PickerProps<T> = SinglePickerProps<T> | MultiplePickerProps<T>;
+
+export type Slots<T extends string> = {
+	readonly [K in T]?: ReactNode | null;
+};

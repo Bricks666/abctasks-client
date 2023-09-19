@@ -22,21 +22,23 @@ export const RoomHeader: React.FC<CommonProps> = (props) => {
 	return (
 		<Header
 			className={cn(className)}
-			leftContent={
-				<div>
-					<Typography variant='h6' component='h1'>
-						{pending ? (
-							<Skeleton className={styles.titleSkeleton} width='10em' />
-						) : (
-							room?.name
-						)}
-					</Typography>
-					<Typography className={styles.description} variant='body2'>
-						{pending ? <Skeleton width='10em' /> : room?.description}
-					</Typography>
-				</div>
-			}
-			centerContent={<Tabs />}
+			slots={{
+				left: (
+					<div>
+						<Typography variant='h6' component='h1'>
+							{pending ? (
+								<Skeleton className={styles.titleSkeleton} width='10em' />
+							) : (
+								room?.name
+							)}
+						</Typography>
+						<Typography className={styles.description} variant='body2'>
+							{pending ? <Skeleton width='10em' /> : room?.description}
+						</Typography>
+					</div>
+				),
+				center: <Tabs />,
+			}}
 		/>
 	);
 };

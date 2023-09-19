@@ -14,12 +14,14 @@ export const RoomsHeader: React.FC<CommonProps> = (props) => {
 	return (
 		<Header
 			className={className}
-			leftContent={
-				<Typography variant='h5' component='h1'>
-					{t('title')}
-				</Typography>
-			}
-			rightContent={<RoomsHeaderActions />}
+			slots={{
+				left: (
+					<Typography variant='h5' component='h1'>
+						{t('title')}
+					</Typography>
+				),
+				right: <RoomsHeaderActions />,
+			}}
 		/>
 	);
 };

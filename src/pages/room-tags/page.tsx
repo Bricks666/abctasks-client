@@ -1,4 +1,11 @@
-import { ListItem, Skeleton, List, Stack, Container } from '@mui/material';
+import {
+	ListItem,
+	Skeleton,
+	List,
+	Stack,
+	Container,
+	Paper
+} from '@mui/material';
 import * as React from 'react';
 
 import { Popups, PopupsProps } from '@/widgets/page';
@@ -73,7 +80,9 @@ const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 		<Container className={className}>
 			<Stack className={className} spacing={1.5}>
 				<SectionHeader title='Tags' actions={<CreateTagButton />} />
-				<List>{items}</List>
+				<Paper>
+					<List>{items}</List>
+				</Paper>
 				<Popups popupMap={popupMap} />
 			</Stack>
 		</Container>

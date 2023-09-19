@@ -1,5 +1,6 @@
 import { Typography, Link as MuiLink } from '@mui/material';
 import { Link } from 'atomic-router-react';
+import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -17,7 +18,7 @@ const LoginPage: React.FC<CommonProps> = ({ className, }) => {
 	usePageTitle(t('title'));
 
 	return (
-		<AuthLayout className={className}>
+		<AuthLayout className={cn(styles.layout, className)}>
 			<PageTitle
 				className={styles.title}
 				title={t('title')}
@@ -32,7 +33,7 @@ const LoginPage: React.FC<CommonProps> = ({ className, }) => {
 					</Typography>
 				}
 			/>
-			<LoginForm />
+			<LoginForm className={styles.form} />
 		</AuthLayout>
 	);
 };
