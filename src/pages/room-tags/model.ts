@@ -12,6 +12,6 @@ export const authorizedRoute = sessionModel.chainAuthorized(currentRoute, {
 
 sample({
 	clock: authorizedRoute.opened,
-	fn: ({ params, }) => params.id,
+	fn: ({ params, }) => ({ roomId: params.id, }),
 	target: tagsModel.query.start,
 });

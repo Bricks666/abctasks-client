@@ -44,7 +44,12 @@ export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
 		<div className={className}>
 			<Tooltip title='Profile settings'>
 				<IconButton onClick={toggle} ref={setReference}>
-					<UserAvatar username={username} email={email} photo={photo} />
+					<UserAvatar
+						username={username}
+						email={email}
+						photo={photo}
+						disableTooltip
+					/>
 				</IconButton>
 			</Tooltip>
 

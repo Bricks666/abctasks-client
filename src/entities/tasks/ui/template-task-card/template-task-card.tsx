@@ -10,7 +10,7 @@ import cn from 'classnames';
 import * as React from 'react';
 
 import { Task } from '@/shared/api';
-import { CommonProps } from '@/shared/types';
+import { CommonProps, Slots } from '@/shared/types';
 import { DateTime } from '@/shared/ui';
 
 import styles from './template-task-card.module.css';
@@ -19,14 +19,15 @@ export interface TemplateTaskCardProps
 	extends CommonProps,
 		Pick<Task, 'title' | 'description' | 'createdAt' | 'status' | 'id'>,
 		Omit<CardProps, keyof Task> {
-	readonly actions: React.ReactElement | null;
-	readonly tags: React.ReactElement | React.ReactElement[] | null;
+	readonly slots: Slots<'actions' | 'tags' | 'userAvatar'>;
 }
 
 export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 	(props) => {
-		const { className, createdAt, actions, tags, title, description, ...rest } =
-			props;
+		const { className, createdAt, slots, title, description, ...rest } = props;
+
+		const { actions, tags, userAvatar, } = slots;
+
 		return (
 			<Card
 				className={cn(styles.card, className)}
@@ -49,11 +50,9 @@ export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 						{description}
 					</Typography>
 				</CardContent>
-				<CardActions>
+				<CardActions className={styles.actions}>
+					{userAvatar}
 					<DateTime date={createdAt} format='HH:mm DD MMM' />
-					<Typography variant='body2' component='span'>
-						0
-					</Typography>
 				</CardActions>
 			</Card>
 		);

@@ -7,8 +7,9 @@ import { TaskCardMenu } from '@/features/tasks';
 import { roomModel } from '@/entities/rooms';
 import { TagLabel, SkeletonTagLabel } from '@/entities/tags';
 import { TemplateTaskCard } from '@/entities/tasks';
+import { UserAvatar } from '@/entities/users';
 
-import { Tag, Task } from '@/shared/api';
+import { Task } from '@/shared/api';
 import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
@@ -17,12 +18,10 @@ import { dragTaskModel } from '../../model';
 
 import styles from './task-card.module.css';
 
-export interface TaskCardProps extends CommonProps, Task {
-	readonly tags: Array<Tag | null>;
-}
+export interface TaskCardProps extends CommonProps, Task {}
 
 export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
-	const { tags, id, roomId, className, status, ...rest } = props;
+	const { tags, id, roomId, className, status, author, ...rest } = props;
 	const [onDragEnd, onDragStart] = useUnit([
 		dragTaskModel.dragEnded,
 		dragTaskModel.dragStarted
@@ -43,14 +42,19 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 			  )
 			: getEmptyArray(2).map((_, i) => <SkeletonTagLabel key={i} />);
 
+	const userAvatar = <UserAvatar {...author} size={24} />;
+
 	return (
 		<TemplateTaskCard
 			className={cn(styles.card, { [styles.drag]: isDrag, }, className)}
 			{...rest}
-			actions={actions}
+			slots={{
+				actions,
+				userAvatar,
+				tags: <div className={styles.tags}>{tagElements}</div>,
+			}}
 			id={id}
 			status={status}
-			tags={<div className={styles.tags}>{tagElements}</div>}
 			draggable={canChange}
 			onDragStart={onDragStart}
 			onDragEnd={onDragEnd}
