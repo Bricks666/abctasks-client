@@ -2,12 +2,16 @@ import { Number, Record, String, Static } from 'runtypes';
 
 import { InRoomParams } from '@/shared/types';
 
+import { user } from '../auth';
+
 export const comment = Record({
 	id: Number,
 	roomId: Number,
-	authorId: Number,
+	author: user,
 	taskId: Number,
 	content: String,
+	createdAt: String,
+	updatedAt: String.nullable(),
 }).asReadonly();
 
 export interface Comment extends Static<typeof comment> {}

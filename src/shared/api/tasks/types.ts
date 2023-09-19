@@ -10,6 +10,9 @@ import {
 
 import { DatesFiltersParams, InRoomParams } from '@/shared/types';
 
+import { user } from '../auth';
+import { tag } from '../tags';
+
 export const taskStatus = Union(
 	Literal('done'),
 	Literal('in_progress'),
@@ -28,8 +31,8 @@ export const statuses: TaskStatus[] = [
 export const task = Record({
 	id: Number,
 	roomId: Number,
-	tagIds: Array(Number),
-	authorId: Number,
+	tags: Array(tag),
+	author: user,
 	title: String,
 	description: String.nullable(),
 	status: taskStatus,
@@ -56,10 +59,9 @@ export interface GetTaskParams extends InRoomParams {
 }
 
 export interface CreateTaskParams
-	extends Pick<
-		Task,
-		'roomId' | 'tagIds' | 'title' | 'status' | 'description'
-	> {}
+	extends Pick<Task, 'roomId' | 'title' | 'status' | 'description'> {
+	readonly tagIds: number[];
+}
 
 export interface UpdateTaskParams
 	extends Partial<Omit<CreateTaskParams, 'roomId'>>,

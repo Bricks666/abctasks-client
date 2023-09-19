@@ -1,4 +1,4 @@
-import { StandardResponse } from '@/shared/types';
+import { InRoomParams, StandardResponse } from '@/shared/types';
 
 import { instance } from '../request';
 
@@ -10,8 +10,8 @@ import {
 	Tag
 } from './types';
 
-export const getAll = async (roomId: number) => {
-	return instance.get(`tags/${roomId}`).json<StandardResponse<Tag[]>>();
+export const getAll = async (params: InRoomParams) => {
+	return instance.get(`tags/${params.roomId}`).json<StandardResponse<Tag[]>>();
 };
 
 export const getOne = async ({ roomId, id, }: GetTagParams) => {

@@ -5,7 +5,6 @@ import * as React from 'react';
 
 import { TaskColumnActions } from '@/features/tasks';
 
-import { useTagsMap } from '@/entities/tags';
 import { SkeletonTaskCard, TaskColumnHeader } from '@/entities/tasks';
 
 import { Task, TaskStatus } from '@/shared/api';
@@ -30,7 +29,6 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	const { tasks, className, columnStatus, header, isLoading, roomId, } = props;
 	const onDrop = useUnit(dragTaskModel.drop);
-	const tagsMap = useTagsMap();
 
 	let items: React.ReactElement[];
 
@@ -38,8 +36,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 		items = getEmptyArray(4).map((_, i) => <SkeletonTaskCard key={i} />);
 	} else {
 		items = tasks.map((task) => {
-			const tags = task.tagIds.map((tagId) => tagsMap.data[tagId] ?? null);
-			return <TaskCard {...task} tags={tags} key={task.id} />;
+			return <TaskCard {...task} key={task.id} />;
 		});
 	}
 

@@ -12,11 +12,9 @@ import {
 	updateTaskModel
 } from '@/features/tasks';
 
-import {
-	activityActionsModel,
-	activitySpheresModel
-} from '@/entities/activities';
+import { activitiesInRoomModel } from '@/entities/activities';
 import { progressesModel } from '@/entities/progresses';
+import { roomsModel } from '@/entities/rooms';
 import { tagsModel } from '@/entities/tags';
 import { tasksInRoomModel } from '@/entities/tasks';
 
@@ -82,17 +80,6 @@ sample({
 	target: query.start,
 });
 
-sample({
-	clock: query.start,
-	target: [activityActionsModel.query.start, activitySpheresModel.query.start],
-});
-
-sample({
-	clock: [authorizedRoute.opened, authorizedRoute.updated],
-	fn: ({ params, }) => params.id,
-	target: tagsModel.query.start,
-});
-
 /*
  * TODO: Сделать обертку над роутом, чтобы отслеживать отдельно изменения параметров
  */
@@ -105,7 +92,12 @@ sample({
 		before: query[getParams.before],
 		after: query[getParams.after],
 	}),
-	target: tasksInRoomModel.query.start,
+	target: [
+		tasksInRoomModel.query.start,
+		activitiesInRoomModel.query.start,
+		tagsModel.query.start,
+		roomsModel.query.start
+	],
 });
 
 sample({

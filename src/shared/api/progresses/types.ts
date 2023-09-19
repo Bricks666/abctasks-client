@@ -1,7 +1,9 @@
 import { Number, Record, Static } from 'runtypes';
 
+import { tag } from '../tags';
+
 export const progress = Record({
-	tagId: Number,
+	tag,
 	donecount: Number,
 	totalcount: Number,
 }).asReadonly();

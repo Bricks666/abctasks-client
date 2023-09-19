@@ -14,7 +14,7 @@ import styles from './activity-card.module.css';
 export interface ActivityCardProps extends CommonProps, Activity {}
 
 export const ActivityCard: React.FC<ActivityCardProps> = (props) => {
-	const { action, sphere, className, createdAt, } = props;
+	const { action, sphere, className, createdAt, activist, } = props;
 	const { t, } = useTranslation('room');
 	return (
 		<Card className={cn(styles.card, className)} variant='outlined'>
@@ -25,6 +25,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = (props) => {
 						{t('activities.text', {
 							type: action,
 							sphere: sphere.name,
+							activist: activist.username,
 						})}
 					</Typography>
 					<DateTime date={createdAt} format='HH:mm MMM DD' />

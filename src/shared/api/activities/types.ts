@@ -7,6 +7,8 @@ import {
 	SortParams
 } from '@/shared/types';
 
+import { user } from '../auth';
+
 export const activityAction = Record({
 	id: Number,
 	name: String,
@@ -24,9 +26,9 @@ export interface ActivitySphere extends Static<typeof activitySphere> {}
 export const activity = Record({
 	id: Number,
 	roomId: Number,
-	activistId: Number,
-	actionId: Number,
-	sphereId: Number,
+	activist: user,
+	action: activityAction,
+	sphere: activitySphere,
 	createdAt: String,
 }).asReadonly();
 
