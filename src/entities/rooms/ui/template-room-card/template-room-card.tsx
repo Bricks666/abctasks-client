@@ -26,7 +26,7 @@ export const TemplateRoomCard: React.FC<TemplateRoomCardProps> = (props) => {
 	const { t, } = useTranslation('rooms');
 
 	return (
-		<Card className={cn(styles.card, className)} variant='outlined'>
+		<Card className={cn(styles.card, className)}>
 			<CardMedia
 				sx={{
 					height: 100,

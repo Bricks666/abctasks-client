@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 
-import { AllActivitiesInRoom } from '@/features/activities';
+import { OpenAllRoomActivities } from '@/features/activities';
 
 import { ActivityCard } from '@/entities/activities';
 
@@ -47,7 +47,7 @@ export const LastActivities: React.FC<CommonProps> = (props) => {
 						<ActivityCard {...activity} key={activity.id} />
 					))}
 				</Stack>
-				{isEmpty ? null : <AllActivitiesInRoom />}
+				{isEmpty ? null : <OpenAllRoomActivities />}
 			</>
 		);
 	}

@@ -6,7 +6,7 @@ import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
-export const AllActivitiesInRoom: React.FC<CommonProps> = React.memo(
+export const OpenAllRoomActivities: React.FC<CommonProps> = React.memo(
 	(props) => {
 		const { className, } = props;
 		const roomId = useParam(routes.room.tasks, 'id');

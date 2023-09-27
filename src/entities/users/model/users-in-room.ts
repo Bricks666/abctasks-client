@@ -13,11 +13,7 @@ import {
 
 const usersInRoom = createDomain();
 
-const handlerFx = usersInRoom.effect<
-	InRoomParams,
-	StandardResponse<User[]>,
-	Error
->(membersApi.getAll);
+const handlerFx = usersInRoom.effect(membersApi.getAll);
 
 export const query = createQuery<
 	InRoomParams,

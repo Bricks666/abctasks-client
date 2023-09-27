@@ -1,40 +1,66 @@
-import { TextField, TextFieldProps } from '@mui/material';
+import { TextFieldProps } from '@mui/material';
 import {
 	DatePicker as MUIDatePicker,
 	DatePickerProps as MUIDatePIckerProps
 } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
 import * as React from 'react';
 
 import { CommonProps } from '@/shared/types';
 
-export interface DatePickerProps<TInputDate, TDate>
+import { Field, FieldProps } from '../field';
+
+type FieldKeys = 'value' | 'onBlur' | 'name' | 'isValid' | 'helperText';
+
+export interface DatePickerProps
 	extends CommonProps,
-		Omit<MUIDatePIckerProps<TInputDate, TDate>, 'onChange' | 'renderInput'> {
+		Pick<FieldProps, FieldKeys>,
+		Omit<MUIDatePIckerProps<Dayjs>, FieldKeys | 'onChange'> {
 	readonly onChange: (date: string | null) => void;
-	readonly size?: TextFieldProps['size'];
 }
 
 export const DatePicker = React.memo(
-	<TInputDate, TDate = TInputDate>(
-		props: DatePickerProps<TInputDate, TDate>
-	): React.ReactElement => {
-		const { onChange, size, ...rest } = props;
-		const handleChange = (date: { $d: Date } | null) => {
+	(props: DatePickerProps): React.ReactElement => {
+		const { onChange, value, isValid, name, onBlur, helperText, ...rest } =
+			props;
+		const preparedValue = dayjs(value);
+		const handleChange: MUIDatePIckerProps<Dayjs>['onChange'] = (date) => {
 			let newDate: string | null;
 
 			try {
-				newDate = date?.$d.toJSON() ?? null;
+				newDate = date?.toDate().toJSON() ?? null;
 			} catch {
 				newDate = null;
 			}
 
 			onChange(newDate);
 		};
+
+		const textField = (params: TextFieldProps) => {
+			const handleBlur = (...args: any[]) => {
+				onBlur();
+				params.onBlur?.(...args);
+			};
+
+			return (
+				<Field
+					{...params}
+					onBlur={handleBlur}
+					isValid={isValid}
+					name={name}
+					helperText={helperText}
+				/>
+			);
+		};
+
 		return (
 			<MUIDatePicker
 				{...rest}
-				onChange={handleChange as any}
-				renderInput={(params) => <TextField {...params} size={size} />}
+				value={preparedValue}
+				onChange={handleChange}
+				slots={{
+					textField,
+				}}
 			/>
 		);
 	}

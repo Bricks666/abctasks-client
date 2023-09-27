@@ -8,6 +8,8 @@ import {
 	activityActionsModel,
 	activitySpheresModel
 } from '@/entities/activities';
+import { roomsModel } from '@/entities/rooms';
+import { usersInRoomModel } from '@/entities/users';
 
 import { GetActivitiesInRoomParams } from '@/shared/api';
 import { controls, getParams, routes } from '@/shared/configs';
@@ -71,7 +73,13 @@ sample({
 		count: query[getParams.count],
 		page: query[getParams.page],
 	}),
-	target: activitiesInRoomModel.query.start,
+	target: [
+		activitiesInRoomModel.query.start,
+		usersInRoomModel.query.start,
+		roomsModel.query.start,
+		activityActionsModel.query.start,
+		activitySpheresModel.query.start
+	],
 });
 
 sample({
@@ -98,25 +106,4 @@ querySync({
 	},
 	clock: formApplied,
 	route: authorizedRoute,
-});
-
-// sample({
-// 	clock: loaded,
-// 	source: controls.$query,
-// 	fn: (query) =>
-// 		({
-// 			activistIds: query[getParams.userId],
-// 			actionIds: query[getParams.actionId],
-// 			after: query[getParams.after],
-// 			before: query[getParams.before],
-// 			sphereIds: query[getParams.sphereId],
-// 			count: query[getParams.count],
-// 			page: query[getParams.page],
-// 		} as activitiesFiltersModel.ActivitiesFiltersForm),
-// 	target: setForm,
-// });
-
-sample({
-	clock: activitiesInRoomModel.query.start,
-	target: [activityActionsModel.query.start, activitySpheresModel.query.start],
 });

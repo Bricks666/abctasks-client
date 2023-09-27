@@ -1,2 +1,2 @@
-export * from './ui';
-export * from './model';
+export * from './open-all-room-activities';
+export * from './activities-filters';

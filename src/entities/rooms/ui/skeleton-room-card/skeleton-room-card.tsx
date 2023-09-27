@@ -18,7 +18,7 @@ export const SkeletonRoomCard: React.FC<SkeletonRoomCardProps> = React.memo(
 	function SkeletonRoomCard(props) {
 		const { className, } = props;
 		return (
-			<Card className={cn(styles.card, className)} variant='outlined'>
+			<Card className={cn(styles.card, className)}>
 				<Skeleton sx={{ height: 100, }} variant='rectangular' animation='wave' />
 				<CardHeader title={<Skeleton width='6em' />} animation='wave' />
 				<CardContent className={styles.content}>

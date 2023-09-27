@@ -1,3 +1,4 @@
+import TuneIcon from '@mui/icons-material/Tune';
 import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
@@ -8,7 +9,7 @@ import { UsersInRoomPicker } from '@/entities/users';
 
 import { usePreventDefault, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { DatePicker, FiltersPopover } from '@/shared/ui';
+import { DatePicker, FiltersPopover, Show } from '@/shared/ui';
 
 import { form } from './model';
 import styles from './tasks-filters.module.css';
@@ -32,27 +33,39 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 		toggleOff();
 	};
 
+	const buttons = (
+		<>
+			<Button onClick={onReset} type='reset' variant='text' color='primary'>
+				Сбросить
+			</Button>
+			<Button
+				onClick={onSubmit}
+				type='submit'
+				variant='contained'
+				color='primary'>
+				Применить
+			</Button>
+		</>
+	);
+
 	return (
 		<FiltersPopover
 			title='Фильтры задач'
 			open={open}
 			onClose={toggleOff}
 			onOpen={toggleOn}
-			filters={
+			icon={<TuneIcon />}
+			slots={{ actions: buttons, }}>
+			{({ isPopup, }) => (
 				<form className={cn(styles.wrapper, className)} onSubmit={onSubmit}>
 					<Tags />
 					<Users />
 					<After />
 					<Before />
-					<Button onClick={onReset} type='reset' variant='text' color='primary'>
-						Сбросить
-					</Button>
-					<Button type='submit' variant='contained' color='primary'>
-						Применить
-					</Button>
+					<Show show={!isPopup}>{buttons}</Show>
 				</form>
-			}
-		/>
+			)}
+		</FiltersPopover>
 	);
 };
 
@@ -101,8 +114,11 @@ const After: React.FC = () => {
 		<DatePicker
 			value={after.value}
 			onChange={after.onChange}
+			onBlur={after.onBlur}
 			label='Создано после'
-			size='medium'
+			helperText={after.errorText}
+			isValid={after.isValid}
+			name='after'
 		/>
 	);
 };
@@ -114,8 +130,11 @@ const Before: React.FC = () => {
 		<DatePicker
 			value={before.value}
 			onChange={before.onChange}
+			onBlur={before.onBlur}
 			label='Создано до'
-			size='medium'
+			helperText={before.errorText}
+			isValid={before.isValid}
+			name='before'
 		/>
 	);
 };

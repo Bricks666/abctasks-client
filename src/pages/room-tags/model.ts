@@ -1,5 +1,6 @@
 import { sample } from 'effector';
 
+import { roomsModel } from '@/entities/rooms';
 import { tagsModel } from '@/entities/tags';
 
 import { routes } from '@/shared/configs';
@@ -13,5 +14,5 @@ export const authorizedRoute = sessionModel.chainAuthorized(currentRoute, {
 sample({
 	clock: authorizedRoute.opened,
 	fn: ({ params, }) => ({ roomId: params.id, }),
-	target: tagsModel.query.start,
+	target: [tagsModel.query.start, roomsModel.query.start],
 });

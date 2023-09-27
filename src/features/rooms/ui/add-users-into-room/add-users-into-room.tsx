@@ -40,7 +40,7 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 			title='Add users into room'>
 			<form className={styles.form} onSubmit={onSubmit}>
 				{user.value ? (
-					<Paper variant='outlined'>
+					<Paper>
 						<TemplateUserListItem
 							{...user.value}
 							actions={

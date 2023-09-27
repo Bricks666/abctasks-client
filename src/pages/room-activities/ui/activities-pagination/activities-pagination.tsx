@@ -27,7 +27,13 @@ export const ActivitiesPagination: React.FC<ActivitiesPaginationProps> = (
 			className={className}
 			count={pageCount}
 			page={page}
-			onChange={(_, page) => onPageChanged(page)}
+			onChange={(_, page) => {
+				window.scrollTo({
+					left: 0,
+					top: 0,
+				});
+				onPageChanged(page);
+			}}
 			color='primary'
 			size='large'
 			renderItem={(item) => {
