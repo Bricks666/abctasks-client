@@ -6,4 +6,7 @@
 	padding: 2px 12px;
 
 	border-radius: 1.5rem;
+
+	word-wrap: break-word;
+	word-break: break-all;
 }

@@ -9,7 +9,8 @@
 		"text": "Пользователь {{activist}} $t(activities.type.{{type}}) $t(activities.spheres.{{sphere}})",
 		"spheres": {
 			"task": "задачу",
-			"group": "группу"
+			"tag": "группу",
+			"comment": "комментарий"
 		},
 		"type": {
 			"update": "изменил",

@@ -24,7 +24,7 @@ export const RoomPageLayout: React.FC<RoomPageLayoutProps> = (props) => {
 			className={cn(styles.layout, className)}
 			header={<RoomHeader />}>
 			<React.Suspense fallback={<PageLoader />}>
-				<div className={styles.content}>{children}</div>
+				<div>{children}</div>
 			</React.Suspense>
 		</MainLayout>
 	);

@@ -6,7 +6,7 @@ import { SkeletonTagLabel } from '@/entities/tags';
 
 import { CommonProps } from '@/shared/types';
 
-import styles from './skeleton-tag-form.module.css';
+import styles from './skeleton.module.css';
 
 export interface SkeletonTagFormProps extends CommonProps {}
 

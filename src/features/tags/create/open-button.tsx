@@ -9,9 +9,9 @@ import { routes, getParams, popupsMap } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
-export interface CreateTagButtonProps extends CommonProps {}
+export interface OpenCreateTagFormProps extends CommonProps {}
 
-export const CreateTagButton: React.FC<CreateTagButtonProps> = React.memo(
+export const OpenCreateTagForm: React.FC<OpenCreateTagFormProps> = React.memo(
 	(props) => {
 		const { className, } = props;
 		const roomId = useParam(routes.room.tags, 'id');

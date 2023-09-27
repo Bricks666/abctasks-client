@@ -1,12 +1,9 @@
-import { createDomain } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
 
 import { Tag } from '@/shared/api';
 import { allowedSymbolsRegExp } from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';
-
-const tagFormDomain = createDomain();
 
 export interface TagFormValues extends Omit<Tag, 'id' | 'roomId'> {}
 
@@ -28,20 +25,21 @@ const schemas = {
 	}),
 };
 
-export const form = createForm<TagFormValues>({
-	fields: {
-		name: {
-			init: 'Name',
-			rules: [createRuleFromSchema('name', schemas.name)],
+export const create = () => {
+	return createForm<TagFormValues>({
+		fields: {
+			name: {
+				init: 'Name',
+				rules: [createRuleFromSchema('name', schemas.name)],
+			},
+			mainColor: {
+				init: '#ffffff',
+				rules: [createRuleFromSchema('mainColor', schemas.mainColor)],
+			},
+			secondColor: {
+				init: '#000000',
+				rules: [createRuleFromSchema('secondColor', schemas.secondColor)],
+			},
 		},
-		mainColor: {
-			init: '#ffffff',
-			rules: [createRuleFromSchema('mainColor', schemas.mainColor)],
-		},
-		secondColor: {
-			init: '#000000',
-			rules: [createRuleFromSchema('secondColor', schemas.secondColor)],
-		},
-	},
-	domain: tagFormDomain,
-});
+	});
+};

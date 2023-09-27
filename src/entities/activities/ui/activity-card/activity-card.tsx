@@ -23,7 +23,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = (props) => {
 				<div>
 					<Typography component='p'>
 						{t('activities.text', {
-							type: action,
+							type: action.name,
 							sphere: sphere.name,
 							activist: activist.username,
 						})}

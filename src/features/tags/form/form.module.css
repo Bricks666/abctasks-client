@@ -6,6 +6,10 @@
 	padding: 10px;
 }
 
+.preview {
+	grid-column: span 2;
+}
+
 .input {
 	grid-column: span 2;
 }
@@ -24,6 +28,10 @@
 @media (max-width: 500px) {
 	.form {
 		grid-template-columns: 1fr;
+	}
+
+	.preview {
+		grid-column: 1;
 	}
 
 	.input {

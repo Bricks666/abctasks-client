@@ -20,3 +20,4 @@ export * from './form';
 export * from './center';
 export * from './page-loader';
 export * from './page-title';
+export * from './show';

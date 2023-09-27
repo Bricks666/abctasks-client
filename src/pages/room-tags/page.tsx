@@ -1,18 +1,11 @@
-import {
-	ListItem,
-	Skeleton,
-	List,
-	Stack,
-	Container,
-	Paper
-} from '@mui/material';
+import { ListItem, Skeleton, List, Stack, Paper } from '@mui/material';
 import * as React from 'react';
 
 import { Popups, PopupsProps } from '@/widgets/page';
 
 import {
 	CreateTag,
-	CreateTagButton,
+	OpenCreateTagForm,
 	TagCardActions,
 	UpdateTag
 } from '@/features/tags';
@@ -45,7 +38,7 @@ const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 
 	if (isError) {
 		const onRetry = () => {
-			tags.start(roomId);
+			tags.start({ roomId, });
 		};
 
 		return (
@@ -72,20 +65,19 @@ const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 				{...group}
 				actions={<TagCardActions tagId={group.id} />}
 				key={group.id}
+				divider
 			/>
 		));
 	}
 
 	return (
-		<Container className={className}>
-			<Stack className={className} spacing={1.5}>
-				<SectionHeader title='Tags' actions={<CreateTagButton />} />
-				<Paper>
-					<List>{items}</List>
-				</Paper>
-				<Popups popupMap={popupMap} />
-			</Stack>
-		</Container>
+		<Stack className={className} spacing={1.5}>
+			<SectionHeader title='Tags' actions={<OpenCreateTagForm />} />
+			<Paper>
+				<List disablePadding>{items}</List>
+			</Paper>
+			<Popups popupMap={popupMap} />
+		</Stack>
 	);
 });
 

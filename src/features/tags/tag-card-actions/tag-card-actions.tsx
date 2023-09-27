@@ -11,7 +11,7 @@ import { useParam, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Confirm } from '@/shared/ui';
 
-import { removeTagModel } from '../../model';
+import { mutation } from './model';
 
 export interface TagCardActionsProps extends CommonProps {
 	readonly tagId: number;
@@ -20,7 +20,7 @@ export interface TagCardActionsProps extends CommonProps {
 export const TagCardActions: React.FC<TagCardActionsProps> = (props) => {
 	const { tagId, className, } = props;
 	const roomId = useParam(routes.room.tags, 'id');
-	const removeTag = useUnit(removeTagModel.mutation);
+	const removeTag = useUnit(mutation);
 	const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
 
 	const onAgree = React.useCallback(() => {

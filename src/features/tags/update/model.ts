@@ -1,6 +1,6 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { createEffect, sample } from 'effector';
 import { and } from 'patronum';
 
 import { createPopupControlModel } from '@/entities/popups';
@@ -11,15 +11,9 @@ import { popupsMap, routes } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
-import { form } from './form';
+import { tagFormModel } from '../form';
 
-const updateTagDomain = createDomain();
-
-const handlerFx = updateTagDomain.effect<
-	UpdateTagParams,
-	StandardResponse<Tag>,
-	Error
->(tagsApi.update);
+const handlerFx = createEffect(tagsApi.update);
 
 export const mutation = createMutation<
 	UpdateTagParams,
@@ -32,6 +26,7 @@ export const mutation = createMutation<
 });
 
 export const { close, $isOpen, } = createPopupControlModel(popupsMap.updateTag);
+export const form = tagFormModel.create();
 
 const { fields, setForm, reset, formValidated, } = form;
 

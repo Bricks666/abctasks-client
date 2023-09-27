@@ -69,7 +69,14 @@ sample({
 
 sample({
 	clock: taskModel.query.finished.success,
-	fn: ({ result, }) => result,
+	fn: ({ result, }) => {
+		const { tags, ...rest } = result;
+
+		return {
+			...rest,
+			tagIds: tags.map((tag) => tag.id),
+		};
+	},
 	target: setInitialForm,
 });
 
