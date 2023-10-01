@@ -25,6 +25,13 @@ export const instance = ky.create({
 			}
 		],
 		afterResponse: [
+			(request) => {
+				const isLogout = request.url.includes('logout');
+
+				if (isLogout) {
+					token = null;
+				}
+			},
 			async (_request, options, response) => {
 				if (!response.ok) {
 					return;
@@ -48,6 +55,7 @@ export const instance = ky.create({
 
 				token = body.data.tokens.accessToken;
 			},
+
 			async (request, options, response) => {
 				if (response.status !== 401) {
 					return;

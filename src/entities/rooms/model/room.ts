@@ -12,11 +12,7 @@ import {
 } from '@/shared/types';
 
 const roomDomain = createDomain();
-const handlerFx = roomDomain.effect<
-	InRoomParams,
-	StandardResponse<Room>,
-	Error
->(roomsApi.getOne);
+const handlerFx = roomDomain.effect(roomsApi.getOne);
 
 export const query = createQuery<
 	InRoomParams,

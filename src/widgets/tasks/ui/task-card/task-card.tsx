@@ -4,7 +4,6 @@ import * as React from 'react';
 
 import { TaskCardMenu } from '@/features/tasks';
 
-import { roomModel } from '@/entities/rooms';
 import { TagLabel, SkeletonTagLabel } from '@/entities/tags';
 import { TemplateTaskCard } from '@/entities/tasks';
 import { UserAvatar } from '@/entities/users';
@@ -27,19 +26,11 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 		dragTaskModel.dragStarted
 	]);
 	const isDrag = useTaskCardIsDrag(id);
-	const canChange = useUnit(roomModel.$canChange);
 
-	const actions = canChange ? (
-		<TaskCardMenu roomId={roomId} taskId={id} />
-	) : null;
+	const actions = <TaskCardMenu roomId={roomId} taskId={id} />;
 	const tagElements =
 		tags.length > 0
-			? tags.map(
-				(tag) =>
-						(tag ? (
-							<TagLabel {...tag} key={tag.id} />
-						) : null) as React.ReactElement
-			  )
+			? tags.map((tag) => <TagLabel {...tag} key={tag.id} />)
 			: getEmptyArray(2).map((_, i) => <SkeletonTagLabel key={i} />);
 
 	const userAvatar = <UserAvatar {...author} size={24} />;
@@ -55,7 +46,6 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 			}}
 			id={id}
 			status={status}
-			draggable={canChange}
 			onDragStart={onDragStart}
 			onDragEnd={onDragEnd}
 			data-id={id}

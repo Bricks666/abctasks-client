@@ -7,6 +7,7 @@ import { Popups, PopupsProps } from '@/widgets/page';
 
 import { AddUserButton, AddUsersIntoRoom } from '@/features/users';
 
+import { roomModel } from '@/entities/rooms';
 import { usersInRoomModel } from '@/entities/users';
 
 import { popupsMap, routes } from '@/shared/configs';
@@ -28,6 +29,7 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 	const roomId = useParam(routes.room.users, 'id');
 	const isError = useUnit(usersInRoomModel.$hasError);
 	const start = useUnit(usersInRoomModel.query.start);
+	const canChange = useUnit(roomModel.$canChange);
 
 	if (isError) {
 		const onRetry = () => {
@@ -44,9 +46,11 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 		);
 	}
 
+	const actions = canChange ? <AddUserButton /> : null;
+
 	return (
 		<Container className={cn(styles.wrapper, className)}>
-			<SectionHeader title='Users' actions={<AddUserButton />} />
+			<SectionHeader title='Users' actions={actions} />
 			<UserList />
 			<Popups popupMap={popupMap} />
 		</Container>
