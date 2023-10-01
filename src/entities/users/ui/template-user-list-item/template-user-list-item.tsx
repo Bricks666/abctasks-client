@@ -9,7 +9,7 @@ import cn from 'classnames';
 import * as React from 'react';
 
 import { User } from '@/shared/api';
-import { CommonProps } from '@/shared/types';
+import { CommonProps, Slots } from '@/shared/types';
 
 import { UserAvatar } from '../user-avatar';
 
@@ -18,9 +18,8 @@ import styles from './template-user-list-item.module.css';
 export interface TemplateUserListItemProps
 	extends CommonProps,
 		User,
-		Omit<ListItemProps, keyof CommonProps | keyof User> {
-	readonly actions?: React.ReactElement | null;
-	readonly extra?: React.ReactElement | null;
+		Omit<ListItemProps, keyof CommonProps | keyof User | 'slots'> {
+	readonly slots?: Slots<'actions' | 'extra'>;
 }
 
 export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
@@ -28,19 +27,18 @@ export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
 ) => {
 	const {
 		username,
-		actions,
 		className,
 		photo,
-		extra,
 		email,
 		id: _id,
+		slots = {},
 		...rest
 	} = props;
 
 	return (
 		<ListItem
 			className={cn(styles.card, className)}
-			secondaryAction={actions}
+			secondaryAction={slots.actions}
 			{...rest}>
 			<ListItemAvatar>
 				<UserAvatar username={username} email={email} photo={photo} />
@@ -50,7 +48,7 @@ export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
 				secondary={email}
 				primaryTypographyProps={{ variant: 'subtitle1', component: 'p', }}
 			/>
-			{extra}
+			{slots.extra}
 		</ListItem>
 	);
 };

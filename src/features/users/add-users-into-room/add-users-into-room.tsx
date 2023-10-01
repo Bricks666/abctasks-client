@@ -1,35 +1,31 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { LoadingButton } from '@mui/lab';
 import { Paper, IconButton } from '@mui/material';
-import { useForm } from 'effector-forms';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 
-import { addUserRoomModel } from '@/features/rooms';
-
 import { TemplateUserListItem, UserSearch } from '@/entities/users';
 
+import { usePreventDefault } from '@/shared/lib';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 
 import styles from './add-users-into-room.module.css';
+import { close, form, mutation } from './model';
 
 export interface AddUsersIntoRoomProps extends CommonProps, BasePopupProps {}
 
 export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 	const { isOpen, className, } = props;
-	const { fields, submit, } = useForm(addUserRoomModel.form);
-	const onClose = useUnit(addUserRoomModel.close);
-	const isLoading = useUnit(addUserRoomModel.mutation.$pending);
-	const { user, } = fields;
+	const submit = useUnit(form.submit);
+	const onClose = useUnit(close);
+	const isLoading = useUnit(mutation.$pending);
+	const user = useUnit(form.fields.user.$value);
 
-	const onSubmit: React.FormEventHandler = (evt) => {
-		evt.preventDefault();
-		submit();
-	};
+	const onSubmit: React.FormEventHandler = usePreventDefault(submit);
 
-	const buttonText = user.value
-		? `Add ${user.value.username} to the room`
+	const buttonText = user
+		? `Add ${user.username} to the room`
 		: 'Select user above';
 
 	return (
@@ -39,30 +35,11 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 			onClose={onClose}
 			title='Add users into room'>
 			<form className={styles.form} onSubmit={onSubmit}>
-				{user.value ? (
-					<Paper>
-						<TemplateUserListItem
-							{...user.value}
-							actions={
-								<IconButton onClick={user.reset as any}>
-									<CloseIcon />
-								</IconButton>
-							}
-						/>
-					</Paper>
-				) : (
-					<UserSearch
-						value={user.value}
-						onChange={user.onChange}
-						isValid={user.isValid}
-						helperText={user.errorText()}
-						required
-					/>
-				)}
+				<User />
 				<LoadingButton
 					type='submit'
 					variant='contained'
-					disabled={!user.value}
+					disabled={!user}
 					loading={isLoading}
 					loadingPosition='start'
 					disableElevation>
@@ -70,5 +47,38 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 				</LoadingButton>
 			</form>
 		</MainPopup>
+	);
+};
+
+const User: React.FC = () => {
+	const user = useUnit(form.fields.user);
+
+	if (user.value) {
+		return (
+			<Paper>
+				<TemplateUserListItem
+					{...user.value}
+					slots={{
+						actions: (
+							<IconButton onClick={user.reset as any}>
+								<CloseIcon />
+							</IconButton>
+						),
+					}}
+				/>
+			</Paper>
+		);
+	}
+
+	return (
+		<UserSearch
+			value={user.value}
+			onChange={user.onChange}
+			onBlur={user.onBlur}
+			isValid={user.isValid}
+			helperText={user.errorText}
+			name='user'
+			required
+		/>
 	);
 };

@@ -5,7 +5,7 @@ import * as React from 'react';
 
 import { Popups, PopupsProps } from '@/widgets/page';
 
-import { AddUserButton, AddUsersIntoRoom } from '@/features/rooms';
+import { AddUserButton, AddUsersIntoRoom } from '@/features/users';
 
 import { usersInRoomModel } from '@/entities/users';
 

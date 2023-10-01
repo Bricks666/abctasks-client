@@ -13,14 +13,17 @@ export const UserList: React.FC<UserListProps> = (props) => {
 	const { className, } = props;
 	const users = useUsersInRoom();
 
+	const count = users.data.length;
+
 	return (
 		<Paper className={className}>
-			<List>
-				{users.data.map((user) => (
+			<List disablePadding>
+				{users.data.map((user, index) => (
 					<TemplateUserListItem
 						className={styles.item}
 						{...user}
 						key={user.id}
+						divider={index < count - 1}
 					/>
 				))}
 			</List>
