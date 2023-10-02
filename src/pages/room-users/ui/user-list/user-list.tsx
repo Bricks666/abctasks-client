@@ -28,7 +28,7 @@ export const UserList: React.FC<UserListProps> = (props) => {
 					<UserInRoomListItem
 						className={styles.item}
 						{...user}
-						roomId={roomId}
+						roomId={Number(roomId)}
 						key={user.id}
 						divider={index < count - 1}
 					/>

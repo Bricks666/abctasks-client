@@ -5,11 +5,11 @@ import * as React from 'react';
 import { routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
-export interface RoomCardActionsProps extends CommonProps {
+export interface OpenRoomProps extends CommonProps {
 	readonly id: number;
 }
 
-export const RoomCardActions: React.FC<RoomCardActionsProps> = (props) => {
+export const OpenRoom: React.FC<OpenRoomProps> = (props) => {
 	const { id, className, } = props;
 	return (
 		<Button
@@ -19,7 +19,7 @@ export const RoomCardActions: React.FC<RoomCardActionsProps> = (props) => {
 			params={{ id, }}
 			component={Link}
 			disableElevation>
-			Перейти
+			Открыть
 		</Button>
 	);
 };

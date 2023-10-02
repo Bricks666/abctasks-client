@@ -1,27 +1,28 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
+import { and } from 'patronum';
 
 import { createPopupControlModel } from '@/entities/popups';
-import { roomsModel } from '@/entities/rooms';
+import { roomModel, roomsModel } from '@/entities/rooms';
 
-import { CreateRoomParams, room, Room, roomsApi } from '@/shared/api';
+import { UpdateRoomParams, Room, roomsApi, room } from '@/shared/api';
 import { popupsMap } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
-import { getStandardResponse, StandardResponse } from '@/shared/types';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
-import { form } from './form';
+import { roomFormModel } from '../form';
 
-const createRoomsDomain = createDomain();
+const updateRoomDomain = createDomain();
 
-const handlerFx = createRoomsDomain.effect<
-	CreateRoomParams,
+const handlerFx = updateRoomDomain.effect<
+	UpdateRoomParams,
 	StandardResponse<Room>,
 	Error
->(roomsApi.create);
+>(roomsApi.update);
 
 export const mutation = createMutation<
-	CreateRoomParams,
+	UpdateRoomParams,
 	StandardResponse<Room>,
 	StandardResponse<Room>,
 	Error
@@ -30,8 +31,16 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(room)),
 });
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.createRoom);
-const { reset, formValidated, } = form;
+export const form = roomFormModel.create();
+
+export const { close, $isOpen, } = createPopupControlModel(popupsMap.updateRoom);
+
+const { formValidated, reset, setInitialForm, } = form;
+
+sample({
+	clock: close,
+	target: roomsModel.$id.reinit!,
+});
 
 sample({
 	clock: close,
@@ -45,8 +54,18 @@ sample({
 
 sample({
 	clock: formValidated,
-	filter: $isOpen,
+	source: roomsModel.$id,
+	filter: and($isOpen, roomsModel.$id),
+	fn: (roomId, values) => {
+		return { ...values, roomId: Number(roomId), };
+	},
 	target: mutation.start,
+});
+
+sample({
+	clock: roomModel.query.finished.success,
+	fn: ({ result, }) => result,
+	target: setInitialForm,
 });
 
 update(roomsModel.query, {
@@ -66,7 +85,9 @@ update(roomsModel.query, {
 			}
 
 			return {
-				result: [...query.result, mutation.result.data],
+				result: query.result.map((room) =>
+					room.id === mutation.result.data.id ? mutation.result.data : room
+				),
 			};
 		},
 	},
@@ -75,7 +96,7 @@ update(roomsModel.query, {
 sample({
 	clock: mutation.finished.success,
 	fn: () => ({
-		message: 'Room was created successfully',
+		message: 'Room was update successfully',
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -84,7 +105,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: 'Room was not created',
+		message: 'Room was not update',
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

@@ -6,11 +6,9 @@ import * as React from 'react';
 import { routes, getParams, popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
-export interface RoomsHeaderActionsProps extends CommonProps {}
+export interface OpenCreateRoomProps extends CommonProps {}
 
-export const RoomsHeaderActions: React.FC<RoomsHeaderActionsProps> = (
-	props
-) => {
+export const OpenCreateRoom: React.FC<OpenCreateRoomProps> = (props) => {
 	const { className, } = props;
 
 	return (

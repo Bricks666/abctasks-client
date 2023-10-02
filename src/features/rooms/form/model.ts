@@ -1,11 +1,8 @@
-import { createDomain } from 'effector';
 import { createForm } from 'effector-forms';
 import Joi from 'joi';
 
 import { Room } from '@/shared/api';
 import { createRuleFromSchema } from '@/shared/lib';
-
-const roomFormDomain = createDomain();
 
 export interface RoomFormValues extends Pick<Room, 'description' | 'name'> {}
 
@@ -19,16 +16,17 @@ const schemas = {
 	}),
 };
 
-export const form = createForm<RoomFormValues>({
-	fields: {
-		name: {
-			init: '',
-			rules: [createRuleFromSchema('name', schemas.name)],
+export const create = () => {
+	return createForm<RoomFormValues>({
+		fields: {
+			name: {
+				init: '',
+				rules: [createRuleFromSchema('name', schemas.name)],
+			},
+			description: {
+				init: '',
+				rules: [createRuleFromSchema('description', schemas.description)],
+			},
 		},
-		description: {
-			init: '',
-			rules: [createRuleFromSchema('description', schemas.description)],
-		},
-	},
-	domain: roomFormDomain,
-});
+	});
+};

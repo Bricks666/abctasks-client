@@ -1,11 +1,13 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
+import { redirect } from 'atomic-router';
 import { createDomain } from 'effector';
 import { Literal } from 'runtypes';
 
 import { roomsModel } from '@/entities/rooms';
 
 import { membersApi } from '@/shared/api';
+import { routes } from '@/shared/configs';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -25,6 +27,11 @@ export const mutation = createMutation({
 	contract: runtypeContract(getStandardResponse(Literal(true))),
 });
 
+redirect({
+	clock: mutation.finished.success,
+	route: routes.rooms,
+});
+
 update(roomsModel.query, {
 	on: mutation,
 	by: {
@@ -42,7 +49,9 @@ update(roomsModel.query, {
 			}
 
 			return {
-				result: query.result.filter((room) => room.id !== mutation.params.id),
+				result: query.result.filter(
+					(room) => room.id !== mutation.params.roomId
+				),
 			};
 		},
 	},

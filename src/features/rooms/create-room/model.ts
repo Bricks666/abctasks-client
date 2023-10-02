@@ -1,28 +1,23 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
-import { and } from 'patronum';
 
 import { createPopupControlModel } from '@/entities/popups';
-import { roomModel, roomsModel } from '@/entities/rooms';
+import { roomsModel } from '@/entities/rooms';
 
-import { UpdateRoomParams, Room, roomsApi, room } from '@/shared/api';
+import { CreateRoomParams, room, Room, roomsApi } from '@/shared/api';
 import { popupsMap } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
-import { StandardResponse, getStandardResponse } from '@/shared/types';
+import { getStandardResponse, StandardResponse } from '@/shared/types';
 
-import { form } from './form';
+import { roomFormModel } from '../form';
 
-const updateRoomDomain = createDomain();
+const createRoomsDomain = createDomain();
 
-const handlerFx = updateRoomDomain.effect<
-	UpdateRoomParams,
-	StandardResponse<Room>,
-	Error
->(roomsApi.update);
+const handlerFx = createRoomsDomain.effect(roomsApi.create);
 
 export const mutation = createMutation<
-	UpdateRoomParams,
+	CreateRoomParams,
 	StandardResponse<Room>,
 	StandardResponse<Room>,
 	Error
@@ -31,14 +26,10 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(room)),
 });
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.updateRoom);
+export const form = roomFormModel.create();
 
-const { formValidated, reset, setInitialForm, } = form;
-
-sample({
-	clock: close,
-	target: roomsModel.$id.reinit!,
-});
+export const { close, $isOpen, } = createPopupControlModel(popupsMap.createRoom);
+const { reset, formValidated, } = form;
 
 sample({
 	clock: close,
@@ -52,18 +43,8 @@ sample({
 
 sample({
 	clock: formValidated,
-	source: roomsModel.$id,
-	filter: and($isOpen, roomsModel.$id),
-	fn: (roomId, values) => {
-		return { ...values, roomId: Number(roomId), };
-	},
+	filter: $isOpen,
 	target: mutation.start,
-});
-
-sample({
-	clock: roomModel.query.finished.success,
-	fn: ({ result, }) => result,
-	target: setInitialForm,
 });
 
 update(roomsModel.query, {
@@ -83,9 +64,7 @@ update(roomsModel.query, {
 			}
 
 			return {
-				result: query.result.map((room) =>
-					room.id === mutation.result.data.id ? mutation.result.data : room
-				),
+				result: [...query.result, mutation.result.data],
 			};
 		},
 	},
@@ -94,7 +73,7 @@ update(roomsModel.query, {
 sample({
 	clock: mutation.finished.success,
 	fn: () => ({
-		message: 'Room was update successfully',
+		message: 'Room was created successfully',
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -103,7 +82,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: 'Room was not update',
+		message: 'Room was not created',
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,
