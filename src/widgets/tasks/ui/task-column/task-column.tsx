@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 
-import { TaskColumnActions } from '@/features/tasks';
+import { OpenCreateTaskButton } from '@/features/tasks';
 
 import { SkeletonTaskCard, TaskColumnHeader } from '@/entities/tasks';
 
@@ -49,7 +49,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 			data-status={columnStatus}>
 			<TaskColumnHeader
 				actions={
-					<TaskColumnActions roomId={roomId} columnStatus={columnStatus} />
+					<OpenCreateTaskButton roomId={roomId} columnStatus={columnStatus} />
 				}>
 				{header}
 			</TaskColumnHeader>

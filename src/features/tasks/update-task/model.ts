@@ -11,7 +11,7 @@ import { popupsMap, routes } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
-import { createTaskForm } from '../lib';
+import { taskFormModel } from '../form';
 
 const updateTaskDomain = createDomain();
 
@@ -37,7 +37,7 @@ const $routeParams = combine(
 	(id, params) => ({ id: Number(id), roomId: params.id, })
 );
 
-export const form = createTaskForm();
+export const form = taskFormModel.create();
 
 const { formValidated, setInitialForm, reset, } = form;
 

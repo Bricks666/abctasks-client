@@ -10,7 +10,7 @@ import { popupsMap, routes } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
-import { createTaskForm } from '../lib';
+import { taskFormModel } from '../form';
 
 const createTaskDomain = createDomain();
 
@@ -30,7 +30,7 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(task)),
 });
 
-export const form = createTaskForm();
+export const form = taskFormModel.create();
 
 export const { close, $isOpen, } = createPopupControlModel(popupsMap.createTask);
 

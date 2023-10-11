@@ -12,9 +12,8 @@ import { usePreventDefault } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
 
-import { TaskFormValues } from '../../lib';
-
-import styles from './task-form.module.css';
+import styles from './form.module.css';
+import { TaskFormValues } from './lib';
 
 export interface TaskFormProps extends CommonProps {
 	readonly buttonText: string;

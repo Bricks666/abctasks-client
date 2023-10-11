@@ -28,7 +28,7 @@ const schemas = {
 		}),
 };
 
-export const createTaskForm = () => {
+export const create = () => {
 	return createForm<TaskFormValues>({
 		fields: {
 			title: {

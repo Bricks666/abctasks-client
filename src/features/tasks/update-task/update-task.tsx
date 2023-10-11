@@ -9,7 +9,7 @@ import { deviceInfoModel } from '@/shared/models';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
-import { SkeletonTaskForm, TaskForm } from '../ui';
+import { SkeletonTaskForm, TaskForm } from '../form';
 
 import { close, form, mutation } from './model';
 import styles from './update-task.module.css';

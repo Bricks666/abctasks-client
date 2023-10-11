@@ -7,7 +7,7 @@ import { deviceInfoModel } from '@/shared/models';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
-import { TaskForm } from '../ui';
+import { TaskForm } from '../form';
 
 import styles from './create-task.module.css';
 import { close, form, mutation } from './model';

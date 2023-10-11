@@ -1,4 +1,4 @@
-import { cache, createQuery } from '@farfetched/core';
+import { cache, createQuery, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
@@ -46,7 +46,9 @@ const activitiesDomain = createDomain();
 const handlerFx = activitiesDomain.effect<
 	InRoomParams,
 	StandardResponse<PaginationResponse<Activity>>
->(({ roomId, }) => activitiesApi.getAll({ roomId, count: 5, }));
+>(({ roomId, }) =>
+	activitiesApi.getAll({ roomId, count: 5, by: 'createdAt', type: 'desc', })
+);
 
 export const query = createQuery<
 	InRoomParams,
@@ -159,4 +161,36 @@ sample({
 		} as UpdateTaskParams;
 	},
 	target: updateTaskModel.mutation.start,
+});
+
+[
+	updateTaskModel.mutation,
+	removeTaskModel.mutation,
+	createTaskModel.mutation
+].forEach((mutation) => {
+	update(query, {
+		on: mutation,
+		by: {
+			success: ({ query, }) => {
+				if (!query) {
+					return {
+						result: { items: [], totalCount: 0, limit: 50, },
+						refetch: true,
+					};
+				}
+
+				if ('error' in query) {
+					return {
+						error: query.error,
+						refetch: true,
+					};
+				}
+
+				return {
+					result: query.result,
+					refetch: true,
+				};
+			},
+		},
+	});
 });

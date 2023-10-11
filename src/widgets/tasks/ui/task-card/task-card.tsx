@@ -2,7 +2,10 @@ import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 
-import { TaskCardMenu } from '@/features/tasks';
+import {
+	OpenUpdateTaskFormMenuItem,
+	RemoveTaskMenuItem
+} from '@/features/tasks';
 
 import { TagLabel, SkeletonTagLabel } from '@/entities/tags';
 import { TemplateTaskCard } from '@/entities/tasks';
@@ -11,6 +14,7 @@ import { UserAvatar } from '@/entities/users';
 import { Task } from '@/shared/api';
 import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
+import { EditMenu } from '@/shared/ui';
 
 import { useTaskCardIsDrag } from '../../lib';
 import { dragTaskModel } from '../../model';
@@ -27,7 +31,7 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 	]);
 	const isDrag = useTaskCardIsDrag(id);
 
-	const actions = <TaskCardMenu roomId={roomId} taskId={id} />;
+	const actions = <CardMenu roomId={roomId} taskId={id} />;
 	const tagElements =
 		tags.length > 0
 			? tags.map((tag) => <TagLabel {...tag} key={tag.id} />)
@@ -50,6 +54,21 @@ export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
 			onDragEnd={onDragEnd}
 			data-id={id}
 			data-status={status}
+			draggable
 		/>
 	);
 });
+
+interface CardMenuProps {
+	readonly taskId: number;
+	readonly roomId: number;
+}
+
+const CardMenu: React.FC<CardMenuProps> = (props) => {
+	return (
+		<EditMenu>
+			<OpenUpdateTaskFormMenuItem {...props} />
+			<RemoveTaskMenuItem {...props} />
+		</EditMenu>
+	);
+};

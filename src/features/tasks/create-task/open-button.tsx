@@ -7,13 +7,13 @@ import { TaskStatus } from '@/shared/api';
 import { routes, getParams, popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
-export interface TaskColumnActionsProps extends CommonProps {
+export interface OpenCreateTaskButtonProps extends CommonProps {
 	readonly columnStatus: TaskStatus;
 	readonly roomId: number;
 }
 
-export const TaskColumnActions: React.FC<TaskColumnActionsProps> = React.memo(
-	(props) => {
+export const OpenCreateTaskButton: React.FC<OpenCreateTaskButtonProps> =
+	React.memo((props) => {
 		const { className, columnStatus, roomId, } = props;
 
 		return (
@@ -31,5 +31,4 @@ export const TaskColumnActions: React.FC<TaskColumnActionsProps> = React.memo(
 				</IconButton>
 			</Tooltip>
 		);
-	}
-);
+	});
