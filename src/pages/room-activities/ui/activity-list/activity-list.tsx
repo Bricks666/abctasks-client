@@ -20,6 +20,8 @@ export interface ActivityListProps extends CommonProps {}
 export const ActivityList: React.FC<ActivityListProps> = (props) => {
 	const { className, } = props;
 
+	const hasItems = useUnit(activitiesInRoomModel.$hasItems);
+
 	return (
 		<FriendlyList
 			className={className}
@@ -32,7 +34,7 @@ export const ActivityList: React.FC<ActivityListProps> = (props) => {
 			SkeletonComponent={SkeletonActivityListItem}
 			emptyText='There are no activities in room yet'
 			slots={{
-				after: <ActivitiesPagination />,
+				after: hasItems ? <ActivitiesPagination /> : null,
 			}}
 		/>
 	);

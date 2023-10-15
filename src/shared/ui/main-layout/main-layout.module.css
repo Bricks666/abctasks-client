@@ -1,14 +1,13 @@
 .wrapper {
+	display: grid;
+	grid-template-rows: max-content 1fr;
+
 	min-height: 100vh;
 }
 
 .layout {
-	display: grid;
-	gap: 2em;
-
 	max-width: 1920px;
 
-	margin: 0 auto;
 	padding: 2em;
 }
 

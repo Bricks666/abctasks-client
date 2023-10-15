@@ -115,12 +115,14 @@ export const FriendlyList = <RawData, Item, Error>(
 	const slotBefore = hasBeforeSlot ? <Center>{slots.before}</Center> : null;
 	const slotAfter = hasAfterSlot ? <Center>{slots.after}</Center> : null;
 
-	const hasSlot = !!(hasBeforeSlot || hasAfterSlot);
+	const hasBothSlot = hasBeforeSlot && hasAfterSlot;
 
 	const classes = cn(
 		styles.paper,
 		{
-			[styles.slots]: hasSlot,
+			[styles.after]: hasAfterSlot,
+			[styles.before]: hasBeforeSlot,
+			[styles.slots]: hasBothSlot,
 			[styles['border-disabled']]: disableBorder,
 		},
 		className

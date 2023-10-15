@@ -1,10 +1,21 @@
 .paper {
 	display: grid;
+	grid-template-rows: 1fr;
+	gap: 1em;
+
 	padding: 0.5em 0;
 }
 
-.slots {
-	gap: 1em;
+.after {
+	grid-template-rows: 1fr max-content;
+}
+
+.before {
+	grid-template-rows: max-content 1fr;
+}
+
+.both {
+	grid-template-rows: max-content 1fr max-content;
 }
 
 .border-disabled {
