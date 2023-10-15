@@ -9,7 +9,7 @@ export * from './menu-item';
 export * from './auth-layout';
 export * from './main-layout';
 export * from './confirm';
-export * from './retry-loading-slat';
+export * from './text-with-action';
 export * from './date-picker';
 export * from './controlled-toggle-button-group';
 export * from './filters-popover';

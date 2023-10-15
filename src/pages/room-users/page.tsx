@@ -1,3 +1,4 @@
+import ReplayIcon from '@mui/icons-material/Replay';
 import { Container } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
@@ -13,7 +14,7 @@ import { usersInRoomModel } from '@/entities/users';
 import { popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat, SectionHeader } from '@/shared/ui';
+import { TextWithAction, SectionHeader } from '@/shared/ui';
 
 import styles from './page.module.css';
 import { UserList } from './ui';
@@ -37,11 +38,12 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 		};
 
 		return (
-			<RetryLoadingSlat
+			<TextWithAction
 				className={className}
-				buttonText='retry'
-				content='Users were not loaded. To retry?'
-				onRetry={onRetry}
+				actionText='retry'
+				text='Users were not loaded. To retry?'
+				onClick={onRetry}
+				icon={<ReplayIcon />}
 			/>
 		);
 	}

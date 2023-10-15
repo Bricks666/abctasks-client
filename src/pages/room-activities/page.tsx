@@ -1,3 +1,4 @@
+import ReplayIcon from '@mui/icons-material/Replay';
 import { Container } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
@@ -10,7 +11,7 @@ import { activitiesInRoomModel } from '@/entities/activities';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat, SectionHeader } from '@/shared/ui';
+import { TextWithAction, SectionHeader } from '@/shared/ui';
 
 import styles from './page.module.css';
 import { ActivitiesPagination, ActivityList } from './ui';
@@ -30,11 +31,12 @@ const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 		};
 
 		children = (
-			<RetryLoadingSlat
+			<TextWithAction
 				className={className}
-				buttonText='retry'
-				content='Activities were not loaded. Click to retry it'
-				onRetry={onRetry}
+				actionText='retry'
+				text='Activities were not loaded. Click to retry it'
+				onClick={onRetry}
+				icon={<ReplayIcon />}
 			/>
 		);
 	} else {

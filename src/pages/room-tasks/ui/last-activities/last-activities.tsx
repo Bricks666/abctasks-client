@@ -1,3 +1,4 @@
+import ReplayIcon from '@mui/icons-material/Replay';
 import { Stack, Typography } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
@@ -10,7 +11,7 @@ import { ActivityCard } from '@/entities/activities';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat } from '@/shared/ui';
+import { TextWithAction } from '@/shared/ui';
 
 import { query } from '../../model';
 
@@ -32,11 +33,12 @@ export const LastActivities: React.FC<CommonProps> = (props) => {
 		};
 
 		children = (
-			<RetryLoadingSlat
+			<TextWithAction
 				className={className}
-				buttonText='retry'
-				content='Activities were not loaded. To retry?'
-				onRetry={onRetry}
+				actionText='retry'
+				text='Activities were not loaded. To retry?'
+				onClick={onRetry}
+				icon={<ReplayIcon />}
 			/>
 		);
 	} else {

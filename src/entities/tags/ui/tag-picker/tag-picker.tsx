@@ -1,11 +1,12 @@
 import { Autocomplete, ListItem } from '@mui/material';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 
 import { Tag } from '@/shared/api';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
-import { useTags } from '../../lib';
+import { tagsModel } from '../../model';
 import { TagLabel } from '../tag-label';
 
 export type TagPickerProps = CommonProps &
@@ -14,7 +15,7 @@ export type TagPickerProps = CommonProps &
 
 export const TagPicker: React.FC<TagPickerProps> = React.memo((props) => {
 	const { className, onChange, value, limitTags, multiple, ...rest } = props;
-	const tags = useTags();
+	const tags = useUnit(tagsModel.query);
 
 	let changeHandler;
 	if (multiple) {

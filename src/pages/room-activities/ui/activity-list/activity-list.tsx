@@ -21,9 +21,11 @@ export const ActivityList: React.FC<ActivityListProps> = (props) => {
 
 	const { items, } = activities.data;
 
+	const isPending = activities.pending;
+
 	return (
 		<section className={cn(styles.list, className)}>
-			{activities.pending
+			{isPending
 				? getEmptyArray(25).map((_, i) => <SkeletonActivityCard key={i} />)
 				: items.map((activity) => (
 					<ActivityCard {...activity} key={activity.id} />

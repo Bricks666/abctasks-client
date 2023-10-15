@@ -1,3 +1,4 @@
+import ReplyIcon from '@mui/icons-material/Replay';
 import { ListItem, Skeleton, List, Stack, Paper } from '@mui/material';
 import * as React from 'react';
 
@@ -15,7 +16,7 @@ import { useTags, TagListItem } from '@/entities/tags';
 import { getEmptyArray, popupsMap, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat, SectionHeader } from '@/shared/ui';
+import { TextWithAction, SectionHeader } from '@/shared/ui';
 
 export interface TagsPageProps extends CommonProps {}
 
@@ -42,11 +43,12 @@ const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 		};
 
 		return (
-			<RetryLoadingSlat
+			<TextWithAction
 				className={className}
-				buttonText='retry'
+				actionText='retry'
 				content='Tags were not loaded. To retry?'
 				onRetry={onRetry}
+				icon={<ReplyIcon />}
 			/>
 		);
 	}

@@ -1,3 +1,4 @@
+import ReplayIcon from '@mui/icons-material/Replay';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +11,7 @@ import { Task, TaskStatus } from '@/shared/api';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat } from '@/shared/ui';
+import { TextWithAction } from '@/shared/ui';
 
 import styles from './tasks.module.css';
 
@@ -55,11 +56,12 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 		};
 
 		return (
-			<RetryLoadingSlat
+			<TextWithAction
 				className={className}
-				buttonText='retry'
-				content='Tasks were not loaded. To retry?'
-				onRetry={onRetry}
+				actionText='retry'
+				text='Tasks were not loaded. To retry?'
+				onClick={onRetry}
+				icon={<ReplayIcon />}
 			/>
 		);
 	}

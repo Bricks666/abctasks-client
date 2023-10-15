@@ -1,3 +1,4 @@
+import ReplayIcon from '@mui/icons-material/Replay';
 import { Stack, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
@@ -12,7 +13,7 @@ import {
 import { getEmptyArray, routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { RetryLoadingSlat } from '@/shared/ui';
+import { TextWithAction } from '@/shared/ui';
 
 import styles from './tasks-progresses.module.css';
 
@@ -33,10 +34,11 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 			progresses.start({ roomId, });
 		};
 		children = (
-			<RetryLoadingSlat
-				content='Progress were not loaded. To retry?'
-				onRetry={onRetry}
-				buttonText='retry'
+			<TextWithAction
+				text='Progress were not loaded. To retry?'
+				onClick={onRetry}
+				actionText='retry'
+				icon={<ReplayIcon />}
 			/>
 		);
 	} else {
