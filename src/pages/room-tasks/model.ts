@@ -1,6 +1,6 @@
 import { cache, createQuery, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { querySync } from 'atomic-router';
+import { RouteQuery, querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
 
 import { dragTaskModel } from '@/widgets/tasks';
@@ -12,7 +12,6 @@ import {
 	updateTaskModel
 } from '@/features/tasks';
 
-import { activitiesInRoomModel } from '@/entities/activities';
 import { progressesModel } from '@/entities/progresses';
 import { roomsModel } from '@/entities/rooms';
 import { tagsModel } from '@/entities/tags';
@@ -49,6 +48,7 @@ const handlerFx = activitiesDomain.effect<
 >(({ roomId, }) =>
 	activitiesApi.getAll({ roomId, count: 5, by: 'createdAt', type: 'desc', })
 );
+const $roomId = authorizedRoute.$params.map(({ id, }) => id);
 
 export const query = createQuery<
 	InRoomParams,
@@ -64,6 +64,24 @@ export const query = createQuery<
 	),
 	mapData: dataExtractor,
 });
+
+const queries = [
+	tasksInRoomModel.query,
+	tagsModel.query,
+	roomsModel.query,
+	usersInRoomModel.query,
+	progressesModel.query,
+	query
+];
+
+const mapQuery = (query: RouteQuery) => {
+	return {
+		authorIds: query[getParams.userId],
+		tagIds: query[getParams.userId],
+		before: query[getParams.before],
+		after: query[getParams.after],
+	};
+};
 
 cache(query);
 
@@ -83,25 +101,14 @@ sample({
 	target: query.start,
 });
 
-/*
- * TODO: Сделать обертку над роутом, чтобы отслеживать отдельно изменения параметров
- */
 sample({
-	clock: [authorizedRoute.opened],
-	fn: ({ params, query, }) => ({
-		roomId: params.id,
-		authorIds: query[getParams.userId],
-		tagIds: query[getParams.userId],
-		before: query[getParams.before],
-		after: query[getParams.after],
+	clock: $roomId,
+	source: authorizedRoute.$query,
+	fn: (query, roomId) => ({
+		roomId,
+		...mapQuery(query),
 	}),
-	target: [
-		tasksInRoomModel.query.start,
-		activitiesInRoomModel.query.start,
-		tagsModel.query.start,
-		roomsModel.query.start,
-		usersInRoomModel.query.start
-	],
+	target: queries.map((query) => query.start),
 });
 
 querySync({
@@ -124,11 +131,6 @@ sample({
 });
 
 sample({
-	clock: authorizedRoute.closed,
-	target: reset,
-});
-
-sample({
 	clock: [
 		updateTaskModel.mutation.finished.success,
 		createTaskModel.mutation.finished.success,
@@ -140,23 +142,22 @@ sample({
 
 sample({
 	clock: authorizedRoute.closed,
-	target: progressesModel.query.reset,
+	target: reset,
 });
 
 sample({
-	clock: [authorizedRoute.opened, authorizedRoute.updated],
-	fn: ({ params, }) => ({ roomId: params.id, }),
-	target: progressesModel.query.start,
+	clock: authorizedRoute.closed,
+	target: queries.map((query) => query.reset),
 });
 
 sample({
 	clock: dragTaskModel.dropped,
-	source: { id: dragTaskModel.$id, params: authorizedRoute.$params, },
-	fn: ({ id, params, }, evt) => {
+	source: { id: dragTaskModel.$id, roomId: $roomId, },
+	fn: ({ id, roomId, }, evt) => {
 		const { status, } = evt.currentTarget.dataset;
 		return {
 			id,
-			roomId: params.id,
+			roomId,
 			status,
 		} as UpdateTaskParams;
 	},
