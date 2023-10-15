@@ -19,7 +19,6 @@ export const AddUserButton: React.FC<AddUserButtonProps> = React.memo(() => {
 				query={{
 					[getParams.popup]: popupsMap.addUser,
 				}}
-				color='inherit'
 				component={Link}>
 				<PersonAddAlt1Icon />
 			</IconButton>

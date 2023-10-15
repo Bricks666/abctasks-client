@@ -1,35 +1,57 @@
-import cn from 'classnames';
+import ReplayIcon from '@mui/icons-material/Replay';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 
 import {
-	useActivitiesInRoom,
-	SkeletonActivityCard,
-	ActivityCard
+	SkeletonActivityListItem,
+	ActivityListItem,
+	activitiesInRoomModel
 } from '@/entities/activities';
 
-import { getEmptyArray } from '@/shared/configs';
+import { routes } from '@/shared/configs';
+import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+import { FriendlyList, TextWithAction } from '@/shared/ui';
 
-import styles from './activity-list.module.css';
+import { ActivitiesPagination } from '../activities-pagination';
 
 export interface ActivityListProps extends CommonProps {}
 
 export const ActivityList: React.FC<ActivityListProps> = (props) => {
 	const { className, } = props;
 
-	const activities = useActivitiesInRoom();
+	return (
+		<FriendlyList
+			className={className}
+			$query={activitiesInRoomModel.query}
+			getData={(data) => data.items}
+			getKey={(item) => item.id}
+			skeletonsCount={50}
+			ErrorComponent={Error}
+			ItemComponent={ActivityListItem}
+			SkeletonComponent={SkeletonActivityListItem}
+			emptyText='There are no activities in room yet'
+			slots={{
+				after: <ActivitiesPagination />,
+			}}
+		/>
+	);
+};
 
-	const { items, } = activities.data;
+const Error: React.FC = () => {
+	const roomId = useParam(routes.room.tasks, 'id');
+	const refresh = useUnit(activitiesInRoomModel.query.refresh);
 
-	const isPending = activities.pending;
+	const onRetry = React.useCallback(() => {
+		refresh({ roomId, });
+	}, [roomId]);
 
 	return (
-		<section className={cn(styles.list, className)}>
-			{isPending
-				? getEmptyArray(25).map((_, i) => <SkeletonActivityCard key={i} />)
-				: items.map((activity) => (
-					<ActivityCard {...activity} key={activity.id} />
-				  ))}
-		</section>
+		<TextWithAction
+			actionText='retry'
+			text='Activities were not loaded. To retry?'
+			onClick={onRetry}
+			icon={<ReplayIcon />}
+		/>
 	);
 };

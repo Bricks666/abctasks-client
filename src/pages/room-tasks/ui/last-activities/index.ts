@@ -1,1 +1,1 @@
-export { LastActivities } from './last-activities';
+export { LastActivities, type LastActivitiesProps } from './last-activities';

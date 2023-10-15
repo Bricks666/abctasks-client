@@ -1,8 +1,8 @@
-.card {
+.item {
 	overflow: unset;
 }
 
-.cardContent {
+.content {
 	display: grid;
 	grid-template-columns: max-content 1fr;
 	grid-template-rows: max-content 1fr;

@@ -33,7 +33,7 @@ export const MobileAside: React.FC<MobileAsideProps> = (props) => {
 						</IconButton>
 					</Tooltip>
 				</div>
-				<Aside />
+				<Aside disableBorder />
 			</Drawer>
 		</div>
 	);

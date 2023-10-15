@@ -1,5 +1,5 @@
 .aside {
 	display: grid;
-	gap: 1.5em;
+	gap: 1em;
 	grid-template-rows: max-content 1fr;
 }

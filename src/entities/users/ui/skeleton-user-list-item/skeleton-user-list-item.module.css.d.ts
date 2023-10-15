@@ -1,4 +1,4 @@
 declare const styles: {
-	readonly wrapper: string;
+	readonly card: string;
 };
 export = styles;

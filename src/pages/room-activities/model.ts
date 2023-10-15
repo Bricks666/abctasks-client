@@ -27,6 +27,14 @@ const { fields, formValidated, reset, $values, } = activitiesFiltersModel.form;
 
 const formApplied = createEvent<void>();
 
+const queries = [
+	activitiesInRoomModel.query,
+	usersInRoomModel.query,
+	roomsModel.query,
+	activityActionsModel.query,
+	activitySpheresModel.query
+];
+
 sample({
 	clock: [formValidated, reset],
 	target: formApplied,
@@ -73,18 +81,17 @@ sample({
 		count: query[getParams.count],
 		page: query[getParams.page],
 	}),
-	target: [
-		activitiesInRoomModel.query.start,
-		usersInRoomModel.query.start,
-		roomsModel.query.start,
-		activityActionsModel.query.start,
-		activitySpheresModel.query.start
-	],
+	target: queries.map((query) => query.start),
 });
 
 sample({
 	clock: authorizedRoute.closed,
-	target: activitiesFiltersModel.form.reset,
+	target: reset,
+});
+
+sample({
+	clock: authorizedRoute.closed,
+	target: queries.map((query) => query.reset),
 });
 
 querySync({

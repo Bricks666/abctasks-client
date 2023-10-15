@@ -1,39 +1,51 @@
-import { List, Paper } from '@mui/material';
+import ReplayIcon from '@mui/icons-material/Replay';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 
 import { UserInRoomListItem } from '@/widgets/users';
 
-import { useUsersInRoom } from '@/entities/users';
+import { SkeletonUserListItem, usersInRoomModel } from '@/entities/users';
 
+import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-
-import { currentRoute } from '../../model';
-
-import styles from './user-list.module.css';
+import { FriendlyList, TextWithAction } from '@/shared/ui';
 
 export interface UserListProps extends CommonProps {}
 
 export const UserList: React.FC<UserListProps> = (props) => {
 	const { className, } = props;
-	const users = useUsersInRoom();
-	const roomId = useParam(currentRoute, 'id');
-
-	const count = users.data.length;
+	const roomId = useParam(routes.room.tasks, 'id');
 
 	return (
-		<Paper className={className}>
-			<List disablePadding>
-				{users.data.map((user, index) => (
-					<UserInRoomListItem
-						className={styles.item}
-						{...user}
-						roomId={Number(roomId)}
-						key={user.id}
-						divider={index < count - 1}
-					/>
-				))}
-			</List>
-		</Paper>
+		<FriendlyList
+			className={className}
+			$query={usersInRoomModel.query}
+			getData={(users) => users.map((user) => ({ ...user, roomId, }))}
+			getKey={(item) => item.id}
+			skeletonsCount={25}
+			ErrorComponent={Error}
+			ItemComponent={UserInRoomListItem}
+			SkeletonComponent={SkeletonUserListItem}
+			emptyText='There are no users in room yet'
+		/>
+	);
+};
+
+const Error: React.FC = () => {
+	const roomId = useParam(routes.room.tasks, 'id');
+	const refresh = useUnit(usersInRoomModel.query.refresh);
+
+	const onRetry = React.useCallback(() => {
+		refresh({ roomId, });
+	}, [roomId]);
+
+	return (
+		<TextWithAction
+			actionText='retry'
+			text='Users were not loaded. To retry?'
+			onClick={onRetry}
+			icon={<ReplayIcon />}
+		/>
 	);
 };

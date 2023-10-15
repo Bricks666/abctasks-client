@@ -1,0 +1,12 @@
+.paper {
+	display: grid;
+	padding: 0.5em 0;
+}
+
+.slots {
+	gap: 1em;
+}
+
+.border-disabled {
+	border: 0;
+}

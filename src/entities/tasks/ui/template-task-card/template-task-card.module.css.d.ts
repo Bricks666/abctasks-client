@@ -4,5 +4,6 @@ declare const styles: {
 	readonly header: string;
 	readonly content: string;
 	readonly description: string;
+	readonly actions: string;
 };
 export = styles;
