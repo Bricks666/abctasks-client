@@ -30,3 +30,7 @@ export type PickerProps<T> = SinglePickerProps<T> | MultiplePickerProps<T>;
 export type Slots<T extends string> = {
 	readonly [K in T]?: ReactNode | null;
 };
+
+export type Classes<T extends string> = {
+	readonly [K in T]?: string;
+};

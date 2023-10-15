@@ -25,7 +25,13 @@ export const MobileAside: React.FC<MobileAsideProps> = (props) => {
 				</IconButton>
 			</Tooltip>
 
-			<Drawer open={open} onClose={toggleOff} anchor='right'>
+			<Drawer
+				classes={{
+					paper: styles.drawer,
+				}}
+				open={open}
+				onClose={toggleOff}
+				anchor='right'>
 				<div className={styles.header}>
 					<Tooltip title='Закрыть'>
 						<IconButton onClick={toggleOff}>

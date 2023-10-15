@@ -1,20 +1,5 @@
-.wrapper {
-	padding: 0 1em;
-}
-
-.title {
-	font-weight: 700;
-}
-
 .list {
+	padding: 0 1em;
+
 	overflow: scroll;
-}
-
-@media (max-width: 1300px) {
-	.wrapper {
-		background-color: white;
-
-		padding: 1rem;
-		border-radius: 8px;
-	}
 }

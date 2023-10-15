@@ -47,6 +47,9 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 					</Typography>
 				),
 			}}
+			classes={{
+				list: styles.list,
+			}}
 		/>
 	);
 };

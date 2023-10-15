@@ -1,3 +1,7 @@
+.drawer {
+	width: minmax(320px, 400px);
+}
+
 .header {
 	display: flex;
 	justify-content: end;

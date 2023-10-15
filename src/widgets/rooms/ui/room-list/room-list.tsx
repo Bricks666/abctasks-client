@@ -1,23 +1,27 @@
 import * as React from 'react';
 
-import { SkeletonRoomCard, useRooms } from '@/entities/rooms';
+import { SkeletonRoomCard, roomsModel } from '@/entities/rooms';
 
-import { getEmptyArray } from '@/shared/configs';
+import { FriendlyList } from '@/shared/ui';
 
 import { RoomCard } from '../room-card';
 
 import styles from './room-list.module.css';
 
 export const RoomList: React.FC = () => {
-	const { data, } = useRooms();
-	const isLoading = !data;
-	const items = isLoading
-		? getEmptyArray(15).map((_, i) => (
-			<SkeletonRoomCard className={styles.card} key={i} />
-		  ))
-		: data.map((room) => (
-			<RoomCard className={styles.card} {...room} key={room.id} />
-		  ));
-
-	return <section className={styles.list}>{items}</section>;
+	return (
+		<FriendlyList
+			$query={roomsModel.query}
+			getKey={(item) => item.id}
+			ItemComponent={RoomCard}
+			SkeletonComponent={SkeletonRoomCard}
+			skeletonsCount={15}
+			ErrorComponent={() => null}
+			emptyText='There are no room yet. Create is for continue'
+			classes={{
+				list: styles.list,
+			}}
+			disableBorder
+		/>
+	);
 };

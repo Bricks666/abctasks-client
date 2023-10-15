@@ -5,7 +5,7 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 
 import { getEmptyArray } from '@/shared/configs';
-import { CommonProps, Slots } from '@/shared/types';
+import { Classes, CommonProps, Slots } from '@/shared/types';
 
 import { Center } from '../center';
 
@@ -25,6 +25,7 @@ interface BaseFriendlyListProps<
 	readonly emptyText: string;
 	readonly getKey: (item: Item) => React.Key | null;
 	readonly slots?: Slots<'before' | 'after'>;
+	readonly classes?: Classes<'list'>;
 	readonly disableBorder?: boolean;
 }
 
@@ -59,6 +60,7 @@ export const FriendlyList = <RawData, Item, Error>(
 		className,
 		slots,
 		disableBorder,
+		classes,
 	} = props;
 
 	const query = useUnit($query as Query<any, Item[] | RawData, any>);
@@ -90,7 +92,11 @@ export const FriendlyList = <RawData, Item, Error>(
 			})
 		);
 
-		content = <List disablePadding>{skeletons}</List>;
+		content = (
+			<List className={classes?.list} disablePadding>
+				{skeletons}
+			</List>
+		);
 	} else if (isEmpty) {
 		content = (
 			<Center>
@@ -107,7 +113,11 @@ export const FriendlyList = <RawData, Item, Error>(
 			})
 		);
 
-		content = <List disablePadding>{items}</List>;
+		content = (
+			<List className={classes?.list} disablePadding>
+				{items}
+			</List>
+		);
 	}
 
 	const hasBeforeSlot = !!slots?.before;
@@ -117,7 +127,7 @@ export const FriendlyList = <RawData, Item, Error>(
 
 	const hasBothSlot = hasBeforeSlot && hasAfterSlot;
 
-	const classes = cn(
+	const paperClasses = cn(
 		styles.paper,
 		{
 			[styles.after]: hasAfterSlot,
@@ -129,7 +139,7 @@ export const FriendlyList = <RawData, Item, Error>(
 	);
 
 	return (
-		<Paper className={classes}>
+		<Paper className={paperClasses}>
 			{slotBefore}
 			{content}
 			{slotAfter}
