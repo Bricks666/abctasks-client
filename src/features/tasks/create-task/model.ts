@@ -32,7 +32,9 @@ export const mutation = createMutation<
 
 export const form = taskFormModel.create();
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.createTask);
+export const { close, $isOpen, opened, } = createPopupControlModel(
+	popupsMap.createTask
+);
 
 const { reset, formValidated, } = form;
 
@@ -56,6 +58,14 @@ sample({
 	source: routes.room.tasks.$params,
 	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
 	target: mutation.start,
+});
+
+sample({
+	clock: opened,
+	source: tasksInRoomModel.$status,
+	filter: Boolean,
+	fn: (status) => ({ status, }),
+	target: form.setInitialForm,
 });
 
 update(tasksInRoomModel.query, {
