@@ -34,6 +34,10 @@ const queries = [
 	activityActionsModel.query,
 	activitySpheresModel.query
 ];
+const sorting = {
+	by: 'createdAt',
+	type: 'desc',
+} as const;
 
 sample({
 	clock: [formValidated, reset],
@@ -62,6 +66,7 @@ sample({
 	fn: ({ params, values, page, }): GetActivitiesInRoomParams => {
 		return {
 			roomId: params.id,
+			...sorting,
 			...values,
 			page: page ? Number(page) : 1,
 		};
@@ -80,6 +85,7 @@ sample({
 		sphereIds: query[getParams.sphereId],
 		count: query[getParams.count],
 		page: query[getParams.page],
+		...sorting,
 	}),
 	target: queries.map((query) => query.start),
 });
