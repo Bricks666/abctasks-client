@@ -1,4 +1,5 @@
 import {
+	CssBaseline,
 	Experimental_CssVarsProvider as CssVarsProvider,
 	StyledEngineProvider,
 	experimental_extendTheme as extendTheme
@@ -19,6 +20,7 @@ export const withGlobalStyles =
 				<CssVarsProvider theme={theme}>
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
 						<StyledEngineProvider injectFirst>
+							<CssBaseline />
 							<Component />
 						</StyledEngineProvider>
 					</LocalizationProvider>
@@ -26,12 +28,26 @@ export const withGlobalStyles =
 			);
 		};
 
+declare module '@mui/material/styles' {
+	interface ColorSchemeOverrides {
+		system: true;
+	}
+}
+
 const theme = extendTheme({
 	shape: {
 		borderRadius: 8,
 	},
 	spacing: (tab: number) => `${tab}rem`,
-
+	colorSchemes: {
+		dark: {
+			palette: {
+				common: {
+					background: '#121212',
+				},
+			},
+		},
+	},
 	components: {
 		MuiButton: {
 			defaultProps: {

@@ -3,6 +3,7 @@ import cn from 'classnames';
 import * as React from 'react';
 
 import { ProfileMenu } from '@/features/auth';
+import { AdaptiveColorSchemeToggler } from '@/features/page';
 
 import { CommonProps, Slots } from '@/shared/types';
 
@@ -21,7 +22,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
 		<AppBar
 			className={className}
 			position='static'
-			color='transparent'
+			color='default'
 			elevation={0}
 			variant='outlined'>
 			<Toolbar className={styles.bar}>
@@ -33,7 +34,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
 					<div className={styles.center}>{slots.center}</div>
 				) : null}
 				<div className={cn(styles.right, styles.side)}>
-					{slots.right} <ProfileMenu />
+					{slots.right} <AdaptiveColorSchemeToggler /> <ProfileMenu />
 				</div>
 			</Toolbar>
 		</AppBar>

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 
@@ -13,9 +14,11 @@ export const MainLayout: React.FC<MainLayoutProps> = (props) => {
 	const { className, children, header, } = props;
 
 	return (
-		<section className={styles.wrapper}>
+		<Box className={styles.wrapper} color='inher'>
 			{header}
-			<main className={cn(styles.layout, className)}>{children}</main>
-		</section>
+			<Box className={cn(styles.layout, className)} component='main'>
+				{children}
+			</Box>
+		</Box>
 	);
 };
