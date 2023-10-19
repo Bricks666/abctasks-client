@@ -30,7 +30,7 @@ export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
 			$query={query}
 			getData={(data) => data.items}
 			getKey={(item) => item.id}
-			skeletonsCount={8}
+			skeletonsCount={6}
 			ErrorComponent={Error}
 			ItemComponent={ActivityListItem}
 			SkeletonComponent={SkeletonActivityListItem}

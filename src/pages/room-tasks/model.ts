@@ -46,7 +46,7 @@ const handlerFx = activitiesDomain.effect<
 	InRoomParams,
 	StandardResponse<PaginationResponse<Activity>>
 >(({ roomId, }) =>
-	activitiesApi.getAll({ roomId, count: 5, by: 'createdAt', type: 'desc', })
+	activitiesApi.getAll({ roomId, count: 6, by: 'createdAt', type: 'desc', })
 );
 const $roomId = authorizedRoute.$params.map(({ id, }) => id);
 
