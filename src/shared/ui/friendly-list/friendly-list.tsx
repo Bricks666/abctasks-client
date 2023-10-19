@@ -100,7 +100,7 @@ export const FriendlyList = <RawData, Item, Error>(
 	} else if (isEmpty) {
 		content = (
 			<Center>
-				<Typography>{emptyText}</Typography>
+				<Typography fontWeight={500}>{emptyText}</Typography>
 			</Center>
 		);
 	} else {
