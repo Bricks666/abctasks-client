@@ -56,10 +56,10 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 
 const Error: React.FC = () => {
 	const roomId = useParam(routes.room.tasks, 'id');
-	const refresh = useUnit(progressesModel.query.refresh);
+	const start = useUnit(progressesModel.query.start);
 
 	const onRetry = React.useCallback(() => {
-		refresh({ roomId, });
+		start({ roomId, });
 	}, [roomId]);
 	return (
 		<TextWithAction

@@ -29,12 +29,12 @@ export const TagsList: React.FC<CommonProps> = (props) => {
 };
 
 const Error: React.FC = () => {
-	const refresh = useUnit(tagsModel.query.refresh);
+	const start = useUnit(tagsModel.query.start);
 
 	const roomId = useParam(routes.room.tags, 'id');
 
 	const onRetry = () => {
-		refresh({ roomId, });
+		start({ roomId, });
 	};
 
 	return (

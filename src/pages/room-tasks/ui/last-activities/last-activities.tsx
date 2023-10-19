@@ -50,10 +50,10 @@ export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
 
 const Error: React.FC = () => {
 	const roomId = useParam(routes.room.tasks, 'id');
-	const refresh = useUnit(query.refresh);
+	const start = useUnit(query.start);
 
 	const onRetry = React.useCallback(() => {
-		refresh({ roomId, });
+		start({ roomId, });
 	}, [roomId]);
 
 	return (

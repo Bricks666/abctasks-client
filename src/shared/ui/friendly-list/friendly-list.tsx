@@ -63,6 +63,15 @@ export const FriendlyList = <RawData, Item, Error>(
 		classes,
 	} = props;
 
+	const finished = useUnit($query.finished);
+	const [alreadyFetched, setAlreadyFetched] = React.useState(finished);
+
+	React.useEffect(() => {
+		if (finished) {
+			setAlreadyFetched(finished);
+		}
+	}, [finished]);
+
 	const query = useUnit($query as Query<any, Item[] | RawData, any>);
 
 	const arrayData = (getData ? getData(query.data as RawData) : query.data) as
@@ -70,7 +79,7 @@ export const FriendlyList = <RawData, Item, Error>(
 		| null;
 
 	const isEmpty = !arrayData?.length;
-	const isLoading = query.pending;
+	const isLoading = query.pending && !alreadyFetched;
 	const isError = !query.error;
 
 	let content: React.ReactElement | null = null;

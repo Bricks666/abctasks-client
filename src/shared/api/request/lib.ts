@@ -4,7 +4,7 @@ export const normalizeQuery = (
 	const entries = Object.entries(object);
 
 	return entries.reduce((object, [key, value]) => {
-		if (value === undefined || value == null) {
+		if (value === undefined || value === null) {
 			return object;
 		}
 

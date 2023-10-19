@@ -42,10 +42,10 @@ export const ActivityList: React.FC<ActivityListProps> = (props) => {
 
 const Error: React.FC = () => {
 	const roomId = useParam(routes.room.tasks, 'id');
-	const refresh = useUnit(activitiesInRoomModel.query.refresh);
+	const start = useUnit(activitiesInRoomModel.query.start);
 
 	const onRetry = React.useCallback(() => {
-		refresh({ roomId, });
+		start({ roomId, });
 	}, [roomId]);
 
 	return (

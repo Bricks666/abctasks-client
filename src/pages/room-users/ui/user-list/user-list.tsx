@@ -34,10 +34,10 @@ export const UserList: React.FC<UserListProps> = (props) => {
 
 const Error: React.FC = () => {
 	const roomId = useParam(routes.room.tasks, 'id');
-	const refresh = useUnit(usersInRoomModel.query.refresh);
+	const start = useUnit(usersInRoomModel.query.start);
 
 	const onRetry = React.useCallback(() => {
-		refresh({ roomId, });
+		start({ roomId, });
 	}, [roomId]);
 
 	return (
