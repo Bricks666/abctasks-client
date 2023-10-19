@@ -1,6 +1,7 @@
 import {
 	LinearProgress,
 	linearProgressClasses,
+	ListItem,
 	SxProps,
 	Typography
 } from '@mui/material';
@@ -31,7 +32,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 		};
 
 		return (
-			<div>
+			<ListItem className={cn(styles.item, className)}>
 				<Typography className={styles.title} variant='body1'>
 					{name}{' '}
 					<Typography component='span' color='#b4b4b4'>
@@ -39,7 +40,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 					</Typography>
 				</Typography>
 				<LinearProgress
-					className={cn(styles.progress, className)}
+					className={styles.progress}
 					variant='determinate'
 					value={value}
 					valueBuffer={100}
@@ -51,7 +52,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 					}
 					sx={sx}
 				/>
-			</div>
+			</ListItem>
 		);
 	}
 );
