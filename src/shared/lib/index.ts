@@ -10,3 +10,4 @@ export * from './create-rule-from-schema';
 export * from './string-to-color';
 export * from './use-prevent-default';
 export * from './prepare-picker-control';
+export * from './group';

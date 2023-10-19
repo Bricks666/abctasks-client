@@ -1,13 +1,13 @@
 import ReplayIcon from '@mui/icons-material/Replay';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TaskColumn } from '@/widgets/tasks';
 
-import { useGroupedTasks } from '@/entities/tasks';
+import { tasksInRoomModel } from '@/entities/tasks';
 
-import { Task, TaskStatus } from '@/shared/api';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -15,42 +15,17 @@ import { TextWithAction } from '@/shared/ui';
 
 import styles from './tasks.module.css';
 
-export interface Column {
-	readonly tasks: Task[];
-	readonly status: TaskStatus;
-	readonly hasActions: boolean;
-}
-
 export const Tasks: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('task');
 	const roomId = useParam(routes.room.tasks, 'id');
-	const tasks = useGroupedTasks();
-	/*
-  TODO: Пересмотреть распределение на колонки
-  */
-	const columns: Column[] = [
-		{
-			tasks: tasks.data.ready,
-			status: 'ready',
-			hasActions: true,
-		},
-		{
-			tasks: tasks.data.in_progress,
-			status: 'in_progress',
-			hasActions: true,
-		},
-		{
-			tasks: tasks.data.needReview,
-			status: 'review',
-			hasActions: true,
-		},
-		{
-			tasks: tasks.data.done,
-			status: 'done',
-			hasActions: false,
-		}
-	];
+	const tasks = useUnit({
+		pending: tasksInRoomModel.query.$pending,
+		stale: tasksInRoomModel.query.$stale,
+		error: tasksInRoomModel.query.$error,
+		start: tasksInRoomModel.query.start,
+	});
+	const columns = useUnit(tasksInRoomModel.$tasksColumns);
 
 	const isLoading = tasks.pending && !tasks.stale;
 	const isError = !!tasks.error;
