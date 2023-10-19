@@ -1,7 +1,8 @@
 import { cache, createQuery, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { RouteQuery, querySync } from 'atomic-router';
-import { createDomain, sample } from 'effector';
+import { createDomain, createStore, sample } from 'effector';
+import { empty, not } from 'patronum';
 
 import { dragTaskModel } from '@/widgets/tasks';
 
@@ -48,7 +49,7 @@ const handlerFx = activitiesDomain.effect<
 >(({ roomId, }) =>
 	activitiesApi.getAll({ roomId, count: 6, by: 'createdAt', type: 'desc', })
 );
-const $roomId = authorizedRoute.$params.map(({ id, }) => id);
+const $roomId = createStore<null | number>(null);
 
 export const query = createQuery<
 	InRoomParams,
@@ -86,26 +87,17 @@ const mapQuery = (query: RouteQuery) => {
 cache(query);
 
 sample({
-	clock: [
-		createTaskModel.mutation.finished.success,
-		removeTaskModel.mutation.finished.success,
-		updateTaskModel.mutation.finished.success
-	],
-	fn: ({ params, }) => ({ roomId: params.roomId, }),
-	target: query.start,
-});
-
-sample({
-	clock: [authorizedRoute.opened],
-	fn: ({ params, }) => ({ roomId: params.id, }),
-	target: query.start,
+	source: authorizedRoute.$params,
+	fn: (params) => params.id,
+	target: $roomId,
 });
 
 sample({
 	clock: $roomId,
 	source: authorizedRoute.$query,
+	filter: not(empty($roomId)),
 	fn: (query, roomId) => ({
-		roomId,
+		roomId: roomId as number,
 		...mapQuery(query),
 	}),
 	target: queries.map((query) => query.start),
@@ -126,18 +118,9 @@ querySync({
 sample({
 	clock: [formValidated, reset],
 	source: authorizedRoute.$params,
+	filter: authorizedRoute.$isOpened,
 	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
 	target: tasksInRoomModel.query.start,
-});
-
-sample({
-	clock: [
-		updateTaskModel.mutation.finished.success,
-		createTaskModel.mutation.finished.success,
-		removeTaskModel.mutation.finished.success
-	],
-	fn: ({ params, }) => ({ roomId: params.roomId, }),
-	target: progressesModel.query.start,
 });
 
 sample({
@@ -148,6 +131,11 @@ sample({
 sample({
 	clock: authorizedRoute.closed,
 	target: queries.map((query) => query.reset),
+});
+
+sample({
+	clock: authorizedRoute.closed,
+	target: $roomId.reinit!,
 });
 
 sample({
@@ -164,34 +152,38 @@ sample({
 	target: updateTaskModel.mutation.start,
 });
 
+const queriesForUpdate = [progressesModel.query, query];
+
 [
 	updateTaskModel.mutation,
 	removeTaskModel.mutation,
 	createTaskModel.mutation
 ].forEach((mutation) => {
-	update(query, {
-		on: mutation,
-		by: {
-			success: ({ query, }) => {
-				if (!query) {
+	queriesForUpdate.forEach((query) => {
+		update(query, {
+			on: mutation,
+			by: {
+				success: ({ query, }) => {
+					if (!query) {
+						return {
+							result: { items: [], totalCount: 0, limit: 50, },
+							refetch: true,
+						};
+					}
+
+					if ('error' in query) {
+						return {
+							error: query.error,
+							refetch: true,
+						};
+					}
+
 					return {
-						result: { items: [], totalCount: 0, limit: 50, },
+						result: query.result,
 						refetch: true,
 					};
-				}
-
-				if ('error' in query) {
-					return {
-						error: query.error,
-						refetch: true,
-					};
-				}
-
-				return {
-					result: query.result,
-					refetch: true,
-				};
+				},
 			},
-		},
+		});
 	});
 });

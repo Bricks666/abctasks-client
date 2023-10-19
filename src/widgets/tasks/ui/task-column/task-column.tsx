@@ -21,13 +21,22 @@ export interface TaskColumnProps extends CommonProps {
 	readonly roomId: number;
 	readonly isLoading: boolean;
 	readonly columnStatus: TaskStatus;
+	readonly hasActions?: boolean;
 	readonly header?: string | null;
 }
 const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 	evt.preventDefault();
 
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
-	const { tasks, className, columnStatus, header, isLoading, roomId, } = props;
+	const {
+		tasks,
+		className,
+		columnStatus,
+		hasActions,
+		header,
+		isLoading,
+		roomId,
+	} = props;
 	const onDrop = useUnit(dragTaskModel.drop);
 
 	let items: React.ReactElement[];
@@ -40,6 +49,10 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 		});
 	}
 
+	const headerActions = hasActions ? (
+		<OpenCreateTaskButton roomId={roomId} columnStatus={columnStatus} />
+	) : null;
+
 	return (
 		<Stack
 			className={cn(styles.wrapper, className)}
@@ -47,10 +60,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 			onDrop={onDrop}
 			onDragOver={onDragOver}
 			data-status={columnStatus}>
-			<TaskColumnHeader
-				actions={
-					<OpenCreateTaskButton roomId={roomId} columnStatus={columnStatus} />
-				}>
+			<TaskColumnHeader slots={{ actions: headerActions, }}>
 				{header}
 			</TaskColumnHeader>
 			<Stack className={styles.list} spacing={1} component='main'>

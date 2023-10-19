@@ -8,8 +8,8 @@ import { routes, getParams, popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
 export interface OpenCreateTaskButtonProps extends CommonProps {
-	readonly columnStatus: TaskStatus;
 	readonly roomId: number;
+	readonly columnStatus?: TaskStatus;
 }
 
 export const OpenCreateTaskButton: React.FC<OpenCreateTaskButtonProps> =

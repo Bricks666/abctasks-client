@@ -18,6 +18,7 @@ import styles from './tasks.module.css';
 export interface Column {
 	readonly tasks: Task[];
 	readonly status: TaskStatus;
+	readonly hasActions: boolean;
 }
 
 export const Tasks: React.FC<CommonProps> = (props) => {
@@ -32,18 +33,22 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 		{
 			tasks: tasks.data.ready,
 			status: 'ready',
+			hasActions: true,
 		},
 		{
 			tasks: tasks.data.in_progress,
 			status: 'in_progress',
+			hasActions: true,
 		},
 		{
 			tasks: tasks.data.needReview,
 			status: 'review',
+			hasActions: true,
 		},
 		{
 			tasks: tasks.data.done,
 			status: 'done',
+			hasActions: false,
 		}
 	];
 
@@ -68,13 +73,14 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 
 	return (
 		<section className={cn(styles.wrapper, className)}>
-			{columns.map(({ status, tasks, }) => (
+			{columns.map(({ status, tasks, hasActions, }) => (
 				<TaskColumn
 					roomId={roomId}
 					tasks={tasks}
 					isLoading={isLoading}
 					columnStatus={status}
 					header={t(`statuses.${status}`)}
+					hasActions={hasActions}
 					key={status}
 				/>
 			))}
