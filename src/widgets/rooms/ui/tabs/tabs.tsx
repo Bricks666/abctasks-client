@@ -6,6 +6,7 @@ import { TabContext, TabList } from '@mui/lab';
 import { Tab } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
@@ -13,8 +14,11 @@ import { deviceInfoModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 
 export const Tabs: React.FC<CommonProps> = React.memo(() => {
+	const { t, } = useTranslation('tabs');
 	const tab = useParam(routes.room.base, 'tab') || 'tasks';
 	const id = useParam(routes.room.base, 'id');
+
+	const tabs = t('tabs', { returnObjects: true, }) as Record<string, string>;
 
 	const [isVertical, isMobile] = useUnit([
 		deviceInfoModel.$isTabletVertical,
@@ -42,25 +46,25 @@ export const Tabs: React.FC<CommonProps> = React.memo(() => {
 				<Tab
 					icon={<ListAltIcon />}
 					iconPosition='start'
-					label={showLabels ? 'Задачи' : null}
+					label={showLabels ? tabs.tasks : null}
 					value='tasks'
 				/>
 				<Tab
 					icon={<LabelIcon />}
 					iconPosition='start'
-					label={showLabels ? 'Теги' : null}
+					label={showLabels ? tabs.tags : null}
 					value='tags'
 				/>
 				<Tab
 					icon={<AssessmentIcon />}
 					iconPosition='start'
-					label={showLabels ? 'Активности' : null}
+					label={showLabels ? tabs.activities : null}
 					value='activities'
 				/>
 				<Tab
 					icon={<PeopleIcon />}
 					iconPosition='start'
-					label={showLabels ? 'Пользователи' : null}
+					label={showLabels ? tabs.users : null}
 					value='users'
 				/>
 			</TabList>

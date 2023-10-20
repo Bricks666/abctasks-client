@@ -6,7 +6,7 @@ import { Literal } from 'runtypes';
 import { roomsModel } from '@/entities/rooms';
 
 import { roomsApi } from '@/shared/api';
-import { notificationsModel } from '@/shared/models';
+import { i18nModel, notificationsModel } from '@/shared/models';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -58,8 +58,9 @@ update(roomsModel.query, {
 
 sample({
 	clock: mutation.finished.success,
-	fn: () => ({
-		message: 'Room was removed successfully',
+	source: i18nModel.integration.$t,
+	fn: (t) => ({
+		message: t('notifications.success', { ns: 'remove-room', }),
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -67,8 +68,9 @@ sample({
 
 sample({
 	clock: mutation.finished.failure,
-	fn: () => ({
-		message: 'Room was not removed',
+	source: i18nModel.integration.$t,
+	fn: (t) => ({
+		message: t('notifications.error', { ns: 'remove-room', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

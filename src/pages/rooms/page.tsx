@@ -22,8 +22,9 @@ const popupMap: PopupsProps['popupMap'] = {
 
 const RoomsPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
-	const { t, } = useTranslation('rooms');
-	usePageTitle(t('title'));
+	const { t, } = useTranslation('rooms-page');
+	const title = t('title');
+	usePageTitle(title);
 
 	return (
 		<MainLayout

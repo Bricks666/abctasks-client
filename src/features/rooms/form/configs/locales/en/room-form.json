@@ -1,0 +1,17 @@
+{
+	"fields": {
+		"name": "Name",
+		"description": "Description"
+	},
+	"errors": {
+		"name": {
+			"empty": "$t(fields.name) must be provided",
+			"min_length": "$t(fields.name) must contain at least {{ min_symbols_count }} letters",
+			"max_length": "$t(fields.name) must contain no more {{ max_symbols_count }} letters"
+		},
+		"description": {
+			"empty": "$t(fields.description) must be provided",
+			"max_length": "$t(fields.description) must contain no more {{ max_symbols_count }} letters"
+		}
+	}
+}

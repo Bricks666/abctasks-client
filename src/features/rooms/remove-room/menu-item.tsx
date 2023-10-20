@@ -18,7 +18,7 @@ export const RemoveRoomMenuItem: React.FC<RemoveRoomMenuItemProps> = (
 	props
 ) => {
 	const { roomId, className, } = props;
-	const { t, } = useTranslation('rooms');
+	const { t, } = useTranslation('remove-room');
 	const removeRoom = useUnit(mutation);
 	const [open, handlers] = useToggle(false);
 
@@ -27,7 +27,13 @@ export const RemoveRoomMenuItem: React.FC<RemoveRoomMenuItemProps> = (
 		handlers.toggleOff();
 	}, [roomId]);
 
-	const label = t('actions.remove', { ns: 'common', });
+	const nameText = t('name');
+	const titleText = t('title');
+	const contentText = t('content');
+	const actions = t('actions', { returnObjects: true, }) as Record<
+		string,
+		string
+	>;
 
 	return (
 		<>
@@ -35,16 +41,16 @@ export const RemoveRoomMenuItem: React.FC<RemoveRoomMenuItemProps> = (
 				<ListItemIcon>
 					<DeleteIcon />
 				</ListItemIcon>
-				{label}
+				{nameText}
 			</MenuItem>
 			<Confirm
 				isOpen={open}
 				onClose={handlers.toggleOff}
-				title='Are you sure?'
-				content='Don you want to delete this room? All tasks and tags will be deleted'
-				agreeText='Delete'
+				title={titleText}
+				content={contentText}
+				agreeText={actions.agree}
 				onAgree={onAgree}
-				disagreeText='Cancel'
+				disagreeText={actions.disagree}
 				onDisagree={handlers.toggleOff}
 			/>
 		</>

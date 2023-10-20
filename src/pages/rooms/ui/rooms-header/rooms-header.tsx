@@ -10,14 +10,16 @@ import { CommonProps } from '@/shared/types';
 
 export const RoomsHeader: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
-	const { t, } = useTranslation('rooms');
+	const { t, } = useTranslation('rooms-page');
+	const title = t('title');
+
 	return (
 		<Header
 			className={className}
 			slots={{
 				left: (
 					<Typography variant='h5' component='h1'>
-						{t('title')}
+						{title}
 					</Typography>
 				),
 				right: <OpenCreateRoom />,

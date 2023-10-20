@@ -15,7 +15,7 @@ import { close, form, mutation } from './model';
 export interface CreateRoomProps extends CommonProps, BasePopupProps {}
 
 export const CreateRoom: React.FC<CreateRoomProps> = (props) => {
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('create-room');
 	const onClose = useUnit(close);
 	const [isMobile, isVertical] = useUnit([
 		deviceInfoModel.$isMobile,
@@ -29,6 +29,7 @@ export const CreateRoom: React.FC<CreateRoomProps> = (props) => {
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
+	const titleText = t('title');
 	const buttonText = t('actions.create', { ns: 'common', });
 
 	const actions = isFullscreen ? (
@@ -38,11 +39,7 @@ export const CreateRoom: React.FC<CreateRoomProps> = (props) => {
 	) : null;
 
 	return (
-		<Popup
-			{...props}
-			title={t('room.createTitle')}
-			onClose={onClose}
-			slots={{ actions, }}>
+		<Popup {...props} title={titleText} onClose={onClose} slots={{ actions, }}>
 			<RoomForm
 				className={styles.form}
 				buttonText={buttonText}

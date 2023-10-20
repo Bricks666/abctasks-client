@@ -4,6 +4,7 @@
 	"actions": {
 		"create": "Create",
 		"update": "Update",
+		"edit": "Edit",
 		"save": "Save",
 		"remove": "Remove",
 		"exit": "Exit",

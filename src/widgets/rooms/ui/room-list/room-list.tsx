@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { SkeletonRoomCard, roomsModel } from '@/entities/rooms';
 
@@ -9,6 +10,9 @@ import { RoomCard } from '../room-card';
 import styles from './room-list.module.css';
 
 export const RoomList: React.FC = () => {
+	const { t, } = useTranslation('room-list');
+	const emptyText = t('empty-text');
+
 	return (
 		<FriendlyList
 			$query={roomsModel.query}
@@ -17,7 +21,7 @@ export const RoomList: React.FC = () => {
 			SkeletonComponent={SkeletonRoomCard}
 			skeletonsCount={15}
 			ErrorComponent={() => null}
-			emptyText='There are no room yet. Create is for continue'
+			emptyText={emptyText}
 			classes={{
 				list: styles.list,
 			}}

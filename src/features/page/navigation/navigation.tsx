@@ -9,24 +9,29 @@ import {
 import { Link } from 'atomic-router-react';
 import cn from 'classnames';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { i18n, routes } from '@/shared/configs';
+import { routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
 import styles from './navigation.module.css';
-
-const items = [
-	{
-		route: routes.rooms,
-		label: i18n.t('title', { ns: 'rooms', }),
-		icon: <HomeIcon />,
-	}
-];
 
 export interface NavigationProps extends CommonProps {}
 
 export const Navigation: React.FC<NavigationProps> = (props) => {
 	const { className, } = props;
+	const { t, } = useTranslation('navigation');
+
+	const roomsText = t('items.rooms');
+
+	const items = [
+		{
+			route: routes.rooms,
+			label: roomsText,
+			icon: <HomeIcon />,
+		}
+	];
+
 	return (
 		<nav className={cn(styles.navigation, className)}>
 			<List className={styles.list}>

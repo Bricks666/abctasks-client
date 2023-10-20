@@ -2,6 +2,7 @@ import ExitRoomIcon from '@mui/icons-material/MeetingRoom';
 import { IconButton, Tooltip } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -18,6 +19,8 @@ export const ExitRoomUserButton: React.FC<ExitRoomUserButtonProps> = (
 ) => {
 	const { className, roomId, } = props;
 
+	const { t, } = useTranslation('exit-room-user');
+
 	const exitRoom = useUnit(mutation);
 	const [opened, handlers] = useToggle(false);
 
@@ -25,6 +28,13 @@ export const ExitRoomUserButton: React.FC<ExitRoomUserButtonProps> = (
 		exitRoom.start({ roomId, });
 		handlers.toggleOff();
 	}, [roomId]);
+
+	const titleText = t('title');
+	const contentText = t('content');
+	const actions = t('actions', { returnObjects: true, }) as Record<
+		string,
+		string
+	>;
 
 	return (
 		<>
@@ -37,11 +47,11 @@ export const ExitRoomUserButton: React.FC<ExitRoomUserButtonProps> = (
 			<Confirm
 				isOpen={opened}
 				onClose={handlers.toggleOff}
-				title='Are you sure?'
-				content='Don you want to exit this room?'
-				agreeText='Exit'
+				title={titleText}
+				content={contentText}
+				agreeText={actions.agree}
 				onAgree={onExitAgree}
-				disagreeText='Cancel'
+				disagreeText={actions.disagree}
 				onDisagree={handlers.toggleOff}
 			/>
 		</>

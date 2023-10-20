@@ -8,7 +8,7 @@ import { roomModel, roomsModel } from '@/entities/rooms';
 
 import { UpdateRoomParams, Room, roomsApi, room } from '@/shared/api';
 import { popupsMap } from '@/shared/configs';
-import { notificationsModel } from '@/shared/models';
+import { i18nModel, notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 import { roomFormModel } from '../form';
@@ -95,8 +95,9 @@ update(roomsModel.query, {
 
 sample({
 	clock: mutation.finished.success,
-	fn: () => ({
-		message: 'Room was update successfully',
+	source: i18nModel.integration.$t,
+	fn: (t) => ({
+		message: t('notifications.success', { ns: 'update-room', }),
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -104,8 +105,9 @@ sample({
 
 sample({
 	clock: mutation.finished.failure,
-	fn: () => ({
-		message: 'Room was not update',
+	source: i18nModel.integration.$t,
+	fn: (t) => ({
+		message: t('notifications.error', { ns: 'update-room', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

@@ -1,8 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { MainLayout, PageLoader } from '@/shared/ui';
 
@@ -16,8 +14,6 @@ export interface RoomPageLayoutProps
 
 export const RoomPageLayout: React.FC<RoomPageLayoutProps> = (props) => {
 	const { className, children, } = props;
-	const { t, } = useTranslation('room');
-	usePageTitle(t('title'));
 
 	return (
 		<MainLayout

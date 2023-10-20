@@ -1,0 +1,7 @@
+{
+	"title": "$t(common:actions.create) комнату",
+	"notifications": {
+		"success": "Комната была успешно создана",
+		"error": "Комната не была создана"
+	}
+}

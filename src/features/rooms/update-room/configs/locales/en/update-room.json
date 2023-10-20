@@ -1,0 +1,7 @@
+{
+	"title": "$t(common:actions.update) room",
+	"notifications": {
+		"success": "Room was updated successfully",
+		"error": "Room was not update"
+	}
+}

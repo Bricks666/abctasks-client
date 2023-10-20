@@ -1,0 +1,7 @@
+{
+	"title": "$t(common:actions.create) room",
+	"notifications": {
+		"success": "Room was created successfully",
+		"error": "Room was not created"
+	}
+}

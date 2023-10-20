@@ -2,17 +2,19 @@ import { createForm } from 'effector-forms';
 import Joi from 'joi';
 
 import { Room } from '@/shared/api';
+import { MAX_SHORT_LENGTH, MIN_LENGTH } from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';
 
 export interface RoomFormValues extends Pick<Room, 'description' | 'name'> {}
 
 const schemas = {
-	name: Joi.string().max(32).required().messages({
-		'string.empty': "Room name can't be empty",
-		'string.max': 'Room name must be less 32 characters',
+	name: Joi.string().min(MIN_LENGTH).max(MAX_SHORT_LENGTH).required().messages({
+		'string.empty': 'empty',
+		'string.min': 'min_length',
+		'string.max': 'max_length',
 	}),
-	description: Joi.string().max(32).messages({
-		'string.max': 'Room name must be less 32 characters',
+	description: Joi.string().max(MAX_SHORT_LENGTH).messages({
+		'string.max': 'max_length',
 	}),
 };
 

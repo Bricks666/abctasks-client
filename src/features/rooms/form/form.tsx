@@ -5,6 +5,7 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { MIN_LENGTH, MAX_SHORT_LENGTH } from '@/shared/configs';
 import { usePreventDefault } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Field, Show } from '@/shared/ui';
@@ -48,38 +49,55 @@ interface FieldProps {
 
 const Name: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
-	const { t, } = useTranslation('popups');
-
+	const { t, } = useTranslation('room-form');
 	const name = useUnit($form.fields.name);
+	const { errorText, } = name;
+
+	const label = t('fields.name');
+	const error = t([`errors.name.${errorText}`, 'common:errors.default'], {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
+	const errorHelperText = name.isValid ? null : error;
 
 	return (
 		<Field
 			value={name.value}
 			onChange={name.onChange}
 			onBlur={name.onBlur}
-			helperText={name.errorText}
+			helperText={errorHelperText}
 			isValid={name.isValid}
 			name='name'
-			label={t('room.name')}
+			label={label}
 		/>
 	);
 };
 
 const Description: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
-	const { t, } = useTranslation('popups');
-
+	const { t, } = useTranslation('room-form');
 	const description = useUnit($form.fields.description);
+	const { errorText, } = description;
+
+	const label = t('fields.description');
+	const error = t(
+		[`errors.description.${errorText}`, 'common:errors.default'],
+		{
+			min_symbols_count: MIN_LENGTH,
+			max_symbols_count: MAX_SHORT_LENGTH,
+		}
+	);
+	const errorHelperText = description.isValid ? null : error;
 
 	return (
 		<Field
 			value={description.value}
 			onChange={description.onChange}
 			onBlur={description.onBlur}
-			helperText={description.errorText}
+			helperText={errorHelperText}
 			isValid={description.isValid}
 			name='description'
-			label={t('room.description')}
+			label={label}
 		/>
 	);
 };
