@@ -15,23 +15,28 @@ import styles from './styles.module.css';
 
 const RegistrationPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
-	const { t, } = useTranslation('registration');
+	const { t, } = useTranslation('registration-page');
+	const pageTitle = t('title');
+	const loginRightNow = t('login_right_now', {
+		returnObjects: true,
+	}) as Array<string>;
+	const hasAccountQuestion = t('has_account_question');
 
-	usePageTitle(t('title'));
+	usePageTitle(pageTitle);
 
 	return (
 		<AuthLayout className={cn(styles.layout, className)}>
 			<PageTitle
 				className={styles.title}
-				title={t('title')}
+				title={pageTitle}
 				extra={
 					<Typography className={styles.link}>
-						<span className={styles.question}>Уже есть аккаунт?</span>
-						<br /> Тогда{' '}
+						<span className={styles.question}>{hasAccountQuestion}</span>
+						<br /> {loginRightNow[0]}{' '}
 						<MuiLink to={routes.login} component={Link}>
-							войдите в него
+							{loginRightNow[1]}
 						</MuiLink>{' '}
-						прямо сейчас
+						{loginRightNow[2]}
 					</Typography>
 				}
 			/>

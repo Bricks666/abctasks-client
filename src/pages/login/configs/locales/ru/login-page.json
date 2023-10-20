@@ -1,5 +1,5 @@
 {
 	"title": "Вход",
-	"has_account_question": "Уже умеете аккаунт?",
+	"has_account_question": "Еще нет аккаунта?",
 	"create_right_now": ["Тогда", "создайте его", "прямо сейчас"]
 }

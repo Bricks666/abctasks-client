@@ -1,0 +1,33 @@
+{
+	"fields": {
+		"email": "Email",
+		"username": "Username",
+		"password": "Password",
+		"repeat_password": "Repeat password"
+	},
+	"submit": "Registration",
+	"errors": {
+		"email": {
+			"empty": "Email must be provided",
+			"email": "It's an invalid email pattern",
+			"min_length": "Email must contain at least {{ min_symbols_count }} letters",
+			"max_length": "Email must contain no more {{ max_symbols_count }} letters",
+			"exists": "User already registered"
+		},
+		"username": {
+			"empty": "Username must be provided",
+			"pattern": "Username can only contain latins alphas, numeric and !, *, (, ), _, +",
+			"min_length": "Username must contain at least {{ min_symbols_count }} letters",
+			"max_length": "Username must contain no more {{ max_symbols_count }} letters"
+		},
+		"password": {
+			"empty": "Password must be provided",
+			"pattern": "Password can only contain latins alphas, numeric and !, *, (, ), _, +",
+			"min_length": "Password must contain at least {{ min_symbols_count }} letters",
+			"max_length": "Password must contain no more {{ max_symbols_count }} letters"
+		},
+		"repeat_password": {
+			"equal": "Passwords must be equal"
+		}
+	}
+}

@@ -11,7 +11,7 @@ import {
 	MIN_LENGTH,
 	MAX_SHORT_LENGTH
 } from '@/shared/configs';
-import { createRuleFromSchema } from '@/shared/lib';
+import { createRuleFromSchema, isHttpErrorCode } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const registrationDomain = createDomain();
@@ -42,11 +42,21 @@ const schemas = Joi.object<RegistrationFormParams>({
 		.email({ tlds: { allow: false, }, })
 		.required()
 		.messages({
-			'string.empty': 'Login must be provided',
-			'string.pattern.base':
-				'Login can only contain latins alphas, numeric and !, *, (, ), _, +',
-			'string.min': `Login must contain minimum ${MIN_LENGTH} symbols`,
-			'string.max': `Login must contain maximum ${MAX_SHORT_LENGTH} symbols`,
+			'string.empty': 'empty',
+			'string.pattern.base': 'pattern',
+			'string.email': 'email',
+			'string.min': 'min_length',
+			'string.max': 'max_length',
+		}),
+	username: Joi.string()
+		.min(MIN_LENGTH)
+		.max(MAX_SHORT_LENGTH)
+		.required()
+		.messages({
+			'string.empty': 'empty',
+			'string.pattern.base': 'pattern',
+			'string.min': 'min_length',
+			'string.max': 'max_length',
 		}),
 	password: Joi.string()
 		.pattern(ALLOWED_SYMBOLS)
@@ -54,14 +64,13 @@ const schemas = Joi.object<RegistrationFormParams>({
 		.max(MAX_SHORT_LENGTH)
 		.required()
 		.messages({
-			'string.empty': 'Password must be provided',
-			'string.pattern.base':
-				'Password can only contain latins alphas, numeric and !, *, (, ), _, +',
-			'string.min': `Password must contain minimum ${MIN_LENGTH} symbols`,
-			'string.max': `Password must contain maximum ${MAX_SHORT_LENGTH} symbols`,
+			'string.empty': 'empty',
+			'string.pattern.base': 'pattern',
+			'string.min': 'min_length',
+			'string.max': 'max_length',
 		}),
 	repeatPassword: Joi.string().messages({
-		'any.only': 'Password must be equal',
+		'any.only': 'equal',
 	}),
 });
 
@@ -73,6 +82,7 @@ export const form = createForm<RegistrationFormParams>({
 		},
 		username: {
 			init: '',
+			rules: [createRuleFromSchema('username', schemas.extract('username'))],
 		},
 		password: {
 			init: '',
@@ -107,9 +117,8 @@ const errors = splitMap({
 	source: mutation.finished.failure,
 	cases: {
 		userAlreadyRegistered: ({ error, }) => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			if ((error as any).statusCode === 409) {
-				return 'User already registered';
+			if (isHttpErrorCode(error, 409)) {
+				return 'exists';
 			}
 		},
 	},

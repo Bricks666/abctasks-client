@@ -1,9 +1,11 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { MIN_LENGTH, MAX_SHORT_LENGTH } from '@/shared/configs';
 import { usePreventDefault } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Field, Form, PasswordField } from '@/shared/ui';
@@ -16,6 +18,7 @@ export const RegistrationForm: React.FC<CommonProps> = (props) => {
 	const { t, } = useTranslation('registration');
 	const submit = useUnit(form.submit);
 	const pending = useUnit(mutation.$pending);
+	const buttonText = t('submit');
 
 	const onSubmit = usePreventDefault(submit);
 
@@ -26,75 +29,114 @@ export const RegistrationForm: React.FC<CommonProps> = (props) => {
 			<Password />
 			<RepeatPassword />
 			<Button type='submit' disabled={pending}>
-				{t('actions.submit')}
+				{buttonText}
 			</Button>
 		</Form>
 	);
 };
 
 const Email: React.FC = () => {
+	const { t, } = useTranslation('registration');
 	const email = useUnit(form.fields.email);
+	const { errorText, } = email;
+
+	const label = t('fields.email');
+	const error = t([`errors.email.${errorText}`, 'common:errors.default'], {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
+	const errorHelperText = email.isValid ? null : error;
 
 	return (
 		<Field
 			value={email.value}
 			onChange={email.onChange}
 			onBlur={email.onBlur}
-			helperText={email.errorText}
+			helperText={errorHelperText}
 			isValid={email.isValid}
 			name='email'
-			label='Почта'
+			label={label}
 			autoComplete='off'
 		/>
 	);
 };
 
 const Username: React.FC = () => {
+	const { t, } = useTranslation('registration');
 	const username = useUnit(form.fields.username);
+	const { errorText, } = username;
+
+	const label = t('fields.username');
+	const error = t([`errors.username.${errorText}`, 'common:errors.default'], {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
+	const errorHelperText = username.isValid ? null : error;
 
 	return (
 		<Field
 			value={username.value}
 			onChange={username.onChange}
 			onBlur={username.onBlur}
-			helperText={username.errorText}
+			helperText={errorHelperText}
 			isValid={username.isValid}
 			name='username'
-			label='Ваше имя'
+			label={label}
 			autoComplete='off'
 		/>
 	);
 };
 
 const Password: React.FC = () => {
+	const { t, } = useTranslation('registration');
 	const password = useUnit(form.fields.password);
+	const { errorText, } = password;
+
+	const label = t('fields.password');
+	const error = t([`errors.password.${errorText}`, 'common:errors.default'], {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
+	const errorHelperText = password.isValid ? null : error;
 
 	return (
 		<PasswordField
 			value={password.value}
 			onChange={password.onChange}
 			onBlur={password.onBlur}
-			helperText={password.errorText}
+			helperText={errorHelperText}
 			isValid={password.isValid}
 			name='password'
-			label='Пароль'
+			label={label}
 			autoComplete='new-password'
 		/>
 	);
 };
 
 const RepeatPassword: React.FC = () => {
+	const { t, } = useTranslation('registration');
 	const repeatPassword = useUnit(form.fields.repeatPassword);
+	const { errorText, } = repeatPassword;
+
+	const label = t('fields.repeat_password');
+	const error = t(
+		[`errors.repeat_password.${errorText}`, 'common:errors.default'],
+		{
+			min_symbols_count: MIN_LENGTH,
+			max_symbols_count: MAX_SHORT_LENGTH,
+		}
+	);
+	const errorHelperText = repeatPassword.isValid ? null : error;
 
 	return (
 		<PasswordField
 			value={repeatPassword.value}
 			onChange={repeatPassword.onChange}
 			onBlur={repeatPassword.onBlur}
-			helperText={repeatPassword.errorText}
+			helperText={errorHelperText}
 			isValid={repeatPassword.isValid}
 			name='repeatPassword'
-			label='Повторите пароль'
+			label={label}
 			autoComplete='new-password'
 		/>
 	);

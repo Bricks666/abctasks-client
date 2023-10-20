@@ -1,5 +1,5 @@
 {
 	"title": "Login",
-	"has_account_question": "Do you have an account?",
+	"has_account_question": "Don't you have an account yet?",
 	"create_right_now": ["Then", "create it", "right now"]
 }
