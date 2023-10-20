@@ -39,11 +39,7 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 			disableBorder={disableBorder}
 			slots={{
 				before: (
-					<Typography
-						className={styles.title}
-						variant='h6'
-						component='h2'
-						fontWeight={700}>
+					<Typography variant='h6' component='h2' fontWeight={700}>
 						{t('taskProgress.title')}
 					</Typography>
 				),

@@ -6,7 +6,6 @@ import * as React from 'react';
 
 import { router, routes } from '@/shared/configs';
 import { appModel } from '@/shared/models';
-import { LoadingIndicator } from '@/shared/ui';
 
 redirect({
 	clock: router.routeNotFound,
@@ -24,9 +23,7 @@ export const withRouter =
 		() => {
 			return (
 				<RouterProvider router={router}>
-					<React.Suspense fallback={<LoadingIndicator size='large' />}>
-						<Component />
-					</React.Suspense>
+					<Component />
 				</RouterProvider>
 			);
 		};

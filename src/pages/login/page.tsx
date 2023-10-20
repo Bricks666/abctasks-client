@@ -14,22 +14,28 @@ import { AuthLayout, PageTitle } from '@/shared/ui';
 import styles from './styles.module.css';
 
 const LoginPage: React.FC<CommonProps> = ({ className, }) => {
-	const { t, } = useTranslation('login');
-	usePageTitle(t('title'));
+	const { t, } = useTranslation('login-page');
+	const pageTitle = t('title');
+	const createRightNow = t('create_right_now', {
+		returnObjects: true,
+	}) as Array<string>;
+	const hasAccountQuestion = t('has_account_question');
+
+	usePageTitle(pageTitle);
 
 	return (
 		<AuthLayout className={cn(styles.layout, className)}>
 			<PageTitle
 				className={styles.title}
-				title={t('title')}
+				title={pageTitle}
 				extra={
 					<Typography className={styles.link}>
-						<span className={styles.question}>Еще нет аккаунта?</span>
-						<br /> Тогда{' '}
+						<span className={styles.question}>{hasAccountQuestion}</span>
+						<br /> {createRightNow[0]}{' '}
 						<MuiLink to={routes.registration.base} component={Link}>
-							создайте его
+							{createRightNow[1]}
 						</MuiLink>{' '}
-						прямо сейчас
+						{createRightNow[2]}
 					</Typography>
 				}
 			/>

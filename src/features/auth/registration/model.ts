@@ -7,9 +7,9 @@ import { splitMap } from 'patronum';
 
 import { authApi, RegistrationParams, user, User } from '@/shared/api';
 import {
-	allowedSymbolsRegExp,
-	minLoginPasswordLength,
-	maxLoginPasswordLength
+	ALLOWED_SYMBOLS,
+	MIN_LENGTH,
+	MAX_SHORT_LENGTH
 } from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -37,28 +37,28 @@ interface RegistrationFormParams extends RegistrationParams {
 
 const schemas = Joi.object<RegistrationFormParams>({
 	email: Joi.string()
-		.min(minLoginPasswordLength)
-		.max(maxLoginPasswordLength)
+		.min(MIN_LENGTH)
+		.max(MAX_SHORT_LENGTH)
 		.email({ tlds: { allow: false, }, })
 		.required()
 		.messages({
 			'string.empty': 'Login must be provided',
 			'string.pattern.base':
 				'Login can only contain latins alphas, numeric and !, *, (, ), _, +',
-			'string.min': `Login must contain minimum ${minLoginPasswordLength} symbols`,
-			'string.max': `Login must contain maximum ${maxLoginPasswordLength} symbols`,
+			'string.min': `Login must contain minimum ${MIN_LENGTH} symbols`,
+			'string.max': `Login must contain maximum ${MAX_SHORT_LENGTH} symbols`,
 		}),
 	password: Joi.string()
-		.pattern(allowedSymbolsRegExp)
-		.min(minLoginPasswordLength)
-		.max(maxLoginPasswordLength)
+		.pattern(ALLOWED_SYMBOLS)
+		.min(MIN_LENGTH)
+		.max(MAX_SHORT_LENGTH)
 		.required()
 		.messages({
 			'string.empty': 'Password must be provided',
 			'string.pattern.base':
 				'Password can only contain latins alphas, numeric and !, *, (, ), _, +',
-			'string.min': `Password must contain minimum ${minLoginPasswordLength} symbols`,
-			'string.max': `Password must contain maximum ${maxLoginPasswordLength} symbols`,
+			'string.min': `Password must contain minimum ${MIN_LENGTH} symbols`,
+			'string.max': `Password must contain maximum ${MAX_SHORT_LENGTH} symbols`,
 		}),
 	repeatPassword: Joi.string().messages({
 		'any.only': 'Password must be equal',

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { CommonProps } from '@/shared/types';
 
@@ -10,9 +11,13 @@ export interface PageLoaderProps extends CommonProps {}
 export const PageLoader: React.FC<PageLoaderProps> = (props) => {
 	const { className, } = props;
 
+	const { t, } = useTranslation('common');
+
+	const loadingText = t('loading');
+
 	return (
 		<Center className={className}>
-			<LoadingIndicator />
+			<LoadingIndicator text={loadingText} />
 		</Center>
 	);
 };

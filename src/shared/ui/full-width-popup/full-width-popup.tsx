@@ -3,10 +3,10 @@ import {
 	Dialog,
 	DialogActions,
 	DialogContent,
-	DialogProps,
 	DialogTitle,
 	IconButton,
-	Slide
+	Slide,
+	SlideProps
 } from '@mui/material';
 import * as React from 'react';
 
@@ -43,7 +43,7 @@ export const FullWidthPopup: React.FC<FullWidthPopupProps> = (props) => {
 };
 
 const Transition = React.forwardRef(function Transition(
-	props: NonNullable<DialogProps['TransitionProps']>,
+	props: NonNullable<SlideProps>,
 	ref: React.Ref<unknown>
 ) {
 	return <Slide direction='up' ref={ref} {...props} />;

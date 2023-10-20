@@ -98,7 +98,7 @@ export const FriendlyList = <RawData, Item, Error>(
 			React.createElement(SkeletonComponent, {
 				key: index,
 				divider: index + 1 !== count,
-			})
+			} as any)
 		);
 
 		content = (
@@ -119,7 +119,7 @@ export const FriendlyList = <RawData, Item, Error>(
 				...item,
 				divider: index + 1 !== count,
 				key: getKey(item),
-			})
+			} as any)
 		);
 
 		content = (
@@ -141,7 +141,7 @@ export const FriendlyList = <RawData, Item, Error>(
 		{
 			[styles.after]: hasAfterSlot,
 			[styles.before]: hasBeforeSlot,
-			[styles.slots]: hasBothSlot,
+			[styles.both]: hasBothSlot,
 			[styles['border-disabled']]: disableBorder,
 		},
 		className

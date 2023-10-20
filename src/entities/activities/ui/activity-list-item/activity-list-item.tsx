@@ -22,7 +22,16 @@ export interface ActivityListItemProps
 		Omit<ListItemProps, keyof Activity> {}
 
 export const ActivityListItem: React.FC<ActivityListItemProps> = (props) => {
-	const { action, sphere, className, createdAt, activist, ...rest } = props;
+	const {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		id: _,
+		action,
+		sphere,
+		className,
+		createdAt,
+		activist,
+		...rest
+	} = props;
 	const { t, } = useTranslation('room');
 	const activityText = t('activities.text', {
 		type: action.name,
@@ -31,7 +40,7 @@ export const ActivityListItem: React.FC<ActivityListItemProps> = (props) => {
 	});
 
 	return (
-		<ListItem className={cn(styles.card, className)} {...rest}>
+		<ListItem className={cn(styles.item, className)} {...rest}>
 			<ListItemAvatar>
 				<ActivityActionPicture {...action} />
 			</ListItemAvatar>

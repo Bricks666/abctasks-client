@@ -25,7 +25,7 @@ export const UserList: React.FC<UserListProps> = (props) => {
 			getKey={(item) => item.id}
 			skeletonsCount={25}
 			ErrorComponent={Error}
-			ItemComponent={UserInRoomListItem}
+			ItemComponent={UserInRoomListItem as any}
 			SkeletonComponent={SkeletonUserListItem}
 			emptyText='There are no users in room yet'
 		/>

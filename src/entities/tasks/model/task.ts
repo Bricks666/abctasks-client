@@ -4,7 +4,7 @@ import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 
 import { GetTaskParams, Task, tasksApi, task } from '@/shared/api';
-import { Error, dataExtractor } from '@/shared/lib';
+import { dataExtractor } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const taskDomain = createDomain();

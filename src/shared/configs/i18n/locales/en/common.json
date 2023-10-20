@@ -8,5 +8,8 @@
 		"remove": "Remove",
 		"exit": "Exit",
 		"close": "Close"
+	},
+	"errors": {
+		"default": "Something went wrong"
 	}
 }

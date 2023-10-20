@@ -27,7 +27,7 @@ export const OpenUpdateRoomFormMenuItem: React.FC<
 				[getParams.popup]: popupsMap.updateRoom,
 				[getParams.roomId]: roomId,
 			}}
-			component={Link}>
+			component={Link as any}>
 			<ListItemIcon>
 				<EditIcon />
 			</ListItemIcon>

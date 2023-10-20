@@ -1,1 +1,1 @@
-export { Tasks, type Column } from './tasks';
+export { Tasks } from './tasks';

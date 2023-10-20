@@ -7,11 +7,11 @@ import { splitMap } from 'patronum';
 
 import { authApi, authResponse, AuthResponse, LoginParams } from '@/shared/api';
 import {
-	allowedSymbolsRegExp,
-	maxLoginPasswordLength,
-	minLoginPasswordLength
+	ALLOWED_SYMBOLS,
+	MAX_SHORT_LENGTH,
+	MIN_LENGTH
 } from '@/shared/configs';
-import { createRuleFromSchema } from '@/shared/lib';
+import { createRuleFromSchema, isHttpErrorCode } from '@/shared/lib';
 import { sessionModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -35,27 +35,25 @@ export const mutation = createMutation<
 const schemas = {
 	email: Joi.string()
 		.email({ tlds: { allow: false, }, })
-		.min(minLoginPasswordLength)
-		.max(maxLoginPasswordLength)
+		.min(MIN_LENGTH)
+		.max(MAX_SHORT_LENGTH)
 		.required()
 		.messages({
-			'string.empty': 'Login must be provided',
-			'string.pattern.base':
-				'Login can only contain latins alphas, numeric and !, *, (, ), _, +',
-			'string.min': `Login must contain minimum ${minLoginPasswordLength} symbols`,
-			'string.max': `Login must contain maximum ${maxLoginPasswordLength} symbols`,
+			'string.empty': 'empty',
+			'string.email': 'email',
+			'string.min': 'min_length',
+			'string.max': 'max_length',
 		}),
 	password: Joi.string()
-		.pattern(allowedSymbolsRegExp)
-		.min(minLoginPasswordLength)
-		.max(maxLoginPasswordLength)
+		.pattern(ALLOWED_SYMBOLS)
+		.min(MIN_LENGTH)
+		.max(MAX_SHORT_LENGTH)
 		.required()
 		.messages({
-			'string.empty': 'Password must be provided',
-			'string.pattern.base':
-				'Password can only contain latins alphas, numeric and !, *, (, ), _, +',
-			'string.min': `Password must contain minimum ${minLoginPasswordLength} symbols`,
-			'string.max': `Password must contain maximum ${maxLoginPasswordLength} symbols`,
+			'string.empty': 'empty',
+			'string.pattern.base': 'pattern',
+			'string.min': 'min_length',
+			'string.max': 'max_length',
 		}),
 	rememberMe: Joi.boolean(),
 };
@@ -93,23 +91,17 @@ const errors = splitMap({
 	source: mutation.finished.failure,
 	cases: {
 		incorrectPassword: ({ error, }) => {
-			if ((error as any).statusCode === 401) {
-				return 'Incorrect password';
+			if (isHttpErrorCode(error, 403)) {
+				return 'incorrect_password';
 			}
 		},
 
 		userNotFound: ({ error, }) => {
-			if ((error as any).statusCode === 404) {
-				return 'User was not found';
+			if (isHttpErrorCode(error, 404)) {
+				return 'not_found';
 			}
 		},
 	},
-});
-
-sample({
-	clock: errors.userNotFound,
-	fn: () => false,
-	target: form.fields.email.$isValid,
 });
 
 sample({
@@ -119,12 +111,6 @@ sample({
 		errorText: message,
 	}),
 	target: form.fields.email.addError,
-});
-
-sample({
-	clock: errors.incorrectPassword,
-	fn: () => false,
-	target: form.fields.password.$isValid,
 });
 
 sample({

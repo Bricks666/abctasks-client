@@ -38,7 +38,9 @@ export const DatePicker = React.memo(
 
 		const textField = (params: TextFieldProps) => {
 			const handleBlur = (...args: any[]) => {
-				onBlur();
+				onBlur?.();
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
 				params.onBlur?.(...args);
 			};
 

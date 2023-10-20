@@ -2,7 +2,7 @@ import { createForm } from 'effector-forms';
 import Joi from 'joi';
 
 import { Tag } from '@/shared/api';
-import { allowedSymbolsRegExp } from '@/shared/configs';
+import { ALLOWED_SYMBOLS } from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';
 
 export interface TagFormValues extends Omit<Tag, 'id' | 'roomId'> {}
@@ -18,7 +18,7 @@ const schemas = {
 		'string.empty': "Color can't be empty",
 		'string.pattern.base': 'Color must be #XXXXXX, for example #ff00aa',
 	}),
-	name: Joi.string().pattern(allowedSymbolsRegExp).required().messages({
+	name: Joi.string().pattern(ALLOWED_SYMBOLS).required().messages({
 		'string.empty': "Name can't be empty",
 		'string.pattern.base':
 			'Name can only contain latins alphas, numeric and !, *, (, ), _, +',

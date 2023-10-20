@@ -12,11 +12,13 @@ import './index.css';
 export const App = withProviders(() => {
 	const { t, } = useTranslation('common');
 
+	const loadingText = t('loading');
+
 	return (
 		<React.Suspense
 			fallback={
 				<Center fullHeight>
-					<LoadingIndicator text={t('loading')} />
+					<LoadingIndicator text={loadingText} />
 				</Center>
 			}>
 			<Pages />

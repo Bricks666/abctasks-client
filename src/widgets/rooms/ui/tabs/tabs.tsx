@@ -12,8 +12,6 @@ import { useParam } from '@/shared/lib';
 import { deviceInfoModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 
-import styles from './tabs.module.css';
-
 export const Tabs: React.FC<CommonProps> = React.memo(() => {
 	const tab = useParam(routes.room.base, 'tab') || 'tasks';
 	const id = useParam(routes.room.base, 'id');
@@ -40,34 +38,26 @@ export const Tabs: React.FC<CommonProps> = React.memo(() => {
 
 	return (
 		<TabContext value={tab}>
-			<TabList
-				className={styles.list}
-				onChange={onChange}
-				variant='scrollable'
-				scrollButtons='auto'>
+			<TabList onChange={onChange} variant='scrollable' scrollButtons='auto'>
 				<Tab
-					className={styles.tab}
 					icon={<ListAltIcon />}
 					iconPosition='start'
 					label={showLabels ? 'Задачи' : null}
 					value='tasks'
 				/>
 				<Tab
-					className={styles.tab}
 					icon={<LabelIcon />}
 					iconPosition='start'
 					label={showLabels ? 'Теги' : null}
 					value='tags'
 				/>
 				<Tab
-					className={styles.tab}
 					icon={<AssessmentIcon />}
 					iconPosition='start'
 					label={showLabels ? 'Активности' : null}
 					value='activities'
 				/>
 				<Tab
-					className={styles.tab}
 					icon={<PeopleIcon />}
 					iconPosition='start'
 					label={showLabels ? 'Пользователи' : null}

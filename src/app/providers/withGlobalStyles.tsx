@@ -28,12 +28,6 @@ export const withGlobalStyles =
 			);
 		};
 
-declare module '@mui/material/styles' {
-	interface ColorSchemeOverrides {
-		system: true;
-	}
-}
-
 const theme = extendTheme({
 	shape: {
 		borderRadius: 8,

@@ -4,7 +4,7 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 
 import { progress, Progress, progressApi } from '@/shared/api';
-import { dataExtractor, Error } from '@/shared/lib';
+import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
