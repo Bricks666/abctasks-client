@@ -22,7 +22,7 @@ const popupMap: PopupsProps['popupMap'] = {
 
 const RoomsPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
-	const { t, } = useTranslation('rooms-page');
+	const { t, } = useTranslation('rooms');
 	const title = t('title');
 	usePageTitle(title);
 

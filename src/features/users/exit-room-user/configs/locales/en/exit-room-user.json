@@ -1,9 +1,0 @@
-{
-	"name": "Exit from room",
-	"title": "Are you sure?",
-	"content": "Do you want to exit from this room?",
-	"actions": {
-		"agree": "Exit",
-		"disagree": "Cancel"
-	}
-}

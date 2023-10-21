@@ -23,8 +23,8 @@ export interface TemplateRoomCardProps extends CommonProps, Room {
 
 export const TemplateRoomCard: React.FC<TemplateRoomCardProps> = (props) => {
 	const { name, className, description, menu, actions, id, } = props;
-	const { t, } = useTranslation('template-room-card');
-	const descriptionText = t('description');
+	const { t, } = useTranslation('rooms');
+	const descriptionText = t('card.description');
 
 	const sx = {
 		height: 100,

@@ -1,6 +1,5 @@
 {
 	"loading": "Loading...",
-	"none": "None",
 	"actions": {
 		"create": "Create",
 		"update": "Update",
@@ -8,7 +7,9 @@
 		"save": "Save",
 		"remove": "Remove",
 		"exit": "Exit",
-		"close": "Close"
+		"close": "Close",
+		"cancel": "Cancel",
+		"open": "Open"
 	},
 	"errors": {
 		"default": "Something went wrong"

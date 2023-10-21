@@ -17,8 +17,8 @@ export const OpenUpdateRoomFormMenuItem: React.FC<
 	OpenUpdateRoomFormMenuItemProps
 > = (props) => {
 	const { className, roomId, ...rest } = props;
-	const { t, } = useTranslation('common');
-	const editText = t('actions.edit');
+	const { t, } = useTranslation('rooms');
+	const editText = t('actions.update_room.name');
 
 	return (
 		<MenuItem

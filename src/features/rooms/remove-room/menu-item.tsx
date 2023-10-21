@@ -18,7 +18,7 @@ export const RemoveRoomMenuItem: React.FC<RemoveRoomMenuItemProps> = (
 	props
 ) => {
 	const { roomId, className, } = props;
-	const { t, } = useTranslation('remove-room');
+	const { t, } = useTranslation('rooms');
 	const removeRoom = useUnit(mutation);
 	const [open, handlers] = useToggle(false);
 
@@ -27,13 +27,12 @@ export const RemoveRoomMenuItem: React.FC<RemoveRoomMenuItemProps> = (
 		handlers.toggleOff();
 	}, [roomId]);
 
-	const nameText = t('name');
-	const titleText = t('title');
-	const contentText = t('content');
-	const actions = t('actions', { returnObjects: true, }) as Record<
-		string,
-		string
-	>;
+	const nameText = t('actions.remove_room.name');
+	const titleText = t('actions.remove_room.title');
+	const contentText = t('actions.remove_room.content');
+	const actions = t('actions.remove_room.actions', {
+		returnObjects: true,
+	}) as Record<string, string>;
 
 	return (
 		<>

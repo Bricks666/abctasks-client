@@ -18,7 +18,7 @@ export const ExitRoomUserMenuItem: React.FC<ExitRoomUserMenuItemProps> = (
 	props
 ) => {
 	const { className, roomId, } = props;
-	const { t, } = useTranslation('exit-room-user');
+	const { t, } = useTranslation('rooms');
 
 	const exitRoom = useUnit(mutation);
 	const [opened, handlers] = useToggle(false);
@@ -28,13 +28,12 @@ export const ExitRoomUserMenuItem: React.FC<ExitRoomUserMenuItemProps> = (
 		handlers.toggleOff();
 	}, [roomId]);
 
-	const nameText = t('name');
-	const titleText = t('title');
-	const contentText = t('content');
-	const actions = t('actions', { returnObjects: true, }) as Record<
-		string,
-		string
-	>;
+	const nameText = t('actions.exit_room.name');
+	const titleText = t('actions.exit_room.title');
+	const contentText = t('actions.exit_room.content');
+	const actions = t('actions.exit_room.actions', {
+		returnObjects: true,
+	}) as Record<string, string>;
 
 	return (
 		<>

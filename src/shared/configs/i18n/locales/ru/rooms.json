@@ -1,0 +1,64 @@
+{
+	"title": "Комнаты",
+	"rooms_list": {
+		"empty_text": "Еще нет ни одной комнаты. Создайте ее"
+	},
+	"card": {
+		"description": "Описание"
+	},
+	"actions": {
+		"exit_room": {
+			"name": "$t(common:actions.exit) из комнаты",
+			"title": "Вы уверены?",
+			"content": "Вы хотите выйти из этой комнаты?",
+			"actions": {
+				"agree": "$t(common:actions.exit)",
+				"disagree": "Отменить"
+			}
+		},
+		"remove_room": {
+			"name": "$t(common:actions.remove) room",
+			"title": "Вы уверены?",
+			"content": "Вы хотите удалить комнату? Все задачи, тэги и активности будут удалены.",
+			"actions": {
+				"agree": "$t(common:actions.remove)",
+				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Комната была успешно удалена",
+				"error": "Комната не была удалена"
+			}
+		},
+		"update_room": {
+			"name": "$t(common:actions.edit) комнату",
+			"title": "$t(common:actions.edit) комнату",
+			"notifications": {
+				"success": "Комната была успешно обновлена",
+				"error": "Комната не была удалена"
+			}
+		},
+		"room_form": {
+			"fields": {
+				"name": "Название",
+				"description": "Описание"
+			},
+			"errors": {
+				"name": {
+					"empty": "Название не должно быть пустым",
+					"min_length": "Название должен быть не короче {{ min_symbols_count }} символов",
+					"max_length": "Название должен быть не длиннее {{ max_symbols_count }} символов"
+				},
+				"description": {
+					"max_length": "Описание должен быть не длиннее {{ max_symbols_count }} символов"
+				}
+			}
+		},
+		"create_room": {
+			"title": "$t(common:actions.create) комнату",
+			"notifications": {
+				"success": "Комната была успешно создана",
+				"error": "Комната не была создана"
+			}
+		}
+	}
+}

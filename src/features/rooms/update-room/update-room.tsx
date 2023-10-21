@@ -15,7 +15,7 @@ import { close, mutation, form } from './model';
 import styles from './update-room.module.css';
 
 export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
-	const { t, } = useTranslation('update-room');
+	const { t, } = useTranslation('rooms');
 	const roomId = useUnit(roomsModel.$id);
 	const { pending: loading, } = useRoom(roomId!);
 	const onClose = useUnit(close);
@@ -31,7 +31,7 @@ export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
-	const title = t('title');
+	const title = t('actions.update_room.title');
 	const buttonText = t('actions.save', { ns: 'common', });
 
 	const actions = isFullscreen ? (

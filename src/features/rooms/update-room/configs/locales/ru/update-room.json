@@ -1,7 +1,0 @@
-{
-	"title": "$t(common:actions.update) комнату",
-	"notifications": {
-		"success": "Комната была успешно обновлена",
-		"error": "Комната не была удалена"
-	}
-}

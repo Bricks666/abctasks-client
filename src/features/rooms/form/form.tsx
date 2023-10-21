@@ -49,15 +49,18 @@ interface FieldProps {
 
 const Name: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
-	const { t, } = useTranslation('room-form');
+	const { t, } = useTranslation('rooms');
 	const name = useUnit($form.fields.name);
 	const { errorText, } = name;
 
-	const label = t('fields.name');
-	const error = t([`errors.name.${errorText}`, 'common:errors.default'], {
-		min_symbols_count: MIN_LENGTH,
-		max_symbols_count: MAX_SHORT_LENGTH,
-	});
+	const label = t('actions.room_form.fields.name');
+	const error = t(
+		[`actions.room_form.errors.name.${errorText}`, 'common:errors.default'],
+		{
+			min_symbols_count: MIN_LENGTH,
+			max_symbols_count: MAX_SHORT_LENGTH,
+		}
+	);
 	const errorHelperText = name.isValid ? null : error;
 
 	return (
@@ -75,13 +78,16 @@ const Name: React.FC<FieldProps> = (props) => {
 
 const Description: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
-	const { t, } = useTranslation('room-form');
+	const { t, } = useTranslation('rooms');
 	const description = useUnit($form.fields.description);
 	const { errorText, } = description;
 
-	const label = t('fields.description');
+	const label = t('actions.room_form.fields.description');
 	const error = t(
-		[`errors.description.${errorText}`, 'common:errors.default'],
+		[
+			`actions.room_form.errors.description.${errorText}`,
+			'common:errors.default'
+		],
 		{
 			min_symbols_count: MIN_LENGTH,
 			max_symbols_count: MAX_SHORT_LENGTH,

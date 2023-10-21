@@ -10,8 +10,8 @@ import { RoomCard } from '../room-card';
 import styles from './room-list.module.css';
 
 export const RoomList: React.FC = () => {
-	const { t, } = useTranslation('room-list');
-	const emptyText = t('empty-text');
+	const { t, } = useTranslation('rooms');
+	const emptyText = t('rooms_list.empty-text');
 
 	return (
 		<FriendlyList

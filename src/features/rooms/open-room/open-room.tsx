@@ -12,9 +12,9 @@ export interface OpenRoomProps extends CommonProps {
 
 export const OpenRoom: React.FC<OpenRoomProps> = (props) => {
 	const { id, className, } = props;
-	const { t, } = useTranslation('open-room');
+	const { t, } = useTranslation('common');
 
-	const nameText = t('name');
+	const nameText = t('actions.open');
 
 	return (
 		<Button
