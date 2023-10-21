@@ -12,5 +12,10 @@
 	},
 	"errors": {
 		"default": "Что-то пошло не так"
+	},
+	"navigation": {
+		"items": {
+			"rooms": "Комнаты"
+		}
 	}
 }

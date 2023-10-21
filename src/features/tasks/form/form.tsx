@@ -52,6 +52,8 @@ interface FieldProps {
 
 const Title: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
+	const { t, } = useTranslation('tasks');
+	const label = t('actions.task_form.fields.title');
 
 	const title = useUnit($form.fields.title);
 
@@ -64,7 +66,7 @@ const Title: React.FC<FieldProps> = (props) => {
 			helperText={title.errorText}
 			isValid={title.isValid}
 			name='title'
-			label='Название'
+			label={label}
 		/>
 	);
 };
@@ -72,7 +74,8 @@ const Title: React.FC<FieldProps> = (props) => {
 const Tags: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
 
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('tasks');
+	const label = t('actions.task_form.fields.tags');
 
 	const tagIds = useUnit($form.fields.tagIds);
 
@@ -84,7 +87,7 @@ const Tags: React.FC<FieldProps> = (props) => {
 			helperText={tagIds.errorText}
 			isValid={tagIds.isValid}
 			name='tagIds'
-			label={t(`task.group`)}
+			label={label}
 			limitTags={1}
 			multiple
 		/>
@@ -94,7 +97,8 @@ const Tags: React.FC<FieldProps> = (props) => {
 const Status: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
 
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('tasks');
+	const label = t('actions.task_form.fields.status');
 
 	const status = useUnit($form.fields.status);
 
@@ -106,7 +110,7 @@ const Status: React.FC<FieldProps> = (props) => {
 			helperText={status.errorText}
 			isValid={status.isValid}
 			name='status'
-			label={t(`task.status`)}
+			label={label}
 		/>
 	);
 };
@@ -114,7 +118,8 @@ const Status: React.FC<FieldProps> = (props) => {
 const Description: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
 
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('tasks');
+	const label = t('actions.task_form.fields.description');
 
 	const description = useUnit($form.fields.description);
 
@@ -127,7 +132,7 @@ const Description: React.FC<FieldProps> = (props) => {
 			helperText={description.errorText}
 			isValid={description.isValid}
 			name='description'
-			label={t('task.content')}
+			label={label}
 			minRows={5}
 			multiline
 		/>

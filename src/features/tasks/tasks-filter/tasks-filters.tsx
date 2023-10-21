@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TagPicker } from '@/entities/tags';
 import { UsersInRoomPicker } from '@/entities/users';
@@ -18,6 +19,7 @@ export interface TasksFiltersProps extends CommonProps {}
 
 export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 	const { className, } = props;
+	const { t, } = useTranslation('tasks');
 
 	const [open, { toggleOn, toggleOff, }] = useToggle();
 	const reset = useUnit(form.reset);
@@ -33,24 +35,29 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 		toggleOff();
 	};
 
+	const buttonsText = t('actions.tasks_filters.actions', {
+		returnObjects: true,
+	}) as Record<string, string>;
+	const title = t('actions.tasks_filters.title');
+
 	const buttons = (
 		<>
 			<Button onClick={onReset} type='reset' variant='text' color='primary'>
-				Сбросить
+				{buttonsText.reset}
 			</Button>
 			<Button
 				onClick={onSubmit}
 				type='submit'
 				variant='contained'
 				color='primary'>
-				Применить
+				{buttonsText.submit}
 			</Button>
 		</>
 	);
 
 	return (
 		<FiltersPopover
-			title='Фильтры задач'
+			title={title}
 			open={open}
 			onClose={toggleOff}
 			onOpen={toggleOn}
@@ -70,7 +77,10 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 };
 
 const Tags: React.FC = () => {
+	const { t, } = useTranslation('tasks');
+
 	const tagIds = useUnit(form.fields.tagIds);
+	const label = t('actions.tasks_filters.fields.tags');
 
 	return (
 		<TagPicker
@@ -80,7 +90,7 @@ const Tags: React.FC = () => {
 			helperText={tagIds.errorText}
 			isValid={tagIds.isValid}
 			name='tagIds'
-			label='Группы'
+			label={label}
 			size='medium'
 			limitTags={1}
 			multiple
@@ -89,7 +99,11 @@ const Tags: React.FC = () => {
 };
 
 const Users: React.FC = () => {
+	const { t, } = useTranslation('tasks');
+
 	const authorIds = useUnit(form.fields.authorIds);
+
+	const label = t('actions.tasks_filters.fields.authors');
 
 	return (
 		<UsersInRoomPicker
@@ -99,7 +113,7 @@ const Users: React.FC = () => {
 			helperText={authorIds.errorText}
 			isValid={authorIds.isValid}
 			name='authorIds'
-			label='Авторы'
+			label={label}
 			size='medium'
 			limitTags={1}
 			multiple
@@ -108,14 +122,18 @@ const Users: React.FC = () => {
 };
 
 const After: React.FC = () => {
+	const { t, } = useTranslation('common');
+
 	const after = useUnit(form.fields.after);
+
+	const label = t('fields.create_after');
 
 	return (
 		<DatePicker
 			value={after.value}
 			onChange={after.onChange}
 			onBlur={after.onBlur}
-			label='Создано после'
+			label={label}
 			helperText={after.errorText}
 			isValid={after.isValid}
 			name='after'
@@ -124,14 +142,18 @@ const After: React.FC = () => {
 };
 
 const Before: React.FC = () => {
+	const { t, } = useTranslation('common');
+
 	const before = useUnit(form.fields.before);
+
+	const label = t('fields.create_before');
 
 	return (
 		<DatePicker
 			value={before.value}
 			onChange={before.onChange}
 			onBlur={before.onBlur}
-			label='Создано до'
+			label={label}
 			helperText={before.errorText}
 			isValid={before.isValid}
 			name='before'

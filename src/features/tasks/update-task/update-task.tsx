@@ -17,7 +17,7 @@ import styles from './update-task.module.css';
 export interface UpdateTaskProps extends CommonProps, BasePopupProps {}
 
 export const UpdateTask: React.FC<UpdateTaskProps> = (props) => {
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('tasks');
 	const onClose = useUnit(close);
 	const { data: task, } = useUnit(taskModel.query);
 
@@ -36,7 +36,7 @@ export const UpdateTask: React.FC<UpdateTaskProps> = (props) => {
 	const loading = !task;
 
 	const buttonText = t('actions.save', { ns: 'common', });
-
+	const title = t('actions.update_task.title');
 	const actions = isFullscreen ? (
 		<Button type='submit' onClick={onClick}>
 			{buttonText}
@@ -44,11 +44,7 @@ export const UpdateTask: React.FC<UpdateTaskProps> = (props) => {
 	) : null;
 
 	return (
-		<Popup
-			{...props}
-			onClose={onClose}
-			title={t('task.updateTitle')}
-			slots={{ actions, }}>
+		<Popup {...props} onClose={onClose} title={title} slots={{ actions, }}>
 			{loading ? (
 				<SkeletonTaskForm className={styles.taskForm} />
 			) : (

@@ -14,7 +14,7 @@ export interface StatusSelectProps
 }
 
 export const StatusSelect: React.FC<StatusSelectProps> = React.memo((props) => {
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('tasks');
 	const { hasEmptyOption, emptyOptionText, ...rest } = props;
 	return (
 		<Field {...rest} select>
@@ -23,7 +23,7 @@ export const StatusSelect: React.FC<StatusSelectProps> = React.memo((props) => {
 			) : null}
 			{statuses.map((name) => (
 				<MenuItem value={name} key={name}>
-					{t(`statuses.${name}`, { ns: 'task', })}
+					{t(`statuses.${name}`)}
 				</MenuItem>
 			))}
 		</Field>

@@ -15,7 +15,7 @@ import { close, form, mutation } from './model';
 export interface CreateTaskProps extends CommonProps, BasePopupProps {}
 
 export const CreateTask: React.FC<CreateTaskProps> = (props) => {
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('tasks');
 	const onClose = useUnit(close);
 	const [isMobile, isVertical] = useUnit([
 		deviceInfoModel.$isMobile,
@@ -29,6 +29,7 @@ export const CreateTask: React.FC<CreateTaskProps> = (props) => {
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
+	const title = t('actions.create_task.title');
 	const buttonText = t('actions.create', { ns: 'common', });
 
 	const actions = isFullscreen ? (
@@ -38,11 +39,7 @@ export const CreateTask: React.FC<CreateTaskProps> = (props) => {
 	) : null;
 
 	return (
-		<Popup
-			{...props}
-			title={t('task.createTitle')}
-			onClose={onClose}
-			slots={{ actions, }}>
+		<Popup {...props} title={title} onClose={onClose} slots={{ actions, }}>
 			<TaskForm
 				className={styles.form}
 				buttonText={buttonText}

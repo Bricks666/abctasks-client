@@ -32,8 +32,8 @@ export const ActivityListItem: React.FC<ActivityListItemProps> = (props) => {
 		activist,
 		...rest
 	} = props;
-	const { t, } = useTranslation('room');
-	const activityText = t('activities.text', {
+	const { t, } = useTranslation('activities');
+	const activityText = t('card.text', {
 		type: action.name,
 		sphere: sphere.name,
 		activist: activist.username,

@@ -2,6 +2,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { OpenAllRoomActivities } from '@/features/activities';
 
@@ -23,6 +24,10 @@ export interface LastActivitiesProps extends CommonProps {
 
 export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
 	const { className, disableBorder, } = props;
+	const { t, } = useTranslation('activities');
+
+	const emptyText = t('list.empty_text');
+	const title = t('blocks.last_activities.title', { ns: 'room-tasks', });
 
 	return (
 		<FriendlyList
@@ -34,11 +39,11 @@ export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
 			ErrorComponent={Error}
 			ItemComponent={ActivityListItem}
 			SkeletonComponent={SkeletonActivityListItem}
-			emptyText='Here will be shown last 5 activities in room'
+			emptyText={emptyText}
 			slots={{
 				before: (
 					<Typography variant='h6' component='h2' fontWeight={700}>
-						Последние активности
+						{title}
 					</Typography>
 				),
 				after: <OpenAllRoomActivities />,
@@ -49,6 +54,8 @@ export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
 };
 
 const Error: React.FC = () => {
+	const { t, } = useTranslation('activities');
+
 	const roomId = useParam(routes.room.tasks, 'id');
 	const start = useUnit(query.start);
 
@@ -56,10 +63,13 @@ const Error: React.FC = () => {
 		start({ roomId, });
 	}, [roomId]);
 
+	const actionText = t('actions.retry', { ns: 'common', });
+	const text = t('actions.retry_actions.text');
+
 	return (
 		<TextWithAction
-			actionText='retry'
-			text='Activities were not loaded. To retry?'
+			actionText={actionText}
+			text={text}
 			onClick={onRetry}
 			icon={<ReplayIcon />}
 		/>

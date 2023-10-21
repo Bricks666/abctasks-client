@@ -11,7 +11,7 @@ import styles from './room-list.module.css';
 
 export const RoomList: React.FC = () => {
 	const { t, } = useTranslation('rooms');
-	const emptyText = t('rooms_list.empty-text');
+	const emptyText = t('rooms_list.empty_text');
 
 	return (
 		<FriendlyList

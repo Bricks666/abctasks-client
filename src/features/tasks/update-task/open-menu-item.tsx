@@ -16,9 +16,9 @@ export interface OpenUpdateTaskFormMenuItemProps extends CommonProps {
 export const OpenUpdateTaskFormMenuItem: React.FC<OpenUpdateTaskFormMenuItemProps> =
 	React.memo((props) => {
 		const { className, taskId, roomId, } = props;
-		const { t, } = useTranslation('common');
+		const { t, } = useTranslation('tasks');
 
-		const label = t('actions.update');
+		const label = t('actions.update_task.actions.open');
 
 		return (
 			<MenuItem

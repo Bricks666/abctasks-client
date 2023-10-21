@@ -9,9 +9,19 @@
 		"exit": "Exit",
 		"close": "Close",
 		"cancel": "Cancel",
-		"open": "Open"
+		"open": "Open",
+		"retry": "Retry"
 	},
 	"errors": {
 		"default": "Something went wrong"
+	},
+	"navigation": {
+		"items": {
+			"rooms": "Rooms"
+		}
+	},
+	"fields": {
+		"create_after": "Create after",
+		"create_before": "Create before"
 	}
 }

@@ -24,7 +24,10 @@ export interface TasksProgressProps extends CommonProps {
 
 export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 	const { className, disableBorder, } = props;
-	const { t, } = useTranslation('room');
+	const { t, } = useTranslation('room-tasks');
+
+	const title = t('blocks.tasks_progress.title');
+	const emptyText = t('blocks.tasks_progress.empty_text');
 
 	return (
 		<FriendlyList
@@ -34,13 +37,13 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 			ItemComponent={TaskProgress}
 			SkeletonComponent={SkeletonTaskProgress}
 			ErrorComponent={Error}
-			emptyText='Here will be shown your task progress'
+			emptyText={emptyText}
 			skeletonsCount={3}
 			disableBorder={disableBorder}
 			slots={{
 				before: (
 					<Typography variant='h6' component='h2' fontWeight={700}>
-						{t('taskProgress.title')}
+						{title}
 					</Typography>
 				),
 			}}
@@ -52,17 +55,23 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 };
 
 const Error: React.FC = () => {
+	const { t, } = useTranslation('room-tasks');
+
 	const roomId = useParam(routes.room.tasks, 'id');
 	const start = useUnit(progressesModel.query.start);
 
 	const onRetry = React.useCallback(() => {
 		start({ roomId, });
 	}, [roomId]);
+
+	const text = t('actions.retry_progress.text');
+	const actionText = t('actions.retry', { ns: 'common', });
+
 	return (
 		<TextWithAction
-			text='Progress were not loaded. To retry?'
+			text={text}
 			onClick={onRetry}
-			actionText='retry'
+			actionText={actionText}
 			icon={<ReplayIcon />}
 		/>
 	);

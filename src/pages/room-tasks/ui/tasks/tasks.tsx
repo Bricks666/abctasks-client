@@ -17,7 +17,7 @@ import styles from './tasks.module.css';
 
 export const Tasks: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
-	const { t, } = useTranslation('task');
+	const { t, } = useTranslation('tasks');
 	const roomId = useParam(routes.room.tasks, 'id');
 	const tasks = useUnit({
 		pending: tasksInRoomModel.query.$pending,
@@ -35,11 +35,14 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 			tasks.start({ roomId, });
 		};
 
+		const text = t('actions.retry_tasks.text');
+		const actionText = t('actions.retry', { ns: 'common', });
+
 		return (
 			<TextWithAction
 				className={className}
-				actionText='retry'
-				text='Tasks were not loaded. To retry?'
+				actionText={actionText}
+				text={text}
 				onClick={onRetry}
 				icon={<ReplayIcon />}
 			/>

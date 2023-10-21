@@ -18,7 +18,7 @@ export interface RemoveTaskMenuItemProps extends CommonProps {
 export const RemoveTaskMenuItem: React.FC<RemoveTaskMenuItemProps> = React.memo(
 	(props) => {
 		const { className, taskId, roomId, } = props;
-		const { t, } = useTranslation('common');
+		const { t, } = useTranslation('tasks');
 		const removeTask = useUnit(mutation);
 		const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
 
@@ -27,7 +27,12 @@ export const RemoveTaskMenuItem: React.FC<RemoveTaskMenuItemProps> = React.memo(
 			toggleOff();
 		}, [toggleOff, taskId, roomId]);
 
-		const label = t('actions.remove');
+		const label = t('actions.remove_task.name');
+		const title = t('actions.remove_task.title');
+		const content = t('actions.remove_task.content');
+		const actions = t('actions.remove_task.actions', {
+			returnObjects: true,
+		}) as Record<string, string>;
 
 		return (
 			<MenuItem className={className} onClick={toggleOn}>
@@ -39,11 +44,11 @@ export const RemoveTaskMenuItem: React.FC<RemoveTaskMenuItemProps> = React.memo(
 				<Confirm
 					isOpen={toggled}
 					onClose={toggleOff}
-					title='Are you sure?'
-					content='Don you want to delete this task?'
-					agreeText='Delete'
+					title={title}
+					content={content}
+					agreeText={actions.agree}
 					onAgree={onAgree}
-					disagreeText='Cancel'
+					disagreeText={actions.disagree}
 					onDisagree={toggleOff}
 				/>
 			</MenuItem>

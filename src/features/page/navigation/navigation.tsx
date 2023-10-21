@@ -20,9 +20,9 @@ export interface NavigationProps extends CommonProps {}
 
 export const Navigation: React.FC<NavigationProps> = (props) => {
 	const { className, } = props;
-	const { t, } = useTranslation('navigation');
+	const { t, } = useTranslation('common');
 
-	const roomsText = t('items.rooms');
+	const roomsText = t('navigation.items.rooms');
 
 	const items = [
 		{

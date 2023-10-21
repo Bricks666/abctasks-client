@@ -20,7 +20,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 	(props) => {
 		const { donecount, totalcount, className, tag, } = props;
 		const { mainColor, secondColor, name, } = tag;
-		const { t, } = useTranslation('room');
+		const { t, } = useTranslation('room-tasks');
 
 		const value = (Number(donecount) / Number(totalcount)) * 100;
 
@@ -30,6 +30,12 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 				backgroundColor: mainColor,
 			},
 		};
+
+		const ariaLabel = t('blocks.tasks_progress.aria_label', {
+			tag_name: name,
+			done_count: donecount,
+			total_count: totalcount,
+		});
 
 		return (
 			<ListItem className={cn(styles.item, className)}>
@@ -44,12 +50,7 @@ export const TaskProgress: React.FC<TaskProgressComponent> = React.memo(
 					variant='determinate'
 					value={value}
 					valueBuffer={100}
-					aria-label={
-						t('taskProgress.progressAria', {
-							name,
-							completed: donecount,
-						})!
-					}
+					aria-label={ariaLabel}
 					sx={sx}
 				/>
 			</ListItem>
