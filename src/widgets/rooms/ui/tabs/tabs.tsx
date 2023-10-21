@@ -14,7 +14,7 @@ import { deviceInfoModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 
 export const Tabs: React.FC<CommonProps> = React.memo(() => {
-	const { t, } = useTranslation('tabs');
+	const { t, } = useTranslation('room');
 	const tab = useParam(routes.room.base, 'tab') || 'tasks';
 	const id = useParam(routes.room.base, 'id');
 

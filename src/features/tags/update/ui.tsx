@@ -21,7 +21,7 @@ export interface UpdateTagProps extends CommonProps, BasePopupProps {}
 export const UpdateTag: React.FC<React.PropsWithChildren<UpdateTagProps>> = (
 	props
 ) => {
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('room-tags');
 	const roomId = useParam(routes.room.tags, 'id');
 	const id = useUnit(tagsModel.$id);
 	const onClose = useUnit(close);
@@ -38,6 +38,7 @@ export const UpdateTag: React.FC<React.PropsWithChildren<UpdateTagProps>> = (
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
+	const title = t('actions.update_tag.title');
 	const buttonText = t('actions.save', { ns: 'common', });
 
 	const actions = isFullscreen ? (
@@ -47,11 +48,7 @@ export const UpdateTag: React.FC<React.PropsWithChildren<UpdateTagProps>> = (
 	) : null;
 
 	return (
-		<Popup
-			{...props}
-			onClose={onClose}
-			title={t('group.updateTitle')}
-			slots={{ actions, }}>
+		<Popup {...props} onClose={onClose} title={title} slots={{ actions, }}>
 			{isLoading ? (
 				<SkeletonTagForm className={styles.form} />
 			) : (

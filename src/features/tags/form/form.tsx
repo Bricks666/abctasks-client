@@ -63,7 +63,9 @@ const Preview: React.FC<FieldProps> = (props) => {
 
 const Name: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('room-tags');
+
+	const label = t('actions.tag_form.fields.name');
 
 	const name = useUnit($form.fields.name);
 
@@ -76,14 +78,15 @@ const Name: React.FC<FieldProps> = (props) => {
 			helperText={name.errorText}
 			isValid={name.isValid}
 			name='name'
-			label={t('group.name')}
+			label={label}
 		/>
 	);
 };
 
 const MainColor: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('room-tags');
+	const label = t('actions.tag_form.fields.main_color');
 
 	const mainColor = useUnit($form.fields.mainColor);
 
@@ -95,7 +98,7 @@ const MainColor: React.FC<FieldProps> = (props) => {
 			helperText={mainColor.errorText}
 			isValid={mainColor.isValid}
 			name='mainColor'
-			label={t('group.mainColor')}
+			label={label}
 			type='color'
 		/>
 	);
@@ -103,7 +106,8 @@ const MainColor: React.FC<FieldProps> = (props) => {
 
 const SecondaryColor: React.FC<FieldProps> = (props) => {
 	const { $form, } = props;
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('room-tags');
+	const label = t('actions.tag_form.fields.second_color');
 
 	const secondColor = useUnit($form.fields.secondColor);
 
@@ -115,7 +119,7 @@ const SecondaryColor: React.FC<FieldProps> = (props) => {
 			helperText={secondColor.errorText}
 			isValid={secondColor.isValid}
 			name='secondColor'
-			label={t('group.secondaryColor')}
+			label={label}
 			type='color'
 		/>
 	);

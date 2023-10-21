@@ -1,6 +1,7 @@
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TagListItem } from '@/widgets/tags';
 
@@ -14,6 +15,10 @@ import { FriendlyList, TextWithAction } from '@/shared/ui';
 export const TagsList: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 
+	const { t, } = useTranslation('room-tags');
+
+	const emptyText = t('list.empty_text');
+
 	return (
 		<FriendlyList
 			className={className}
@@ -23,12 +28,17 @@ export const TagsList: React.FC<CommonProps> = (props) => {
 			SkeletonComponent={SkeletonTagListItem}
 			skeletonsCount={15}
 			ErrorComponent={Error}
-			emptyText='There is not tags in the room yet'
+			emptyText={emptyText}
 		/>
 	);
 };
 
 const Error: React.FC = () => {
+	const { t, } = useTranslation('room-tags');
+
+	const actionText = t('actions.retry', { ns: 'common', });
+	const text = t('actions.retry_tags.text');
+
 	const start = useUnit(tagsModel.query.start);
 
 	const roomId = useParam(routes.room.tags, 'id');
@@ -39,8 +49,8 @@ const Error: React.FC = () => {
 
 	return (
 		<TextWithAction
-			actionText='retry'
-			text='Tags were not loaded. To retry?'
+			actionText={actionText}
+			text={text}
 			onClick={onRetry}
 			icon={<ReplayIcon />}
 		/>

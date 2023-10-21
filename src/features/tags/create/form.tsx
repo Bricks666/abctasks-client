@@ -15,7 +15,7 @@ import { close, form, mutation } from './model';
 export interface CreateTagProps extends CommonProps, BasePopupProps {}
 
 export const CreateTag: React.FC<CreateTagProps> = (props) => {
-	const { t, } = useTranslation('popups');
+	const { t, } = useTranslation('room-tags');
 	const onClose = useUnit(close);
 	const pending = useUnit(mutation.$pending);
 	const onClick = useUnit(form.submit);
@@ -28,6 +28,7 @@ export const CreateTag: React.FC<CreateTagProps> = (props) => {
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
+	const title = t('actions.create_tag.title');
 	const buttonText = t('actions.save', { ns: 'common', });
 
 	const actions = isFullscreen ? (
@@ -37,15 +38,11 @@ export const CreateTag: React.FC<CreateTagProps> = (props) => {
 	) : null;
 
 	return (
-		<Popup
-			{...props}
-			onClose={onClose}
-			title={t('group.createTitle')}
-			slots={{ actions, }}>
+		<Popup {...props} onClose={onClose} title={title} slots={{ actions, }}>
 			<TagForm
 				className={styles.form}
 				$form={form}
-				buttonText={t('actions.create', { ns: 'common', })}
+				buttonText={buttonText}
 				hideButton={isFullscreen}
 				buttonDisabled={pending}
 			/>

@@ -15,10 +15,12 @@ export const OpenCreateTagForm: React.FC<OpenCreateTagFormProps> = React.memo(
 	(props) => {
 		const { className, } = props;
 		const roomId = useParam(routes.room.tags, 'id');
-		const { t, } = useTranslation('common');
+		const { t, } = useTranslation('room-tags');
+
+		const title = t('actions.create_tag.actions.open');
 
 		return (
-			<Tooltip title={`${t('actions.create')} tag`}>
+			<Tooltip title={title}>
 				<IconButton
 					className={className}
 					to={routes.room.tags as RouteInstance<any>}

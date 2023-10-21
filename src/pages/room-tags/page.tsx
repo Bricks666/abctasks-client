@@ -1,6 +1,7 @@
 import { Container } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Popups, PopupsProps } from '@/widgets/page';
 
@@ -13,7 +14,6 @@ import { SectionHeader } from '@/shared/ui';
 import styles from './page.module.css';
 import { TagsList } from './ui';
 
-
 export interface TagsPageProps extends CommonProps {}
 
 const popupMap: PopupsProps['popupMap'] = {
@@ -23,10 +23,13 @@ const popupMap: PopupsProps['popupMap'] = {
 
 const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 	const { className, } = props;
+	const { t, } = useTranslation('room-tags');
+
+	const title = t('title');
 
 	return (
 		<Container className={cn(styles.container, className)}>
-			<SectionHeader title='Tags' actions={<OpenCreateTagForm />} />
+			<SectionHeader title={title} actions={<OpenCreateTagForm />} />
 			<TagsList />
 			<Popups popupMap={popupMap} />
 		</Container>
