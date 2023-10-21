@@ -5,7 +5,7 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 
 import { room, Room, roomsApi } from '@/shared/api';
-import { controls, routes, getParams } from '@/shared/configs';
+import { controls, getParams } from '@/shared/configs';
 import { dataExtractor } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -31,7 +31,6 @@ cache(query);
 
 querySync({
 	controls,
-	route: routes.rooms,
 	source: {
 		[getParams.roomId]: $id,
 	},

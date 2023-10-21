@@ -1,0 +1,29 @@
+{
+	"title": "Login",
+	"has_account_question": "Don't you have an account yet?",
+	"create_right_now": ["Then", "create it", "right now"],
+	"login_form": {
+		"fields": {
+			"email": "Email",
+			"password": "Password",
+			"remember_me": "Remember me"
+		},
+		"submit": "Login",
+		"errors": {
+			"email": {
+				"empty": "Email must be provided",
+				"email": "It's an invalid email pattern",
+				"min_length": "Email must contain at least {{ min_symbols_count }} letters",
+				"max_length": "Email must contain no more {{ max_symbols_count }} letters",
+				"not_found": "User was not found"
+			},
+			"password": {
+				"empty": "Password must be provided",
+				"pattern": "Password can only contain latins alphas, numeric and !, *, (, ), _, +",
+				"min_length": "Password must contain at least {{ min_symbols_count }} letters",
+				"max_length": "Password must contain no more {{ max_symbols_count }} letters",
+				"incorrect_password": "Incorrect password"
+			}
+		}
+	}
+}

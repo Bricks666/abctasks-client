@@ -18,7 +18,7 @@ export const RegistrationForm: React.FC<CommonProps> = (props) => {
 	const { t, } = useTranslation('registration');
 	const submit = useUnit(form.submit);
 	const pending = useUnit(mutation.$pending);
-	const buttonText = t('submit');
+	const buttonText = t('registration_form.submit');
 
 	const onSubmit = usePreventDefault(submit);
 
@@ -40,11 +40,14 @@ const Email: React.FC = () => {
 	const email = useUnit(form.fields.email);
 	const { errorText, } = email;
 
-	const label = t('fields.email');
-	const error = t([`errors.email.${errorText}`, 'common:errors.default'], {
-		min_symbols_count: MIN_LENGTH,
-		max_symbols_count: MAX_SHORT_LENGTH,
-	});
+	const label = t('registration_form.fields.email');
+	const error = t(
+		[`registration_form.errors.email.${errorText}`, 'common:errors.default'],
+		{
+			min_symbols_count: MIN_LENGTH,
+			max_symbols_count: MAX_SHORT_LENGTH,
+		}
+	);
 	const errorHelperText = email.isValid ? null : error;
 
 	return (
@@ -66,11 +69,14 @@ const Username: React.FC = () => {
 	const username = useUnit(form.fields.username);
 	const { errorText, } = username;
 
-	const label = t('fields.username');
-	const error = t([`errors.username.${errorText}`, 'common:errors.default'], {
-		min_symbols_count: MIN_LENGTH,
-		max_symbols_count: MAX_SHORT_LENGTH,
-	});
+	const label = t('registration_form.fields.username');
+	const error = t(
+		[`registration_form.errors.username.${errorText}`, 'common:errors.default'],
+		{
+			min_symbols_count: MIN_LENGTH,
+			max_symbols_count: MAX_SHORT_LENGTH,
+		}
+	);
 	const errorHelperText = username.isValid ? null : error;
 
 	return (
@@ -92,11 +98,14 @@ const Password: React.FC = () => {
 	const password = useUnit(form.fields.password);
 	const { errorText, } = password;
 
-	const label = t('fields.password');
-	const error = t([`errors.password.${errorText}`, 'common:errors.default'], {
-		min_symbols_count: MIN_LENGTH,
-		max_symbols_count: MAX_SHORT_LENGTH,
-	});
+	const label = t('registration_form.fields.password');
+	const error = t(
+		[`registration_form.errors.password.${errorText}`, 'common:errors.default'],
+		{
+			min_symbols_count: MIN_LENGTH,
+			max_symbols_count: MAX_SHORT_LENGTH,
+		}
+	);
 	const errorHelperText = password.isValid ? null : error;
 
 	return (
@@ -118,9 +127,12 @@ const RepeatPassword: React.FC = () => {
 	const repeatPassword = useUnit(form.fields.repeatPassword);
 	const { errorText, } = repeatPassword;
 
-	const label = t('fields.repeat_password');
+	const label = t('registration_form.fields.repeat_password');
 	const error = t(
-		[`errors.repeat_password.${errorText}`, 'common:errors.default'],
+		[
+			`registration_form.errors.repeat_password.${errorText}`,
+			'common:errors.default'
+		],
 		{
 			min_symbols_count: MIN_LENGTH,
 			max_symbols_count: MAX_SHORT_LENGTH,

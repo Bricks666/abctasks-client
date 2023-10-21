@@ -35,6 +35,7 @@ export const Gate = createGate<InRoomParams>({
 
 sample({
 	clock: Gate.state,
+	filter: ({ roomId, }) => Boolean(roomId),
 	target: query.start,
 });
 

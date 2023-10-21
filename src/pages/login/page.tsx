@@ -14,7 +14,7 @@ import { AuthLayout, PageTitle } from '@/shared/ui';
 import styles from './styles.module.css';
 
 const LoginPage: React.FC<CommonProps> = ({ className, }) => {
-	const { t, } = useTranslation('login-page');
+	const { t, } = useTranslation('login');
 	const pageTitle = t('title');
 	const createRightNow = t('create_right_now', {
 		returnObjects: true,

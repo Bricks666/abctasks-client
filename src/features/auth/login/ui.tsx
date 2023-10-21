@@ -15,7 +15,7 @@ import styles from './ui.module.css';
 export const LoginForm: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('login');
-	const loginText = t('submit');
+	const loginText = t('login_form.submit');
 	const submit = useUnit(form.submit);
 
 	const onSubmit = usePreventDefault(submit);
@@ -35,11 +35,14 @@ const Email: React.FC = () => {
 	const email = useUnit(form.fields.email);
 	const { errorText, } = email;
 
-	const label = t('fields.email');
-	const error = t([`errors.email.${errorText}`, 'common:errors.default'], {
-		min_symbols_count: MIN_LENGTH,
-		max_symbols_count: MAX_SHORT_LENGTH,
-	});
+	const label = t('login_form.fields.email');
+	const error = t(
+		[`login_form.errors.email.${errorText}`, 'common:errors.default'],
+		{
+			min_symbols_count: MIN_LENGTH,
+			max_symbols_count: MAX_SHORT_LENGTH,
+		}
+	);
 	const errorHelperText = email.isValid ? null : error;
 
 	return (
@@ -61,11 +64,14 @@ const Password: React.FC = () => {
 	const password = useUnit(form.fields.password);
 	const { errorText, } = password;
 
-	const label = t('fields.password');
-	const error = t([`errors.password.${errorText}`, 'common:errors.default'], {
-		min_symbols_count: MIN_LENGTH,
-		max_symbols_count: MAX_SHORT_LENGTH,
-	});
+	const label = t('login_form.fields.password');
+	const error = t(
+		[`login_form.errors.password.${errorText}`, 'common:errors.default'],
+		{
+			min_symbols_count: MIN_LENGTH,
+			max_symbols_count: MAX_SHORT_LENGTH,
+		}
+	);
 	const errorHelperText = password.isValid ? null : error;
 
 	return (
@@ -84,7 +90,7 @@ const Password: React.FC = () => {
 
 const RememberMe: React.FC = () => {
 	const { t, } = useTranslation('login');
-	const label = t('fields.remember_me');
+	const label = t('login_form.fields.remember_me');
 
 	const rememberMe = useUnit(form.fields.rememberMe);
 

@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 
 const RegistrationPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
-	const { t, } = useTranslation('registration-page');
+	const { t, } = useTranslation('registration');
 	const pageTitle = t('title');
 	const loginRightNow = t('login_right_now', {
 		returnObjects: true,
