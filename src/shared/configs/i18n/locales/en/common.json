@@ -1,6 +1,7 @@
 {
 	"loading": "Loading...",
 	"actions": {
+		"add": "Add",
 		"create": "Create",
 		"update": "Update",
 		"edit": "Edit",

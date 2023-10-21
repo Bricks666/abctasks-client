@@ -1,0 +1,31 @@
+{
+	"title": "Users",
+	"list": {
+		"empty_text": "There are no users in room yet"
+	},
+	"actions": {
+		"add_user": {
+			"title": "$t(common:actions.add) user into room",
+			"fields": {
+				"user": "Username"
+			},
+			"actions": {
+				"open": "$t(common:actions.add) user",
+				"submit": "Add {{ username }} to the room",
+				"submit_disabled": "Select user above"
+			}
+		},
+		"remove_user": {
+			"title": "Are you sure?",
+			"content": "Do you want to $t(common:actions.remove) this user? You will be able to invite him again.",
+			"actions": {
+				"open": "$t(common:actions.remove) user",
+				"agree": "$t(common:actions.remove)",
+				"disagree": "$t(common:actions.cancel)"
+			}
+		},
+		"retry_users": {
+			"text": "Users were not loaded. Click to retry"
+		}
+	}
+}

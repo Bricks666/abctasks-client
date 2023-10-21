@@ -3,6 +3,7 @@ import { LoadingButton } from '@mui/lab';
 import { Paper, IconButton } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TemplateUserListItem, UserSearch } from '@/entities/users';
 
@@ -17,6 +18,7 @@ export interface AddUsersIntoRoomProps extends CommonProps, BasePopupProps {}
 
 export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 	const { isOpen, className, } = props;
+	const { t, } = useTranslation('room-users');
 	const submit = useUnit(form.submit);
 	const onClose = useUnit(close);
 	const isLoading = useUnit(mutation.$pending);
@@ -24,16 +26,17 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 
 	const onSubmit: React.FormEventHandler = usePreventDefault(submit);
 
+	const title = t('actions.add_user.title');
 	const buttonText = user
-		? `Add ${user.username} to the room`
-		: 'Select user above';
+		? t('actions.add_user.actions.submit', { username: user.username, })
+		: t('actions.add_user.actions.submit', { context: 'disabled', });
 
 	return (
 		<MainPopup
 			className={className}
 			isOpen={isOpen}
 			onClose={onClose}
-			title='Add users into room'>
+			title={title}>
 			<form className={styles.form} onSubmit={onSubmit}>
 				<User />
 				<LoadingButton
@@ -52,6 +55,7 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 
 const User: React.FC = () => {
 	const user = useUnit(form.fields.user);
+	const { t, } = useTranslation('room-users');
 
 	if (user.value) {
 		return (
@@ -69,6 +73,7 @@ const User: React.FC = () => {
 			</Paper>
 		);
 	}
+	const label = t('actions.add_user.fields.user');
 
 	return (
 		<UserSearch
@@ -78,7 +83,8 @@ const User: React.FC = () => {
 			isValid={user.isValid}
 			helperText={user.errorText}
 			name='user'
-			required
+			label={label}
+			autoComplete='off'
 		/>
 	);
 };

@@ -1,7 +1,8 @@
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -18,7 +19,7 @@ export const RemoveUserFromRoom: React.FC<RemoveUserFromRoomProps> = (
 	props
 ) => {
 	const { userId, className, roomId, } = props;
-
+	const { t, } = useTranslation('room-users');
 	const removeUser = useUnit(mutation);
 
 	const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
@@ -28,19 +29,27 @@ export const RemoveUserFromRoom: React.FC<RemoveUserFromRoomProps> = (
 		toggleOff();
 	}, [toggleOff, userId, roomId]);
 
+	const title = t('actions.remove_user.title');
+	const content = t('actions.remove_user.content');
+	const open = t('actions.remove_user.actions.open');
+	const agree = t('actions.remove_user.actions.agree');
+	const disagree = t('actions.remove_user.actions.disagree');
+
 	return (
 		<>
-			<IconButton className={className} onClick={toggleOn} title='Remove user'>
-				<DeleteIcon />
-			</IconButton>
+			<Tooltip title={open}>
+				<IconButton className={className} onClick={toggleOn}>
+					<DeleteIcon />
+				</IconButton>
+			</Tooltip>
 			<Confirm
 				isOpen={toggled}
 				onClose={toggleOff}
-				title='Are you sure?'
-				content='Don you want to delete this user?'
-				agreeText='Remove'
+				title={title}
+				content={content}
+				agreeText={agree}
 				onAgree={onAgree}
-				disagreeText='Cancel'
+				disagreeText={disagree}
 				onDisagree={toggleOff}
 			/>
 		</>

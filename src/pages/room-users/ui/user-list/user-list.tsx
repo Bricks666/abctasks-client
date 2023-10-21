@@ -1,6 +1,7 @@
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { UserInRoomListItem } from '@/widgets/users';
 
@@ -15,7 +16,10 @@ export interface UserListProps extends CommonProps {}
 
 export const UserList: React.FC<UserListProps> = (props) => {
 	const { className, } = props;
+	const { t, } = useTranslation('room-users');
 	const roomId = useParam(routes.room.tasks, 'id');
+
+	const emptyText = t('list.empty_text');
 
 	return (
 		<FriendlyList
@@ -27,14 +31,19 @@ export const UserList: React.FC<UserListProps> = (props) => {
 			ErrorComponent={Error}
 			ItemComponent={UserInRoomListItem as any}
 			SkeletonComponent={SkeletonUserListItem}
-			emptyText='There are no users in room yet'
+			emptyText={emptyText}
 		/>
 	);
 };
 
 const Error: React.FC = () => {
+	const { t, } = useTranslation('room-users');
+
 	const roomId = useParam(routes.room.tasks, 'id');
 	const start = useUnit(usersInRoomModel.query.start);
+
+	const text = t('actions.retry_users.text');
+	const actionText = t('actions.retry', { ns: 'common', });
 
 	const onRetry = React.useCallback(() => {
 		start({ roomId, });
@@ -42,8 +51,8 @@ const Error: React.FC = () => {
 
 	return (
 		<TextWithAction
-			actionText='retry'
-			text='Users were not loaded. To retry?'
+			actionText={actionText}
+			text={text}
 			onClick={onRetry}
 			icon={<ReplayIcon />}
 		/>
