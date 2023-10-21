@@ -11,7 +11,7 @@
 			},
 			"actions": {
 				"open": "$t(common:actions.add) user",
-				"submit": "Add {{ username }} to the room",
+				"submit": "$t(common:actions.add) {{ username }} to the room",
 				"submit_disabled": "Select user above"
 			}
 		},

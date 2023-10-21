@@ -13,7 +13,7 @@
 			"content": "Вы хотите выйти из этой комнаты?",
 			"actions": {
 				"agree": "$t(common:actions.exit)",
-				"disagree": "Отменить"
+				"disagree": "$t(common:actions.cancel)"
 			}
 		},
 		"remove_room": {

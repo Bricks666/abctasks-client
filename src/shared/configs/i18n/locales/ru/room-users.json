@@ -1,0 +1,31 @@
+{
+	"title": "Пользователи",
+	"list": {
+		"empty_text": "В комнате еще нет пользователей"
+	},
+	"actions": {
+		"add_user": {
+			"title": "$t(common:actions.add) пользователя в комнату",
+			"fields": {
+				"user": "Имя пользователя"
+			},
+			"actions": {
+				"open": "$t(common:actions.add) пользователя",
+				"submit": "$t(common:actions.add) {{ username }} в комнату",
+				"submit_disabled": "Выберите пользователя выше"
+			}
+		},
+		"remove_user": {
+			"title": "Вы уверены?",
+			"content": "Вы уверены, что хотите $t(common:actions.remove) этого пользователя? Вы сможете пригласить его потом снова",
+			"actions": {
+				"open": "$t(common:actions.remove) пользователя",
+				"agree": "$t(common:actions.remove)",
+				"disagree": "$t(common:actions.cancel)"
+			}
+		},
+		"retry_users": {
+			"text": "Пользователи не были загружены. Нажмите, чтобы повторить"
+		}
+	}
+}

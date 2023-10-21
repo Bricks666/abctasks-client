@@ -1,0 +1,25 @@
+{
+	"card": {
+		"text": "Пользователь {{ activist }} $t(type.{{ type }}) $t(spheres.{{ sphere }}, {\"context\":\"vp\"  })"
+	},
+	"list": {
+		"empty_text": "Здесь будут показываться активности в комнате"
+	},
+	"spheres": {
+		"task": "задача",
+		"task_vp": "задачу",
+		"tag": "тэг",
+		"comment": "комментарий"
+	},
+	"type": {
+		"create": "создал",
+		"update": "изменил",
+		"remove": "удалил",
+		"create_comment": "оставил"
+	},
+	"actions": {
+		"retry_actions": {
+			"text": "Активности не загружены. Нажмите, чтобы повторить"
+		}
+	}
+}

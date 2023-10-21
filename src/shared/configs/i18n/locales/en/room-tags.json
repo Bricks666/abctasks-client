@@ -18,7 +18,7 @@
 		},
 		"remove_tag": {
 			"title": "Are you sure?",
-			"text": "Do you want to delete this group? All tasks, having only this tag, will be deleted",
+			"text": "Do you want to $t(common:actions.remove) this tag? All tasks, having only this tag, will be deleted",
 			"actions": {
 				"open": "$t(common:actions.remove) tag",
 				"agree": "$t(common:actions.remove)",
