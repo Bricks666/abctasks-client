@@ -8,12 +8,20 @@
 			"title": "$t(common:actions.create) tag",
 			"actions": {
 				"open": "$t(common:actions.create) tag"
+			},
+			"notifications": {
+				"success": "Tag was created successfully",
+				"error": "Tag was not created"
 			}
 		},
 		"update_tag": {
 			"title": "$t(common:actions.update) tag",
 			"actions": {
 				"open": "$t(common:actions.update) tag"
+			},
+			"notifications": {
+				"success": "Tag was updated successfully",
+				"error": "Tag was not updated"
 			}
 		},
 		"remove_tag": {
@@ -23,6 +31,10 @@
 				"open": "$t(common:actions.remove) tag",
 				"agree": "$t(common:actions.remove)",
 				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Tag was removed successfully",
+				"error": "Tag was not removed"
 			}
 		},
 		"tag_form": {

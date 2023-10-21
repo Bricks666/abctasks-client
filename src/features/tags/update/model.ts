@@ -8,7 +8,7 @@ import { tagsModel, tagModel } from '@/entities/tags';
 
 import { UpdateTagParams, Tag, tagsApi, tag } from '@/shared/api';
 import { popupsMap, routes } from '@/shared/configs';
-import { notificationsModel } from '@/shared/models';
+import { i18nModel, notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 import { tagFormModel } from '../form';
@@ -100,8 +100,9 @@ update(tagsModel.query, {
 
 sample({
 	clock: mutation.finished.success,
-	fn: () => ({
-		message: 'Tag was update successfully',
+	source: i18nModel.integration.$t,
+	fn: (t) => ({
+		message: t('action.update_tag.notifications.success', { ns: 'room-tags', }),
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -109,8 +110,9 @@ sample({
 
 sample({
 	clock: mutation.finished.failure,
-	fn: () => ({
-		message: 'Tag was not update',
+	source: i18nModel.integration.$t,
+	fn: (t) => ({
+		message: t('action.update_tag.notifications.error', { ns: 'room-tags', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

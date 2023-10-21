@@ -97,7 +97,7 @@ sample({
 	clock: mutation.finished.success,
 	source: i18nModel.integration.$t,
 	fn: (t) => ({
-		message: t('notifications.success', { ns: 'update-room', }),
+		message: t('actions.update_room.notifications.success', { ns: 'rooms', }),
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -107,7 +107,7 @@ sample({
 	clock: mutation.finished.failure,
 	source: i18nModel.integration.$t,
 	fn: (t) => ({
-		message: t('notifications.error', { ns: 'update-room', }),
+		message: t('actions.update_room.notifications.error', { ns: 'rooms', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

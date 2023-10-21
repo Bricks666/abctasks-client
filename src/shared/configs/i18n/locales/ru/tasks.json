@@ -21,12 +21,20 @@
 			"title": "$t(common:actions.create) задачу",
 			"actions": {
 				"open": "$t(common:actions.create) задачу"
+			},
+			"notifications": {
+				"success": "Задача была успешно создана",
+				"error": "Задача не была создана"
 			}
 		},
 		"update_task": {
 			"title": "$t(common:actions.update) задачу",
 			"actions": {
 				"open": "$t(common:actions.update) задачу"
+			},
+			"notifications": {
+				"success": "Задача была успешно изменена",
+				"error": "Задача не была изменена"
 			}
 		},
 		"remove_task": {
@@ -36,6 +44,10 @@
 			"actions": {
 				"agree": "$t(common:actions.remove)",
 				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Задача была успешно удалена",
+				"error": "Задача не была удалена"
 			}
 		},
 		"task_form": {

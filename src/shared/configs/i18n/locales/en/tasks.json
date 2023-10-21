@@ -21,12 +21,20 @@
 			"title": "$t(common:actions.create) task",
 			"actions": {
 				"open": "$t(common:actions.create) task"
+			},
+			"notifications": {
+				"success": "Task was created successfully",
+				"error": "Task was not created"
 			}
 		},
 		"update_task": {
 			"title": "$t(common:actions.update) task",
 			"actions": {
 				"open": "$t(common:actions.update) task"
+			},
+			"notifications": {
+				"success": "Task was updated successfully",
+				"error": "Task was not updated"
 			}
 		},
 		"remove_task": {
@@ -36,6 +44,10 @@
 			"actions": {
 				"agree": "$t(common:actions.remove)",
 				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Task was removed successfully",
+				"error": "Task was not removed"
 			}
 		},
 		"task_form": {

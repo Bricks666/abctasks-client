@@ -14,6 +14,10 @@
 			"actions": {
 				"agree": "$t(common:actions.exit)",
 				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "You exited from user successfully",
+				"error": "You didn't exit from room"
 			}
 		},
 		"remove_room": {

@@ -13,6 +13,10 @@
 				"open": "$t(common:actions.add) пользователя",
 				"submit": "$t(common:actions.add) {{ username }} в комнату",
 				"submit_disabled": "Выберите пользователя выше"
+			},
+			"notifications": {
+				"success": "Приглашение было отправлено успешно",
+				"error": "Приглашение не было отправлено"
 			}
 		},
 		"remove_user": {
@@ -22,6 +26,10 @@
 				"open": "$t(common:actions.remove) пользователя",
 				"agree": "$t(common:actions.remove)",
 				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Пользователь был удален из комнаты успешно",
+				"error": "Пользователь не был удален из комнаты"
 			}
 		},
 		"retry_users": {

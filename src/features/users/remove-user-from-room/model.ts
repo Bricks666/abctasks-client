@@ -1,11 +1,12 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createEffect } from 'effector';
+import { createEffect, sample } from 'effector';
 import { Boolean } from 'runtypes';
 
 import { usersInRoomModel } from '@/entities/users';
 
 import { membersApi } from '@/shared/api';
+import { i18nModel, notificationsModel } from '@/shared/models';
 import { getStandardResponse } from '@/shared/types';
 
 const handlerFx = createEffect(membersApi.remove);
@@ -40,4 +41,26 @@ update(usersInRoomModel.query, {
 			};
 		},
 	},
+});
+
+sample({
+	clock: mutation.finished.success,
+	source: i18nModel.integration.$t,
+	fn: (t) => ({
+		message: t('action.remove_user.notifications.success', {
+			ns: 'room-users',
+		}),
+		color: 'success' as const,
+	}),
+	target: notificationsModel.create,
+});
+
+sample({
+	clock: mutation.finished.failure,
+	source: i18nModel.integration.$t,
+	fn: (t) => ({
+		message: t('action.remove_user.notifications.error', { ns: 'room-users', }),
+		color: 'error' as const,
+	}),
+	target: notificationsModel.create,
 });

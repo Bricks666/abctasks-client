@@ -13,6 +13,10 @@
 				"open": "$t(common:actions.add) user",
 				"submit": "$t(common:actions.add) {{ username }} to the room",
 				"submit_disabled": "Select user above"
+			},
+			"notifications": {
+				"success": "Invitation was sent successfully",
+				"error": "Invitation was not sent"
 			}
 		},
 		"remove_user": {
@@ -22,6 +26,10 @@
 				"open": "$t(common:actions.remove) user",
 				"agree": "$t(common:actions.remove)",
 				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "User was removed from the room successfully",
+				"error": "User was not removed from the room"
 			}
 		},
 		"retry_users": {

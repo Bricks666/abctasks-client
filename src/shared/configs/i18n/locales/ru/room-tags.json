@@ -8,12 +8,20 @@
 			"title": "$t(common:actions.create) тэг",
 			"actions": {
 				"open": "$t(common:actions.create) тэг"
+			},
+			"notifications": {
+				"success": "Тэг был успешно создан",
+				"error": "Тэг не был создан"
 			}
 		},
 		"update_tag": {
 			"title": "$t(common:actions.update) тэг",
 			"actions": {
 				"open": "$t(common:actions.update) тэг"
+			},
+			"notifications": {
+				"success": "Тэг был успешно обновлен",
+				"error": "Тэг не был обновлен"
 			}
 		},
 		"remove_tag": {
@@ -23,6 +31,10 @@
 				"open": "$t(common:actions.remove) тэг",
 				"agree": "$t(common:actions.remove)",
 				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Тэг был успешно удален",
+				"error": "Тэг не был удален"
 			}
 		},
 		"tag_form": {
