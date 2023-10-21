@@ -1,8 +1,10 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import TuneIcon from '@mui/icons-material/Tune';
 import { Button } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
 	ActivitiesActionsPicker,
@@ -21,6 +23,7 @@ export interface ActivitiesFiltersProps extends CommonProps {}
 
 export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 	const { className, } = props;
+	const { t, } = useTranslation('room-activities');
 
 	const [open, { toggleOff, toggleOn, }] = useToggle();
 	const [reset, submit] = useUnit([form.reset, form.submit]);
@@ -35,6 +38,11 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 		toggleOff();
 	};
 
+	const title = t('actions.filter_activities.title');
+	const actions = t('actions.filter_activities.actions', {
+		returnObjects: true,
+	}) as Record<string, string>;
+
 	const buttons = (
 		<>
 			<Button
@@ -43,14 +51,14 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 				type='reset'
 				variant='text'
 				color='primary'>
-				Сбросить
+				{actions.reset}
 			</Button>
 			<Button
 				className={styles.submit}
 				onClick={onSubmit}
 				type='submit'
 				variant='contained'>
-				Применить
+				{actions.submit}
 			</Button>
 		</>
 	);
@@ -60,7 +68,7 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 			open={open}
 			onOpen={toggleOn}
 			onClose={toggleOff}
-			title='Фильтры активностей'
+			title={title}
 			icon={<TuneIcon />}
 			slots={{ actions: buttons, }}>
 			{({ isPopup, }) => (
@@ -78,6 +86,10 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 };
 
 const Action: React.FC = () => {
+	const { t, } = useTranslation('room-activities');
+
+	const label = t('actions.filter_activities.fields.types');
+
 	const actionIds = useUnit(form.fields.actionIds);
 
 	return (
@@ -87,7 +99,7 @@ const Action: React.FC = () => {
 			helperText={actionIds.errorText}
 			isValid={actionIds.isValid}
 			name='action'
-			label='Тип события'
+			label={label}
 			limitTags={2}
 			multiple
 			fullWidth
@@ -96,6 +108,9 @@ const Action: React.FC = () => {
 };
 
 const Spheres: React.FC = () => {
+	const { t, } = useTranslation('room-activities');
+
+	const label = t('actions.filter_activities.fields.spheres');
 	const sphereIds = useUnit(form.fields.sphereIds);
 
 	return (
@@ -106,7 +121,7 @@ const Spheres: React.FC = () => {
 			isValid={sphereIds.isValid}
 			limitTags={2}
 			name='spheres'
-			label='Сферы'
+			label={label}
 			multiple
 			fullWidth
 		/>
@@ -114,6 +129,9 @@ const Spheres: React.FC = () => {
 };
 
 const Users: React.FC = () => {
+	const { t, } = useTranslation('room-activities');
+
+	const label = t('actions.filter_activities.fields.users');
 	const activistIds = useUnit(form.fields.activistIds);
 
 	return (
@@ -124,7 +142,7 @@ const Users: React.FC = () => {
 			helperText={activistIds.errorText}
 			isValid={activistIds.isValid}
 			name='activists'
-			label='Пользователи'
+			label={label}
 			limitTags={1}
 			multiple
 		/>
@@ -132,11 +150,14 @@ const Users: React.FC = () => {
 };
 
 const After: React.FC = () => {
+	const { t, } = useTranslation('common');
+
+	const label = t('fields.create_after');
 	const after = useUnit(form.fields.after);
 
 	return (
 		<DatePicker
-			label='Произошло после'
+			label={label}
 			value={after.value}
 			onChange={after.onChange}
 			onBlur={after.onBlur}
@@ -148,11 +169,14 @@ const After: React.FC = () => {
 };
 
 const Before: React.FC = () => {
+	const { t, } = useTranslation('common');
+
+	const label = t('fields.create_before');
 	const before = useUnit(form.fields.before);
 
 	return (
 		<DatePicker
-			label='Произошло до'
+			label={label}
 			value={before.value}
 			onChange={before.onChange}
 			onBlur={before.onBlur}

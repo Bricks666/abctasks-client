@@ -1,7 +1,6 @@
 {
-	"title": "Activities",
 	"card": {
-		"text": "User {{ activist }} has $t(type.{{type}}) the $t(spheres.{{sphere}})"
+		"text": "User {{ activist }} has $t(type.{{ type }}) the $t(spheres.{{ sphere }})"
 	},
 	"list": {
 		"empty_text": "Here will be shown activities in room"

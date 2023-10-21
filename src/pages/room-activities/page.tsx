@@ -1,6 +1,7 @@
 import { Container } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ActivitiesFilters } from '@/features/activities';
 
@@ -12,10 +13,13 @@ import { ActivityList } from './ui';
 
 const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 	const { className, } = props;
+	const { t, } = useTranslation('room-activities');
+
+	const title = t('title');
 
 	return (
 		<Container className={cn(styles.wrapper, className)}>
-			<SectionHeader title='Activities' actions={<ActivitiesFilters />} />
+			<SectionHeader title={title} actions={<ActivitiesFilters />} />
 			<ActivityList />
 		</Container>
 	);
