@@ -1,5 +1,6 @@
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { CommonProps } from '@/shared/types';
 
@@ -15,6 +16,7 @@ export const DesktopColorschemeToggler: React.FC<
 	DesktopColorSchemeTogglerProps
 > = (props) => {
 	const { className, size = 'small', } = props;
+	const { t, } = useTranslation('common');
 	const [colorScheme, changeColorScheme] = useToggleColorScheme();
 
 	const onChange = (_event: unknown, value: ColorScheme) => {
@@ -32,9 +34,14 @@ export const DesktopColorschemeToggler: React.FC<
 			exclusive>
 			{SCHEMES.map((scheme) => {
 				return (
-					<ToggleButton value={scheme} aria-label={`${scheme} scheme`}>
-						{React.createElement(ICONS_MAP[scheme])}
-					</ToggleButton>
+					<Tooltip title={t(`color_schemes.schemes.${scheme}`)}>
+						<ToggleButton
+							value={scheme}
+							selected={colorScheme === scheme}
+							aria-label={`${scheme} scheme`}>
+							{React.createElement(ICONS_MAP[scheme])}
+						</ToggleButton>
+					</Tooltip>
 				);
 			})}
 		</ToggleButtonGroup>
