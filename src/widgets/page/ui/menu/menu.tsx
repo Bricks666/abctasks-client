@@ -9,6 +9,7 @@ import {
 	ListSubheader
 } from '@mui/material';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Navigation } from '@/features/page';
 
@@ -21,6 +22,9 @@ import styles from './menu.module.css';
 export const Menu: React.FC = () => {
 	const [isOpen, { toggleOff: close, toggleOn: open, }] = useToggle();
 	const rooms = useRooms();
+	const { t, } = useTranslation('common');
+
+	const subheader = t('navigation.menu.title');
 
 	return (
 		<>
@@ -35,9 +39,7 @@ export const Menu: React.FC = () => {
 					<Navigation />
 					<Divider />
 					<List>
-						<ListSubheader disableSticky>
-							Комнаты, в которых я состою
-						</ListSubheader>
+						<ListSubheader disableSticky>{subheader}</ListSubheader>
 						{rooms.data.map((room) => (
 							<RoomListItem {...room} key={room.id} />
 						))}

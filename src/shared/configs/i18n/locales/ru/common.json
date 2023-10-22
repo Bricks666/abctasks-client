@@ -19,6 +19,9 @@
 	"navigation": {
 		"items": {
 			"rooms": "Комнаты"
+		},
+		"menu": {
+			"title": "Мои комнаты"
 		}
 	},
 	"fields": {
@@ -30,5 +33,20 @@
 		"en": "Английский",
 		"ru_short": "Рус",
 		"en_short": "Англ"
+	},
+	"color_schemes": {
+		"schemes": {
+			"dark": "Темная тема",
+			"system": "Системная тема",
+			"light": "Светлая тема"
+		},
+		"activated": "Выбрана $t(color_schemes.schemes.{{ scheme }})"
+	},
+	"profile_menu": {
+		"title": "Настройки профиля {{ username }}",
+		"items": {
+			"settings": "Настройки",
+			"logout": "Выйти"
+		}
 	}
 }

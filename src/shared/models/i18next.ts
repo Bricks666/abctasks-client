@@ -1,14 +1,8 @@
-import { createI18nextIntegration } from '@withease/i18next';
 import { createEffect, createEvent, createStore, sample } from 'effector';
 
 import { i18n } from '../configs';
 
 import { started } from './app';
-
-export const integration = createI18nextIntegration({
-	instance: i18n,
-	setup: started,
-});
 
 export type AllowedLanguages = 'ru' | 'en';
 

@@ -19,6 +19,9 @@
 	"navigation": {
 		"items": {
 			"rooms": "Rooms"
+		},
+		"menu": {
+			"title": "My rooms"
 		}
 	},
 	"fields": {
@@ -30,5 +33,20 @@
 		"en": "English",
 		"ru_short": "Ru",
 		"en_short": "En"
+	},
+	"color_schemes": {
+		"schemes": {
+			"dark": "Dark scheme",
+			"system": "OS scheme",
+			"light": "Light scheme"
+		},
+		"activated": "$t(color_schemes.schemes.{{ scheme }}) activate now"
+	},
+	"profile_menu": {
+		"title": "{{ username }}'s profile settings",
+		"items": {
+			"settings": "Settings",
+			"logout": "Logout"
+		}
 	}
 }

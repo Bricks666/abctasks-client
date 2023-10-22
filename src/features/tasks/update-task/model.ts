@@ -7,8 +7,8 @@ import { createPopupControlModel } from '@/entities/popups';
 import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 
 import { UpdateTaskParams, Task, tasksApi, task } from '@/shared/api';
-import { popupsMap, routes } from '@/shared/configs';
-import { i18nModel, notificationsModel } from '@/shared/models';
+import { i18n, popupsMap, routes } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 import { taskFormModel } from '../form';
@@ -107,9 +107,10 @@ update(tasksInRoomModel.query, {
 
 sample({
 	clock: mutation.finished.success,
-	source: i18nModel.integration.$t,
-	fn: (t) => ({
-		message: t('action.update_task.notifications.success', { ns: 'tasks', }),
+	fn: () => ({
+		message: i18n.t('action.update_task.notifications.success', {
+			ns: 'tasks',
+		}),
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -117,9 +118,8 @@ sample({
 
 sample({
 	clock: mutation.finished.failure,
-	source: i18nModel.integration.$t,
-	fn: (t) => ({
-		message: t('action.update_task.notifications.error', { ns: 'tasks', }),
+	fn: () => ({
+		message: i18n.t('action.update_task.notifications.error', { ns: 'tasks', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

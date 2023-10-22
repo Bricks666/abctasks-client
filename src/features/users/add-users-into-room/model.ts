@@ -7,8 +7,8 @@ import { createPopupControlModel } from '@/entities/popups';
 import { searchUserModel } from '@/entities/users';
 
 import { AddUserRoomParams, membersApi, user, User } from '@/shared/api';
-import { popupsMap, routes } from '@/shared/configs';
-import { i18nModel, notificationsModel } from '@/shared/models';
+import { i18n, popupsMap, routes } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const addUserRoomDomain = createDomain();
@@ -57,9 +57,10 @@ sample({
 
 sample({
 	clock: mutation.finished.success,
-	source: i18nModel.integration.$t,
-	fn: (t) => ({
-		message: t('action.add_user.notifications.success', { ns: 'room-users', }),
+	fn: () => ({
+		message: i18n.t('action.add_user.notifications.success', {
+			ns: 'room-users',
+		}),
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -67,9 +68,10 @@ sample({
 
 sample({
 	clock: mutation.finished.failure,
-	source: i18nModel.integration.$t,
-	fn: (t) => ({
-		message: t('action.add_user.notifications.error', { ns: 'room-users', }),
+	fn: () => ({
+		message: i18n.t('action.add_user.notifications.error', {
+			ns: 'room-users',
+		}),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

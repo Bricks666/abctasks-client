@@ -15,34 +15,41 @@ import { MenuOption, MenuItem } from '@/shared/ui';
 import { mutation } from './model';
 
 export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
-	const { t, } = useTranslation('header');
+	const { t, } = useTranslation('common');
 	const user = useUnit(sessionModel.$user);
 	const [isOpen, { toggle, }] = useToggle(false);
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
 	const logout = useUnit(mutation);
 
+	if (!user) {
+		return null;
+	}
+
+	const items = t('profile_menu.items', { returnObjects: true, }) as Record<
+		string,
+		string
+	>;
+
 	const options: MenuOption<object>[] = [
 		{
-			label: t('actions.settings'),
+			label: items.settings,
 			onClick: console.log,
 			icon: <SettingsIcon />,
 		},
 		{
-			label: t('actions.logout'),
+			label: items.logout,
 			onClick: () => logout.start(),
 			icon: <LogoutIcon />,
 		}
 	];
 
-	if (!user) {
-		return null;
-	}
-
 	const { username, photo, email, } = user;
+
+	const title = t('profile_menu.title', { username, });
 
 	return (
 		<div className={className}>
-			<Tooltip title='Profile settings'>
+			<Tooltip title={title}>
 				<IconButton onClick={toggle} ref={setReference}>
 					<UserAvatar
 						username={username}

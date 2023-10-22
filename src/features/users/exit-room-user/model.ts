@@ -7,8 +7,8 @@ import { Literal } from 'runtypes';
 import { roomsModel } from '@/entities/rooms';
 
 import { membersApi } from '@/shared/api';
-import { routes } from '@/shared/configs';
-import { i18nModel, notificationsModel } from '@/shared/models';
+import { i18n, routes } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -60,9 +60,8 @@ update(roomsModel.query, {
 
 sample({
 	clock: mutation.finished.success,
-	source: i18nModel.integration.$t,
-	fn: (t) => ({
-		message: t('action.exit_room.notifications.success', { ns: 'rooms', }),
+	fn: () => ({
+		message: i18n.t('action.exit_room.notifications.success', { ns: 'rooms', }),
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -70,9 +69,8 @@ sample({
 
 sample({
 	clock: mutation.finished.failure,
-	source: i18nModel.integration.$t,
-	fn: (t) => ({
-		message: t('action.exit_room.notifications.error', { ns: 'rooms', }),
+	fn: () => ({
+		message: i18n.t('action.exit_room.notifications.error', { ns: 'rooms', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

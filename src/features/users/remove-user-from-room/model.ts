@@ -6,7 +6,8 @@ import { Boolean } from 'runtypes';
 import { usersInRoomModel } from '@/entities/users';
 
 import { membersApi } from '@/shared/api';
-import { i18nModel, notificationsModel } from '@/shared/models';
+import { i18n } from '@/shared/configs';
+import { notificationsModel } from '@/shared/models';
 import { getStandardResponse } from '@/shared/types';
 
 const handlerFx = createEffect(membersApi.remove);
@@ -45,9 +46,8 @@ update(usersInRoomModel.query, {
 
 sample({
 	clock: mutation.finished.success,
-	source: i18nModel.integration.$t,
-	fn: (t) => ({
-		message: t('action.remove_user.notifications.success', {
+	fn: () => ({
+		message: i18n.t('action.remove_user.notifications.success', {
 			ns: 'room-users',
 		}),
 		color: 'success' as const,
@@ -57,9 +57,10 @@ sample({
 
 sample({
 	clock: mutation.finished.failure,
-	source: i18nModel.integration.$t,
-	fn: (t) => ({
-		message: t('action.remove_user.notifications.error', { ns: 'room-users', }),
+	fn: () => ({
+		message: i18n.t('action.remove_user.notifications.error', {
+			ns: 'room-users',
+		}),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,
