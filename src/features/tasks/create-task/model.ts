@@ -94,7 +94,7 @@ update(tasksInRoomModel.query, {
 sample({
 	clock: mutation.finished.success,
 	fn: () => ({
-		message: i18n.t('action.create_task.notifications.success', {
+		message: i18n.t('actions.create_task.notifications.success', {
 			ns: 'tasks',
 		}),
 		color: 'success' as const,
@@ -105,7 +105,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: i18n.t('action.create_task.notifications.error', { ns: 'tasks', }),
+		message: i18n.t('actions.create_task.notifications.error', { ns: 'tasks', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,

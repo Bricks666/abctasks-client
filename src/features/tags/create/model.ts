@@ -74,7 +74,7 @@ update(tagsModel.query, {
 sample({
 	clock: mutation.finished.success,
 	fn: () => ({
-		message: i18n.t('action.create_tag.notifications.success', {
+		message: i18n.t('actions.create_tag.notifications.success', {
 			ns: 'room-tags',
 		}),
 		color: 'success' as const,
@@ -85,7 +85,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: i18n.t('action.create_tag.notifications.success', {
+		message: i18n.t('actions.create_tag.notifications.success', {
 			ns: 'room-tags',
 		}),
 		color: 'error' as const,

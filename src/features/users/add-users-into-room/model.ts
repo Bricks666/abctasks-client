@@ -58,7 +58,7 @@ sample({
 sample({
 	clock: mutation.finished.success,
 	fn: () => ({
-		message: i18n.t('action.add_user.notifications.success', {
+		message: i18n.t('actions.add_user.notifications.success', {
 			ns: 'room-users',
 		}),
 		color: 'success' as const,
@@ -69,7 +69,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: i18n.t('action.add_user.notifications.error', {
+		message: i18n.t('actions.add_user.notifications.error', {
 			ns: 'room-users',
 		}),
 		color: 'error' as const,

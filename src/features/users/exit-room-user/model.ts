@@ -61,7 +61,7 @@ update(roomsModel.query, {
 sample({
 	clock: mutation.finished.success,
 	fn: () => ({
-		message: i18n.t('action.exit_room.notifications.success', { ns: 'rooms', }),
+		message: i18n.t('actions.exit_room.notifications.success', { ns: 'rooms', }),
 		color: 'success' as const,
 	}),
 	target: notificationsModel.create,
@@ -70,7 +70,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: i18n.t('action.exit_room.notifications.error', { ns: 'rooms', }),
+		message: i18n.t('actions.exit_room.notifications.error', { ns: 'rooms', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,
