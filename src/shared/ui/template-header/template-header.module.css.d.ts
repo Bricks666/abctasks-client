@@ -1,7 +1,7 @@
 declare const styles: {
 	readonly bar: string;
-	readonly left: string;
 	readonly center: string;
+	readonly left: string;
 	readonly right: string;
 	readonly side: string;
 };

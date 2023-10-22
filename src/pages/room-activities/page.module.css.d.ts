@@ -1,5 +1,5 @@
 declare const styles: {
-	readonly wrapper: string;
 	readonly pagination: string;
+	readonly wrapper: string;
 };
 export = styles;

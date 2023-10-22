@@ -1,1 +1,1 @@
-export { RoomsHeader } from './rooms-header';
+export { RoomsLayout } from './rooms-layout';

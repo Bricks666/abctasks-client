@@ -1,7 +1,7 @@
 import { RouteRecord, createRouteView } from 'atomic-router-react';
 import { lazy } from 'react';
 
-import { RoomPageLayout } from '@/widgets/rooms';
+import { RoomLayout } from '@/widgets/rooms';
 
 import { PageLoader } from '@/shared/ui';
 
@@ -16,5 +16,5 @@ export const roomTagsPage: RouteRecord<any, any> = {
 		view: Page,
 		otherwise: PageLoader,
 	}),
-	layout: RoomPageLayout,
+	layout: RoomLayout,
 };

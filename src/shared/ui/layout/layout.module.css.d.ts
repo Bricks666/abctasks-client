@@ -1,5 +1,6 @@
 declare const styles: {
-	readonly wrapper: string;
 	readonly layout: string;
+	readonly wrapper: string;
+	readonly 'wrapper--headerless': string;
 };
 export = styles;

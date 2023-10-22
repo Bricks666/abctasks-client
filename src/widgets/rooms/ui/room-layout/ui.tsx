@@ -2,24 +2,24 @@ import cn from 'classnames';
 import * as React from 'react';
 
 import { CommonProps } from '@/shared/types';
-import { MainLayout, PageLoader } from '@/shared/ui';
+import { Layout, PageLoader } from '@/shared/ui';
 
 import { RoomHeader } from '../room-header';
 
 import styles from './ui.module.css';
 
-export interface RoomPageLayoutProps
-	extends CommonProps,
-		React.PropsWithChildren {}
+export interface RoomLayoutProps extends CommonProps, React.PropsWithChildren {}
 
-export const RoomPageLayout: React.FC<RoomPageLayoutProps> = (props) => {
+export const RoomLayout: React.FC<RoomLayoutProps> = (props) => {
 	const { className, children, } = props;
 
 	return (
-		<MainLayout
+		<Layout
 			className={cn(styles.layout, className)}
-			header={<RoomHeader />}>
+			slots={{
+				header: <RoomHeader />,
+			}}>
 			<React.Suspense fallback={<PageLoader />}>{children}</React.Suspense>
-		</MainLayout>
+		</Layout>
 	);
 };

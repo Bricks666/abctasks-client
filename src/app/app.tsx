@@ -17,7 +17,7 @@ export const App = withProviders(() => {
 	return (
 		<React.Suspense
 			fallback={
-				<Center fullHeight>
+				<Center height='page'>
 					<LoadingIndicator text={loadingText} />
 				</Center>
 			}>

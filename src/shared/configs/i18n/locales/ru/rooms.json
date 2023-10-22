@@ -21,7 +21,7 @@
 			}
 		},
 		"remove_room": {
-			"name": "$t(common:actions.remove) room",
+			"name": "$t(common:actions.remove) комнату",
 			"title": "Вы уверены?",
 			"content": "Вы хотите удалить комнату? Все задачи, тэги и активности будут удалены.",
 			"actions": {

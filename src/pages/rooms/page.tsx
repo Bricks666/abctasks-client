@@ -10,10 +10,9 @@ import { CreateRoom, UpdateRoom } from '@/features/rooms';
 import { popupsMap } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { MainLayout } from '@/shared/ui';
 
 import styles from './styles.module.css';
-import { RoomsHeader } from './ui';
+import { RoomsLayout } from './ui';
 
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createRoom]: CreateRoom,
@@ -27,12 +26,10 @@ const RoomsPage: React.FC<CommonProps> = (props) => {
 	usePageTitle(title);
 
 	return (
-		<MainLayout
-			className={cn(styles.layout, className)}
-			header={<RoomsHeader />}>
+		<RoomsLayout className={cn(styles.layout, className)}>
 			<RoomList />
 			<Popups popupMap={popupMap} />
-		</MainLayout>
+		</RoomsLayout>
 	);
 };
 

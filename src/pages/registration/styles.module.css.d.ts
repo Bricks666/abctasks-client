@@ -1,8 +1,8 @@
 declare const styles: {
-	readonly layout: string;
 	readonly form: string;
-	readonly title: string;
+	readonly layout: string;
 	readonly link: string;
 	readonly question: string;
+	readonly title: string;
 };
 export = styles;

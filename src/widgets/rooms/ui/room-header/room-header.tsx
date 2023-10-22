@@ -2,7 +2,7 @@ import { Skeleton, Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 
-import { Header } from '@/widgets/page';
+import { MainHeader } from '@/widgets/page';
 
 import { useRoom } from '@/entities/rooms';
 
@@ -20,7 +20,7 @@ export const RoomHeader: React.FC<CommonProps> = (props) => {
 	const { data: room, pending, } = useRoom(id);
 
 	return (
-		<Header
+		<MainHeader
 			className={cn(className)}
 			slots={{
 				left: (

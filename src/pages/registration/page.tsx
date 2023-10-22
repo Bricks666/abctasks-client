@@ -4,12 +4,14 @@ import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { AuthLayout } from '@/widgets/page';
+
 import { RegistrationForm } from '@/features/auth';
 
 import { routes } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { AuthLayout, PageTitle } from '@/shared/ui';
+import { PageTitle } from '@/shared/ui';
 
 import styles from './styles.module.css';
 

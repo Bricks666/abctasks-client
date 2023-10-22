@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Header } from '@/widgets/page';
+import { MainHeader } from '@/widgets/page';
 
 import { OpenCreateRoom } from '@/features/rooms';
 
@@ -14,7 +14,7 @@ export const RoomsHeader: React.FC<CommonProps> = (props) => {
 	const title = t('title');
 
 	return (
-		<Header
+		<MainHeader
 			className={className}
 			slots={{
 				left: (
