@@ -3,7 +3,7 @@ import cn from 'classnames';
 import * as React from 'react';
 
 import { ProfileMenu } from '@/features/auth';
-import { AdaptiveColorSchemeToggler } from '@/features/page';
+import { AdaptiveColorSchemeToggler, ChangeLanguage } from '@/features/page';
 
 import { CommonProps, Slots } from '@/shared/types';
 
@@ -34,7 +34,8 @@ export const Header: React.FC<HeaderProps> = (props) => {
 					<div className={styles.center}>{slots.center}</div>
 				) : null}
 				<div className={cn(styles.right, styles.side)}>
-					{slots.right} <AdaptiveColorSchemeToggler /> <ProfileMenu />
+					{slots.right} <ChangeLanguage /> <AdaptiveColorSchemeToggler />{' '}
+					<ProfileMenu />
 				</div>
 			</Toolbar>
 		</AppBar>

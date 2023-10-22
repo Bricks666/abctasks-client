@@ -24,5 +24,11 @@
 	"fields": {
 		"create_after": "Create after",
 		"create_before": "Create before"
+	},
+	"languages": {
+		"ru": "Russian",
+		"en": "English",
+		"ru_short": "Ru",
+		"en_short": "En"
 	}
 }
