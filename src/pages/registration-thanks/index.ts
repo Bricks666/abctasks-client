@@ -3,7 +3,7 @@ import { lazy } from 'react';
 
 import { PageLoader } from '@/shared/ui';
 
-import { anonymousRoute, currentRoute } from './model';
+import { anonymousRoute, currentRoute, hiddenRoute } from './model';
 
 const Page = lazy(() => import('./page'));
 
@@ -11,7 +11,11 @@ export const thanksRegistrationPage: RouteRecord<any, any> = {
 	route: currentRoute,
 	view: createRouteView({
 		route: anonymousRoute,
-		view: Page,
+		view: createRouteView({
+			route: hiddenRoute,
+			view: Page,
+			otherwise: PageLoader,
+		}),
 		otherwise: PageLoader,
 	}),
 };

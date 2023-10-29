@@ -16,7 +16,8 @@ export const routes = {
 	login: createRoute(),
 	registration: {
 		base: createRoute(),
-		tanks: createRoute(),
+		thanks: createRoute(),
+		activate: createRoute(),
 	},
 	settings: createRoute(),
 };
@@ -35,7 +36,7 @@ export const router = createHistoryRouter({
 		},
 		{
 			path: '/registration/thanks',
-			route: routes.registration.tanks,
+			route: routes.registration.thanks,
 		},
 		{
 			path: '/rooms',

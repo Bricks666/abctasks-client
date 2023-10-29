@@ -14,6 +14,7 @@ i18n
 		interpolation: {
 			escapeValue: false,
 		},
+		defaultNS: ['common'],
 		resources: {},
 	});
 

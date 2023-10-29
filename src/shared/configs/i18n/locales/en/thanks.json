@@ -1,0 +1,11 @@
+{
+	"title": "Thanks for registration",
+	"title_long": "{{ username }}, thanks for registration",
+	"content": [
+		"The registration confirmation email has been sent on your email ",
+		". After confirmation, you will can login into account"
+	],
+	"actions": {
+		"navigate": "Go to the login page"
+	}
+}

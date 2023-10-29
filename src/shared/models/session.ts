@@ -10,7 +10,6 @@ import {
 	combine,
 	sample,
 	createEvent,
-	Effect,
 	createStore,
 	createEffect,
 	Event
@@ -19,7 +18,11 @@ import { equals } from 'patronum';
 
 import { User, AuthResponse, authResponse, authApi } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
-import { StandardResponse, getStandardResponse } from '@/shared/types';
+import {
+	ChainedParams,
+	StandardResponse,
+	getStandardResponse
+} from '@/shared/types';
 
 type Status = 'initial' | 'pending' | 'authorized' | 'anonymous';
 
@@ -66,10 +69,6 @@ sample({
 	fn: ({ result, }) => result.user,
 	target: $user,
 });
-
-interface ChainedParams {
-	readonly otherwise?: Event<any> | Effect<any, any>;
-}
 
 export const chainAuthorized = <Params extends RouteParams>(
 	route: RouteInstance<Params>,

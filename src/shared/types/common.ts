@@ -1,3 +1,4 @@
+import { Effect, Event } from 'effector';
 import { Template, String, Static } from 'runtypes';
 
 export const hex = Template`#${String.withConstraint(
@@ -6,3 +7,7 @@ export const hex = Template`#${String.withConstraint(
 export type HEX = Static<typeof hex>;
 
 export type VoidFunction = () => void;
+
+export interface ChainedParams {
+	readonly otherwise?: Event<any> | Effect<any, any>;
+}

@@ -1,23 +1,27 @@
 import * as React from 'react';
 
-import { CommonProps } from '@/shared/types';
+import { Classes, CommonProps } from '@/shared/types';
 import { Center, Layout } from '@/shared/ui';
 
 import { AuthHeader } from '../auth-header';
 
-export interface AuthLayoutProps extends CommonProps {}
+export interface AuthLayoutProps extends CommonProps {
+	readonly classes?: Classes<'header' | 'center'>;
+}
 
 export const AuthLayout: React.FC<React.PropsWithChildren<AuthLayoutProps>> = (
 	props
 ) => {
-	const { className, children, } = props;
+	const { className, classes, children, } = props;
 	return (
 		<Layout
 			className={className}
 			slots={{
-				header: <AuthHeader />,
+				header: <AuthHeader className={classes?.header} />,
 			}}>
-			<Center height='container'>{children}</Center>
+			<Center className={classes?.center} height='container'>
+				{children}
+			</Center>
 		</Layout>
 	);
 };

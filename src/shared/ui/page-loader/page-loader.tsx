@@ -16,7 +16,7 @@ export const PageLoader: React.FC<PageLoaderProps> = (props) => {
 	const loadingText = t('loading');
 
 	return (
-		<Center className={className}>
+		<Center className={className} height='page'>
 			<LoadingIndicator text={loadingText} />
 		</Center>
 	);
