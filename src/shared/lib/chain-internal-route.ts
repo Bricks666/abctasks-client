@@ -4,36 +4,41 @@ import {
 	RouteParamsAndQuery,
 	chainRoute
 } from 'atomic-router';
-import { Event, createEvent, sample } from 'effector';
+import { Event, Store, createEvent, sample } from 'effector';
 import { not } from 'patronum';
 
-import { internalRoutingModel } from '../models';
 import { ChainedParams } from '../types';
 
-export const chainHiddenRoute = <Params extends RouteParams>(
+export interface ChainInternalRouteParams extends ChainedParams {
+	readonly isInternal: Store<boolean>;
+}
+
+export const chainInternalRoute = <Params extends RouteParams>(
 	route: RouteInstance<Params>,
-	options?: ChainedParams
+	options: ChainInternalRouteParams
 ): RouteInstance<Params> => {
+	const { isInternal, otherwise, } = options;
+
 	const startNavigationChecking = createEvent<RouteParamsAndQuery<Params>>();
 	const userNavigated = createEvent();
 	const internalNavigated = createEvent();
 
 	sample({
 		clock: startNavigationChecking,
-		filter: internalRoutingModel.$internalRoute.$flag,
+		filter: isInternal,
 		target: internalNavigated,
 	});
 
 	sample({
 		clock: startNavigationChecking,
-		filter: not(internalRoutingModel.$internalRoute.$flag),
+		filter: not(isInternal),
 		target: userNavigated,
 	});
 
-	if (options?.otherwise) {
+	if (otherwise) {
 		sample({
 			clock: userNavigated,
-			target: options.otherwise as Event<any>,
+			target: otherwise as Event<any>,
 		});
 	}
 

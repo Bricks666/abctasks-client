@@ -2,15 +2,16 @@ import { querySync } from 'atomic-router';
 import { createStore, sample } from 'effector';
 
 import { controls, routes } from '@/shared/configs';
-import { chainHiddenRoute } from '@/shared/lib';
+import { chainInternalRoute } from '@/shared/lib';
 import { internalRoutingModel, sessionModel } from '@/shared/models';
 
 export const currentRoute = routes.registration.thanks;
 export const anonymousRoute = sessionModel.chainAnonymous(currentRoute, {
 	otherwise: routes.rooms.open,
 });
-export const hiddenRoute = chainHiddenRoute(anonymousRoute, {
+export const hiddenRoute = chainInternalRoute(anonymousRoute, {
 	otherwise: routes.login.open,
+	isInternal: internalRoutingModel.$internalRoute.$flag,
 });
 
 export const $username = createStore('');

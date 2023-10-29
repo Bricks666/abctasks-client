@@ -39,6 +39,10 @@ export const router = createHistoryRouter({
 			route: routes.registration.thanks,
 		},
 		{
+			path: '/registration/activate',
+			route: routes.registration.activate,
+		},
+		{
 			path: '/rooms',
 			route: routes.rooms,
 		},

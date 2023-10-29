@@ -2,6 +2,7 @@ import { createRoutesView } from 'atomic-router-react';
 
 import { loginPage } from './login';
 import { registrationPage } from './registration';
+import { activateAccountPage } from './registration-activate';
 import { thanksRegistrationPage } from './registration-thanks';
 import { roomActivitiesPage } from './room-activities';
 import { roomTagsPage } from './room-tags';
@@ -15,6 +16,7 @@ const Routes = createRoutesView({
 		loginPage,
 		registrationPage,
 		thanksRegistrationPage,
+		activateAccountPage,
 		roomTagsPage,
 		roomTasksPage,
 		roomUsersPage,

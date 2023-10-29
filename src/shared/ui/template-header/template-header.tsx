@@ -15,7 +15,7 @@ export const TemplateHeader: React.FC<TemplateHeaderProps> = (props) => {
 
 	return (
 		<AppBar
-			className={className}
+			className={cn(styles.container, className)}
 			position='static'
 			color='default'
 			elevation={0}

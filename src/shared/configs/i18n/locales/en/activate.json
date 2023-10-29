@@ -1,0 +1,12 @@
+{
+	"title": "Activating the account",
+	"text_loading": "The account is activating",
+	"text_success": "The account has been successfully activated",
+	"text_fail": "The account has not been activated",
+	"actions": {
+		"navigate": "Go to login page"
+	},
+	"errors": {
+		"already_activated": "The account has already been activated"
+	}
+}

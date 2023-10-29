@@ -9,5 +9,5 @@ export * from './use-prevent-default';
 export * from './prepare-picker-control';
 export * from './group';
 export * from './is-http-error-code';
-export * from './chain-hidden-route';
+export * from './chain-internal-route';
 export * from './create-flag';
