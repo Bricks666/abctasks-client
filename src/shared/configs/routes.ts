@@ -5,7 +5,7 @@ import {
 } from 'atomic-router';
 
 export const routes = {
-	rooms: createRoute(),
+	rooms: { base: createRoute(), invite: createRoute(), },
 	room: {
 		base: createRoute<{ id: number; tab: string }>(),
 		tasks: createRoute<{ id: number }>(),
@@ -44,7 +44,11 @@ export const router = createHistoryRouter({
 		},
 		{
 			path: '/rooms',
-			route: routes.rooms,
+			route: routes.rooms.base,
+		},
+		{
+			path: '/rooms/invite',
+			route: routes.rooms.invite,
 		},
 		{
 			path: '/rooms/:id/:tab',

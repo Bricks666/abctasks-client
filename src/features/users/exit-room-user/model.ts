@@ -30,7 +30,7 @@ export const mutation = createMutation({
 
 redirect({
 	clock: mutation.finished.success,
-	route: routes.rooms,
+	route: routes.rooms.base,
 });
 
 update(roomsModel.query, {

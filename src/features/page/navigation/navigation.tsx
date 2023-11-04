@@ -26,7 +26,7 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
 
 	const items = [
 		{
-			route: routes.rooms,
+			route: routes.rooms.base,
 			label: roomsText,
 			icon: <HomeIcon />,
 		}

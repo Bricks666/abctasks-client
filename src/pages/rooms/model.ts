@@ -5,7 +5,7 @@ import { roomsModel } from '@/entities/rooms';
 import { routes } from '@/shared/configs';
 import { sessionModel } from '@/shared/models';
 
-export const currentRoute = routes.rooms;
+export const currentRoute = routes.rooms.base;
 export const authorizedRoute = sessionModel.chainAuthorized(currentRoute, {
 	otherwise: routes.login.open,
 });

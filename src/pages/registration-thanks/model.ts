@@ -7,7 +7,7 @@ import { internalRoutingModel, sessionModel } from '@/shared/models';
 
 export const currentRoute = routes.registration.thanks;
 export const anonymousRoute = sessionModel.chainAnonymous(currentRoute, {
-	otherwise: routes.rooms.open,
+	otherwise: routes.rooms.base.open,
 });
 export const hiddenRoute = chainInternalRoute(anonymousRoute, {
 	otherwise: routes.login.open,

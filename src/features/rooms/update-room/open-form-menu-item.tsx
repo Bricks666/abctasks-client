@@ -24,7 +24,7 @@ export const OpenUpdateRoomFormMenuItem: React.FC<
 		<MenuItem
 			className={className}
 			{...rest}
-			to={routes.rooms}
+			to={routes.rooms.base}
 			params={{}}
 			query={{
 				[getParams.popup]: popupsMap.updateRoom,

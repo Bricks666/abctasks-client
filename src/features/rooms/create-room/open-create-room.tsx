@@ -14,7 +14,7 @@ export const OpenCreateRoom: React.FC<OpenCreateRoomProps> = (props) => {
 	return (
 		<IconButton
 			className={className}
-			to={routes.rooms}
+			to={routes.rooms.base}
 			params={{}}
 			query={{ [getParams.popup]: popupsMap.createRoom, }}
 			component={Link}>

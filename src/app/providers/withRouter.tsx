@@ -9,7 +9,7 @@ import { appModel } from '@/shared/models';
 
 redirect({
 	clock: router.routeNotFound,
-	route: routes.rooms,
+	route: routes.rooms.base,
 });
 
 sample({
