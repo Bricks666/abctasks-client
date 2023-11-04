@@ -10,55 +10,53 @@ import {
 } from './types';
 
 export const getAll = async ({ roomId, }: InRoomParams) => {
-	return instance
-		.get(`rooms/${roomId}/members`)
-		.json<StandardResponse<User[]>>();
+	return instance.get(`members/${roomId}`).json<StandardResponse<User[]>>();
 };
 
 export const getAllInvited = async ({ roomId, }: InRoomParams) => {
 	return instance
-		.get(`rooms/${roomId}/members/invited`)
+		.get(`members/${roomId}/invited`)
 		.json<StandardResponse<User[]>>();
 };
 
 export const invite = async ({ roomId, userId, }: AddUserRoomParams) => {
 	return instance
-		.put(`rooms/${roomId}/members/${userId}`)
+		.put(`members/${roomId}/invite/${userId}`)
 		.json<StandardResponse<User>>();
 };
 
 export const getLinkHash = async ({ roomId, }: InRoomParams) => {
 	return instance
-		.get(`rooms/${roomId}/members/link-hash`)
+		.get(`members/${roomId}/invite/generate-link`)
 		.json<StandardResponse<string>>();
 };
 
 export const approveInvite = async ({ roomId, }: InRoomParams) => {
 	return instance
-		.put(`rooms/${roomId}/members/approve`)
+		.put(`members/${roomId}/invitation/approve`)
 		.json<StandardResponse<User>>();
 };
 
 export const rejectInvite = async ({ roomId, }: InRoomParams) => {
 	return instance
-		.put(`rooms/${roomId}/members/reject`)
+		.put(`members/${roomId}/invitation/reject`)
 		.json<StandardResponse<boolean>>();
 };
 
 export const inviteByHash = async ({ roomId, token, }: InviteByHashParams) => {
 	return instance
-		.put(`rooms/${roomId}/members/${token}`)
+		.put(`members/${roomId}/${token}`)
 		.json<StandardResponse<boolean>>();
 };
 
 export const exit = async ({ roomId, }: InRoomParams) => {
 	return instance
-		.delete(`rooms/${roomId}/members/exit`)
+		.delete(`members/${roomId}/exit`)
 		.json<StandardResponse<boolean>>();
 };
 
 export const remove = async ({ roomId, userId, }: RemoveUserParams) => {
 	return instance
-		.delete(`rooms/${roomId}/members/remove/${userId}`)
+		.delete(`members/${roomId}/remove/${userId}`)
 		.json<StandardResponse<boolean>>();
 };
