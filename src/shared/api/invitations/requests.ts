@@ -34,7 +34,7 @@ export const invite = async ({
 	userId,
 }: InviteUserRequestParams): InviteUserResponseData => {
 	return instance
-		.put(`invitations/invite`, { json: { roomId, userId, }, })
+		.put(`invitations/invite/${roomId}`, { json: { userId, }, })
 		.json();
 };
 

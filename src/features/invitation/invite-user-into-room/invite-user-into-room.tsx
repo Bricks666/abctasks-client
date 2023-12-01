@@ -11,12 +11,14 @@ import { usePreventDefault } from '@/shared/lib';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { MainPopup } from '@/shared/ui';
 
-import styles from './add-users-into-room.module.css';
+import styles from './invite-user-into-room.module.css';
 import { close, form, mutation } from './model';
 
-export interface AddUsersIntoRoomProps extends CommonProps, BasePopupProps {}
+export interface InviteUserIntoRoomProps extends CommonProps, BasePopupProps {}
 
-export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
+export const InviteUserIntoRoom: React.FC<InviteUserIntoRoomProps> = (
+	props
+) => {
 	const { isOpen, className, } = props;
 	const { t, } = useTranslation('room-users');
 	const submit = useUnit(form.submit);
@@ -26,10 +28,10 @@ export const AddUsersIntoRoom: React.FC<AddUsersIntoRoomProps> = (props) => {
 
 	const onSubmit: React.FormEventHandler = usePreventDefault(submit);
 
-	const title = t('actions.add_user.title');
+	const title = t('actions.invite_user.title');
 	const buttonText = user
-		? t('actions.add_user.actions.submit', { username: user.username, })
-		: t('actions.add_user.actions.submit', { context: 'disabled', });
+		? t('actions.invite_user.actions.submit', { username: user.username, })
+		: t('actions.invite_user.actions.submit', { context: 'disabled', });
 
 	return (
 		<MainPopup
@@ -73,7 +75,7 @@ const User: React.FC = () => {
 			</Paper>
 		);
 	}
-	const label = t('actions.add_user.fields.user');
+	const label = t('actions.invite_user.fields.user');
 
 	return (
 		<UserSearch
