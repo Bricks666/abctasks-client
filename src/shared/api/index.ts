@@ -7,3 +7,4 @@ export * from './progresses';
 export * from './users';
 export * from './members';
 export * from './comments';
+export * from './invitations';
