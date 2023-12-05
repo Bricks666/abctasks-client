@@ -5,3 +5,8 @@
 
 	padding: 0;
 }
+
+.group {
+	display: grid;
+	gap: 0.5em;
+}

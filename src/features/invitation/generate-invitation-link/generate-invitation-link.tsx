@@ -1,5 +1,5 @@
 import CopyAllIcon from '@mui/icons-material/CopyAll';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useGate, useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,15 +20,12 @@ export const GenerateInvitationLink: React.FC<GenerateInvitationLinkProps> = (
 	const { className, roomId, } = props;
 
 	useGate(Gate, { roomId, });
-	const onClick = useUnit(copyLink);
 
 	return (
 		<Form className={className} variant='elevation' elevation={0}>
 			<div className={styles.container}>
 				<InvitationLink />
-				<IconButton onClick={onClick} color='primary'>
-					<CopyAllIcon />
-				</IconButton>
+				<CopyButton />
 			</div>
 		</Form>
 	);
@@ -36,7 +33,7 @@ export const GenerateInvitationLink: React.FC<GenerateInvitationLinkProps> = (
 
 const InvitationLink: React.FC = () => {
 	const link = useUnit(form.fields.link);
-	const { t, } = useTranslation('room-users');
+	const { t, } = useTranslation('room-invitations');
 
 	const label = t('actions.generate_link.fields.link');
 
@@ -51,5 +48,21 @@ const InvitationLink: React.FC = () => {
 			label={label}
 			InputProps={{ readOnly: true, }}
 		/>
+	);
+};
+
+const CopyButton: React.FC = () => {
+	const { t, } = useTranslation('room-invitations');
+
+	const onClick = useUnit(copyLink);
+
+	const title = t('actions.generate_link.actions.copy');
+
+	return (
+		<Tooltip title={title}>
+			<IconButton onClick={onClick} color='primary'>
+				<CopyAllIcon />
+			</IconButton>
+		</Tooltip>
 	);
 };

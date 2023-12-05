@@ -12,7 +12,7 @@ export interface CreateInvitationButtonProps extends CommonProps {}
 
 export const CreateInvitationButton: React.FC<CreateInvitationButtonProps> =
 	React.memo(() => {
-		const { t, } = useTranslation('room-users');
+		const { t, } = useTranslation('room-invitations');
 		const params = useUnit(routes.room.users.$params);
 
 		const title = t('actions.create_invitation.actions.open');

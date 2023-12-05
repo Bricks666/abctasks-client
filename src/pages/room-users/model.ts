@@ -1,5 +1,6 @@
 import { sample } from 'effector';
 
+import { invitationsModel } from '@/entities/invitations';
 import { roomsModel } from '@/entities/rooms';
 import { usersInRoomModel } from '@/entities/users';
 
@@ -14,5 +15,18 @@ export const authorizedRoute = sessionModel.chainAuthorized(currentRoute, {
 sample({
 	clock: authorizedRoute.opened,
 	fn: ({ params, }) => ({ roomId: params.id, }),
-	target: [usersInRoomModel.query.start, roomsModel.query.start],
+	target: [
+		usersInRoomModel.query.start,
+		roomsModel.query.start,
+		invitationsModel.query.start
+	],
+});
+
+sample({
+	clock: authorizedRoute.closed,
+	target: [
+		usersInRoomModel.query.reset,
+		roomsModel.query.reset,
+		invitationsModel.query.reset
+	],
 });

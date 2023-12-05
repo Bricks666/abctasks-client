@@ -17,7 +17,7 @@ import { CommonProps } from '@/shared/types';
 import { SectionHeader } from '@/shared/ui';
 
 import styles from './page.module.css';
-import { UserList } from './ui';
+import { InvitationList, UserList } from './ui';
 
 export interface UsersPageProps extends CommonProps {}
 
@@ -30,13 +30,20 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 	const { t, } = useTranslation('room-users');
 	const canChange = useUnit(roomModel.$canChange);
 
-	const title = t('title');
+	const usersTitle = t('title');
+	const invitationsTitle = t('title', { ns: 'room-invitations', });
 	const actions = canChange ? <CreateInvitationButton /> : null;
 
 	return (
 		<Container className={cn(styles.wrapper, className)}>
-			<SectionHeader title={title} actions={actions} />
-			<UserList />
+			<div className={styles.group}>
+				<SectionHeader title={usersTitle} actions={actions} />
+				<UserList />
+			</div>
+			<div className={styles.group}>
+				<SectionHeader title={invitationsTitle} />
+				<InvitationList />
+			</div>
 			<Popups popupMap={popupMap} />
 		</Container>
 	);

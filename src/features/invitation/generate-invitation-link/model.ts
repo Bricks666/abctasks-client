@@ -55,7 +55,7 @@ sample({
 	clock: copyLinkFx.done,
 	fn: () => ({
 		message: i18n.t('actions.generate_link.notifications.success', {
-			ns: 'room-users',
+			ns: 'room-invitations',
 		}),
 		color: 'info' as const,
 	}),

@@ -1,4 +1,4 @@
-import { Record, Number, String, Static } from 'runtypes';
+import { Record, Number, String, Static, Boolean } from 'runtypes';
 
 import { InRoomParams } from '@/shared/types';
 
@@ -7,6 +7,7 @@ export const room = Record({
 	ownerId: Number,
 	name: String,
 	description: String,
+	canChange: Boolean.optional(),
 }).asReadonly();
 
 export interface Room extends Static<typeof room> {}

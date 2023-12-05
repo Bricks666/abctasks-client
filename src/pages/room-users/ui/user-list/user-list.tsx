@@ -17,7 +17,7 @@ export interface UserListProps extends CommonProps {}
 export const UserList: React.FC<UserListProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room-users');
-	const roomId = useParam(routes.room.tasks, 'id');
+	const roomId = useParam(routes.room.users, 'id');
 
 	const emptyText = t('list.empty_text');
 
@@ -39,7 +39,7 @@ export const UserList: React.FC<UserListProps> = (props) => {
 const Error: React.FC = () => {
 	const { t, } = useTranslation('room-users');
 
-	const roomId = useParam(routes.room.tasks, 'id');
+	const roomId = useParam(routes.room.users, 'id');
 	const start = useUnit(usersInRoomModel.query.start);
 
 	const text = t('actions.retry_users.text');

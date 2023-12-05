@@ -20,7 +20,7 @@ export const InviteUserIntoRoom: React.FC<InviteUserIntoRoomProps> = (
 	props
 ) => {
 	const { className, } = props;
-	const { t, } = useTranslation('room-users');
+	const { t, } = useTranslation('room-invitations');
 	const submit = useUnit(form.submit);
 	const isLoading = useUnit(mutation.$pending);
 	const user = useUnit(form.fields.user.$value);
@@ -49,7 +49,7 @@ export const InviteUserIntoRoom: React.FC<InviteUserIntoRoomProps> = (
 
 const User: React.FC = () => {
 	const user = useUnit(form.fields.user);
-	const { t, } = useTranslation('room-users');
+	const { t, } = useTranslation('room-invitations');
 
 	if (user.value) {
 		return (

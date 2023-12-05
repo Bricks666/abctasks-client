@@ -25,7 +25,7 @@ export interface CreateInvitationProps extends CommonProps, BasePopupProps {}
 
 export const CreateInvitation: React.FC<CreateInvitationProps> = (props) => {
 	const [tab, setTab] = React.useState('invite_user');
-	const { t, } = useTranslation('room-users');
+	const { t, } = useTranslation('room-invitations');
 	const roomId = useParam(routes.room.users, 'id');
 
 	const close = useUnit(createInvitationModel.close);
