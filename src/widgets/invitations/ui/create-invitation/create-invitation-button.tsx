@@ -8,14 +8,14 @@ import { useTranslation } from 'react-i18next';
 import { getParams, popupsMap, routes } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
-export interface InviteUserButtonProps extends CommonProps {}
+export interface CreateInvitationButtonProps extends CommonProps {}
 
-export const InviteUserButton: React.FC<InviteUserButtonProps> = React.memo(
-	() => {
+export const CreateInvitationButton: React.FC<CreateInvitationButtonProps> =
+	React.memo(() => {
 		const { t, } = useTranslation('room-users');
 		const params = useUnit(routes.room.users.$params);
 
-		const title = t('actions.invite_user.actions.open');
+		const title = t('actions.create_invitation.actions.open');
 
 		return (
 			<Tooltip title={title}>
@@ -23,12 +23,11 @@ export const InviteUserButton: React.FC<InviteUserButtonProps> = React.memo(
 					to={routes.room.users as any}
 					params={params}
 					query={{
-						[getParams.popup]: popupsMap.inviteUser,
+						[getParams.popup]: popupsMap.createInvitation,
 					}}
 					component={Link}>
 					<PersonAddAlt1Icon />
 				</IconButton>
 			</Tooltip>
 		);
-	}
-);
+	});

@@ -4,9 +4,11 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import {
+	CreateInvitation,
+	CreateInvitationButton
+} from '@/widgets/invitations';
 import { Popups, PopupsProps } from '@/widgets/page';
-
-import { InviteUserButton, InviteUserIntoRoom } from '@/features/invitation';
 
 import { roomModel } from '@/entities/rooms';
 
@@ -20,7 +22,7 @@ import { UserList } from './ui';
 export interface UsersPageProps extends CommonProps {}
 
 const popupMap: PopupsProps['popupMap'] = {
-	[popupsMap.inviteUser]: InviteUserIntoRoom,
+	[popupsMap.createInvitation]: CreateInvitation,
 };
 
 const UsersPage: React.FC<UsersPageProps> = (props) => {
@@ -29,7 +31,7 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 	const canChange = useUnit(roomModel.$canChange);
 
 	const title = t('title');
-	const actions = canChange ? <InviteUserButton /> : null;
+	const actions = canChange ? <CreateInvitationButton /> : null;
 
 	return (
 		<Container className={cn(styles.wrapper, className)}>

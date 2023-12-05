@@ -4,15 +4,12 @@ import { createEffect, sample } from 'effector';
 import { createForm } from 'effector-forms';
 
 import { invitationsModel } from '@/entities/invitations';
-import { createPopupControlModel } from '@/entities/popups';
-import { searchUserModel } from '@/entities/users';
 
 import { invitation, invitationsApi, User } from '@/shared/api';
-import { i18n, popupsMap, routes } from '@/shared/configs';
+import { i18n, routes } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 import { getStandardResponse } from '@/shared/types';
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.inviteUser);
 const handlerFx = createEffect(invitationsApi.invite);
 
 export const mutation = createMutation({
@@ -30,16 +27,6 @@ export const form = createForm<AddUserFormValues>({
 			init: null,
 		},
 	},
-});
-
-sample({
-	clock: mutation.finished.success,
-	target: close,
-});
-
-sample({
-	clock: close,
-	target: [searchUserModel.query.reset, form.reset],
 });
 
 sample({

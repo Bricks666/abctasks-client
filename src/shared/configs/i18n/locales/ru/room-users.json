@@ -5,18 +5,29 @@
 	},
 	"actions": {
 		"invite_user": {
-			"title": "$t(common:actions.add) пользователя в комнату",
+			"title": "Пригласить пользователя в комнату",
+			"title_short": "Персональное приглашение",
 			"fields": {
 				"user": "Имя пользователя"
 			},
 			"actions": {
-				"open": "$t(common:actions.add) пользователя",
-				"submit": "$t(common:actions.add) {{ username }} в комнату",
+				"submit": "Пригласить {{ username }} в комнату",
 				"submit_disabled": "Выберите пользователя выше"
 			},
 			"notifications": {
 				"success": "Приглашение было отправлено успешно",
 				"error": "Приглашение не было отправлено"
+			}
+		},
+		"generate_link": {
+			"title": "Сгенерировать ссылку-приглашение",
+			"title_short": "По ссылке",
+			"fields": {
+				"link": "Ссылка"
+			},
+			"notifications": {
+				"success": "Ссылка была скопирована",
+				"error": "Ссылка не была скопирована"
 			}
 		},
 		"remove_user": {
@@ -34,6 +45,11 @@
 		},
 		"retry_users": {
 			"text": "Пользователи не были загружены. Нажмите, чтобы повторить"
+		},
+		"create_invitation": {
+			"actions": {
+				"open": "Пригласить пользователя"
+			}
 		}
 	}
 }
