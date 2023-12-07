@@ -34,32 +34,32 @@ export const invite = async ({
 	userId,
 }: InviteUserRequestParams): InviteUserResponseData => {
 	return instance
-		.put(`invitations/invite/${roomId}`, { json: { userId, }, })
+		.post(`invitations/invite/${roomId}`, { json: { userId, }, })
 		.json();
 };
 
 export const generateLink = async ({
 	roomId,
 }: GenerateLinkRequestParams): GenerateLinkResponseData => {
-	return instance.get(`invitations/invite/${roomId}/generate-link`).json();
+	return instance.post(`invitations/invite/${roomId}/generate-link`).json();
 };
 
 export const approveInvitation = async ({
-	token,
+	id,
 }: ApproveInvitationRequestParams): ApproveInvitationResponseData => {
 	return instance
 		.put(`invitations/invite/approve`, {
-			searchParams: { token, },
+			json: { id, },
 		})
 		.json();
 };
 
 export const rejectInvitation = async ({
-	token,
+	id,
 }: RejectInvitationRequestParams): RejectInvitationResponseData => {
 	return instance
 		.put(`invitations/invite/reject`, {
-			searchParams: { token, },
+			json: { id, },
 		})
 		.json();
 };

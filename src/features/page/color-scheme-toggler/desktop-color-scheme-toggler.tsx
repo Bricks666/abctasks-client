@@ -34,7 +34,7 @@ export const DesktopColorschemeToggler: React.FC<
 			exclusive>
 			{SCHEMES.map((scheme) => {
 				return (
-					<Tooltip title={t(`color_schemes.schemes.${scheme}`)}>
+					<Tooltip title={t(`color_schemes.schemes.${scheme}`)} key={scheme}>
 						<ToggleButton
 							value={scheme}
 							selected={colorScheme === scheme}

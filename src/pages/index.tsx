@@ -5,6 +5,7 @@ import { registrationPage } from './registration';
 import { activateAccountPage } from './registration-activate';
 import { thanksRegistrationPage } from './registration-thanks';
 import { roomActivitiesPage } from './room-activities';
+import { roomInvitationPage } from './room-invitation';
 import { roomTagsPage } from './room-tags';
 import { roomTasksPage } from './room-tasks';
 import { roomUsersPage } from './room-users';
@@ -22,6 +23,7 @@ const Routes = createRoutesView({
 		roomUsersPage,
 		roomActivitiesPage,
 		roomsPage,
+		roomInvitationPage,
 		settingsPage
 	],
 });

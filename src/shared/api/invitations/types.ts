@@ -7,8 +7,8 @@ import { room } from '../rooms';
 
 export const invitationStatus = Union(
 	Literal('sended'),
-	Literal('activated'),
-	Literal('removed')
+	Literal('approved'),
+	Literal('rejected')
 );
 
 export type InvitationStatus = Static<typeof invitationStatus>;
@@ -48,16 +48,16 @@ export interface InviteUserRequestParams extends InRoomParams {
 export type InviteUserResponseData = Promise<StandardResponse<Invitation>>;
 
 export interface ApproveInvitationRequestParams {
-	readonly token: string;
+	readonly id: number;
 }
 
-export type ApproveInvitationResponseData = Promise<StandardResponse<string>>;
+export type ApproveInvitationResponseData = Promise<StandardResponse<boolean>>;
 
 export interface RejectInvitationRequestParams {
-	readonly token: string;
+	readonly id: number;
 }
 
-export type RejectInvitationResponseData = Promise<StandardResponse<string>>;
+export type RejectInvitationResponseData = Promise<StandardResponse<boolean>>;
 
 export interface RemoveInvitationRequestParams extends InRoomParams {
 	readonly id: number;
