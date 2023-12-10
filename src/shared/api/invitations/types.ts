@@ -16,7 +16,7 @@ export type InvitationStatus = Static<typeof invitationStatus>;
 export const invitation = Record({
 	id: Number,
 	room,
-	user: user.nullable(),
+	user,
 	inviter: user,
 	status: invitationStatus,
 });
