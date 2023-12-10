@@ -1,15 +1,23 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as path from 'path';
+
 import { babel } from '@rollup/plugin-babel';
 import react from '@vitejs/plugin-react';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-// https://vitejs.dev/config/
+const LOCALE_FILE_REGEXP = /src\/([\w-/ ])*\/([\w-]+)\/([\w-]+)\.json$/;
+
 export default defineConfig({
 	server: {
 		port: 3000,
 		cors: true,
-		open: true,
+		proxy: {
+			'/api': {
+				changeOrigin: true,
+				target: 'http://localhost:5000',
+			},
+		},
 	},
 	resolve: {
 		alias: {
@@ -28,6 +36,25 @@ export default defineConfig({
 			browserslistConfigFile: true,
 			extensions: ['.ts', '.tsx'],
 		}),
-		splitVendorChunkPlugin()
+		splitVendorChunkPlugin(),
+		viteStaticCopy({
+			targets: [
+				{
+					src: 'src/**/locales/**/*.json',
+					rename: (_name, _extension, path) => {
+						const matches = path.match(LOCALE_FILE_REGEXP);
+
+						if (matches.length < 4) {
+							return '';
+						}
+
+						const [, , language, namespace] = matches;
+
+						return `${language}/${namespace}.json`;
+					},
+					dest: 'locales',
+				}
+			],
+		})
 	],
 });

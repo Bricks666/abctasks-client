@@ -2,18 +2,19 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { IconButton, Menu } from '@mui/material';
 import { CommonProps } from '@mui/material/OverridableComponent';
 import * as React from 'react';
+
 import { useToggle } from '@/shared/lib';
 import { Size } from '@/shared/types';
 import { MenuOption, MenuItem } from '@/shared/ui';
 
-export interface EditMenuProps extends CommonProps {
+export interface EditMenuProps extends CommonProps, React.PropsWithChildren {
 	readonly alt?: string;
-	readonly options: MenuOption<object>[];
+	readonly options?: MenuOption<object>[];
 	readonly size?: Size;
 }
 
 export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
-	const { options, className, size, alt, } = props;
+	const { options, className, size, alt, children, } = props;
 	const [isOpen, { toggle, }] = useToggle();
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
 	return (
@@ -27,9 +28,10 @@ export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
 				<MoreHorizIcon />
 			</IconButton>
 			<Menu anchorEl={reference} open={isOpen} onClose={toggle}>
-				{options.map((option) => (
+				{options?.map((option) => (
 					<MenuItem {...option} key={option.label} />
 				))}
+				{children}
 			</Menu>
 		</div>
 	);

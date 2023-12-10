@@ -1,5 +1,6 @@
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
+
 import { controls, getParams } from '@/shared/configs';
 
 const popupsDomain = createDomain();

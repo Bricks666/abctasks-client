@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import * as React from 'react';
+
 import { CommonProps } from '@/shared/types';
 
 export interface DateTimeProps extends CommonProps {
@@ -14,11 +15,14 @@ export const DateTime: React.FC<DateTimeProps> = React.memo(function Datetime(
 	const { className, date, format, } = props;
 	const jsDate = new Date(date).toISOString();
 	const showDate = dayjs(jsDate).format(format);
+	const title = dayjs(jsDate).toISOString();
+
 	return (
 		<Typography
 			className={className}
 			variant='body2'
 			dateTime={jsDate}
+			title={title}
 			component='time'>
 			{showDate}
 		</Typography>

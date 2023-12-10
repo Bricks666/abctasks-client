@@ -2,8 +2,6 @@
 	width: 100%;
 
 	box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
-
-	cursor: move;
 }
 
 .card:hover {
@@ -14,6 +12,20 @@
 	opacity: 0.1;
 }
 
+.header {
+	padding-bottom: 0.5em;
+}
 .content {
+	padding-top: 0.5em;
+}
+
+.description {
 	word-break: break-all;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+
+	padding: 1em;
 }

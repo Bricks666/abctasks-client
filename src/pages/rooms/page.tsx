@@ -1,28 +1,36 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Header } from '@/widgets/page';
-import { RoomList, RoomsHeader } from '@/widgets/rooms';
+
+import { Popups, PopupsProps } from '@/widgets/page';
+import { RoomList } from '@/widgets/rooms';
+
+import { CreateRoom, UpdateRoom } from '@/features/rooms';
+
+import { popupsMap } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { MainLayout } from '@/shared/ui';
-import { pageModel } from './model';
 
 import styles from './styles.module.css';
+import { RoomsLayout } from './ui';
+
+const popupMap: PopupsProps['popupMap'] = {
+	[popupsMap.createRoom]: CreateRoom,
+	[popupsMap.updateRoom]: UpdateRoom,
+};
 
 const RoomsPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('rooms');
-	usePageTitle(t('title'));
+	const title = t('title');
+	usePageTitle(title);
 
 	return (
-		<MainLayout className={cn(styles.layout, className)} header={<Header />}>
-			<RoomsHeader />
+		<RoomsLayout className={cn(styles.layout, className)}>
 			<RoomList />
-		</MainLayout>
+			<Popups popupMap={popupMap} />
+		</RoomsLayout>
 	);
 };
-
-pageModel.loaded();
 
 export default RoomsPage;

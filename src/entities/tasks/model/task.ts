@@ -2,41 +2,33 @@ import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
-import { GetTaskRequest, Task, tasksApi, task } from '@/shared/api';
-import {
-	StandardFailError,
-	getIsSuccessResponseValidator,
-	dataExtractor
-} from '@/shared/lib';
-import {
-	StandardResponse,
-	StandardSuccessResponse,
-	getStandardSuccessResponse
-} from '@/shared/types';
+
+import { GetTaskParams, Task, tasksApi, task } from '@/shared/api';
+import { dataExtractor } from '@/shared/lib';
+import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const taskDomain = createDomain();
 
 const handlerFx = taskDomain.effect<
-	GetTaskRequest,
+	GetTaskParams,
 	StandardResponse<Task>,
-	StandardFailError
->();
-handlerFx.use(tasksApi.getOne);
+	Error
+>(tasksApi.getOne);
 
 export const query = createQuery<
-	GetTaskRequest,
+	GetTaskParams,
 	StandardResponse<Task>,
-	StandardFailError,
-	StandardSuccessResponse<Task>,
+	Error,
+	StandardResponse<Task>,
 	Task
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(task)),
-	validate: getIsSuccessResponseValidator(),
+	contract: runtypeContract(getStandardResponse(task)),
+
 	mapData: dataExtractor,
 });
 
-export const Gate = createGate<GetTaskRequest>({
+export const Gate = createGate<GetTaskParams>({
 	domain: taskDomain,
 });
 

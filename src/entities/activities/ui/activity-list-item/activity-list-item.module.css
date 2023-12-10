@@ -1,0 +1,8 @@
+.item {
+	overflow: unset;
+}
+
+.content {
+	display: flex;
+	column-gap: 1.25em;
+}

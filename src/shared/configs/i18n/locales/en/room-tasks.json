@@ -1,0 +1,24 @@
+{
+	"title": "Tasks",
+	"blocks": {
+		"tasks_progress": {
+			"title": "Tasks progress",
+			"empty_text": "Here will be shown your task progress",
+			"aria_label": "Progress of {{ tag_name }} tasks is {{ done_count }} from {{ total_count }}"
+		},
+		"last_activities": {
+			"title": "Last activities",
+			"actions": {
+				"open": "$t(common:actions.open) all activities"
+			}
+		},
+		"mobile_aside": {
+			"title": "Statistic"
+		}
+	},
+	"actions": {
+		"retry_progress": {
+			"text": "Progress was not loaded. Click to retry"
+		}
+	}
+}

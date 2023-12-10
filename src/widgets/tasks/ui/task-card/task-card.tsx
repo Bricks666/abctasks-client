@@ -1,35 +1,74 @@
+import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { TaskCardMenu } from '@/features/tasks';
+
 import {
-	GroupLabel,
-	groupsModel,
-	SkeletonGroupLabel,
-	useGroup
-} from '@/entities/groups';
+	OpenUpdateTaskFormMenuItem,
+	RemoveTaskMenuItem
+} from '@/features/tasks';
+
+import { TagLabel, SkeletonTagLabel } from '@/entities/tags';
 import { TemplateTaskCard } from '@/entities/tasks';
+import { UserAvatar } from '@/entities/users';
+
 import { Task } from '@/shared/api';
+import { getEmptyArray } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
+import { EditMenu } from '@/shared/ui';
+
+import { useTaskCardIsDrag } from '../../lib';
+import { dragTaskModel } from '../../model';
+
+import styles from './task-card.module.css';
 
 export interface TaskCardProps extends CommonProps, Task {}
 
 export const TaskCard: React.FC<TaskCardProps> = React.memo((props) => {
-	const { groupId, id, roomId, } = props;
+	const { tags, id, roomId, className, status, author, ...rest } = props;
+	const [onDragEnd, onDragStart] = useUnit([
+		dragTaskModel.dragEnded,
+		dragTaskModel.dragStarted
+	]);
+	const isDrag = useTaskCardIsDrag(id);
 
-	const { data: group, } = useGroup(groupId);
-	const status = useUnit(groupsModel.query.$status);
-	const isLoading = status === 'initial' || status === 'pending';
+	const actions = <CardMenu roomId={roomId} taskId={id} />;
+	const tagElements =
+		tags.length > 0
+			? tags.map((tag) => <TagLabel {...tag} key={tag.id} />)
+			: getEmptyArray(2).map((_, i) => <SkeletonTagLabel key={i} />);
 
-	if (!isLoading && !group) {
-		return null;
-	}
+	const userAvatar = <UserAvatar {...author} size={24} />;
 
-	const actions = <TaskCardMenu roomId={roomId} taskId={id} />;
-	const groupLabel = !isLoading ? (
-		<GroupLabel {...group!} />
-	) : (
-		<SkeletonGroupLabel />
+	return (
+		<TemplateTaskCard
+			className={cn(styles.card, { [styles.drag]: isDrag, }, className)}
+			{...rest}
+			slots={{
+				actions,
+				userAvatar,
+				tags: <div className={styles.tags}>{tagElements}</div>,
+			}}
+			id={id}
+			status={status}
+			onDragStart={onDragStart}
+			onDragEnd={onDragEnd}
+			data-id={id}
+			data-status={status}
+			draggable
+		/>
 	);
-
-	return <TemplateTaskCard actions={actions} group={groupLabel} {...props} />;
 });
+
+interface CardMenuProps {
+	readonly taskId: number;
+	readonly roomId: number;
+}
+
+const CardMenu: React.FC<CardMenuProps> = (props) => {
+	return (
+		<EditMenu>
+			<OpenUpdateTaskFormMenuItem {...props} />
+			<RemoveTaskMenuItem {...props} />
+		</EditMenu>
+	);
+};

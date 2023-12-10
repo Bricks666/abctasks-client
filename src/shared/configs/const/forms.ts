@@ -1,4 +1,4 @@
-export const allowedSymbolsRegExp = /[a-zA-Z0-9_\- !*+()]/;
+export const ALLOWED_SYMBOLS = /[a-zA-Z0-9_\- !*+()]/;
 
-export const minLoginPasswordLength = 6;
-export const maxLoginPasswordLength = 32;
+export const MIN_LENGTH = 6;
+export const MAX_SHORT_LENGTH = 32;

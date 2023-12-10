@@ -1,0 +1,26 @@
+.form {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(2, minmax(150px, 1fr));
+	align-items: end;
+
+	padding: 1em;
+}
+
+.reset {
+	grid-column: 1;
+}
+
+.submit {
+	grid-column: 2;
+}
+
+@media (max-width: 720px) {
+	.form {
+		grid-template-columns: 1fr;
+	}
+
+	.submit {
+		grid-column: 1;
+	}
+}

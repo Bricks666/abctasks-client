@@ -1,1 +1,1 @@
-export * from './add-users-into-room-popup';
+export * from './user-in-room-list-item';

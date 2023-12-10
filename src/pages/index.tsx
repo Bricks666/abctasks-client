@@ -1,30 +1,30 @@
 import { createRoutesView } from 'atomic-router-react';
-import * as React from 'react';
-import { routes } from '@/shared/configs';
 
-const LoginPage = React.lazy(() => import('./login'));
-const RegistrationPage = React.lazy(() => import('./registration'));
-const RoomPage = React.lazy(() => import('./room'));
-const RoomsPage = React.lazy(() => import('./rooms'));
+import { loginPage } from './login';
+import { registrationPage } from './registration';
+import { activateAccountPage } from './registration-activate';
+import { thanksRegistrationPage } from './registration-thanks';
+import { roomActivitiesPage } from './room-activities';
+import { roomInvitationPage } from './room-invitation';
+import { roomTagsPage } from './room-tags';
+import { roomTasksPage } from './room-tasks';
+import { roomUsersPage } from './room-users';
+import { roomsPage } from './rooms';
+import { settingsPage } from './settings';
 
 const Routes = createRoutesView({
 	routes: [
-		{
-			route: routes.login,
-			view: LoginPage,
-		},
-		{
-			route: routes.registration,
-			view: RegistrationPage,
-		},
-		{
-			route: routes.room,
-			view: RoomPage,
-		},
-		{
-			route: routes.rooms,
-			view: RoomsPage,
-		}
+		loginPage,
+		registrationPage,
+		thanksRegistrationPage,
+		activateAccountPage,
+		roomTagsPage,
+		roomTasksPage,
+		roomUsersPage,
+		roomActivitiesPage,
+		roomsPage,
+		roomInvitationPage,
+		settingsPage
 	],
 });
 

@@ -1,0 +1,39 @@
+{
+	"title": "Invitation answer",
+	"card": {
+		"title": "User {{ inviter_name }} invite you",
+		"text": [
+			"User ",
+			"{{ inviter_name }}",
+			" inviter you, ",
+			"{{ user_name }}",
+			", into room ",
+			"{{ room_name }}"
+		]
+	},
+	"actions": {
+		"approve": {
+			"actions": {
+				"button": "Approve"
+			},
+			"notifications": {
+				"success": "Invitation was successfully approved",
+				"error": "Invitation was not approved"
+			}
+		},
+		"reject": {
+			"actions": {
+				"button": "Reject"
+			},
+			"notifications": {
+				"success": "Invitation was successfully rejected",
+				"error": "Invitation was not rejected"
+			}
+		},
+		"via-token": {
+			"notifications": {
+				"error": "Invitation was not loaded. It's not available for you"
+			}
+		}
+	}
+}

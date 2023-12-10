@@ -1,3 +1,3 @@
-export interface LoginSearchQuery {
-	readonly login: string;
+export interface SearchUsersQuery {
+	readonly username: string;
 }

@@ -1,0 +1,7 @@
+.aside {
+	display: grid;
+	gap: 1em;
+	grid-template-rows: 3fr 7fr;
+
+	height: min(100%, 960px);
+}

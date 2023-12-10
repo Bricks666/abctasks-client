@@ -1,0 +1,61 @@
+{
+	"title": "Приглашения",
+	"list": {
+		"empty_text": "В комнате еще нет приглашений",
+		"item": {
+			"inviter": "Приглашен пользователем {{ inviter_name }}"
+		}
+	},
+	"actions": {
+		"invite_user": {
+			"title": "Пригласить пользователя в комнату",
+			"title_short": "Персональное приглашение",
+			"fields": {
+				"user": "Имя пользователя"
+			},
+			"actions": {
+				"submit": "Пригласить {{ username }} в комнату",
+				"submit_disabled": "Выберите пользователя выше"
+			},
+			"notifications": {
+				"success": "Приглашение было отправлено успешно",
+				"error": "Приглашение не было отправлено"
+			}
+		},
+		"generate_link": {
+			"title": "Сгенерировать ссылку-приглашение",
+			"title_short": "По ссылке",
+			"fields": {
+				"link": "Ссылка"
+			},
+			"actions": {
+				"copy": "Скопировать ссылку"
+			},
+			"notifications": {
+				"success": "Ссылка была скопирована",
+				"error": "Ссылка не была скопирована"
+			}
+		},
+		"retry_invitations": {
+			"text": "Приглашения не были загружены. Нажмите, чтобы повторить"
+		},
+		"create_invitation": {
+			"actions": {
+				"open": "Пригласить пользователя"
+			}
+		},
+		"remove_invitation": {
+			"title": "вы уверены?",
+			"content": "Вы хотите $t(common:actions.remove) это приглашение? Вы сможете пригласить пользователя снова",
+			"actions": {
+				"open": "$t(common:actions.remove) приглашение",
+				"agree": "$t(common:actions.remove)",
+				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Приглашение было успешно удалено",
+				"error": "Приглашение не было удалено"
+			}
+		}
+	}
+}

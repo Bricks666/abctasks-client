@@ -1,6 +1,7 @@
 import { useUnit } from 'effector-react';
-import { searchedUsersModel } from '../model';
+
+import { searchUserModel } from '../model';
 
 export const useSearchedUsers = () => {
-	return useUnit(searchedUsersModel.query);
+	return useUnit(searchUserModel.query);
 };

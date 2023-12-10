@@ -1,16 +1,20 @@
-import { useUnit } from 'effector-react';
+import { SnackbarList } from 'effector-mui-snacks';
 import * as React from 'react';
-import { NotificationCard } from '@/widgets/notifications';
-import { notificationModel } from '@/entities/notifications';
+
+import { notificationsModel } from '@/shared/models';
+
+import 'effector-mui-snacks/dist/style.css';
 
 export const withNotifications =
 	(Component: React.ComponentType): React.ComponentType =>
 		() => {
-			const notification = useUnit(notificationModel.$last);
 			return (
 				<>
 					<Component />
-					{notification ? <NotificationCard {...notification} /> : null}
+					<SnackbarList
+						model={notificationsModel.notifications}
+						domRootSelector='#root'
+					/>
 				</>
 			);
 		};

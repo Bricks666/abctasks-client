@@ -1,4 +1,5 @@
 import { useUnit } from 'effector-react';
+
 import { progressesModel } from '../model';
 
 export const useProgresses = () => {

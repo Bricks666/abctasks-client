@@ -1,2 +1,2 @@
-export * as tasksModel from './tasks';
+export * as tasksInRoomModel from './tasks-in-room';
 export * as taskModel from './task';

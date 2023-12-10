@@ -1,0 +1,38 @@
+.form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1em;
+
+	width: 100%;
+}
+
+.select {
+	width: 100%;
+	height: 4em;
+}
+
+.field {
+	grid-column: span 2;
+	height: 6em;
+}
+
+.button {
+	grid-column: 2;
+	justify-self: end;
+	width: 7em;
+	height: 3em;
+}
+
+@media (max-width: 500px) {
+	.form {
+		grid-template-columns: 1fr;
+	}
+
+	.field {
+		grid-column: 1;
+	}
+
+	.button {
+		grid-column: 1;
+	}
+}

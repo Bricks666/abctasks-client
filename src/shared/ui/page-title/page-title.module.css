@@ -1,0 +1,9 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: 1fr max-content;
+	gap: 1em;
+}
+
+.title {
+	font-weight: 700;
+}

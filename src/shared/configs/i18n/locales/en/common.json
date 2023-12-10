@@ -1,12 +1,52 @@
 {
 	"loading": "Loading...",
-	"none": "None",
 	"actions": {
+		"add": "Add",
 		"create": "Create",
 		"update": "Update",
+		"edit": "Edit",
 		"save": "Save",
 		"remove": "Remove",
 		"exit": "Exit",
-		"close": "Close"
+		"close": "Close",
+		"cancel": "Cancel",
+		"open": "Open",
+		"retry": "Retry"
+	},
+	"errors": {
+		"default": "Something went wrong"
+	},
+	"navigation": {
+		"items": {
+			"rooms": "Rooms"
+		},
+		"menu": {
+			"title": "My rooms"
+		}
+	},
+	"fields": {
+		"create_after": "Create after",
+		"create_before": "Create before"
+	},
+	"languages": {
+		"ru": "Russian",
+		"en": "English",
+		"ru_short": "Ru",
+		"en_short": "En"
+	},
+	"color_schemes": {
+		"schemes": {
+			"dark": "Dark scheme",
+			"system": "OS scheme",
+			"light": "Light scheme"
+		},
+		"activated": "$t(color_schemes.schemes.{{ scheme }}) activate now"
+	},
+	"profile_menu": {
+		"title": "{{ username }}'s profile settings",
+		"items": {
+			"settings": "Settings",
+			"logout": "Logout"
+		}
 	}
 }

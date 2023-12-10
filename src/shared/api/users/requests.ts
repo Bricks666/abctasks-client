@@ -1,34 +1,14 @@
-import { fetcher } from '@/shared/lib';
-import { InRoomRequest, StandardResponse } from '@/shared/types';
+import { StandardResponse } from '@/shared/types';
+
 import { User } from '../auth';
-import { LoginSearchQuery } from './types';
+import { instance, normalizeQuery } from '../request';
 
-const usersFetcher = fetcher.create({
-	baseURL: 'users',
-});
+import { SearchUsersQuery } from './types';
 
-export const getAllInRoom = async (
-	params: InRoomRequest
-): Promise<StandardResponse<User[]>> => {
-	return usersFetcher.get({
-		path: {
-			url: '',
-			query: {
-				roomId: params.roomId.toString(),
-			},
-		},
-	});
-};
-
-export const getAllIncludeLogin = async (
-	params: LoginSearchQuery
-): Promise<StandardResponse<User[]>> => {
-	return usersFetcher.get({
-		path: {
-			url: '',
-			query: {
-				login: params.login,
-			},
-		},
-	});
+export const searchUsers = async (query: SearchUsersQuery) => {
+	return instance
+		.get('users', {
+			searchParams: new URLSearchParams(normalizeQuery(query)),
+		})
+		.json<StandardResponse<User[]>>();
 };

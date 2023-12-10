@@ -1,2 +1,2 @@
-export * as activitiesApi from './activities';
+export * as activitiesApi from './requests';
 export * from './types';

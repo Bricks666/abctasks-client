@@ -1,0 +1,23 @@
+.wrapper {
+	display: grid;
+	grid-template-rows: max-content 1fr;
+
+	min-height: 100vh;
+}
+
+.wrapper--headerless {
+	grid-template-rows: 1fr;
+}
+
+.layout {
+	width: 100%;
+	max-width: 1920px;
+
+	padding: 2em;
+}
+
+@media (max-width: 600px) {
+	.layout {
+		padding: 1em;
+	}
+}

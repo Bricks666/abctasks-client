@@ -1,9 +1,11 @@
-import { Number, Record, Static, Union, String } from 'runtypes';
+import { Number, Record, Static } from 'runtypes';
+
+import { tag } from '../tags';
 
 export const progress = Record({
-	groupId: Number,
-	completedCount: Union(Number, String),
-	totalCount: Union(Number, String),
+	tag,
+	donecount: Number,
+	totalcount: Number,
 }).asReadonly();
 
 export interface Progress extends Static<typeof progress> {}

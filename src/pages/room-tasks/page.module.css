@@ -1,0 +1,29 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: 6fr 400px;
+	grid-template-rows: max-content 1fr;
+	grid-template-areas: '. aside' 'tasks aside';
+	gap: 1em;
+
+	height: 100%;
+	width: 100%;
+}
+
+.tasks {
+	grid-area: tasks;
+}
+
+.aside {
+	grid-area: aside;
+}
+
+@media (max-width: 1440px) {
+	.wrapper {
+		grid-template-columns: 1fr;
+		grid-template-areas: '.' 'tasks';
+	}
+
+	.tasks {
+		padding-bottom: 1.5em;
+	}
+}

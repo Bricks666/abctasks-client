@@ -1,6 +1,17 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-import { Record, Number, String, Static, Union, Literal } from 'runtypes';
-import { AccessOptions } from '@/shared/lib';
+import {
+	Record,
+	Number,
+	String,
+	Static,
+	Union,
+	Literal,
+	Array
+} from 'runtypes';
+
+import { DatesFiltersParams, InRoomParams } from '@/shared/types';
+
+import { user } from '../auth';
+import { tag } from '../tags';
 
 export const taskStatus = Union(
 	Literal('done'),
@@ -19,12 +30,14 @@ export const statuses: TaskStatus[] = [
 
 export const task = Record({
 	id: Number,
-	groupId: Number,
 	roomId: Number,
-	authorId: Number,
+	tags: Array(tag),
+	author: user,
+	title: String,
+	description: String.nullable(),
 	status: taskStatus,
-	content: String,
 	createdAt: String,
+	updatedAt: String.nullable(),
 });
 
 export interface Task extends Static<typeof task> {}
@@ -36,27 +49,26 @@ export interface GroupedByStatusTasks {
 	readonly done: Task[];
 }
 
-export type StatusNamesStore = {
-	readonly [key in keyof GroupedByStatusTasks]: TaskStatus;
-};
-
-export interface GetTaskRequest {
-	readonly id: number;
-	readonly roomId: number;
+export interface GetTasksParams extends InRoomParams, DatesFiltersParams {
+	readonly authorIds?: number[];
+	readonly tagIds?: number[];
 }
 
-export interface CreateTaskRequest
-	extends Required<AccessOptions>,
-		Pick<Task, 'roomId' | 'groupId' | 'content' | 'status'> {}
-
-export interface UpdateTaskRequest
-	extends Partial<Omit<CreateTaskRequest, 'accessToken'>>,
-		Required<AccessOptions> {
+export interface GetTaskParams extends InRoomParams {
 	readonly id: number;
-	readonly roomId: number;
 }
 
-export interface RemoveTaskRequest extends Required<AccessOptions> {
+export interface CreateTaskParams
+	extends Pick<Task, 'roomId' | 'title' | 'status' | 'description'> {
+	readonly tagIds: number[];
+}
+
+export interface UpdateTaskParams
+	extends Partial<Omit<CreateTaskParams, 'roomId'>>,
+		InRoomParams {
 	readonly id: number;
-	readonly roomId: number;
+}
+
+export interface RemoveTaskParams extends InRoomParams {
+	readonly id: number;
 }

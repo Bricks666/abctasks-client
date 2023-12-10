@@ -1,1 +1,2 @@
-export { usePopups } from './usePopups';
+export * from './use-popups';
+export * from './create-popup-control-model';

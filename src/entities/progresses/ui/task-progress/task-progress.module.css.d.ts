@@ -1,5 +1,6 @@
 declare const styles: {
-	readonly title: string;
+	readonly item: string;
 	readonly progress: string;
+	readonly title: string;
 };
 export = styles;

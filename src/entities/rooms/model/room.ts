@@ -2,48 +2,40 @@ import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
+
 import { Room, roomsApi, room } from '@/shared/api';
-import {
-	StandardFailError,
-	getIsSuccessResponseValidator,
-	dataExtractor
-} from '@/shared/lib';
+import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
-	StandardSuccessResponse,
-	getStandardSuccessResponse,
-	InRoomRequest
+	getStandardResponse,
+	InRoomParams
 } from '@/shared/types';
 
 const roomDomain = createDomain();
-const handlerFx = roomDomain.effect<
-	number,
-	StandardResponse<Room>,
-	StandardFailError
->();
-
-handlerFx.use(roomsApi.getOne);
+const handlerFx = roomDomain.effect(roomsApi.getOne);
 
 export const query = createQuery<
-	number,
+	InRoomParams,
 	StandardResponse<Room>,
-	StandardFailError,
-	StandardSuccessResponse<Room>,
+	Error,
+	StandardResponse<Room>,
 	Room
 >({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardSuccessResponse(room)),
-	validate: getIsSuccessResponseValidator(),
+	contract: runtypeContract(getStandardResponse(room)),
+
 	mapData: dataExtractor,
 });
 
-export const Gate = createGate<InRoomRequest>({
+export const $canChange = query.$data.map((room) => room?.canChange || false);
+
+export const Gate = createGate<InRoomParams>({
 	domain: roomDomain,
 });
 
 sample({
-	clock: Gate.open,
-	fn: ({ roomId, }) => roomId,
+	clock: Gate.state,
+	filter: ({ roomId, }) => Boolean(roomId),
 	target: query.start,
 });
 

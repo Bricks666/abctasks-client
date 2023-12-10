@@ -1,36 +1,18 @@
-import { Record, Number, String, Static } from 'runtypes';
-import { AccessOptions } from '@/shared/lib';
+import { Record, Number, String, Static, Boolean } from 'runtypes';
 
-export type GetRoomsRequest = Required<AccessOptions>;
+import { InRoomParams } from '@/shared/types';
 
 export const room = Record({
 	id: Number,
+	ownerId: Number,
 	name: String,
 	description: String,
+	canChange: Boolean.optional(),
 }).asReadonly();
 
 export interface Room extends Static<typeof room> {}
 
-export interface GetRoomRequest extends AccessOptions, Pick<Room, 'id'> {}
-
-export interface CreateRoomRequest
-	extends Required<AccessOptions>,
-		Pick<Room, 'description' | 'name'> {}
-export interface UpdateRoomRequest
-	extends Omit<Partial<CreateRoomRequest>, 'accessToken'>,
-		Required<AccessOptions> {
-	readonly id: number;
-}
-
-export interface RemoveRoomRequest extends Required<AccessOptions> {
-	readonly id: number;
-}
-
-export interface AddUserRoomRequest extends Required<AccessOptions> {
-	readonly id: number;
-	readonly userId: number;
-}
-
-export interface ExitRoomRequest extends Required<AccessOptions> {
-	readonly id: number;
-}
+export interface CreateRoomParams extends Pick<Room, 'description' | 'name'> {}
+export interface UpdateRoomParams
+	extends Partial<CreateRoomParams>,
+		InRoomParams {}

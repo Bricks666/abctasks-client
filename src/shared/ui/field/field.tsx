@@ -1,42 +1,30 @@
 import { TextField, TextFieldProps } from '@mui/material';
+import { ConnectedField } from 'effector-forms';
 import * as React from 'react';
-import {
-	FieldValues,
-	useController,
-	UseControllerProps,
-	UseControllerReturn
-} from 'react-hook-form';
+
 import { CommonProps } from '@/shared/types';
 
-export interface FieldProps<FormValues extends FieldValues>
+export interface FieldProps
 	extends CommonProps,
-		UseControllerProps<FormValues>,
-		Omit<
-			TextFieldProps,
-			keyof UseControllerProps | keyof UseControllerReturn
-		> {}
+		Partial<
+			Pick<
+				ConnectedField<any>,
+				'isValid' | 'name' | 'onChange' | 'onBlur' | 'value'
+			>
+		>,
+		Omit<TextFieldProps, keyof ConnectedField<any>> {}
 
-export const Field = <FormValues extends FieldValues>(
-	props: FieldProps<FormValues>
-) => {
-	const { name, control, defaultValue, rules, shouldUnregister, ...rest } =
-		props;
-	const { field, fieldState, } = useController({
-		name,
-		control,
-		defaultValue,
-		rules,
-		shouldUnregister,
-	});
-	const { ref, ...controls } = field;
-	const { error, } = fieldState;
+export const Field: React.FC<FieldProps> = React.memo((props) => {
+	const { isValid, onChange, ...rest } = props;
+	const handleChange: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
+		onChange?.(evt.target.value);
+	};
+
 	return (
 		<TextField
-			{...rest}
-			{...controls}
-			inputRef={ref}
-			error={!!error}
-			helperText={error?.message}
+			{...(rest as TextFieldProps)}
+			onChange={handleChange}
+			error={!isValid}
 		/>
 	);
-};
+});

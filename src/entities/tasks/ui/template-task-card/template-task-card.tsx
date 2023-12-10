@@ -1,59 +1,59 @@
-import { Card, CardContent, CardHeader, Typography } from '@mui/material';
+import {
+	Card,
+	CardActions,
+	CardContent,
+	CardHeader,
+	CardProps,
+	Typography
+} from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+
 import { Task } from '@/shared/api';
-import { CommonProps } from '@/shared/types';
+import { CommonProps, Slots } from '@/shared/types';
 import { DateTime } from '@/shared/ui';
 
 import styles from './template-task-card.module.css';
 
 export interface TemplateTaskCardProps
 	extends CommonProps,
-		Pick<Task, 'content' | 'createdAt' | 'status' | 'id'> {
-	readonly actions: React.ReactElement;
-	readonly group: React.ReactElement;
+		Pick<Task, 'title' | 'description' | 'createdAt' | 'status' | 'id'>,
+		Omit<CardProps, keyof Task> {
+	readonly slots: Slots<'actions' | 'tags' | 'userAvatar'>;
 }
 
 export const TemplateTaskCard: React.FC<TemplateTaskCardProps> = React.memo(
 	(props) => {
-		const { className, content, createdAt, id, status, actions, group, } = props;
-		const [isDrag, setIsDrag] = React.useState(false);
+		const { className, createdAt, slots, title, description, ...rest } = props;
 
-		const onDragStart = React.useCallback<React.DragEventHandler>(
-			(evt) => {
-				evt.dataTransfer.clearData();
-				evt.dataTransfer.setData('status', status.toString());
-				evt.dataTransfer.setData('taskId', id.toString());
-				setIsDrag(true);
-			},
-			[status, id]
-		);
-
-		const onDragEnd = React.useCallback<React.DragEventHandler>(() => {
-			setIsDrag(false);
-		}, []);
+		const { actions, tags, userAvatar, } = slots;
 
 		return (
 			<Card
-				className={cn(styles.card, { [styles.drag]: isDrag, }, className)}
-				onDragStart={onDragStart}
-				onDragEnd={onDragEnd}
-				draggable
-				component='article'>
+				className={cn(styles.card, className)}
+				variant='outlined'
+				component='article'
+				{...rest}>
 				<CardHeader
+					className={styles.header}
 					action={actions}
-					title={group}
-					titleTypographyProps={{ component: 'div', }}
-				/>
-				<CardContent>
-					<Typography className={styles.content}>{content}</Typography>
-					<div>
-						<DateTime date={createdAt} format='HH:mm DD MMM' />
-						<Typography variant='body2' component='span'>
-							0
+					title={
+						<Typography variant='h5' component='h3'>
+							{title}
 						</Typography>
-					</div>
+					}
+					subheader={tags}
+					disableTypography
+				/>
+				<CardContent className={styles.content}>
+					<Typography className={styles.description} variant='body1'>
+						{description}
+					</Typography>
 				</CardContent>
+				<CardActions className={styles.actions}>
+					{userAvatar}
+					<DateTime date={createdAt} format='HH:mm DD MMM' />
+				</CardActions>
 			</Card>
 		);
 	}

@@ -1,0 +1,51 @@
+{
+	"title": "Тэги",
+	"list": {
+		"empty_text": "В комнате еще не создан ни один тэг."
+	},
+	"actions": {
+		"create_tag": {
+			"title": "$t(common:actions.create) тэг",
+			"actions": {
+				"open": "$t(common:actions.create) тэг"
+			},
+			"notifications": {
+				"success": "Тэг был успешно создан",
+				"error": "Тэг не был создан"
+			}
+		},
+		"update_tag": {
+			"title": "$t(common:actions.update) тэг",
+			"actions": {
+				"open": "$t(common:actions.update) тэг"
+			},
+			"notifications": {
+				"success": "Тэг был успешно обновлен",
+				"error": "Тэг не был обновлен"
+			}
+		},
+		"remove_tag": {
+			"title": "Вы уверены?",
+			"text": "Вы хотите удалить этот тэг? Все задачи, которые имеют только этот тэг, будут удалены",
+			"actions": {
+				"open": "$t(common:actions.remove) тэг",
+				"agree": "$t(common:actions.remove)",
+				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Тэг был успешно удален",
+				"error": "Тэг не был удален"
+			}
+		},
+		"tag_form": {
+			"fields": {
+				"name": "Название",
+				"main_color": "Главный цвет",
+				"second_color": "Вторичный цвет"
+			}
+		},
+		"retry_tags": {
+			"text": "Тэги не были загружены. Нажмите, чтобы повторить"
+		}
+	}
+}

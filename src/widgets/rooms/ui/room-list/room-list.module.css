@@ -1,8 +1,5 @@
 .list {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
+	grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
 	gap: 1em;
-}
-
-.card {
 }

@@ -7,6 +7,12 @@
 	padding: 2rem 0;
 }
 
-.title {
-	font-weight: 700;
+.titleSkeleton {
+  margin-bottom: 0.2em;
+}
+
+.description {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

@@ -2,6 +2,7 @@ import { ListItemIcon, MenuItem as MenuItemMUI } from '@mui/material';
 import { RouteInstance, RouteQuery } from 'atomic-router';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
+
 import { CommonProps } from '@/shared/types';
 
 interface BaseMenuOption {
