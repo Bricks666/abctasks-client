@@ -40,12 +40,16 @@ sample({
 });
 
 sample({
-	clock: [
-		approveInvitationModel.mutation.finished.success,
-		rejectInvitationModel.mutation.finished.success
-	],
+	clock: [approveInvitationModel.mutation.finished.success],
 	source: invitationViaTokenModel.query.$data,
 	filter: Boolean,
 	fn: (invitation) => ({ id: invitation.room.id, }),
 	target: routes.room.tasks.open,
+});
+
+sample({
+	clock: [rejectInvitationModel.mutation.finished.success],
+	source: invitationViaTokenModel.query.$data,
+	filter: Boolean,
+	target: routes.rooms.base.open,
 });
