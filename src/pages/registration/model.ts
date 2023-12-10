@@ -1,6 +1,5 @@
 import { redirect } from 'atomic-router';
 import { sample } from 'effector';
-import { debug } from 'patronum';
 
 import { registrationModel } from '@/features/auth';
 
@@ -32,11 +31,3 @@ redirect({
 	},
 	route: routes.registration.thanks,
 });
-
-debug(registrationModel.mutation.finished);
-debug(
-	routes.registration.thanks.open,
-	routes.registration.thanks.opened,
-	internalRoutingModel.$internalRoute.enable,
-	internalRoutingModel.$internalRoute.$flag
-);
