@@ -35,9 +35,9 @@ export const InvitationList: React.FC<InvitationListProps> = (props) => {
 			getData={(invitation) =>
 				invitation.map((invitation) => ({
 					id: invitation.id,
-					email: invitation.user.email,
-					username: invitation.user.username,
-					photo: invitation.user.photo,
+					email: invitation.user!.email,
+					username: invitation.user!.username,
+					photo: invitation.user!.photo,
 					inviterName: invitation.inviter.username,
 					roomId,
 				}))
