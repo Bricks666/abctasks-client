@@ -19,6 +19,16 @@ export default defineConfig({
 			},
 		},
 	},
+	preview: {
+		port: 3000,
+		cors: true,
+		proxy: {
+			'/api': {
+				changeOrigin: true,
+				target: 'http://localhost:5000',
+			},
+		},
+	},
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, 'src'),
@@ -53,8 +63,8 @@ export default defineConfig({
 						return `${language}/${namespace}.json`;
 					},
 					dest: 'locales',
-				}
+				},
 			],
-		})
+		}),
 	],
 });
