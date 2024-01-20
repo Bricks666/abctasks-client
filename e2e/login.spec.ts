@@ -1,4 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from './fixtures/testing-api';
+
+const email = 'testemail@gmail.com';
+const password = 'password';
 
 test.describe('login page', () => {
 	test.beforeEach(async ({ page }) => {
@@ -36,9 +40,15 @@ test.describe('login page', () => {
 		await expect(page).toHaveURL('/registration');
 	});
 
-	test('has error on incorrect login into account', async ({ page }) => {
-		await page.getByLabel('Email').fill('testemail@gmail.com');
-		await page.getByLabel('Password').fill('test-password');
+	test('has error on incorrect login into account', async ({
+		page,
+		removeUser,
+	}) => {
+		await removeUser({
+			email,
+		});
+		await page.getByLabel('Email').fill(email);
+		await page.getByLabel('Password').fill(password);
 		await page.getByLabel('Remember me').check();
 		await page.getByRole('button', { name: 'Login' }).click();
 
@@ -52,11 +62,41 @@ test.describe('login page', () => {
 		);
 	});
 
-	test('redirect into rooms page after success login', async ({ page }) => {
-		await page.getByLabel('Email').fill(process.env.REGISTERED_USER_EMAIL!);
-		await page
-			.getByLabel('Password')
-			.fill(process.env.REGISTERED_USER_PASSWORD!);
+	test('has error on try log in into inactivated account', async ({
+		page,
+		user,
+	}) => {
+		const deactivated = await user({
+			email,
+			password,
+			activated: false,
+		});
+		await page.getByLabel('Email').fill(deactivated.email);
+		await page.getByLabel('Password').fill(password);
+		await page.getByLabel('Remember me').check();
+		await page.getByRole('button', { name: 'Login' }).click();
+
+		const error = page.getByText('User was not found');
+
+		await expect(error).toBeVisible();
+		await expect(error).toHaveCSS('color', 'rgb(211, 47, 47)');
+		await expect(page.locator('label', { hasText: 'Email' })).toHaveCSS(
+			'color',
+			'rgb(211, 47, 47)'
+		);
+	});
+
+	test('redirect into rooms page after success login', async ({
+		page,
+		user,
+	}) => {
+		const registeredUser = await user({
+			email,
+			password,
+		});
+
+		await page.getByLabel('Email').fill(registeredUser.email);
+		await page.getByLabel('Password').fill(password);
 		await page.getByLabel('Remember me').check();
 		await page.getByRole('button', { name: 'Login' }).click();
 
@@ -67,7 +107,7 @@ test.describe('login page', () => {
 	 * @todo move into integration tests
 	 */
 	// test('toggle password visibility', async ({ page }) => {
-	// 	const password = 'test-password';
+	// 	const password = password;
 	// 	const passwordFiledContainer = page
 	// 		.locator('div')
 	// 		.filter({ hasText: /^Password$/ });
