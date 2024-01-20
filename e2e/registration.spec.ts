@@ -1,4 +1,9 @@
-import { Page, expect, test } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
+import { test } from './fixtures/testing-api';
+
+const email = 'testing@email.com';
+const password = 'password';
+const username = 'username';
 
 const getFormControls = (page: Page) => {
 	const email = page.getByLabel('Email');
@@ -21,6 +26,10 @@ test.describe('registration page', () => {
 		await page.goto('/registration');
 	});
 
+	test.afterEach(async ({ context }) => {
+		await context.clearCookies();
+	});
+
 	test('has title', async ({ page }) => {
 		await expect(page).toHaveTitle('Registration');
 	});
@@ -29,12 +38,17 @@ test.describe('registration page', () => {
 		await expect(page).toHaveScreenshot();
 	});
 
-	test('has error on registered account', async ({ page }) => {
+	test('has error on registered account', async ({ page, user }) => {
+		const registered = await user({
+			email,
+			password,
+		});
+
 		const controls = getFormControls(page);
-		await controls.email.fill(process.env.REGISTERED_USER_EMAIL!);
-		await controls.username.fill('username');
-		await controls.password.fill('test-password');
-		await controls.repeatPassword.fill('test-password');
+		await controls.email.fill(registered.email);
+		await controls.username.fill(registered.username);
+		await controls.password.fill(password);
+		await controls.repeatPassword.fill(password);
 		await controls.button.click();
 
 		const error = page.getByText('User already registered');
@@ -62,18 +76,26 @@ test.describe('registration page', () => {
 
 	test('redirect into thanks page after success registration', async ({
 		page,
-		browserName,
+		removeUser,
 	}) => {
+		await removeUser({
+			email,
+		});
+
 		const controls = getFormControls(page);
 
-		await controls.email.fill(`test-${browserName}@email.com`);
-		await controls.username.fill('username');
-		await controls.password.fill('test-password');
-		await controls.repeatPassword.fill('test-password');
+		await controls.email.fill(email);
+		await controls.username.fill(username);
+		await controls.password.fill(password);
+		await controls.repeatPassword.fill(password);
 		await controls.button.click();
 
 		await expect(page).toHaveURL(
-			'/registration/thanks?email=test%40email.com&username=username'
+			`/registration/thanks?` +
+				new URLSearchParams({
+					email,
+					username,
+				})
 		);
 		await expect(page).toHaveTitle('Thanks for registration');
 		await expect(page.getByRole('link')).toBeVisible();
