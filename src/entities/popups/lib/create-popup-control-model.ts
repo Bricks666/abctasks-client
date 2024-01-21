@@ -1,35 +1,32 @@
-import { createEvent, createStore, sample } from 'effector';
+import { combine, createEvent, sample } from 'effector';
 
 import { popupsModel } from '../model';
 
-export const createPopupControlModel = (popup: string) => {
-	const $isOpen = createStore<boolean>(false);
+export const createPopupControlModel = (name: string) => {
+	const $isOpen = combine(popupsModel.$popups, (popups) =>
+		popups.includes(name)
+	);
 	const close = createEvent();
 	const opened = createEvent();
+	const open = createEvent();
+
+	sample({
+		clock: open,
+		fn: () => name,
+		target: popupsModel.open,
+	});
 
 	sample({
 		clock: close,
-		fn: () => popup,
+		fn: () => name,
 		target: popupsModel.close,
 	});
 
 	sample({
 		clock: popupsModel.$popups,
-		filter: (popups) => popups.includes(popup),
+		filter: (popups) => popups.includes(name),
 		target: opened,
 	});
 
-	sample({
-		clock: opened,
-		fn: () => true,
-		target: $isOpen,
-	});
-
-	sample({
-		clock: close,
-		fn: () => false,
-		target: $isOpen,
-	});
-
-	return { $isOpen, close, opened, };
+	return { $isOpen, close, opened, open, };
 };

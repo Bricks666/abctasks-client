@@ -26,10 +26,29 @@ export interface Login {
 	readonly user: User;
 }
 
+export interface RoomParams {
+	readonly id?: number;
+	readonly name?: string;
+	readonly description?: string;
+	readonly createdAt?: Date | null;
+	readonly updatedAt?: Date | null;
+	readonly ownerId?: number;
+}
+
+export interface Room {
+	readonly id: number;
+	readonly name: string;
+	readonly description: string;
+	readonly createdAt: Date | null;
+	readonly updatedAt: Date | null;
+	readonly ownerId: number;
+}
 export interface TestingApiFixture {
 	user(params?: UserParams): Promise<User>;
 	removeUser(params?: UserParams): Promise<boolean>;
 	login(params?: UserParams): Promise<Login>;
+	room(params?: RoomParams): Promise<Room>;
+	removeRoom(params?: RoomParams): Promise<boolean>;
 }
 
 const buildUrl = (endpoint: string): string => {
@@ -52,10 +71,9 @@ const request = async <T>(
 ): Promise<T> => {
 	const headers = { ...init.headers };
 
-	const response = await fetch(buildUrl(endpoint), {
+	const response = await ctx.request.fetch(buildUrl(endpoint), {
 		...init,
 		headers,
-		mode: 'cors',
 	});
 
 	return response.json().then((data) => data.data);
@@ -91,11 +109,23 @@ const login = async (
 	});
 };
 
-const removeUser = async (params: UserParams = {}): Promise<User> => {
-	const query = new URLSearchParams(params);
+const room = async (
+	ctx: BrowserContext,
+	data: RoomParams = {}
+): Promise<Room> => {
+	return request(ctx, '/room', {
+		method: 'POST',
+		data,
+	});
+};
 
-	return request('/user?' + query.toString(), {
+const removeRoom = async (
+	ctx: BrowserContext,
+	params: RoomParams = {}
+): Promise<boolean> => {
+	return request(ctx, '/room', {
 		method: 'DELETE',
+		params,
 	});
 };
 
@@ -108,5 +138,11 @@ export const test = base.extend<TestingApiFixture>({
 	},
 	login: async ({ context }, use) => {
 		await use(createRequest(context, login));
+	},
+	room: async ({ context }, use) => {
+		await use(createRequest(context, room));
+	},
+	removeRoom: async ({ context }, use) => {
+		await use(createRequest(context, removeRoom));
 	},
 });

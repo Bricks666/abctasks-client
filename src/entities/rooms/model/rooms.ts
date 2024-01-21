@@ -1,7 +1,8 @@
-import { cache, createQuery } from '@farfetched/core';
+import { cache, createQuery, keepFresh } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { querySync } from 'atomic-router';
 import { createDomain } from 'effector';
+import { interval } from 'patronum';
 import { Array } from 'runtypes';
 
 import { room, Room, roomsApi } from '@/shared/api';
@@ -34,4 +35,8 @@ querySync({
 	source: {
 		[getParams.roomId]: $id,
 	},
+});
+
+keepFresh(query, {
+	triggers: [interval({ timeout: 5000, })],
 });

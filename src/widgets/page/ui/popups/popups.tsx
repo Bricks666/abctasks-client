@@ -1,6 +1,7 @@
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 
-import { usePopups } from '@/entities/popups';
+import { popupsModel } from '@/entities/popups';
 
 import { BasePopupProps, CommonProps } from '@/shared/types';
 
@@ -10,7 +11,10 @@ export interface PopupsProps extends CommonProps {
 
 export const Popups: React.FC<PopupsProps> = (props) => {
 	const { popupMap, className, } = props;
-	const { mountedPopups, popups, } = usePopups();
+	const { mountedPopups, popups, } = useUnit({
+		mountedPopups: popupsModel.$mountedPopups,
+		popups: popupsModel.$popups,
+	});
 	return (
 		<>
 			{mountedPopups.map((popup) => {
