@@ -14,7 +14,6 @@ export const Popups: React.FC<PopupsProps> = (props) => {
 		mountedPopups: popupsModel.$mountedPopups,
 		popups: popupsModel.$popups,
 	});
-
 	return (
 		<>
 			{mountedPopups.map((popup) => {

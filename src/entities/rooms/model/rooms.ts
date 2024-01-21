@@ -1,6 +1,7 @@
-import { cache, createQuery } from '@farfetched/core';
+import { cache, createQuery, keepFresh } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
+import { interval } from 'patronum';
 import { Array } from 'runtypes';
 
 import { room, Room, roomsApi } from '@/shared/api';
@@ -25,3 +26,7 @@ export const query = createQuery<
 });
 
 cache(query);
+
+keepFresh(query, {
+	triggers: [interval({ timeout: 5000 })],
+});

@@ -62,6 +62,9 @@
 			"notifications": {
 				"success": "Room was created successfully",
 				"error": "Room was not created"
+			},
+			"actions": {
+				"open": "Open create room form"
 			}
 		}
 	}

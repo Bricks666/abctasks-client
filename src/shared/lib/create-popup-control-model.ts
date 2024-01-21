@@ -3,8 +3,8 @@ import { not } from 'patronum';
 
 import { popupsModel } from '@/shared/models';
 
-export const createPopupControlModel = (popup: string) => {
-	const $isOpen = createStore<boolean>(false);
+export const createPopupControlModel = (name: string) => {
+	const $isOpen = createStore(false);
 	const close = createEvent();
 	const opened = createEvent();
 	const open = createEvent();
@@ -12,19 +12,19 @@ export const createPopupControlModel = (popup: string) => {
 
 	sample({
 		clock: open,
-		fn: () => popup,
+		fn: () => name,
 		target: popupsModel.open,
 	});
 
 	sample({
 		clock: close,
-		fn: () => popup,
+		fn: () => name,
 		target: popupsModel.close,
 	});
 
 	sample({
 		clock: popupsModel.$popups,
-		fn: (popups) => popups.includes(popup),
+		fn: (popups) => popups.includes(name),
 		target: $isOpen,
 	});
 
@@ -40,5 +40,5 @@ export const createPopupControlModel = (popup: string) => {
 		target: closed,
 	});
 
-	return { $isOpen, close, opened, open, closed, };
+	return { $isOpen, close, opened, open, closed };
 };

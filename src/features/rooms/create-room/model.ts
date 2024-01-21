@@ -1,6 +1,6 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { createDomain, createEvent, sample } from 'effector';
 
 import { roomsModel } from '@/entities/rooms';
 
@@ -26,10 +26,11 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(room)),
 });
 
+export const openButtonClicked = createEvent();
 export const form = roomFormModel.create();
 
 export const popupControls = createPopupControlModel(popupsMap.createRoom);
-const { reset, formValidated, } = form;
+const { reset, formValidated } = form;
 
 sample({
 	clock: popupControls.closed,
@@ -50,7 +51,7 @@ sample({
 update(roomsModel.query, {
 	on: mutation,
 	by: {
-		success: ({ query, mutation, }) => {
+		success: ({ query, mutation }) => {
 			if (!query) {
 				return {
 					result: [],
@@ -84,7 +85,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: i18n.t('actions.create_room.notifications.error', { ns: 'rooms', }),
+		message: i18n.t('actions.create_room.notifications.error', { ns: 'rooms' }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,
