@@ -1,10 +1,26 @@
-import { expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { test } from './fixtures/testing-api';
 
-const email = 'testemail@gmail.com';
-const password = 'password';
+const getFormControls = (page: Page) => {
+	const email = page.getByLabel('Email');
+	const username = page.getByLabel('Username');
+	const password = page.getByLabel('Password');
+	const rememberMe = page.getByLabel('Remember me');
+	const button = page.getByRole('button', { name: 'Login' });
+
+	return {
+		email,
+		username,
+		password,
+		rememberMe,
+		button,
+	};
+};
 
 test.describe('login page', () => {
+	const email = 'testemail@gmail.com';
+	const password = 'password';
+
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/login');
 	});
@@ -16,19 +32,6 @@ test.describe('login page', () => {
 	test('has correct view', async ({ page }) => {
 		await expect(page).toHaveScreenshot();
 	});
-
-	/**
-	 * @todo move into integration tests
-	 */
-	// test('has login form', async ({ page }) => {
-	// 	const loginForm = page.locator('form');
-
-	// 	await expect(loginForm).toBeVisible();
-	// 	await expect(loginForm.getByLabel('Email')).toBeVisible();
-	// 	await expect(loginForm.getByLabel('Password')).toBeVisible();
-	// 	await expect(loginForm.getByLabel('Remember me')).toBeVisible();
-	// 	await expect(loginForm.getByText('Login')).toBeVisible();
-	// });
 
 	test('has link to registration page', async ({ page }) => {
 		const link = page.getByRole('link');
@@ -47,10 +50,13 @@ test.describe('login page', () => {
 		await removeUser({
 			email,
 		});
-		await page.getByLabel('Email').fill(email);
-		await page.getByLabel('Password').fill(password);
-		await page.getByLabel('Remember me').check();
-		await page.getByRole('button', { name: 'Login' }).click();
+
+		const controls = getFormControls(page);
+
+		await controls.email.fill(email);
+		await controls.password.fill(password);
+		await controls.rememberMe.check();
+		await controls.button.click();
 
 		const error = page.getByText('User was not found');
 
@@ -71,10 +77,13 @@ test.describe('login page', () => {
 			password,
 			activated: false,
 		});
-		await page.getByLabel('Email').fill(deactivated.email);
-		await page.getByLabel('Password').fill(password);
-		await page.getByLabel('Remember me').check();
-		await page.getByRole('button', { name: 'Login' }).click();
+
+		const controls = getFormControls(page);
+
+		await controls.email.fill(deactivated.email);
+		await controls.password.fill(password);
+		await controls.rememberMe.check();
+		await controls.button.click();
 
 		const error = page.getByText('User was not found');
 
@@ -93,35 +102,16 @@ test.describe('login page', () => {
 		const registeredUser = await user({
 			email,
 			password,
+			activated: true,
 		});
 
-		await page.getByLabel('Email').fill(registeredUser.email);
-		await page.getByLabel('Password').fill(password);
-		await page.getByLabel('Remember me').check();
-		await page.getByRole('button', { name: 'Login' }).click();
+		const controls = getFormControls(page);
+
+		await controls.email.fill(registeredUser.email);
+		await controls.password.fill(password);
+		await controls.rememberMe.check();
+		await controls.button.click();
 
 		await expect(page).toHaveURL('/rooms');
 	});
-
-	/**
-	 * @todo move into integration tests
-	 */
-	// test('toggle password visibility', async ({ page }) => {
-	// 	const password = password;
-	// 	const passwordFiledContainer = page
-	// 		.locator('div')
-	// 		.filter({ hasText: /^Password$/ });
-	// 	const passwordInput = passwordFiledContainer.getByLabel('Password');
-	// 	await passwordInput.fill(password);
-
-	// 	expect(await passwordInput.getAttribute('type')).toBe('password');
-
-	// 	await passwordFiledContainer.getByRole('button').click();
-
-	// 	expect(await passwordInput.getAttribute('type')).toBe('text');
-
-	// 	await passwordFiledContainer.getByRole('button').click();
-
-	// 	expect(await passwordInput.getAttribute('type')).toBe('password');
-	// });
 });
