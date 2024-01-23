@@ -1,0 +1,10 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(300px, 1fr));
+	gap: 1rem;
+
+	height: 100%;
+	width: 100%;
+
+	overflow-x: scroll;
+}

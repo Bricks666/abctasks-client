@@ -1,0 +1,10 @@
+.container {
+	justify-content: flex-start;
+	padding-top: 4em;
+}
+
+.text {
+	max-width: 400px;
+
+  text-align: center;
+}

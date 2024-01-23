@@ -1,0 +1,10 @@
+.wrapper {
+	display: grid;
+	gap: 1.5em;
+
+	padding: 0;
+}
+
+.pagination {
+	justify-self: center;
+}

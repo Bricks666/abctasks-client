@@ -1,0 +1,17 @@
+{
+	"title": "Activities",
+	"actions": {
+		"filter_activities": {
+			"title": "Activities filters",
+			"fields": {
+				"types": "Activities types",
+				"spheres": "Activities spheres",
+				"users": "Users"
+			},
+			"actions": {
+				"submit": "Apply",
+				"reset": "Reset"
+			}
+		}
+	}
+}

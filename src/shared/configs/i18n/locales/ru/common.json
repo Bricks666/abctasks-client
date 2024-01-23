@@ -1,0 +1,52 @@
+{
+	"loading": "Загрузка...",
+	"actions": {
+		"add": "Добавить",
+		"create": "Добавить",
+		"update": "Изменить",
+		"edit": "Изменить",
+		"save": "Сохранить",
+		"remove": "Удалить",
+		"exit": "Выйти",
+		"close": "Закрыть",
+		"cancel": "Отменить",
+		"open": "Открыть",
+		"retry": "Повторить"
+	},
+	"errors": {
+		"default": "Что-то пошло не так"
+	},
+	"navigation": {
+		"items": {
+			"rooms": "Комнаты"
+		},
+		"menu": {
+			"title": "Мои комнаты"
+		}
+	},
+	"fields": {
+		"create_after": "Создано после",
+		"create_before": "Создано до"
+	},
+	"languages": {
+		"ru": "Русский",
+		"en": "Английский",
+		"ru_short": "Рус",
+		"en_short": "Англ"
+	},
+	"color_schemes": {
+		"schemes": {
+			"dark": "Темная тема",
+			"system": "Системная тема",
+			"light": "Светлая тема"
+		},
+		"activated": "Выбрана $t(color_schemes.schemes.{{ scheme }})"
+	},
+	"profile_menu": {
+		"title": "Настройки профиля {{ username }}",
+		"items": {
+			"settings": "Настройки",
+			"logout": "Выйти"
+		}
+	}
+}

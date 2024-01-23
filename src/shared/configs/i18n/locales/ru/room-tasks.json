@@ -1,0 +1,24 @@
+{
+	"title": "Задачи",
+	"blocks": {
+		"tasks_progress": {
+			"title": "Прогресс задач",
+			"empty_text": "Здесь будут отображаться процесс решения задач",
+			"aria_label": "Прогресс решения задач с тэгом {{ tag_name }} - {{ done_count }} из {{ total_count }}"
+		},
+		"last_activities": {
+			"title": "Последние активности",
+			"actions": {
+				"open": "$t(common:actions.open) все активности"
+			}
+		},
+		"mobile_aside": {
+			"title": "Статистика"
+		}
+	},
+	"actions": {
+		"retry_progress": {
+			"text": "Прогресс не был загружен. Нажмите, чтобы повторить"
+		}
+	}
+}

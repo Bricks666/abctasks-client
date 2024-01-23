@@ -1,0 +1,22 @@
+.layout {
+	justify-items: center;
+}
+
+.form {
+	width: clamp(200px, 100%, 500px);
+}
+
+.title {
+	display: flex;
+	gap: 0;
+	flex-direction: column;
+	align-items: center;
+}
+
+.link {
+	text-align: center;
+}
+
+.question {
+	font-weight: 700;
+}

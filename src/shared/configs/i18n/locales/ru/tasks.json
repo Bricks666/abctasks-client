@@ -1,0 +1,65 @@
+{
+	"statuses": {
+		"ready": "В ожидании",
+		"in_progress": "В процессе",
+		"review": "Требуется ревью",
+		"done": "Выполнено"
+	},
+	"actions": {
+		"tasks_filters": {
+			"title": "Фильтры задач",
+			"fields": {
+				"tags": "Тэги",
+				"authors": "Авторы"
+			},
+			"actions": {
+				"submit": "Применить",
+				"reset": "Сбросить"
+			}
+		},
+		"create_task": {
+			"title": "$t(common:actions.create) задачу",
+			"actions": {
+				"open": "$t(common:actions.create) задачу"
+			},
+			"notifications": {
+				"success": "Задача была успешно создана",
+				"error": "Задача не была создана"
+			}
+		},
+		"update_task": {
+			"title": "$t(common:actions.update) задачу",
+			"actions": {
+				"open": "$t(common:actions.update) задачу"
+			},
+			"notifications": {
+				"success": "Задача была успешно изменена",
+				"error": "Задача не была изменена"
+			}
+		},
+		"remove_task": {
+			"name": "$t(common:actions.remove) задачу",
+			"title": "Вы уверены?",
+			"content": "Вы хотите $t(common:actions.remove) задачу?",
+			"actions": {
+				"agree": "$t(common:actions.remove)",
+				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Задача была успешно удалена",
+				"error": "Задача не была удалена"
+			}
+		},
+		"task_form": {
+			"fields": {
+				"title": "Название",
+				"tags": "Тэги",
+				"status": "Статус",
+				"description": "Описание"
+			}
+		},
+		"retry_tasks": {
+			"text": "Задачи не были загружены. Нажмите, чтобы повторить"
+		}
+	}
+}

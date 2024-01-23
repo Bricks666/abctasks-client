@@ -1,0 +1,13 @@
+.card {
+	cursor: pointer;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+}
+
+.drag {
+	opacity: 0.1;
+}

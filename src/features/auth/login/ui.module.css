@@ -1,0 +1,23 @@
+.form {
+	display: grid;
+	grid-template-columns: var(--login-form-template-columns);
+	gap: 1em;
+}
+
+.field {
+	grid-column: var(--login-form-field-column);
+}
+
+@media (width >= 700px) {
+	.form {
+		--login-form-template-columns: max-content 1fr;
+		--login-form-field-column: span 2;
+	}
+}
+
+@media (width < 700px) {
+	.form {
+		--login-form-template-columns: 1fr;
+		--login-form-field-column: 1;
+	}
+}

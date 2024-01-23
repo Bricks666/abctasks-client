@@ -1,0 +1,32 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+
+	font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans',
+		'Helvetica Neue', sans-serif;
+	color: #2e2e2e;
+}
+
+#root {
+	min-height: 100%;
+}
+
+.visibility-hidden {
+	display: inline-block;
+
+	position: absolute;
+	top: -99999px;
+	left: -9999px;
+
+	width: 1px;
+	height: 1px;
+
+	clip: rect(0, 0, 0, 0);
+
+	font-size: 1px;
+}

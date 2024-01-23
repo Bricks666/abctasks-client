@@ -1,0 +1,12 @@
+.wrapper {
+	display: grid;
+	gap: 1.5em;
+	grid-template-rows: max-content;
+
+	padding: 0;
+}
+
+.group {
+	display: grid;
+	gap: 0.5em;
+}

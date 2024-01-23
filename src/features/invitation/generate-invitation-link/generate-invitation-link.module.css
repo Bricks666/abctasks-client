@@ -1,0 +1,6 @@
+.container {
+	display: grid;
+	grid-template-columns: 1fr max-content;
+  align-items: center;
+	gap: 1em;
+}

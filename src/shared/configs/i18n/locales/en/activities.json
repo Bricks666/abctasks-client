@@ -1,0 +1,24 @@
+{
+	"card": {
+		"text": "User {{ activist }} has $t(type.{{ type }}) the $t(spheres.{{ sphere }})"
+	},
+	"list": {
+		"empty_text": "Here will be shown activities in room"
+	},
+	"spheres": {
+		"task": "task",
+		"tag": "tag",
+		"comment": "comment"
+	},
+	"type": {
+		"create": "created",
+		"update": "updated",
+		"remove": "removed",
+		"create_comment": "left"
+	},
+	"actions": {
+		"retry_actions": {
+			"text": "Activities were not loaded. Click to retry"
+		}
+	}
+}

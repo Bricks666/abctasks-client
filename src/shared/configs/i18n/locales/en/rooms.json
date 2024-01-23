@@ -1,0 +1,68 @@
+{
+	"title": "Rooms",
+	"rooms_list": {
+		"empty_text": "There are no room yet. Create it"
+	},
+	"card": {
+		"description": "Description"
+	},
+	"actions": {
+		"exit_room": {
+			"name": "$t(common:actions.exit) from room",
+			"title": "Are you sure?",
+			"content": "Do you want to exit from this room?",
+			"actions": {
+				"agree": "$t(common:actions.exit)",
+				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "You exited from user successfully",
+				"error": "You didn't exit from room"
+			}
+		},
+		"remove_room": {
+			"name": "$t(common:actions.remove) room",
+			"title": "Are you sure?",
+			"content": "Do you want to remove this room? All tasks and tags will be removed",
+			"actions": {
+				"agree": "$t(common:actions.remove)",
+				"disagree": "$t(common:actions.cancel)"
+			},
+			"notifications": {
+				"success": "Room was removed successfully",
+				"error": "Room was not removed"
+			}
+		},
+		"update_room": {
+			"name": "$t(common:actions.edit) room",
+			"title": "$t(common:actions.edit) room",
+			"notifications": {
+				"success": "Room was updated successfully",
+				"error": "Room was not updated"
+			}
+		},
+		"room_form": {
+			"fields": {
+				"name": "Name",
+				"description": "Description"
+			},
+			"errors": {
+				"name": {
+					"empty": "Name must be provided",
+					"min_length": "Name must contain at least {{ min_symbols_count }} letters",
+					"max_length": "Name must contain no more {{ max_symbols_count }} letters"
+				},
+				"description": {
+					"max_length": "Description must contain no more {{ max_symbols_count }} letters"
+				}
+			}
+		},
+		"create_room": {
+			"title": "$t(common:actions.create) room",
+			"notifications": {
+				"success": "Room was created successfully",
+				"error": "Room was not created"
+			}
+		}
+	}
+}
