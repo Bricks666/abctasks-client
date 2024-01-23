@@ -1,13 +1,26 @@
 FROM node:lts-alpine as build
+
 WORKDIR /app
-COPY package.json /app/package.json
-RUN npm i --ignore-scripts
-COPY . /app
-ARG API_HOST
-ENV VITE_API_HOST=$API_HOST
+
+COPY package*.json /app/
+RUN npm ci --ignore-scripts
+
+COPY . /app/
+
 RUN npm run build
+
 FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY --from=build /app/nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+WORKDIR /app
+
+COPY --from=build /app/dist/ /usr/share/nginx/html
+COPY ./deploy/nginx/ /etc/nginx/
+
+EXPOSE 80 443
+
+ENV SERVER_NAME="localhost"
+
+ENV API_PROXY_PASS=""
+ENV DOCS_PROXY_PASS=""
+
+CMD [ "nginx", "-g", "daemon off;" ]
