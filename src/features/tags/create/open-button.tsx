@@ -12,9 +12,9 @@ export interface OpenCreateTagFormProps extends CommonProps {}
 
 export const OpenCreateTagForm: React.FC<OpenCreateTagFormProps> = React.memo(
 	(props) => {
-		const { className, } = props;
+		const { className } = props;
 		const onClick = useUnit(popupControls.open);
-		const { t, } = useTranslation('room-tags');
+		const { t } = useTranslation('room-tags');
 
 		const title = t('actions.create_tag.actions.open');
 
