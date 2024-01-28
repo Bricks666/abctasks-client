@@ -2,19 +2,17 @@ import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createEffect, sample } from 'effector';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { tagsModel } from '@/entities/tags';
 
 import { CreateTagParams, tag, Tag, tagsApi } from '@/shared/api';
 import { i18n, popupsMap, routes } from '@/shared/configs';
+import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 import { tagFormModel } from '../form';
 
-export const { close, $isOpen, open, } = createPopupControlModel(
-	popupsMap.createTag
-);
+export const popupControls = createPopupControlModel(popupsMap.createTag);
 
 export const form = tagFormModel.create();
 
@@ -34,18 +32,17 @@ export const mutation = createMutation<
 
 sample({
 	clock: mutation.finished.success,
-	target: close,
+	target: popupControls.close,
 });
 
 sample({
-	clock: close,
+	clock: popupControls.closed,
 	target: reset,
 });
 
 sample({
 	clock: formValidated,
 	source: routes.room.tags.$params,
-	filter: $isOpen,
 	fn: (params, values) => ({ ...values, roomId: params.id, }),
 	target: mutation.start,
 });

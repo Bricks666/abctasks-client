@@ -1,13 +1,13 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
-import { and } from 'patronum';
+import { createDomain, createEvent, sample } from 'effector';
+import { and, not } from 'patronum';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { roomModel, roomsModel } from '@/entities/rooms';
 
 import { UpdateRoomParams, Room, roomsApi, room } from '@/shared/api';
-import { i18n, popupsMap } from '@/shared/configs';
+import { getParams, i18n, popupsMap } from '@/shared/configs';
+import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -32,30 +32,42 @@ export const mutation = createMutation<
 });
 
 export const form = roomFormModel.create();
-
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.updateRoom);
+export const popupControls = createPopupControlModel(popupsMap.updateRoom);
+export const roomId = createQueryModel<number | null>({
+	name: getParams.roomId,
+	defaultValue: null,
+});
+export const openPopup = createEvent<number>();
 
 const { formValidated, reset, setInitialForm, } = form;
 
 sample({
-	clock: close,
-	target: roomsModel.$id.reinit!,
+	clock: openPopup,
+	target: [popupControls.open, roomId.set],
 });
 
 sample({
-	clock: close,
-	target: reset,
+	clock: popupControls.opened,
+	source: roomId.$value,
+	filter: Boolean,
+	fn: (id) => ({ roomId: id, }),
+	target: roomModel.query.start,
+});
+
+sample({
+	clock: popupControls.closed,
+	target: [roomId.reset, reset, roomModel.query.reset],
 });
 
 sample({
 	clock: mutation.finished.success,
-	target: close,
+	target: popupControls.close,
 });
 
 sample({
 	clock: formValidated,
-	source: roomsModel.$id,
-	filter: and($isOpen, roomsModel.$id),
+	source: roomId.$value,
+	filter: and(popupControls.$isOpen, not(roomId.$isEmpty)),
 	fn: (roomId, values) => {
 		return { ...values, roomId: Number(roomId), };
 	},

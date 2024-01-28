@@ -3,17 +3,15 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { tagsModel, useTag } from '@/entities/tags';
+import { tagModel } from '@/entities/tags';
 
-import { routes } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
 import { deviceInfoModel } from '@/shared/models';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
 import { SkeletonTagForm, TagForm } from '../form';
 
-import { close, form, mutation } from './model';
+import { popupControls, form, mutation } from './model';
 import styles from './ui.module.css';
 
 export interface UpdateTagProps extends CommonProps, BasePopupProps {}
@@ -22,12 +20,10 @@ export const UpdateTag: React.FC<React.PropsWithChildren<UpdateTagProps>> = (
 	props
 ) => {
 	const { t, } = useTranslation('room-tags');
-	const roomId = useParam(routes.room.tags, 'id');
-	const id = useUnit(tagsModel.$id);
-	const onClose = useUnit(close);
+	const onClose = useUnit(popupControls.close);
 	const pending = useUnit(mutation.$pending);
 	const onClick = useUnit(form.submit);
-	const tag = useTag(Number(id), roomId);
+	const tag = useUnit(tagModel.query);
 	const isLoading = !tag.data;
 
 	const [isMobile, isVertical] = useUnit([

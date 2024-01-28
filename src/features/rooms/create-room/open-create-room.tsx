@@ -5,14 +5,14 @@ import * as React from 'react';
 
 import { CommonProps } from '@/shared/types';
 
-import { open } from './model';
+import { popupControls } from './model';
 
 export interface OpenCreateRoomProps extends CommonProps {}
 
 export const OpenCreateRoom: React.FC<OpenCreateRoomProps> = (props) => {
 	const { className, } = props;
 
-	const onClick = useUnit(open);
+	const onClick = useUnit(popupControls.open);
 
 	return (
 		<IconButton className={className} onClick={onClick}>

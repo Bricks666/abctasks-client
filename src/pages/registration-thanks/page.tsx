@@ -11,14 +11,15 @@ import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { PageTitle } from '@/shared/ui';
 
-import { $email, $username } from './model';
+import { emailQuery, usernameQuery } from './model';
 import styles from './page.module.css';
 
 const RegistrationThanksPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('thanks');
 
-	const [username, email] = useUnit([$username, $email]);
+	const { value: username, } = useUnit(usernameQuery);
+	const { value: email, } = useUnit(emailQuery);
 
 	const title = t('title');
 	const titleLong = t('title', { context: 'long', username, });
