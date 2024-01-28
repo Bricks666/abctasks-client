@@ -11,8 +11,9 @@ import { CommonProps } from '@/shared/types';
 export const OpenAllRoomActivities: React.FC<CommonProps> = React.memo(
 	(props) => {
 		const { className, } = props;
-		const roomId = useParam(routes.room.tasks, 'id');
 		const { t, } = useTranslation('room-tasks');
+
+		const roomId = useParam(routes.room.tasks, 'id');
 
 		const text = t('blocks.last_activities.actions.open');
 

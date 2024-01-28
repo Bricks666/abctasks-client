@@ -11,10 +11,10 @@ import { popupControls } from './model';
 export interface OpenCreateRoomProps extends CommonProps {}
 
 export const OpenCreateRoom: React.FC<OpenCreateRoomProps> = (props) => {
-	const { className, } = props;
+	const { className } = props;
 
 	const onClick = useUnit(popupControls.open);
-	const { t, } = useTranslation('rooms');
+	const { t } = useTranslation('rooms');
 
 	const label = t('actions.create_room.actions.open');
 

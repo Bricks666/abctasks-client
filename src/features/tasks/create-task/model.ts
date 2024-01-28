@@ -9,7 +9,7 @@ import {
 	Task,
 	tasksApi,
 	task,
-	TaskStatus
+	TaskStatus,
 } from '@/shared/api';
 import { getParams, i18n, popupsMap, routes } from '@/shared/configs';
 import { createPopupControlModel, createQueryModel } from '@/shared/lib';
@@ -48,7 +48,7 @@ export const status = createQueryModel<TaskStatus | null>({
 });
 export const openPopup = createEvent<TaskStatus>();
 
-const { reset, formValidated, } = form;
+const { reset, formValidated } = form;
 
 sample({
 	clock: openPopup,
@@ -83,7 +83,7 @@ sample({
 sample({
 	clock: formValidated,
 	source: routes.room.tasks.$params,
-	fn: ({ id, }, values) => ({ roomId: id, ...values, }),
+	fn: ({ id }, values) => ({ roomId: id, ...values }),
 	target: mutation.start,
 });
 
@@ -91,14 +91,14 @@ sample({
 	clock: popupControls.opened,
 	source: status.$value,
 	filter: Boolean,
-	fn: (status) => ({ status, }),
+	fn: (status) => ({ status }),
 	target: form.setInitialForm,
 });
 
 update(tasksInRoomModel.query, {
 	on: mutation,
 	by: {
-		success: ({ query, mutation, }) => {
+		success: ({ query, mutation }) => {
 			if (!query) {
 				return {
 					result: [],
@@ -132,7 +132,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: i18n.t('actions.create_task.notifications.error', { ns: 'tasks', }),
+		message: i18n.t('actions.create_task.notifications.error', { ns: 'tasks' }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,
