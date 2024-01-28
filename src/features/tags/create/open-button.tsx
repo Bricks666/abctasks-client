@@ -6,14 +6,14 @@ import { useTranslation } from 'react-i18next';
 
 import { CommonProps } from '@/shared/types';
 
-import { open } from './model';
+import { popupControls } from './model';
 
 export interface OpenCreateTagFormProps extends CommonProps {}
 
 export const OpenCreateTagForm: React.FC<OpenCreateTagFormProps> = React.memo(
 	(props) => {
 		const { className, } = props;
-		const onClick = useUnit(open);
+		const onClick = useUnit(popupControls.open);
 		const { t, } = useTranslation('room-tags');
 
 		const title = t('actions.create_tag.actions.open');

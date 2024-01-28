@@ -6,7 +6,12 @@ import { controls, getParams } from '@/shared/configs';
 
 const popupsDomain = createDomain();
 
-export const $popups = popupsDomain.createStore<string[]>([]);
+const parsePopups = (raw: string): string[] => {
+	return raw.split(',');
+};
+
+const $rawPopups = popupsDomain.createStore<string>('');
+export const $popups = $rawPopups.map(parsePopups);
 export const $mountedPopups = debounce({
 	source: $popups,
 	timeout: 250,
@@ -19,7 +24,7 @@ export const close = popupsDomain.event<string>();
 querySync({
 	controls,
 	source: {
-		[getParams.popup]: $popups,
+		[getParams.popup]: $rawPopups,
 	},
 });
 

@@ -2,7 +2,6 @@ export * from './usePageTitle';
 export * from './useToggle';
 export * from './useParam';
 export * from './data-extractor';
-export * from './useQueryParam';
 export * from './create-rule-from-schema';
 export * from './string-to-color';
 export * from './use-prevent-default';

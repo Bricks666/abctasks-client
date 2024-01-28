@@ -1,11 +1,20 @@
-import { querySync } from 'atomic-router';
-import { Event, Store, createEvent, createStore, sample } from 'effector';
+import { RouteInstance, querySync } from 'atomic-router';
+import {
+	Effect,
+	Event,
+	Store,
+	createEvent,
+	createStore,
+	sample
+} from 'effector';
 
 import { controls } from '@/shared/configs';
 
 export interface CreateQueryModelParams<T> {
 	readonly name: string;
 	readonly defaultValue: T;
+	readonly route?: RouteInstance<any>;
+	readonly clock?: Event<any> | Effect<any, any>;
 }
 
 export interface QueryModel<T> {
@@ -13,12 +22,14 @@ export interface QueryModel<T> {
 	readonly $isEmpty: Store<boolean>;
 	readonly reset: Event<void>;
 	readonly set: Event<T>;
+
+	'@@unitShape': () => { value: Store<T>; set: Event<T> };
 }
 
 export const createQueryModel = <T>(
 	params: CreateQueryModelParams<T>
 ): QueryModel<T> => {
-	const { name, defaultValue, } = params;
+	const { name, defaultValue, clock, route, } = params;
 
 	const $value = createStore<T>(defaultValue);
 	const $isEmpty = $value.map((value) => value === defaultValue);
@@ -27,6 +38,8 @@ export const createQueryModel = <T>(
 
 	querySync({
 		controls,
+		clock,
+		route,
 		source: {
 			[name]: $value,
 		},
@@ -47,5 +60,12 @@ export const createQueryModel = <T>(
 		$isEmpty,
 		set,
 		reset,
+
+		'@@unitShape': () => {
+			return {
+				set,
+				value: $value,
+			};
+		},
 	};
 };

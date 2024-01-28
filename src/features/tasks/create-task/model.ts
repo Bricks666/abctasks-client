@@ -1,9 +1,7 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { querySync } from 'atomic-router';
-import { createDomain, createEvent, createStore, sample } from 'effector';
+import { createDomain, createEvent, sample } from 'effector';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { tasksInRoomModel } from '@/entities/tasks';
 
 import {
@@ -13,7 +11,8 @@ import {
 	task,
 	TaskStatus
 } from '@/shared/api';
-import { controls, getParams, i18n, popupsMap, routes } from '@/shared/configs';
+import { getParams, i18n, popupsMap, routes } from '@/shared/configs';
+import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -41,17 +40,13 @@ export const form = taskFormModel.create();
 
 export const popupControls = createPopupControlModel(popupsMap.createTask);
 
-export const $status = createStore<TaskStatus | null>(null);
+export const status = createQueryModel<TaskStatus | null>({
+	name: getParams.taskStatus,
+	defaultValue: null,
+});
 export const openPopup = createEvent<TaskStatus>();
 
 const { reset, formValidated, } = form;
-
-querySync({
-	controls,
-	source: {
-		[getParams.taskStatus]: $status,
-	},
-});
 
 sample({
 	clock: openPopup,
@@ -60,17 +55,17 @@ sample({
 
 sample({
 	clock: openPopup,
-	target: $status,
+	target: status.set,
 });
 
 sample({
 	clock: popupControls.closed,
-	target: $status.reinit!,
+	target: status.reset,
 });
 
 sample({
 	clock: popupControls.closed,
-	target: tasksInRoomModel.$status.reinit!,
+	target: status.reset,
 });
 
 sample({
@@ -92,7 +87,7 @@ sample({
 
 sample({
 	clock: popupControls.opened,
-	source: tasksInRoomModel.$status,
+	source: status.$value,
 	filter: Boolean,
 	fn: (status) => ({ status, }),
 	target: form.setInitialForm,

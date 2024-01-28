@@ -1,5 +1,5 @@
 import { querySync } from 'atomic-router';
-import { createStore, createEvent, sample } from 'effector';
+import { createEvent, sample } from 'effector';
 
 import { activitiesFiltersModel } from '@/features/activities';
 
@@ -8,11 +8,12 @@ import {
 	activityActionsModel,
 	activitySpheresModel
 } from '@/entities/activities';
-import { roomsModel } from '@/entities/rooms';
+import { roomModel, roomsModel } from '@/entities/rooms';
 import { usersInRoomModel } from '@/entities/users';
 
 import { GetActivitiesInRoomParams } from '@/shared/api';
 import { controls, getParams, routes } from '@/shared/configs';
+import { createQueryModel } from '@/shared/lib';
 import { sessionModel } from '@/shared/models';
 
 export const currentRoute = routes.room.activities;
@@ -20,8 +21,13 @@ export const authorizedRoute = sessionModel.chainAuthorized(currentRoute, {
 	otherwise: routes.login.open,
 });
 
-const $page = createStore<null | string>(null);
-export const pageChanged = createEvent<null | number>();
+const $roomId = authorizedRoute.$params.map((params) => params.id);
+
+export const page = createQueryModel<string | null>({
+	name: getParams.page,
+	defaultValue: null,
+	route: authorizedRoute,
+});
 
 const { fields, formValidated, reset, $values, } = activitiesFiltersModel.form;
 
@@ -45,27 +51,20 @@ sample({
 });
 
 sample({
-	clock: pageChanged,
-	fn: (page) => page as string | null,
-	target: $page,
-});
-
-sample({
 	clock: formApplied,
-	fn: () => null,
-	target: $page,
+	target: page.reset,
 });
 
 sample({
-	clock: [formApplied, pageChanged],
+	clock: [formApplied, page.$value],
 	source: {
-		params: authorizedRoute.$params,
-		page: $page,
+		roomId: $roomId,
+		page: page.$value,
 		values: $values,
 	},
-	fn: ({ params, values, page, }): GetActivitiesInRoomParams => {
+	fn: ({ roomId, values, page, }): GetActivitiesInRoomParams => {
 		return {
-			roomId: params.id,
+			roomId,
 			...sorting,
 			...values,
 			page: page ? Number(page) : 1,
@@ -87,7 +86,7 @@ sample({
 		page: query[getParams.page],
 		...sorting,
 	}),
-	target: queries.map((query) => query.start),
+	target: queries.map((query) => query.start).concat(roomModel.query.start),
 });
 
 sample({
@@ -98,14 +97,6 @@ sample({
 sample({
 	clock: authorizedRoute.closed,
 	target: queries.map((query) => query.reset),
-});
-
-querySync({
-	controls,
-	source: {
-		[getParams.page]: $page,
-	},
-	route: authorizedRoute,
 });
 
 querySync({

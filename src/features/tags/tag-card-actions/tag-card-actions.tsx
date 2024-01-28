@@ -16,6 +16,10 @@ export interface TagCardActionsProps extends CommonProps {
 	readonly tagId: number;
 }
 
+/**
+ * @todo
+ * Split on components
+ */
 export const TagCardActions: React.FC<TagCardActionsProps> = (props) => {
 	const { tagId, className, } = props;
 	const { t, } = useTranslation('room-tags');

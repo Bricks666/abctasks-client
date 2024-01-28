@@ -53,7 +53,6 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 		<section className={cn(styles.wrapper, className)}>
 			{columns.map(({ status, tasks, hasActions, }) => (
 				<TaskColumn
-					roomId={roomId}
 					tasks={tasks}
 					isLoading={isLoading}
 					columnStatus={status}

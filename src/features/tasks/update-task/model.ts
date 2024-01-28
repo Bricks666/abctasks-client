@@ -3,12 +3,11 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { combine, createDomain, createEvent, sample } from 'effector';
 import { not } from 'patronum';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 
 import { UpdateTaskParams, Task, tasksApi, task } from '@/shared/api';
 import { getParams, i18n, popupsMap, routes } from '@/shared/configs';
-import { createQueryModel } from '@/shared/lib';
+import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 

@@ -18,7 +18,6 @@ import styles from './task-column.module.css';
 
 export interface TaskColumnProps extends CommonProps {
 	readonly tasks: Task[];
-	readonly roomId: number;
 	readonly isLoading: boolean;
 	readonly columnStatus: TaskStatus;
 	readonly hasActions?: boolean;
@@ -28,15 +27,8 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 	evt.preventDefault();
 
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
-	const {
-		tasks,
-		className,
-		columnStatus,
-		hasActions,
-		header,
-		isLoading,
-		roomId,
-	} = props;
+	const { tasks, className, columnStatus, hasActions, header, isLoading, } =
+		props;
 	const onDrop = useUnit(dragTaskModel.drop);
 
 	let items: React.ReactElement[];
@@ -50,7 +42,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	}
 
 	const headerActions = hasActions ? (
-		<OpenCreateTaskButton roomId={roomId} columnStatus={columnStatus} />
+		<OpenCreateTaskButton columnStatus={columnStatus} />
 	) : null;
 
 	return (
