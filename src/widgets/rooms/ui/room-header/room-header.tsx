@@ -13,8 +13,8 @@ import { Tabs } from '../tabs';
 import styles from './room-header.module.css';
 
 export const RoomHeader: React.FC<CommonProps> = (props) => {
-	const { className, } = props;
-	const { data: room, pending, } = useUnit(roomModel.query);
+	const { className } = props;
+	const { data: room, pending } = useUnit(roomModel.query);
 
 	const firstLoading = !room && pending;
 
