@@ -1,14 +1,12 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, createEvent, sample } from 'effector';
-import { not } from 'patronum';
+import { createDomain, sample } from 'effector';
 import { Literal } from 'runtypes';
 
 import { tagsModel } from '@/entities/tags';
 
 import { RemoveTagParams, tagsApi } from '@/shared/api';
-import { getParams, i18n, popupsMap } from '@/shared/configs';
-import { createPopupControlModel, createQueryModel } from '@/shared/lib';
+import { i18n } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -28,29 +26,6 @@ export const mutation = createMutation<
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Literal(true))),
-});
-
-const { open, $isOpen, } = createPopupControlModel(popupsMap.updateTag);
-export const tagId = createQueryModel<number | null>({
-	name: getParams.tagId,
-	defaultValue: null,
-});
-export const openPopup = createEvent<number>();
-
-sample({
-	clock: openPopup,
-	target: open,
-});
-
-sample({
-	clock: openPopup,
-	target: tagId.set,
-});
-
-sample({
-	clock: not($isOpen),
-	filter: Boolean,
-	target: tagId.reset!,
 });
 
 update(tagsModel.query, {

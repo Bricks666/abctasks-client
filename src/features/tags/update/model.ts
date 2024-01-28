@@ -1,6 +1,6 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createEffect, sample } from 'effector';
+import { createEffect, createEvent, sample } from 'effector';
 import { and, not } from 'patronum';
 
 import { tagsModel, tagModel } from '@/entities/tags';
@@ -31,6 +31,13 @@ export const form = tagFormModel.create();
 export const tagId = createQueryModel<number | null>({
 	name: getParams.tagId,
 	defaultValue: null,
+});
+
+export const openPopup = createEvent<number>();
+
+sample({
+	clock: openPopup,
+	target: [popupControls.open, tagId.set],
 });
 
 const { fields, setForm, reset, formValidated, } = form;
