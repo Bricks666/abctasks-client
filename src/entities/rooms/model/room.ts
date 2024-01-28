@@ -7,7 +7,7 @@ import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
-	InRoomParams
+	InRoomParams,
 } from '@/shared/types';
 
 const roomDomain = createDomain();
