@@ -1,15 +1,14 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { querySync } from 'atomic-router';
-import { createDomain, createEvent, createStore, sample } from 'effector';
+import { createDomain, createEvent, sample } from 'effector';
 import { not } from 'patronum';
 import { Literal } from 'runtypes';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { tagsModel } from '@/entities/tags';
 
 import { RemoveTagParams, tagsApi } from '@/shared/api';
-import { controls, getParams, i18n, popupsMap } from '@/shared/configs';
+import { getParams, i18n, popupsMap } from '@/shared/configs';
+import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -32,7 +31,10 @@ export const mutation = createMutation<
 });
 
 const { open, $isOpen, } = createPopupControlModel(popupsMap.updateTag);
-export const $tagId = createStore<number | null>(null);
+export const tagId = createQueryModel<number | null>({
+	name: getParams.tagId,
+	defaultValue: null,
+});
 export const openPopup = createEvent<number>();
 
 sample({
@@ -42,20 +44,13 @@ sample({
 
 sample({
 	clock: openPopup,
-	target: $tagId,
+	target: tagId.set,
 });
 
 sample({
 	clock: not($isOpen),
 	filter: Boolean,
-	target: $tagId.reinit!,
-});
-
-querySync({
-	controls,
-	source: {
-		[getParams.tagId]: $tagId,
-	},
+	target: tagId.reset!,
 });
 
 update(tagsModel.query, {
