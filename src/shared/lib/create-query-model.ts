@@ -43,6 +43,10 @@ export const createQueryModel = <T>(
 		source: {
 			[name]: $value,
 		},
+		cleanup: {
+			irrelevant: false,
+			empty: true,
+		},
 	});
 
 	sample({

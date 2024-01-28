@@ -13,12 +13,11 @@ import { CommonProps } from '@/shared/types';
 import { SectionHeader, Show } from '@/shared/ui';
 
 import styles from './page.module.css';
-import { Tasks, Aside, MobileAside, TaskPopup } from './ui';
+import { Tasks, Aside, MobileAside } from './ui';
 
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createTask]: CreateTask,
 	[popupsMap.updateTask]: UpdateTask,
-	[popupsMap.task]: TaskPopup,
 };
 
 const TasksPage: React.FC<CommonProps> = (props) => {

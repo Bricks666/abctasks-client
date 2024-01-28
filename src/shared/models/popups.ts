@@ -30,18 +30,18 @@ querySync({
 
 sample({
 	clock: open,
-	source: $popups,
+	source: $rawPopups,
 	fn: (popups, popup) => {
-		return popups.concat(popup);
+		return popups ? [popups, popup].join(',') : popup;
 	},
-	target: $popups,
+	target: $rawPopups,
 });
 
 sample({
 	clock: close,
-	source: $popups,
+	source: $rawPopups,
 	fn: (popups, popup) => {
-		return popups.filter((name) => popup !== name);
+		return popups.replaceAll(popup, '');
 	},
-	target: $popups,
+	target: $rawPopups,
 });
