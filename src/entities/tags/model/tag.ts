@@ -1,7 +1,6 @@
 import { createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
-import { createGate } from 'effector-react';
+import { createDomain } from 'effector';
 
 import { GetTagParams, Tag, tag, tagsApi } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
@@ -9,9 +8,7 @@ import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 const tagDomain = createDomain();
 
-const handlerFx = tagDomain.effect<GetTagParams, StandardResponse<Tag>, Error>(
-	tagsApi.getOne
-);
+const handlerFx = tagDomain.effect(tagsApi.getOne);
 
 export const query = createQuery<
 	GetTagParams,
@@ -23,16 +20,4 @@ export const query = createQuery<
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(tag)),
 	mapData: dataExtractor,
-});
-
-export const Gate = createGate<GetTagParams>();
-
-sample({
-	clock: Gate.open,
-	target: query.start,
-});
-
-sample({
-	clock: Gate.close,
-	target: query.reset,
 });

@@ -1,13 +1,13 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { combine, createDomain, sample } from 'effector';
-import { empty, not } from 'patronum';
+import { combine, createDomain, createEvent, sample } from 'effector';
+import { not } from 'patronum';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 
 import { UpdateTaskParams, Task, tasksApi, task } from '@/shared/api';
-import { i18n, popupsMap, routes } from '@/shared/configs';
+import { getParams, i18n, popupsMap, routes } from '@/shared/configs';
+import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -27,12 +27,15 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(task)),
 });
 
-export const { close, $isOpen, opened, } = createPopupControlModel(
-	popupsMap.updateTask
-);
+export const popupControls = createPopupControlModel(popupsMap.updateTask);
+export const taskId = createQueryModel<number | null>({
+	name: getParams.taskId,
+	defaultValue: null,
+});
+export const openPopup = createEvent<number>();
 
 const $routeParams = combine(
-	tasksInRoomModel.$id,
+	taskId.$value,
 	routes.room.tasks.$params,
 	(id, params) => ({ id: Number(id), roomId: params.id, })
 );
@@ -42,17 +45,32 @@ export const form = taskFormModel.create();
 const { formValidated, setInitialForm, reset, } = form;
 
 sample({
-	clock: close,
-	target: [tasksInRoomModel.$id.reinit!, reset],
+	clock: openPopup,
+	target: popupControls.open,
+});
+
+sample({
+	clock: openPopup,
+	target: taskId.set,
+});
+
+sample({
+	clock: popupControls.closed,
+	target: taskId.reset,
+});
+
+sample({
+	clock: popupControls.close,
+	target: [taskId.reset!, reset],
 });
 
 sample({
 	clock: mutation.finished.success,
-	target: close,
+	target: popupControls.close,
 });
 
 sample({
-	clock: opened,
+	clock: popupControls.opened,
 	source: $routeParams,
 	target: taskModel.query.start,
 });
@@ -60,7 +78,7 @@ sample({
 sample({
 	clock: formValidated,
 	source: $routeParams,
-	filter: not(empty(tasksInRoomModel.$id)),
+	filter: not(taskId.$isEmpty),
 	fn: (routeParams, values) => {
 		return { ...values, ...routeParams, };
 	},

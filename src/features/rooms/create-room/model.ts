@@ -2,11 +2,11 @@ import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain, sample } from 'effector';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { roomsModel } from '@/entities/rooms';
 
 import { CreateRoomParams, room, Room, roomsApi } from '@/shared/api';
 import { i18n, popupsMap } from '@/shared/configs';
+import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
@@ -28,22 +28,22 @@ export const mutation = createMutation<
 
 export const form = roomFormModel.create();
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.createRoom);
+export const popupControls = createPopupControlModel(popupsMap.createRoom);
 const { reset, formValidated, } = form;
 
 sample({
-	clock: close,
+	clock: popupControls.closed,
 	target: reset,
 });
 
 sample({
 	clock: mutation.finished.success,
-	target: close,
+	target: popupControls.close,
 });
 
 sample({
 	clock: formValidated,
-	filter: $isOpen,
+	filter: popupControls.$isOpen,
 	target: mutation.start,
 });
 

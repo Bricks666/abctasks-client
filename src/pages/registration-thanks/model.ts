@@ -1,8 +1,7 @@
-import { querySync } from 'atomic-router';
-import { createStore, sample } from 'effector';
+import { sample } from 'effector';
 
-import { controls, routes } from '@/shared/configs';
-import { chainInternalRoute } from '@/shared/lib';
+import { routes } from '@/shared/configs';
+import { chainInternalRoute, createQueryModel } from '@/shared/lib';
 import { internalRoutingModel, sessionModel } from '@/shared/models';
 
 export const currentRoute = routes.registration.thanks;
@@ -14,21 +13,18 @@ export const hiddenRoute = chainInternalRoute(anonymousRoute, {
 	isInternal: internalRoutingModel.$internalRoute.$flag,
 });
 
-export const $username = createStore('');
-export const $email = createStore('');
-
-/**
- * @todo Add guard for redirect from this route if user was not redirected from registration page
- */
-
-querySync({
-	source: {
-		email: $email,
-		username: $username,
-	},
+export const usernameQuery = createQueryModel({
+	name: 'username',
+	defaultValue: '',
 	route: hiddenRoute,
 	clock: hiddenRoute.opened,
-	controls,
+});
+
+export const emailQuery = createQueryModel({
+	name: 'email',
+	defaultValue: '',
+	route: hiddenRoute,
+	clock: hiddenRoute.opened,
 });
 
 sample({

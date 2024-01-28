@@ -5,3 +5,4 @@ export * from './device-info';
 export * as i18nModel from './i18next';
 export * as colorSchemeModel from './scheme';
 export * as internalRoutingModel from './internal-routing';
+export * as popupsModel from './popups';

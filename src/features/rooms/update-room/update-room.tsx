@@ -3,7 +3,7 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { roomsModel, useRoom } from '@/entities/rooms';
+import { roomModel } from '@/entities/rooms';
 
 import { deviceInfoModel } from '@/shared/models';
 import { BasePopupProps } from '@/shared/types';
@@ -11,14 +11,13 @@ import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
 import { SkeletonRoomForm, RoomForm } from '../form';
 
-import { close, mutation, form } from './model';
+import { popupControls, mutation, form } from './model';
 import styles from './update-room.module.css';
 
 export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 	const { t, } = useTranslation('rooms');
-	const roomId = useUnit(roomsModel.$id);
-	const { pending: loading, } = useRoom(roomId!);
-	const onClose = useUnit(close);
+	const { pending: loading, } = useUnit(roomModel.query);
+	const onClose = useUnit(popupControls.close);
 	const [isMobile, isVertical] = useUnit([
 		deviceInfoModel.$isMobile,
 		deviceInfoModel.$isTabletVertical

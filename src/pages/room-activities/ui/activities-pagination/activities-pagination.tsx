@@ -4,11 +4,9 @@ import * as React from 'react';
 
 import { activitiesInRoomModel } from '@/entities/activities';
 
-import { getParams } from '@/shared/configs';
-import { useQueryParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
-import { pageChanged } from '../../model';
+import { page } from '../../model';
 
 export interface ActivitiesPaginationProps extends CommonProps {}
 
@@ -17,22 +15,21 @@ export const ActivitiesPagination: React.FC<ActivitiesPaginationProps> = (
 ) => {
 	const { className, } = props;
 
-	const onPageChanged = useUnit(pageChanged);
+	const pageQuery = useUnit(page);
 	const hasItems = useUnit(activitiesInRoomModel.$hasItems);
 	const pageCount = useUnit(activitiesInRoomModel.$pageCount);
-	const page = parseInt(useQueryParam(getParams.page, '1'), 10);
 
 	return hasItems ? (
 		<Pagination
 			className={className}
 			count={pageCount}
-			page={page}
+			page={pageQuery.value as any}
 			onChange={(_, page) => {
 				window.scrollTo({
 					left: 0,
 					top: 0,
 				});
-				onPageChanged(page);
+				pageQuery.set(page as any);
 			}}
 			color='primary'
 			size='large'

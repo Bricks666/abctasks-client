@@ -10,13 +10,13 @@ import { FullWidthPopup, MainPopup } from '@/shared/ui';
 import { TaskForm } from '../form';
 
 import styles from './create-task.module.css';
-import { close, form, mutation } from './model';
+import { popupControls, form, mutation } from './model';
 
 export interface CreateTaskProps extends CommonProps, BasePopupProps {}
 
 export const CreateTask: React.FC<CreateTaskProps> = (props) => {
 	const { t, } = useTranslation('tasks');
-	const onClose = useUnit(close);
+	const onClose = useUnit(popupControls.close);
 	const [isMobile, isVertical] = useUnit([
 		deviceInfoModel.$isMobile,
 		deviceInfoModel.$isTabletVertical

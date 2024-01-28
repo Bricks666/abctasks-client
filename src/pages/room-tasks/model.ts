@@ -1,8 +1,7 @@
 import { cache, createQuery, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { RouteQuery, querySync } from 'atomic-router';
-import { createDomain, createStore, sample } from 'effector';
-import { empty, not } from 'patronum';
+import { createDomain, sample } from 'effector';
 
 import { dragTaskModel } from '@/widgets/tasks';
 
@@ -14,7 +13,7 @@ import {
 } from '@/features/tasks';
 
 import { progressesModel } from '@/entities/progresses';
-import { roomsModel } from '@/entities/rooms';
+import { roomModel, roomsModel } from '@/entities/rooms';
 import { tagsModel } from '@/entities/tags';
 import { tasksInRoomModel } from '@/entities/tasks';
 import { usersInRoomModel } from '@/entities/users';
@@ -49,7 +48,7 @@ const handlerFx = activitiesDomain.effect<
 >(({ roomId, }) =>
 	activitiesApi.getAll({ roomId, count: 6, by: 'createdAt', type: 'desc', })
 );
-const $roomId = createStore<null | number>(null);
+const $roomId = authorizedRoute.$params.map((params) => params.id);
 
 export const query = createQuery<
 	InRoomParams,
@@ -87,20 +86,13 @@ const mapQuery = (query: RouteQuery) => {
 cache(query);
 
 sample({
-	source: authorizedRoute.$params,
-	fn: (params) => params.id,
-	target: $roomId,
-});
-
-sample({
 	clock: $roomId,
 	source: authorizedRoute.$query,
-	filter: not(empty($roomId)),
 	fn: (query, roomId) => ({
 		roomId: roomId as number,
 		...mapQuery(query),
 	}),
-	target: queries.map((query) => query.start),
+	target: queries.map((query) => query.start).concat(roomModel.query.start),
 });
 
 querySync({
@@ -125,17 +117,7 @@ sample({
 
 sample({
 	clock: authorizedRoute.closed,
-	target: reset,
-});
-
-sample({
-	clock: authorizedRoute.closed,
-	target: queries.map((query) => query.reset),
-});
-
-sample({
-	clock: authorizedRoute.closed,
-	target: $roomId.reinit!,
+	target: queries.map((query) => query.reset).concat(reset),
 });
 
 sample({
