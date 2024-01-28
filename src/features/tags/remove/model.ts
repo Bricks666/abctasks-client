@@ -50,8 +50,8 @@ sample({
 		id: $id,
 		roomId: routes.room.tags.$params.map((params) => params.id),
 	},
-	filter: ({ id, roomId, }) => !!id && !!roomId,
-	fn: ({ roomId, id, }) => {
+	filter: ({ id, roomId }) => !!id && !!roomId,
+	fn: ({ roomId, id }) => {
 		return {
 			roomId,
 			id,
@@ -73,7 +73,7 @@ sample({
 update(tagsModel.query, {
 	on: mutation,
 	by: {
-		success: ({ query, mutation, }) => {
+		success: ({ query, mutation }) => {
 			if (!query) {
 				return {
 					result: [],
