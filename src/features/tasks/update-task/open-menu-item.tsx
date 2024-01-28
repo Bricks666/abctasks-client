@@ -21,7 +21,6 @@ export const OpenUpdateTaskFormMenuItem: React.FC<OpenUpdateTaskFormMenuItemProp
 		const onClick = () => {
 			open(taskId);
 		};
-
 		const label = t('actions.update_task.actions.open');
 
 		return (
