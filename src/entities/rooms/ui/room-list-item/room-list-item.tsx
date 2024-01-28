@@ -14,7 +14,6 @@ import { routes } from '@/shared/configs';
 import { stringToColor } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
-
 export interface RoomListItemProps extends CommonProps, Room {}
 
 export const RoomListItem: React.FC<RoomListItemProps> = (props) => {
