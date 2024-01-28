@@ -28,7 +28,9 @@ export const mutation = createMutation<
 
 export const form = roomFormModel.create();
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.createRoom);
+export const { close, $isOpen, open, } = createPopupControlModel(
+	popupsMap.createRoom
+);
 const { reset, formValidated, } = form;
 
 sample({

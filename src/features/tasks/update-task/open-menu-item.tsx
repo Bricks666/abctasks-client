@@ -1,37 +1,31 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { ListItemIcon, MenuItem } from '@mui/material';
-import { RouteInstance } from 'atomic-router';
-import { Link } from 'atomic-router-react';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { routes, getParams, popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
+import { openPopup } from './model';
+
 export interface OpenUpdateTaskFormMenuItemProps extends CommonProps {
-	readonly roomId: number;
 	readonly taskId: number;
 }
 
 export const OpenUpdateTaskFormMenuItem: React.FC<OpenUpdateTaskFormMenuItemProps> =
 	React.memo((props) => {
-		const { className, taskId, roomId, } = props;
+		const { className, taskId, } = props;
+		const open = useUnit(openPopup);
 		const { t, } = useTranslation('tasks');
+
+		const onClick = () => {
+			open(taskId);
+		};
 
 		const label = t('actions.update_task.actions.open');
 
 		return (
-			<MenuItem
-				className={className}
-				to={routes.room.tasks as RouteInstance<any>}
-				params={{
-					id: roomId,
-				}}
-				query={{
-					[getParams.popup]: popupsMap.updateTask,
-					[getParams.taskId]: taskId,
-				}}
-				component={Link}>
+			<MenuItem className={className} onClick={onClick}>
 				<ListItemIcon>
 					<EditIcon />
 				</ListItemIcon>
