@@ -1,12 +1,19 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { querySync } from 'atomic-router';
+import { createDomain, createEvent, createStore, sample } from 'effector';
 
 import { createPopupControlModel } from '@/entities/popups';
 import { tasksInRoomModel } from '@/entities/tasks';
 
-import { CreateTaskParams, Task, tasksApi, task } from '@/shared/api';
-import { i18n, popupsMap, routes } from '@/shared/configs';
+import {
+	CreateTaskParams,
+	Task,
+	tasksApi,
+	task,
+	TaskStatus
+} from '@/shared/api';
+import { controls, getParams, i18n, popupsMap, routes } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -32,25 +39,48 @@ export const mutation = createMutation<
 
 export const form = taskFormModel.create();
 
-export const { close, $isOpen, opened, } = createPopupControlModel(
-	popupsMap.createTask
-);
+export const popupControls = createPopupControlModel(popupsMap.createTask);
+
+export const $status = createStore<TaskStatus | null>(null);
+export const openPopup = createEvent<TaskStatus>();
 
 const { reset, formValidated, } = form;
 
+querySync({
+	controls,
+	source: {
+		[getParams.taskStatus]: $status,
+	},
+});
+
 sample({
-	clock: close,
+	clock: openPopup,
+	target: popupControls.open,
+});
+
+sample({
+	clock: openPopup,
+	target: $status,
+});
+
+sample({
+	clock: popupControls.closed,
+	target: $status.reinit!,
+});
+
+sample({
+	clock: popupControls.closed,
 	target: tasksInRoomModel.$status.reinit!,
 });
 
 sample({
-	clock: close,
+	clock: popupControls.closed,
 	target: reset,
 });
 
 sample({
 	clock: mutation.finished.success,
-	target: close,
+	target: popupControls.close,
 });
 
 sample({
@@ -61,7 +91,7 @@ sample({
 });
 
 sample({
-	clock: opened,
+	clock: popupControls.opened,
 	source: tasksInRoomModel.$status,
 	filter: Boolean,
 	fn: (status) => ({ status, }),

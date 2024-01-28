@@ -1,17 +1,16 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton, Tooltip } from '@mui/material';
-import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { routes, getParams, popupsMap } from '@/shared/configs';
+import { routes } from '@/shared/configs';
 import { useParam, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Confirm } from '@/shared/ui';
 
-import { mutation } from './model';
+import { mutation, openPopup } from './model';
 
 export interface TagCardActionsProps extends CommonProps {
 	readonly tagId: number;
@@ -22,7 +21,12 @@ export const TagCardActions: React.FC<TagCardActionsProps> = (props) => {
 	const { t, } = useTranslation('room-tags');
 	const roomId = useParam(routes.room.tags, 'id');
 	const removeTag = useUnit(mutation);
+	const open = useUnit(openPopup);
 	const [toggled, { toggleOff, toggleOn, }] = useToggle(false);
+
+	const onClick = () => {
+		open(tagId);
+	};
 
 	const onAgree = React.useCallback(() => {
 		removeTag.start({ id: tagId, roomId, });
@@ -40,14 +44,7 @@ export const TagCardActions: React.FC<TagCardActionsProps> = (props) => {
 	return (
 		<div className={className}>
 			<Tooltip title={updateTitle}>
-				<IconButton
-					to={routes.room.tags as any}
-					params={{ id: roomId, }}
-					query={{
-						[getParams.popup]: popupsMap.updateTag,
-						[getParams.tagId]: tagId,
-					}}
-					component={Link}>
+				<IconButton onClick={onClick}>
 					<EditIcon />
 				</IconButton>
 			</Tooltip>

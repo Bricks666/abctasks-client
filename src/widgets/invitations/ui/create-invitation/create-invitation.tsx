@@ -28,7 +28,7 @@ export const CreateInvitation: React.FC<CreateInvitationProps> = (props) => {
 	const { t, } = useTranslation('room-invitations');
 	const roomId = useParam(routes.room.users, 'id');
 
-	const close = useUnit(createInvitationModel.close);
+	const close = useUnit(createInvitationModel.popupControls.close);
 
 	const [isVertical, isMobile] = useUnit([
 		deviceInfoModel.$isTabletVertical,

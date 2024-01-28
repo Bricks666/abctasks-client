@@ -6,14 +6,15 @@ import { useTranslation } from 'react-i18next';
 
 import { CommonProps } from '@/shared/types';
 
-import { openButtonClicked } from './model';
+import { open } from './model';
 
 export interface OpenCreateRoomProps extends CommonProps {}
 
 export const OpenCreateRoom: React.FC<OpenCreateRoomProps> = (props) => {
 	const { className, } = props;
+
+	const onClick = useUnit(open);
 	const { t, } = useTranslation('rooms');
-	const onClick = useUnit(openButtonClicked);
 
 	const label = t('actions.create_room.actions.open');
 

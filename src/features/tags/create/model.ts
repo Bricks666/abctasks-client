@@ -12,7 +12,9 @@ import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 import { tagFormModel } from '../form';
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.createTag);
+export const { close, $isOpen, open, } = createPopupControlModel(
+	popupsMap.createTag
+);
 
 export const form = tagFormModel.create();
 

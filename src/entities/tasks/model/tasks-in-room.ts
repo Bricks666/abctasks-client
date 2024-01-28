@@ -1,21 +1,14 @@
 import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { querySync } from 'atomic-router';
 import { combine, createDomain } from 'effector';
 import { Array } from 'runtypes';
 
 import { Task, tasksApi, task, TaskStatus, GetTasksParams } from '@/shared/api';
-import { controls, routes, getParams } from '@/shared/configs';
 import { dataExtractor, group } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const tasksInRoom = createDomain();
 
-/**
- * Может стоит перенести на уровень виджета(??)
- */
-export const $id = tasksInRoom.store<number | null>(null);
-export const $status = tasksInRoom.store<TaskStatus | null>(null);
 const handlerFx = tasksInRoom.effect<
 	GetTasksParams,
 	StandardResponse<Task[]>,
@@ -71,12 +64,3 @@ export const $tasksColumns = combine(query.$data, (tasks) => {
 });
 
 cache(query);
-
-querySync({
-	controls,
-	source: {
-		[getParams.taskId]: $id,
-		[getParams.taskStatus]: $status,
-	},
-	route: routes.room.tasks,
-});

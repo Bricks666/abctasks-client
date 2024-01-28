@@ -2,21 +2,21 @@ import { sample } from 'effector';
 
 import { inviteUserIntoRoomModel } from '@/features/invitation';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { searchUserModel } from '@/entities/users';
 
 import { popupsMap } from '@/shared/configs';
+import { createPopupControlModel } from '@/shared/lib';
 
-export const { close, $isOpen, } = createPopupControlModel(
+export const popupControls = createPopupControlModel(
 	popupsMap.createInvitation
 );
 
 sample({
 	clock: inviteUserIntoRoomModel.mutation.finished.success,
-	target: close,
+	target: popupControls.close,
 });
 
 sample({
-	clock: close,
+	clock: popupControls.closed,
 	target: [searchUserModel.query.reset, inviteUserIntoRoomModel.form.reset],
 });
