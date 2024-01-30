@@ -10,13 +10,13 @@ import { FullWidthPopup, MainPopup } from '@/shared/ui';
 import { TagForm } from '../form';
 
 import styles from './form.module.css';
-import { close, form, mutation } from './model';
+import { popupControls, form, mutation } from './model';
 
 export interface CreateTagProps extends CommonProps, BasePopupProps {}
 
 export const CreateTag: React.FC<CreateTagProps> = (props) => {
 	const { t, } = useTranslation('room-tags');
-	const onClose = useUnit(close);
+	const onClose = useUnit(popupControls.close);
 	const pending = useUnit(mutation.$pending);
 	const onClick = useUnit(form.submit);
 

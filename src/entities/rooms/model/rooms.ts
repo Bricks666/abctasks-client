@@ -1,16 +1,13 @@
 import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { querySync } from 'atomic-router';
 import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 
 import { room, Room, roomsApi } from '@/shared/api';
-import { controls, getParams } from '@/shared/configs';
 import { dataExtractor } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 export const roomsDomain = createDomain();
-export const $id = roomsDomain.store<null | number>(null);
 const handlerFx = roomsDomain.effect(roomsApi.getAll);
 
 export const query = createQuery<
@@ -28,10 +25,3 @@ export const query = createQuery<
 });
 
 cache(query);
-
-querySync({
-	controls,
-	source: {
-		[getParams.roomId]: $id,
-	},
-});

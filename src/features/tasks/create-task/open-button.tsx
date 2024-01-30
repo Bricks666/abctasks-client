@@ -1,35 +1,32 @@
 import AddIcon from '@mui/icons-material/Add';
 import { IconButton, Tooltip } from '@mui/material';
-import { Link } from 'atomic-router-react';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TaskStatus } from '@/shared/api';
-import { routes, getParams, popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
+import { openPopup } from './model';
+
 export interface OpenCreateTaskButtonProps extends CommonProps {
-	readonly roomId: number;
-	readonly columnStatus?: TaskStatus;
+	readonly columnStatus: TaskStatus;
 }
 
 export const OpenCreateTaskButton: React.FC<OpenCreateTaskButtonProps> =
 	React.memo((props) => {
-		const { className, columnStatus, roomId, } = props;
+		const { className, columnStatus, } = props;
+		const open = useUnit(openPopup);
 		const { t, } = useTranslation('tasks');
 		const label = t('actions.create_task.actions.open');
 
+		const onClick = () => {
+			open(columnStatus);
+		};
+
 		return (
 			<Tooltip title={label}>
-				<IconButton
-					className={className}
-					to={routes.room.tasks as any}
-					params={{ id: roomId, }}
-					query={{
-						[getParams.popup]: popupsMap.createTask,
-						[getParams.taskStatus]: columnStatus,
-					}}
-					component={Link}>
+				<IconButton className={className} onClick={onClick}>
 					<AddIcon />
 				</IconButton>
 			</Tooltip>

@@ -1,7 +1,7 @@
 import { sample } from 'effector';
 
 import { invitationsModel } from '@/entities/invitations';
-import { roomsModel } from '@/entities/rooms';
+import { roomModel, roomsModel } from '@/entities/rooms';
 import { usersInRoomModel } from '@/entities/users';
 
 import { routes } from '@/shared/configs';
@@ -18,7 +18,8 @@ sample({
 	target: [
 		usersInRoomModel.query.start,
 		roomsModel.query.start,
-		invitationsModel.query.start
+		invitationsModel.query.start,
+		roomModel.query.start
 	],
 });
 

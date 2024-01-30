@@ -11,14 +11,14 @@ import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
 import { SkeletonTaskForm, TaskForm } from '../form';
 
-import { close, form, mutation } from './model';
+import { popupControls, form, mutation } from './model';
 import styles from './update-task.module.css';
 
 export interface UpdateTaskProps extends CommonProps, BasePopupProps {}
 
 export const UpdateTask: React.FC<UpdateTaskProps> = (props) => {
 	const { t, } = useTranslation('tasks');
-	const onClose = useUnit(close);
+	const onClose = useUnit(popupControls.close);
 	const { data: task, } = useUnit(taskModel.query);
 
 	const [isMobile, isVertical] = useUnit([

@@ -1,7 +1,6 @@
-import { createQuery } from '@farfetched/core';
+import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
-import { createGate } from 'effector-react';
+import { createDomain } from 'effector';
 
 import { Room, roomsApi, room } from '@/shared/api';
 import { dataExtractor } from '@/shared/lib';
@@ -29,17 +28,4 @@ export const query = createQuery<
 
 export const $canChange = query.$data.map((room) => room?.canChange || false);
 
-export const Gate = createGate<InRoomParams>({
-	domain: roomDomain,
-});
-
-sample({
-	clock: Gate.state,
-	filter: ({ roomId, }) => Boolean(roomId),
-	target: query.start,
-});
-
-sample({
-	clock: Gate.close,
-	target: query.reset,
-});
+cache(query);

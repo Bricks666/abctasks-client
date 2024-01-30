@@ -1,13 +1,13 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createEffect, sample } from 'effector';
-import { and } from 'patronum';
+import { createEffect, createEvent, sample } from 'effector';
+import { and, not } from 'patronum';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { tagsModel, tagModel } from '@/entities/tags';
 
-import { UpdateTagParams, Tag, tagsApi, tag } from '@/shared/api';
-import { i18n, popupsMap, routes } from '@/shared/configs';
+import { UpdateTagParams, Tag, tagsApi, tag, GetTagParams } from '@/shared/api';
+import { getParams, i18n, popupsMap, routes } from '@/shared/configs';
+import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -25,30 +25,55 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(tag)),
 });
 
-export const { close, $isOpen, } = createPopupControlModel(popupsMap.updateTag);
+export const popupControls = createPopupControlModel(popupsMap.updateTag);
+export const $roomId = routes.room.tags.$params.map((params) => params.id);
 export const form = tagFormModel.create();
+export const tagId = createQueryModel<number | null>({
+	name: getParams.tagId,
+	defaultValue: null,
+});
+
+export const openPopup = createEvent<number>();
+
+sample({
+	clock: openPopup,
+	target: [popupControls.open, tagId.set],
+});
 
 const { fields, setForm, reset, formValidated, } = form;
 
 sample({
-	clock: close,
-	target: tagsModel.$id.reinit!,
-});
-
-sample({
-	clock: close,
-	target: reset,
+	clock: popupControls.closed,
+	target: [tagId.reset, reset],
 });
 
 sample({
 	clock: mutation.finished.success,
-	target: close,
+	target: popupControls.close,
+});
+
+sample({
+	clock: popupControls.opened,
+	source: {
+		roomId: $roomId,
+		id: tagId.$value,
+	},
+	filter: ({ id, }) => {
+		return !!id;
+	},
+	fn: ({ id, roomId, }) => {
+		return {
+			id,
+			roomId,
+		} as GetTagParams;
+	},
+	target: tagModel.query.start,
 });
 
 sample({
 	clock: formValidated,
-	source: { params: routes.room.tags.$params, id: tagsModel.$id, },
-	filter: and($isOpen, tagsModel.$id),
+	source: { params: routes.room.tags.$params, id: tagId.$value, },
+	filter: and(popupControls.$isOpen, not(tagId.$isEmpty)),
 	fn: ({ params, id, }, values) => ({
 		...values,
 		id: Number(id),

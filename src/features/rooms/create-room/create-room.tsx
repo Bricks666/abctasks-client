@@ -10,13 +10,13 @@ import { FullWidthPopup, MainPopup } from '@/shared/ui';
 import { RoomForm } from '../form';
 
 import styles from './create-room.module.css';
-import { close, form, mutation } from './model';
+import { popupControls, form, mutation } from './model';
 
 export interface CreateRoomProps extends CommonProps, BasePopupProps {}
 
 export const CreateRoom: React.FC<CreateRoomProps> = (props) => {
 	const { t, } = useTranslation('rooms');
-	const onClose = useUnit(close);
+	const onClose = useUnit(popupControls.close);
 	const [isMobile, isVertical] = useUnit([
 		deviceInfoModel.$isMobile,
 		deviceInfoModel.$isTabletVertical

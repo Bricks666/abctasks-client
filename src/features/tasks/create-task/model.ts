@@ -1,12 +1,18 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, sample } from 'effector';
+import { createDomain, createEvent, sample } from 'effector';
 
-import { createPopupControlModel } from '@/entities/popups';
 import { tasksInRoomModel } from '@/entities/tasks';
 
-import { CreateTaskParams, Task, tasksApi, task } from '@/shared/api';
-import { i18n, popupsMap, routes } from '@/shared/configs';
+import {
+	CreateTaskParams,
+	Task,
+	tasksApi,
+	task,
+	TaskStatus
+} from '@/shared/api';
+import { getParams, i18n, popupsMap, routes } from '@/shared/configs';
+import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -32,25 +38,44 @@ export const mutation = createMutation<
 
 export const form = taskFormModel.create();
 
-export const { close, $isOpen, opened, } = createPopupControlModel(
-	popupsMap.createTask
-);
+export const popupControls = createPopupControlModel(popupsMap.createTask);
+
+export const status = createQueryModel<TaskStatus | null>({
+	name: getParams.taskStatus,
+	defaultValue: null,
+});
+export const openPopup = createEvent<TaskStatus>();
 
 const { reset, formValidated, } = form;
 
 sample({
-	clock: close,
-	target: tasksInRoomModel.$status.reinit!,
+	clock: openPopup,
+	target: popupControls.open,
 });
 
 sample({
-	clock: close,
+	clock: openPopup,
+	target: status.set,
+});
+
+sample({
+	clock: popupControls.closed,
+	target: status.reset,
+});
+
+sample({
+	clock: popupControls.closed,
+	target: status.reset,
+});
+
+sample({
+	clock: popupControls.closed,
 	target: reset,
 });
 
 sample({
 	clock: mutation.finished.success,
-	target: close,
+	target: popupControls.close,
 });
 
 sample({
@@ -61,8 +86,8 @@ sample({
 });
 
 sample({
-	clock: opened,
-	source: tasksInRoomModel.$status,
+	clock: popupControls.opened,
+	source: status.$value,
 	filter: Boolean,
 	fn: (status) => ({ status, }),
 	target: form.setInitialForm,
