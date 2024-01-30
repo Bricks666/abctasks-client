@@ -17,6 +17,10 @@ export interface User {
 	readonly activated: boolean;
 }
 
+export interface LoginParams extends UserParams {
+	readonly remember?: boolean;
+}
+
 export interface Tokens {
 	readonly accessToken: string;
 }
@@ -44,23 +48,26 @@ export interface Room {
 	readonly ownerId: number;
 }
 export interface TestingApiFixture {
-	user(params?: UserParams): Promise<User>;
-	removeUser(params?: UserParams): Promise<boolean>;
-	login(params?: UserParams): Promise<Login>;
-	room(params?: RoomParams): Promise<Room>;
-	removeRoom(params?: RoomParams): Promise<boolean>;
+	user(data?: UserParams): Promise<User>;
+	removeUser(data?: UserParams): Promise<boolean>;
+	auth(data?: LoginParams): Promise<Login>;
+	logout(data: never): Promise<boolean>;
+	room(data?: RoomParams): Promise<Room>;
+	removeRoom(data?: RoomParams): Promise<boolean>;
 }
 
 const buildUrl = (endpoint: string): string => {
 	return `${process.env.API_HOST}/testing${endpoint}`;
 };
 
-const createRequest = <Func extends (ctx: BrowserContext, params: any) => any>(
+const createRequest = <Func extends (ctx: BrowserContext, data: any) => any>(
 	ctx: BrowserContext,
 	func: Func
 ) => {
-	return (params: Parameters<Func>[1]): ReturnType<Func> => {
-		return func(ctx, params);
+	return (
+		data: Parameters<Func>[1] extends undefined ? never : Parameters<Func>[1]
+	): ReturnType<Func> => {
+		return func(ctx, data);
 	};
 };
 
@@ -91,21 +98,27 @@ const user = async (
 
 const removeUser = async (
 	ctx: BrowserContext,
-	params: UserParams = {}
+	data: UserParams = {}
 ): Promise<boolean> => {
 	return request(ctx, '/user', {
-		method: 'DELETE',
-		params,
+		method: 'PUT',
+		data,
 	});
 };
 
-const login = async (
+const auth = async (
 	ctx: BrowserContext,
 	data: UserParams = {}
 ): Promise<Login> => {
-	return request(ctx, '/login', {
+	return request(ctx, '/auth', {
 		method: 'POST',
 		data,
+	});
+};
+
+const logout = async (ctx: BrowserContext): Promise<boolean> => {
+	return request(ctx, '/logout', {
+		method: 'PUT',
 	});
 };
 
@@ -121,11 +134,11 @@ const room = async (
 
 const removeRoom = async (
 	ctx: BrowserContext,
-	params: RoomParams = {}
+	data: RoomParams = {}
 ): Promise<boolean> => {
 	return request(ctx, '/room', {
-		method: 'DELETE',
-		params,
+		method: 'PUT',
+		data,
 	});
 };
 
@@ -136,8 +149,11 @@ export const test = base.extend<TestingApiFixture>({
 	removeUser: async ({ context }, use) => {
 		await use(createRequest(context, removeUser));
 	},
-	login: async ({ context }, use) => {
-		await use(createRequest(context, login));
+	auth: async ({ context }, use) => {
+		await use(createRequest(context, auth));
+	},
+	logout: async ({ context }, use) => {
+		await use(createRequest(context, logout));
 	},
 	room: async ({ context }, use) => {
 		await use(createRequest(context, room));

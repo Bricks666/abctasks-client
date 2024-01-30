@@ -6,7 +6,7 @@ import { User, test } from './fixtures/testing-api';
 const getFormControls = (loc: Locator | Page) => {
 	const name = loc.getByLabel('Name');
 	const description = loc.getByLabel('Description');
-	const button = loc.getByRole('button');
+	const button = loc.getByRole('link', { name: 'Open' });
 
 	return {
 		name,
@@ -21,7 +21,7 @@ const getRoomCard = (
 	description: string
 ) => {
 	return loc
-		.locator('ul div')
+		.getByRole('listitem')
 		.filter({
 			hasText: new RegExp(`^${name}Description: ${description}`),
 		})
@@ -34,8 +34,8 @@ test.describe('rooms page', () => {
 	const name = 'test room name';
 	const description = 'test room description';
 
-	test.beforeEach(async ({ page, login }) => {
-		const data = await login({
+	test.beforeEach(async ({ page, auth }) => {
+		const data = await auth({
 			email: 'test@test.com',
 		});
 
