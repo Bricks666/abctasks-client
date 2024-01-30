@@ -4,7 +4,6 @@ map $sent_http_content_type $expires {
     text/html                  epoch;
     text/css                   max;
     application/javascript     max;
-    application/json           max;
     ~image/                    max;
     ~font/                     max;
 }
