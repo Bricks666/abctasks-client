@@ -1,14 +1,4 @@
 {
-	"presets": [
-		"@babel/env",
-		"@babel/typescript",
-		"@babel/react",
-		"atomic-router/babel-preset"
-	],
-	"plugins": [
-		[
-			"effector/babel-plugin",
-			{ "reactSsr": false, "factories": ["@farfetched/core", "atomic-router"] }
-		]
-	]
+	"presets": ["atomic-router/babel-preset"],
+	"plugins": ["effector/babel-plugin"]
 }

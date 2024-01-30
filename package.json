@@ -49,9 +49,6 @@
 	"devDependencies": {
 		"@babel/cli": "^7.23.0",
 		"@babel/core": "^7.23.2",
-		"@babel/preset-env": "^7.23.2",
-		"@babel/preset-react": "^7.22.15",
-		"@babel/preset-typescript": "^7.23.2",
 		"@rollup/plugin-babel": "^6.0.4",
 		"@types/compose-function": "^0.0.32",
 		"@types/node": "^20.8.7",
