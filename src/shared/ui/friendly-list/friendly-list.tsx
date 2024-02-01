@@ -8,6 +8,7 @@ import { getEmptyArray } from '@/shared/configs';
 import { Classes, CommonProps, Slots } from '@/shared/types';
 
 import { Center } from '../center';
+import { Scrollable } from '../scrollable';
 
 import styles from './friendly-list.module.css';
 
@@ -102,9 +103,11 @@ export const FriendlyList = <RawData, Item, Error>(
 		);
 
 		content = (
-			<List className={classes?.list} disablePadding>
-				{skeletons}
-			</List>
+			<Scrollable direction='vertical'>
+				<List className={classes?.list} disablePadding>
+					{skeletons}
+				</List>
+			</Scrollable>
 		);
 	} else if (isEmpty) {
 		content = (
@@ -123,9 +126,11 @@ export const FriendlyList = <RawData, Item, Error>(
 		);
 
 		content = (
-			<List className={classes?.list} disablePadding>
-				{items}
-			</List>
+			<Scrollable direction='vertical'>
+				<List className={classes?.list} disablePadding>
+					{items}
+				</List>
+			</Scrollable>
 		);
 	}
 

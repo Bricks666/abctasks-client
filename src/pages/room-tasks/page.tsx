@@ -7,7 +7,10 @@ import { Popups, PopupsProps } from '@/widgets/page';
 
 import { CreateTask, TasksFilters, UpdateTask } from '@/features/tasks';
 
+import { roomModel } from '@/entities/rooms';
+
 import { popupsMap } from '@/shared/configs';
+import { usePageTitle } from '@/shared/lib';
 import { deviceInfoModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 import { SectionHeader, Show } from '@/shared/ui';
@@ -24,9 +27,14 @@ const TasksPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room-tasks');
 	const isDesktopLarge = useUnit(deviceInfoModel.$isDesktopLarge);
+	const room = useUnit(roomModel.query.$data);
 
 	const title = t('title');
 	const showAside = isDesktopLarge;
+
+	const pageTitle = `${room?.name ?? ''} - ${title}`;
+
+	usePageTitle(pageTitle);
 
 	return (
 		<div className={cn(styles.wrapper, className)}>
