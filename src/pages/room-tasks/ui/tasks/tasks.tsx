@@ -11,7 +11,7 @@ import { tasksInRoomModel } from '@/entities/tasks';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { TextWithAction } from '@/shared/ui';
+import { Scrollable, TextWithAction } from '@/shared/ui';
 
 import styles from './tasks.module.css';
 
@@ -50,7 +50,10 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 	}
 
 	return (
-		<section className={cn(styles.wrapper, className)}>
+		<Scrollable
+			className={cn(styles.wrapper, className)}
+			direction='horizontal'
+			component='section'>
 			{columns.map(({ status, tasks, hasActions, }) => (
 				<TaskColumn
 					tasks={tasks}
@@ -61,6 +64,6 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 					key={status}
 				/>
 			))}
-		</section>
+		</Scrollable>
 	);
 };

@@ -22,3 +22,4 @@ export * from './show';
 export * from './friendly-list';
 export * from './template-header';
 export * from './layout';
+export * from './scrollable';

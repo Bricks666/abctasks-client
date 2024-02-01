@@ -9,10 +9,6 @@
 	width: 100%;
 }
 
-.tasks {
-	grid-area: tasks;
-}
-
 .aside {
 	grid-area: aside;
 }
