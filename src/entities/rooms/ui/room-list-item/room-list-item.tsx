@@ -20,12 +20,10 @@ export const RoomListItem: React.FC<RoomListItemProps> = (props) => {
 	const style = {
 		background: stringToColor(''.padEnd(15, id.toString())),
 	};
+
 	return (
 		<ListItem className={className} disablePadding>
-			<ListItemButton
-				to={routes.room.tasks as any}
-				params={{ id, }}
-				component={Link}>
+			<ListItemButton to={routes.room.tasks} params={{ id, }} component={Link}>
 				<ListItemAvatar>
 					<Avatar style={style}>{name.at(0)}</Avatar>
 				</ListItemAvatar>

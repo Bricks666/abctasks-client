@@ -42,6 +42,7 @@
 		--indicator-size: 1em;
 
 		position: sticky;
+    z-index: 1;
 
 		opacity: 0;
 
@@ -49,9 +50,9 @@
 		animation-timing-function: linear;
 		animation-fill-mode: both;
 
-		background: canvas;
+		background-color: var(--mui-palette-background-paper);
 
-		box-shadow: var(--mui-shadows-6);
+		box-shadow: var(--mui-shadows-3);
 	}
 
 	.container--horizontal .indicator {

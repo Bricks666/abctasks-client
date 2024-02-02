@@ -16,6 +16,7 @@ import { Navigation } from '@/features/page';
 import { RoomListItem, useRooms } from '@/entities/rooms';
 
 import { useToggle } from '@/shared/lib';
+import { Scrollable } from '@/shared/ui';
 
 import styles from './menu.module.css';
 
@@ -34,17 +35,18 @@ export const Menu: React.FC = () => {
 			<Drawer
 				open={isOpen}
 				onClose={close}
+				onClick={close}
 				PaperProps={{ className: styles.menu, }}>
-				<div onClick={close}>
-					<Navigation />
-					<Divider />
-					<List>
+				<Navigation />
+				<Divider />
+				<Scrollable direction='vertical' hideScroll={false}>
+					<List className={styles.list} disablePadding>
 						<ListSubheader disableSticky>{subheader}</ListSubheader>
 						{rooms.data.map((room) => (
 							<RoomListItem {...room} key={room.id} />
 						))}
 					</List>
-				</div>
+				</Scrollable>
 			</Drawer>
 		</>
 	);
