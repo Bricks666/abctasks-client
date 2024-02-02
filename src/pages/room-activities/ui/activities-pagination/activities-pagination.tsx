@@ -23,13 +23,13 @@ export const ActivitiesPagination: React.FC<ActivitiesPaginationProps> = (
 		<Pagination
 			className={className}
 			count={pageCount}
-			page={pageQuery.value as any}
+			page={+pageQuery.value}
 			onChange={(_, page) => {
 				window.scrollTo({
 					left: 0,
 					top: 0,
 				});
-				pageQuery.set(page as any);
+				pageQuery.set(page.toString());
 			}}
 			color='primary'
 			size='large'
