@@ -6,10 +6,10 @@ export const openAllActivities = createEvent();
 
 sample({
 	clock: openAllActivities,
-	source: routes.room.base.$query,
-	fn: (query) => {
+	source: routes.room.base.$params,
+	fn: (params) => {
 		return {
-			id: query.id,
+			id: params.id,
 		};
 	},
 	target: routes.room.activities.open,

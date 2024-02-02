@@ -23,9 +23,9 @@ export const authorizedRoute = sessionModel.chainAuthorized(currentRoute, {
 
 const $roomId = authorizedRoute.$params.map((params) => params.id);
 
-export const page = createQueryModel<string | null>({
+export const page = createQueryModel<string>({
 	name: getParams.page,
-	defaultValue: null,
+	defaultValue: '1',
 	route: authorizedRoute,
 });
 

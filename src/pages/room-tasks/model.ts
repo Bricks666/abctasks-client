@@ -86,9 +86,9 @@ const mapQuery = (query: RouteQuery) => {
 cache(query);
 
 sample({
-	clock: $roomId,
-	source: authorizedRoute.$query,
-	fn: (query, roomId) => ({
+	clock: [$roomId, authorizedRoute.opened],
+	source: { query: authorizedRoute.$query, roomId: $roomId, },
+	fn: ({ query, roomId, }) => ({
 		roomId: roomId as number,
 		...mapQuery(query),
 	}),
