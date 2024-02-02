@@ -30,12 +30,15 @@ const iconMap: Record<string, React.ReactNode> = {
 export const ActivityActionPicture: React.FC<ActivityActionPictureProps> =
 	React.memo((props) => {
 		const { name, className, } = props;
-		const { t, } = useTranslation('room');
+		const { t, } = useTranslation('activities');
+
+		const label = t(`type.${name}`)!;
 
 		return (
 			<Avatar
 				className={cn(styles.avatar, styles[colorMap[name]], className)}
-				alt={t(`activities.type.${name}`)!}>
+				aria-label={label}
+				alt={label}>
 				{iconMap[name]}
 			</Avatar>
 		);
