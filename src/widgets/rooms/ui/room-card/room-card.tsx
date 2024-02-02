@@ -20,20 +20,20 @@ export const RoomCard: React.FC<RoomCardProps> = (props) => {
 	return (
 		<TemplateRoomCard
 			{...props}
-			menu={canChange ? <CardMenu roomId={id} /> : null}
+			menu={<CardMenu roomId={id} canChange={canChange} />}
 			actions={<OpenRoom id={id} />}
 		/>
 	);
 };
 
-const CardMenu: React.FC<{ roomId: number }> = (props) => {
-	const { roomId, } = props;
+const CardMenu: React.FC<{ roomId: number; canChange?: boolean }> = (props) => {
+	const { roomId, canChange, } = props;
 
 	return (
 		<EditMenu>
-			<OpenUpdateRoomFormMenuItem roomId={roomId} />
+			{canChange ? <OpenUpdateRoomFormMenuItem roomId={roomId} /> : null}
 			<ExitRoomUserMenuItem roomId={roomId} />
-			<RemoveRoomMenuItem roomId={roomId} />
+			{canChange ? <RemoveRoomMenuItem roomId={roomId} /> : null}
 		</EditMenu>
 	);
 };

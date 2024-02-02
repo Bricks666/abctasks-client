@@ -3,28 +3,44 @@ import { not } from 'patronum';
 
 import { popupsModel } from '@/shared/models';
 
-export const createPopupControlModel = (popup: string) => {
+export interface CreatePopupControlModelParams {
+	readonly name: string;
+	/**
+	 * Should popup be synced with query
+	 * @default true
+	 */
+	readonly sync?: boolean;
+}
+
+export const createPopupControlModel = (
+	params: CreatePopupControlModelParams
+) => {
+	const { name, sync = true, } = params;
+
 	const $isOpen = createStore<boolean>(false);
 	const close = createEvent();
 	const opened = createEvent();
 	const open = createEvent();
 	const closed = createEvent();
 
+	const openPopup = sync ? popupsModel.openSynced : popupsModel.open;
+	const closePopup = sync ? popupsModel.closeSynced : popupsModel.close;
+
 	sample({
 		clock: open,
-		fn: () => popup,
-		target: popupsModel.open,
+		fn: () => name,
+		target: openPopup,
 	});
 
 	sample({
 		clock: close,
-		fn: () => popup,
-		target: popupsModel.close,
+		fn: () => name,
+		target: closePopup,
 	});
 
 	sample({
 		clock: popupsModel.$popups,
-		fn: (popups) => popups.includes(popup),
+		fn: (popups) => popups.includes(name),
 		target: $isOpen,
 	});
 
@@ -40,5 +56,20 @@ export const createPopupControlModel = (popup: string) => {
 		target: closed,
 	});
 
-	return { $isOpen, close, opened, open, closed, };
+	const unitShape = {
+		close,
+		opened,
+		open,
+		closed,
+		isOpen: $isOpen,
+	};
+
+	return {
+		$isOpen,
+		close,
+		opened,
+		open,
+		closed,
+		'@@unitShape': () => unitShape,
+	};
 };

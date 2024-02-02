@@ -1,10 +1,11 @@
-import { cache, createQuery } from '@farfetched/core';
+import { cache, createQuery, keepFresh } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { combine, createDomain } from 'effector';
+import { combine, createDomain, sample } from 'effector';
+import { empty, interval, not } from 'patronum';
 import { Array } from 'runtypes';
 
 import { Task, tasksApi, task, TaskStatus, GetTasksParams } from '@/shared/api';
-import { dataExtractor, group } from '@/shared/lib';
+import { createFlag, dataExtractor, group } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const tasksInRoom = createDomain();
@@ -27,6 +28,21 @@ export const query = createQuery<
 	contract: runtypeContract(getStandardResponse(Array(task))),
 	mapData: dataExtractor,
 });
+
+export const loaded = createFlag(false);
+
+sample({
+	clock: query.finished.finally,
+	target: loaded.enable,
+});
+
+sample({
+	clock: query.start,
+	filter: not(empty(query.$error)),
+	target: loaded.disable,
+});
+
+// export const $loaded = query.$status.map((status) => status !== 'initial');
 
 interface Column {
 	readonly tasks: Task[];
@@ -64,3 +80,7 @@ export const $tasksColumns = combine(query.$data, (tasks) => {
 });
 
 cache(query);
+
+keepFresh(query, {
+	triggers: [interval({ timeout: 5000, })],
+});

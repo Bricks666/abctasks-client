@@ -27,7 +27,9 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(task)),
 });
 
-export const popupControls = createPopupControlModel(popupsMap.updateTask);
+export const popupControls = createPopupControlModel({
+	name: popupsMap.updateTask,
+});
 export const taskId = createQueryModel<number | null>({
 	name: getParams.taskId,
 	defaultValue: null,

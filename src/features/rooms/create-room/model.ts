@@ -29,7 +29,9 @@ export const mutation = createMutation<
 export const openButtonClicked = createEvent();
 export const form = roomFormModel.create();
 
-export const popupControls = createPopupControlModel(popupsMap.createRoom);
+export const popupControls = createPopupControlModel({
+	name: popupsMap.createRoom,
+});
 const { reset, formValidated, } = form;
 
 sample({

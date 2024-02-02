@@ -5,7 +5,12 @@ import { useTranslation } from 'react-i18next';
 
 import { Popups, PopupsProps } from '@/widgets/page';
 
-import { CreateTask, TasksFilters, UpdateTask } from '@/features/tasks';
+import {
+	ConfirmRemoveTask,
+	CreateTask,
+	TasksFilters,
+	UpdateTask
+} from '@/features/tasks';
 
 import { roomModel } from '@/entities/rooms';
 
@@ -21,6 +26,7 @@ import { Tasks, Aside, MobileAside } from './ui';
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createTask]: CreateTask,
 	[popupsMap.updateTask]: UpdateTask,
+	[popupsMap.removeTask]: ConfirmRemoveTask,
 };
 
 const TasksPage: React.FC<CommonProps> = (props) => {

@@ -36,13 +36,12 @@ export const TemplateRoomCard: React.FC<TemplateRoomCardProps> = (props) => {
 		<Card className={cn(styles.card, className)} component='li'>
 			<CardMedia sx={sx} />
 			<CardHeader className={styles.header} action={menu} title={name} />
-			<Scrollable
-				className={styles.content}
-				direction='vertical'
-				component={CardContent}>
-				<Typography>
-					{descriptionText}: {description}
-				</Typography>
+			<Scrollable direction='vertical'>
+				<CardContent className={styles.content}>
+					<Typography>
+						{descriptionText}: {description}
+					</Typography>
+				</CardContent>
 			</Scrollable>
 			<CardActions className={styles.actions}>{actions}</CardActions>
 		</Card>

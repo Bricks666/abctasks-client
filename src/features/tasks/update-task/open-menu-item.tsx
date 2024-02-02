@@ -1,10 +1,10 @@
 import EditIcon from '@mui/icons-material/Edit';
-import { ListItemIcon, MenuItem } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CommonProps } from '@/shared/types';
+import { MenuItem } from '@/shared/ui';
 
 import { openPopup } from './model';
 
@@ -25,11 +25,11 @@ export const OpenUpdateTaskFormMenuItem: React.FC<OpenUpdateTaskFormMenuItemProp
 		const label = t('actions.update_task.actions.open');
 
 		return (
-			<MenuItem className={className} onClick={onClick}>
-				<ListItemIcon>
-					<EditIcon />
-				</ListItemIcon>
-				{label}
-			</MenuItem>
+			<MenuItem
+				className={className}
+				onClick={onClick}
+				icon={<EditIcon />}
+				label={label}
+			/>
 		);
 	});

@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Popups, PopupsProps } from '@/widgets/page';
 import { RoomList } from '@/widgets/rooms';
 
-import { CreateRoom, UpdateRoom } from '@/features/rooms';
+import { ConfirmRemoveRoom, CreateRoom, UpdateRoom } from '@/features/rooms';
+import { ConfirmUserExit } from '@/features/users';
 
 import { popupsMap } from '@/shared/configs';
 import { usePageTitle } from '@/shared/lib';
@@ -17,6 +18,8 @@ import { RoomsLayout } from './ui';
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createRoom]: CreateRoom,
 	[popupsMap.updateRoom]: UpdateRoom,
+	[popupsMap.removeRoom]: ConfirmRemoveRoom,
+	[popupsMap.exitRoom]: ConfirmUserExit,
 };
 
 const RoomsPage: React.FC<CommonProps> = (props) => {
