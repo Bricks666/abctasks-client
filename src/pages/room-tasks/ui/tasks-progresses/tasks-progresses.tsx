@@ -1,6 +1,5 @@
 import ReplayIcon from '@mui/icons-material/Replay';
 import { Typography } from '@mui/material';
-import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +30,7 @@ export const TasksProgress: React.FC<TasksProgressProps> = (props) => {
 
 	return (
 		<FriendlyList
-			className={cn(styles.wrapper, className)}
+			className={className}
 			$query={progressesModel.query}
 			getKey={(item) => item.tag.id}
 			ItemComponent={TaskProgress}
