@@ -30,6 +30,18 @@ export interface Login {
 	readonly user: User;
 }
 
+export interface MemberParams {
+	readonly roomId?: number;
+	readonly userId?: number;
+	readonly status?: 'activated' | 'removed';
+}
+
+export interface Member {
+	readonly roomId: number;
+	readonly userId: number;
+	readonly status: 'activated' | 'removed';
+}
+
 export interface RoomParams {
 	readonly id?: number;
 	readonly name?: string;
@@ -37,6 +49,7 @@ export interface RoomParams {
 	readonly createdAt?: Date | null;
 	readonly updatedAt?: Date | null;
 	readonly ownerId?: number;
+	readonly members?: MemberParams[];
 }
 
 export interface Room {
@@ -47,13 +60,84 @@ export interface Room {
 	readonly updatedAt: Date | null;
 	readonly ownerId: number;
 }
+
+export interface TagParams {
+	readonly id?: number;
+	readonly room?: RoomParams;
+	readonly name?: string;
+	readonly mainColor?: string;
+	readonly secondColor?: string;
+}
+
+export interface Tag {
+	readonly id: number;
+	readonly roomId: number;
+	readonly name: string;
+	readonly mainColor: string;
+	readonly secondColor: string;
+}
+
+export interface TaskParams {
+	readonly id?: number;
+	readonly room?: RoomParams;
+	readonly tags?: TagParams[];
+	readonly author?: UserParams;
+	readonly title?: string;
+	readonly description?: string;
+	readonly status?: string;
+	readonly createdAt?: string;
+	readonly updatedAt?: string;
+}
+
+export interface Task {
+	readonly id: number;
+	readonly roomId: number;
+	readonly tags: Tag[];
+	readonly author: User;
+	readonly title: string;
+	readonly description: string;
+	readonly status: string;
+	readonly createdAt: string;
+	readonly updatedAt: string;
+}
+
+export interface InvitationParams {
+	readonly id?: number;
+	readonly room?: RoomParams;
+	readonly inviter?: UserParams;
+	readonly user?: UserParams;
+	readonly status?: string;
+}
+
+export interface Invitation {
+	readonly id: number;
+	readonly room: Room;
+	readonly inviter: User;
+	readonly user: User;
+	readonly status: string;
+}
+
 export interface TestingApiFixture {
 	user(data?: UserParams): Promise<User>;
 	removeUser(data?: UserParams): Promise<boolean>;
+
 	auth(data?: LoginParams): Promise<Login>;
 	logout(data: never): Promise<boolean>;
+
 	room(data?: RoomParams): Promise<Room>;
 	removeRoom(data?: RoomParams): Promise<boolean>;
+
+	member(data?: MemberParams): Promise<Member>;
+	removeMember(data?: MemberParams): Promise<boolean>;
+
+	tag(data?: TagParams): Promise<Tag>;
+	removeTag(data?: TagParams): Promise<boolean>;
+
+	task(data?: TaskParams): Promise<Task>;
+	removeTask(data?: TaskParams): Promise<boolean>;
+
+	invitation(data?: InvitationParams): Promise<Task>;
+	removeInvitation(data?: InvitationParams): Promise<boolean>;
 }
 
 const buildUrl = (endpoint: string): string => {
@@ -142,6 +226,83 @@ const removeRoom = async (
 	});
 };
 
+const member = async (
+	ctx: BrowserContext,
+	data: MemberParams = {}
+): Promise<Member> => {
+	return request(ctx, '/member', {
+		method: 'POST',
+		data,
+	});
+};
+
+const removeMember = async (
+	ctx: BrowserContext,
+	data: MemberParams = {}
+): Promise<boolean> => {
+	return request(ctx, '/member', {
+		method: 'PUT',
+		data,
+	});
+};
+
+const tag = async (ctx: BrowserContext, data: TagParams = {}): Promise<Tag> => {
+	return request(ctx, '/tag', {
+		method: 'POST',
+		data,
+	});
+};
+
+const removeTag = async (
+	ctx: BrowserContext,
+	data: TagParams = {}
+): Promise<boolean> => {
+	return request(ctx, '/tag', {
+		method: 'PUT',
+		data,
+	});
+};
+
+const task = async (
+	ctx: BrowserContext,
+	data: TaskParams = {}
+): Promise<Task> => {
+	return request(ctx, '/task', {
+		method: 'POST',
+		data,
+	});
+};
+
+const removeTask = async (
+	ctx: BrowserContext,
+	data: TaskParams = {}
+): Promise<boolean> => {
+	return request(ctx, '/task', {
+		method: 'PUT',
+		data,
+	});
+};
+
+const invitation = async (
+	ctx: BrowserContext,
+	data: InvitationParams = {}
+): Promise<Invitation> => {
+	return request(ctx, '/invitation', {
+		method: 'POST',
+		data,
+	});
+};
+
+const removeInvitation = async (
+	ctx: BrowserContext,
+	data: InvitationParams = {}
+): Promise<boolean> => {
+	return request(ctx, '/invitation', {
+		method: 'PUT',
+		data,
+	});
+};
+
 export const test = base.extend<TestingApiFixture>({
 	user: async ({ context }, use) => {
 		await use(createRequest(context, user));
@@ -160,5 +321,29 @@ export const test = base.extend<TestingApiFixture>({
 	},
 	removeRoom: async ({ context }, use) => {
 		await use(createRequest(context, removeRoom));
+	},
+	member: async ({ context }, use) => {
+		await use(createRequest(context, member));
+	},
+	removeMember: async ({ context }, use) => {
+		await use(createRequest(context, removeMember));
+	},
+	tag: async ({ context }, use) => {
+		await use(createRequest(context, tag));
+	},
+	removeTag: async ({ context }, use) => {
+		await use(createRequest(context, removeTag));
+	},
+	task: async ({ context }, use) => {
+		await use(createRequest(context, task));
+	},
+	removeTask: async ({ context }, use) => {
+		await use(createRequest(context, removeTask));
+	},
+	invitation: async ({ context }, use) => {
+		await use(createRequest(context, invitation));
+	},
+	removeInvitation: async ({ context }, use) => {
+		await use(createRequest(context, removeInvitation));
 	},
 });

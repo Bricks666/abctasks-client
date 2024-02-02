@@ -1,5 +1,5 @@
 import { Page, expect } from '@playwright/test';
-import { test } from './fixtures/testing-api';
+import { test } from './fixtures';
 
 const email = 'testing@email.com';
 const password = 'password';
