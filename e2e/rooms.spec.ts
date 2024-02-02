@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 
 import { expectAlert, getMenuItemByName } from './utils';
-import { User, test } from './fixtures/testing-api';
+import { User, test } from './fixtures';
 
 const getFormControls = (loc: Locator | Page) => {
 	const name = loc.getByLabel('Name');
