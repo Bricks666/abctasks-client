@@ -7,9 +7,9 @@ import { searchUserModel } from '@/entities/users';
 import { popupsMap } from '@/shared/configs';
 import { createPopupControlModel } from '@/shared/lib';
 
-export const popupControls = createPopupControlModel(
-	popupsMap.createInvitation
-);
+export const popupControls = createPopupControlModel({
+	name: popupsMap.createInvitation,
+});
 
 sample({
 	clock: inviteUserIntoRoomModel.mutation.finished.success,

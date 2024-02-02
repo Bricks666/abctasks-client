@@ -10,6 +10,9 @@ import {
 } from '@/widgets/invitations';
 import { Popups, PopupsProps } from '@/widgets/page';
 
+import { ConfirmRemoveInvitation } from '@/features/invitation';
+import { ConfirmRemoveUser, ConfirmUserExit } from '@/features/users';
+
 import { roomModel } from '@/entities/rooms';
 
 import { popupsMap } from '@/shared/configs';
@@ -23,6 +26,9 @@ export interface UsersPageProps extends CommonProps {}
 
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createInvitation]: CreateInvitation,
+	[popupsMap.removeInvitation]: ConfirmRemoveInvitation,
+	[popupsMap.removeUserFromRoom]: ConfirmRemoveUser,
+	[popupsMap.exitRoom]: ConfirmUserExit,
 };
 
 const UsersPage: React.FC<UsersPageProps> = (props) => {

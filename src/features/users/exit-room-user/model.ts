@@ -1,13 +1,14 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { redirect } from 'atomic-router';
-import { createDomain, sample } from 'effector';
+import { createDomain, createEvent, createStore, sample } from 'effector';
 import { Literal } from 'runtypes';
 
 import { roomsModel } from '@/entities/rooms';
 
 import { membersApi } from '@/shared/api';
-import { i18n, routes } from '@/shared/configs';
+import { i18n, popupsMap, routes } from '@/shared/configs';
+import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import {
 	StandardResponse,
@@ -23,9 +24,48 @@ const handlerFx = exitRoomDomain.effect<
 	Error
 >(membersApi.exit);
 
+export const popupControls = createPopupControlModel({
+	name: popupsMap.exitRoom,
+	sync: false,
+});
+
+const $roomId = createStore<number | null>(null);
+
+export const openConfirm = createEvent<number>();
+export const exit = createEvent();
+
 export const mutation = createMutation({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Literal(true))),
+});
+
+sample({
+	clock: openConfirm,
+	target: [popupControls.open, $roomId],
+});
+
+sample({
+	clock: exit,
+	source: {
+		roomId: $roomId,
+	},
+	filter: ({ roomId, }) => !!roomId,
+	fn: ({ roomId, }) => {
+		return {
+			roomId,
+		} as InRoomParams;
+	},
+	target: mutation.start,
+});
+
+sample({
+	clock: mutation.finished.finally,
+	target: popupControls.close,
+});
+
+sample({
+	clock: popupControls.closed,
+	target: $roomId.reinit!,
 });
 
 redirect({

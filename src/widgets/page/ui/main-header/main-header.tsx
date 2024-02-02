@@ -6,8 +6,7 @@ import { AdaptiveColorSchemeToggler, ChangeLanguage } from '@/features/page';
 import { CommonProps } from '@/shared/types';
 import { TemplateHeader, TemplateHeaderProps } from '@/shared/ui';
 
-import { Menu } from '../menu';
-
+import { AppMenu } from '../app-menu';
 
 export interface MainHeaderProps extends CommonProps, TemplateHeaderProps {}
 
@@ -21,7 +20,7 @@ export const MainHeader: React.FC<MainHeaderProps> = (props) => {
 				...slots,
 				left: (
 					<>
-						<Menu />
+						<AppMenu />
 						{slots?.left}
 					</>
 				),

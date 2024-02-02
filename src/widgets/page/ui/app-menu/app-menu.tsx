@@ -18,9 +18,9 @@ import { RoomListItem, useRooms } from '@/entities/rooms';
 import { useToggle } from '@/shared/lib';
 import { Scrollable } from '@/shared/ui';
 
-import styles from './menu.module.css';
+import styles from './app-menu.module.css';
 
-export const Menu: React.FC = () => {
+export const AppMenu: React.FC = () => {
 	const [isOpen, { toggleOff: close, toggleOn: open, }] = useToggle();
 	const rooms = useRooms();
 	const { t, } = useTranslation('common');
@@ -39,7 +39,7 @@ export const Menu: React.FC = () => {
 				PaperProps={{ className: styles.menu, }}>
 				<Navigation />
 				<Divider />
-				<Scrollable direction='vertical' hideScroll={false}>
+				<Scrollable direction='vertical'>
 					<List className={styles.list} disablePadding>
 						<ListSubheader disableSticky>{subheader}</ListSubheader>
 						{rooms.data.map((room) => (

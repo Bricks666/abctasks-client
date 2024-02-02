@@ -4,3 +4,4 @@ export {
 	ExitRoomUserMenuItem,
 	type ExitRoomUserMenuItemProps
 } from './menu-item';
+export { ConfirmUserExit, type ConfirmUserExitProps } from './confirm';

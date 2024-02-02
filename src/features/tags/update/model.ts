@@ -25,7 +25,9 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(tag)),
 });
 
-export const popupControls = createPopupControlModel(popupsMap.updateTag);
+export const popupControls = createPopupControlModel({
+	name: popupsMap.updateTag,
+});
 export const $roomId = routes.room.tags.$params.map((params) => params.id);
 export const form = tagFormModel.create();
 export const tagId = createQueryModel<number | null>({

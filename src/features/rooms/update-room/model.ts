@@ -32,7 +32,9 @@ export const mutation = createMutation<
 });
 
 export const form = roomFormModel.create();
-export const popupControls = createPopupControlModel(popupsMap.updateRoom);
+export const popupControls = createPopupControlModel({
+	name: popupsMap.updateRoom,
+});
 export const roomId = createQueryModel<number | null>({
 	name: getParams.roomId,
 	defaultValue: null,

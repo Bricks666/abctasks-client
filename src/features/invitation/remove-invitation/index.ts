@@ -3,3 +3,7 @@ export {
 	RemoveInvitation,
 	type RemoveInvitationProps
 } from './remove-invitation';
+export {
+	ConfirmRemoveInvitation,
+	type ConfirmRemoveInvitationProps
+} from './confirm';

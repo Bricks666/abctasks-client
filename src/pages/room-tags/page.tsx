@@ -5,7 +5,12 @@ import { useTranslation } from 'react-i18next';
 
 import { Popups, PopupsProps } from '@/widgets/page';
 
-import { CreateTag, OpenCreateTagForm, UpdateTag } from '@/features/tags';
+import {
+	ConfirmRemoveTag,
+	CreateTag,
+	OpenCreateTagForm,
+	UpdateTag
+} from '@/features/tags';
 
 import { popupsMap } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
@@ -19,6 +24,7 @@ export interface TagsPageProps extends CommonProps {}
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createTag]: CreateTag,
 	[popupsMap.updateTag]: UpdateTag,
+	[popupsMap.removeTag]: ConfirmRemoveTag,
 };
 
 const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {

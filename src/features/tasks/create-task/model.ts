@@ -38,7 +38,9 @@ export const mutation = createMutation<
 
 export const form = taskFormModel.create();
 
-export const popupControls = createPopupControlModel(popupsMap.createTask);
+export const popupControls = createPopupControlModel({
+	name: popupsMap.createTask,
+});
 
 export const status = createQueryModel<TaskStatus | null>({
 	name: getParams.taskStatus,

@@ -1,20 +1,62 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createEffect, sample } from 'effector';
+import { createEffect, createEvent, createStore, sample } from 'effector';
 import { Boolean } from 'runtypes';
 
 import { invitationsModel } from '@/entities/invitations';
 
-import { invitationsApi } from '@/shared/api';
-import { i18n } from '@/shared/configs';
+import { RemoveInvitationRequestParams, invitationsApi } from '@/shared/api';
+import { i18n, popupsMap, routes } from '@/shared/configs';
+import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { getStandardResponse } from '@/shared/types';
 
 const handlerFx = createEffect(invitationsApi.remove);
 
+const $id = createStore<number | null>(null);
+
+export const openConfirm = createEvent<number>();
+export const remove = createEvent();
+
+export const popupControls = createPopupControlModel({
+	name: popupsMap.removeInvitation,
+	sync: false,
+});
+
 export const mutation = createMutation({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Boolean)),
+});
+
+sample({
+	clock: openConfirm,
+	target: [$id, popupControls.open],
+});
+
+sample({
+	clock: remove,
+	source: {
+		id: $id,
+		roomId: routes.room.users.$params.map((params) => params.id),
+	},
+	filter: ({ id, roomId, }) => !!id && !!roomId,
+	fn: ({ roomId, id, }) => {
+		return {
+			roomId,
+			id,
+		} as RemoveInvitationRequestParams;
+	},
+	target: mutation.start,
+});
+
+sample({
+	clock: popupControls.closed,
+	target: $id.reinit!,
+});
+
+sample({
+	clock: mutation.finished.finally,
+	target: popupControls.close,
 });
 
 update(invitationsModel.query, {
