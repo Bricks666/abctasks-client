@@ -17,7 +17,7 @@ const getFormControls = (page: Page) => {
 	};
 };
 
-test.describe('login page', () => {
+test.describe('login page(online)', () => {
 	const email = 'testemail@gmail.com';
 	const password = 'password';
 
@@ -73,7 +73,7 @@ test.describe('login page', () => {
 		user,
 	}) => {
 		const deactivated = await user({
-			email,
+			email: 'deactivated@example.com',
 			password,
 			activated: false,
 		});

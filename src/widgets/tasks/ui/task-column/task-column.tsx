@@ -29,6 +29,8 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	const { tasks, className, columnStatus, hasActions, header, isLoading, } =
 		props;
+	const id = React.useId();
+
 	const onDrop = useUnit(dragTaskModel.drop);
 
 	let items: React.ReactElement[];
@@ -49,10 +51,6 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	 * @todo
 	 * Should I make it ul list?
 	 */
-	/**
-	 * @todo
-	 * Add translation for aria-label
-	 */
 	return (
 		<Stack
 			className={cn(styles.wrapper, className)}
@@ -60,9 +58,9 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 			onDrop={onDrop}
 			onDragOver={onDragOver}
 			data-status={columnStatus}
-			aria-label={header!}
+			aria-labelledby={id}
 			component='section'>
-			<TaskColumnHeader slots={{ actions: headerActions, }}>
+			<TaskColumnHeader id={id} slots={{ actions: headerActions, }}>
 				{header}
 			</TaskColumnHeader>
 			<Stack className={styles.list} spacing={1} role='group'>

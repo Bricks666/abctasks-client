@@ -3,10 +3,10 @@ import { Locator, Page, expect } from '@playwright/test';
 import { expectAlert, getMenuItemByName } from './utils';
 import { User, test } from './fixtures';
 
-const getFormControls = (loc: Locator | Page) => {
+const getFormControls = (loc: Locator | Page, buttonText: string) => {
 	const name = loc.getByLabel('Name');
 	const description = loc.getByLabel('Description');
-	const button = loc.getByRole('link', { name: 'Open' });
+	const button = loc.getByRole('button', { name: buttonText });
 
 	return {
 		name,
@@ -28,7 +28,7 @@ const getRoomCard = (
 		.first();
 };
 
-test.describe('rooms page', () => {
+test.describe('rooms page(online)', () => {
 	let user: User;
 
 	const name = 'test room name';
@@ -56,13 +56,11 @@ test.describe('rooms page', () => {
 		});
 
 		await expect(button).toBeVisible();
-
 		await button.click();
 
 		const form = page.locator('form');
 		await expect(form).toBeVisible();
-
-		const controls = getFormControls(form);
+		const controls = getFormControls(form, 'Create');
 
 		await expect(controls.name).toHaveValue('');
 		await expect(controls.description).toHaveValue('');
@@ -72,13 +70,11 @@ test.describe('rooms page', () => {
 		await controls.button.click();
 
 		await expect(form).toBeHidden();
-
 		await expectAlert({
 			parent: page,
 			message: 'Room was created successfully',
 			type: 'success',
 		});
-
 		await expect(getRoomCard(page, name, description)).toBeVisible();
 	});
 
@@ -89,8 +85,11 @@ test.describe('rooms page', () => {
 			ownerId: user.id,
 		});
 
-		const card = getRoomCard(page, created.name, created.description);
+		const list = page.getByRole('list');
 
+		await expect(list).toBeVisible();
+
+		const card = getRoomCard(list, created.name, created.description);
 		const button = card.getByRole('link', { name: 'Open', exact: true });
 
 		await button.click();
@@ -104,89 +103,74 @@ test.describe('rooms page', () => {
 			name,
 		});
 
-		const card = getRoomCard(page, created.name, created.description);
+		const list = page.getByRole('list');
 
+		await expect(list).toBeVisible();
+
+		const card = getRoomCard(list, created.name, created.description);
 		const button = card.getByRole('button');
 
 		await button.click();
-
 		const editRoom = getMenuItemByName(page, 'Edit room');
-
 		await editRoom.click();
-
 		const form = page.locator('form');
-
 		await expect(form).toBeVisible();
 
-		const controls = getFormControls(form);
+		const controls = getFormControls(form, 'Save');
 
 		await expect(controls.name).toHaveValue(created.name);
 		await expect(controls.description).toHaveValue(created.description);
 
 		const newName = `new ${created.name}`;
-
 		await controls.name.fill(newName);
-
 		await controls.button.click();
 
 		await expect(form).toBeHidden();
-
 		/**
 		 * @remarks
 		 * Need to close menu
 		 */
-
 		await expectAlert({
 			parent: page,
 			message: 'Room was updated successfully',
 			type: 'success',
 		});
-
 		await expect(getRoomCard(page, newName, created.description)).toBeVisible();
 	});
 
 	test('can remove room', async ({ page, room }) => {
 		const name = 'room-for-removing';
-
 		const created = await room({
 			ownerId: user.id,
 			name,
 		});
 
-		const card = getRoomCard(page, created.name, created.description);
+		const list = page.getByRole('list');
 
-		const button = card.getByRole('button');
+		await expect(list).toBeVisible();
 
-		await button.click();
+		const card = getRoomCard(list, created.name, created.description);
+		const menu = card.getByRole('button');
 
-		const removeRoom = getMenuItemByName(page, 'Remove room');
-
-		await removeRoom.click();
-
+		await menu.click();
+		const menuitem = getMenuItemByName(page, 'Remove room');
+		await menuitem.click();
 		const dialog = page.getByRole('dialog');
-
 		await expect(dialog).toBeVisible();
-
 		const cancelButton = dialog.getByRole('button', { name: 'Cancel' });
-
 		await cancelButton.click();
-
 		await expect(dialog).toBeHidden();
-
-		await removeRoom.click();
-
+		await menu.click();
+		await menuitem.click();
 		const removeButton = dialog.getByRole('button', { name: 'Remove' });
-
 		await removeButton.click();
 
 		await expect(dialog).toBeHidden();
-
 		await expectAlert({
 			parent: page,
 			message: 'Room was removed successfully',
 			type: 'success',
 		});
-
 		await expect(
 			getRoomCard(page, created.name, created.description)
 		).toBeHidden();
@@ -194,46 +178,33 @@ test.describe('rooms page', () => {
 
 	test('can exit room', async ({ page, room }) => {
 		const name = 'room-for-exit';
-
 		const created = await room({
 			ownerId: user.id,
 			name,
 		});
 
 		const card = getRoomCard(page, created.name, created.description);
+		const menu = card.getByRole('button');
 
-		const button = card.getByRole('button');
-
-		await button.click();
-
-		const exitRoom = getMenuItemByName(page, 'Exit from room');
-
-		await exitRoom.click();
-
+		await menu.click();
+		const menuitem = getMenuItemByName(page, 'Exit from room');
+		await menuitem.click();
 		const dialog = page.getByRole('dialog');
-
 		await expect(dialog).toBeVisible();
-
 		const cancelButton = dialog.getByRole('button', { name: 'Cancel' });
-
 		await cancelButton.click();
-
 		await expect(dialog).toBeHidden();
-
-		await exitRoom.click();
-
+		await menu.click();
+		await menuitem.click();
 		const removeButton = dialog.getByRole('button', { name: 'Exit' });
-
 		await removeButton.click();
 
 		await expect(dialog).toBeHidden();
-
 		await expectAlert({
 			parent: page,
 			message: 'You exited from user successfully',
 			type: 'success',
 		});
-
 		await expect(
 			getRoomCard(page, created.name, created.description)
 		).toBeHidden();
