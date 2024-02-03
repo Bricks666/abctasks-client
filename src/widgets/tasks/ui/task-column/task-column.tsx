@@ -45,17 +45,27 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 		<OpenCreateTaskButton columnStatus={columnStatus} />
 	) : null;
 
+	/**
+	 * @todo
+	 * Should I make it ul list?
+	 */
+	/**
+	 * @todo
+	 * Add translation for aria-label
+	 */
 	return (
 		<Stack
 			className={cn(styles.wrapper, className)}
 			spacing={1}
 			onDrop={onDrop}
 			onDragOver={onDragOver}
-			data-status={columnStatus}>
+			data-status={columnStatus}
+			aria-label={header!}
+			component='section'>
 			<TaskColumnHeader slots={{ actions: headerActions, }}>
 				{header}
 			</TaskColumnHeader>
-			<Stack className={styles.list} spacing={1} component='main'>
+			<Stack className={styles.list} spacing={1} role='group'>
 				{items}
 			</Stack>
 		</Stack>

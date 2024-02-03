@@ -135,7 +135,6 @@ test.describe('rooms page', () => {
 		 * @remarks
 		 * Need to close menu
 		 */
-		await page.locator('body').click();
 
 		await expectAlert({
 			parent: page,
@@ -181,8 +180,6 @@ test.describe('rooms page', () => {
 		await removeButton.click();
 
 		await expect(dialog).toBeHidden();
-
-		await page.locator('body').click();
 
 		await expectAlert({
 			parent: page,
@@ -230,8 +227,6 @@ test.describe('rooms page', () => {
 		await removeButton.click();
 
 		await expect(dialog).toBeHidden();
-
-		await page.locator('body').click();
 
 		await expectAlert({
 			parent: page,

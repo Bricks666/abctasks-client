@@ -24,7 +24,6 @@ export interface InvitationListProps extends CommonProps {}
 export const InvitationList: React.FC<InvitationListProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room-invitations');
-	const roomId = useParam(routes.room.users, 'id');
 
 	const emptyText = t('list.empty_text');
 
@@ -39,7 +38,6 @@ export const InvitationList: React.FC<InvitationListProps> = (props) => {
 					username: invitation.user!.username,
 					photo: invitation.user!.photo,
 					inviterName: invitation.inviter.username,
-					roomId,
 				}))
 			}
 			getKey={(item) => item.id}

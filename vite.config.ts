@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, '.', '');
 
 	return {
+		build: {
+			sourcemap: true,
+		},
 		server: {
 			port: 3000,
 			cors: true,

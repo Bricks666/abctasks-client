@@ -25,10 +25,14 @@ export interface LastActivitiesProps extends CommonProps {
 export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
 	const { className, disableBorder, } = props;
 	const { t, } = useTranslation('activities');
+	const id = React.useId();
 
 	const emptyText = t('list.empty_text');
 	const title = t('blocks.last_activities.title', { ns: 'room-tasks', });
 
+	/**
+	 * @todo
+	 */
 	return (
 		<FriendlyList
 			className={className}
@@ -42,13 +46,17 @@ export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
 			emptyText={emptyText}
 			slots={{
 				before: (
-					<Typography variant='h6' component='h2' fontWeight={700}>
+					<Typography id={id} variant='h6' component='h2' fontWeight={700}>
 						{title}
 					</Typography>
 				),
 				after: <OpenAllRoomActivities />,
 			}}
 			disableBorder={disableBorder}
+			rootProps={{
+				component: 'section',
+				'aria-labelledby': id,
+			}}
 		/>
 	);
 };

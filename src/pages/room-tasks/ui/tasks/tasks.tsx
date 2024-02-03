@@ -51,8 +51,7 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 	return (
 		<Scrollable
 			className={cn(styles.wrapper, className)}
-			direction='horizontal'
-			component='section'>
+			direction='horizontal'>
 			{columns.map(({ status, tasks, hasActions, }) => (
 				<TaskColumn
 					tasks={tasks}

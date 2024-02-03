@@ -1,6 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 
-export type ActivityItemType = 'success' | 'error' | 'info';
+export type ActivityItemType = 'success' | 'error' | 'warning';
 
 export interface ExpectActivityItemParams {
 	readonly parent: Page | Locator;
@@ -11,7 +11,7 @@ export interface ExpectActivityItemParams {
 const iconIdMap = {
 	success: 'AddIcon',
 	error: 'DeleteIcon',
-	info: 'EditIcon',
+	warning: 'EditIcon',
 };
 
 export const expectActivityItem = async (
@@ -24,7 +24,7 @@ export const expectActivityItem = async (
 		.filter({ hasText: new RegExp(content) });
 
 	await expect(item).toBeVisible();
-	await expect(item.getByRole('paragraph')).toHaveText(content);
+	await expect(item).toHaveText(new RegExp(content));
 	await expect(item.getByTestId(iconIdMap[type])).toBeVisible();
 
 	return item;
