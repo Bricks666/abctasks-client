@@ -79,6 +79,10 @@ test.describe('tasks page(online)', () => {
 		await page.goto(`/rooms/${room.id}/tasks`);
 	});
 
+	test('has correct view', async ({ page }) => {
+		await expect(page).toHaveScreenshot();
+	});
+
 	test('has right title', async ({ page }) => {
 		await expect(page).toHaveTitle(/Tasks/);
 	});

@@ -21,7 +21,7 @@ const getFormControls = (page: Page) => {
 	};
 };
 
-test.describe('registration page', () => {
+test.describe('registration page(online)', () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/registration');
 	});
@@ -59,7 +59,6 @@ test.describe('registration page', () => {
 			'color',
 			'rgb(211, 47, 47)'
 		);
-
 		await expect(controls.password).toBeEmpty();
 		await expect(controls.repeatPassword).toBeEmpty();
 	});
@@ -100,7 +99,6 @@ test.describe('registration page', () => {
 		await expect(page).toHaveTitle('Thanks for registration');
 		await expect(page.getByRole('link')).toBeVisible();
 		await page.getByRole('link').click();
-
 		await expect(page).toHaveURL('/login');
 	});
 });
