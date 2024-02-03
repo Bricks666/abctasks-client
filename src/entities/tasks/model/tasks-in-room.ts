@@ -42,8 +42,6 @@ sample({
 	target: loaded.disable,
 });
 
-// export const $loaded = query.$status.map((status) => status !== 'initial');
-
 interface Column {
 	readonly tasks: Task[];
 	readonly status: TaskStatus;
@@ -82,5 +80,5 @@ export const $tasksColumns = combine(query.$data, (tasks) => {
 cache(query);
 
 keepFresh(query, {
-	triggers: [interval({ timeout: 5000, })],
+	triggers: [interval({ timeout: 6000, })],
 });

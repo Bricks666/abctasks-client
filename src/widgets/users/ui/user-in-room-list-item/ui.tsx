@@ -35,9 +35,7 @@ export const UserInRoomListItem: React.FC<UserInRoomListItemProps> = (
 		isAuthorized && !isOwner ? <ExitRoomUserButton roomId={roomId} /> : null;
 
 	const removeUserButton =
-		isOwnerAuthorized && !isOwner ? (
-			<RemoveUserFromRoom userId={id} roomId={roomId} />
-		) : null;
+		isOwnerAuthorized && !isOwner ? <RemoveUserFromRoom userId={id} /> : null;
 
 	const actions = (
 		<>

@@ -16,7 +16,6 @@ export interface InvitationListItemProps
 	extends CommonProps,
 		Omit<TemplateInvitationListItemProps, 'slots' | 'id'> {
 	readonly id: number;
-	readonly roomId: number;
 	readonly email: string;
 	readonly photo: string | null;
 }
@@ -24,12 +23,10 @@ export interface InvitationListItemProps
 export const InvitationListItem: React.FC<InvitationListItemProps> = (
 	props
 ) => {
-	const { id, roomId, username, email, photo, ...rest } = props;
+	const { id, username, email, photo, ...rest } = props;
 	const canChange = useUnit(roomModel.$canChange);
 
-	const actions = canChange ? (
-		<RemoveInvitation id={id} roomId={roomId} />
-	) : null;
+	const actions = canChange ? <RemoveInvitation id={id} /> : null;
 
 	const userAvatar = (
 		<UserAvatar username={username} email={email} photo={photo} />
