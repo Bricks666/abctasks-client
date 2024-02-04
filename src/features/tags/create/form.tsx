@@ -29,7 +29,7 @@ export const CreateTag: React.FC<CreateTagProps> = (props) => {
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
 	const title = t('actions.create_tag.title');
-	const buttonText = t('actions.save', { ns: 'common', });
+	const buttonText = t('actions.create', { ns: 'common', });
 
 	const actions = isFullscreen ? (
 		<Button type='submit' onClick={onClick}>

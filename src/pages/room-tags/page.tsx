@@ -13,6 +13,7 @@ import {
 } from '@/features/tags';
 
 import { popupsMap } from '@/shared/configs';
+import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { SectionHeader } from '@/shared/ui';
 
@@ -32,6 +33,8 @@ const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 	const { t, } = useTranslation('room-tags');
 
 	const title = t('title');
+
+	usePageTitle(title);
 
 	return (
 		<Container className={cn(styles.container, className)}>
