@@ -1,18 +1,17 @@
-.header {
-	display: grid;
-	grid-template-columns: 1fr max-content;
-	column-gap: 1em;
-	align-items: center;
+.text {
+	max-width: 200px;
 
-	padding: 2rem 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .titleSkeleton {
-  margin-bottom: 0.2em;
+	margin-bottom: 0.2em;
 }
 
-.description {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+@media (max-width: 560px) {
+	.text {
+		max-width: 120px;
+	}
 }
