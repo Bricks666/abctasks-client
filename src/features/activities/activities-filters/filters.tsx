@@ -71,8 +71,11 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 			title={title}
 			icon={<TuneIcon />}
 			slots={{ actions: buttons, }}>
-			{({ isPopup, }) => (
-				<form className={cn(styles.form, className)} onSubmit={onSubmit}>
+			{({ isPopup, titleId, }) => (
+				<form
+					className={cn(styles.form, className)}
+					onSubmit={onSubmit}
+					aria-labelledby={titleId}>
 					<Action />
 					<Spheres />
 					<Users />
@@ -88,7 +91,7 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 const Action: React.FC = () => {
 	const { t, } = useTranslation('room-activities');
 
-	const label = t('actions.filter_activities.fields.types');
+	const label = t('actions.filter_activities.fields.action');
 
 	const actionIds = useUnit(form.fields.actionIds);
 

@@ -80,5 +80,5 @@ export const $tasksColumns = combine(query.$data, (tasks) => {
 cache(query);
 
 keepFresh(query, {
-	triggers: [interval({ timeout: 6000, })],
+	triggers: [interval({ timeout: 5000, })],
 });

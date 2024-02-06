@@ -25,6 +25,7 @@ export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
 		transformOrigin,
 	} = props;
 	const [isOpen, { toggle, }] = useToggle();
+	const menuId = React.useId();
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
 
 	const expanded = isOpen ? 'true' : undefined;
@@ -37,10 +38,12 @@ export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
 				tabIndex={0}
 				aria-expanded={expanded}
 				aria-haspopup='true'
+				aria-controls={menuId}
 				ref={setReference}>
 				<MoreHorizIcon />
 			</IconButton>
 			<Menu
+				id={menuId}
 				anchorEl={reference}
 				open={isOpen}
 				onClose={toggle}

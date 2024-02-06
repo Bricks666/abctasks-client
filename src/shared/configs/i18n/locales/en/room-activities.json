@@ -4,7 +4,7 @@
 		"filter_activities": {
 			"title": "Activities filters",
 			"fields": {
-				"types": "Activities types",
+				"action": "Activities action",
 				"spheres": "Activities spheres",
 				"users": "Users"
 			},

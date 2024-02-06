@@ -1,4 +1,4 @@
-import { Tooltip, IconButton, Popover } from '@mui/material';
+import { Tooltip, IconButton, Popover, Typography } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 
@@ -9,6 +9,7 @@ import { FullWidthPopup, FullWidthPopupProps } from '../full-width-popup';
 
 interface RenderProps {
 	readonly isPopup: boolean;
+	readonly titleId: string;
 }
 
 export interface FiltersPopoverProps extends CommonProps {
@@ -26,6 +27,8 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 		props;
 
 	const [ref, setRef] = React.useState<HTMLElement | null>(null);
+	const titleId = React.useId();
+	const popupId = React.useId();
 
 	const [isMobile, isVertical] = useUnit([
 		deviceInfoModel.$isMobile,
@@ -34,23 +37,28 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 
 	const isPopup = isMobile || isVertical;
 
-	const child = React.createElement(children, { isPopup, });
+	const child = React.createElement(children, { isPopup, titleId, });
 
 	let content: React.ReactElement;
 
 	if (isPopup) {
 		content = (
 			<FullWidthPopup
+				id={popupId}
 				isOpen={open}
 				onClose={onClose}
 				title={title}
-				slots={slots}>
+				slots={slots}
+				DialogTitleProps={{
+					id: titleId,
+				}}>
 				{child}
 			</FullWidthPopup>
 		);
 	} else {
 		content = (
 			<Popover
+				id={popupId}
 				open={open}
 				onClose={onClose}
 				anchorEl={ref}
@@ -62,10 +70,18 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 					horizontal: 'right',
 					vertical: 'top',
 				}}>
+				<Typography id={titleId} className='visibility-hidden' component='p'>
+					{title}
+				</Typography>
 				{child}
 			</Popover>
 		);
 	}
+
+	/**
+	 * @todo
+	 * Add aria-label for button
+	 */
 
 	return (
 		<>
@@ -73,6 +89,9 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 				<IconButton
 					className={className}
 					onClick={open ? onClose : onOpen}
+					aria-expanded={open}
+					aria-haspopup='true'
+					aria-controls={popupId}
 					ref={setRef}>
 					{icon}
 				</IconButton>

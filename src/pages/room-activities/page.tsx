@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ActivitiesFilters } from '@/features/activities';
 
+import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { SectionHeader } from '@/shared/ui';
 
@@ -16,6 +17,8 @@ const ActivitiesPage: React.FC<CommonProps> = React.memo((props) => {
 	const { t, } = useTranslation('room-activities');
 
 	const title = t('title');
+
+	usePageTitle(title);
 
 	return (
 		<Container className={cn(styles.wrapper, className)}>
