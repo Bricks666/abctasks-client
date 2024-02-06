@@ -361,4 +361,6 @@ test.describe('tasks page(online)', () => {
 
 		await expect(page).toHaveURL(new RegExp(`/${room.id}/activities`));
 	});
+
+	test.describe('tasks filtering', () => {});
 });

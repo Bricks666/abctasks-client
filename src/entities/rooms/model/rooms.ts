@@ -28,5 +28,5 @@ export const query = createQuery<
 cache(query);
 
 keepFresh(query, {
-	triggers: [interval({ timeout: 6000, })],
+	triggers: [interval({ timeout: 5000, })],
 });

@@ -4,6 +4,7 @@ import {
 	DialogActions,
 	DialogContent,
 	DialogTitle,
+	DialogTitleProps,
 	IconButton,
 	Slide,
 	SlideProps
@@ -19,18 +20,29 @@ export interface FullWidthPopupProps
 		React.PropsWithChildren {
 	readonly onClose: VoidFunction;
 	readonly title: string;
+	readonly DialogTitleProps?: DialogTitleProps;
 }
 
 export const FullWidthPopup: React.FC<FullWidthPopupProps> = (props) => {
-	const { isOpen, onClose, title, className, children, slots, } = props;
+	const {
+		id,
+		isOpen,
+		onClose,
+		title,
+		className,
+		children,
+		slots,
+		DialogTitleProps,
+	} = props;
 
 	return (
 		<Dialog
+			id={id}
 			open={isOpen}
 			onClose={onClose}
 			TransitionComponent={Transition}
 			fullScreen>
-			<DialogTitle align='center'>
+			<DialogTitle align='center' {...DialogTitleProps}>
 				{title}
 				<IconButton className={styles.cross} onClick={onClose}>
 					<CloseIcon />

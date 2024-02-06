@@ -1,6 +1,7 @@
-import { cache, createQuery } from '@farfetched/core';
+import { cache, createQuery, keepFresh } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
+import { interval } from 'patronum';
 
 import {
 	Activity,
@@ -43,3 +44,7 @@ export const $pageCount = query.$data.map((data) =>
 );
 
 cache(query);
+
+keepFresh(query, {
+	triggers: [interval({ timeout: 5000, })],
+});

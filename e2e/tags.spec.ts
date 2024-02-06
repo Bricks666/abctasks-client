@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { expectActivityItem, expectAlert, getMenuItemByName } from './utils';
+import { expectAlert } from './utils';
 import { Room, User, test } from './fixtures';
 
 const getFormControls = (locator: Locator | Page, buttonText: string) => {

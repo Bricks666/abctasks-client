@@ -117,6 +117,34 @@ export interface Invitation {
 	readonly status: string;
 }
 
+export interface ActivityParams {
+	readonly id?: number;
+	readonly room?: RoomParams;
+	readonly activist?: UserParams;
+	readonly action?: string;
+	readonly sphere?: string;
+	readonly createdAt?: string;
+}
+
+interface ActivitySphere {
+	readonly id: number;
+	readonly name: string;
+}
+
+interface ActivityAction {
+	readonly id: number;
+	readonly name: string;
+}
+
+export interface Activity {
+	readonly id: number;
+	readonly roomId: number;
+	readonly activist: User;
+	readonly action: ActivityAction;
+	readonly sphere: ActivitySphere;
+	readonly createdAt: string;
+}
+
 export interface TestingApiFixture {
 	user(data?: UserParams): Promise<User>;
 	removeUser(data?: UserParams): Promise<boolean>;
@@ -136,8 +164,11 @@ export interface TestingApiFixture {
 	task(data?: TaskParams): Promise<Task>;
 	removeTask(data?: TaskParams): Promise<boolean>;
 
-	invitation(data?: InvitationParams): Promise<Task>;
+	invitation(data?: InvitationParams): Promise<Invitation>;
 	removeInvitation(data?: InvitationParams): Promise<boolean>;
+
+	activity(data?: ActivityParams): Promise<Activity>;
+	removeActivity(data?: ActivityParams): Promise<boolean>;
 }
 
 const buildUrl = (endpoint: string): string => {
@@ -303,6 +334,26 @@ const removeInvitation = async (
 	});
 };
 
+const activity = async (
+	ctx: BrowserContext,
+	data: ActivityParams = {}
+): Promise<Activity> => {
+	return request(ctx, '/activity', {
+		method: 'POST',
+		data,
+	});
+};
+
+const removeActivity = async (
+	ctx: BrowserContext,
+	data: ActivityParams = {}
+): Promise<boolean> => {
+	return request(ctx, '/activity', {
+		method: 'PUT',
+		data,
+	});
+};
+
 export const test = base.extend<TestingApiFixture>({
 	user: async ({ context }, use) => {
 		await use(createRequest(context, user));
@@ -345,5 +396,12 @@ export const test = base.extend<TestingApiFixture>({
 	},
 	removeInvitation: async ({ context }, use) => {
 		await use(createRequest(context, removeInvitation));
+	},
+
+	activity: async ({ context }, use) => {
+		await use(createRequest(context, activity));
+	},
+	removeActivity: async ({ context }, use) => {
+		await use(createRequest(context, removeActivity));
 	},
 });
