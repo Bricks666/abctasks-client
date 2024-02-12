@@ -15,7 +15,9 @@
 			},
 			"actions": {
 				"submit": "Пригласить {{ username }} в комнату",
-				"submit_disabled": "Выберите пользователя выше"
+				"submit_disabled": "Выберите пользователя выше",
+				"remove-selection": "Удалить выбор {{ username }}"
+
 			},
 			"notifications": {
 				"success": "Приглашение было отправлено успешно",

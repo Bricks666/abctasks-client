@@ -13,7 +13,6 @@ import { useTranslation } from 'react-i18next';
 import { Room } from '@/shared/api';
 import { stringToColor } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { Scrollable } from '@/shared/ui';
 
 import styles from './template-room-card.module.css';
 
@@ -36,13 +35,11 @@ export const TemplateRoomCard: React.FC<TemplateRoomCardProps> = (props) => {
 		<Card className={cn(styles.card, className)} component='li'>
 			<CardMedia sx={sx} />
 			<CardHeader className={styles.header} action={menu} title={name} />
-			<Scrollable direction='vertical'>
-				<CardContent className={styles.content}>
-					<Typography>
-						{descriptionText}: {description}
-					</Typography>
-				</CardContent>
-			</Scrollable>
+			<CardContent className={styles.content}>
+				<Typography>
+					{descriptionText}: {description}
+				</Typography>
+			</CardContent>
 			<CardActions className={styles.actions}>{actions}</CardActions>
 		</Card>
 	);

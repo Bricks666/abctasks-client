@@ -20,7 +20,7 @@
 .content {
 	padding: 1em;
 
-	height: 100%;
+	height: max-content;
 }
 
 .actions {

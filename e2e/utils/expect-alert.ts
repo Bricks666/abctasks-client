@@ -12,7 +12,7 @@ export interface ExpectAlertParams {
 const colors: Record<Type, string> = {
 	success: 'rgb(46, 125, 50)',
 	error: 'rgb(211, 47, 47)',
-	info: 'rgb(2, 136, 39)',
+	info: 'rgb(2, 136, 209)',
 };
 
 export const expectAlert = async (

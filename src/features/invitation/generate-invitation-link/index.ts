@@ -1,4 +1,4 @@
-export * as generateInvitationLinkModel from './generate-invitation-link';
+export * as generateInvitationLinkModel from './model';
 export {
 	GenerateInvitationLink,
 	type GenerateInvitationLinkProps

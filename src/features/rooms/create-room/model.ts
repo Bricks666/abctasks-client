@@ -65,7 +65,7 @@ update(roomsModel.query, {
 			}
 
 			return {
-				result: [...query.result, mutation.result.data],
+				result: [mutation.result.data, ...query.result],
 			};
 		},
 	},

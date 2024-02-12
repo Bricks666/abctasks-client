@@ -1,6 +1,9 @@
 import { sample } from 'effector';
 
-import { inviteUserIntoRoomModel } from '@/features/invitation';
+import {
+	generateInvitationLinkModel,
+	inviteUserIntoRoomModel
+} from '@/features/invitation';
 
 import { searchUserModel } from '@/entities/users';
 
@@ -12,7 +15,10 @@ export const popupControls = createPopupControlModel({
 });
 
 sample({
-	clock: inviteUserIntoRoomModel.mutation.finished.success,
+	clock: [
+		inviteUserIntoRoomModel.mutation.finished.success,
+		generateInvitationLinkModel.query.finished.success
+	],
 	target: popupControls.close,
 });
 

@@ -1,6 +1,5 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { redirect } from 'atomic-router';
 import { createEffect, createEvent, createStore, sample } from 'effector';
 import { Boolean } from 'runtypes';
 
@@ -58,11 +57,6 @@ sample({
 sample({
 	clock: popupControls.closed,
 	target: $id.reinit!,
-});
-
-redirect({
-	clock: mutation.finished.success,
-	route: routes.rooms.base,
 });
 
 update(usersInRoomModel.query, {

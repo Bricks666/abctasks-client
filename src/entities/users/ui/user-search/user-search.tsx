@@ -18,6 +18,7 @@ export interface UserSearchProps extends CommonProps, FieldProps {
 export const UserSearch: React.FC<UserSearchProps> = (props) => {
 	const { className, onChange, value, ...rest } = props;
 	const users = useSearchedUsers();
+	const resetUsers = useUnit(searchUserModel.query.reset);
 	const searchChanged = useUnit(searchUserModel.searchChanged);
 
 	const handleChange = (_: unknown, user: User | null) => {
@@ -25,6 +26,11 @@ export const UserSearch: React.FC<UserSearchProps> = (props) => {
 	};
 
 	const onInputChange = (_: unknown, value: string) => {
+		if (value === '') {
+			resetUsers();
+
+			return;
+		}
 		searchChanged(value);
 	};
 
