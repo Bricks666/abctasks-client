@@ -15,13 +15,15 @@ import { RoomFormValues } from './model';
 
 export interface RoomFormProps extends CommonProps {
 	readonly $form: Form<RoomFormValues>;
+	readonly ariaLabelledby?: string;
 	readonly hideButton?: boolean;
 	readonly buttonText?: string;
 	readonly disabled?: boolean;
 }
 
 export const RoomForm: React.FC<RoomFormProps> = (props) => {
-	const { className, buttonText, $form, disabled, hideButton, } = props;
+	const { className, buttonText, $form, disabled, hideButton, ariaLabelledby, } =
+		props;
 	const submit = useUnit($form.submit);
 
 	const onSubmit = usePreventDefault(submit);
@@ -31,6 +33,7 @@ export const RoomForm: React.FC<RoomFormProps> = (props) => {
 			className={cn(styles.form, className)}
 			spacing={1}
 			onSubmit={onSubmit}
+			aria-labelledby={ariaLabelledby}
 			component='form'>
 			<Name $form={$form} />
 			<Description $form={$form} />

@@ -23,9 +23,9 @@ const getRoomCard = (
 	return loc
 		.getByRole('listitem')
 		.filter({
-			hasText: new RegExp(`^${name}Description: ${description}`),
+			has: loc.getByText(name),
 		})
-		.first();
+		.filter({ has: loc.getByText(description) });
 };
 
 test.describe('rooms page(online)', () => {
@@ -34,12 +34,17 @@ test.describe('rooms page(online)', () => {
 	const name = 'test room name';
 	const description = 'test room description';
 
-	test.beforeEach(async ({ page, auth }) => {
+	test.beforeEach(async ({ page, auth, removeRoom }) => {
 		const data = await auth({
 			email: 'test@test.com',
 		});
 
 		user = data.user;
+		const removed = await removeRoom({
+			ownerId: user.id,
+		});
+
+		console.log(removed);
 
 		await page.goto('/rooms');
 	});
@@ -47,8 +52,6 @@ test.describe('rooms page(online)', () => {
 	test('can create room', async ({ page, removeRoom }) => {
 		await removeRoom({
 			ownerId: user.id,
-			name,
-			description,
 		});
 
 		const button = page.getByRole('button', {
@@ -58,7 +61,9 @@ test.describe('rooms page(online)', () => {
 		await expect(button).toBeVisible();
 		await button.click();
 
-		const form = page.locator('form');
+		const dialog = page.getByRole('dialog');
+		await expect(dialog).toBeVisible();
+		const form = dialog.getByRole('form', { name: 'Create room' });
 		await expect(form).toBeVisible();
 		const controls = getFormControls(form, 'Create');
 
@@ -101,6 +106,7 @@ test.describe('rooms page(online)', () => {
 		const created = await room({
 			ownerId: user.id,
 			name,
+			description: 'editable room',
 		});
 
 		const list = page.getByRole('list');
@@ -113,7 +119,7 @@ test.describe('rooms page(online)', () => {
 		await button.click();
 		const editRoom = getMenuItemByName(page, 'Edit room');
 		await editRoom.click();
-		const form = page.locator('form');
+		const form = page.getByRole('form', { name: 'Edit room' });
 		await expect(form).toBeVisible();
 
 		const controls = getFormControls(form, 'Save');

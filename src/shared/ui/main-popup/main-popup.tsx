@@ -5,6 +5,7 @@ import {
 	DialogActions,
 	DialogContent,
 	DialogTitle,
+	DialogTitleProps,
 	IconButton
 } from '@mui/material';
 import * as React from 'react';
@@ -17,6 +18,7 @@ export interface MainPopupProps extends CommonProps, BasePopupProps {
 	readonly onClose: VoidFunction;
 	readonly title: string;
 	readonly maxWidth?: Breakpoint;
+	readonly DialogTitleProps?: DialogTitleProps;
 }
 
 export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = (
@@ -29,12 +31,13 @@ export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = (
 		className,
 		title,
 		slots,
+		DialogTitleProps,
 		maxWidth = 'sm',
 	} = props;
 
 	return (
 		<Dialog open={isOpen} onClose={onClose} maxWidth={maxWidth} fullWidth>
-			<DialogTitle align='center'>
+			<DialogTitle align='center' {...DialogTitleProps}>
 				{title}
 				<IconButton className={styles.cross} onClick={onClose}>
 					<CloseIcon />

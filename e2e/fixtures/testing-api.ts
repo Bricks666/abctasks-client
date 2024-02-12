@@ -31,8 +31,8 @@ export interface Login {
 }
 
 export interface MemberParams {
-	readonly roomId?: number;
-	readonly userId?: number;
+	readonly room?: RoomParams;
+	readonly user?: UserParams;
 	readonly status?: 'activated' | 'removed';
 }
 
@@ -150,6 +150,7 @@ export interface TestingApiFixture {
 	removeUser(data?: UserParams): Promise<boolean>;
 
 	auth(data?: LoginParams): Promise<Login>;
+	registrationLink(data?: UserParams): Promise<string>;
 	logout(data: never): Promise<boolean>;
 
 	room(data?: RoomParams): Promise<Room>;
@@ -165,6 +166,7 @@ export interface TestingApiFixture {
 	removeTask(data?: TaskParams): Promise<boolean>;
 
 	invitation(data?: InvitationParams): Promise<Invitation>;
+	invitationLink(data?: InvitationParams): Promise<string>;
 	removeInvitation(data?: InvitationParams): Promise<boolean>;
 
 	activity(data?: ActivityParams): Promise<Activity>;

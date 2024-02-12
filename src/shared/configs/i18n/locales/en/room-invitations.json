@@ -15,7 +15,8 @@
 			},
 			"actions": {
 				"submit": "Invite {{ username }} to the room",
-				"submit_disabled": "Select user above"
+				"submit_disabled": "Select user above",
+				"remove-selection": "Unselect {{ username }}"
 			},
 			"notifications": {
 				"success": "Invitation was sent successfully",

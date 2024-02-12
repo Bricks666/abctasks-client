@@ -52,13 +52,17 @@ const User: React.FC = () => {
 	const { t, } = useTranslation('room-invitations');
 
 	if (user.value) {
+		const label = t('actions.invite_user.actions.remove-selection', {
+			username: user.value.username,
+		});
+
 		return (
 			<Paper>
 				<TemplateUserListItem
 					{...user.value}
 					slots={{
 						actions: (
-							<IconButton onClick={user.reset as any}>
+							<IconButton onClick={user.reset as any} aria-label={label}>
 								<CloseIcon />
 							</IconButton>
 						),
