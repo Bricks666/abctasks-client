@@ -44,8 +44,6 @@ test.describe('rooms page(online)', () => {
 			ownerId: user.id,
 		});
 
-		console.log(removed);
-
 		await page.goto('/rooms');
 	});
 

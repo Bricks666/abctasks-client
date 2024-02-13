@@ -150,7 +150,7 @@ export interface TestingApiFixture {
 	removeUser(data?: UserParams): Promise<boolean>;
 
 	auth(data?: LoginParams): Promise<Login>;
-	registrationLink(data?: UserParams): Promise<string>;
+	activateAccountLink(data?: UserParams): Promise<string>;
 	logout(data: never): Promise<boolean>;
 
 	room(data?: RoomParams): Promise<Room>;
@@ -228,6 +228,16 @@ const auth = async (
 	data: UserParams = {}
 ): Promise<Login> => {
 	return request(ctx, '/auth', {
+		method: 'POST',
+		data,
+	});
+};
+
+const activateAccountLink = async (
+	ctx: BrowserContext,
+	data: UserParams = {}
+): Promise<string> => {
+	return request(ctx, '/activate-link', {
 		method: 'POST',
 		data,
 	});
@@ -336,6 +346,16 @@ const removeInvitation = async (
 	});
 };
 
+const invitationLink = async (
+	ctx: BrowserContext,
+	data: InvitationParams = {}
+): Promise<string> => {
+	return request(ctx, '/invitation-link', {
+		method: 'POST',
+		data,
+	});
+};
+
 const activity = async (
 	ctx: BrowserContext,
 	data: ActivityParams = {}
@@ -365,6 +385,9 @@ export const test = base.extend<TestingApiFixture>({
 	},
 	auth: async ({ context }, use) => {
 		await use(createRequest(context, auth));
+	},
+	activateAccountLink: async ({ context }, use) => {
+		await use(createRequest(context, activateAccountLink));
 	},
 	logout: async ({ context }, use) => {
 		await use(createRequest(context, logout));
@@ -399,7 +422,9 @@ export const test = base.extend<TestingApiFixture>({
 	removeInvitation: async ({ context }, use) => {
 		await use(createRequest(context, removeInvitation));
 	},
-
+	invitationLink: async ({ context }, use) => {
+		await use(createRequest(context, invitationLink));
+	},
 	activity: async ({ context }, use) => {
 		await use(createRequest(context, activity));
 	},
