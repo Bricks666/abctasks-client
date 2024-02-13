@@ -23,9 +23,10 @@ const getRoomCard = (
 	return loc
 		.getByRole('listitem')
 		.filter({
-			has: loc.getByText(name),
+			hasText: new RegExp(`^${name}`),
 		})
-		.filter({ has: loc.getByText(description) });
+		.filter({ hasText: new RegExp(`${description}`) })
+		.first();
 };
 
 test.describe('rooms page(online)', () => {
@@ -40,7 +41,7 @@ test.describe('rooms page(online)', () => {
 		});
 
 		user = data.user;
-		const removed = await removeRoom({
+		await removeRoom({
 			ownerId: user.id,
 		});
 
@@ -206,7 +207,7 @@ test.describe('rooms page(online)', () => {
 		await expect(dialog).toBeHidden();
 		await expectAlert({
 			parent: page,
-			message: 'You exited from user successfully',
+			message: 'You exited from room successfully',
 			type: 'success',
 		});
 		await expect(
