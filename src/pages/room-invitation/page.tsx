@@ -17,7 +17,6 @@ import { Center, Layout } from '@/shared/ui';
 
 import styles from './styles.module.css';
 
-
 const RoomsPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room-invitation');
