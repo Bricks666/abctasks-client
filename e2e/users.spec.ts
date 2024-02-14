@@ -1,6 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { expectAlert } from './utils';
 import { Room, User, test } from './fixtures';
+import { faker } from '@faker-js/faker';
 
 interface GetUserItemParams {
 	readonly parent: Locator | Page;
@@ -30,7 +31,7 @@ test.describe('users page(online)', () => {
 
 	test.beforeEach(async ({ auth, room: getRoom, page }) => {
 		const data = await auth({
-			email: 'test@test.com',
+			email: faker.internet.email(),
 		});
 
 		owner = data.user;
@@ -52,8 +53,8 @@ test.describe('users page(online)', () => {
 
 	test('can invite user', async ({ page, user: getUser }) => {
 		const user = await getUser({
-			email: 'potential@email.com',
-			username: 'potential member',
+			email: faker.internet.email(),
+			username: faker.internet.userName(),
 		});
 
 		const addUser = page.getByRole('button', { name: 'invite user' });
@@ -162,8 +163,8 @@ test.describe('users page(online)', () => {
 		member: getMember,
 	}) => {
 		const user = await getUser({
-			email: 'potential@email.com',
-			username: 'potential member',
+			email: faker.internet.email(),
+			username: faker.internet.userName(),
 		});
 		const member = await getMember({
 			room,
@@ -211,8 +212,8 @@ test.describe('users page(online)', () => {
 		test.skip(true, 'Need fix on test side');
 
 		const user = await getUser({
-			email: 'potential@email.com',
-			username: 'potential member',
+			email: faker.internet.email(),
+			username: faker.internet.userName(),
 		});
 		const member = await getMember({
 			room,
@@ -235,8 +236,8 @@ test.describe('users page(online)', () => {
 		user: getUser,
 	}) => {
 		const user = await getUser({
-			email: 'potential@email.com',
-			username: 'potential member',
+			email: faker.internet.email(),
+			username: faker.internet.userName(),
 		});
 		const invitation = await getInvitation({
 			room,
@@ -280,8 +281,8 @@ test.describe('users page(online)', () => {
 		member: getMember,
 	}) => {
 		const user = await getUser({
-			email: 'potential@email.com',
-			username: 'potential member',
+			email: faker.internet.email(),
+			username: faker.internet.userName(),
 		});
 		const member = await getMember({
 			room,
@@ -328,8 +329,8 @@ test.describe('users page(online)', () => {
 		auth,
 	}) => {
 		const user = await getUser({
-			email: 'potential@email.com',
-			username: 'potential member',
+			email: faker.internet.email(),
+			username: faker.internet.userName(),
 		});
 		const member = await getMember({
 			room,

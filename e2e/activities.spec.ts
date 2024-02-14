@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { expect } from '@playwright/test';
 import { Room, User, test } from './fixtures';
 
@@ -9,7 +10,7 @@ test.describe('activities page(online)', () => {
 
 	test.beforeEach(async ({ auth, room: getRoom, activity, page }) => {
 		const data = await auth({
-			email: 'test@test.com',
+			email: faker.internet.email(),
 		});
 
 		user = data.user;

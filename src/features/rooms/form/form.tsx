@@ -75,6 +75,7 @@ const Name: React.FC<FieldProps> = (props) => {
 			isValid={name.isValid}
 			name='name'
 			label={label}
+			multiline
 		/>
 	);
 };

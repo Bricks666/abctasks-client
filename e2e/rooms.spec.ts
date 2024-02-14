@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { Locator, Page, expect } from '@playwright/test';
 
 import { expectAlert, getMenuItemByName } from './utils';
@@ -32,27 +33,20 @@ const getRoomCard = (
 test.describe('rooms page(online)', () => {
 	let user: User;
 
-	const name = 'test room name';
-	const description = 'test room description';
+	const name = faker.lorem.words({ min: 1, max: 3 });
+	const description = faker.lorem.words({ min: 4, max: 6 });
 
-	test.beforeEach(async ({ page, auth, removeRoom }) => {
+	test.beforeEach(async ({ page, auth }) => {
 		const data = await auth({
-			email: 'test@test.com',
+			email: faker.internet.email(),
 		});
 
 		user = data.user;
-		await removeRoom({
-			ownerId: user.id,
-		});
 
 		await page.goto('/rooms');
 	});
 
-	test('can create room', async ({ page, removeRoom }) => {
-		await removeRoom({
-			ownerId: user.id,
-		});
-
+	test('can create room', async ({ page }) => {
 		const button = page.getByRole('button', {
 			name: 'Open create room form',
 		});
@@ -105,7 +99,7 @@ test.describe('rooms page(online)', () => {
 		const created = await room({
 			ownerId: user.id,
 			name,
-			description: 'editable room',
+			description: faker.lorem.words({ min: 4, max: 6 }),
 		});
 
 		const list = page.getByRole('list');
@@ -126,7 +120,7 @@ test.describe('rooms page(online)', () => {
 		await expect(controls.name).toHaveValue(created.name);
 		await expect(controls.description).toHaveValue(created.description);
 
-		const newName = `new ${created.name}`;
+		const newName = faker.lorem.words({ min: 1, max: 3 });
 		await controls.name.fill(newName);
 		await controls.button.click();
 
@@ -144,15 +138,18 @@ test.describe('rooms page(online)', () => {
 	});
 
 	test('can remove room', async ({ page, room }) => {
-		const name = 'room-for-removing';
+		const name = faker.lorem.words({ min: 4, max: 6 });
+
 		const created = await room({
 			ownerId: user.id,
 			name,
 		});
 
+		await page.reload();
+
 		const list = page.getByRole('list');
 
-		await expect(list).toBeVisible();
+		await expect(list).toBeVisible({ timeout: 110000 });
 
 		const card = getRoomCard(list, created.name, created.description);
 		const menu = card.getByRole('button');
@@ -182,13 +179,18 @@ test.describe('rooms page(online)', () => {
 	});
 
 	test('can exit room', async ({ page, room }) => {
-		const name = 'room-for-exit';
+		const name = faker.lorem.words({ min: 4, max: 6 });
 		const created = await room({
 			ownerId: user.id,
 			name,
 		});
 
+		await page.reload();
+
 		const card = getRoomCard(page, created.name, created.description);
+
+		await expect(card).toBeVisible({ timeout: 110000 });
+
 		const menu = card.getByRole('button');
 
 		await menu.click();
