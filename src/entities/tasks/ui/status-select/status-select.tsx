@@ -19,7 +19,9 @@ export const StatusSelect: React.FC<StatusSelectProps> = React.memo((props) => {
 	return (
 		<Field {...rest} select>
 			{hasEmptyOption ? (
-				<MenuItem value={null as any}>{emptyOptionText}</MenuItem>
+				<MenuItem value={null as any} key='empty'>
+					{emptyOptionText}
+				</MenuItem>
 			) : null}
 			{statuses.map((name) => (
 				<MenuItem value={name} key={name}>

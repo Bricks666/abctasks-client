@@ -10,9 +10,13 @@ import {
 } from '@/widgets/invitations';
 import { Popups, PopupsProps } from '@/widgets/page';
 
+import { ConfirmRemoveInvitation } from '@/features/invitation';
+import { ConfirmRemoveUser, ConfirmUserExit } from '@/features/users';
+
 import { roomModel } from '@/entities/rooms';
 
 import { popupsMap } from '@/shared/configs';
+import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { SectionHeader } from '@/shared/ui';
 
@@ -23,6 +27,9 @@ export interface UsersPageProps extends CommonProps {}
 
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createInvitation]: CreateInvitation,
+	[popupsMap.removeInvitation]: ConfirmRemoveInvitation,
+	[popupsMap.removeUserFromRoom]: ConfirmRemoveUser,
+	[popupsMap.exitRoom]: ConfirmUserExit,
 };
 
 const UsersPage: React.FC<UsersPageProps> = (props) => {
@@ -30,14 +37,16 @@ const UsersPage: React.FC<UsersPageProps> = (props) => {
 	const { t, } = useTranslation('room-users');
 	const canChange = useUnit(roomModel.$canChange);
 
-	const usersTitle = t('title');
+	const title = t('title');
 	const invitationsTitle = t('title', { ns: 'room-invitations', });
 	const actions = canChange ? <CreateInvitationButton /> : null;
+
+	usePageTitle(title);
 
 	return (
 		<Container className={cn(styles.wrapper, className)}>
 			<div className={styles.group}>
-				<SectionHeader title={usersTitle} actions={actions} />
+				<SectionHeader title={title} actions={actions} />
 				<UserList />
 			</div>
 			<div className={styles.group}>

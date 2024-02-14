@@ -5,9 +5,15 @@ import { useTranslation } from 'react-i18next';
 
 import { Popups, PopupsProps } from '@/widgets/page';
 
-import { CreateTag, OpenCreateTagForm, UpdateTag } from '@/features/tags';
+import {
+	ConfirmRemoveTag,
+	CreateTag,
+	OpenCreateTagForm,
+	UpdateTag
+} from '@/features/tags';
 
 import { popupsMap } from '@/shared/configs';
+import { usePageTitle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { SectionHeader } from '@/shared/ui';
 
@@ -19,6 +25,7 @@ export interface TagsPageProps extends CommonProps {}
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createTag]: CreateTag,
 	[popupsMap.updateTag]: UpdateTag,
+	[popupsMap.removeTag]: ConfirmRemoveTag,
 };
 
 const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
@@ -26,6 +33,8 @@ const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 	const { t, } = useTranslation('room-tags');
 
 	const title = t('title');
+
+	usePageTitle(title);
 
 	return (
 		<Container className={cn(styles.container, className)}>

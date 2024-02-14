@@ -5,12 +5,11 @@
 	min-width: 200px;
 	height: 300px;
 
-	overflow-y: scroll;
-
 	transition: box-shadow 250ms ease-in-out;
 }
 
-.card:hover {
+.card:hover,
+.card:focus-within {
 	box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
 }
 
@@ -21,9 +20,7 @@
 .content {
 	padding: 1em;
 
-	height: 100%;
-
-	overflow-y: scroll;
+	height: max-content;
 }
 
 .actions {

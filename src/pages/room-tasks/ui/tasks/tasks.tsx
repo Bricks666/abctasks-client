@@ -11,7 +11,7 @@ import { tasksInRoomModel } from '@/entities/tasks';
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { TextWithAction } from '@/shared/ui';
+import { Scrollable, TextWithAction } from '@/shared/ui';
 
 import styles from './tasks.module.css';
 
@@ -20,14 +20,13 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 	const { t, } = useTranslation('tasks');
 	const roomId = useParam(routes.room.tasks, 'id');
 	const tasks = useUnit({
-		pending: tasksInRoomModel.query.$pending,
-		stale: tasksInRoomModel.query.$stale,
+		loaded: tasksInRoomModel.loaded.$flag,
 		error: tasksInRoomModel.query.$error,
 		start: tasksInRoomModel.query.start,
 	});
 	const columns = useUnit(tasksInRoomModel.$tasksColumns);
 
-	const isLoading = tasks.pending && !tasks.stale;
+	const isLoading = !tasks.loaded;
 	const isError = !!tasks.error;
 
 	if (isError) {
@@ -50,7 +49,9 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 	}
 
 	return (
-		<section className={cn(styles.wrapper, className)}>
+		<Scrollable
+			className={cn(styles.wrapper, className)}
+			direction='horizontal'>
 			{columns.map(({ status, tasks, hasActions, }) => (
 				<TaskColumn
 					tasks={tasks}
@@ -61,6 +62,6 @@ export const Tasks: React.FC<CommonProps> = (props) => {
 					key={status}
 				/>
 			))}
-		</section>
+		</Scrollable>
 	);
 };

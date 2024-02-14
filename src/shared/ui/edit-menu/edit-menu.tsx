@@ -1,36 +1,55 @@
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { IconButton, Menu } from '@mui/material';
+import { IconButton, PopoverOrigin, PopoverPosition } from '@mui/material';
 import { CommonProps } from '@mui/material/OverridableComponent';
 import * as React from 'react';
 
 import { useToggle } from '@/shared/lib';
 import { Size } from '@/shared/types';
-import { MenuOption, MenuItem } from '@/shared/ui';
+
+import { Menu } from '../menu';
 
 export interface EditMenuProps extends CommonProps, React.PropsWithChildren {
-	readonly alt?: string;
-	readonly options?: MenuOption<object>[];
 	readonly size?: Size;
+	readonly anchorPosition?: PopoverPosition;
+	readonly anchorOrigin?: PopoverOrigin;
+	readonly transformOrigin?: PopoverOrigin;
 }
 
 export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
-	const { options, className, size, alt, children, } = props;
+	const {
+		className,
+		size,
+		children,
+		anchorOrigin,
+		anchorPosition,
+		transformOrigin,
+	} = props;
 	const [isOpen, { toggle, }] = useToggle();
+	const menuId = React.useId();
 	const [reference, setReference] = React.useState<HTMLElement | null>(null);
+
+	const expanded = isOpen ? 'true' : undefined;
+
 	return (
 		<div className={className}>
 			<IconButton
 				onClick={toggle}
 				size={size}
 				tabIndex={0}
-				title={alt}
+				aria-expanded={expanded}
+				aria-haspopup='true'
+				aria-controls={menuId}
 				ref={setReference}>
 				<MoreHorizIcon />
 			</IconButton>
-			<Menu anchorEl={reference} open={isOpen} onClose={toggle}>
-				{options?.map((option) => (
-					<MenuItem {...option} key={option.label} />
-				))}
+			<Menu
+				id={menuId}
+				anchorEl={reference}
+				open={isOpen}
+				onClose={toggle}
+				anchorPosition={anchorPosition}
+				anchorOrigin={anchorOrigin}
+				transformOrigin={transformOrigin}>
 				{children}
 			</Menu>
 		</div>

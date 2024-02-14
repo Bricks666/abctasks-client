@@ -32,7 +32,7 @@ export const TemplateRoomCard: React.FC<TemplateRoomCardProps> = (props) => {
 	};
 
 	return (
-		<Card className={cn(styles.card, className)}>
+		<Card className={cn(styles.card, className)} component='li'>
 			<CardMedia sx={sx} />
 			<CardHeader className={styles.header} action={menu} title={name} />
 			<CardContent className={styles.content}>

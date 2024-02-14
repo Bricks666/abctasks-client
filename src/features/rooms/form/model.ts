@@ -2,7 +2,11 @@ import { createForm } from 'effector-forms';
 import Joi from 'joi';
 
 import { Room } from '@/shared/api';
-import { MAX_SHORT_LENGTH, MIN_LENGTH } from '@/shared/configs';
+import {
+	MAX_LONG_LENGTH,
+	MAX_SHORT_LENGTH,
+	MIN_LENGTH
+} from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';
 
 export interface RoomFormValues extends Pick<Room, 'description' | 'name'> {}
@@ -13,7 +17,7 @@ const schemas = {
 		'string.min': 'min_length',
 		'string.max': 'max_length',
 	}),
-	description: Joi.string().max(MAX_SHORT_LENGTH).messages({
+	description: Joi.string().max(MAX_LONG_LENGTH).messages({
 		'string.max': 'max_length',
 	}),
 };

@@ -16,10 +16,11 @@ import { Navigation } from '@/features/page';
 import { RoomListItem, useRooms } from '@/entities/rooms';
 
 import { useToggle } from '@/shared/lib';
+import { Scrollable } from '@/shared/ui';
 
-import styles from './menu.module.css';
+import styles from './app-menu.module.css';
 
-export const Menu: React.FC = () => {
+export const AppMenu: React.FC = () => {
 	const [isOpen, { toggleOff: close, toggleOn: open, }] = useToggle();
 	const rooms = useRooms();
 	const { t, } = useTranslation('common');
@@ -34,17 +35,18 @@ export const Menu: React.FC = () => {
 			<Drawer
 				open={isOpen}
 				onClose={close}
+				onClick={close}
 				PaperProps={{ className: styles.menu, }}>
-				<div onClick={close}>
-					<Navigation />
-					<Divider />
-					<List>
+				<Navigation />
+				<Divider />
+				<Scrollable direction='vertical'>
+					<List className={styles.list} disablePadding>
 						<ListSubheader disableSticky>{subheader}</ListSubheader>
 						{rooms.data.map((room) => (
 							<RoomListItem {...room} key={room.id} />
 						))}
 					</List>
-				</div>
+				</Scrollable>
 			</Drawer>
 		</>
 	);

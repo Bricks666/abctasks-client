@@ -1,5 +1,11 @@
 import { Query } from '@farfetched/core';
-import { List, ListItemProps, Paper, Typography } from '@mui/material';
+import {
+	List,
+	ListItemProps,
+	Paper,
+	PaperProps,
+	Typography
+} from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
@@ -8,6 +14,7 @@ import { getEmptyArray } from '@/shared/configs';
 import { Classes, CommonProps, Slots } from '@/shared/types';
 
 import { Center } from '../center';
+import { Scrollable } from '../scrollable';
 
 import styles from './friendly-list.module.css';
 
@@ -27,6 +34,7 @@ interface BaseFriendlyListProps<
 	readonly slots?: Slots<'before' | 'after'>;
 	readonly classes?: Classes<'list'>;
 	readonly disableBorder?: boolean;
+	readonly rootProps?: Omit<PaperProps, 'className'>;
 }
 
 interface ArrayQueryFriendlyListProps<Item, Error>
@@ -61,6 +69,7 @@ export const FriendlyList = <RawData, Item, Error>(
 		slots,
 		disableBorder,
 		classes,
+		rootProps,
 	} = props;
 
 	const finished = useUnit($query.finished);
@@ -102,9 +111,11 @@ export const FriendlyList = <RawData, Item, Error>(
 		);
 
 		content = (
-			<List className={classes?.list} disablePadding>
-				{skeletons}
-			</List>
+			<Scrollable direction='vertical'>
+				<List className={classes?.list} disablePadding>
+					{skeletons}
+				</List>
+			</Scrollable>
 		);
 	} else if (isEmpty) {
 		content = (
@@ -123,9 +134,11 @@ export const FriendlyList = <RawData, Item, Error>(
 		);
 
 		content = (
-			<List className={classes?.list} disablePadding>
-				{items}
-			</List>
+			<Scrollable direction='vertical'>
+				<List className={classes?.list} disablePadding>
+					{items}
+				</List>
+			</Scrollable>
 		);
 	}
 
@@ -148,7 +161,7 @@ export const FriendlyList = <RawData, Item, Error>(
 	);
 
 	return (
-		<Paper className={paperClasses}>
+		<Paper className={paperClasses} {...rootProps}>
 			{slotBefore}
 			{content}
 			{slotAfter}

@@ -22,6 +22,7 @@ export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 		deviceInfoModel.$isMobile,
 		deviceInfoModel.$isTabletVertical
 	]);
+	const titleId = React.useId();
 
 	const onClick = useUnit(form.submit);
 	const pending = useUnit(mutation.$pending);
@@ -40,12 +41,20 @@ export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 	) : null;
 
 	return (
-		<Popup {...props} title={title} onClose={onClose} slots={{ actions, }}>
+		<Popup
+			{...props}
+			title={title}
+			onClose={onClose}
+			slots={{ actions, }}
+			DialogTitleProps={{
+				id: titleId,
+			}}>
 			{loading ? (
 				<SkeletonRoomForm />
 			) : (
 				<RoomForm
 					className={styles.form}
+					ariaLabelledby={titleId}
 					buttonText={buttonText}
 					$form={form}
 					disabled={pending}

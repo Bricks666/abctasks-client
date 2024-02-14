@@ -1,9 +1,3 @@
-.wrapper {
-	overflow-y: auto;
-}
-
 .list {
 	padding: 0 1em;
-
-	overflow-y: scroll;
 }

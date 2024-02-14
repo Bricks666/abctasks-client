@@ -1,6 +1,6 @@
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { IconButton, Menu, Tooltip } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ import { UserAvatar } from '@/entities/users';
 import { useToggle } from '@/shared/lib';
 import { sessionModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
-import { MenuOption, MenuItem } from '@/shared/ui';
+import { MenuOption, MenuItem, Menu } from '@/shared/ui';
 
 import { mutation } from './model';
 
@@ -38,7 +38,7 @@ export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
 		},
 		{
 			label: items.logout,
-			onClick: () => logout.start(),
+			onClick: logout.start,
 			icon: <LogoutIcon />,
 		}
 	];

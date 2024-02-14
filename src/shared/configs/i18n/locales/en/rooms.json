@@ -16,7 +16,7 @@
 				"disagree": "$t(common:actions.cancel)"
 			},
 			"notifications": {
-				"success": "You exited from user successfully",
+				"success": "You exited from room successfully",
 				"error": "You didn't exit from room"
 			}
 		},
@@ -62,6 +62,9 @@
 			"notifications": {
 				"success": "Room was created successfully",
 				"error": "Room was not created"
+			},
+			"actions": {
+				"open": "Open create room form"
 			}
 		}
 	}

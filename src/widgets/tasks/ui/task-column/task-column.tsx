@@ -29,6 +29,8 @@ const onDragOver: React.DragEventHandler<HTMLDivElement> = (evt) =>
 export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 	const { tasks, className, columnStatus, hasActions, header, isLoading, } =
 		props;
+	const id = React.useId();
+
 	const onDrop = useUnit(dragTaskModel.drop);
 
 	let items: React.ReactElement[];
@@ -45,17 +47,23 @@ export const TaskColumn: React.FC<TaskColumnProps> = (props) => {
 		<OpenCreateTaskButton columnStatus={columnStatus} />
 	) : null;
 
+	/**
+	 * @todo
+	 * Should I make it ul list?
+	 */
 	return (
 		<Stack
 			className={cn(styles.wrapper, className)}
 			spacing={1}
 			onDrop={onDrop}
 			onDragOver={onDragOver}
-			data-status={columnStatus}>
-			<TaskColumnHeader slots={{ actions: headerActions, }}>
+			data-status={columnStatus}
+			aria-labelledby={id}
+			component='section'>
+			<TaskColumnHeader id={id} slots={{ actions: headerActions, }}>
 				{header}
 			</TaskColumnHeader>
-			<Stack className={styles.list} spacing={1} component='main'>
+			<Stack className={styles.list} spacing={1} role='group'>
 				{items}
 			</Stack>
 		</Stack>

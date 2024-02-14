@@ -5,9 +5,17 @@ import { useTranslation } from 'react-i18next';
 
 import { Popups, PopupsProps } from '@/widgets/page';
 
-import { CreateTask, TasksFilters, UpdateTask } from '@/features/tasks';
+import {
+	ConfirmRemoveTask,
+	CreateTask,
+	TasksFilters,
+	UpdateTask
+} from '@/features/tasks';
+
+import { roomModel } from '@/entities/rooms';
 
 import { popupsMap } from '@/shared/configs';
+import { usePageTitle } from '@/shared/lib';
 import { deviceInfoModel } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 import { SectionHeader, Show } from '@/shared/ui';
@@ -18,15 +26,21 @@ import { Tasks, Aside, MobileAside } from './ui';
 const popupMap: PopupsProps['popupMap'] = {
 	[popupsMap.createTask]: CreateTask,
 	[popupsMap.updateTask]: UpdateTask,
+	[popupsMap.removeTask]: ConfirmRemoveTask,
 };
 
 const TasksPage: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('room-tasks');
 	const isDesktopLarge = useUnit(deviceInfoModel.$isDesktopLarge);
+	const room = useUnit(roomModel.query.$data);
 
 	const title = t('title');
 	const showAside = isDesktopLarge;
+
+	const pageTitle = `${room?.name ?? ''} - ${title}`;
+
+	usePageTitle(pageTitle);
 
 	return (
 		<div className={cn(styles.wrapper, className)}>

@@ -7,7 +7,7 @@ import { dataExtractor } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
-	InRoomParams
+	InRoomParams,
 } from '@/shared/types';
 
 const roomDomain = createDomain();
@@ -26,6 +26,6 @@ export const query = createQuery<
 	mapData: dataExtractor,
 });
 
-export const $canChange = query.$data.map((room) => room?.canChange || false);
+export const $canChange = query.$data.map((room) => room?.canChange ?? false);
 
 cache(query);

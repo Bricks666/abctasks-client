@@ -25,6 +25,9 @@ export const RoomList: React.FC = () => {
 			classes={{
 				list: styles.list,
 			}}
+			slots={{
+				after: null,
+			}}
 			disableBorder
 		/>
 	);

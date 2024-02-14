@@ -5,6 +5,7 @@ import {
 	ListItemButton,
 	ListItemText
 } from '@mui/material';
+import { RouteInstance } from 'atomic-router';
 import { Link } from 'atomic-router-react';
 import * as React from 'react';
 
@@ -17,13 +18,15 @@ export interface RoomListItemProps extends CommonProps, Room {}
 
 export const RoomListItem: React.FC<RoomListItemProps> = (props) => {
 	const { description, id, name, className, } = props;
+
 	const style = {
 		background: stringToColor(''.padEnd(15, id.toString())),
 	};
+
 	return (
 		<ListItem className={className} disablePadding>
 			<ListItemButton
-				to={routes.room.tasks as any}
+				to={routes.room.tasks as RouteInstance<any>}
 				params={{ id, }}
 				component={Link}>
 				<ListItemAvatar>
