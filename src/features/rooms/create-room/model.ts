@@ -29,8 +29,10 @@ export const mutation = createMutation<
 export const openButtonClicked = createEvent();
 export const form = roomFormModel.create();
 
-export const popupControls = createPopupControlModel(popupsMap.createRoom);
-const { reset, formValidated } = form;
+export const popupControls = createPopupControlModel({
+	name: popupsMap.createRoom,
+});
+const { reset, formValidated, } = form;
 
 sample({
 	clock: popupControls.closed,
@@ -51,7 +53,7 @@ sample({
 update(roomsModel.query, {
 	on: mutation,
 	by: {
-		success: ({ query, mutation }) => {
+		success: ({ query, mutation, }) => {
 			if (!query) {
 				return {
 					result: [],
@@ -85,7 +87,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: i18n.t('actions.create_room.notifications.error', { ns: 'rooms' }),
+		message: i18n.t('actions.create_room.notifications.error', { ns: 'rooms', }),
 		color: 'error' as const,
 	}),
 	target: notificationsModel.create,
