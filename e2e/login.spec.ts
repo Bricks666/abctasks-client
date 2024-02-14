@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { Page, expect } from '@playwright/test';
 import { test } from './fixtures';
 
@@ -18,8 +19,8 @@ const getFormControls = (page: Page) => {
 };
 
 test.describe('login page(online)', () => {
-	const email = 'testemail@gmail.com';
-	const password = 'password';
+	const email = faker.internet.email();
+	const password = faker.internet.password();
 
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/login');
@@ -73,7 +74,7 @@ test.describe('login page(online)', () => {
 		user,
 	}) => {
 		const deactivated = await user({
-			email: 'deactivated@example.com',
+			email: faker.internet.email(),
 			password,
 			activated: false,
 		});

@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { Locator, Page, expect } from '@playwright/test';
 import { expectAlert } from './utils';
 import { Room, User, test } from './fixtures';
@@ -47,7 +48,7 @@ const expectListItem = async (params: ExpectListItemParams) => {
 };
 
 const data = {
-	name: 'Testing tag',
+	name: faker.lorem.words({ min: 1, max: 3 }),
 	primaryColor: '#000000',
 	secondaryColor: '#ffffff',
 };
@@ -58,7 +59,7 @@ test.describe('tags page(online)', () => {
 
 	test.beforeEach(async ({ auth, room: getRoom, page }) => {
 		const data = await auth({
-			email: 'test@test.com',
+			email: faker.internet.email(),
 		});
 
 		user = data.user;

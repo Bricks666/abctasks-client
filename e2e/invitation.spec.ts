@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { Locator, Page, expect } from '@playwright/test';
 
 import { expectAlert, getMenuItemByName } from './utils';
@@ -28,13 +29,13 @@ test.describe('invitation page(online)', () => {
 			invitation: getInvitation,
 		}) => {
 			owner = await getUser({
-				email: 'test@test.com',
+				email: faker.internet.email(),
 			});
 			room = await getRoom({
 				ownerId: owner.id,
 			});
 			user = await auth({
-				email: 'requested-user@example.com',
+				email: faker.internet.email(),
 			}).then((data) => data.user);
 			invitation = await getInvitation({
 				room,

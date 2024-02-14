@@ -1,9 +1,6 @@
+import { faker } from '@faker-js/faker';
 import { Page, expect } from '@playwright/test';
 import { test } from './fixtures';
-
-const email = 'testing@email.com';
-const password = 'password';
-const username = 'username';
 
 const getFormControls = (page: Page) => {
 	const email = page.getByLabel('Email');
@@ -22,6 +19,10 @@ const getFormControls = (page: Page) => {
 };
 
 test.describe('registration page(online)', () => {
+	const email = faker.internet.email();
+	const password = faker.internet.password();
+	const username = faker.internet.userName();
+
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/registration');
 	});

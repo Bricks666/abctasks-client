@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { Locator, Page, expect } from '@playwright/test';
 import {
 	getTagsLabels,
@@ -45,8 +46,8 @@ const getCard = (params: GetCardParams) => {
 };
 
 const data = {
-	title: 'Task',
-	description: 'It is important task',
+	title: faker.lorem.words({ min: 1, max: 3 }),
+	description: faker.lorem.words({ min: 4, max: 6 }),
 };
 
 test.describe('tasks page(online)', () => {
@@ -56,7 +57,7 @@ test.describe('tasks page(online)', () => {
 
 	test.beforeEach(async ({ auth, room: getRoom, tag, page }) => {
 		const data = await auth({
-			email: 'test@test.com',
+			email: faker.internet.email(),
 		});
 
 		user = data.user;
@@ -67,11 +68,11 @@ test.describe('tasks page(online)', () => {
 
 		tags = await Promise.all([
 			tag({
-				name: 'Tag 1',
+				name: faker.lorem.words({ min: 1, max: 3 }),
 				room,
 			}),
 			tag({
-				name: 'Tag 2',
+				name: faker.lorem.words({ min: 1, max: 3 }),
 				room,
 			}),
 		]);
@@ -87,11 +88,7 @@ test.describe('tasks page(online)', () => {
 		await expect(page).toHaveTitle(/Tasks/);
 	});
 
-	test('can create task with one tag', async ({ page, removeTask }) => {
-		await removeTask({
-			title: 'Task',
-		});
-
+	test('can create task with one tag', async ({ page }) => {
 		const column = getColumn(page, 'Ready');
 
 		const create = column.getByRole('button', {
@@ -133,14 +130,7 @@ test.describe('tasks page(online)', () => {
 		await expect(card).toBeVisible();
 	});
 
-	test('can create task with several tags tag', async ({
-		page,
-		removeTask,
-	}) => {
-		await removeTask({
-			title: 'Task',
-		});
-
+	test('can create task with several tags tag', async ({ page }) => {
 		const column = getColumn(page, 'Ready');
 
 		const create = column.getByRole('button', {
@@ -203,6 +193,8 @@ test.describe('tasks page(online)', () => {
 			author: user,
 		});
 
+		const newTitle = faker.lorem.words({ min: 1, max: 3 });
+
 		const card = getCard({
 			parent: page,
 			description: created.description,
@@ -234,7 +226,7 @@ test.describe('tasks page(online)', () => {
 		 * @todo
 		 */
 		// await expect(controls.tags).toContainText(new RegExp(tagName));
-		await controls.title.fill('Some another title');
+		await controls.title.fill(newTitle);
 		await controls.button.click();
 
 		await expectAlert({
@@ -251,7 +243,7 @@ test.describe('tasks page(online)', () => {
 			parent: page,
 			description: created.description,
 			tags: getTagsLabels(created.tags),
-			title: 'Some another title',
+			title: newTitle,
 		});
 		await expect(updatedCard).toBeVisible();
 	});
