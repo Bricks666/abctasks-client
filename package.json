@@ -54,6 +54,7 @@
 		"@babel/preset-env": "^7.23.2",
 		"@babel/preset-react": "^7.22.15",
 		"@babel/preset-typescript": "^7.23.2",
+		"@faker-js/faker": "^8.4.1",
 		"@playwright/test": "^1.40.1",
 		"@rollup/plugin-babel": "^6.0.4",
 		"@types/compose-function": "^0.0.32",
