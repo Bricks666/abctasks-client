@@ -1,10 +1,10 @@
 {
-	"short_name": "TaskMan",
-	"name": "Beauty task manager",
+	"short_name": "ABCTasks",
+	"name": "ABCTasks",
 	"icons": [],
 	"start_url": ".",
 	"scope": "/",
 	"display": "standalone",
-	"theme_color": "#ebf0f7",
-	"background_color": "#ebf0f7"
+	"theme_color": "#2e87ba",
+	"background_color": "#2e87ba"
 }
