@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" prefix="og: http://ogp.me/ns#">
 	<head>
 		<meta charset="utf-8" />
+
+		<link rel="manifest" href="manifest.json" />
+
+		<title>ABC Tasks</title>
+		<meta
+			name="description"
+			content="Tasks manager for single persons and teams" />
+		<meta
+			name="keywords"
+			content="tasks, task management, abc tasks, todo list, todo, teams" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="manifest" href="manifest.json" />
-		<title>Task Manager</title>
+
+		<meta property="og:title" content="ABC Tasks" />
+		<meta property="og:type" content="website" />
+    <meta property="og:url" content="https://abctasks.ru/" />
+    <meta property="og:image" content="https://abctasks.ru/images/preview.jpg"/>
+    <meta property="og:image:secure_url" content="https://abctasks.ru/images/preview.jpg"/>
+    <meta property="og:image:type" content="image/webp"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alr" content="ABC Tasks - divide and rule"/>
+    <meta property="og:description" content="Control you time"/>
+    <meta property="og:site_name" content="ABC Tasks - Task management system"/>
+
 	</head>
 	<body>
 		<div id="root"></div>
-    <script type="module" src="/src/index.tsx"></script>
+		<script type="module" src="/src/index.tsx"></script>
 	</body>
 </html>
