@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as path from 'path';
+import * as path from 'node:path';
 
 import { babel } from '@rollup/plugin-babel';
 import react from '@vitejs/plugin-react';
@@ -7,7 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-const LOCALE_FILE_REGEXP = /src\/([\w-/ ])*\/([\w-]+)\/([\w-]+)\.json$/;
+const localeFileRegexp = /src\/([\w-/ ])*\/([\w-]+)\/([\w-]+)\.json$/;
 
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, '.', '');
@@ -61,7 +61,7 @@ export default defineConfig(({ mode }) => {
 					{
 						src: 'src/**/locales/**/*.json',
 						rename: (_name, _extension, path) => {
-							const matches = path.match(LOCALE_FILE_REGEXP);
+							const matches = path.match(localeFileRegexp);
 
 							if (matches.length < 4) {
 								return '';
