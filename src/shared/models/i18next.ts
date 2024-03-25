@@ -17,7 +17,7 @@ const subscribeI18NextEventsFx = createEffect(() => {
 	i18n.on('languageChanged', (lang) => {
 		const language = lang.split('-');
 
-		setLanguage(language[0]);
+		setLanguage(language[0] as AllowedLanguages);
 	});
 });
 const changeLanguageFx = createEffect((language: AllowedLanguages) => {
