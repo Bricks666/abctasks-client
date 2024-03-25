@@ -17,7 +17,7 @@ export const popupControls = createPopupControlModel({
 sample({
 	clock: [
 		inviteUserIntoRoomModel.mutation.finished.success,
-		generateInvitationLinkModel.query.finished.success
+		generateInvitationLinkModel.linkCopied
 	],
 	target: popupControls.close,
 });

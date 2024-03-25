@@ -33,7 +33,7 @@ export const Confirm: React.FC<ConfirmProps> = (props) => {
 		className,
 	} = props;
 	return (
-		<Dialog open={isOpen} onClose={onClose} maxWidth='sm' fullWidth>
+		<Dialog open={isOpen} onClose={onClose} maxWidth='xs' fullWidth>
 			<DialogTitle>{title}</DialogTitle>
 			<DialogContent>
 				<DialogContentText className={className}>{content}</DialogContentText>
