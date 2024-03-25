@@ -9,7 +9,17 @@ export type AllowedLanguages = 'ru' | 'en';
 export const $language = createStore<AllowedLanguages>(
 	i18n.language as AllowedLanguages
 );
+
 export const changeLanguage = createEvent<AllowedLanguages>();
+const setLanguage = createEvent<AllowedLanguages>();
+
+const subscribeI18NextEventsFx = createEffect(() => {
+	i18n.on('languageChanged', (lang) => {
+		const language = lang.split('-');
+
+		setLanguage(language[0]);
+	});
+});
 const changeLanguageFx = createEffect((language: AllowedLanguages) => {
 	i18n.changeLanguage(language);
 
@@ -28,11 +38,15 @@ sample({
 
 sample({
 	clock: changeLanguageFx.doneData,
-	target: $language,
+	target: setLanguage,
 });
 
 sample({
 	clock: started,
-	fn: () => i18n.language as AllowedLanguages,
+	target: subscribeI18NextEventsFx,
+});
+
+sample({
+	clock: setLanguage,
 	target: $language,
 });
