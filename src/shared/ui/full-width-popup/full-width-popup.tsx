@@ -9,6 +9,7 @@ import {
 	Slide,
 	SlideProps
 } from '@mui/material';
+import cn from 'classnames';
 import * as React from 'react';
 
 import { BasePopupProps, VoidFunction } from '@/shared/types';
@@ -42,13 +43,18 @@ export const FullWidthPopup: React.FC<FullWidthPopupProps> = (props) => {
 			onClose={onClose}
 			TransitionComponent={Transition}
 			fullScreen>
-			<DialogTitle align='center' {...DialogTitleProps}>
+			<DialogTitle
+				className={styles.title}
+				align='center'
+				{...DialogTitleProps}>
 				{title}
 				<IconButton className={styles.cross} onClick={onClose}>
 					<CloseIcon />
 				</IconButton>
 			</DialogTitle>
-			<DialogContent className={className}>{children}</DialogContent>
+			<DialogContent className={cn(styles.content, className)}>
+				{children}
+			</DialogContent>
 			{slots?.actions ? <DialogActions>{slots.actions}</DialogActions> : null}
 		</Dialog>
 	);

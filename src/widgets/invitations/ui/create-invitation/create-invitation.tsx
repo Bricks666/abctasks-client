@@ -15,7 +15,7 @@ import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
 import { deviceInfoModel } from '@/shared/models';
 import { BasePopupProps, CommonProps } from '@/shared/types';
-import { MainPopup } from '@/shared/ui';
+import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
 import { createInvitationModel } from '../../models';
 
@@ -35,7 +35,7 @@ export const CreateInvitation: React.FC<CreateInvitationProps> = (props) => {
 		deviceInfoModel.$isMobile
 	]);
 
-	const showLabels = !isVertical && !isMobile;
+	const fullscreenPopup = isVertical || isMobile;
 
 	const translation = t('actions', { returnObjects: true, }) as Record<
 		string,
@@ -48,20 +48,24 @@ export const CreateInvitation: React.FC<CreateInvitationProps> = (props) => {
 		setTab(value);
 	}, []);
 
+	const Popup = fullscreenPopup ? FullWidthPopup : MainPopup;
+
 	return (
-		<MainPopup {...props} title={title} onClose={close}>
+		<Popup {...props} title={title} onClose={close}>
 			<TabContext value={tab}>
 				<TabList onChange={onChange} variant='fullWidth' scrollButtons='auto'>
 					<Tab
 						icon={<AddLinkIcon />}
 						iconPosition='start'
-						label={showLabels ? translation.generate_link.title_short : null}
+						label={
+							fullscreenPopup ? null : translation.generate_link.title_short
+						}
 						value='generate_link'
 					/>
 					<Tab
 						icon={<PersonAddIcon />}
 						iconPosition='start'
-						label={showLabels ? translation.invite_user.title_short : null}
+						label={fullscreenPopup ? null : translation.invite_user.title_short}
 						value='invite_user'
 					/>
 				</TabList>
@@ -72,6 +76,6 @@ export const CreateInvitation: React.FC<CreateInvitationProps> = (props) => {
 					<InviteUserIntoRoom />
 				</TabPanel>
 			</TabContext>
-		</MainPopup>
+		</Popup>
 	);
 };
