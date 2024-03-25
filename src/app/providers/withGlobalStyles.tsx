@@ -77,5 +77,12 @@ const theme = extendTheme({
 				},
 			},
 		},
+		MuiDialog: {
+			styleOverrides: {
+				paperFullScreen: {
+					height: '100dvh',
+				},
+			},
+		},
 	},
 });
