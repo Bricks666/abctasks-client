@@ -2,7 +2,6 @@ import { createForm } from 'effector-forms';
 import Joi from 'joi';
 
 import { Task } from '@/shared/api';
-import { ALLOWED_SYMBOLS } from '@/shared/configs';
 import { createRuleFromSchema } from '@/shared/lib';
 
 export interface TaskFormValues
@@ -16,11 +15,9 @@ const schemas = {
 		'number.positive': 'Tag must be choose',
 	}),
 	status: Joi.string().required(),
-	title: Joi.string().pattern(ALLOWED_SYMBOLS).max(128).required().messages({
+	title: Joi.string().max(128).required().messages({
 		'string.empty': "Content can't be empty",
 		'string.max': 'Content can be less than 128',
-		'string.pattern.base':
-			'Content can only contain latins alphas, numeric and !, *, (, ), _, +',
 	}),
 };
 
