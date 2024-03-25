@@ -6,11 +6,7 @@ import Joi from 'joi';
 import { splitMap } from 'patronum';
 
 import { authApi, RegistrationParams, user, User } from '@/shared/api';
-import {
-	ALLOWED_SYMBOLS,
-	MIN_LENGTH,
-	MAX_SHORT_LENGTH
-} from '@/shared/configs';
+import { MIN_LENGTH, MAX_SHORT_LENGTH } from '@/shared/configs';
 import { createRuleFromSchema, isHttpErrorCode } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
@@ -59,7 +55,6 @@ const schemas = Joi.object<RegistrationFormParams>({
 			'string.max': 'max_length',
 		}),
 	password: Joi.string()
-		.pattern(ALLOWED_SYMBOLS)
 		.min(MIN_LENGTH)
 		.max(MAX_SHORT_LENGTH)
 		.required()
