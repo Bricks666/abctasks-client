@@ -36,6 +36,7 @@ const copyLinkFx = createEffect((link: string) => {
 });
 
 export const copyLink = createEvent();
+export const linkCopied = createEvent();
 
 export const Gate = createGate<InRoomParams>();
 
@@ -60,6 +61,11 @@ sample({
 		color: 'info' as const,
 	}),
 	target: notificationsModel.create,
+});
+
+sample({
+	clock: copyLinkFx.done,
+	target: linkCopied,
 });
 
 sample({
