@@ -8,12 +8,14 @@ i18n
 	.use(LanguageDetector)
 	.use(initReactI18next)
 	.init({
-		fallbackLng: 'en',
+		fallbackLng: 'ru',
 		partialBundledLanguages: true,
 		debug: import.meta.env.DEV,
 		interpolation: {
 			escapeValue: false,
 		},
+		supportedLngs: ['ru', 'en'],
+		load: 'languageOnly',
 		defaultNS: ['common'],
 		resources: {},
 	});
