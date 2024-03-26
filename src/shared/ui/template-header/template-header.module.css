@@ -1,4 +1,6 @@
 .container {
+	gap: 0.5em;
+
 	border-left: none;
 	border-top: none;
 	border-right: none;
@@ -7,7 +9,7 @@
 .bar {
 	display: grid;
 	grid-template-columns: 150px 1fr 150px;
-	gap: 0.5em;
+	gap: inherit;
 	align-items: center;
 
 	padding: 0 1em;
@@ -48,5 +50,11 @@
 
 	.right {
 		grid-column: 2;
+	}
+}
+
+@media (max-width: 600px) {
+	.bar {
+		padding: 0 0.5em;
 	}
 }
