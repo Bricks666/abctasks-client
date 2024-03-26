@@ -1,0 +1,9 @@
+@media (max-width: 600px) {
+	.title {
+		font-size: 1.3rem;
+	}
+
+	.bar {
+		gap: 0.25em;
+	}
+}
