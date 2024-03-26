@@ -16,8 +16,6 @@ export const RoomsHeader: React.FC<CommonProps> = (props) => {
 	const { t, } = useTranslation('rooms');
 	const title = t('title');
 
-	console.log(styles);
-
 	return (
 		<MainHeader
 			className={cn(styles.bar, className)}

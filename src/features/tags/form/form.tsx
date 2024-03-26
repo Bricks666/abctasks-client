@@ -69,10 +69,6 @@ const Name: React.FC<FieldProps> = (props) => {
 
 	const name = useUnit($form.fields.name);
 
-	if (name.isValid) {
-		console.log('Invalid field');
-	}
-
 	return (
 		<Field
 			className={styles.input}

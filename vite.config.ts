@@ -51,6 +51,67 @@ export default defineConfig(({ mode }) => {
 				manifest: {
 					name: 'ABCTasks',
 					short_name: 'ABC',
+					description:
+						'Simple and functional task manager. It is great for single and team usage.',
+					screenshots: [
+						{
+							src: 'screenshots/rooms-light-desktop.webp',
+							sizes: '1280x720',
+							type: 'image/webp',
+							form_factor: 'wide',
+							label: 'Rooms list of user in light scheme',
+						},
+						{
+							src: 'screenshots/rooms-dark-desktop.webp',
+							sizes: '1280x720',
+							type: 'image/webp',
+							form_factor: 'wide',
+							label: 'Rooms list of user in dark scheme',
+						},
+						{
+							src: 'screenshots/tasks-light-desktop.webp',
+							sizes: '1280x720',
+							type: 'image/webp',
+							form_factor: 'wide',
+							label: 'Tasks page of user in light scheme',
+						},
+						{
+							src: 'screenshots/tasks-dark-desktop.webp',
+							sizes: '1280x720',
+							type: 'image/webp',
+							form_factor: 'wide',
+							label: 'Tasks page of user in dark scheme',
+						},
+
+						{
+							src: 'screenshots/rooms-light-mobile.webp',
+							sizes: '360x720',
+							type: 'image/webp',
+							form_factor: 'narrow',
+							label: 'Rooms list of user in light scheme',
+						},
+						{
+							src: 'screenshots/rooms-dark-mobile.webp',
+							sizes: '360x720',
+							type: 'image/webp',
+							form_factor: 'narrow',
+							label: 'Rooms list of user in dark scheme',
+						},
+						{
+							src: 'screenshots/tasks-light-mobile.webp',
+							sizes: '360x720',
+							type: 'image/webp',
+							form_factor: 'narrow',
+							label: 'Tasks page of user in light scheme',
+						},
+						{
+							src: 'screenshots/tasks-dark-mobile.webp',
+							sizes: '360x720',
+							type: 'image/webp',
+							form_factor: 'narrow',
+							label: 'Tasks page of user in dark scheme',
+						},
+					],
 					icons: [
 						{
 							src: 'images/icon-48.webp',
@@ -75,8 +136,9 @@ export default defineConfig(({ mode }) => {
 					start_url: '.',
 					scope: '/',
 					display: 'standalone',
-					theme_color: '#2e87ba',
-					background_color: '#2e87ba',
+					theme_color: '#f5f5f5',
+					background_color: '#f5f5f5',
+					categories: ['productivity', 'personalization', 'lifestyle'],
 				},
 			})
 		);
