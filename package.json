@@ -7,6 +7,8 @@
 		"dev": "vite --host",
 		"build": "tsc && vite build",
 		"preview": "vite preview --mode test",
+		"test": "vitest",
+		"test:coverage": "vitest --coverage",
 		"test:e2e": "npx playwright test",
 		"test:e2e:ui": "npx playwright test --ui",
 		"lint": "eslint --ext .tsx,.ts src",
@@ -54,6 +56,8 @@
 		"@faker-js/faker": "^8.4.1",
 		"@playwright/test": "^1.40.1",
 		"@rollup/plugin-babel": "^6.0.4",
+		"@testing-library/jest-dom": "^6.4.6",
+		"@testing-library/react": "^16.0.0",
 		"@types/compose-function": "^0.0.32",
 		"@types/node": "^20.8.7",
 		"@types/react": "^18.2.31",
@@ -70,11 +74,14 @@
 		"eslint-plugin-import": "^2.28.1",
 		"eslint-plugin-sonarjs": "^0.21.0",
 		"husky": "^8.0.3",
+		"jsdom": "^24.1.0",
 		"lint-staged": "^15.0.2",
+		"msw": "^2.3.1",
 		"typed-css-modules": "^0.8.0",
 		"typescript": "^5.2.2",
 		"vite": "^4.5.0",
 		"vite-plugin-pwa": "^0.19.0",
-		"vite-plugin-static-copy": "^0.17.0"
+		"vite-plugin-static-copy": "^0.17.0",
+		"vitest": "^1.6.0"
 	}
 }
