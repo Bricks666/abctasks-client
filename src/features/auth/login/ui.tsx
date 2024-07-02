@@ -12,16 +12,22 @@ import { Checkbox, Field, Form, PasswordField } from '@/shared/ui';
 import { form } from './model';
 import styles from './ui.module.css';
 
-export const LoginForm: React.FC<CommonProps> = (props) => {
+export type LoginFormProps = CommonProps;
+
+export const LoginForm: React.FC<LoginFormProps> = (props) => {
 	const { className, } = props;
 	const { t, } = useTranslation('login');
 	const loginText = t('login_form.submit');
+	const formTitleText = t('login_form.title');
 	const submit = useUnit(form.submit);
 
 	const onSubmit = usePreventDefault(submit);
 
 	return (
-		<Form className={cn(styles.form, className)} onSubmit={onSubmit}>
+		<Form
+			className={cn(styles.form, className)}
+			onSubmit={onSubmit}
+			aria-label={formTitleText}>
 			<Email />
 			<Password />
 			<RememberMe />
@@ -34,15 +40,11 @@ const Email: React.FC = () => {
 	const { t, } = useTranslation('login');
 	const email = useUnit(form.fields.email);
 	const { errorText, } = email;
-
 	const label = t('login_form.fields.email');
-	const error = t(
-		[`login_form.errors.email.${errorText}`, 'common:errors.default'],
-		{
-			min_symbols_count: MIN_LENGTH,
-			max_symbols_count: MAX_SHORT_LENGTH,
-		}
-	);
+	const error = t(`login_form.errors.email.${errorText}`, {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
 	const errorHelperText = email.isValid ? null : error;
 
 	return (
@@ -53,7 +55,7 @@ const Email: React.FC = () => {
 			onBlur={email.onBlur}
 			helperText={errorHelperText}
 			isValid={email.isValid}
-			name='Email'
+			name='email'
 			label={label}
 		/>
 	);
@@ -65,13 +67,10 @@ const Password: React.FC = () => {
 	const { errorText, } = password;
 
 	const label = t('login_form.fields.password');
-	const error = t(
-		[`login_form.errors.password.${errorText}`, 'common:errors.default'],
-		{
-			min_symbols_count: MIN_LENGTH,
-			max_symbols_count: MAX_SHORT_LENGTH,
-		}
-	);
+	const error = t(`login_form.errors.password.${errorText}`, {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
 	const errorHelperText = password.isValid ? null : error;
 
 	return (

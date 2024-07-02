@@ -46,7 +46,6 @@ const schemas = {
 		.required()
 		.messages({
 			'string.empty': 'empty',
-			'string.pattern.base': 'pattern',
 			'string.min': 'min_length',
 			'string.max': 'max_length',
 		}),
@@ -80,6 +79,11 @@ sample({
 	clock: mutation.finished.success,
 	fn: ({ result, }) => result.data.user,
 	target: sessionModel.query.start,
+});
+
+sample({
+	clock: mutation.finished.finally,
+	target: form.fields.password.resetValue,
 });
 
 const errors = splitMap({
