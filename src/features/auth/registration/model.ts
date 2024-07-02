@@ -39,7 +39,6 @@ const schemas = Joi.object<RegistrationFormParams>({
 		.required()
 		.messages({
 			'string.empty': 'empty',
-			'string.pattern.base': 'pattern',
 			'string.email': 'email',
 			'string.min': 'min_length',
 			'string.max': 'max_length',
@@ -50,7 +49,6 @@ const schemas = Joi.object<RegistrationFormParams>({
 		.required()
 		.messages({
 			'string.empty': 'empty',
-			'string.pattern.base': 'pattern',
 			'string.min': 'min_length',
 			'string.max': 'max_length',
 		}),
@@ -60,13 +58,10 @@ const schemas = Joi.object<RegistrationFormParams>({
 		.required()
 		.messages({
 			'string.empty': 'empty',
-			'string.pattern.base': 'pattern',
 			'string.min': 'min_length',
 			'string.max': 'max_length',
 		}),
-	repeatPassword: Joi.string().messages({
-		'any.only': 'equal',
-	}),
+	repeatPassword: Joi.string().required(),
 });
 
 export const form = createForm<RegistrationFormParams>({
@@ -103,9 +98,11 @@ sample({
 });
 
 sample({
-	clock: mutation.finished.failure,
-	fn: () => '',
-	target: [form.fields.password.$value, form.fields.repeatPassword.$value],
+	clock: mutation.finished.finally,
+	target: [
+		form.fields.password.resetValue,
+		form.fields.repeatPassword.resetValue
+	],
 });
 
 const errors = splitMap({
