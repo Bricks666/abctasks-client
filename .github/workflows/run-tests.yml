@@ -19,7 +19,8 @@ jobs:
           - 'main'
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout branch ${{ matrix.branch }}
+        uses: actions/checkout@v4
         with:
           ref: ${{ matrix.branch }}
 
@@ -30,10 +31,10 @@ jobs:
           cache: 'npm'
 
       - name: Install deps
-      - run: npm ci
+        run: npm ci
 
       - name: Run tests
-      - run: npm test:coverage
+        run: npm test:coverage
 
       - name: 'Upload Coverage'
         if: always()
