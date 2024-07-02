@@ -2,7 +2,7 @@ import ky from 'ky';
 
 import { StandardResponse } from '@/shared/types';
 
-import { api } from '../../configs';
+import { API_HOST } from '../../configs';
 
 import { Tokens } from './types';
 
@@ -10,7 +10,7 @@ let token: string | null = null;
 
 export const instance = ky.create({
 	mode: 'cors',
-	prefixUrl: api,
+	prefixUrl: API_HOST,
 	hooks: {
 		beforeRequest: [
 			(request) => {
