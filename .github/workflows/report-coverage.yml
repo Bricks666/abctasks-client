@@ -17,6 +17,8 @@ jobs:
       - name: "Download Branch Coverage Artifacts"
         uses: actions/download-artifact@v4
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
           name: coverage
           path: coverage
 
