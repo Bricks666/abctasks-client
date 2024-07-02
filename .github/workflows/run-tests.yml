@@ -12,17 +12,9 @@ jobs:
     permissions:
       contents: read
 
-    strategy:
-      matrix:
-        branch:
-          - ${{ github.head_ref }}
-          - 'main'
-
     steps:
-      - name: Checkout branch ${{ matrix.branch }}
+      - name: Checkout branch
         uses: actions/checkout@v4
-        with:
-          ref: ${{ matrix.branch }}
 
       - name: Install Node
         uses: actions/setup-node@v4
@@ -40,5 +32,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ matrix.branch }}
+          name: coverage
           path: coverage
