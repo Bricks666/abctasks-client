@@ -6,24 +6,16 @@ import {
 	waitFor
 } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
-import { setupServer } from 'msw/node';
-import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import { LoginForm, LoginFormProps } from './ui';
+
+import { server } from '~/tests';
+
 
 import '@testing-library/jest-dom/vitest';
 
 describe('features/auth/login/ui', () => {
-	const fn = vi.fn().mockResolvedValue(
-		HttpResponse.json({
-			data: {
-				user: {},
-			},
-		})
-	);
-
-	const handlers = [http.post('/api/auth/login', fn)];
-	const server = setupServer(...handlers);
 	const values = {
 		email: 'email@example.com',
 		password: 'password',
@@ -56,14 +48,6 @@ describe('features/auth/login/ui', () => {
 			target: { value: values.rememberMe, },
 		});
 	};
-
-	beforeAll(() => {
-		server.listen();
-	});
-
-	afterAll(() => {
-		server.close();
-	});
 
 	test('should render form, 3 inputs and button', () => {
 		createComponent();
@@ -176,14 +160,16 @@ describe('features/auth/login/ui', () => {
 			});
 
 			test('there is not user with this email', async () => {
-				fn.mockImplementationOnce(() => {
-					return HttpResponse.json(
-						{
-							message: 'Not Found',
-						},
-						{ status: 404, statusText: 'Not Found', }
-					);
-				});
+				server.use(
+					http.post('/api/auth/login', () => {
+						return HttpResponse.json(
+							{
+								message: 'Not Found',
+							},
+							{ status: 404, statusText: 'Not Found', }
+						);
+					})
+				);
 
 				createComponent();
 
@@ -268,14 +254,16 @@ describe('features/auth/login/ui', () => {
 			});
 
 			test('incorrect password', async () => {
-				fn.mockImplementationOnce(() => {
-					return HttpResponse.json(
-						{
-							message: 'Forbidden',
-						},
-						{ status: 403, statusText: 'Forbidden', }
-					);
-				});
+				server.use(
+					http.post('/api/auth/login', () => {
+						return HttpResponse.json(
+							{
+								message: 'Forbidden',
+							},
+							{ status: 403, statusText: 'Forbidden', }
+						);
+					})
+				);
 
 				createComponent();
 

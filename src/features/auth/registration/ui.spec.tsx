@@ -7,24 +7,14 @@ import {
 	waitFor
 } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
-import { setupServer } from 'msw/node';
-import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import { RegistrationForm, RegistrationFormProps } from './ui';
 
 import '@testing-library/jest-dom/vitest';
+import { server } from '~/tests';
 
 describe('features/auth/registration/ui', () => {
-	const fn = vi.fn().mockResolvedValue(
-		HttpResponse.json({
-			data: {
-				user: {},
-			},
-		})
-	);
-
-	const handlers = [http.post('/api/auth/registration', fn)];
-	const server = setupServer(...handlers);
 	const values = {
 		email: 'email@example.com',
 		username: 'username',
@@ -66,14 +56,6 @@ describe('features/auth/registration/ui', () => {
 			target: { value: values.repeatPassword, },
 		});
 	};
-
-	beforeAll(() => {
-		server.listen();
-	});
-
-	afterAll(() => {
-		server.close();
-	});
 
 	test('should render form, 4 inputs and button', () => {
 		createComponent();
@@ -246,14 +228,16 @@ describe('features/auth/registration/ui', () => {
 			});
 
 			test('there is not user with this email', async () => {
-				fn.mockImplementationOnce(() => {
-					return HttpResponse.json(
-						{
-							message: 'Conflict',
-						},
-						{ status: 409, statusText: 'Conflict', }
-					);
-				});
+				server.use(
+					http.post('/api/auth/registration', () => {
+						return HttpResponse.json(
+							{
+								message: 'Conflict',
+							},
+							{ status: 409, statusText: 'Conflict', }
+						);
+					})
+				);
 
 				createComponent();
 
