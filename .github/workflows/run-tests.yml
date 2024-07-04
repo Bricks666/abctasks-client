@@ -11,6 +11,7 @@ jobs:
 
     permissions:
       contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout branch
@@ -28,9 +29,9 @@ jobs:
       - name: Run tests
         run: npm run test:coverage
 
-      - name: 'Upload Coverage'
+      - name: "Report Coverage"
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: davelosert/vitest-coverage-report-action@v2
         with:
-          name: coverage
-          path: coverage
+          json-summary-path: coverage/coverage-summary.json
+          json-final-path: coverage/coverage-final.json
