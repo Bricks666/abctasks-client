@@ -60,6 +60,12 @@ const invitationHandlers = [
 			statusCode: 200,
 		});
 	}),
+	http.put('/api/invitations/invite/approve', () => {
+		return HttpResponse.json({
+			data: true,
+			statusCode: 200,
+		});
+	}),
 ];
 
 const handlers = [...authHandlers, ...invitationHandlers];
