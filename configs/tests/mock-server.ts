@@ -66,6 +66,12 @@ const invitationHandlers = [
 			statusCode: 200,
 		});
 	}),
+	http.post('/api/invitations/invite/:roomId/generate-link', ({ params }) => {
+		return HttpResponse.json({
+			data: `https://localhost:3000/invitation-link-to-room-${params.roomId}`,
+			statusCode: 200,
+		});
+	}),
 ];
 
 const handlers = [...authHandlers, ...invitationHandlers];

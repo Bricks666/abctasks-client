@@ -1,0 +1,72 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/invitation/generate-invitation-link/generate-invitation-link > should render form, input with link and button to copy 1`] = `
+<form
+  aria-label="actions.generate_link.title"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 _form_97cd14 css-ee20y-MuiPaper-root"
+>
+  <div
+    class="_container_19bcf6"
+  >
+    <div
+      class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink="true"
+        for=":r0:"
+        id=":r0:-label"
+      >
+        actions.generate_link.fields.link
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+          id=":r0:"
+          name="link"
+          readonly=""
+          type="text"
+          value="https://localhost:3000/invitation-link-to-room-123"
+        />
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-14lo706"
+          >
+            <span>
+              actions.generate_link.fields.link
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+    <button
+      aria-label="actions.generate_link.actions.copy"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-1kuq5xv-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element="true"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="CopyAllIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M18 2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H9V4h9v12zM3 15v-2h2v2H3zm0-5.5h2v2H3v-2zM10 20h2v2h-2v-2zm-7-1.5v-2h2v2H3zM5 22c-1.1 0-2-.9-2-2h2v2zm3.5 0h-2v-2h2v2zm5 0v-2h2c0 1.1-.9 2-2 2zM5 6v2H3c0-1.1.9-2 2-2z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</form>
+`;

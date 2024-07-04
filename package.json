@@ -58,6 +58,7 @@
 		"@rollup/plugin-babel": "^6.0.4",
 		"@testing-library/jest-dom": "^6.4.6",
 		"@testing-library/react": "^16.0.0",
+		"@testing-library/user-event": "^14.5.2",
 		"@types/compose-function": "^0.0.32",
 		"@types/node": "^20.8.7",
 		"@types/react": "^18.2.31",
