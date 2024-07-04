@@ -7,7 +7,6 @@ import { CommonProps } from '@/shared/types';
 
 import { mutation } from './model';
 
-
 export interface RejectInvitationButtonProps extends CommonProps {
 	readonly id: number;
 }
@@ -24,11 +23,11 @@ export const RejectInvitationButton: React.FC<RejectInvitationButtonProps> = (
 		approve.start({ id, });
 	};
 
-	const text = t('actions.reject.actions.button');
+	const textText = t('actions.reject.actions.button');
 
 	return (
 		<Button className={className} color='error' onClick={onClick}>
-			{text}
+			{textText}
 		</Button>
 	);
 };
