@@ -17,10 +17,10 @@ export const RejectInvitationButton: React.FC<RejectInvitationButtonProps> = (
 	const { id, className, } = props;
 
 	const { t, } = useTranslation('room-invitation');
-	const approve = useUnit(mutation);
+	const reject = useUnit(mutation);
 
 	const onClick = () => {
-		approve.start({ id, });
+		reject.start({ id, });
 	};
 
 	const textText = t('actions.reject.actions.button');
