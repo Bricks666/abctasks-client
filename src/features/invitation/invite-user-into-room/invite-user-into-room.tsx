@@ -24,6 +24,7 @@ export const InviteUserIntoRoom: React.FC<InviteUserIntoRoomProps> = (
 	const submit = useUnit(form.submit);
 	const isLoading = useUnit(mutation.$pending);
 	const user = useUnit(form.fields.user.$value);
+	const titleText = t('actions.invite_user.title');
 
 	const onSubmit: React.FormEventHandler = usePreventDefault(submit);
 
@@ -32,7 +33,10 @@ export const InviteUserIntoRoom: React.FC<InviteUserIntoRoomProps> = (
 		: t('actions.invite_user.actions.submit', { context: 'disabled', });
 
 	return (
-		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
+		<form
+			className={cn(styles.form, className)}
+			onSubmit={onSubmit}
+			aria-label={titleText}>
 			<User />
 			<LoadingButton
 				type='submit'

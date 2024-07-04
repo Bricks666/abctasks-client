@@ -72,8 +72,73 @@ const invitationHandlers = [
 			statusCode: 200,
 		});
 	}),
+	http.post('/api/invitations/invite/:roomId', () => {
+		return HttpResponse.json({
+			data: {
+				id: 123,
+				room: {
+					id: 123,
+					ownerId: 123,
+					name: 'Room',
+					description: 'Some room',
+					canChange: true,
+				},
+				user: {
+					id: 123,
+					email: 'email@example.org',
+					username: 'username',
+					photo: null,
+				},
+				inviter: {
+					id: 123,
+					email: 'email@example.org',
+					username: 'username',
+					photo: null,
+				},
+				status: 'sended',
+			},
+			statusCode: 200,
+		});
+	}),
 ];
 
-const handlers = [...authHandlers, ...invitationHandlers];
+const users = [
+	{
+		id: 1,
+		email: 'email@example.org',
+		username: 'username',
+		photo: null,
+	},
+	{
+		id: 2,
+		email: 'another-email@example.org',
+		username: 'Cool-user',
+		photo: null,
+	},
+	{
+		id: 3,
+		email: 'some-strange-email@example.org',
+		username: 'Shit-user',
+		photo: null,
+	},
+];
+
+const usersHandlers = [
+	http.get('/api/users', ({ request }) => {
+		const url = new URL(request.url);
+		const username = url.searchParams.get('username');
+
+		const searchedUsers = users.filter((user) =>
+			user.username.includes(username)
+		);
+
+		return HttpResponse.json({
+			data: searchedUsers,
+			statusCode: 200,
+		});
+	}),
+];
+
+const handlers = [...authHandlers, ...invitationHandlers, ...usersHandlers];
 
 export const server = setupServer(...handlers);
