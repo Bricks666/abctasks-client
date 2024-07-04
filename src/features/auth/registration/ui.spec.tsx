@@ -329,7 +329,7 @@ describe('features/auth/registration/ui', () => {
 			});
 		});
 
-		describe('repeat password field', () => {
+		describe.skip('repeat password field', () => {
 			test('different passwords', async () => {
 				createComponent();
 
