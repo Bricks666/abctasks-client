@@ -47,6 +47,15 @@ const authHandlers = [
 	}),
 ];
 
-const handlers = [...authHandlers];
+const invitationHandlers = [
+	http.delete('/api/invitations/invite/:roomId/:id', () => {
+		return HttpResponse.json({
+			data: true,
+			statusCode: 200,
+		});
+	}),
+];
+
+const handlers = [...authHandlers, ...invitationHandlers];
 
 export const server = setupServer(...handlers);
