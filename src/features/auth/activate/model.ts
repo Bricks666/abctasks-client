@@ -13,7 +13,7 @@ export const query = createQuery<
 	StandardResponse<boolean>,
 	Error,
 	StandardResponse<boolean>,
-	globalThis.Boolean
+	globalThis.Boolean | null
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Boolean)),

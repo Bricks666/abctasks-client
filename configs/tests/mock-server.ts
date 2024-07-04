@@ -39,6 +39,12 @@ const authHandlers = [
 			statusCode: 200,
 		});
 	}),
+	http.put('/api/auth/registration/activate', () => {
+		return HttpResponse.json({
+			data: true,
+			statusCode: 200,
+		});
+	}),
 ];
 
 const handlers = [...authHandlers];

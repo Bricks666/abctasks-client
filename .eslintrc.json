@@ -215,5 +215,19 @@
 		"@typescript-eslint/no-empty-interface": ["off"],
 		"@typescript-eslint/no-explicit-any": "warn"
 	},
-	"ignorePatterns": ["templates/**/*", "*.css.d.ts", "configs/*", "e2e", "*.config.*"]
+	"overrides": [
+		{
+			"files": ["*.spec.tsx", "*.spec.ts"],
+			"rules": {
+				"import/no-extraneous-dependencies": "off"
+			}
+		}
+	],
+	"ignorePatterns": [
+		"templates/**/*",
+		"*.css.d.ts",
+		"configs/*",
+		"e2e",
+		"*.config.*"
+	]
 }
