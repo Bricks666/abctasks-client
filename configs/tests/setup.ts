@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { expect, afterEach, beforeAll, afterAll } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
-import { server } from './mockServerHandlers';
+import { server } from './mock-server';
 
 expect.extend(matchers);
 

@@ -14,7 +14,15 @@ import { MenuOption, MenuItem, Menu } from '@/shared/ui';
 
 import { mutation } from './model';
 
-export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
+export type ProfileMenuProps = CommonProps;
+
+/**
+ * @todo
+ * Extract settings button and exit button into different features.
+ * @todo
+ * Make it a widget
+ */
+export const ProfileMenu: React.FC<ProfileMenuProps> = ({ className, }) => {
 	const { t, } = useTranslation('common');
 	const user = useUnit(sessionModel.$user);
 	const [isOpen, { toggle, }] = useToggle(false);
@@ -25,19 +33,14 @@ export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
 		return null;
 	}
 
-	const items = t('profile_menu.items', { returnObjects: true, }) as Record<
-		string,
-		string
-	>;
-
 	const options: MenuOption<object>[] = [
 		{
-			label: items.settings,
+			label: t('profile_menu.items.settings'),
 			onClick: console.log,
 			icon: <SettingsIcon />,
 		},
 		{
-			label: items.logout,
+			label: t('profile_menu.items.logout'),
 			onClick: logout.start,
 			icon: <LogoutIcon />,
 		}
@@ -45,11 +48,11 @@ export const ProfileMenu: React.FC<CommonProps> = ({ className, }) => {
 
 	const { username, photo, email, } = user;
 
-	const title = t('profile_menu.title', { username, });
+	const titleText = t('profile_menu.title', { username, });
 
 	return (
 		<div className={className}>
-			<Tooltip title={title}>
+			<Tooltip title={titleText}>
 				<IconButton onClick={toggle} ref={setReference}>
 					<UserAvatar
 						username={username}

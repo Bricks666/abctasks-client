@@ -40,6 +40,8 @@ export const instance = ky.create({
 				const body = await response.json();
 
 				if (
+					typeof body !== 'object' ||
+					body === null ||
 					!('data' in body) ||
 					typeof body.data !== 'object' ||
 					body.data === null

@@ -1,1 +1,1 @@
-export * from './mockServerHandlers';
+export * from './mock-server';

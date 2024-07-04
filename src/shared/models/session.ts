@@ -29,7 +29,6 @@ type Status = 'initial' | 'pending' | 'authorized' | 'anonymous';
 export const $user = createStore<User | null>(null);
 export const $status = createStore<Status>('initial');
 export const $isAuth = $status.map((status) => status === 'authorized');
-export const setUser = createEvent<User | null>();
 
 const handlerFx = createEffect(authApi.auth);
 
@@ -68,6 +67,11 @@ sample({
 	clock: query.finished.success,
 	fn: ({ result, }) => result.user,
 	target: $user,
+});
+
+sample({
+	clock: query.finished.failure,
+	target: $user.reinit!,
 });
 
 export const chainAuthorized = <Params extends RouteParams>(
