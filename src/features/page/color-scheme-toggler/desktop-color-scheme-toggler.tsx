@@ -19,6 +19,8 @@ export const DesktopColorschemeToggler: React.FC<
 	const { t, } = useTranslation('common');
 	const [colorScheme, changeColorScheme] = useToggleColorScheme();
 
+	const labelText = t('color_schemes.label');
+
 	const onChange = (_event: unknown, value: colorSchemeModel.ColorScheme) => {
 		changeColorScheme(value);
 	};
@@ -28,7 +30,7 @@ export const DesktopColorschemeToggler: React.FC<
 			className={className}
 			value={colorScheme}
 			onChange={onChange}
-			aria-label='color scheme'
+			aria-label={labelText}
 			size={size}
 			color='primary'
 			exclusive>
@@ -38,7 +40,7 @@ export const DesktopColorschemeToggler: React.FC<
 						<ToggleButton
 							value={scheme}
 							selected={colorScheme === scheme}
-							aria-label={`${scheme} scheme`}>
+							aria-label={t(`color_schemes.schemes.${scheme}`)}>
 							{React.createElement(ICONS_MAP[scheme])}
 						</ToggleButton>
 					</Tooltip>

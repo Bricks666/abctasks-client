@@ -41,7 +41,8 @@
 			"system": "Системная тема",
 			"light": "Светлая тема"
 		},
-		"activated": "Выбрана $t(color_schemes.schemes.{{ scheme }})"
+		"activated": "Выбрана $t(color_schemes.schemes.{{ scheme }})",
+		"label": "Цветовая тема"
 	},
 	"profile_menu": {
 		"title": "Настройки профиля {{ username }}",

@@ -41,7 +41,8 @@
 			"system": "OS scheme",
 			"light": "Light scheme"
 		},
-		"activated": "$t(color_schemes.schemes.{{ scheme }}) activate now"
+		"activated": "$t(color_schemes.schemes.{{ scheme }}) activate now",
+		"label": "Color scheme"
 	},
 	"profile_menu": {
 		"title": "{{ username }}'s profile settings",
