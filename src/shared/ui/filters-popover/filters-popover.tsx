@@ -78,11 +78,6 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 		);
 	}
 
-	/**
-	 * @todo
-	 * Add aria-label for button
-	 */
-
 	return (
 		<>
 			<Tooltip title={title}>
@@ -92,6 +87,7 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 					aria-expanded={open}
 					aria-haspopup='true'
 					aria-controls={popupId}
+					aria-label={title}
 					ref={setRef}>
 					{icon}
 				</IconButton>

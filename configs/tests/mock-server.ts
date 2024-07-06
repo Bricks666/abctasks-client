@@ -139,6 +139,66 @@ const usersHandlers = [
 	}),
 ];
 
-const handlers = [...authHandlers, ...invitationHandlers, ...usersHandlers];
+const membersHandler = [
+	http.get('/api/members/:roomId', () => {
+		return HttpResponse.json({
+			data: users,
+			statusCode: 200,
+		});
+	}),
+];
+
+const actions = [
+	{
+		id: 1,
+		name: 'created',
+	},
+	{
+		id: 2,
+		name: 'updated',
+	},
+	{
+		id: 3,
+		name: 'removed',
+	},
+];
+
+const spheres = [
+	{
+		id: 1,
+		name: 'task',
+	},
+	{
+		id: 2,
+		name: 'comment',
+	},
+	{
+		id: 3,
+		name: 'tag',
+	},
+];
+
+const actionsHandlers = [
+	http.get('api/activities/actions/all', () => {
+		return HttpResponse.json({
+			data: actions,
+			statusCode: 200,
+		});
+	}),
+	http.get('api/activities/spheres/all', () => {
+		return HttpResponse.json({
+			data: spheres,
+			statusCode: 200,
+		});
+	}),
+];
+
+const handlers = [
+	...authHandlers,
+	...invitationHandlers,
+	...usersHandlers,
+	...actionsHandlers,
+	...membersHandler,
+];
 
 export const server = setupServer(...handlers);

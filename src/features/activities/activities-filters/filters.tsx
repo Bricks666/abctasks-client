@@ -26,7 +26,7 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 	const { t, } = useTranslation('room-activities');
 
 	const [open, { toggleOff, toggleOn, }] = useToggle();
-	const [reset, submit] = useUnit([form.reset, form.submit]);
+	const [reset, submit] = useUnit([form.resetValues, form.submit]);
 
 	const onSubmit = usePreventDefault(() => {
 		submit();
@@ -38,10 +38,9 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 		toggleOff();
 	};
 
-	const title = t('actions.filter_activities.title');
-	const actions = t('actions.filter_activities.actions', {
-		returnObjects: true,
-	}) as Record<string, string>;
+	const titleText = t('actions.filter_activities.title');
+	const submitText = t('actions.filter_activities.actions.submit');
+	const resetText = t('actions.filter_activities.actions.reset');
 
 	const buttons = (
 		<>
@@ -51,14 +50,14 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 				type='reset'
 				variant='text'
 				color='primary'>
-				{actions.reset}
+				{resetText}
 			</Button>
 			<Button
 				className={styles.submit}
 				onClick={onSubmit}
 				type='submit'
 				variant='contained'>
-				{actions.submit}
+				{submitText}
 			</Button>
 		</>
 	);
@@ -68,7 +67,7 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 			open={open}
 			onOpen={toggleOn}
 			onClose={toggleOff}
-			title={title}
+			title={titleText}
 			icon={<TuneIcon />}
 			slots={{ actions: buttons, }}>
 			{({ isPopup, titleId, }) => (
