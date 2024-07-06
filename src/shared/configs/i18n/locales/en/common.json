@@ -32,7 +32,8 @@
 		"ru": "Russian",
 		"en": "English",
 		"ru_short": "Ru",
-		"en_short": "En"
+		"en_short": "En",
+		"label": "Language"
 	},
 	"color_schemes": {
 		"schemes": {

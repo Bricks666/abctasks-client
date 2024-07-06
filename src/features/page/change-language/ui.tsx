@@ -9,6 +9,10 @@ import { useTranslation } from 'react-i18next';
 
 import { deviceInfoModel, i18nModel } from '@/shared/models';
 
+/**
+ * @todo
+ * Use `supportedLng` field of 'i18n' object instead of it
+ */
 const languages = ['ru', 'en'];
 
 export const ChangeLanguage: React.FC = () => {
@@ -23,6 +27,7 @@ export const ChangeLanguage: React.FC = () => {
 		changeLanguage(event.target.value as any);
 	};
 
+	const labelText = t('languages.label');
 	const context = isMobile ? 'short' : '';
 
 	return (
@@ -32,6 +37,7 @@ export const ChangeLanguage: React.FC = () => {
 			variant='standard'
 			size='small'
 			SelectProps={SelectProps}
+			label={labelText}
 			select>
 			{languages.map((language) => (
 				<MenuItem value={language} key={language}>
