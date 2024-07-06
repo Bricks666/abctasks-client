@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/page/navigation/navigation > should render navigation with links 1`] = `
+<nav
+  class="_navigation_ee997c"
+>
+  <ul
+    class="MuiList-root MuiList-padding _list_ee997c css-h4y409-MuiList-root"
+  >
+    <li
+      class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+    >
+      <a
+        class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+        href="[object Object]"
+        tabindex="0"
+      >
+        <div
+          class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="HomeIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-subtitle1 MuiListItemText-primary css-1kji7gj-MuiTypography-root"
+          >
+            navigation.items.rooms
+          </p>
+        </div>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
