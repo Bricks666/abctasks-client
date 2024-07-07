@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/rooms/form/skeleton > should render element with 3 field holders 1`] = `
+<div
+  class="MuiStack-root _form_a5febb css-jfdv4h-MuiStack-root"
+>
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-1e1x4vv-MuiSkeleton-root"
+    style="height: 3em;"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-1e1x4vv-MuiSkeleton-root"
+    style="height: 3em;"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-1e1x4vv-MuiSkeleton-root"
+    style="height: 3em;"
+  />
+</div>
+`;

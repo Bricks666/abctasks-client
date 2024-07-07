@@ -56,13 +56,10 @@ const Name: React.FC<FieldProps> = (props) => {
 	const { errorText, } = name;
 
 	const label = t('actions.room_form.fields.name');
-	const error = t(
-		[`actions.room_form.errors.name.${errorText}`, 'common:errors.default'],
-		{
-			min_symbols_count: MIN_LENGTH,
-			max_symbols_count: MAX_SHORT_LENGTH,
-		}
-	);
+	const error = t(`actions.room_form.errors.name.${errorText}`, {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
 	const errorHelperText = name.isValid ? null : error;
 
 	return (
@@ -85,16 +82,10 @@ const Description: React.FC<FieldProps> = (props) => {
 	const { errorText, } = description;
 
 	const label = t('actions.room_form.fields.description');
-	const error = t(
-		[
-			`actions.room_form.errors.description.${errorText}`,
-			'common:errors.default'
-		],
-		{
-			min_symbols_count: MIN_LENGTH,
-			max_symbols_count: MAX_SHORT_LENGTH,
-		}
-	);
+	const error = t(`actions.room_form.errors.description.${errorText}`, {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
 	const errorHelperText = description.isValid ? null : error;
 
 	return (
