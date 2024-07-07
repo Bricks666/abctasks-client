@@ -155,4 +155,25 @@ describe('features/rooms/create-room/create-room', () => {
 			);
 		});
 	});
+
+	test('should reset form on popup close', async () => {
+		createComponent();
+
+		const nameField = findNameField();
+		const descriptionField = findDescriptionField();
+
+		await user.click(nameField);
+		await user.keyboard(name);
+
+		await user.click(descriptionField);
+		await user.keyboard(description);
+
+		allSettled(popupControls.close, { scope, });
+
+		await waitFor(() => {
+			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
+			expect(nameField).toHaveValue('');
+			expect(descriptionField).toHaveValue('');
+		});
+	});
 });
