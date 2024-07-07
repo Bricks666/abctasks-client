@@ -11,7 +11,9 @@ const parsePopups = (raw: string): string[] => {
 };
 
 const $rawPopups = popupsDomain.createStore<string>('');
-const $querySyncedPopups = $rawPopups.map(parsePopups);
+const $querySyncedPopups = $rawPopups
+	.map(parsePopups)
+	.map((popups) => popups.filter((popup) => popup !== ''));
 const $manualPopups = popupsDomain.createStore<string[]>([]);
 
 export const $popups = combine(
