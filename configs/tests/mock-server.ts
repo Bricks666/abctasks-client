@@ -217,6 +217,27 @@ const roomsHandlers = [
 			statusCode: 200,
 		});
 	}),
+	http.get('/api/rooms/:id', ({ params }) => {
+		const room = rooms.find((room) => room.id === params.id);
+
+		return HttpResponse.json({
+			data: room,
+			statusCode: 200,
+		});
+	}),
+	http.put('/api/rooms/:id/update', async ({ params, request }) => {
+		const room = rooms.find((room) => room.id == params.id);
+		const { name, description } = await request.json();
+
+		return HttpResponse.json({
+			data: {
+				...room,
+				name,
+				description,
+			},
+			statusCode: 200,
+		});
+	}),
 	http.post('/api/rooms/create', async ({ request }) => {
 		const { name, description } = await request.json();
 
