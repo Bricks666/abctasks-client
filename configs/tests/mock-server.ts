@@ -193,12 +193,55 @@ const actionsHandlers = [
 	}),
 ];
 
+const rooms = [
+	{
+		id: 1,
+		ownerId: 1,
+		name: 'name',
+		description: 'description',
+		canChange: true,
+	},
+	{
+		id: 2,
+		ownerId: 1,
+		name: 'name-2',
+		description: 'description-2',
+		canChange: true,
+	},
+];
+
+const roomsHandlers = [
+	http.get('/api/rooms', () => {
+		return HttpResponse.json({
+			data: rooms,
+			statusCode: 200,
+		});
+	}),
+	http.post('/api/rooms/create', async ({ request }) => {
+		const { name, description } = await request.json();
+
+		const room = {
+			id: 123,
+			name,
+			description,
+			ownerId: 1,
+			canChange: true,
+		};
+
+		return HttpResponse.json({
+			data: room,
+			statusCode: 200,
+		});
+	}),
+];
+
 const handlers = [
 	...authHandlers,
 	...invitationHandlers,
 	...usersHandlers,
 	...actionsHandlers,
 	...membersHandler,
+	...roomsHandlers,
 ];
 
 export const server = setupServer(...handlers);

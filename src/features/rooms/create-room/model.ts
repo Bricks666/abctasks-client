@@ -31,11 +31,11 @@ export const form = roomFormModel.create();
 export const popupControls = createPopupControlModel({
 	name: popupsMap.createRoom,
 });
-const { reset, formValidated, } = form;
+const { resetValues, formValidated, } = form;
 
 sample({
 	clock: popupControls.closed,
-	target: reset,
+	target: resetValues,
 });
 
 sample({
