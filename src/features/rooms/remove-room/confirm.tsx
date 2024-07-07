@@ -7,7 +7,6 @@ import { Confirm } from '@/shared/ui';
 
 import { popupControls, remove } from './model';
 
-
 export interface ConfirmRemoveRoomProps extends CommonProps, BasePopupProps {}
 
 export const ConfirmRemoveRoom: React.FC<ConfirmRemoveRoomProps> = (props) => {
@@ -19,9 +18,8 @@ export const ConfirmRemoveRoom: React.FC<ConfirmRemoveRoomProps> = (props) => {
 
 	const titleText = t('actions.remove_room.title');
 	const contentText = t('actions.remove_room.content');
-	const actions = t('actions.remove_room.actions', {
-		returnObjects: true,
-	}) as Record<string, string>;
+	const agreeText = t('actions.remove_room.actions.agree');
+	const disagreeText = t('actions.remove_room.actions.disagree');
 
 	return (
 		<Confirm
@@ -30,9 +28,9 @@ export const ConfirmRemoveRoom: React.FC<ConfirmRemoveRoomProps> = (props) => {
 			onClose={close}
 			title={titleText}
 			content={contentText}
-			agreeText={actions.agree}
+			agreeText={agreeText}
 			onAgree={removeRoom}
-			disagreeText={actions.disagree}
+			disagreeText={disagreeText}
 			onDisagree={close}
 		/>
 	);

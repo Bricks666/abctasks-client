@@ -1,6 +1,6 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, createEvent, createStore, sample } from 'effector';
+import { createEffect, createEvent, createStore, sample } from 'effector';
 import { Literal } from 'runtypes';
 
 import { roomsModel } from '@/entities/rooms';
@@ -15,13 +15,9 @@ import {
 	InRoomParams
 } from '@/shared/types';
 
-const removeRoomDomain = createDomain();
-
-const handlerFx = removeRoomDomain.effect<
-	InRoomParams,
-	StandardResponse<boolean>,
-	Error
->(roomsApi.remove);
+const handlerFx = createEffect<InRoomParams, StandardResponse<boolean>, Error>(
+	roomsApi.remove
+);
 
 const $id = createStore<number | null>(null);
 

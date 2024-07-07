@@ -254,6 +254,12 @@ const roomsHandlers = [
 			statusCode: 200,
 		});
 	}),
+	http.delete('/api/rooms/:id/remove', () => {
+		return HttpResponse.json({
+			data: true,
+			statusCode: 200,
+		});
+	}),
 ];
 
 const handlers = [
