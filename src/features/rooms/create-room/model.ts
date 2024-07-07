@@ -1,6 +1,6 @@
 import { createMutation, update } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain, createEvent, sample } from 'effector';
+import { createDomain, sample } from 'effector';
 
 import { roomsModel } from '@/entities/rooms';
 
@@ -26,7 +26,6 @@ export const mutation = createMutation<
 	contract: runtypeContract(getStandardResponse(room)),
 });
 
-export const openButtonClicked = createEvent();
 export const form = roomFormModel.create();
 
 export const popupControls = createPopupControlModel({
