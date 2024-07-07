@@ -39,10 +39,10 @@ describe('features/page/change-language/ui', () => {
 		const select = findSelect();
 
 		await user.click(select);
-		await user.click(screen.getByRole('option', { name: 'languages.ru', }));
+		await user.click(screen.getByRole('option', { name: 'languages.en', }));
 
 		await waitFor(() => {
-			expect(scope.getState(i18nModel.$language)).toBe('ru');
+			expect(scope.getState(i18nModel.$language)).toBe('en');
 		});
 	});
 });
