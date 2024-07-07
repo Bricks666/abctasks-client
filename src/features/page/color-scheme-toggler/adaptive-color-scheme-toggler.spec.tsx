@@ -84,8 +84,6 @@ describe('features/page/color-scheme-toggler/adaptive-color-scheme', () => {
 		test('should render button with icon of selected scheme when menu closed', () => {
 			createComponent();
 
-			console.log(scope.getState(deviceInfoModel.$device));
-
 			expect(document.body).toMatchSnapshot('mobile scheme toggler. closed');
 		});
 

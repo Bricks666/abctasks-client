@@ -1,14 +1,11 @@
-import i18n from 'i18next';
-import { expect, afterEach, beforeAll, afterAll } from 'vitest';
+import { expect, afterEach, beforeAll, afterAll, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
 import { server } from './mock-server';
 
 expect.extend(matchers);
 
-i18n.init({
-	lng: 'cimode',
-});
+vi.mock('@/shared/configs/i18n/index.ts');
 
 afterEach(() => {
 	cleanup();

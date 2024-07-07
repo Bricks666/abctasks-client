@@ -11,10 +11,6 @@ exports[`features/page/change-language/ui > should render select to choose langu
   role="combobox"
   tabindex="0"
 >
-  <span
-    class="notranslate"
-  >
-    ​
-  </span>
+  languages.ru
 </div>
 `;
