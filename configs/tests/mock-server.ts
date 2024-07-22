@@ -333,6 +333,12 @@ const tagsHandlers = [
 			statusCode: 200,
 		});
 	}),
+	http.delete('/api/tags/:roomId/:id/remove', async () => {
+		return HttpResponse.json({
+			data: true,
+			statusCode: 200,
+		});
+	}),
 ];
 
 const handlers = [
