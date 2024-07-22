@@ -8,6 +8,10 @@ export interface TagFormValues extends Omit<Tag, 'id' | 'roomId'> {}
 
 const colorPattern = /#[0-9a-fA-F]{6}/;
 
+/**
+ * @todo
+ * Replace error text with translations
+ */
 const schemas = {
 	mainColor: Joi.string().pattern(colorPattern).required().messages({
 		'string.empty': "Color can't be empty",
