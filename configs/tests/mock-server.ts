@@ -303,6 +303,22 @@ const tagsHandlers = [
 			statusCode: 200,
 		});
 	}),
+	http.post('/api/tags/:roomId/create', async ({ request }) => {
+		const { name, mainColor, secondColor } = await request.json();
+
+		const room = {
+			id: 12,
+			roomId: 1,
+			name,
+			mainColor,
+			secondColor,
+		};
+
+		return HttpResponse.json({
+			data: room,
+			statusCode: 200,
+		});
+	}),
 	http.put('/api/tags/:roomId/:id/update', async ({ params, request }) => {
 		const tag = tags.find((tag) => tag.id == params.id);
 		const { name, mainColor, secondColor } = await request.json();

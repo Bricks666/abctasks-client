@@ -8,7 +8,7 @@ import { Popups, PopupsProps } from '@/widgets/page';
 import {
 	ConfirmRemoveTag,
 	CreateTag,
-	OpenCreateTagForm,
+	OpenCreateTagButton,
 	UpdateTag
 } from '@/features/tags';
 
@@ -38,7 +38,7 @@ const TagsPage: React.FC<TagsPageProps> = React.memo(function TagsPage(props) {
 
 	return (
 		<Container className={cn(styles.container, className)}>
-			<SectionHeader title={title} actions={<OpenCreateTagForm />} />
+			<SectionHeader title={title} actions={<OpenCreateTagButton />} />
 			<TagsList />
 			<Popups popupMap={popupMap} />
 		</Container>

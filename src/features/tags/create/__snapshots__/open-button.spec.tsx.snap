@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/tags/create/open-button > should render button with icon and title 1`] = `[Function]`;
