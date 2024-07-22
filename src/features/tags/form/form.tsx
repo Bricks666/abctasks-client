@@ -16,19 +16,30 @@ import { TagFormValues } from './model';
 
 export interface TagFormProps extends CommonProps {
 	readonly $form: Form<TagFormValues>;
+	readonly titleText: string;
 	readonly buttonText: string;
 	readonly buttonDisabled?: boolean;
 	readonly hideButton?: boolean;
 }
 
 export const TagForm: React.FC<TagFormProps> = (props) => {
-	const { className, buttonText, $form, hideButton, buttonDisabled, } = props;
+	const {
+		className,
+		titleText,
+		buttonText,
+		$form,
+		hideButton,
+		buttonDisabled,
+	} = props;
 	const submit = useUnit($form.submit);
 
 	const onSubmit = usePreventDefault(submit);
 
 	return (
-		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
+		<form
+			className={cn(styles.form, className)}
+			onSubmit={onSubmit}
+			aria-label={titleText}>
 			<Preview $form={$form} />
 			<Name $form={$form} />
 			<MainColor $form={$form} />

@@ -262,6 +262,63 @@ const roomsHandlers = [
 	}),
 ];
 
+const tags = [
+	{
+		id: 1,
+		roomId: 1,
+		name: 'A tag',
+		mainColor: '#123321',
+		secondColor: '#564701',
+	},
+	{
+		id: 2,
+		roomId: 1,
+		name: 'The tag',
+		mainColor: '#AA3321',
+		secondColor: '#FE4701',
+	},
+	{
+		id: 4,
+		roomId: 1,
+		name: 'tag tag',
+		mainColor: '#FAE321',
+		secondColor: '#56F701',
+	},
+];
+
+const tagsHandlers = [
+	http.get('/api/tags/:roomId', () => {
+		return HttpResponse.json({
+			data: tags,
+			statusCode: 200,
+		});
+	}),
+	http.get('/api/tags/:roomId/:id', ({ params }) => {
+		const { id } = params;
+
+		const tag = tags.find((tag) => tag.id === Number(id));
+
+		return HttpResponse.json({
+			data: tag,
+			statusCode: 200,
+		});
+	}),
+	http.put('/api/tags/:roomId/:id/update', async ({ params, request }) => {
+		const tag = tags.find((tag) => tag.id == params.id);
+		const { name, mainColor, secondColor } = await request.json();
+
+		return HttpResponse.json({
+			data: {
+				...tag,
+				name,
+				mainColor,
+				secondColor,
+			},
+			statusCode: 200,
+		});
+	}),
+];
+
 const handlers = [
 	...authHandlers,
 	...invitationHandlers,
@@ -269,6 +326,7 @@ const handlers = [
 	...actionsHandlers,
 	...membersHandler,
 	...roomsHandlers,
+	...tagsHandlers,
 ];
 
 export const server = setupServer(...handlers);

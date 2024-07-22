@@ -34,7 +34,7 @@ export const UpdateTag: React.FC<React.PropsWithChildren<UpdateTagProps>> = (
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
-	const title = t('actions.update_tag.title');
+	const titleText = t('actions.update_tag.title');
 	const buttonText = t('actions.save', { ns: 'common', });
 
 	const actions = isFullscreen ? (
@@ -44,12 +44,13 @@ export const UpdateTag: React.FC<React.PropsWithChildren<UpdateTagProps>> = (
 	) : null;
 
 	return (
-		<Popup {...props} onClose={onClose} title={title} slots={{ actions, }}>
+		<Popup {...props} onClose={onClose} title={titleText} slots={{ actions, }}>
 			{isLoading ? (
 				<SkeletonTagForm className={styles.form} />
 			) : (
 				<TagForm
 					className={styles.form}
+					titleText={titleText}
 					$form={form}
 					buttonText={buttonText}
 					hideButton={isFullscreen}

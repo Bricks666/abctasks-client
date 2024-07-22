@@ -148,6 +148,7 @@ exports[`features/rooms/create-room/create-room > should render popup with room 
   >
     actions.create_room.title
     <button
+      aria-label="actions.close"
       class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium _cross_c9c479 css-78trlr-MuiButtonBase-root-MuiIconButton-root"
       tabindex="0"
       type="button"
