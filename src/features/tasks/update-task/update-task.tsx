@@ -50,6 +50,7 @@ export const UpdateTask: React.FC<UpdateTaskProps> = (props) => {
 			) : (
 				<TaskForm
 					className={styles.taskForm}
+					titleT={title}
 					buttonText={buttonText}
 					$form={form}
 					buttonDisabled={pending}

@@ -36,6 +36,7 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
     class="MuiDialogContent-root _content_62745c css-ypiqx9-MuiDialogContent-root"
   >
     <form
+      aria-label="actions.update_task.title"
       class="_form_2cb0c5 _taskForm_98578e"
     >
       <div
@@ -337,6 +338,7 @@ exports[`features/tasks/update/update-task > should render form in popup > large
     class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
   >
     <form
+      aria-label="actions.update_task.title"
       class="_form_2cb0c5 _taskForm_98578e"
     >
       <div
