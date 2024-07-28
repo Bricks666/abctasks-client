@@ -30,7 +30,7 @@ export const create = () => {
 			},
 			description: {
 				init: '',
-				rules: [createRuleFromSchema('description', schemas.title)],
+				// rules: [createRuleFromSchema('description', schemas.de)],
 			},
 			tagIds: {
 				init: [],

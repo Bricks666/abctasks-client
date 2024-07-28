@@ -364,6 +364,31 @@ const membersHandlers = [
 	}),
 ];
 
+const tasks = [] as const;
+
+const tasksHandlers = [
+	http.get('/api/tasks/:roomId', () => {
+		return createStandardResponse(tasks);
+	}),
+	http.post('/api/tasks/:roomId/create', async ({ request }) => {
+		const { title, tagIds, status, description } = await request.json();
+		const taskTags = tags.filter((tag) => tagIds.includes(tag.id));
+		const task = {
+			id: 4,
+			roomId: 1,
+			tags: taskTags,
+			author: users[0],
+			title,
+			description,
+			status,
+			createdAt: new Date(),
+			updatedAt: null,
+		};
+
+		return createStandardResponse(task);
+	}),
+];
+
 const handlers = [
 	...authHandlers,
 	...invitationHandlers,
@@ -373,6 +398,7 @@ const handlers = [
 	...roomsHandlers,
 	...tagsHandlers,
 	...membersHandlers,
+	...tasksHandlers,
 ];
 
 export const server = setupServer(...handlers);
