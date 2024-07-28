@@ -21,8 +21,8 @@ export interface UseTestRouterResult {
 export const useTestRouter = (params: UseTestRouterParams) => {
 	const { getScope, router, options } = params;
 
-	beforeEach(() => {
-		allSettled(router.setHistory, {
+	beforeEach(async () => {
+		await allSettled(router.setHistory, {
 			scope: getScope(),
 			params: createMemoryHistory(options),
 		});
