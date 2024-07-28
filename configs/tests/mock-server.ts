@@ -1,6 +1,13 @@
 import { setupServer } from 'msw/node';
 import { HttpResponse, http } from 'msw';
 
+const createStandardResponse = (data: unknown): HttpResponse => {
+	return HttpResponse.json({
+		data,
+		statusCode: 200,
+	});
+};
+
 const authHandlers = [
 	http.get('/api/auth', () => {
 		return HttpResponse.json({
@@ -341,6 +348,22 @@ const tagsHandlers = [
 	}),
 ];
 
+const members = users;
+
+const membersHandlers = [
+	http.get('/api/members/:roomId', () => {
+		return createStandardResponse(members);
+	}),
+	http.delete('/api/members/:roomId/exit', () => {
+		return createStandardResponse(members);
+	}),
+	http.delete('/api/members/:roomId/remove/:userId', ({ params }) => {
+		const { userId } = params;
+
+		return createStandardResponse(true);
+	}),
+];
+
 const handlers = [
 	...authHandlers,
 	...invitationHandlers,
@@ -349,6 +372,7 @@ const handlers = [
 	...membersHandler,
 	...roomsHandlers,
 	...tagsHandlers,
+	...membersHandlers,
 ];
 
 export const server = setupServer(...handlers);
