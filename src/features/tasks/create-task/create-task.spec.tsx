@@ -145,8 +145,12 @@ describe('features/tasks/create/create-task', () => {
 		create();
 
 		const titleField = findTitleField();
-
 		fireEvent.input(titleField, { target: { value: 'some name', }, });
+		fireEvent.input(titleField, { target: { value: taskTitle, }, });
+		const tagsSelect = findTagsSelect();
+		fireEvent.click(tagsSelect);
+		fireEvent.input(tagsSelect, { target: { value: 'A tag', }, });
+		fireEvent.click(screen.getByRole('option'));
 
 		const button = findSubmit();
 

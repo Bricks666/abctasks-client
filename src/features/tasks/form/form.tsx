@@ -13,23 +13,28 @@ import { CommonProps } from '@/shared/types';
 import { Field } from '@/shared/ui';
 
 import styles from './form.module.css';
-import { TaskFormValues } from './lib';
+import { TaskFormValues } from './model';
 
 export interface TaskFormProps extends CommonProps {
 	readonly buttonText: string;
+	readonly titleT: string;
 	readonly $form: Form<TaskFormValues>;
 	readonly buttonDisabled?: boolean;
 	readonly hideButton?: boolean;
 }
 
 export const TaskForm: React.FC<TaskFormProps> = React.memo((props) => {
-	const { buttonText, className, $form, hideButton, buttonDisabled, } = props;
+	const { buttonText, className, titleT, $form, hideButton, buttonDisabled, } =
+		props;
 	const submit = useUnit($form.submit);
 
 	const onSubmit = usePreventDefault(submit);
 
 	return (
-		<form className={cn(styles.form, className)} onSubmit={onSubmit}>
+		<form
+			className={cn(styles.form, className)}
+			onSubmit={onSubmit}
+			aria-label={titleT}>
 			<Title $form={$form} />
 			<Tags $form={$form} />
 			<Status $form={$form} />

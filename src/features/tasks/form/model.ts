@@ -9,15 +9,17 @@ export interface TaskFormValues
 	readonly tagIds: number[];
 }
 
+/**
+ * @todo Use error messages from translations
+ */
 const schemas = {
-	tagIds: Joi.array().items(Joi.number()).required().messages({
-		'number.empty': 'Tag must be choose',
-		'number.positive': 'Tag must be choose',
+	tagIds: Joi.array().items(Joi.number()).min(1).required().messages({
+		'array.min': 'At least one tag must be chosen',
 	}),
 	status: Joi.string().required(),
 	title: Joi.string().max(128).required().messages({
-		'string.empty': "Content can't be empty",
-		'string.max': 'Content can be less than 128',
+		'string.empty': "Title can't be empty",
+		'string.max': 'Title can be less than 128',
 	}),
 };
 
@@ -30,7 +32,6 @@ export const create = () => {
 			},
 			description: {
 				init: '',
-				// rules: [createRuleFromSchema('description', schemas.de)],
 			},
 			tagIds: {
 				init: [],

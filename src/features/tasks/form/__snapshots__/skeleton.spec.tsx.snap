@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/tags/form/skeleton > should render skeleton fields and skeleton button 1`] = `
+<div
+  class="_form_183669"
+>
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _select_183669 css-1e1x4vv-MuiSkeleton-root"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _select_183669 css-1e1x4vv-MuiSkeleton-root"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _field_183669 css-1e1x4vv-MuiSkeleton-root"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _button_183669 css-1e1x4vv-MuiSkeleton-root"
+  />
+</div>
+`;
