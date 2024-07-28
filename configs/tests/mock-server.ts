@@ -355,7 +355,7 @@ const membersHandlers = [
 		return createStandardResponse(members);
 	}),
 	http.delete('/api/members/:roomId/exit', () => {
-		return createStandardResponse(members);
+		return createStandardResponse(true);
 	}),
 	http.delete('/api/members/:roomId/remove/:userId', ({ params }) => {
 		const { userId } = params;

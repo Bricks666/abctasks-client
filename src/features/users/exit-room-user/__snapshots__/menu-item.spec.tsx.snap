@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/users/exit-room-user/menu-item > should render button 1`] = `
+<li
+  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+  role="menuitem"
+  tabindex="-1"
+>
+  <div
+    class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+  >
+    <svg
+      aria-hidden="true"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="MeetingRoomIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M14 6v15H3v-2h2V3h9v1h5v15h2v2h-4V6h-3zm-4 5v2h2v-2h-2z"
+      />
+    </svg>
+  </div>
+  actions.exit_room.name
+  <span
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+  />
+</li>
+`;

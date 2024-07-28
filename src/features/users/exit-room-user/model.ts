@@ -59,7 +59,7 @@ sample({
 });
 
 sample({
-	clock: mutation.finished.finally,
+	clock: mutation.finished.success,
 	target: popupControls.close,
 });
 
