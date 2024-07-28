@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, test } from 'vitest';
 
 import { usersInRoomModel } from '@/entities/users';
 
-import { routes } from '@/shared/configs';
+import { routes, router } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 
 import { ConfirmRemoveUser } from './confirm';
@@ -21,13 +21,10 @@ import {
 
 describe('features/users/remove-user-from-room/confirm', () => {
 	const userId = 1;
-	const testScope = useTestScope();
-	const testRouter = useTestRouter();
-	const RootProvider = createRootProvider(
-		testScope.Provider,
-		testRouter.Provider
-	);
-	const component = useCreateComponent({
+	const { Provider: ScopeProvider, getScope, } = useTestScope();
+	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
+	const RootProvider = createRootProvider(ScopeProvider, RouterProvider);
+	const { getWrapper, create, } = useCreateComponent({
 		Component: ConfirmRemoveUser,
 		defaultProps: {
 			isOpen: true,
@@ -38,33 +35,32 @@ describe('features/users/remove-user-from-room/confirm', () => {
 	});
 
 	const findPopup = () =>
-		component.wrapper.getByRole('dialog', {
+		getWrapper().getByRole('dialog', {
 			name: 'actions.remove_user.title',
 		});
 	const findAgree = () =>
-		component.wrapper.getByRole('button', {
+		getWrapper().getByRole('button', {
 			name: 'actions.remove_user.actions.agree',
 		});
 	const findDisagree = () =>
-		component.wrapper.getByRole('button', {
+		getWrapper().getByRole('button', {
 			name: 'actions.remove_user.actions.disagree',
 		});
 
 	beforeEach(async () => {
-		await testRouter.initRouter(testScope.scope);
 		await allSettled(routes.room.users.open, {
-			scope: testScope.scope,
+			scope: getScope(),
 			params: {
 				id: 1,
 			},
 		});
 		await allSettled(openConfirm, {
-			scope: testScope.scope,
+			scope: getScope(),
 			params: userId,
 		});
 
 		await allSettled(usersInRoomModel.query.start, {
-			scope: testScope.scope,
+			scope: getScope(),
 			params: {
 				roomId: 1,
 			},
@@ -72,30 +68,28 @@ describe('features/users/remove-user-from-room/confirm', () => {
 	});
 
 	test('should render popup with text and 2 buttons', () => {
-		component.createComponent();
+		create();
 
 		expect(findPopup()).toMatchSnapshot();
 	});
 
 	test('should remove user from room on approve button click', async () => {
-		component.createComponent();
+		create();
 
 		const button = findAgree();
 
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(testScope.scope.getState(popupControls.$isOpen)).toBeFalsy();
-			expect(
-				testScope.scope.getState(notificationsModel.$items)
-			).toContainEqual(
+			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
+			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.remove_user.notifications.success',
 					color: 'success',
 				})
 			);
 			expect(
-				testScope.scope.getState(usersInRoomModel.query.$data)
+				getScope().getState(usersInRoomModel.query.$data)
 			).not.toContainEqual(
 				expect.objectContaining({
 					id: userId,
@@ -116,25 +110,21 @@ describe('features/users/remove-user-from-room/confirm', () => {
 			})
 		);
 
-		component.createComponent();
+		create();
 
 		const button = findAgree();
 
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(testScope.scope.getState(popupControls.$isOpen)).toBeTruthy();
-			expect(
-				testScope.scope.getState(notificationsModel.$items)
-			).toContainEqual(
+			expect(getScope().getState(popupControls.$isOpen)).toBeTruthy();
+			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.remove_user.notifications.error',
 					color: 'error',
 				})
 			);
-			expect(
-				testScope.scope.getState(usersInRoomModel.query.$data)
-			).toContainEqual(
+			expect(getScope().getState(usersInRoomModel.query.$data)).toContainEqual(
 				expect.objectContaining({
 					id: userId,
 				})
@@ -143,14 +133,14 @@ describe('features/users/remove-user-from-room/confirm', () => {
 	});
 
 	test('should just close popup on reject button click', async () => {
-		component.createComponent();
+		create();
 
 		const button = findDisagree();
 
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(testScope.scope.getState(popupControls.$isOpen)).toBeFalsy();
+			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
 		});
 	});
 });

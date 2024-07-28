@@ -6,9 +6,12 @@ export interface UseCreateComponentParams<Props> {
 	readonly defaultProps?: Props;
 	readonly options?: RenderOptions;
 }
+
+export type GetWrapper = () => RenderResult;
+
 export interface UseCreateComponentResult<Props> {
-	readonly wrapper: RenderResult;
-	readonly createComponent: (props?: Props) => RenderResult;
+	readonly getWrapper: GetWrapper;
+	readonly create: (props?: Props) => RenderResult;
 }
 
 export const useCreateComponent = <Props>(
@@ -16,18 +19,20 @@ export const useCreateComponent = <Props>(
 ): UseCreateComponentResult<Props> => {
 	const { Component, options, defaultProps } = params;
 
+	let wrapper: RenderResult;
+
 	const result = {} as UseCreateComponentResult<Props>;
 
-	const createComponent = (props?: Props) => {
-		result.wrapper = render(
+	const create = (props?: Props) => {
+		wrapper = render(
 			createElement(Component, { ...defaultProps, ...props }),
 			options
 		);
 
-		return result.wrapper;
+		return wrapper;
 	};
 
-	result.createComponent = createComponent;
+	const getWrapper = () => wrapper;
 
-	return result;
+	return { getWrapper, create };
 };

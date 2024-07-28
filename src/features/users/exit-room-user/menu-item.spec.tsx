@@ -14,21 +14,20 @@ import {
 	useTestScope
 } from '~/tests';
 
-
 describe('features/users/exit-room-user/menu-item', () => {
 	const roomId = 123;
 
-	const testScope = useTestScope();
-	const testRouter = useTestRouter();
+	const { Provider: ScopeProvider, getScope, } = useTestScope();
+	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
 	const MenuProvider = createMenuProvider({
 		open: true,
 	});
 	const RootProvider = createRootProvider(
-		testScope.Provider,
-		testRouter.Provider,
+		ScopeProvider,
+		RouterProvider,
 		MenuProvider
 	);
-	const component = useCreateComponent({
+	const { create, getWrapper, } = useCreateComponent({
 		Component: ExitRoomUserMenuItem,
 		defaultProps: {
 			roomId,
@@ -38,24 +37,24 @@ describe('features/users/exit-room-user/menu-item', () => {
 		},
 	});
 	const findMenuItem = () =>
-		component.wrapper.getByRole('menuitem', { name: 'actions.exit_room.name', });
+		getWrapper().getByRole('menuitem', { name: 'actions.exit_room.name', });
 
 	test('should render button', () => {
-		component.createComponent();
+		create();
 
 		expect(findMenuItem()).toMatchSnapshot();
 	});
 
 	test('should open confirm popup on button click', async () => {
-		component.createComponent();
+		create();
 
 		const button = findMenuItem();
 
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(testScope.scope.getState(popupControls.$isOpen)).toBeTruthy();
-			expect(testScope.scope.getState(router.$query)).toStrictEqual({});
+			expect(getScope().getState(popupControls.$isOpen)).toBeTruthy();
+			expect(getScope().getState(router.$query)).toStrictEqual({});
 		});
 	});
 });
