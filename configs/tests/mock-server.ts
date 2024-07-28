@@ -433,6 +433,9 @@ const tasksHandlers = [
 
 		return createStandardResponse(updatedTask);
 	}),
+	http.delete('/api/tasks/:roomId/:taskId/remove', () => {
+		return createStandardResponse(true);
+	}),
 ];
 
 const handlers = [

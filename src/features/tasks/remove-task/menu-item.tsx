@@ -9,7 +9,6 @@ import { MenuItem } from '@/shared/ui';
 import { openConfirm } from './model';
 
 export interface RemoveTaskMenuItemProps extends CommonProps {
-	readonly roomId: number;
 	readonly taskId: number;
 }
 
