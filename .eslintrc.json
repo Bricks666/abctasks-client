@@ -64,6 +64,10 @@
 			{
 				"patterns": [
 					{
+						"message": "Tests specific imports are prohibited, use it only in tests",
+						"group": ["~/**"]
+					},
+					{
 						"message": "Private imports are prohibited, use public imports instead",
 						"group": ["@/app/**"]
 					},
@@ -219,12 +223,66 @@
 		{
 			"files": ["*.spec.tsx", "*.spec.ts"],
 			"rules": {
-				"import/no-extraneous-dependencies": "off"
+				"import/no-extraneous-dependencies": "off",
+				"no-restricted-imports": [
+					"error",
+					{
+						"patterns": [
+							{
+								"message": "Private imports are prohibited, use public imports instead",
+								"group": ["@/app/**"]
+							},
+							{
+								"message": "Private imports are prohibited, use public imports instead",
+								"group": ["@/pages/*/**"]
+							},
+							{
+								"message": "Private imports are prohibited, use public imports instead",
+								"group": ["@/widgets/*/**"]
+							},
+							{
+								"message": "Private imports are prohibited, use public imports instead",
+								"group": ["@/features/*/**"]
+							},
+							{
+								"message": "Private imports are prohibited, use public imports instead",
+								"group": ["@/entities/*/**"]
+							},
+							{
+								"message": "Private imports are prohibited, use public imports instead",
+								"group": ["@/shared/*/*/**"]
+							},
+							{
+								"message": "Prefer absolute imports instead of relatives (for root modules)",
+								"group": ["../**/app"]
+							},
+							{
+								"message": "Prefer absolute imports instead of relatives (for root modules)",
+								"group": ["../**/pages"]
+							},
+							{
+								"message": "Prefer absolute imports instead of relatives (for root modules)",
+								"group": ["../**/widgets"]
+							},
+							{
+								"message": "Prefer absolute imports instead of relatives (for root modules)",
+								"group": ["../**/features"]
+							},
+							{
+								"message": "Prefer absolute imports instead of relatives (for root modules)",
+								"group": ["../**/entities"]
+							},
+							{
+								"message": "Prefer absolute imports instead of relatives (for root modules)",
+								"group": ["../**/shared"]
+							}
+						]
+					}
+				]
 			}
 		}
 	],
 	"ignorePatterns": [
-		"templates/**/*",
 		"*.css.d.ts",
 		"configs/*",
 		"e2e",
