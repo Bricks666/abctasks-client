@@ -42,11 +42,13 @@ export const task = Record({
 
 export interface Task extends Static<typeof task> {}
 
+export type Tasks = Task[];
+
 export interface GroupedByStatusTasks {
-	readonly ready: Task[];
-	readonly in_progress: Task[];
-	readonly needReview: Task[];
-	readonly done: Task[];
+	readonly ready: Tasks;
+	readonly in_progress: Tasks;
+	readonly needReview: Tasks;
+	readonly done: Tasks;
 }
 
 export interface GetTasksParams extends InRoomParams, DatesFiltersParams {

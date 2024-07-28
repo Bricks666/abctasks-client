@@ -1,5 +1,6 @@
 import { setupServer } from 'msw/node';
 import { HttpResponse, http } from 'msw';
+import { Tasks } from '@/shared/api';
 
 const createStandardResponse = (data: unknown): HttpResponse => {
 	return HttpResponse.json({
@@ -364,11 +365,40 @@ const membersHandlers = [
 	}),
 ];
 
-const tasks = [] as const;
+const tasks: Tasks = [
+	{
+		id: 1,
+		roomId: 1,
+		tags: tags.slice(1),
+		author: users[0],
+		title: 'Title 1',
+		description: 'Description 1',
+		status: 'done',
+		createdAt: new Date().toString(),
+		updatedAt: new Date().toString(),
+	},
+	{
+		id: 2,
+		roomId: 1,
+		tags: tags.slice(2),
+		author: users[0],
+		title: 'Title 2',
+		description: 'Description 2',
+		status: 'ready',
+		createdAt: new Date().toString(),
+		updatedAt: null,
+	},
+];
 
 const tasksHandlers = [
 	http.get('/api/tasks/:roomId', () => {
 		return createStandardResponse(tasks);
+	}),
+	http.get('/api/tasks/:roomId/:taskId', ({ params }) => {
+		const { taskId } = params;
+		const task = tasks.find((task) => task.id === parseInt(taskId as string));
+
+		return createStandardResponse(task);
 	}),
 	http.post('/api/tasks/:roomId/create', async ({ request }) => {
 		const { title, tagIds, status, description } = await request.json();
@@ -386,6 +416,22 @@ const tasksHandlers = [
 		};
 
 		return createStandardResponse(task);
+	}),
+	http.put('/api/tasks/:roomId/:taskId/update', async ({ request, params }) => {
+		const { title, tagIds, status, description } = await request.json();
+		const { taskId } = params;
+		const task = tasks.find((task) => task.id === parseInt(taskId as string));
+		const taskTags = tags.filter((tag) => tagIds.includes(tag.id));
+		const updatedTask = {
+			...task,
+			tags: taskTags,
+			title,
+			description,
+			status,
+			updatedAt: new Date(),
+		};
+
+		return createStandardResponse(updatedTask);
 	}),
 ];
 

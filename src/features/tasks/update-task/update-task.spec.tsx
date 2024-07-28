@@ -1,16 +1,16 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { allSettled } from 'effector';
 import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tagsModel } from '@/entities/tags';
-import { tasksInRoomModel } from '@/entities/tasks';
+import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 
 import { router, routes } from '@/shared/configs';
 import { deviceInfoModel, notificationsModel } from '@/shared/models';
 
-import { CreateTask } from './create-task';
 import { openPopup, popupControls } from './model';
+import { UpdateTask } from './update-task';
 
 import {
 	createRootProvider,
@@ -21,14 +21,14 @@ import {
 } from '~/tests';
 
 const taskTitle = 'some title';
-describe('features/tasks/create/create-task', () => {
+describe('features/tasks/update/update-task', () => {
 	const roomId = 1;
-	const columnStatus = 'done' as const;
+	const taskId = 1;
 	const { Provider: ScopeProvider, getScope, } = useTestScope();
 	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
 	const RootProvider = createRootProvider(ScopeProvider, RouterProvider);
 	const { getWrapper, create, } = useCreateComponent({
-		Component: CreateTask,
+		Component: UpdateTask,
 		defaultProps: {
 			isOpen: true,
 		},
@@ -38,17 +38,14 @@ describe('features/tasks/create/create-task', () => {
 	});
 
 	const findPopup = () =>
-		getWrapper().getByRole('dialog', { name: 'actions.create_task.title', });
+		getWrapper().getByRole('dialog', { name: 'actions.update_task.title', });
 	const findTitleField = () =>
 		getWrapper().getByRole('textbox', {
 			name: 'actions.task_form.fields.title',
 		});
-	const findTagsSelect = () =>
-		getWrapper().getByRole('combobox', {
-			name: 'actions.task_form.fields.tags',
-		});
+
 	const findSubmit = () =>
-		getWrapper().getByRole('button', { name: 'actions.create', });
+		getWrapper().getByRole('button', { name: 'actions.save', });
 
 	beforeEach(async () => {
 		await allSettled(deviceInfoModel.$device, {
@@ -65,15 +62,19 @@ describe('features/tasks/create/create-task', () => {
 			params: { roomId, },
 		});
 
-		await allSettled(openPopup, { scope: getScope(), params: columnStatus, });
 		await allSettled(routes.room.tasks.open, {
 			scope: getScope(),
 			params: { id: roomId, },
 		});
+		await allSettled(openPopup, { scope: getScope(), params: taskId, });
 	});
 
 	test('should render form in popup', async () => {
 		create();
+
+		await waitFor(() => {
+			expect(findPopup()).toBeInTheDocument();
+		});
 
 		expect(findPopup()).toMatchSnapshot('large screen');
 	});
@@ -86,18 +87,36 @@ describe('features/tasks/create/create-task', () => {
 
 		create();
 
+		await waitFor(() => {
+			expect(findPopup()).toBeInTheDocument();
+		});
+
 		expect(findPopup()).toMatchSnapshot('small screen');
 	});
 
-	test('should create task on submit', async () => {
+	test('should render skeleton while task is loading', async () => {
 		create();
+
+		await allSettled(taskModel.query.start, {
+			scope: getScope(),
+			params: {
+				roomId,
+				id: 1234,
+			},
+		});
+
+		expect(findPopup()).toMatchSnapshot('loading');
+	});
+
+	test('should update task on submit', async () => {
+		create();
+
+		await waitFor(() => {
+			expect(findPopup()).toBeInTheDocument();
+		});
 
 		const titleField = findTitleField();
 		fireEvent.input(titleField, { target: { value: taskTitle, }, });
-		const tagsSelect = findTagsSelect();
-		fireEvent.click(tagsSelect);
-		fireEvent.input(tagsSelect, { target: { value: 'A tag', }, });
-		fireEvent.click(screen.getByRole('option'));
 
 		const button = findSubmit();
 
@@ -107,21 +126,14 @@ describe('features/tasks/create/create-task', () => {
 			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
 			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
-					message: 'actions.create_task.notifications.success',
+					message: 'actions.update_task.notifications.success',
 					color: 'success',
 				})
 			);
 			expect(getScope().getState(tasksInRoomModel.query.$data)).toContainEqual(
 				expect.objectContaining({
-					roomId,
+					id: taskId,
 					title: taskTitle,
-					description: '',
-					status: columnStatus,
-					tags: expect.arrayContaining([
-						expect.objectContaining({
-							name: 'A tag',
-						})
-					]),
 				})
 			);
 		});
@@ -129,7 +141,7 @@ describe('features/tasks/create/create-task', () => {
 
 	test('should create error notification on error', async () => {
 		server.use(
-			http.post('/api/tasks/:roomId/create', () => {
+			http.put('/api/tasks/:roomId/:taskId/update', () => {
 				return HttpResponse.json(
 					{
 						message: 'Server Error',
@@ -144,6 +156,10 @@ describe('features/tasks/create/create-task', () => {
 
 		create();
 
+		await waitFor(() => {
+			expect(findPopup()).toBeInTheDocument();
+		});
+
 		const titleField = findTitleField();
 
 		fireEvent.input(titleField, { target: { value: 'some name', }, });
@@ -156,7 +172,7 @@ describe('features/tasks/create/create-task', () => {
 			expect(getScope().getState(popupControls.$isOpen)).toBeTruthy();
 			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
-					message: 'actions.create_task.notifications.error',
+					message: 'actions.update_task.notifications.error',
 					color: 'error',
 				})
 			);
@@ -164,6 +180,7 @@ describe('features/tasks/create/create-task', () => {
 				getScope().getState(tasksInRoomModel.query.$data)
 			).not.toContainEqual(
 				expect.objectContaining({
+					id: taskId,
 					title: taskTitle,
 				})
 			);
