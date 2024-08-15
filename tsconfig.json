@@ -18,7 +18,7 @@
 		"baseUrl": "src",
 		"paths": {
 			"@/*": ["*"],
-			"~/*": ["../configs/*"]
+			"~/test-utils": ["../test-utils"]
 		}
 	},
 	"include": ["src", "configs"],
