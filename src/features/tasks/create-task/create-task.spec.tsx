@@ -1,97 +1,99 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { allSettled } from 'effector';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tagsModel } from '@/entities/tags';
 import { tasksInRoomModel } from '@/entities/tasks';
 
-import { router, routes } from '@/shared/configs';
+import { router } from '@/shared/configs';
 import { deviceInfoModel, notificationsModel } from '@/shared/models';
 
 import { CreateTask } from './create-task';
 import { openPopup, popupControls } from './model';
 
 import {
-	createRootProvider,
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fireEvent,
+	fork,
+	http,
+	render,
+	screen,
 	server,
-	useCreateComponent,
 	useTestRouter,
-	useTestScope
-} from '~/tests';
+	waitFor
+} from '~/test-utils';
 
 const taskTitle = 'some title';
 describe('features/tasks/create/create-task', () => {
 	const roomId = 1;
 	const columnStatus = 'done' as const;
-	const { Provider: ScopeProvider, getScope, } = useTestScope();
-	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
-	const RootProvider = createRootProvider(ScopeProvider, RouterProvider);
-	const { getWrapper, create, } = useCreateComponent({
-		Component: CreateTask,
-		defaultProps: {
-			isOpen: true,
-		},
-		options: {
-			wrapper: RootProvider,
-		},
-	});
+	let wrapper: RenderResult;
+	let scope: Scope;
 
+	const createComponent = () => {
+		wrapper = render(<CreateTask isOpen />, { scope, router, });
+	};
 	const findPopup = () =>
-		getWrapper().getByRole('dialog', { name: 'actions.create_task.title', });
+		wrapper.getByRole('dialog', { name: 'actions.create_task.title', });
 	const findTitleField = () =>
-		getWrapper().getByRole('textbox', {
+		wrapper.getByRole('textbox', {
 			name: 'actions.task_form.fields.title',
 		});
 	const findTagsSelect = () =>
-		getWrapper().getByRole('combobox', {
+		wrapper.getByRole('combobox', {
 			name: 'actions.task_form.fields.tags',
 		});
 	const findSubmit = () =>
-		getWrapper().getByRole('button', { name: 'actions.create', });
+		wrapper.getByRole('button', { name: 'actions.create', });
 
 	beforeEach(async () => {
+		scope = fork();
+
+		await useTestRouter({
+			scope,
+			router,
+			options: {
+				initialEntries: [`/rooms/${roomId}/tasks`],
+			},
+		});
+
 		await allSettled(deviceInfoModel.$device, {
-			scope: getScope(),
+			scope,
 			params: 'desktop-small',
 		});
 
 		await allSettled(tagsModel.query.start, {
-			scope: getScope(),
+			scope,
 			params: { roomId, },
 		});
 		await allSettled(tasksInRoomModel.query.start, {
-			scope: getScope(),
+			scope,
 			params: { roomId, },
 		});
 
-		await allSettled(openPopup, { scope: getScope(), params: columnStatus, });
-		await allSettled(routes.room.tasks.open, {
-			scope: getScope(),
-			params: { id: roomId, },
-		});
+		await allSettled(openPopup, { scope, params: columnStatus, });
+
+		await act(async () => createComponent());
 	});
 
 	test('should render form in popup', async () => {
-		create();
-
 		expect(findPopup()).toMatchSnapshot('large screen');
 	});
 
 	test('should render form in fullscreen popup for small screens', async () => {
-		await allSettled(deviceInfoModel.$device, {
-			scope: getScope(),
-			params: 'mobile',
-		});
-
-		create();
+		await act(() =>
+			allSettled(deviceInfoModel.$device, {
+				scope,
+				params: 'mobile',
+			})
+		);
 
 		expect(findPopup()).toMatchSnapshot('small screen');
 	});
 
 	test('should create task on submit', async () => {
-		create();
-
 		const titleField = findTitleField();
 		fireEvent.input(titleField, { target: { value: taskTitle, }, });
 		const tagsSelect = findTagsSelect();
@@ -104,14 +106,14 @@ describe('features/tasks/create/create-task', () => {
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
-			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
+			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
+			expect(scope.getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.create_task.notifications.success',
 					color: 'success',
 				})
 			);
-			expect(getScope().getState(tasksInRoomModel.query.$data)).toContainEqual(
+			expect(scope.getState(tasksInRoomModel.query.$data)).toContainEqual(
 				expect.objectContaining({
 					roomId,
 					title: taskTitle,
@@ -142,8 +144,6 @@ describe('features/tasks/create/create-task', () => {
 			})
 		);
 
-		create();
-
 		const titleField = findTitleField();
 		fireEvent.input(titleField, { target: { value: 'some name', }, });
 		fireEvent.input(titleField, { target: { value: taskTitle, }, });
@@ -157,16 +157,14 @@ describe('features/tasks/create/create-task', () => {
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(popupControls.$isOpen)).toBeTruthy();
-			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
+			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
+			expect(scope.getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.create_task.notifications.error',
 					color: 'error',
 				})
 			);
-			expect(
-				getScope().getState(tasksInRoomModel.query.$data)
-			).not.toContainEqual(
+			expect(scope.getState(tasksInRoomModel.query.$data)).not.toContainEqual(
 				expect.objectContaining({
 					title: taskTitle,
 				})

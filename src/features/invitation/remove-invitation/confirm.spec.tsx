@@ -17,7 +17,7 @@ import { notificationsModel, popupsModel } from '@/shared/models';
 import { ConfirmRemoveInvitation } from './confirm';
 import { openConfirm } from './model';
 
-import { server } from '~/tests';
+import { server } from '~/test-utils';
 
 describe('features/invitation/remove-invitation/confirm', () => {
 	const id = 123;

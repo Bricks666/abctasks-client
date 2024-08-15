@@ -1,13 +1,10 @@
-import { RenderResult, render, waitFor } from '@testing-library/react';
-import { Scope, fork } from 'effector';
-import { Provider } from 'effector-react';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { notificationsModel } from '@/shared/models';
 
 import { GenerateInvitationLink } from './generate-invitation-link';
 
-import { user } from '~/tests';
+import { RenderResult, Scope, act, fork, render, waitFor } from '~/test-utils';
 
 describe('features/invitation/generate-invitation-link/generate-invitation-link', () => {
 	const roomId = 123;
@@ -20,11 +17,7 @@ describe('features/invitation/generate-invitation-link/generate-invitation-link'
 	let scope: Scope;
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<GenerateInvitationLink roomId={roomId} />
-			</Provider>
-		);
+		wrapper = render(<GenerateInvitationLink roomId={roomId} />, { scope, });
 	};
 	const findForm = () =>
 		wrapper.getByRole('form', { name: 'actions.generate_link.title', });
@@ -35,13 +28,13 @@ describe('features/invitation/generate-invitation-link/generate-invitation-link'
 			name: 'actions.generate_link.fields.link',
 		});
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		scope = fork();
+
+		await act(async () => createComponent());
 	});
 
 	test('should render form, input with link and button to copy', async () => {
-		createComponent();
-
 		const field = findField();
 
 		await waitFor(() => {
@@ -52,8 +45,6 @@ describe('features/invitation/generate-invitation-link/generate-invitation-link'
 	});
 
 	test('should copy url into clipboard on click', async () => {
-		createComponent();
-
 		const field = findField();
 
 		await waitFor(() => {
@@ -61,7 +52,7 @@ describe('features/invitation/generate-invitation-link/generate-invitation-link'
 		});
 
 		const button = findButton();
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(async () => {
 			const value = await window.navigator.clipboard.readText();
@@ -76,15 +67,13 @@ describe('features/invitation/generate-invitation-link/generate-invitation-link'
 	});
 
 	test('should be able to select link in input and copy via keyboard', async () => {
-		createComponent();
-
 		const field = findField();
 
 		await waitFor(() => {
 			expect(field).toHaveValue(link);
 		});
 
-		await user.pointer([
+		await wrapper.user.pointer([
 			{
 				target: field,
 				offset: 0,
@@ -94,7 +83,7 @@ describe('features/invitation/generate-invitation-link/generate-invitation-link'
 				offset: link.length,
 			}
 		]);
-		await user.copy();
+		await wrapper.user.copy();
 
 		await waitFor(async () => {
 			const value = await window.navigator.clipboard.readText();

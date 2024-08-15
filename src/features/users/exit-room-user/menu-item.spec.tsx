@@ -1,5 +1,4 @@
-import { fireEvent, waitFor } from '@testing-library/react';
-import { describe, expect, test } from 'vitest';
+import { beforeEach, describe, expect, test } from 'vitest';
 
 import { router } from '@/shared/configs';
 
@@ -7,54 +6,50 @@ import { ExitRoomUserMenuItem } from './menu-item';
 import { popupControls } from './model';
 
 import {
+	RenderResult,
+	Scope,
+	act,
 	createMenuProvider,
-	createRootProvider,
-	useCreateComponent,
+	fork,
+	render,
 	useTestRouter,
-	useTestScope
-} from '~/tests';
+	waitFor
+} from '~/test-utils';
 
-describe('features/users/exit-room-user/menu-item', () => {
+describe('features/users/exit-room-user/menu-item.tsx', () => {
 	const roomId = 123;
+	let scope: Scope;
+	let wrapper: RenderResult;
 
-	const { Provider: ScopeProvider, getScope, } = useTestScope();
-	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
-	const MenuProvider = createMenuProvider({
-		open: true,
-	});
-	const RootProvider = createRootProvider(
-		ScopeProvider,
-		RouterProvider,
-		MenuProvider
-	);
-	const { create, getWrapper, } = useCreateComponent({
-		Component: ExitRoomUserMenuItem,
-		defaultProps: {
-			roomId,
-		},
-		options: {
-			wrapper: RootProvider,
-		},
-	});
+	const createComponent = () => {
+		wrapper = render(<ExitRoomUserMenuItem roomId={roomId} />, {
+			scope,
+			router,
+			wrapper: createMenuProvider(),
+		});
+	};
 	const findMenuItem = () =>
-		getWrapper().getByRole('menuitem', { name: 'actions.exit_room.name', });
+		wrapper.getByRole('menuitem', { name: 'actions.exit_room.name', });
+
+	beforeEach(async () => {
+		scope = fork();
+
+		await useTestRouter({ scope, router, });
+		await act(async () => createComponent());
+	});
 
 	test('should render button', () => {
-		create();
-
 		expect(findMenuItem()).toMatchSnapshot();
 	});
 
 	test('should open confirm popup on button click', async () => {
-		create();
-
 		const button = findMenuItem();
 
-		fireEvent.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(popupControls.$isOpen)).toBeTruthy();
-			expect(getScope().getState(router.$query)).toStrictEqual({});
+			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
+			expect(scope.getState(router.$query)).toStrictEqual({});
 		});
 	});
 });

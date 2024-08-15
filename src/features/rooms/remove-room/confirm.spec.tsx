@@ -1,9 +1,3 @@
-import { render, RenderResult, waitFor } from '@testing-library/react';
-import { RouterProvider } from 'atomic-router-react';
-import { allSettled, fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
-import { createMemoryHistory } from 'history';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { roomsModel } from '@/entities/rooms';
@@ -14,10 +8,19 @@ import { notificationsModel } from '@/shared/models';
 import { ConfirmRemoveRoom } from './confirm';
 import { openConfirm, popupControls } from './model';
 
-
-import { server, user } from '~/tests';
-
-
+import {
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fork,
+	http,
+	render,
+	server,
+	useTestRouter,
+	waitFor
+} from '~/test-utils';
 
 describe('features/rooms/remove-room/confirm', () => {
 	const roomId = 1;
@@ -25,13 +28,7 @@ describe('features/rooms/remove-room/confirm', () => {
 	let scope: Scope;
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<RouterProvider router={router}>
-					<ConfirmRemoveRoom isOpen />
-				</RouterProvider>
-			</Provider>
-		);
+		wrapper = render(<ConfirmRemoveRoom isOpen />, { scope, router, });
 	};
 	const findPopup = () =>
 		wrapper.getByRole('dialog', { name: 'actions.remove_room.title', });
@@ -45,26 +42,20 @@ describe('features/rooms/remove-room/confirm', () => {
 	beforeEach(async () => {
 		scope = fork();
 
-		await allSettled(router.setHistory, {
-			scope,
-			params: createMemoryHistory(),
-		});
+		await useTestRouter({ scope, router, });
 		await allSettled(openConfirm, { scope, params: roomId, });
-		allSettled(roomsModel.query.start, { scope, });
+		await allSettled(roomsModel.query.start, { scope, });
+		await act(async () => createComponent());
 	});
 
 	test('should render dialog with title, text and 2 buttons', () => {
-		createComponent();
-
 		expect(findPopup()).toMatchSnapshot();
 	});
 
 	test('should remove room on confirmation', async () => {
-		createComponent();
-
 		const button = findAgreeButton();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
@@ -92,11 +83,9 @@ describe('features/rooms/remove-room/confirm', () => {
 			})
 		);
 
-		createComponent();
-
 		const button = findAgreeButton();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
@@ -115,11 +104,9 @@ describe('features/rooms/remove-room/confirm', () => {
 	});
 
 	test('should just close dialog on reject button click', async () => {
-		createComponent();
-
 		const button = findDisagreeButton();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();

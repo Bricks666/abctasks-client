@@ -1,17 +1,19 @@
-import { render, RenderResult } from '@testing-library/react';
-import { RouterProvider } from 'atomic-router-react';
-import { allSettled, fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
-import { createMemoryHistory } from 'history';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { popupsMap, router } from '@/shared/configs';
 import { popupsModel } from '@/shared/models';
-import { Menu } from '@/shared/ui';
 
 import { OpenUpdateRoomFormMenuItem } from './open-form-menu-item';
 
-import { user } from '~/tests';
+import {
+	RenderResult,
+	Scope,
+	act,
+	createMenuProvider,
+	fork,
+	render,
+	useTestRouter
+} from '~/test-utils';
 
 describe('features/rooms/update-room/open-form-menu-item', () => {
 	const roomId = 123;
@@ -19,15 +21,11 @@ describe('features/rooms/update-room/open-form-menu-item', () => {
 	let scope: Scope;
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<RouterProvider router={router}>
-					<Menu open anchorEl={document.body}>
-						<OpenUpdateRoomFormMenuItem roomId={roomId} />
-					</Menu>
-				</RouterProvider>
-			</Provider>
-		);
+		wrapper = render(<OpenUpdateRoomFormMenuItem roomId={roomId} />, {
+			scope,
+			router,
+			wrapper: createMenuProvider(),
+		});
 	};
 	const findMenuitem = () =>
 		wrapper.getByRole('menuitem', { name: 'actions.update_room.name', });
@@ -35,24 +33,18 @@ describe('features/rooms/update-room/open-form-menu-item', () => {
 	beforeEach(async () => {
 		scope = fork();
 
-		await allSettled(router.setHistory, {
-			scope,
-			params: createMemoryHistory(),
-		});
+		await useTestRouter({ scope, router, });
+		await act(async () => createComponent());
 	});
 
 	test('should render menu item with icon', () => {
-		createComponent();
-
 		expect(findMenuitem()).toMatchSnapshot();
 	});
 
 	test('should open update room popup', async () => {
-		createComponent();
-
 		const button = findMenuitem();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		expect(scope.getState(popupsModel.$popups)).toContain(popupsMap.updateRoom);
 	});

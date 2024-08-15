@@ -28,6 +28,9 @@ exports[`features/auth/logout/profile-menu > should render button when menu is c
             />
           </svg>
         </div>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
       </button>
     </div>
   </div>

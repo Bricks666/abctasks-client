@@ -1,77 +1,77 @@
-import { fireEvent, waitFor } from '@testing-library/react';
-import { allSettled } from 'effector';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tagsModel } from '@/entities/tags';
 import { taskModel, tasksInRoomModel } from '@/entities/tasks';
 
-import { router, routes } from '@/shared/configs';
+import { router } from '@/shared/configs';
 import { deviceInfoModel, notificationsModel } from '@/shared/models';
 
 import { openPopup, popupControls } from './model';
 import { UpdateTask } from './update-task';
 
 import {
-	createRootProvider,
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fireEvent,
+	fork,
+	http,
+	render,
 	server,
-	useCreateComponent,
 	useTestRouter,
-	useTestScope
-} from '~/tests';
+	waitFor
+} from '~/test-utils';
 
 const taskTitle = 'some title';
 describe('features/tasks/update/update-task', () => {
 	const roomId = 1;
 	const taskId = 1;
-	const { Provider: ScopeProvider, getScope, } = useTestScope();
-	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
-	const RootProvider = createRootProvider(ScopeProvider, RouterProvider);
-	const { getWrapper, create, } = useCreateComponent({
-		Component: UpdateTask,
-		defaultProps: {
-			isOpen: true,
-		},
-		options: {
-			wrapper: RootProvider,
-		},
-	});
+	let scope: Scope;
+	let wrapper: RenderResult;
+
+	const createComponent = () => {
+		wrapper = render(<UpdateTask isOpen />, { scope, router, });
+	};
 
 	const findPopup = () =>
-		getWrapper().getByRole('dialog', { name: 'actions.update_task.title', });
+		wrapper.getByRole('dialog', { name: 'actions.update_task.title', });
 	const findTitleField = () =>
-		getWrapper().getByRole('textbox', {
+		wrapper.getByRole('textbox', {
 			name: 'actions.task_form.fields.title',
 		});
 
 	const findSubmit = () =>
-		getWrapper().getByRole('button', { name: 'actions.save', });
+		wrapper.getByRole('button', { name: 'actions.save', });
 
 	beforeEach(async () => {
+		scope = fork();
+		await useTestRouter({
+			scope,
+			router,
+			options: {
+				initialEntries: [`/rooms/${roomId}/tasks`],
+			},
+		});
 		await allSettled(deviceInfoModel.$device, {
-			scope: getScope(),
+			scope,
 			params: 'desktop-small',
 		});
-
 		await allSettled(tagsModel.query.start, {
-			scope: getScope(),
+			scope,
 			params: { roomId, },
 		});
 		await allSettled(tasksInRoomModel.query.start, {
-			scope: getScope(),
+			scope,
 			params: { roomId, },
 		});
+		await allSettled(openPopup, { scope, params: taskId, });
 
-		await allSettled(routes.room.tasks.open, {
-			scope: getScope(),
-			params: { id: roomId, },
-		});
-		await allSettled(openPopup, { scope: getScope(), params: taskId, });
+		await act(async () => createComponent());
 	});
 
 	test('should render form in popup', async () => {
-		create();
-
 		await waitFor(() => {
 			expect(findPopup()).toBeInTheDocument();
 		});
@@ -80,12 +80,12 @@ describe('features/tasks/update/update-task', () => {
 	});
 
 	test('should render form in fullscreen popup for small screens', async () => {
-		await allSettled(deviceInfoModel.$device, {
-			scope: getScope(),
-			params: 'mobile',
-		});
-
-		create();
+		await act(() =>
+			allSettled(deviceInfoModel.$device, {
+				scope,
+				params: 'mobile',
+			})
+		);
 
 		await waitFor(() => {
 			expect(findPopup()).toBeInTheDocument();
@@ -95,22 +95,20 @@ describe('features/tasks/update/update-task', () => {
 	});
 
 	test('should render skeleton while task is loading', async () => {
-		create();
-
-		await allSettled(taskModel.query.start, {
-			scope: getScope(),
-			params: {
-				roomId,
-				id: 1234,
-			},
-		});
+		await act(() =>
+			allSettled(taskModel.query.start, {
+				scope,
+				params: {
+					roomId,
+					id: 1234,
+				},
+			})
+		);
 
 		expect(findPopup()).toMatchSnapshot('loading');
 	});
 
 	test('should update task on submit', async () => {
-		create();
-
 		await waitFor(() => {
 			expect(findPopup()).toBeInTheDocument();
 		});
@@ -123,14 +121,14 @@ describe('features/tasks/update/update-task', () => {
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
-			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
+			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
+			expect(scope.getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.update_task.notifications.success',
 					color: 'success',
 				})
 			);
-			expect(getScope().getState(tasksInRoomModel.query.$data)).toContainEqual(
+			expect(scope.getState(tasksInRoomModel.query.$data)).toContainEqual(
 				expect.objectContaining({
 					id: taskId,
 					title: taskTitle,
@@ -154,8 +152,6 @@ describe('features/tasks/update/update-task', () => {
 			})
 		);
 
-		create();
-
 		await waitFor(() => {
 			expect(findPopup()).toBeInTheDocument();
 		});
@@ -169,16 +165,14 @@ describe('features/tasks/update/update-task', () => {
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(popupControls.$isOpen)).toBeTruthy();
-			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
+			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
+			expect(scope.getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.update_task.notifications.error',
 					color: 'error',
 				})
 			);
-			expect(
-				getScope().getState(tasksInRoomModel.query.$data)
-			).not.toContainEqual(
+			expect(scope.getState(tasksInRoomModel.query.$data)).not.toContainEqual(
 				expect.objectContaining({
 					id: taskId,
 					title: taskTitle,

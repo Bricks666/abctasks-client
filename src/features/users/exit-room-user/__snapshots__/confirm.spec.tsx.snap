@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`features/users/remove-user-from-room/confirm > should render popup with text and 2 buttons 1`] = `
+exports[`features/users/remove-user-from-room/confirm.tsx > should render popup with text and 2 buttons 1`] = `
 <div
   aria-labelledby=":r0:"
   class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthXs MuiDialog-paperFullWidth css-twia2z-MuiPaper-root-MuiDialog-paper"

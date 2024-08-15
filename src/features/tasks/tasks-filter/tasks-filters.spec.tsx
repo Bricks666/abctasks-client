@@ -1,5 +1,3 @@
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
-import { allSettled } from 'effector';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tagsModel } from '@/entities/tags';
@@ -12,52 +10,46 @@ import { form } from './model';
 import { TasksFilters } from './tasks-filters';
 
 import {
-	createDateTimeProvider,
-	createRootProvider,
-	useCreateComponent,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fireEvent,
+	fork,
+	render,
+	screen,
 	useTestRouter,
-	useTestScope,
-	user
-} from '~/tests';
-
+	waitFor
+} from '~/test-utils';
 
 describe('features/tasks/tasks-filters/tasks-filters', () => {
+	let scope: Scope;
+	let wrapper: RenderResult;
 	const roomId = 123;
-	const { Provider: ScopeProvider, getScope, } = useTestScope();
-	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
-	const DateTimeProvider = createDateTimeProvider();
-	const RootProvider = createRootProvider(
-		ScopeProvider,
-		RouterProvider,
-		DateTimeProvider
-	);
-	const { getWrapper, create, } = useCreateComponent({
-		Component: TasksFilters,
-		options: {
-			wrapper: RootProvider,
-		},
-	});
 
+	const createComponent = () => {
+		wrapper = render(<TasksFilters />, { scope, router, });
+	};
 	const findOpenButton = () =>
-		getWrapper().getByRole('button', {
+		wrapper.getByRole('button', {
 			name: 'actions.tasks_filters.title',
 		});
 	const findForm = () =>
-		getWrapper().getByRole('form', { name: 'actions.tasks_filters.title', });
+		wrapper.getByRole('form', { name: 'actions.tasks_filters.title', });
 	const findSubmitButton = () =>
-		getWrapper().getByRole('button', {
+		wrapper.getByRole('button', {
 			name: 'actions.tasks_filters.actions.submit',
 		});
 	const findResetButton = () =>
-		getWrapper().getByRole('button', {
+		wrapper.getByRole('button', {
 			name: 'actions.tasks_filters.actions.reset',
 		});
 	const findAuthorsField = () =>
-		getWrapper().getByRole('combobox', {
+		wrapper.getByRole('combobox', {
 			name: 'actions.tasks_filters.fields.authors',
 		});
 	const findTagsFild = () =>
-		getWrapper().getByRole('combobox', {
+		wrapper.getByRole('combobox', {
 			name: 'actions.tasks_filters.fields.tags',
 		});
 
@@ -68,37 +60,37 @@ describe('features/tasks/tasks-filters/tasks-filters', () => {
 	};
 
 	beforeEach(async () => {
+		scope = fork();
+
+		await useTestRouter({ scope, router, });
 		await allSettled(usersInRoomModel.query.start, {
-			scope: getScope(),
+			scope,
 			params: { roomId, },
 		});
 		await allSettled(tagsModel.query.start, {
-			scope: getScope(),
+			scope,
 			params: { roomId, },
 		});
+		await act(async () => createComponent());
 	});
 
 	test('should render buttons to open filters form', async () => {
-		create();
-
 		expect(document.body).toMatchSnapshot('closed filters');
 	});
 
 	test('should render form in popover for screen with width > 720', async () => {
-		create();
-
 		openForm();
 
 		expect(document.body).toMatchSnapshot('filters in popover');
 	});
 
 	test('should render form in popup for screen with width <= 720', async () => {
-		create();
-
-		await allSettled(deviceInfoModel.$device, {
-			scope: getScope(),
-			params: 'mobile',
-		});
+		await act(() =>
+			allSettled(deviceInfoModel.$device, {
+				scope,
+				params: 'mobile',
+			})
+		);
 		openForm();
 
 		expect(document.body).toMatchSnapshot('filters in popup');
@@ -107,29 +99,26 @@ describe('features/tasks/tasks-filters/tasks-filters', () => {
 	test('should submit form and close form on submit button click', async () => {
 		expect.assertions(2);
 
-		create();
 		openForm();
 		const authorsField = findAuthorsField();
 		const tagsField = findTagsFild();
 
-		await act(async () => {
-			await user.click(authorsField);
-			await user.keyboard('username');
-			await waitFor(async () => {
-				await user.click(screen.getByRole('option'));
-			});
-
-			await user.click(tagsField);
-			await user.keyboard('A tag');
-			await waitFor(async () => {
-				await user.click(screen.getByRole('option'));
-			});
+		await wrapper.user.click(authorsField);
+		await wrapper.user.keyboard('username');
+		await waitFor(async () => {
+			await wrapper.user.click(screen.getByRole('option'));
 		});
 
-		await user.click(findSubmitButton());
+		await wrapper.user.click(tagsField);
+		await wrapper.user.keyboard('A tag');
+		await waitFor(async () => {
+			await wrapper.user.click(screen.getByRole('option'));
+		});
+
+		await wrapper.user.click(findSubmitButton());
 
 		expect(findForm).toThrow();
-		expect(getScope().getState(form.$values)).toStrictEqual(
+		expect(scope.getState(form.$values)).toStrictEqual(
 			expect.objectContaining({
 				authorIds: [1],
 				tagIds: [1],
@@ -140,29 +129,26 @@ describe('features/tasks/tasks-filters/tasks-filters', () => {
 	test('should reset form and close form on reset button click', async () => {
 		expect.assertions(4);
 
-		create();
 		openForm();
 		const authorsField = findAuthorsField();
 		const tagsField = findTagsFild();
 
-		await act(async () => {
-			await user.click(authorsField);
-			await user.keyboard('username');
-			await waitFor(async () => {
-				await user.click(screen.getByRole('option'));
-			});
-
-			await user.click(tagsField);
-			await user.keyboard('A tag');
-			await waitFor(async () => {
-				await user.click(screen.getByRole('option'));
-			});
+		await wrapper.user.click(authorsField);
+		await wrapper.user.keyboard('username');
+		await waitFor(async () => {
+			await wrapper.user.click(screen.getByRole('option'));
 		});
 
-		await user.click(findSubmitButton());
+		await wrapper.user.click(tagsField);
+		await wrapper.user.keyboard('A tag');
+		await waitFor(async () => {
+			await wrapper.user.click(screen.getByRole('option'));
+		});
+
+		await wrapper.user.click(findSubmitButton());
 
 		openForm();
-		await user.click(findResetButton());
+		await wrapper.user.click(findResetButton());
 
 		expect(findForm).toThrow();
 		await waitFor(() => {
@@ -170,7 +156,7 @@ describe('features/tasks/tasks-filters/tasks-filters', () => {
 			expect(authorsField).toHaveValue('');
 			expect(tagsField).toHaveValue('');
 		});
-		expect(getScope().getState(form.$values)).toStrictEqual(
+		expect(scope.getState(form.$values)).toStrictEqual(
 			expect.objectContaining({
 				tagIds: [],
 				authorIds: [],

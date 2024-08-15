@@ -1,9 +1,3 @@
-import { render, RenderResult, waitFor } from '@testing-library/react';
-import { RouterProvider } from 'atomic-router-react';
-import { allSettled, fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
-import { createMemoryHistory } from 'history';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { roomsModel } from '@/entities/rooms';
@@ -14,7 +8,19 @@ import { Devices, deviceInfoModel, notificationsModel } from '@/shared/models';
 import { CreateRoom } from './create-room';
 import { popupControls } from './model';
 
-import { server, user } from '~/tests';
+import {
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fork,
+	http,
+	render,
+	server,
+	useTestRouter,
+	waitFor
+} from '~/test-utils';
 
 describe('features/rooms/create-room/create-room', () => {
 	let wrapper: RenderResult;
@@ -24,13 +30,7 @@ describe('features/rooms/create-room/create-room', () => {
 	const name = 'some name';
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<RouterProvider router={router}>
-					<CreateRoom isOpen />
-				</RouterProvider>
-			</Provider>
-		);
+		wrapper = render(<CreateRoom isOpen />, { scope, router, });
 	};
 	const setDeviceSize = async (device: Devices) => {
 		await allSettled(deviceInfoModel.$device, { scope, params: device, });
@@ -51,47 +51,42 @@ describe('features/rooms/create-room/create-room', () => {
 			values: [[roomsModel.query.$data, []]],
 		});
 
-		await allSettled(router.setHistory, {
+		await useTestRouter({
 			scope,
-			params: createMemoryHistory({
+			router,
+			options: {
 				initialEntries: ['/rooms'],
-			}),
+			},
 		});
-
 		await allSettled(popupControls.open, { scope, });
+		await act(async () => createComponent());
 	});
 
 	test('should render popup with room form and button inside it for large screen', async () => {
-		await setDeviceSize('desktop-small');
-
-		createComponent();
+		await act(() => setDeviceSize('desktop-small'));
 
 		expect(findPopup()).toMatchSnapshot('large screen');
 	});
 
 	test('should render popup with room form and button in popup footer for small screen', async () => {
-		await setDeviceSize('tablet-vertical');
-
-		createComponent();
+		await act(() => setDeviceSize('tablet-vertical'));
 
 		expect(findPopup()).toMatchSnapshot('small screen');
 	});
 
 	test('should create room on form submit', async () => {
-		createComponent();
-
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();
 
-		await user.click(nameField);
-		await user.keyboard(name);
+		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard(name);
 
-		await user.click(descriptionField);
-		await user.keyboard(description);
+		await wrapper.user.click(descriptionField);
+		await wrapper.user.keyboard(description);
 
 		const button = findSubmit();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
@@ -122,20 +117,18 @@ describe('features/rooms/create-room/create-room', () => {
 			})
 		);
 
-		createComponent();
-
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();
 
-		await user.click(nameField);
-		await user.keyboard(name);
+		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard(name);
 
-		await user.click(descriptionField);
-		await user.keyboard(description);
+		await wrapper.user.click(descriptionField);
+		await wrapper.user.keyboard(description);
 
 		const button = findSubmit();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
@@ -157,18 +150,16 @@ describe('features/rooms/create-room/create-room', () => {
 	});
 
 	test('should reset form on popup close', async () => {
-		createComponent();
-
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();
 
-		await user.click(nameField);
-		await user.keyboard(name);
+		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard(name);
 
-		await user.click(descriptionField);
-		await user.keyboard(description);
+		await wrapper.user.click(descriptionField);
+		await wrapper.user.keyboard(description);
 
-		allSettled(popupControls.close, { scope, });
+		await act(() => allSettled(popupControls.close, { scope, }));
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();

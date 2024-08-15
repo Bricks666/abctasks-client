@@ -39,7 +39,7 @@ const createAllProviders = (
 		return (
 			<StoreProvider value={scope}>
 				<RouterProvider router={router}>
-					<LocalizationProvider adapterLocale={AdapterDayjs}>
+					<LocalizationProvider dateAdapter={AdapterDayjs}>
 						<Wrapper>{children}</Wrapper>
 					</LocalizationProvider>
 				</RouterProvider>

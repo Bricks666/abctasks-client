@@ -12,7 +12,7 @@ import { describe, expect, test } from 'vitest';
 import { RegistrationForm, RegistrationFormProps } from './ui';
 
 import '@testing-library/jest-dom/vitest';
-import { server } from '~/tests';
+import { server } from '~/test-utils';
 
 describe('features/auth/registration/ui', () => {
 	const values = {

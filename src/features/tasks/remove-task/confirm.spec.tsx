@@ -1,91 +1,90 @@
-import { fireEvent, waitFor } from '@testing-library/react';
-import { allSettled } from 'effector';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tasksInRoomModel } from '@/entities/tasks';
 
-import { router, routes } from '@/shared/configs';
+import { router } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 
 import { ConfirmRemoveTask } from './confirm';
 import { openConfirm, popupControls } from './model';
 
 import {
-	createRootProvider,
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fireEvent,
+	fork,
+	http,
+	render,
 	server,
-	useCreateComponent,
 	useTestRouter,
-	useTestScope
-} from '~/tests';
+	waitFor
+} from '~/test-utils';
 
 describe('features/tags/remove/confirm', () => {
 	const roomId = 123;
 	const taskId = 1;
+	let scope: Scope;
+	let wrapper: RenderResult;
 
-	const { Provider: ScopeProvider, getScope, } = useTestScope();
-	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
-	const RootProvider = createRootProvider(ScopeProvider, RouterProvider);
-	const { getWrapper, create, } = useCreateComponent({
-		Component: ConfirmRemoveTask,
-		defaultProps: {
-			isOpen: true,
-		},
-		options: {
-			wrapper: RootProvider,
-		},
-	});
+	const createComponent = () => {
+		wrapper = render(<ConfirmRemoveTask isOpen />, { scope, router, });
+	};
 
 	const findConfirm = () =>
-		getWrapper().getByRole('dialog', { name: 'actions.remove_task.title', });
+		wrapper.getByRole('dialog', { name: 'actions.remove_task.title', });
 	const findApprove = () =>
-		getWrapper().getByRole('button', {
+		wrapper.getByRole('button', {
 			name: 'actions.remove_task.actions.agree',
 		});
 	const findDisapprove = () =>
-		getWrapper().getByRole('button', {
+		wrapper.getByRole('button', {
 			name: 'actions.remove_task.actions.disagree',
 		});
 
 	beforeEach(async () => {
-		await allSettled(routes.room.tasks.open, {
-			scope: getScope(),
-			params: { id: roomId, },
+		scope = fork();
+
+		await useTestRouter({
+			scope,
+			router,
+			options: {
+				initialEntries: [`/rooms/${roomId}/tasks`],
+			},
 		});
-		await allSettled(openConfirm, { scope: getScope(), params: taskId, });
+
+		await allSettled(openConfirm, { scope, params: taskId, });
 		await allSettled(tasksInRoomModel.query.start, {
-			scope: getScope(),
+			scope,
 			params: { roomId, },
 		});
+		await act(async () => createComponent());
 	});
 
 	test('should render confirm popup with text to remove task', async () => {
-		create();
-
 		expect(findConfirm()).toMatchSnapshot();
 	});
 
 	test('should remove task on approve button click', async () => {
-		create();
 		const button = findApprove();
 
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
+			expect(scope.getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.remove_task.notifications.success',
 					color: 'success',
 				})
 			);
-			expect(
-				getScope().getState(tasksInRoomModel.query.$data)
-			).not.toContainEqual(
+			expect(scope.getState(tasksInRoomModel.query.$data)).not.toContainEqual(
 				expect.objectContaining({
 					id: taskId,
 				})
 			);
-			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
+			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
 		});
 	});
 
@@ -104,40 +103,38 @@ describe('features/tags/remove/confirm', () => {
 			})
 		);
 
-		create();
 		const button = findApprove();
 
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
+			expect(scope.getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.remove_task.notifications.error',
 					color: 'error',
 				})
 			);
-			expect(getScope().getState(tasksInRoomModel.query.$data)).toContainEqual(
+			expect(scope.getState(tasksInRoomModel.query.$data)).toContainEqual(
 				expect.objectContaining({
 					id: taskId,
 				})
 			);
-			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
+			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
 		});
 	});
 
 	test('should just close confirm on close button click', async () => {
-		create();
 		const button = findDisapprove();
 
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(tasksInRoomModel.query.$data)).toContainEqual(
+			expect(scope.getState(tasksInRoomModel.query.$data)).toContainEqual(
 				expect.objectContaining({
 					id: taskId,
 				})
 			);
-			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
+			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
 		});
 	});
 });

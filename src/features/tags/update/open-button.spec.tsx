@@ -1,8 +1,3 @@
-import { render, RenderResult, waitFor } from '@testing-library/react';
-import { RouterProvider } from 'atomic-router-react';
-import { allSettled, fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
-import { createMemoryHistory } from 'history';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { getParams, popupsMap, router } from '@/shared/configs';
@@ -10,8 +5,15 @@ import { getParams, popupsMap, router } from '@/shared/configs';
 import { popupControls } from './model';
 import { OpenUpdateTagButton } from './open-button';
 
-import { user } from '~/tests';
-
+import {
+	RenderResult,
+	Scope,
+	act,
+	fork,
+	render,
+	useTestRouter,
+	waitFor
+} from '~/test-utils';
 
 describe('featuers/tags/update/open-button', () => {
 	const tagId = 123;
@@ -20,13 +22,7 @@ describe('featuers/tags/update/open-button', () => {
 	let scope: Scope;
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<RouterProvider router={router}>
-					<OpenUpdateTagButton tagId={tagId} />
-				</RouterProvider>
-			</Provider>
-		);
+		wrapper = render(<OpenUpdateTagButton tagId={tagId} />, { scope, router, });
 	};
 
 	const findButton = () =>
@@ -35,24 +31,19 @@ describe('featuers/tags/update/open-button', () => {
 	beforeEach(async () => {
 		scope = fork();
 
-		await allSettled(router.setHistory, {
-			scope,
-			params: createMemoryHistory(),
-		});
+		await useTestRouter({ router, scope, });
+
+		await act(async () => createComponent());
 	});
 
 	test('should render button to open modal', () => {
-		createComponent();
-
 		expect(findButton()).toMatchSnapshot();
 	});
 
 	test('should open modal on click', async () => {
-		createComponent();
-
 		const button = findButton();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();

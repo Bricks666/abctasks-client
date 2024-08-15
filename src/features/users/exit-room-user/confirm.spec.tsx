@@ -1,6 +1,3 @@
-import { fireEvent, waitFor } from '@testing-library/react';
-import { allSettled } from 'effector';
-import { HttpResponse, http } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { roomsModel } from '@/entities/rooms';
@@ -13,87 +10,82 @@ import { ConfirmUserExit } from './confirm';
 import { openConfirm, popupControls } from './model';
 
 import {
-	createRootProvider,
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fork,
+	http,
+	render,
 	server,
-	useCreateComponent,
 	useTestRouter,
-	useTestScope
-} from '~/tests';
+	waitFor
+} from '~/test-utils';
 
-describe('features/users/remove-user-from-room/confirm', () => {
+describe('features/users/remove-user-from-room/confirm.tsx', () => {
 	const roomId = 1;
-	const { Provider: ScopeProvider, getScope, } = useTestScope();
-	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
-	const RootProvider = createRootProvider(ScopeProvider, RouterProvider);
-	const { create, getWrapper, } = useCreateComponent({
-		Component: ConfirmUserExit,
-		defaultProps: {
-			isOpen: true,
-		},
-		options: {
-			wrapper: RootProvider,
-		},
-	});
+	let wrapper: RenderResult;
+	let scope: Scope;
+
+	const createComponent = () => {
+		wrapper = render(<ConfirmUserExit isOpen />, { scope, router, });
+	};
 
 	const findPopup = () =>
-		getWrapper().getByRole('dialog', {
+		wrapper.getByRole('dialog', {
 			name: 'actions.exit_room.title',
 		});
 	const findAgree = () =>
-		getWrapper().getByRole('button', {
+		wrapper.getByRole('button', {
 			name: 'actions.exit_room.actions.agree',
 		});
 	const findDisagree = () =>
-		getWrapper().getByRole('button', {
+		wrapper.getByRole('button', {
 			name: 'actions.exit_room.actions.disagree',
 		});
 
 	beforeEach(async () => {
-		await allSettled(routes.room.users.open, {
-			scope: getScope(),
-			params: {
-				id: 1,
-			},
+		scope = fork();
+
+		await useTestRouter({
+			scope,
+			router,
+			options: { initialEntries: ['/rooms/1/users'], },
 		});
 		await allSettled(openConfirm, {
-			scope: getScope(),
+			scope,
 			params: roomId,
 		});
-
 		await allSettled(roomsModel.query.start, {
-			scope: getScope(),
+			scope,
 		});
+		await act(async () => createComponent());
 	});
 
 	test('should render popup with text and 2 buttons', () => {
-		create();
-
 		expect(findPopup()).toMatchSnapshot();
 	});
 
 	test('should remove user from room on approve button click', async () => {
-		create();
-
 		const button = findAgree();
 
-		fireEvent.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
-			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
+			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
+			expect(scope.getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.exit_room.notifications.success',
 					color: 'success',
 				})
 			);
-			expect(
-				getScope().getState(usersInRoomModel.query.$data)
-			).not.toContainEqual(
+			expect(scope.getState(usersInRoomModel.query.$data)).not.toContainEqual(
 				expect.objectContaining({
 					id: roomId,
 				})
 			);
-			expect(getScope().getState(routes.rooms.base.$isOpened)).toBeTruthy();
+			expect(scope.getState(routes.rooms.base.$isOpened)).toBeTruthy();
 		});
 	});
 
@@ -109,21 +101,19 @@ describe('features/users/remove-user-from-room/confirm', () => {
 			})
 		);
 
-		create();
-
 		const button = findAgree();
 
-		fireEvent.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(popupControls.$isOpen)).toBeTruthy();
-			expect(getScope().getState(notificationsModel.$items)).toContainEqual(
+			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
+			expect(scope.getState(notificationsModel.$items)).toContainEqual(
 				expect.objectContaining({
 					message: 'actions.exit_room.notifications.error',
 					color: 'error',
 				})
 			);
-			expect(getScope().getState(roomsModel.query.$data)).toContainEqual(
+			expect(scope.getState(roomsModel.query.$data)).toContainEqual(
 				expect.objectContaining({
 					id: roomId,
 				})
@@ -132,15 +122,13 @@ describe('features/users/remove-user-from-room/confirm', () => {
 	});
 
 	test('should just close popup on reject button click', async () => {
-		create();
-
 		const button = findDisagree();
 
-		fireEvent.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
-			expect(getScope().getState(popupControls.$isOpen)).toBeFalsy();
-			expect(getScope().getState(routes.rooms.base.$isOpened)).toBeFalsy();
+			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
+			expect(scope.getState(routes.rooms.base.$isOpened)).toBeFalsy();
 		});
 	});
 });

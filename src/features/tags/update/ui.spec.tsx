@@ -1,20 +1,26 @@
-import { render, RenderResult, waitFor } from '@testing-library/react';
-import { RouterProvider } from 'atomic-router-react';
-import { allSettled, fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
-import { createMemoryHistory } from 'history';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tagModel, tagsModel } from '@/entities/tags';
 
-import { getParams, popupsMap, router, routes } from '@/shared/configs';
+import { getParams, popupsMap, router } from '@/shared/configs';
 import { deviceInfoModel, notificationsModel } from '@/shared/models';
 
 import { openPopup, popupControls } from './model';
 import { UpdateTag } from './ui';
 
-import { server, user } from '~/tests';
+import {
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fork,
+	http,
+	render,
+	server,
+	useTestRouter,
+	waitFor
+} from '~/test-utils';
 
 describe('features/tags/update/ui', () => {
 	const tagId = 1;
@@ -24,13 +30,7 @@ describe('features/tags/update/ui', () => {
 	let scope: Scope;
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<RouterProvider router={router}>
-					<UpdateTag isOpen />
-				</RouterProvider>
-			</Provider>
-		);
+		wrapper = render(<UpdateTag isOpen />, { scope, router, });
 	};
 	const findPopup = () =>
 		wrapper.getByRole('dialog', { name: 'actions.update_tag.title', });
@@ -46,66 +46,64 @@ describe('features/tags/update/ui', () => {
 	beforeEach(async () => {
 		scope = fork();
 
-		await allSettled(router.setHistory, {
+		await useTestRouter({
 			scope,
-			params: createMemoryHistory(),
+			router,
+			options: { initialEntries: [`/room/${roomId}/tags`], },
 		});
-		await allSettled(routes.room.tags.open, {
-			scope,
-			params: { id: roomId, },
-		});
+
 		await allSettled(deviceInfoModel.$device, {
 			scope,
 			params: 'desktop-small',
 		});
 		await allSettled(openPopup, { scope, params: tagId, });
 		await allSettled(tagsModel.query.start, { scope, params: { roomId, }, });
+
+		await act(async () => createComponent());
 	});
 
 	test('should render form in popup with predefined data', () => {
-		createComponent();
-
 		expect(findForm()).toBeInTheDocument();
 		expect(findPopup()).toMatchSnapshot('large screen');
 	});
 
 	test('should render fullscreen popup for small screen', async () => {
-		await allSettled(deviceInfoModel.$device, { scope, params: 'mobile', });
-		createComponent();
+		await act(() =>
+			allSettled(deviceInfoModel.$device, { scope, params: 'mobile', })
+		);
 
 		expect(findForm()).toBeInTheDocument();
 		expect(findPopup()).toMatchSnapshot('small screen');
 	});
 
 	test('should render skeleton while data is loading', async () => {
-		await allSettled(tagModel.query.start, {
-			scope,
-			params: {
-				id: 5,
-				roomId,
-			},
-		});
-		createComponent();
+		await act(() =>
+			allSettled(tagModel.query.start, {
+				scope,
+				params: {
+					id: 5,
+					roomId,
+				},
+			})
+		);
 
 		expect(findForm).toThrow();
 		expect(findPopup()).toMatchSnapshot('loading');
 	});
 
 	test('should update tag on submit', async () => {
-		createComponent();
-
 		await waitFor(() => {
 			expect(findForm()).toBeInTheDocument();
 		});
 
 		const nameField = findNameField();
 
-		await user.click(nameField);
-		await user.keyboard('another name');
+		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard('another name');
 
 		const button = findSubmit();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(notificationsModel.$items)).toContainEqual(
@@ -146,15 +144,13 @@ describe('features/tags/update/ui', () => {
 			})
 		);
 
-		createComponent();
-
 		await waitFor(() => {
 			expect(findForm()).toBeInTheDocument();
 		});
 
 		const button = findSubmit();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(notificationsModel.$items)).toContainEqual(
@@ -168,15 +164,13 @@ describe('features/tags/update/ui', () => {
 	});
 
 	test('should just close popup on close button click', async () => {
-		createComponent();
-
 		await waitFor(() => {
 			expect(findForm()).toBeInTheDocument();
 		});
 
 		const button = findClose();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();

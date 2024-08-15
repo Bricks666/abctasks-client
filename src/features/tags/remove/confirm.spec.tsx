@@ -19,10 +19,7 @@ import { notificationsModel } from '@/shared/models';
 import { ConfirmRemoveTag } from './confirm';
 import { openConfirm, popupControls } from './model';
 
-
-
-import { server } from '~/tests';
-
+import { server } from '~/test-utils';
 
 describe('features/tags/remove/confirm', () => {
 	const roomId = 123;

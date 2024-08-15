@@ -1,6 +1,3 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { allSettled } from 'effector';
-import { debug } from 'patronum';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { tagsModel } from '@/entities/tags';
@@ -11,65 +8,73 @@ import { TaskForm } from './form';
 import { create as createForm } from './model';
 
 import {
-	createRootProvider,
-	useCreateComponent,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fireEvent,
+	fork,
+	render,
+	screen,
 	useTestRouter,
-	useTestScope
-} from '~/tests';
-
+	waitFor
+} from '~/test-utils';
 
 describe('features/tasks/form/form', () => {
 	const roomId = 1;
 	const form = createForm();
 	const buttonText = 'submit';
 	const titleT = 'form title';
+	let scope: Scope;
+	let wrapper: RenderResult;
 
-	const { Provider: ScopeProvider, getScope, } = useTestScope();
-	const { Provider: RouterProvider, } = useTestRouter({ getScope, router, });
-	const RootProvider = createRootProvider(ScopeProvider, RouterProvider);
-	const { getWrapper, create, } = useCreateComponent({
-		Component: TaskForm,
-		defaultProps: {
-			$form: form,
-			buttonText,
-			titleT,
-		},
-		options: {
-			wrapper: RootProvider,
-		},
-	});
+	const createComponent = () => {
+		wrapper = render(
+			<TaskForm $form={form} buttonText={buttonText} titleT={titleT} />,
+			{ scope, router, }
+		);
+	};
 
-	const findForm = () => getWrapper().getByRole('form', { name: titleT, });
+	const findForm = () => wrapper.getByRole('form', { name: titleT, });
 	const findTitleField = () =>
-		getWrapper().getByRole('textbox', {
+		wrapper.getByRole('textbox', {
 			name: 'actions.task_form.fields.title',
 		});
 	const findTagsSelect = () =>
-		getWrapper().getByRole('combobox', {
+		wrapper.getByRole('combobox', {
 			name: 'actions.task_form.fields.tags',
 		});
-	const findButton = () =>
-		getWrapper().getByRole('button', { name: buttonText, });
+	const findButton = () => wrapper.getByRole('button', { name: buttonText, });
 
 	beforeEach(async () => {
+		scope = fork();
+
+		await useTestRouter({ scope, router, });
 		await allSettled(tagsModel.query.start, {
-			scope: getScope(),
+			scope,
 			params: {
 				roomId,
 			},
 		});
+
+		await act(async () => createComponent());
 	});
 
 	test('should render form with 4 fields and button', async () => {
-		create();
-
 		expect(findForm()).toMatchSnapshot('with button');
 	});
 
 	test('should hide button if passed hideButton=true', async () => {
-		create({
-			hideButton: true,
-		});
+		await act(async () =>
+			wrapper.rerender(
+				<TaskForm
+					$form={form}
+					buttonText={buttonText}
+					titleT={titleT}
+					hideButton
+				/>
+			)
+		);
 
 		expect(findForm()).toMatchSnapshot('without button');
 	});
@@ -79,10 +84,6 @@ describe('features/tasks/form/form', () => {
 
 		const cb = vi.fn();
 		const unwatch = form.formValidated.watch(cb);
-
-		create();
-
-		debug(form.fields.tagIds.$errors);
 
 		const titleField = findTitleField();
 		fireEvent.input(titleField, { target: { value: 'Some target', }, });
@@ -104,8 +105,6 @@ describe('features/tasks/form/form', () => {
 	describe('validation', () => {
 		describe('title', () => {
 			test('empty', async () => {
-				create();
-
 				const titleField = findTitleField();
 
 				fireEvent.input(titleField, { target: { value: '', }, });
@@ -115,13 +114,11 @@ describe('features/tasks/form/form', () => {
 				fireEvent.click(button);
 
 				await waitFor(() => {
-					expect(getWrapper().getByText("Title can't be empty"));
+					expect(wrapper.getByText("Title can't be empty"));
 				});
 			});
 
 			test('too long', async () => {
-				create();
-
 				const titleField = findTitleField();
 
 				fireEvent.input(titleField, {
@@ -133,21 +130,19 @@ describe('features/tasks/form/form', () => {
 				fireEvent.click(button);
 
 				await waitFor(() => {
-					expect(getWrapper().getByText('Title can be less than 128'));
+					expect(wrapper.getByText('Title can be less than 128'));
 				});
 			});
 		});
 
 		describe('tags', () => {
 			test('empty', async () => {
-				create();
-
 				const button = findButton();
 
 				fireEvent.click(button);
 
 				await waitFor(() => {
-					expect(getWrapper().getByText('At least one tag must be chosen'));
+					expect(wrapper.getByText('At least one tag must be chosen'));
 				});
 			});
 		});

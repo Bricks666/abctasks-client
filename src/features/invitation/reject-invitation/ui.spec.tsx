@@ -13,7 +13,7 @@ import { notificationsModel } from '@/shared/models';
 
 import { RejectInvitationButton } from './ui';
 
-import { server } from '~/tests';
+import { server } from '~/test-utils';
 
 describe('features/invitation/reject-invitation/ui', () => {
 	const id = 123;

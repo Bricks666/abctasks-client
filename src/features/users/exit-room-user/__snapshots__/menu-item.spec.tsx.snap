@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`features/users/exit-room-user/menu-item > should render button 1`] = `
+exports[`features/users/exit-room-user/menu-item.tsx > should render button 1`] = `
 <li
   class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
   role="menuitem"

@@ -1,9 +1,3 @@
-import { render, RenderResult, waitFor } from '@testing-library/react';
-import { RouterProvider } from 'atomic-router-react';
-import { allSettled, fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
-import { createMemoryHistory } from 'history';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { roomsModel } from '@/entities/rooms';
@@ -14,7 +8,19 @@ import { Devices, deviceInfoModel, notificationsModel } from '@/shared/models';
 import { openPopup, popupControls } from './model';
 import { UpdateRoom } from './update-room';
 
-import { server, user } from '~/tests';
+import {
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fork,
+	http,
+	render,
+	server,
+	useTestRouter,
+	waitFor
+} from '~/test-utils';
 
 describe('features/rooms/update-room/update-room', () => {
 	const id = 1;
@@ -25,13 +31,7 @@ describe('features/rooms/update-room/update-room', () => {
 	const name = 'some name';
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<RouterProvider router={router}>
-					<UpdateRoom isOpen />
-				</RouterProvider>
-			</Provider>
-		);
+		wrapper = render(<UpdateRoom isOpen />, { scope, router, });
 	};
 	const setDeviceSize = async (device: Devices) => {
 		await allSettled(deviceInfoModel.$device, { scope, params: device, });
@@ -48,22 +48,22 @@ describe('features/rooms/update-room/update-room', () => {
 		});
 
 	beforeEach(async () => {
-		scope = fork({});
+		scope = fork();
 
-		await allSettled(router.setHistory, {
+		await useTestRouter({
 			scope,
-			params: createMemoryHistory({
-				initialEntries: ['/rooms'],
-			}),
+			router,
+			options: { initialEntries: ['/rooms'], },
 		});
+
 		await allSettled(openPopup, { scope, params: id, });
-		allSettled(roomsModel.query.start, { scope, });
+		await allSettled(roomsModel.query.start, { scope, });
+
+		await act(async () => createComponent());
 	});
 
 	test('should render popup with room form and button inside it for large screen', async () => {
-		setDeviceSize('desktop-small');
-
-		createComponent();
+		await act(() => setDeviceSize('desktop-small'));
 
 		await waitFor(() => {
 			expect(findPopup()).toBeInTheDocument();
@@ -73,9 +73,7 @@ describe('features/rooms/update-room/update-room', () => {
 	});
 
 	test('should render popup with room form and button in popup footer for small screen', async () => {
-		setDeviceSize('tablet-vertical');
-
-		createComponent();
+		await act(() => setDeviceSize('tablet-vertical'));
 
 		await waitFor(() => {
 			expect(findPopup()).toBeInTheDocument();
@@ -85,20 +83,18 @@ describe('features/rooms/update-room/update-room', () => {
 	});
 
 	test('should update room on form submit', async () => {
-		createComponent();
-
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();
 
-		await user.click(nameField);
-		await user.keyboard(name);
+		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard(name);
 
-		await user.click(descriptionField);
-		await user.keyboard(description);
+		await wrapper.user.click(descriptionField);
+		await wrapper.user.keyboard(description);
 
 		const button = findSubmit();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
@@ -130,20 +126,18 @@ describe('features/rooms/update-room/update-room', () => {
 			})
 		);
 
-		createComponent();
-
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();
 
-		await user.click(nameField);
-		await user.keyboard(name);
+		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard(name);
 
-		await user.click(descriptionField);
-		await user.keyboard(description);
+		await wrapper.user.click(descriptionField);
+		await wrapper.user.keyboard(description);
 
 		const button = findSubmit();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
@@ -171,13 +165,13 @@ describe('features/rooms/update-room/update-room', () => {
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();
 
-		await user.click(nameField);
-		await user.keyboard(name);
+		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard(name);
 
-		await user.click(descriptionField);
-		await user.keyboard(description);
+		await wrapper.user.click(descriptionField);
+		await wrapper.user.keyboard(description);
 
-		allSettled(popupControls.close, { scope, });
+		await act(() => allSettled(popupControls.close, { scope, }));
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();

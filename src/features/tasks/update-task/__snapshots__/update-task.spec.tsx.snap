@@ -2,13 +2,13 @@
 
 exports[`features/tasks/update/update-task > should render form in fullscreen popup for small screens > small screen 1`] = `
 <div
-  aria-labelledby=":r7:"
+  aria-labelledby=":re:"
   class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullScreen css-m9glnp-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
   <h2
     class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root _title_62745c css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
-    id=":r7:"
+    id=":re:"
   >
     actions.update_task.title
     <button
@@ -45,8 +45,8 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
         <label
           class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="true"
-          for=":r8:"
-          id=":r8:-label"
+          for=":rf:"
+          id=":rf:-label"
         >
           actions.task_form.fields.title
         </label>
@@ -56,7 +56,7 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
           <input
             aria-invalid="false"
             class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            id=":r8:"
+            id=":rf:"
             name="title"
             type="text"
             value="Title 1"
@@ -84,8 +84,8 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="true"
-            for=":r9:"
-            id=":r9:-label"
+            for=":rg:"
+            id=":rg:-label"
           >
             actions.task_form.fields.tags
           </label>
@@ -109,7 +109,7 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
               autocapitalize="none"
               autocomplete="off"
               class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-152mnda-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":r9:"
+              id=":rg:"
               name="tagIds"
               role="combobox"
               spellcheck="false"
@@ -185,8 +185,8 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
         <label
           class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="true"
-          for=":rb:"
-          id=":rb:-label"
+          for=":ri:"
+          id=":ri:-label"
         >
           actions.task_form.fields.status
         </label>
@@ -194,12 +194,12 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
         >
           <div
-            aria-controls=":rc:"
+            aria-controls=":rj:"
             aria-expanded="false"
             aria-haspopup="listbox"
-            aria-labelledby=":rb:-label :rb:"
+            aria-labelledby=":ri:-label :ri:"
             class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-            id=":rb:"
+            id=":ri:"
             role="combobox"
             tabindex="0"
           >
@@ -244,8 +244,8 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
         <label
           class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="true"
-          for=":rd:"
-          id=":rd:-label"
+          for=":rk:"
+          id=":rk:-label"
         >
           actions.task_form.fields.description
         </label>
@@ -255,7 +255,7 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
           <textarea
             aria-invalid="false"
             class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input"
-            id=":rd:"
+            id=":rk:"
             name="description"
             style="height: 0px; overflow: hidden;"
           >
@@ -601,13 +601,13 @@ exports[`features/tasks/update/update-task > should render form in popup > large
 
 exports[`features/tasks/update/update-task > should render skeleton while task is loading > loading 1`] = `
 <div
-  aria-labelledby=":re:"
+  aria-labelledby=":rl:"
   class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth css-tlc64q-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
   <h2
     class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
-    id=":re:"
+    id=":rl:"
   >
     actions.update_task.title
     <button

@@ -1,14 +1,3 @@
-import {
-	fireEvent,
-	render,
-	RenderResult,
-	waitFor
-} from '@testing-library/react';
-import { RouterProvider } from 'atomic-router-react';
-import { allSettled, fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
-import { createMemoryHistory } from 'history';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tagsModel } from '@/entities/tags';
@@ -19,10 +8,20 @@ import { deviceInfoModel, notificationsModel } from '@/shared/models';
 import { CreateTag } from './form';
 import { popupControls } from './model';
 
-
-
-import { server, user } from '~/tests';
-
+import {
+	act,
+	allSettled,
+	fireEvent,
+	fork,
+	http,
+	HttpResponse,
+	render,
+	RenderResult,
+	Scope,
+	useTestRouter,
+	waitFor,
+	server
+} from '~/test-utils';
 
 describe('features/tags/create/form', () => {
 	const roomId = 123;
@@ -30,13 +29,7 @@ describe('features/tags/create/form', () => {
 	let scope: Scope;
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<RouterProvider router={router}>
-					<CreateTag isOpen />
-				</RouterProvider>
-			</Provider>
-		);
+		wrapper = render(<CreateTag isOpen />, { scope, router, });
 	};
 
 	const findPopup = () =>
@@ -49,45 +42,40 @@ describe('features/tags/create/form', () => {
 	beforeEach(async () => {
 		scope = fork();
 
-		await allSettled(router.setHistory, {
-			scope,
-			params: createMemoryHistory(),
-		});
+		await useTestRouter({ scope, router, });
+
 		await allSettled(deviceInfoModel.$device, {
 			scope,
 			params: 'desktop-small',
 		});
 		await allSettled(popupControls.open, { scope, });
 		await allSettled(tagsModel.query.start, { scope, params: { roomId, }, });
+		await act(async () => createComponent());
 	});
 
 	test('should render form in popup', async () => {
-		createComponent();
-
 		expect(findPopup()).toMatchSnapshot('large screen');
 	});
 
 	test('should render form in fullscreen popup for small screens', async () => {
-		await allSettled(deviceInfoModel.$device, {
-			scope,
-			params: 'mobile',
-		});
-
-		createComponent();
+		await act(() =>
+			allSettled(deviceInfoModel.$device, {
+				scope,
+				params: 'mobile',
+			})
+		);
 
 		expect(findPopup()).toMatchSnapshot('small screen');
 	});
 
 	test('should create tag on submit', async () => {
-		createComponent();
-
 		const nameField = findNameField();
 
 		fireEvent.input(nameField, { target: { value: 'some name', }, });
 
 		const button = findSubmit();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
@@ -124,16 +112,14 @@ describe('features/tags/create/form', () => {
 			})
 		);
 
-		createComponent();
-
 		const nameField = findNameField();
 
-		await user.click(nameField);
-		await user.keyboard('some name');
+		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard('some name');
 
 		const button = findSubmit();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();

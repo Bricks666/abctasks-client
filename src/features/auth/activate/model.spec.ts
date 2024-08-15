@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, test } from 'vitest';
 
 import { query } from './model';
 
-import { server } from '~/tests';
+import { server } from '~/test-utils';
 
 describe('features/auth/activate/model', () => {
 	const token = 'some-token';

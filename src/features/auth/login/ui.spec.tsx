@@ -10,8 +10,7 @@ import { describe, expect, test } from 'vitest';
 
 import { LoginForm, LoginFormProps } from './ui';
 
-import { server } from '~/tests';
-
+import { server } from '~/test-utils';
 
 import '@testing-library/jest-dom/vitest';
 

@@ -1,17 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import {
-	RenderResult,
-	act,
-	fireEvent,
-	render,
-	waitFor
-} from '@testing-library/react';
-import '@testing-library/jest-dom/vitest';
-import { Scope, allSettled, fork } from 'effector';
-import { Provider } from 'effector-react';
-import { HttpResponse, http } from 'msw';
-import {
-	Mock,
+	MockInstance,
 	afterAll,
 	beforeAll,
 	beforeEach,
@@ -25,18 +14,26 @@ import { sessionModel } from '@/shared/models';
 
 import { ProfileMenu, ProfileMenuProps } from './profile-menu';
 
-import { server } from '~/tests';
+import {
+	HttpResponse,
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	fireEvent,
+	fork,
+	http,
+	render,
+	server,
+	waitFor
+} from '~/test-utils';
 
 describe('features/auth/logout/profile-menu', () => {
 	let scope: Scope;
 	let wrapper: RenderResult;
 
 	const createComponent = (props: ProfileMenuProps = {}) => {
-		wrapper = render(
-			<Provider value={scope}>
-				<ProfileMenu {...props} />
-			</Provider>
-		);
+		wrapper = render(<ProfileMenu {...props} />, { scope, });
 	};
 
 	const loginUser = async () => {
@@ -51,28 +48,24 @@ describe('features/auth/logout/profile-menu', () => {
 	const findLogoutButton = () =>
 		wrapper.getByRole('menuitem', { name: 'profile_menu.items.logout', });
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		scope = fork();
+
+		await act(async () => createComponent());
 	});
 
 	test('should render nothing if user is not logged in', () => {
-		createComponent();
-
 		expect(document.body).toMatchSnapshot('anonymous-user');
 	});
 
 	test('should render button when menu is closed', async () => {
-		createComponent();
-
-		await loginUser();
+		await act(() => loginUser());
 
 		expect(document.body).toMatchSnapshot('closed');
 	});
 
 	test('should render button when menu is not opened', async () => {
-		createComponent();
-
-		await loginUser();
+		await act(() => loginUser());
 
 		const button = findButton();
 
@@ -82,16 +75,14 @@ describe('features/auth/logout/profile-menu', () => {
 	});
 
 	describe('content', () => {
-		let logSpy: Mock;
+		let logSpy: MockInstance;
 
 		beforeAll(() => {
 			logSpy = vi.spyOn(console, 'log');
 		});
 
 		beforeEach(async () => {
-			createComponent();
-
-			await loginUser();
+			await act(() => loginUser());
 
 			const button = findButton();
 
@@ -111,9 +102,7 @@ describe('features/auth/logout/profile-menu', () => {
 				})
 			);
 
-			act(() => {
-				fireEvent.click(logoutButton);
-			});
+			fireEvent.click(logoutButton);
 
 			await waitFor(() => {
 				expect(findMenu).toThrow();
@@ -127,9 +116,7 @@ describe('features/auth/logout/profile-menu', () => {
 		test('should do nothing on setting button click', () => {
 			const settingsButton = findSettingsButton();
 
-			act(() => {
-				fireEvent.click(settingsButton);
-			});
+			fireEvent.click(settingsButton);
 
 			expect(console.log).toHaveBeenCalled();
 		});

@@ -1,13 +1,9 @@
-import { render, RenderResult } from '@testing-library/react';
-import { fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { RoomForm, RoomFormProps } from './form';
 import { create } from './model';
 
-
-import { user } from '~/tests';
+import { RenderResult, Scope, act, fork, render } from '~/test-utils';
 
 describe('features/rooms/form/form', () => {
 	const $form = create();
@@ -18,14 +14,13 @@ describe('features/rooms/form/form', () => {
 
 	const createComponent = (props?: Partial<RoomFormProps>) => {
 		wrapper = render(
-			<Provider value={scope}>
-				<RoomForm
-					$form={$form}
-					buttonText={buttonText}
-					title={title}
-					{...props}
-				/>
-			</Provider>
+			<RoomForm
+				$form={$form}
+				buttonText={buttonText}
+				title={title}
+				{...props}
+			/>,
+			{ scope, }
 		);
 	};
 	const findForm = () => wrapper.getByRole('form', { name: 'title', });
@@ -37,24 +32,43 @@ describe('features/rooms/form/form', () => {
 		});
 	const findButton = () => wrapper.getByRole('button', { name: buttonText, });
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		scope = fork();
+
+		await act(async () => createComponent({ hideButton: false, }));
 	});
 
 	test('should render form with 3 fields and button when hideButton = false', () => {
-		createComponent({ hideButton: false, });
-
 		expect(findForm()).toMatchSnapshot('without button');
 	});
 
-	test('should render form with 3 fields when hideButton = true', () => {
-		createComponent({ hideButton: true, });
+	test('should render form with 3 fields when hideButton = true', async () => {
+		await act(async () =>
+			wrapper.rerender(
+				<RoomForm
+					$form={$form}
+					buttonText={buttonText}
+					title={title}
+					hideButton
+				/>
+			)
+		);
 
 		expect(findForm()).toMatchSnapshot('with disabled button');
 	});
 
-	test('should disable button when disabled = true', () => {
-		createComponent({ hideButton: false, disabled: true, });
+	test('should disable button when disabled = true', async () => {
+		await act(async () =>
+			wrapper.rerender(
+				<RoomForm
+					$form={$form}
+					buttonText={buttonText}
+					title={title}
+					hideButton={false}
+					disabled
+				/>
+			)
+		);
 
 		expect(findForm()).toMatchSnapshot('with button');
 	});
@@ -63,20 +77,18 @@ describe('features/rooms/form/form', () => {
 		const fn = vi.fn();
 		const { unsubscribe, } = $form.formValidated.subscribe(fn);
 
-		createComponent();
-
 		const name = findNameField();
-		await user.click(name);
-		await user.keyboard('some name');
+		await wrapper.user.click(name);
+		await wrapper.user.keyboard('some name');
 
 		const description = findDescriptionField();
 
-		await user.click(description);
-		await user.keyboard('some description');
+		await wrapper.user.click(description);
+		await wrapper.user.keyboard('some description');
 
 		const button = findButton();
 
-		await user.click(button);
+		await wrapper.user.click(button);
 
 		expect(fn).toHaveBeenCalled();
 		expect(fn).toHaveBeenCalledWith({
@@ -88,15 +100,11 @@ describe('features/rooms/form/form', () => {
 	});
 
 	describe('validation', () => {
-		beforeEach(() => {
-			createComponent();
-		});
-
 		describe('name field', () => {
 			test('empty field', async () => {
 				const button = findButton();
 
-				await user.click(button);
+				await wrapper.user.click(button);
 
 				expect(
 					wrapper.getByText('actions.room_form.errors.name.empty')
@@ -105,12 +113,12 @@ describe('features/rooms/form/form', () => {
 
 			test('too short name', async () => {
 				const name = findNameField();
-				await user.click(name);
-				await user.keyboard('name');
+				await wrapper.user.click(name);
+				await wrapper.user.keyboard('name');
 
 				const button = findButton();
 
-				await user.click(button);
+				await wrapper.user.click(button);
 
 				expect(
 					wrapper.getByText('actions.room_form.errors.name.min_length')
@@ -119,14 +127,14 @@ describe('features/rooms/form/form', () => {
 
 			test('too long name', async () => {
 				const name = findNameField();
-				await user.click(name);
-				await user.keyboard(
+				await wrapper.user.click(name);
+				await wrapper.user.keyboard(
 					'skljsngjsndgkjsdfkjgnskdfnkj;sdfngkjsdngkjnjnsnsj;fnjksnfgjksndfgjnsdfjkgnsdkjlfng'
 				);
 
 				const button = findButton();
 
-				await user.click(button);
+				await wrapper.user.click(button);
 
 				expect(
 					wrapper.getByText('actions.room_form.errors.name.max_length')
@@ -137,16 +145,16 @@ describe('features/rooms/form/form', () => {
 		describe('description field', () => {
 			test('too long description', async () => {
 				const name = findNameField();
-				await user.click(name);
-				await user.keyboard('some name');
+				await wrapper.user.click(name);
+				await wrapper.user.keyboard('some name');
 
 				const description = findDescriptionField();
-				await user.click(description);
+				await wrapper.user.click(description);
 				/**
 				 * @todo
 				 * Optimize way of input
 				 */
-				await user.keyboard(
+				await wrapper.user.keyboard(
 					`skljsngjsndgkjsdfkjgnskd adfg sdf gsd
           fg sdfg sdfg sdf gsd fg sdfg sdf gsd fg sdfg sdfmgg sdjfkfg skdfn n
           nsf nsdngjsdgjsfig sdfgjisdgijsndlijg nsfljfg jlsdf giljsdbglibslgbsljbg
@@ -156,7 +164,7 @@ describe('features/rooms/form/form', () => {
 
 				const button = findButton();
 
-				await user.click(button);
+				await wrapper.user.click(button);
 
 				expect(
 					wrapper.getByText('actions.room_form.errors.description.max_length')

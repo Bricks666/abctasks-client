@@ -2,13 +2,13 @@
 
 exports[`features/rooms/create-room/create-room > should render popup with room form and button in popup footer for small screen > small screen 1`] = `
 <div
-  aria-labelledby=":r3:"
+  aria-labelledby=":r6:"
   class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullScreen css-m9glnp-MuiPaper-root-MuiDialog-paper"
   role="dialog"
 >
   <h2
     class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root _title_62745c css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
-    id=":r3:"
+    id=":r6:"
   >
     actions.create_room.title
     <button
@@ -45,8 +45,8 @@ exports[`features/rooms/create-room/create-room > should render popup with room 
         <label
           class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="false"
-          for=":r4:"
-          id=":r4:-label"
+          for=":r7:"
+          id=":r7:-label"
         >
           actions.room_form.fields.name
         </label>
@@ -56,7 +56,7 @@ exports[`features/rooms/create-room/create-room > should render popup with room 
           <input
             aria-invalid="false"
             class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            id=":r4:"
+            id=":r7:"
             name="name"
             type="text"
             value=""
@@ -81,8 +81,8 @@ exports[`features/rooms/create-room/create-room > should render popup with room 
         <label
           class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="false"
-          for=":r5:"
-          id=":r5:-label"
+          for=":r8:"
+          id=":r8:-label"
         >
           actions.room_form.fields.description
         </label>
@@ -92,7 +92,7 @@ exports[`features/rooms/create-room/create-room > should render popup with room 
           <textarea
             aria-invalid="false"
             class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input"
-            id=":r5:"
+            id=":r8:"
             name="description"
             style="height: 0px; overflow: hidden;"
           />
