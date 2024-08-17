@@ -1,10 +1,8 @@
-import { Scope, allSettled, fork } from 'effector';
-import { HttpResponse, http } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { query } from './model';
 
-import { server } from '~/test-utils';
+import { server, handlers, Scope, allSettled, fork } from '~/test-utils';
 
 describe('features/auth/activate/model', () => {
 	const token = 'some-token';
@@ -22,14 +20,7 @@ describe('features/auth/activate/model', () => {
 	});
 
 	test('should fail on return any data except boolean', async () => {
-		server.use(
-			http.put('/api/auth/registration/activate', () => {
-				return HttpResponse.json({
-					data: 123,
-					statusCode: 200,
-				});
-			})
-		);
+		server.use(handlers.auth.error.activate);
 
 		await allSettled(query.start, { scope, params: { token, }, });
 

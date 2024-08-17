@@ -9,13 +9,12 @@ import { ConfirmRemoveUser } from './confirm';
 import { openConfirm, popupControls } from './model';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
 	fork,
-	http,
+	handlers,
 	render,
 	server,
 	useTestRouter,
@@ -94,16 +93,7 @@ describe('features/users/remove-user-from-room/confirm', () => {
 	});
 
 	test('should create notification and keep popup opened on server error', async () => {
-		server.use(
-			http.delete('/api/members/:roomId/remove/:userId', () => {
-				return HttpResponse.json(
-					{
-						message: 'Not Found',
-					},
-					{ status: 404, statusText: 'Not Found', }
-				);
-			})
-		);
+		server.use(handlers.members.error.remove);
 
 		const button = findAgree();
 

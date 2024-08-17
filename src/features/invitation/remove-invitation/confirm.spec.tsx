@@ -1,36 +1,37 @@
-import {
-	RenderResult,
-	fireEvent,
-	render,
-	waitFor
-} from '@testing-library/react';
-import { Scope, allSettled, fork } from 'effector';
-import { Provider } from 'effector-react';
-import { HttpResponse, http } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { invitationsModel } from '@/entities/invitations';
 
-import { popupsMap, routes } from '@/shared/configs';
+import { popupsMap, router } from '@/shared/configs';
 import { notificationsModel, popupsModel } from '@/shared/models';
 
 import { ConfirmRemoveInvitation } from './confirm';
 import { openConfirm } from './model';
 
-import { server } from '~/test-utils';
+import {
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	defaultInvitation,
+	defaultRoom,
+	fireEvent,
+	fork,
+	handlers,
+	render,
+	server,
+	useTestRouter,
+	waitFor
+} from '~/test-utils';
 
 describe('features/invitation/remove-invitation/confirm', () => {
-	const id = 123;
-	const roomId = 44;
+	const { id, } = defaultInvitation;
+	const { id: roomId, } = defaultRoom;
 	let scope: Scope;
 	let wrapper: RenderResult;
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<ConfirmRemoveInvitation isOpen />
-			</Provider>
-		);
+		wrapper = render(<ConfirmRemoveInvitation isOpen />, { scope, router, });
 	};
 	const findConfirm = () =>
 		wrapper.getByRole('dialog', { name: 'actions.remove_invitation.title', });
@@ -44,37 +45,30 @@ describe('features/invitation/remove-invitation/confirm', () => {
 		});
 
 	beforeEach(async () => {
-		scope = fork({
-			values: [
-				[
-					invitationsModel.query.$data,
-					[
-						{
-							id,
-						}
-					]
-				],
-				[
-					routes.room.users.$params,
-					{
-						id: roomId,
-					}
-				]
-			],
-		});
+		scope = fork();
 
+		await useTestRouter({
+			scope,
+			router,
+			options: {
+				initialEntries: [`/rooms/${roomId}/users`],
+			},
+		});
 		await allSettled(openConfirm, { params: id, scope, });
+		await allSettled(invitationsModel.query.start, {
+			params: { roomId, },
+			scope,
+		});
+		await allSettled(openConfirm, { params: id, scope, });
+
+		await act(async () => createComponent());
 	});
 
 	test('should render dialog with title, text and 2 buttons', () => {
-		createComponent();
-
 		expect(findConfirm()).toMatchSnapshot();
 	});
 
 	test('should remove on user confirmation', async () => {
-		createComponent();
-
 		const button = findAgreeButton();
 
 		fireEvent.click(button);
@@ -94,18 +88,7 @@ describe('features/invitation/remove-invitation/confirm', () => {
 	});
 
 	test('should show error notification on failed removing', async () => {
-		server.use(
-			http.delete('/api/invitations/invite/:roomId/:id', () => {
-				return HttpResponse.json(
-					{
-						message: 'Not Found',
-					},
-					{ status: 404, statusText: 'Not Found', }
-				);
-			})
-		);
-
-		createComponent();
+		server.use(handlers.invitations.error.remove);
 
 		const button = findAgreeButton();
 
@@ -126,8 +109,6 @@ describe('features/invitation/remove-invitation/confirm', () => {
 	});
 
 	test('should just close confirm on rejection', async () => {
-		createComponent();
-
 		const button = findDisagreeButton();
 		fireEvent.click(button);
 

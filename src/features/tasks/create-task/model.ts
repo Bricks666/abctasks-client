@@ -87,7 +87,7 @@ sample({
 	source: status.$value,
 	filter: Boolean,
 	fn: (status) => ({ status, }),
-	target: form.setInitialForm,
+	target: form.setForm,
 });
 
 update(tasksInRoomModel.query, {

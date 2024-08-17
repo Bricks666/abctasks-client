@@ -1,18 +1,19 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable sonarjs/no-duplicate-string */
-import {
-	RenderResult,
-	fireEvent,
-	render,
-	waitFor
-} from '@testing-library/react';
-import { HttpResponse, http } from 'msw';
-import { describe, expect, test } from 'vitest';
+import { beforeEach, describe, expect, test } from 'vitest';
 
 import { RegistrationForm, RegistrationFormProps } from './ui';
 
 import '@testing-library/jest-dom/vitest';
-import { server } from '~/test-utils';
+import {
+	RenderResult,
+	act,
+	fireEvent,
+	handlers,
+	render,
+	server,
+	waitFor
+} from '~/test-utils';
 
 describe('features/auth/registration/ui', () => {
 	const values = {
@@ -57,15 +58,15 @@ describe('features/auth/registration/ui', () => {
 		});
 	};
 
-	test('should render form, 4 inputs and button', () => {
-		createComponent();
+	beforeEach(async () => {
+		await act(async () => createComponent());
+	});
 
+	test('should render form, 4 inputs and button', () => {
 		expect(foundForm()).toMatchSnapshot();
 	});
 
 	test('should be able to click on button if fields are empty', async () => {
-		createComponent();
-
 		const { submit, } = foundItems();
 
 		expect(submit).not.toHaveAttribute('disabled', true);
@@ -74,8 +75,6 @@ describe('features/auth/registration/ui', () => {
 	});
 
 	test('should send registration query with data from fields', async () => {
-		createComponent();
-
 		const { submit, username, email, password, repeatPassword, } = foundItems();
 		fillFields({ email, username, password, repeatPassword, }, values);
 
@@ -92,8 +91,6 @@ describe('features/auth/registration/ui', () => {
 	describe('validation', () => {
 		describe('username field', () => {
 			test('empty field', async () => {
-				createComponent();
-
 				const { submit, username, email, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -113,8 +110,6 @@ describe('features/auth/registration/ui', () => {
 			});
 
 			test('too short username', async () => {
-				createComponent();
-
 				const { submit, username, email, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -134,8 +129,6 @@ describe('features/auth/registration/ui', () => {
 			});
 
 			test('too long username', async () => {
-				createComponent();
-
 				const { submit, username, email, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -161,8 +154,6 @@ describe('features/auth/registration/ui', () => {
 
 		describe('email field', () => {
 			test('empty field', async () => {
-				createComponent();
-
 				const { submit, username, email, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -182,8 +173,6 @@ describe('features/auth/registration/ui', () => {
 			});
 
 			test('too short email', async () => {
-				createComponent();
-
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -203,8 +192,6 @@ describe('features/auth/registration/ui', () => {
 			});
 
 			test('too long email', async () => {
-				createComponent();
-
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -228,18 +215,7 @@ describe('features/auth/registration/ui', () => {
 			});
 
 			test('there is not user with this email', async () => {
-				server.use(
-					http.post('/api/auth/registration', () => {
-						return HttpResponse.json(
-							{
-								message: 'Conflict',
-							},
-							{ status: 409, statusText: 'Conflict', }
-						);
-					})
-				);
-
-				createComponent();
+				server.use(handlers.auth.error.registration);
 
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
@@ -262,8 +238,6 @@ describe('features/auth/registration/ui', () => {
 
 		describe('password field', () => {
 			test('empty field', async () => {
-				createComponent();
-
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -283,8 +257,6 @@ describe('features/auth/registration/ui', () => {
 			});
 
 			test('too short password', async () => {
-				createComponent();
-
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -304,8 +276,6 @@ describe('features/auth/registration/ui', () => {
 			});
 
 			test('too long password', async () => {
-				createComponent();
-
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -331,8 +301,6 @@ describe('features/auth/registration/ui', () => {
 
 		describe.skip('repeat password field', () => {
 			test('different passwords', async () => {
-				createComponent();
-
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(

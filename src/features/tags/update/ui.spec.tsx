@@ -9,13 +9,14 @@ import { openPopup, popupControls } from './model';
 import { UpdateTag } from './ui';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
+	defaultRoom,
+	defaultTag,
 	fork,
-	http,
+	handlers,
 	render,
 	server,
 	useTestRouter,
@@ -23,8 +24,8 @@ import {
 } from '~/test-utils';
 
 describe('features/tags/update/ui', () => {
-	const tagId = 1;
-	const roomId = 1;
+	const { id: tagId, } = defaultTag;
+	const { id: roomId, } = defaultRoom;
 
 	let wrapper: RenderResult;
 	let scope: Scope;
@@ -130,19 +131,7 @@ describe('features/tags/update/ui', () => {
 	});
 
 	test('should create notification on error', async () => {
-		server.use(
-			http.put('/api/tags/:roomId/:id/update', () => {
-				return HttpResponse.json(
-					{
-						message: 'Not Found',
-					},
-					{
-						status: 404,
-						statusText: 'Not Found',
-					}
-				);
-			})
-		);
+		server.use(handlers.tags.error.udpate);
 
 		await waitFor(() => {
 			expect(findForm()).toBeInTheDocument();

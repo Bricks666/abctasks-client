@@ -9,13 +9,12 @@ import { ConfirmRemoveRoom } from './confirm';
 import { openConfirm, popupControls } from './model';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
 	fork,
-	http,
+	handlers,
 	render,
 	server,
 	useTestRouter,
@@ -74,14 +73,7 @@ describe('features/rooms/remove-room/confirm', () => {
 	});
 
 	test('should close dialog on error and create notification', async () => {
-		server.use(
-			http.delete('/api/rooms/:id/remove', () => {
-				return HttpResponse.json(
-					{ message: 'Forbidden', },
-					{ status: 403, statusText: 'Forbidden', }
-				);
-			})
-		);
+		server.use(handlers.rooms.error.remove);
 
 		const button = findAgreeButton();
 

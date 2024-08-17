@@ -29,7 +29,7 @@ exports[`features/invitation/generate-invitation-link/generate-invitation-link >
           name="link"
           readonly=""
           type="text"
-          value="https://localhost:3000/invitation-link-to-room-123"
+          value="http://localhost:3000/invitation-link-to-room-1"
         />
         <fieldset
           aria-hidden="true"

@@ -10,14 +10,15 @@ import { openPopup, popupControls } from './model';
 import { UpdateTask } from './update-task';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
+	defaultRoom,
+	defaultTask,
 	fireEvent,
 	fork,
-	http,
+	handlers,
 	render,
 	server,
 	useTestRouter,
@@ -26,8 +27,8 @@ import {
 
 const taskTitle = 'some title';
 describe('features/tasks/update/update-task', () => {
-	const roomId = 1;
-	const taskId = 1;
+	const { id: roomId, } = defaultRoom;
+	const { id: taskId, } = defaultTask;
 	let scope: Scope;
 	let wrapper: RenderResult;
 
@@ -138,19 +139,7 @@ describe('features/tasks/update/update-task', () => {
 	});
 
 	test('should create error notification on error', async () => {
-		server.use(
-			http.put('/api/tasks/:roomId/:taskId/update', () => {
-				return HttpResponse.json(
-					{
-						message: 'Server Error',
-					},
-					{
-						status: 500,
-						statusText: 'Internal Error',
-					}
-				);
-			})
-		);
+		server.use(handlers.tasks.error.update);
 
 		await waitFor(() => {
 			expect(findPopup()).toBeInTheDocument();

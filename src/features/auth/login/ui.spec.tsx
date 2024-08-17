@@ -1,18 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import {
-	RenderResult,
-	fireEvent,
-	render,
-	waitFor
-} from '@testing-library/react';
-import { HttpResponse, http } from 'msw';
 import { describe, expect, test } from 'vitest';
 
 import { LoginForm, LoginFormProps } from './ui';
 
-import { server } from '~/test-utils';
-
-import '@testing-library/jest-dom/vitest';
+import {
+	handlers,
+	server,
+	RenderResult,
+	fireEvent,
+	render,
+	waitFor
+} from '~/test-utils';
 
 describe('features/auth/login/ui', () => {
 	const values = {
@@ -159,16 +157,7 @@ describe('features/auth/login/ui', () => {
 			});
 
 			test('there is not user with this email', async () => {
-				server.use(
-					http.post('/api/auth/login', () => {
-						return HttpResponse.json(
-							{
-								message: 'Not Found',
-							},
-							{ status: 404, statusText: 'Not Found', }
-						);
-					})
-				);
+				server.use(handlers.auth.error.login.notFound);
 
 				createComponent();
 
@@ -253,16 +242,7 @@ describe('features/auth/login/ui', () => {
 			});
 
 			test('incorrect password', async () => {
-				server.use(
-					http.post('/api/auth/login', () => {
-						return HttpResponse.json(
-							{
-								message: 'Forbidden',
-							},
-							{ status: 403, statusText: 'Forbidden', }
-						);
-					})
-				);
+				server.use(handlers.auth.error.login.forbidden);
 
 				createComponent();
 

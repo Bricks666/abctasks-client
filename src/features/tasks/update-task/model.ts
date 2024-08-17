@@ -44,7 +44,7 @@ const $routeParams = combine(
 
 export const form = taskFormModel.create();
 
-const { formValidated, setInitialForm, reset, } = form;
+const { formValidated, setForm, reset, } = form;
 
 sample({
 	clock: openPopup,
@@ -97,7 +97,7 @@ sample({
 			tagIds: tags.map((tag) => tag.id),
 		};
 	},
-	target: setInitialForm,
+	target: setForm,
 });
 
 update(tasksInRoomModel.query, {

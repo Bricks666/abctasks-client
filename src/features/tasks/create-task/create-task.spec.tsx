@@ -10,14 +10,14 @@ import { CreateTask } from './create-task';
 import { openPopup, popupControls } from './model';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
+	defaultRoom,
 	fireEvent,
 	fork,
-	http,
+	handlers,
 	render,
 	screen,
 	server,
@@ -27,7 +27,7 @@ import {
 
 const taskTitle = 'some title';
 describe('features/tasks/create/create-task', () => {
-	const roomId = 1;
+	const { id: roomId, } = defaultRoom;
 	const columnStatus = 'done' as const;
 	let wrapper: RenderResult;
 	let scope: Scope;
@@ -130,19 +130,7 @@ describe('features/tasks/create/create-task', () => {
 	});
 
 	test('should create error notification on error', async () => {
-		server.use(
-			http.post('/api/tasks/:roomId/create', () => {
-				return HttpResponse.json(
-					{
-						message: 'Server Error',
-					},
-					{
-						status: 500,
-						statusText: 'Internal Error',
-					}
-				);
-			})
-		);
+		server.use(handlers.tasks.error.create);
 
 		const titleField = findTitleField();
 		fireEvent.input(titleField, { target: { value: 'some name', }, });

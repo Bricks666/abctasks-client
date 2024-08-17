@@ -9,13 +9,12 @@ import { CreateRoom } from './create-room';
 import { popupControls } from './model';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
 	fork,
-	http,
+	handlers,
 	render,
 	server,
 	useTestRouter,
@@ -108,14 +107,7 @@ describe('features/rooms/create-room/create-room', () => {
 	});
 
 	test('should create notification on error', async () => {
-		server.use(
-			http.post('/api/rooms/create', () => {
-				return HttpResponse.json(
-					{ message: 'Internal Error', },
-					{ status: 500, statusText: 'Internal Error', }
-				);
-			})
-		);
+		server.use(handlers.rooms.error.create);
 
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();

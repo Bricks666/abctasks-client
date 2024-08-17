@@ -93,15 +93,10 @@ exports[`features/tasks/update/update-task > should render form in fullscreen po
             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-1gywuxd-MuiInputBase-root-MuiOutlinedInput-root"
           >
             <p
-              class="MuiTypography-root MuiTypography-body2 _label_cbafb0 MuiAutocomplete-tag MuiAutocomplete-tagSizeMedium css-1yn26ww-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 _label_cbafb0 MuiAutocomplete-tag MuiAutocomplete-tagSizeMedium css-1etqv6i-MuiTypography-root"
             >
-              The tag
+              A tag
             </p>
-            <span
-              class="MuiAutocomplete-tag MuiAutocomplete-tagSizeMedium"
-            >
-              +1
-            </span>
             <input
               aria-autocomplete="list"
               aria-expanded="false"
@@ -395,15 +390,10 @@ exports[`features/tasks/update/update-task > should render form in popup > large
             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-1gywuxd-MuiInputBase-root-MuiOutlinedInput-root"
           >
             <p
-              class="MuiTypography-root MuiTypography-body2 _label_cbafb0 MuiAutocomplete-tag MuiAutocomplete-tagSizeMedium css-1yn26ww-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body2 _label_cbafb0 MuiAutocomplete-tag MuiAutocomplete-tagSizeMedium css-1etqv6i-MuiTypography-root"
             >
-              The tag
+              A tag
             </p>
-            <span
-              class="MuiAutocomplete-tag MuiAutocomplete-tagSizeMedium"
-            >
-              +1
-            </span>
             <input
               aria-autocomplete="list"
               aria-expanded="false"

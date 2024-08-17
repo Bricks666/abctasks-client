@@ -13,18 +13,18 @@ import {
 	allSettled,
 	fireEvent,
 	fork,
-	http,
-	HttpResponse,
 	render,
 	RenderResult,
 	Scope,
 	useTestRouter,
 	waitFor,
-	server
+	server,
+	handlers,
+	defaultRoom
 } from '~/test-utils';
 
 describe('features/tags/create/form', () => {
-	const roomId = 123;
+	const { id: roomId, } = defaultRoom;
 	let wrapper: RenderResult;
 	let scope: Scope;
 
@@ -98,19 +98,7 @@ describe('features/tags/create/form', () => {
 	});
 
 	test('should create error notification on error', async () => {
-		server.use(
-			http.post('/api/tags/:roomId/create', () => {
-				return HttpResponse.json(
-					{
-						message: 'Server Error',
-					},
-					{
-						status: 500,
-						statusText: 'Internal Error',
-					}
-				);
-			})
-		);
+		server.use(handlers.tags.error.create);
 
 		const nameField = findNameField();
 

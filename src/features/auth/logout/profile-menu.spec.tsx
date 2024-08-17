@@ -15,14 +15,13 @@ import { sessionModel } from '@/shared/models';
 import { ProfileMenu, ProfileMenuProps } from './profile-menu';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
 	fireEvent,
 	fork,
-	http,
+	handlers,
 	render,
 	server,
 	waitFor
@@ -96,11 +95,7 @@ describe('features/auth/logout/profile-menu', () => {
 		test('should be logout after click on logout button', async () => {
 			const logoutButton = findLogoutButton();
 
-			server.use(
-				http.get('/api/auth', () => {
-					return HttpResponse.json({});
-				})
-			);
+			server.use(handlers.auth.error.auth);
 
 			fireEvent.click(logoutButton);
 

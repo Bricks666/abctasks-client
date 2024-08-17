@@ -1,40 +1,37 @@
-import {
-	fireEvent,
-	render,
-	RenderResult,
-	waitFor
-} from '@testing-library/react';
-import { RouterProvider } from 'atomic-router-react';
-import { allSettled, fork, Scope } from 'effector';
-import { Provider } from 'effector-react';
-import { createMemoryHistory } from 'history';
-import { http, HttpResponse } from 'msw';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tagsModel } from '@/entities/tags';
 
-import { router, routes } from '@/shared/configs';
+import { router } from '@/shared/configs';
 import { notificationsModel } from '@/shared/models';
 
 import { ConfirmRemoveTag } from './confirm';
 import { openConfirm, popupControls } from './model';
 
-import { server } from '~/test-utils';
+import {
+	RenderResult,
+	Scope,
+	act,
+	allSettled,
+	defaultRoom,
+	defaultTag,
+	fireEvent,
+	fork,
+	handlers,
+	render,
+	server,
+	useTestRouter,
+	waitFor
+} from '~/test-utils';
 
 describe('features/tags/remove/confirm', () => {
-	const roomId = 123;
-	const tagId = 1;
+	const { id: roomId, } = defaultRoom;
+	const { id: tagId, } = defaultTag;
 	let wrapper: RenderResult;
 	let scope: Scope;
 
 	const createComponent = () => {
-		wrapper = render(
-			<Provider value={scope}>
-				<RouterProvider router={router}>
-					<ConfirmRemoveTag isOpen />
-				</RouterProvider>
-			</Provider>
-		);
+		wrapper = render(<ConfirmRemoveTag isOpen />, { scope, router, });
 	};
 	const findConfirm = () =>
 		wrapper.getByRole('dialog', { name: 'actions.remove_tag.title', });
@@ -48,23 +45,25 @@ describe('features/tags/remove/confirm', () => {
 	beforeEach(async () => {
 		scope = fork();
 
-		await allSettled(router.setHistory, {
+		await useTestRouter({
 			scope,
-			params: createMemoryHistory(),
+			router,
+			options: {
+				initialEntries: [`/rooms/${roomId}/tags`],
+			},
 		});
-		await allSettled(routes.room.tags.open, { scope, params: { id: roomId, }, });
+
 		await allSettled(openConfirm, { scope, params: tagId, });
 		await allSettled(tagsModel.query.start, { scope, params: { roomId, }, });
+
+		await act(async () => createComponent());
 	});
 
 	test('should render confirm popup with text to remove tag', async () => {
-		createComponent();
-
 		expect(findConfirm()).toMatchSnapshot();
 	});
 
 	test('should remove tag on approve button click', async () => {
-		createComponent();
 		const button = findApprove();
 
 		fireEvent.click(button);
@@ -78,7 +77,7 @@ describe('features/tags/remove/confirm', () => {
 			);
 			expect(scope.getState(tagsModel.query.$data)).not.toContainEqual(
 				expect.objectContaining({
-					id: 1,
+					id: tagId,
 				})
 			);
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
@@ -86,21 +85,8 @@ describe('features/tags/remove/confirm', () => {
 	});
 
 	test('should create notificaiton on error', async () => {
-		server.use(
-			http.delete('/api/tags/:roomId/:id/remove', () => {
-				return HttpResponse.json(
-					{
-						message: 'Not Found',
-					},
-					{
-						status: 404,
-						statusText: 'Not Found',
-					}
-				);
-			})
-		);
+		server.use(handlers.tags.error.remove);
 
-		createComponent();
 		const button = findApprove();
 
 		fireEvent.click(button);
@@ -114,7 +100,7 @@ describe('features/tags/remove/confirm', () => {
 			);
 			expect(scope.getState(tagsModel.query.$data)).toContainEqual(
 				expect.objectContaining({
-					id: 1,
+					id: tagId,
 				})
 			);
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
@@ -122,7 +108,6 @@ describe('features/tags/remove/confirm', () => {
 	});
 
 	test('should just close confirm on close button click', async () => {
-		createComponent();
 		const button = findDisapprove();
 
 		fireEvent.click(button);
@@ -130,7 +115,7 @@ describe('features/tags/remove/confirm', () => {
 		await waitFor(() => {
 			expect(scope.getState(tagsModel.query.$data)).toContainEqual(
 				expect.objectContaining({
-					id: 1,
+					id: tagId,
 				})
 			);
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();

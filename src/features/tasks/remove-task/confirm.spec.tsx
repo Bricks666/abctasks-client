@@ -9,14 +9,15 @@ import { ConfirmRemoveTask } from './confirm';
 import { openConfirm, popupControls } from './model';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
+	defaultRoom,
+	defaultTask,
 	fireEvent,
 	fork,
-	http,
+	handlers,
 	render,
 	server,
 	useTestRouter,
@@ -24,8 +25,8 @@ import {
 } from '~/test-utils';
 
 describe('features/tags/remove/confirm', () => {
-	const roomId = 123;
-	const taskId = 1;
+	const { id: roomId, } = defaultRoom;
+	const { id: taskId, } = defaultTask;
 	let scope: Scope;
 	let wrapper: RenderResult;
 
@@ -89,19 +90,7 @@ describe('features/tags/remove/confirm', () => {
 	});
 
 	test('should create notificaiton on error', async () => {
-		server.use(
-			http.delete('/api/tasks/:roomId/:taskId/remove', () => {
-				return HttpResponse.json(
-					{
-						message: 'Not Found',
-					},
-					{
-						status: 404,
-						statusText: 'Not Found',
-					}
-				);
-			})
-		);
+		server.use(handlers.tasks.error.remove);
 
 		const button = findApprove();
 

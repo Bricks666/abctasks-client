@@ -9,13 +9,13 @@ import { openPopup, popupControls } from './model';
 import { UpdateRoom } from './update-room';
 
 import {
-	HttpResponse,
 	RenderResult,
 	Scope,
 	act,
 	allSettled,
+	defaultRoom,
 	fork,
-	http,
+	handlers,
 	render,
 	server,
 	useTestRouter,
@@ -23,7 +23,7 @@ import {
 } from '~/test-utils';
 
 describe('features/rooms/update-room/update-room', () => {
-	const id = 1;
+	const { id, } = defaultRoom;
 	let wrapper: RenderResult;
 	let scope: Scope;
 
@@ -87,9 +87,13 @@ describe('features/rooms/update-room/update-room', () => {
 		const descriptionField = findDescriptionField();
 
 		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard(`{Backspace>${defaultRoom.name.length}}`);
 		await wrapper.user.keyboard(name);
 
 		await wrapper.user.click(descriptionField);
+		await wrapper.user.keyboard(
+			`{Backspace>${defaultRoom.description.length}}`
+		);
 		await wrapper.user.keyboard(description);
 
 		const button = findSubmit();
@@ -117,22 +121,19 @@ describe('features/rooms/update-room/update-room', () => {
 	});
 
 	test('should create notification on error', async () => {
-		server.use(
-			http.put('/api/rooms/:id/update', () => {
-				return HttpResponse.json(
-					{ message: 'Internal Error', },
-					{ status: 500, statusText: 'Internal Error', }
-				);
-			})
-		);
+		server.use(handlers.rooms.error.update);
 
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();
 
 		await wrapper.user.click(nameField);
+		await wrapper.user.keyboard(`{Backspace>${defaultRoom.name.length}}`);
 		await wrapper.user.keyboard(name);
 
 		await wrapper.user.click(descriptionField);
+		await wrapper.user.keyboard(
+			`{Backspace>${defaultRoom.description.length}}`
+		);
 		await wrapper.user.keyboard(description);
 
 		const button = findSubmit();
@@ -160,8 +161,6 @@ describe('features/rooms/update-room/update-room', () => {
 	});
 
 	test('should reset form on popup close', async () => {
-		createComponent();
-
 		const nameField = findNameField();
 		const descriptionField = findDescriptionField();
 

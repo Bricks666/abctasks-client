@@ -282,11 +282,5 @@
 			}
 		}
 	],
-	"ignorePatterns": [
-		"*.css.d.ts",
-		"configs/*",
-		"test-utils/*",
-		"e2e",
-		"*.config.*"
-	]
+	"ignorePatterns": ["*.css.d.ts", "configs/*", "e2e", "*.config.*"]
 }

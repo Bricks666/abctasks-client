@@ -4,15 +4,20 @@ import { notificationsModel } from '@/shared/models';
 
 import { GenerateInvitationLink } from './generate-invitation-link';
 
-import { RenderResult, Scope, act, fork, render, waitFor } from '~/test-utils';
+import {
+	RenderResult,
+	Scope,
+	act,
+	createInvitationLink,
+	defaultRoom,
+	fork,
+	render,
+	waitFor
+} from '~/test-utils';
 
 describe('features/invitation/generate-invitation-link/generate-invitation-link', () => {
-	const roomId = 123;
-
-	/**
-	 * See value in mocked handlers
-	 */
-	const link = 'https://localhost:3000/invitation-link-to-room-123';
+	const { id: roomId, } = defaultRoom;
+	const link = createInvitationLink(roomId);
 	let wrapper: RenderResult;
 	let scope: Scope;
 
