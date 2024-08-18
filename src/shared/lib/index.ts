@@ -1,5 +1,5 @@
 export * from './usePageTitle';
-export * from './useToggle';
+export * from './use-toggle';
 export * from './useParam';
 export * from './data-extractor';
 export * from './create-rule-from-schema';
