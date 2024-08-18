@@ -1,10 +1,13 @@
-/** eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies */
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import {
 	render as rtlRender,
 	RenderOptions as RTLRenderOptions,
 	RenderResult as RTLRenderResult,
+	renderHook as rtlRenderHook,
+	RenderHookOptions as RTLRenderHookOptions,
+	RenderHookResult as RTLRenderHookResult
 } from '@testing-library/react';
 import userEvent, { UserEvent } from '@testing-library/user-event';
 import { RouterProvider } from 'atomic-router-react';
@@ -14,7 +17,7 @@ import React, {
 	Fragment,
 	JSXElementConstructor,
 	PropsWithChildren,
-	ReactNode,
+	ReactNode
 } from 'react';
 
 import { router as appRouter } from '@/shared/configs';
@@ -31,10 +34,10 @@ interface CreateAllProvidersOptions {
 const createAllProviders = (
 	options: CreateAllProvidersOptions
 ): ComponentType<PropsWithChildren> => {
-	const { router, scope, wrapper: Wrapper } = options;
+	const { router, scope, wrapper: Wrapper, } = options;
 
 	return (props) => {
-		const { children } = props;
+		const { children, } = props;
 
 		return (
 			<StoreProvider value={scope}>
@@ -64,9 +67,9 @@ const render = (ui: ReactNode, options: RenderOptions = {}): RenderResult => {
 		...rest
 	} = options;
 
-	const AllProviders = createAllProviders({ scope, router, wrapper });
+	const AllProviders = createAllProviders({ scope, router, wrapper, });
 
-	const defualtResult = rtlRender(ui, { ...rest, wrapper: AllProviders });
+	const defualtResult = rtlRender(ui, { ...rest, wrapper: AllProviders, });
 
 	return {
 		...defualtResult,
@@ -76,6 +79,36 @@ const render = (ui: ReactNode, options: RenderOptions = {}): RenderResult => {
 	};
 };
 
+interface RenderHookOptions<Result, Props>
+	extends Omit<RTLRenderHookOptions<Result, Props>, 'wrapper'>,
+		Partial<CreateAllProvidersOptions> {}
+
+interface RenderHookResult<Result, Props>
+	extends RTLRenderHookResult<Result, Props> {}
+
+const renderHook = <Result, Props>(
+	render: (initialProps: Props) => Result,
+	options: RenderHookOptions<Result, Props> = {}
+): RenderHookResult<Result, Props> => {
+	const {
+		scope = fork(),
+		router = appRouter,
+		wrapper = Fragment,
+		...rest
+	} = options;
+
+	const AllProviders = createAllProviders({ scope, router, wrapper, });
+
+	return rtlRenderHook(render, { ...rest, wrapper: AllProviders, });
+};
+
 export * from '@testing-library/react';
 export * as userEvent from '@testing-library/user-event';
-export { render, RenderOptions, RenderResult };
+export {
+	render,
+	RenderOptions,
+	RenderResult,
+	renderHook,
+	RenderHookResult,
+	RenderHookOptions
+};

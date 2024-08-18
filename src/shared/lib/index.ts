@@ -1,6 +1,6 @@
 export * from './use-page-title';
 export * from './use-toggle';
-export * from './useParam';
+export * from './use-param';
 export * from './data-extractor';
 export * from './create-rule-from-schema';
 export * from './string-to-color';
