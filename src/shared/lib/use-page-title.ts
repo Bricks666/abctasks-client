@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const usePageTitle = (title: string) => {
 	React.useLayoutEffect(() => {
-		const lastTitle = title;
+		const lastTitle = document.title;
 
 		document.title = title;
 

@@ -1,4 +1,4 @@
-export * from './usePageTitle';
+export * from './use-page-title';
 export * from './use-toggle';
 export * from './useParam';
 export * from './data-extractor';
