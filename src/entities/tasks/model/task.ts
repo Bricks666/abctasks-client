@@ -4,7 +4,7 @@ import { createDomain, sample } from 'effector';
 import { createGate } from 'effector-react';
 
 import { GetTaskParams, Task, tasksApi, task } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const taskDomain = createDomain();
@@ -25,7 +25,7 @@ export const query = createQuery<
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(task)),
 
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 export const Gate = createGate<GetTaskParams>({

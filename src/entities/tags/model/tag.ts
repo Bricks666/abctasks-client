@@ -3,7 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createDomain } from 'effector';
 
 import { GetTagParams, Tag, tag, tagsApi } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 const tagDomain = createDomain();
@@ -19,5 +19,5 @@ export const query = createQuery<
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(tag)),
-	mapData: dataExtractor,
+	mapData: extractData,
 });

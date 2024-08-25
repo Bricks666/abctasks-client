@@ -17,7 +17,7 @@ import {
 import { equals } from 'patronum';
 
 import { User, AuthResponse, authResponse, authApi } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import {
 	ChainedParams,
 	StandardResponse,
@@ -41,7 +41,7 @@ export const query = createQuery<
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(authResponse)),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 sample({

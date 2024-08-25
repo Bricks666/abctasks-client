@@ -25,7 +25,7 @@ import {
 	activity
 } from '@/shared/api';
 import { controls, getParams, routes } from '@/shared/configs';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import { sessionModel } from '@/shared/models';
 import {
 	InRoomParams,
@@ -62,7 +62,7 @@ export const query = createQuery<
 	contract: runtypeContract(
 		getStandardResponse(getPaginationResponse(activity))
 	),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 const queries = [

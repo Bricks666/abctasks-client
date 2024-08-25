@@ -3,7 +3,7 @@ import { runtypeContract } from '@farfetched/runtypes';
 import { createEffect } from 'effector';
 
 import { Room, roomsApi, room } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -22,7 +22,7 @@ export const query = createQuery<
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(room)),
 
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 export const $canChange = query.$data.map((room) => room?.canChange ?? false);

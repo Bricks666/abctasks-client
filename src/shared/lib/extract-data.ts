@@ -1,6 +1,6 @@
 import { StandardResponse } from '@/shared/types';
 
-export const dataExtractor = <T>({
+export const extractData = <T>({
 	result,
 }: {
 	result: StandardResponse<T>;

@@ -5,7 +5,7 @@ import { debounce } from 'patronum';
 import { Array } from 'runtypes';
 
 import { SearchUsersQuery, user, User, usersApi } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 const searchUserDomain = createDomain();
@@ -26,7 +26,7 @@ export const query = createQuery<
 	initialData: [],
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Array(user))),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 export const searchChanged = createEvent<string>();

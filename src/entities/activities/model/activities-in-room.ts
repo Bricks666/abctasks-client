@@ -9,7 +9,7 @@ import {
 	GetActivitiesInRoomParams,
 	activitiesApi
 } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -35,7 +35,7 @@ export const query = createQuery<
 	contract: runtypeContract(
 		getStandardResponse(getPaginationResponse(activity))
 	),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 export const $hasItems = query.$data.map((data) => !!data.totalCount);

@@ -5,7 +5,7 @@ import { interval } from 'patronum';
 import { Array } from 'runtypes';
 
 import { membersApi, user, User } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import {
 	getStandardResponse,
 	InRoomParams,
@@ -26,7 +26,7 @@ export const query = createQuery<
 	initialData: [],
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Array(user))),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 export const $ids = query.$data.map((users) => users.map((user) => user.id));
