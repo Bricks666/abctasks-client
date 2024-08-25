@@ -6,14 +6,14 @@ exports[`features/auth/logout/profile-menu > should render button when menu is c
     <div>
       <button
         aria-label="profile_menu.title"
-        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
         data-mui-internal-clone-element="true"
         tabindex="0"
         type="button"
       >
         <div
           aria-label="username"
-          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1f5h5jw-MuiAvatar-root"
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1i3y8b0-MuiAvatar-root"
           data-mui-internal-clone-element="true"
         >
           <svg
@@ -47,14 +47,14 @@ exports[`features/auth/logout/profile-menu > should render button when menu is n
     <div>
       <button
         aria-label="profile_menu.title"
-        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
         data-mui-internal-clone-element="true"
         tabindex="0"
         type="button"
       >
         <div
           aria-label="username"
-          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1f5h5jw-MuiAvatar-root"
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1i3y8b0-MuiAvatar-root"
           data-mui-internal-clone-element="true"
         >
           <svg
@@ -76,7 +76,7 @@ exports[`features/auth/logout/profile-menu > should render button when menu is n
     </div>
   </div>
   <div
-    class="MuiMenu-root MuiPopover-root MuiModal-root css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root"
+    class="MuiMenu-root MuiPopover-root MuiModal-root css-28lyyy-MuiModal-root-MuiPopover-root-MuiMenu-root"
     role="presentation"
   >
     <div
@@ -89,7 +89,7 @@ exports[`features/auth/logout/profile-menu > should render button when menu is n
       tabindex="0"
     />
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiMenu-paper MuiPopover-paper MuiMenu-paper css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiMenu-paper MuiPopover-paper MuiMenu-paper css-u2vwkl-MuiPaper-root-MuiPopover-paper-MuiMenu-paper"
       style="opacity: 1; transform: scale(1, 1); transition: opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; top: 16px; left: 16px; transform-origin: -16px -16px;"
       tabindex="-1"
     >
@@ -99,12 +99,12 @@ exports[`features/auth/logout/profile-menu > should render button when menu is n
         tabindex="-1"
       >
         <li
-          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-ztq8a6-MuiButtonBase-root-MuiMenuItem-root"
           role="menuitem"
           tabindex="-1"
         >
           <div
-            class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+            class="MuiListItemIcon-root css-11tpveg-MuiListItemIcon-root"
           >
             <svg
               aria-hidden="true"
@@ -124,12 +124,12 @@ exports[`features/auth/logout/profile-menu > should render button when menu is n
           />
         </li>
         <li
-          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-ztq8a6-MuiButtonBase-root-MuiMenuItem-root"
           role="menuitem"
           tabindex="-1"
         >
           <div
-            class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+            class="MuiListItemIcon-root css-11tpveg-MuiListItemIcon-root"
           >
             <svg
               aria-hidden="true"

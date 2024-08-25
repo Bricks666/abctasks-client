@@ -8,15 +8,15 @@ exports[`features/page/navigation/navigation > should render navigation with lin
     class="MuiList-root MuiList-padding _list_ee997c css-h4y409-MuiList-root"
   >
     <li
-      class="MuiListItem-root MuiListItem-gutters css-1nxmd3h-MuiListItem-root"
+      class="MuiListItem-root MuiListItem-gutters css-qefhw6-MuiListItem-root"
     >
       <a
-        class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root"
+        class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-17h9zjm-MuiButtonBase-root-MuiListItemButton-root"
         href="[object Object]"
         tabindex="0"
       >
         <div
-          class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+          class="MuiListItemIcon-root css-11tpveg-MuiListItemIcon-root"
         >
           <svg
             aria-hidden="true"

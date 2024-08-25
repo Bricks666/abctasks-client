@@ -195,8 +195,6 @@ describe('shared/models/session', () => {
 
 				chainRoute();
 
-				console.log(scope.getState($user));
-
 				await allSettled(route.open, { scope, });
 
 				expect(scope.getState(chainedRoute.$isOpened)).toBeFalsy();
@@ -222,8 +220,6 @@ describe('shared/models/session', () => {
 				expect.assertions(1);
 
 				await allSettled(query.start, { scope, });
-
-				console.log(scope.getState($user));
 
 				chainRoute({ otherwise, });
 

@@ -5,16 +5,16 @@ exports[`features/tags/form/skeleton > should render skeleton fields and skeleto
   class="_form_183669"
 >
   <span
-    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _select_183669 css-1e1x4vv-MuiSkeleton-root"
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _select_183669 css-1mhfe40-MuiSkeleton-root"
   />
   <span
-    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _select_183669 css-1e1x4vv-MuiSkeleton-root"
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _select_183669 css-1mhfe40-MuiSkeleton-root"
   />
   <span
-    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _field_183669 css-1e1x4vv-MuiSkeleton-root"
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _field_183669 css-1mhfe40-MuiSkeleton-root"
   />
   <span
-    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _button_183669 css-1e1x4vv-MuiSkeleton-root"
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _button_183669 css-1mhfe40-MuiSkeleton-root"
   />
 </div>
 `;

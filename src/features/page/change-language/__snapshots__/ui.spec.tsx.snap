@@ -6,7 +6,7 @@ exports[`features/page/change-language/ui > should render select to choose langu
   aria-expanded="false"
   aria-haspopup="listbox"
   aria-labelledby=":r0:-label :r0:"
-  class="MuiSelect-select MuiSelect-standard MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall css-jd1zyo-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+  class="MuiSelect-select MuiSelect-standard MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall css-owlier-MuiSelect-select-MuiInputBase-input-MuiInput-input"
   id=":r0:"
   role="combobox"
   tabindex="0"

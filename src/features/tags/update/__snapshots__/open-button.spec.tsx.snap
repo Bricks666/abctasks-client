@@ -3,7 +3,7 @@
 exports[`featuers/tags/update/open-button > should render button to open modal 1`] = `
 <button
   aria-label="actions.update_tag.actions.open"
-  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
   data-mui-internal-clone-element="true"
   tabindex="0"
   type="button"

@@ -1,8 +1,12 @@
 import { expect, afterEach, beforeAll, afterAll, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
-import { matchMedia, MediaQueryListEvent } from 'mock-match-media';
-import { server, cleanup as cleanupMatchMedia } from '~/test-utils';
+import {
+	matchMedia,
+	MediaQueryListEvent,
+	cleanup as cleanupMatchMedia,
+} from 'mock-match-media';
+import { server } from '~/test-utils';
 
 expect.extend(matchers);
 
@@ -23,8 +27,8 @@ beforeAll(() => {
 
 afterEach(() => {
 	cleanup();
-	cleanupMatchMedia();
 	server.resetHandlers();
+	cleanupMatchMedia();
 });
 
 afterAll(() => {

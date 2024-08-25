@@ -2,12 +2,12 @@
 
 exports[`features/tasks/remove-task/menu-item > should render menuitem 1`] = `
 <li
-  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+  class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-ztq8a6-MuiButtonBase-root-MuiMenuItem-root"
   role="menuitem"
   tabindex="-1"
 >
   <div
-    class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+    class="MuiListItemIcon-root css-11tpveg-MuiListItemIcon-root"
   >
     <svg
       aria-hidden="true"
