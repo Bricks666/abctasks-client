@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/center/center > should render container 1`] = `
+<div
+  class="_center_ffe4db _auto_ffe4db"
+>
+  <div>
+    Container
+  </div>
+</div>
+`;

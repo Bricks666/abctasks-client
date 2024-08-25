@@ -32,7 +32,4 @@ afterAll(() => {
 });
 
 window.MediaQueryListEvent = MediaQueryListEvent;
-window.matchMedia = (...args) => {
-	console.log(args);
-	return matchMedia(...args);
-};
+window.matchMedia = matchMedia;
