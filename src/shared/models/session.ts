@@ -27,8 +27,7 @@ import {
 type Status = 'initial' | 'pending' | 'authorized' | 'anonymous';
 
 export const $user = createStore<User | null>(null);
-export const $status = createStore<Status>('initial');
-export const $isAuth = $status.map((status) => status === 'authorized');
+const $status = createStore<Status>('initial');
 
 const handlerFx = createEffect(authApi.auth);
 
