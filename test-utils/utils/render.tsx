@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import {
@@ -42,9 +43,11 @@ const createAllProviders = (
 		return (
 			<StoreProvider value={scope}>
 				<RouterProvider router={router}>
-					<LocalizationProvider dateAdapter={AdapterDayjs}>
-						<Wrapper>{children}</Wrapper>
-					</LocalizationProvider>
+					<CssVarsProvider>
+						<LocalizationProvider dateAdapter={AdapterDayjs}>
+							<Wrapper>{children}</Wrapper>
+						</LocalizationProvider>
+					</CssVarsProvider>
 				</RouterProvider>
 			</StoreProvider>
 		);

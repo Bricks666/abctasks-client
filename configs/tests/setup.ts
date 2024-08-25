@@ -1,7 +1,8 @@
 import { expect, afterEach, beforeAll, afterAll, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
-import { server } from '~/test-utils';
+import { matchMedia, MediaQueryListEvent } from 'mock-match-media';
+import { server, cleanup as cleanupMatchMedia } from '~/test-utils';
 
 expect.extend(matchers);
 
@@ -16,18 +17,22 @@ vi.mock('@farfetched/core', async (importOriginal) => {
 	};
 });
 
-afterEach(() => {
-	cleanup();
-});
-
 beforeAll(() => {
 	server.listen();
 });
 
 afterEach(() => {
+	cleanup();
+	cleanupMatchMedia();
 	server.resetHandlers();
 });
 
 afterAll(() => {
 	server.close();
 });
+
+window.MediaQueryListEvent = MediaQueryListEvent;
+window.matchMedia = (...args) => {
+	console.log(args);
+	return matchMedia(...args);
+};
