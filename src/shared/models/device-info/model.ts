@@ -24,13 +24,13 @@ export const $isDesktopLarge = $device.map(
 	(device) => device === 'desktop-large'
 );
 
-const calculateDeviceFx = deviceInfoDomain.effect<unknown, Devices>(
+const calculateDeviceFx = deviceInfoDomain.effect<any, Devices>(
 	calculateDevice
 );
 
 export const subscribeFx = deviceInfoDomain.effect(() => {
 	window.addEventListener('resize', calculateDeviceFx);
-	return calculateDevice();
+	return calculateDeviceFx({});
 });
 
 export const unsubscribeFx = deviceInfoDomain.effect(() =>
@@ -38,11 +38,11 @@ export const unsubscribeFx = deviceInfoDomain.effect(() =>
 );
 
 sample({
-	clock: [calculateDeviceFx.doneData, subscribeFx.doneData],
+	clock: calculateDeviceFx.doneData,
 	target: $device,
 });
 
 sample({
 	clock: started,
-	target: [subscribeFx, calculateDeviceFx],
+	target: subscribeFx,
 });
