@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/date-time/date-time > should render time element with formated time 1`] = `
+<time
+  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+  datetime="2024-12-11T21:00:00.000Z"
+  title="2024-12-11T21:00:00.000Z"
+>
+  12-12-2024
+</time>
+`;
