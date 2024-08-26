@@ -9,6 +9,7 @@ import { Size } from '@/shared/types';
 import { Menu } from '../menu';
 
 export interface EditMenuProps extends CommonProps, React.PropsWithChildren {
+	readonly label: string;
 	readonly size?: Size;
 	readonly anchorPosition?: PopoverPosition;
 	readonly anchorOrigin?: PopoverOrigin;
@@ -18,6 +19,7 @@ export interface EditMenuProps extends CommonProps, React.PropsWithChildren {
 export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
 	const {
 		className,
+		label,
 		size,
 		children,
 		anchorOrigin,
@@ -39,6 +41,7 @@ export const EditMenu: React.FC<EditMenuProps> = React.memo((props) => {
 				aria-expanded={expanded}
 				aria-haspopup='true'
 				aria-controls={menuId}
+				aria-label={label}
 				ref={setReference}>
 				<MoreHorizIcon />
 			</IconButton>

@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/menu-item/menu-item > should render button witgh edit icon 1`] = `
+<button
+  aria-controls=":r0:"
+  aria-haspopup="true"
+  aria-label="button"
+  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
+  tabindex="0"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="MoreHorizIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+    />
+  </svg>
+  <span
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+  />
+</button>
+`;
+
+exports[`shared/ui/menu-item/menu-item > should render menu on button click 1`] = `
+<ul
+  class="MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list"
+  role="menu"
+  tabindex="-1"
+/>
+`;
