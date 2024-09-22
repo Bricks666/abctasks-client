@@ -1,0 +1,52 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shaerd/ui/text-with-action/text-with-action > should render button with icon if it passed > with icon 1`] = `
+<div
+  class="_box_253fa6 classname"
+>
+  <p
+    class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+  >
+    text
+  </p>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+    >
+      <div>
+        icon
+      </div>
+    </span>
+    action text
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`shaerd/ui/text-with-action/text-with-action > should render paragraph with button > simple variant 1`] = `
+<div
+  class="_box_253fa6 classname"
+>
+  <p
+    class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+  >
+    text
+  </p>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+    tabindex="0"
+    type="button"
+  >
+    action text
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
