@@ -1,0 +1,217 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/filters-popover/filters-popover > should open popup on button click if current device is mobile > popup mobile 1`] = `
+<div
+  aria-labelledby=":rd:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullScreen css-e9vkov-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root _title_62745c css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
+    id=":rd:"
+  >
+    title
+    <button
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium _cross_62745c css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="CloseIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </h2>
+  <div
+    class="MuiDialogContent-root _content_62745c css-ypiqx9-MuiDialogContent-root"
+  >
+    <div>
+      popup
+    </div>
+  </div>
+  <div
+    class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"
+  >
+    <div>
+      actions
+    </div>
+  </div>
+</div>
+`;
+
+exports[`shared/ui/filters-popover/filters-popover > should open popup on button click if current device is tablet-vertical > popup tablet-vertical 1`] = `
+<div
+  aria-labelledby=":ra:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullScreen css-e9vkov-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root _title_62745c css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
+    id=":ra:"
+  >
+    title
+    <button
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium _cross_62745c css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="CloseIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </h2>
+  <div
+    class="MuiDialogContent-root _content_62745c css-ypiqx9-MuiDialogContent-root"
+  >
+    <div>
+      popup
+    </div>
+  </div>
+  <div
+    class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"
+  >
+    <div>
+      actions
+    </div>
+  </div>
+</div>
+`;
+
+exports[`shared/ui/filters-popover/filters-popover > should render button > closed 1`] = `
+<div>
+  <button
+    aria-controls=":r0:"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="title"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium classname css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
+    data-mui-internal-clone-element="true"
+    tabindex="0"
+    type="button"
+  >
+    <div>
+      icon
+    </div>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`shared/ui/filters-popover/filters-popover > should toggle popover on button click if current device is desktop-large > popover desktop-large 1`] = `
+<div
+  aria-label="title"
+  class="MuiPopover-root MuiModal-root css-1o2t9a7-MuiModal-root-MuiPopover-root"
+  id=":r2:"
+  role="presentation"
+>
+  <div
+    aria-hidden="true"
+    class="MuiBackdrop-root MuiBackdrop-invisible MuiModal-backdrop css-g3hgs1-MuiBackdrop-root-MuiModal-backdrop"
+    style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+  />
+  <div
+    data-testid="sentinelStart"
+    tabindex="0"
+  />
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-1k8ev9l-MuiPaper-root-MuiPopover-paper"
+    style="opacity: 1; transform: none; transition: opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; top: 16px; left: 16px; transform-origin: -16px -16px;"
+    tabindex="-1"
+  >
+    <div>
+      popover
+    </div>
+  </div>
+  <div
+    data-testid="sentinelEnd"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`shared/ui/filters-popover/filters-popover > should toggle popover on button click if current device is desktop-small > popover desktop-small 1`] = `
+<div
+  aria-label="title"
+  class="MuiPopover-root MuiModal-root css-1o2t9a7-MuiModal-root-MuiPopover-root"
+  id=":r4:"
+  role="presentation"
+>
+  <div
+    aria-hidden="true"
+    class="MuiBackdrop-root MuiBackdrop-invisible MuiModal-backdrop css-g3hgs1-MuiBackdrop-root-MuiModal-backdrop"
+    style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+  />
+  <div
+    data-testid="sentinelStart"
+    tabindex="0"
+  />
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-1k8ev9l-MuiPaper-root-MuiPopover-paper"
+    style="opacity: 1; transform: none; transition: opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; top: 16px; left: 16px; transform-origin: -16px -16px;"
+    tabindex="-1"
+  >
+    <div>
+      popover
+    </div>
+  </div>
+  <div
+    data-testid="sentinelEnd"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`shared/ui/filters-popover/filters-popover > should toggle popover on button click if current device is tablet-horizontal > popover tablet-horizontal 1`] = `
+<div
+  aria-label="title"
+  class="MuiPopover-root MuiModal-root css-1o2t9a7-MuiModal-root-MuiPopover-root"
+  id=":r6:"
+  role="presentation"
+>
+  <div
+    aria-hidden="true"
+    class="MuiBackdrop-root MuiBackdrop-invisible MuiModal-backdrop css-g3hgs1-MuiBackdrop-root-MuiModal-backdrop"
+    style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+  />
+  <div
+    data-testid="sentinelStart"
+    tabindex="0"
+  />
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-1k8ev9l-MuiPaper-root-MuiPopover-paper"
+    style="opacity: 1; transform: none; transition: opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; top: 16px; left: 16px; transform-origin: -16px -16px;"
+    tabindex="-1"
+  >
+    <div>
+      popover
+    </div>
+  </div>
+  <div
+    data-testid="sentinelEnd"
+    tabindex="0"
+  />
+</div>
+`;

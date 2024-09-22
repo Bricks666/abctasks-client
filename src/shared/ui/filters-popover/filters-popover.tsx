@@ -1,4 +1,4 @@
-import { Tooltip, IconButton, Popover, Typography } from '@mui/material';
+import { Tooltip, IconButton, Popover } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 
@@ -9,7 +9,6 @@ import { FullWidthPopup, FullWidthPopupProps } from '../full-width-popup';
 
 interface RenderProps {
 	readonly isPopup: boolean;
-	readonly titleId: string;
 }
 
 export interface FiltersPopoverProps extends CommonProps {
@@ -27,7 +26,6 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 		props;
 
 	const [ref, setRef] = React.useState<HTMLElement | null>(null);
-	const titleId = React.useId();
 	const popupId = React.useId();
 
 	const [isMobile, isVertical] = useUnit([
@@ -37,7 +35,7 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 
 	const isPopup = isMobile || isVertical;
 
-	const child = React.createElement(children, { isPopup, titleId, });
+	const child = React.createElement(children, { isPopup, });
 
 	let content: React.ReactElement;
 
@@ -48,10 +46,7 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 				isOpen={open}
 				onClose={onClose}
 				title={title}
-				slots={slots}
-				DialogTitleProps={{
-					id: titleId,
-				}}>
+				slots={slots}>
 				{child}
 			</FullWidthPopup>
 		);
@@ -69,10 +64,8 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 				transformOrigin={{
 					horizontal: 'right',
 					vertical: 'top',
-				}}>
-				<Typography id={titleId} className='visibility-hidden' component='p'>
-					{title}
-				</Typography>
+				}}
+				aria-label={title}>
 				{child}
 			</Popover>
 		);
