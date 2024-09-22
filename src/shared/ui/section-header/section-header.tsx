@@ -18,7 +18,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = (props) => {
 			<Typography variant='h5' component='h2' fontWeight={700}>
 				{title}
 			</Typography>
-			<div className={styles.actions}>{actions}</div>
+			{actions ? <div className={styles.actions}>{actions}</div> : null}
 		</header>
 	);
 };

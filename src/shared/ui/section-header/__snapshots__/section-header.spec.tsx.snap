@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/section-header/section-header > should render header with title > simple variant 1`] = `
+<header
+  class="_wrapper_8f9a0a classname"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h5 css-bezmlo-MuiTypography-root"
+  >
+    title
+  </h2>
+</header>
+`;
+
+exports[`shared/ui/section-header/section-header > should render header with title and actions > with actions 1`] = `
+<header
+  class="_wrapper_8f9a0a classname"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h5 css-bezmlo-MuiTypography-root"
+  >
+    title
+  </h2>
+  <div
+    class="_actions_8f9a0a"
+  >
+    <div />
+  </div>
+</header>
+`;
