@@ -72,10 +72,10 @@ const render = (ui: ReactNode, options: RenderOptions = {}): RenderResult => {
 
 	const AllProviders = createAllProviders({ scope, router, wrapper, });
 
-	const defualtResult = rtlRender(ui, { ...rest, wrapper: AllProviders, });
+	const defaultResult = rtlRender(ui, { ...rest, wrapper: AllProviders, });
 
 	return {
-		...defualtResult,
+		...defaultResult,
 		user: userEvent.setup({
 			writeToClipboard: true,
 		}),

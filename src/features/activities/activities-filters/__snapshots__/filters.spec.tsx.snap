@@ -4,7 +4,7 @@ exports[`features/activities/activities-filters/filters > should render buttons 
 <body>
   <div>
     <button
-      aria-controls=":r1:"
+      aria-controls=":r0:"
       aria-expanded="false"
       aria-haspopup="true"
       aria-label="actions.filter_activities.title"
@@ -40,7 +40,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
     aria-hidden="true"
   >
     <button
-      aria-controls=":r4:"
+      aria-controls=":r2:"
       aria-expanded="true"
       aria-haspopup="true"
       aria-label="actions.filter_activities.title"
@@ -66,8 +66,9 @@ exports[`features/activities/activities-filters/filters > should render form in 
     </button>
   </div>
   <div
+    aria-label="actions.filter_activities.title"
     class="MuiPopover-root MuiModal-root css-1o2t9a7-MuiModal-root-MuiPopover-root"
-    id=":r4:"
+    id=":r2:"
     role="presentation"
   >
     <div
@@ -84,14 +85,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
       style="opacity: 1; transform: scale(1, 1); transition: opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; top: 16px; left: 16px; transform-origin: -16px -16px;"
       tabindex="-1"
     >
-      <p
-        class="MuiTypography-root MuiTypography-body1 visibility-hidden css-ahj2mt-MuiTypography-root"
-        id=":r3:"
-      >
-        actions.filter_activities.title
-      </p>
       <form
-        aria-labelledby=":r3:"
+        aria-label="actions.filter_activities.title"
         class="_form_b70bb9"
       >
         <div
@@ -103,8 +98,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
             <label
               class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
               data-shrink="false"
-              for=":r6:"
-              id=":r6:-label"
+              for=":r4:"
+              id=":r4:-label"
             >
               actions.filter_activities.fields.action
             </label>
@@ -118,7 +113,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
                 autocapitalize="none"
                 autocomplete="off"
                 class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                id=":r6:"
+                id=":r4:"
                 name="action"
                 role="combobox"
                 spellcheck="false"
@@ -175,8 +170,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
             <label
               class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
               data-shrink="false"
-              for=":r8:"
-              id=":r8:-label"
+              for=":r6:"
+              id=":r6:-label"
             >
               actions.filter_activities.fields.spheres
             </label>
@@ -190,7 +185,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
                 autocapitalize="none"
                 autocomplete="off"
                 class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                id=":r8:"
+                id=":r6:"
                 name="spheres"
                 role="combobox"
                 spellcheck="false"
@@ -247,8 +242,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
             <label
               class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
               data-shrink="false"
-              for=":ra:"
-              id=":ra:-label"
+              for=":r8:"
+              id=":r8:-label"
             >
               actions.filter_activities.fields.users
             </label>
@@ -262,7 +257,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
                 autocapitalize="none"
                 autocomplete="off"
                 class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                id=":ra:"
+                id=":r8:"
                 name="activists"
                 role="combobox"
                 spellcheck="false"
@@ -316,8 +311,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="true"
-            for=":rd:"
-            id=":rd:-label"
+            for=":rb:"
+            id=":rb:-label"
           >
             fields.create_after
           </label>
@@ -329,7 +324,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
               aria-label="Choose date"
               autocomplete="off"
               class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":rd:"
+              id=":rb:"
               inputmode="text"
               name="after"
               placeholder="MM/DD/YYYY"
@@ -357,8 +352,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="true"
-            for=":rg:"
-            id=":rg:-label"
+            for=":re:"
+            id=":re:-label"
           >
             fields.create_before
           </label>
@@ -370,7 +365,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
               aria-label="Choose date"
               autocomplete="off"
               class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":rg:"
+              id=":re:"
               inputmode="text"
               name="before"
               placeholder="MM/DD/YYYY"
@@ -431,7 +426,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
     aria-hidden="true"
   >
     <button
-      aria-controls=":rj:"
+      aria-controls=":rg:"
       aria-expanded="true"
       aria-haspopup="true"
       aria-label="actions.filter_activities.title"
@@ -458,7 +453,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
   </div>
   <div
     class="MuiDialog-root MuiModal-root css-1p9gn7o-MuiModal-root-MuiDialog-root"
-    id=":rj:"
+    id=":rg:"
     role="presentation"
   >
     <div
@@ -477,7 +472,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
       tabindex="-1"
     >
       <div
-        aria-labelledby=":rl:"
+        aria-labelledby=":ri:"
         class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullScreen css-e9vkov-MuiPaper-root-MuiDialog-paper"
         role="dialog"
       >
@@ -511,7 +506,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
           class="MuiDialogContent-root _content_62745c css-ypiqx9-MuiDialogContent-root"
         >
           <form
-            aria-labelledby=":ri:"
+            aria-label="actions.filter_activities.title"
             class="_form_b70bb9"
           >
             <div
@@ -523,8 +518,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for=":rm:"
-                  id=":rm:-label"
+                  for=":rj:"
+                  id=":rj:-label"
                 >
                   actions.filter_activities.fields.action
                 </label>
@@ -538,7 +533,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
                     autocapitalize="none"
                     autocomplete="off"
                     class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":rm:"
+                    id=":rj:"
                     name="action"
                     role="combobox"
                     spellcheck="false"
@@ -595,8 +590,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for=":ro:"
-                  id=":ro:-label"
+                  for=":rl:"
+                  id=":rl:-label"
                 >
                   actions.filter_activities.fields.spheres
                 </label>
@@ -610,7 +605,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
                     autocapitalize="none"
                     autocomplete="off"
                     class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":ro:"
+                    id=":rl:"
                     name="spheres"
                     role="combobox"
                     spellcheck="false"
@@ -667,8 +662,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for=":rq:"
-                  id=":rq:-label"
+                  for=":rn:"
+                  id=":rn:-label"
                 >
                   actions.filter_activities.fields.users
                 </label>
@@ -682,7 +677,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
                     autocapitalize="none"
                     autocomplete="off"
                     class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":rq:"
+                    id=":rn:"
                     name="activists"
                     role="combobox"
                     spellcheck="false"
@@ -736,8 +731,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
               <label
                 class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
                 data-shrink="true"
-                for=":rt:"
-                id=":rt:-label"
+                for=":rq:"
+                id=":rq:-label"
               >
                 fields.create_after
               </label>
@@ -749,7 +744,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
                   aria-label="Choose date"
                   autocomplete="off"
                   class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
-                  id=":rt:"
+                  id=":rq:"
                   inputmode="text"
                   name="after"
                   placeholder="MM/DD/YYYY"
@@ -777,8 +772,8 @@ exports[`features/activities/activities-filters/filters > should render form in 
               <label
                 class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
                 data-shrink="true"
-                for=":r10:"
-                id=":r10:-label"
+                for=":rt:"
+                id=":rt:-label"
               >
                 fields.create_before
               </label>
@@ -790,7 +785,7 @@ exports[`features/activities/activities-filters/filters > should render form in 
                   aria-label="Choose date"
                   autocomplete="off"
                   class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
-                  id=":r10:"
+                  id=":rt:"
                   inputmode="text"
                   name="before"
                   placeholder="MM/DD/YYYY"

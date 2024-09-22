@@ -38,9 +38,9 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 		toggleOff();
 	};
 
-	const titleText = t('actions.filter_activities.title');
-	const submitText = t('actions.filter_activities.actions.submit');
-	const resetText = t('actions.filter_activities.actions.reset');
+	const titleT = t('actions.filter_activities.title');
+	const submitT = t('actions.filter_activities.actions.submit');
+	const resetT = t('actions.filter_activities.actions.reset');
 
 	const buttons = (
 		<>
@@ -50,14 +50,14 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 				type='reset'
 				variant='text'
 				color='primary'>
-				{resetText}
+				{resetT}
 			</Button>
 			<Button
 				className={styles.submit}
 				onClick={onSubmit}
 				type='submit'
 				variant='contained'>
-				{submitText}
+				{submitT}
 			</Button>
 		</>
 	);
@@ -67,14 +67,14 @@ export const ActivitiesFilters: React.FC<ActivitiesFiltersProps> = (props) => {
 			open={open}
 			onOpen={toggleOn}
 			onClose={toggleOff}
-			title={titleText}
+			title={titleT}
 			icon={<TuneIcon />}
 			slots={{ actions: buttons, }}>
-			{({ isPopup, titleId, }) => (
+			{({ isPopup, }) => (
 				<form
 					className={cn(styles.form, className)}
 					onSubmit={onSubmit}
-					aria-labelledby={titleId}>
+					aria-label={titleT}>
 					<Action />
 					<Spheres />
 					<Users />

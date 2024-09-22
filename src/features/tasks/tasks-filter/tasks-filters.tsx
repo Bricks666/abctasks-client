@@ -63,7 +63,10 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 			icon={<TuneIcon />}
 			slots={{ actions: buttons, }}>
 			{({ isPopup, }) => (
-				<form className={cn(styles.wrapper, className)} onSubmit={onSubmit}>
+				<form
+					className={cn(styles.wrapper, className)}
+					onSubmit={onSubmit}
+					aria-label={titleT}>
 					<Tags />
 					<Users />
 					<After />
