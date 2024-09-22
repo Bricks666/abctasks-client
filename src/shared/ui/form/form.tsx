@@ -4,7 +4,9 @@ import * as React from 'react';
 
 import styles from './form.module.css';
 
-export const Form: React.FC<PaperProps<'form'>> = (props) => {
+export type FormProps = PaperProps<'form'>;
+
+export const Form: React.FC<FormProps> = (props) => {
 	const { className, children, ...rest } = props;
 
 	return (
