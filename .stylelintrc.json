@@ -1,0 +1,27 @@
+{
+	"extends": ["stylelint-config-clean-order"],
+	"plugins": [
+		"stylelint-color-format",
+		"stylelint-use-nesting",
+		"stylelint-z-index-value-constraint",
+		"stylelint-no-nested-media",
+		"stylelint-high-performance-animation",
+		"stylelint-css-modules"
+	],
+	"rules": {
+		"color-format/format": {
+			"format": "hsl"
+		},
+		"media-feature-range-notation": "prefix",
+
+		"plugin/z-index-value-constraint": {
+			"min": -1,
+			"max": 10000
+		},
+
+		"pitcher/no-nested-media": true,
+
+		"plugin/no-low-performance-animation-properties": true
+	},
+	"ignoreFiles": ["**/*.[jt]sx?", "**/third-party/*", "**/PlanEditor/*"]
+}

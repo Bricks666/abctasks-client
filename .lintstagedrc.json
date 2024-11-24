@@ -2,5 +2,9 @@
 	"*.ts(x)?": [
 		"prettier --write --ignore-unknown --config ./.prettierrc",
 		"eslint --fix -c ./.eslintrc.json"
+	],
+	"*.css": [
+		"prettier --write --ignore-unknown --config ./.prettierrc --ignore-path ./.prettierignore",
+		"stylelint --fix -c ./configs/styles/.stylelintrc.json"
 	]
 }
