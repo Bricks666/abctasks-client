@@ -8,7 +8,6 @@ import { withProviders } from './providers';
 
 import { Pages } from '@/pages';
 
-
 import './index.css';
 
 export const App = withProviders(() => {

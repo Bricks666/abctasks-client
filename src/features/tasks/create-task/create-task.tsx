@@ -42,6 +42,7 @@ export const CreateTask: React.FC<CreateTaskProps> = (props) => {
 		<Popup {...props} title={title} onClose={onClose} slots={{ actions, }}>
 			<TaskForm
 				className={styles.form}
+				titleT={title}
 				buttonText={buttonText}
 				$form={form}
 				hideButton={isFullscreen}

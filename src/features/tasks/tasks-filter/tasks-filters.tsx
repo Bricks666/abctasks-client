@@ -35,36 +35,38 @@ export const TasksFilters: React.FC<TasksFiltersProps> = (props) => {
 		toggleOff();
 	};
 
-	const buttonsText = t('actions.tasks_filters.actions', {
-		returnObjects: true,
-	}) as Record<string, string>;
-	const title = t('actions.tasks_filters.title');
+	const submitT = t('actions.tasks_filters.actions.submit');
+	const resetT = t('actions.tasks_filters.actions.reset');
+	const titleT = t('actions.tasks_filters.title');
 
 	const buttons = (
 		<>
 			<Button onClick={onReset} type='reset' variant='text' color='primary'>
-				{buttonsText.reset}
+				{resetT}
 			</Button>
 			<Button
 				onClick={onSubmit}
 				type='submit'
 				variant='contained'
 				color='primary'>
-				{buttonsText.submit}
+				{submitT}
 			</Button>
 		</>
 	);
 
 	return (
 		<FiltersPopover
-			title={title}
+			title={titleT}
 			open={open}
 			onClose={toggleOff}
 			onOpen={toggleOn}
 			icon={<TuneIcon />}
 			slots={{ actions: buttons, }}>
 			{({ isPopup, }) => (
-				<form className={cn(styles.wrapper, className)} onSubmit={onSubmit}>
+				<form
+					className={cn(styles.wrapper, className)}
+					onSubmit={onSubmit}
+					aria-label={titleT}>
 					<Tags />
 					<Users />
 					<After />
@@ -80,7 +82,7 @@ const Tags: React.FC = () => {
 	const { t, } = useTranslation('tasks');
 
 	const tagIds = useUnit(form.fields.tagIds);
-	const label = t('actions.tasks_filters.fields.tags');
+	const labelT = t('actions.tasks_filters.fields.tags');
 
 	return (
 		<TagPicker
@@ -90,7 +92,7 @@ const Tags: React.FC = () => {
 			helperText={tagIds.errorText}
 			isValid={tagIds.isValid}
 			name='tagIds'
-			label={label}
+			label={labelT}
 			size='medium'
 			limitTags={1}
 			multiple

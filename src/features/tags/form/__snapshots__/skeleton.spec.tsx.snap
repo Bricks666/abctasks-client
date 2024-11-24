@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/tags/form/skeleton > should render skeleton preview, skeleton fields and skeleton button 1`] = `
+<div
+  class="_wrapper_b98333"
+>
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-1e1x4vv-MuiSkeleton-root"
+    style="width: 5em; height: 1.5em;"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _input_b98333 css-1e1x4vv-MuiSkeleton-root"
+    style="height: 3em;"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _colorInput_b98333 css-1e1x4vv-MuiSkeleton-root"
+    style="height: 3em;"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _colorInput_b98333 css-1e1x4vv-MuiSkeleton-root"
+    style="height: 3em;"
+  />
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse _button_b98333 css-1e1x4vv-MuiSkeleton-root"
+    style="width: 8em; height: 2em;"
+  />
+</div>
+`;

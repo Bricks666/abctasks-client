@@ -1,0 +1,4 @@
+{
+	"src/**/*.tsx": { "alternate": "src/{}.spec.tsx" },
+	"src/**/*.ts": { "alternate": "src/{}.spec.ts" }
+}

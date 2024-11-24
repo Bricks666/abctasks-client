@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`featuers/tags/update/open-button > should render button to open modal 1`] = `
+<button
+  aria-label="actions.update_tag.actions.open"
+  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
+  data-mui-internal-clone-element="true"
+  tabindex="0"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="EditIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+    />
+  </svg>
+  <span
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+  />
+</button>
+`;

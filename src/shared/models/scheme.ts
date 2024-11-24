@@ -43,7 +43,7 @@ export const useSyncScheme = () => {
 
 persist({
 	store: $scheme,
-	key: 'bt-color-scheme',
+	key: 'abc-color-scheme',
 });
 
 sample({

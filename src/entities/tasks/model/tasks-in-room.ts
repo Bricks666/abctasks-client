@@ -5,7 +5,7 @@ import { empty, interval, not } from 'patronum';
 import { Array } from 'runtypes';
 
 import { Task, tasksApi, task, TaskStatus, GetTasksParams } from '@/shared/api';
-import { createFlag, dataExtractor, group } from '@/shared/lib';
+import { createFlag, extractData, group } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const tasksInRoom = createDomain();
@@ -26,7 +26,7 @@ export const query = createQuery<
 	initialData: [],
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Array(task))),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 export const loaded = createFlag(false);

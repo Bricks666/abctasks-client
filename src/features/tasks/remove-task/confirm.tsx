@@ -18,9 +18,8 @@ export const ConfirmRemoveTask: React.FC<ConfirmRemoveTaskProps> = (props) => {
 
 	const title = t('actions.remove_task.title');
 	const content = t('actions.remove_task.content');
-	const actions = t('actions.remove_task.actions', {
-		returnObjects: true,
-	}) as Record<string, string>;
+	const agreeT = t('actions.remove_task.actions.agree');
+	const disagreeT = t('actions.remove_task.actions.disagree');
 
 	return (
 		<Confirm
@@ -29,9 +28,9 @@ export const ConfirmRemoveTask: React.FC<ConfirmRemoveTaskProps> = (props) => {
 			onClose={close}
 			title={title}
 			content={content}
-			agreeText={actions.agree}
+			agreeText={agreeT}
 			onAgree={removeTask}
-			disagreeText={actions.disagree}
+			disagreeText={disagreeT}
 			onDisagree={close}
 		/>
 	);

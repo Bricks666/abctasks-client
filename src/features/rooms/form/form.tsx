@@ -15,15 +15,14 @@ import { RoomFormValues } from './model';
 
 export interface RoomFormProps extends CommonProps {
 	readonly $form: Form<RoomFormValues>;
-	readonly ariaLabelledby?: string;
+	readonly title?: string;
 	readonly hideButton?: boolean;
 	readonly buttonText?: string;
 	readonly disabled?: boolean;
 }
 
 export const RoomForm: React.FC<RoomFormProps> = (props) => {
-	const { className, buttonText, $form, disabled, hideButton, ariaLabelledby, } =
-		props;
+	const { className, buttonText, $form, disabled, hideButton, title, } = props;
 	const submit = useUnit($form.submit);
 
 	const onSubmit = usePreventDefault(submit);
@@ -33,7 +32,7 @@ export const RoomForm: React.FC<RoomFormProps> = (props) => {
 			className={cn(styles.form, className)}
 			spacing={1}
 			onSubmit={onSubmit}
-			aria-labelledby={ariaLabelledby}
+			aria-label={title}
 			component='form'>
 			<Name $form={$form} />
 			<Description $form={$form} />
@@ -57,13 +56,10 @@ const Name: React.FC<FieldProps> = (props) => {
 	const { errorText, } = name;
 
 	const label = t('actions.room_form.fields.name');
-	const error = t(
-		[`actions.room_form.errors.name.${errorText}`, 'common:errors.default'],
-		{
-			min_symbols_count: MIN_LENGTH,
-			max_symbols_count: MAX_SHORT_LENGTH,
-		}
-	);
+	const error = t(`actions.room_form.errors.name.${errorText}`, {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
 	const errorHelperText = name.isValid ? null : error;
 
 	return (
@@ -75,7 +71,6 @@ const Name: React.FC<FieldProps> = (props) => {
 			isValid={name.isValid}
 			name='name'
 			label={label}
-			multiline
 		/>
 	);
 };
@@ -87,16 +82,10 @@ const Description: React.FC<FieldProps> = (props) => {
 	const { errorText, } = description;
 
 	const label = t('actions.room_form.fields.description');
-	const error = t(
-		[
-			`actions.room_form.errors.description.${errorText}`,
-			'common:errors.default'
-		],
-		{
-			min_symbols_count: MIN_LENGTH,
-			max_symbols_count: MAX_SHORT_LENGTH,
-		}
-	);
+	const error = t(`actions.room_form.errors.description.${errorText}`, {
+		min_symbols_count: MIN_LENGTH,
+		max_symbols_count: MAX_SHORT_LENGTH,
+	});
 	const errorHelperText = description.isValid ? null : error;
 
 	return (
@@ -108,6 +97,7 @@ const Description: React.FC<FieldProps> = (props) => {
 			isValid={description.isValid}
 			name='description'
 			label={label}
+			multiline
 		/>
 	);
 };

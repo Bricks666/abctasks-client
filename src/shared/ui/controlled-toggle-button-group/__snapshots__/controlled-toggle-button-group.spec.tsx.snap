@@ -1,0 +1,135 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/controlled-toggle-button-group/controlled-toggle-button-group > should render button group with label > simple 1`] = `
+<div
+  class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+>
+  <label
+    class="MuiFormLabel-root MuiFormLabel-colorPrimary css-1r9unm3-MuiFormLabel-root"
+    for=":r0:"
+  >
+    label
+  </label>
+  <div
+    class="MuiToggleButtonGroup-root css-1g3wmti-MuiToggleButtonGroup-root"
+    id=":r0:"
+    role="group"
+  >
+    <button
+      aria-pressed="true"
+      class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeMedium MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-yrwndp-MuiButtonBase-root-MuiToggleButton-root"
+      tabindex="0"
+      type="button"
+      value="A"
+    >
+      A
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      aria-pressed="false"
+      class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-yrwndp-MuiButtonBase-root-MuiToggleButton-root"
+      tabindex="0"
+      type="button"
+      value="B"
+    >
+      B
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;
+
+exports[`shared/ui/controlled-toggle-button-group/controlled-toggle-button-group > should render helper text if it passed > helper-text 1`] = `
+<div
+  class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+>
+  <label
+    class="MuiFormLabel-root MuiFormLabel-colorPrimary css-1r9unm3-MuiFormLabel-root"
+    for=":r2:"
+  >
+    label
+  </label>
+  <div
+    class="MuiToggleButtonGroup-root css-1g3wmti-MuiToggleButtonGroup-root"
+    id=":r2:"
+    role="group"
+  >
+    <button
+      aria-pressed="true"
+      class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeMedium MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-yrwndp-MuiButtonBase-root-MuiToggleButton-root"
+      tabindex="0"
+      type="button"
+      value="A"
+    >
+      A
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      aria-pressed="false"
+      class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-yrwndp-MuiButtonBase-root-MuiToggleButton-root"
+      tabindex="0"
+      type="button"
+      value="B"
+    >
+      B
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <p
+    class="MuiFormHelperText-root MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-645khj-MuiFormHelperText-root"
+  >
+    helper text
+  </p>
+</div>
+`;
+
+exports[`shared/ui/controlled-toggle-button-group/controlled-toggle-button-group > should render with error styles if error=true > error 1`] = `
+<div
+  class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+>
+  <label
+    class="MuiFormLabel-root MuiFormLabel-colorPrimary Mui-error css-1r9unm3-MuiFormLabel-root"
+    for=":r1:"
+  >
+    label
+  </label>
+  <div
+    class="MuiToggleButtonGroup-root css-1g3wmti-MuiToggleButtonGroup-root"
+    id=":r1:"
+    role="group"
+  >
+    <button
+      aria-pressed="true"
+      class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeMedium MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-yrwndp-MuiButtonBase-root-MuiToggleButton-root"
+      tabindex="0"
+      type="button"
+      value="A"
+    >
+      A
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      aria-pressed="false"
+      class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-standard MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-yrwndp-MuiButtonBase-root-MuiToggleButton-root"
+      tabindex="0"
+      type="button"
+      value="B"
+    >
+      B
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;

@@ -4,7 +4,7 @@ import { createEffect } from 'effector';
 import { Boolean } from 'runtypes';
 
 import { authApi, ActivateParams } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
 
 const handlerFx = createEffect(authApi.activate);
@@ -13,9 +13,9 @@ export const query = createQuery<
 	StandardResponse<boolean>,
 	Error,
 	StandardResponse<boolean>,
-	globalThis.Boolean
+	globalThis.Boolean | null
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Boolean)),
-	mapData: dataExtractor,
+	mapData: extractData,
 });

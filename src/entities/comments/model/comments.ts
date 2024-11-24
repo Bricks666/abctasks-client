@@ -4,7 +4,7 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 
 import { Comment, comment, commentsApi } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import { getStandardResponse } from '@/shared/types';
 
 const commentsDomain = createDomain();
@@ -15,7 +15,7 @@ export const query = createQuery({
 	initialData: [] as Comment[],
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Array(comment))),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 cache(query);

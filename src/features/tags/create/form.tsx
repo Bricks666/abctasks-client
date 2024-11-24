@@ -28,21 +28,22 @@ export const CreateTag: React.FC<CreateTagProps> = (props) => {
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
-	const title = t('actions.create_tag.title');
-	const buttonText = t('actions.create', { ns: 'common', });
+	const titleT = t('actions.create_tag.title');
+	const buttonT = t('actions.create', { ns: 'common', });
 
 	const actions = isFullscreen ? (
 		<Button type='submit' onClick={onClick}>
-			{buttonText}
+			{buttonT}
 		</Button>
 	) : null;
 
 	return (
-		<Popup {...props} onClose={onClose} title={title} slots={{ actions, }}>
+		<Popup {...props} onClose={onClose} title={titleT} slots={{ actions, }}>
 			<TagForm
 				className={styles.form}
+				titleText={titleT}
 				$form={form}
-				buttonText={buttonText}
+				buttonText={buttonT}
 				hideButton={isFullscreen}
 				buttonDisabled={pending}
 			/>

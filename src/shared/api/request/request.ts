@@ -2,7 +2,7 @@ import ky from 'ky';
 
 import { StandardResponse } from '@/shared/types';
 
-import { api } from '../../configs';
+import { API_HOST } from '../../configs';
 
 import { Tokens } from './types';
 
@@ -10,7 +10,7 @@ let token: string | null = null;
 
 export const instance = ky.create({
 	mode: 'cors',
-	prefixUrl: api,
+	prefixUrl: API_HOST,
 	hooks: {
 		beforeRequest: [
 			(request) => {
@@ -40,6 +40,8 @@ export const instance = ky.create({
 				const body = await response.json();
 
 				if (
+					typeof body !== 'object' ||
+					body === null ||
 					!('data' in body) ||
 					typeof body.data !== 'object' ||
 					body.data === null

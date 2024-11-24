@@ -1,0 +1,445 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/tasks/form/form > should hide button if passed hideButton=true > without button 1`] = `
+<form
+  aria-label="form title"
+  class="_form_2cb0c5"
+>
+  <div
+    class="MuiFormControl-root MuiTextField-root _field_2cb0c5 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="false"
+      for=":r6:"
+      id=":r6:-label"
+    >
+      actions.task_form.fields.title
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+        id=":r6:"
+        name="title"
+        type="text"
+        value=""
+      />
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-yjsfm1"
+        >
+          <span>
+            actions.task_form.fields.title
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+  <div
+    class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+  >
+    <div
+      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink="false"
+        for=":r7:"
+        id=":r7:-label"
+      >
+        actions.task_form.fields.tags
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
+      >
+        <input
+          aria-autocomplete="list"
+          aria-expanded="false"
+          aria-invalid="false"
+          autocapitalize="none"
+          autocomplete="off"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
+          id=":r7:"
+          name="tagIds"
+          role="combobox"
+          spellcheck="false"
+          type="text"
+          value=""
+        />
+        <div
+          class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+        >
+          <button
+            aria-label="Open"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-15ldqyv-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+            tabindex="-1"
+            title="Open"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-yjsfm1"
+          >
+            <span>
+              actions.task_form.fields.tags
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for=":r9:"
+      id=":r9:-label"
+    >
+      actions.task_form.fields.status
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+    >
+      <div
+        aria-controls=":ra:"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-labelledby=":r9:-label :r9:"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1idmfta-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        id=":r9:"
+        role="combobox"
+        tabindex="0"
+      >
+        statuses.ready
+      </div>
+      <input
+        aria-hidden="true"
+        aria-invalid="false"
+        class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        name="status"
+        tabindex="-1"
+        value="ready"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1i1js26-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-14lo706"
+        >
+          <span>
+            actions.task_form.fields.status
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiTextField-root _field_2cb0c5 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="false"
+      for=":rb:"
+      id=":rb:-label"
+    >
+      actions.task_form.fields.description
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-multiline css-fsrfwa-MuiInputBase-root-MuiOutlinedInput-root"
+    >
+      <textarea
+        aria-invalid="false"
+        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-vcg1b0-MuiInputBase-input-MuiOutlinedInput-input"
+        id=":rb:"
+        name="description"
+        style="height: 0px; overflow: hidden;"
+      />
+      <textarea
+        aria-hidden="true"
+        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-vcg1b0-MuiInputBase-input-MuiOutlinedInput-input"
+        readonly=""
+        style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding-top: 0px; padding-bottom: 0px; width: 100%;"
+        tabindex="-1"
+      />
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-yjsfm1"
+        >
+          <span>
+            actions.task_form.fields.description
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`features/tasks/form/form > should render form with 4 fields and button > with button 1`] = `
+<form
+  aria-label="form title"
+  class="_form_2cb0c5"
+>
+  <div
+    class="MuiFormControl-root MuiTextField-root _field_2cb0c5 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="false"
+      for=":r0:"
+      id=":r0:-label"
+    >
+      actions.task_form.fields.title
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+        id=":r0:"
+        name="title"
+        type="text"
+        value=""
+      />
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-yjsfm1"
+        >
+          <span>
+            actions.task_form.fields.title
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+  <div
+    class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+  >
+    <div
+      class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink="false"
+        for=":r1:"
+        id=":r1:-label"
+      >
+        actions.task_form.fields.tags
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
+      >
+        <input
+          aria-autocomplete="list"
+          aria-expanded="false"
+          aria-invalid="false"
+          autocapitalize="none"
+          autocomplete="off"
+          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
+          id=":r1:"
+          name="tagIds"
+          role="combobox"
+          spellcheck="false"
+          type="text"
+          value=""
+        />
+        <div
+          class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+        >
+          <button
+            aria-label="Open"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-15ldqyv-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+            tabindex="-1"
+            title="Open"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-yjsfm1"
+          >
+            <span>
+              actions.task_form.fields.tags
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for=":r3:"
+      id=":r3:-label"
+    >
+      actions.task_form.fields.status
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+    >
+      <div
+        aria-controls=":r4:"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-labelledby=":r3:-label :r3:"
+        class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1idmfta-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        id=":r3:"
+        role="combobox"
+        tabindex="0"
+      >
+        statuses.ready
+      </div>
+      <input
+        aria-hidden="true"
+        aria-invalid="false"
+        class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        name="status"
+        tabindex="-1"
+        value="ready"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1i1js26-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-14lo706"
+        >
+          <span>
+            actions.task_form.fields.status
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiTextField-root _field_2cb0c5 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="false"
+      for=":r5:"
+      id=":r5:-label"
+    >
+      actions.task_form.fields.description
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-multiline css-fsrfwa-MuiInputBase-root-MuiOutlinedInput-root"
+    >
+      <textarea
+        aria-invalid="false"
+        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-vcg1b0-MuiInputBase-input-MuiOutlinedInput-input"
+        id=":r5:"
+        name="description"
+        style="height: 0px; overflow: hidden;"
+      />
+      <textarea
+        aria-hidden="true"
+        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-vcg1b0-MuiInputBase-input-MuiOutlinedInput-input"
+        readonly=""
+        style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding-top: 0px; padding-bottom: 0px; width: 100%;"
+        tabindex="-1"
+      />
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-yjsfm1"
+        >
+          <span>
+            actions.task_form.fields.description
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium _button_2cb0c5 css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+    tabindex="0"
+    type="submit"
+  >
+    submit
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</form>
+`;

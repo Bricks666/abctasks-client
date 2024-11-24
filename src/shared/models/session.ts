@@ -17,7 +17,7 @@ import {
 import { equals } from 'patronum';
 
 import { User, AuthResponse, authResponse, authApi } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import {
 	ChainedParams,
 	StandardResponse,
@@ -29,7 +29,6 @@ type Status = 'initial' | 'pending' | 'authorized' | 'anonymous';
 export const $user = createStore<User | null>(null);
 export const $status = createStore<Status>('initial');
 export const $isAuth = $status.map((status) => status === 'authorized');
-export const setUser = createEvent<User | null>();
 
 const handlerFx = createEffect(authApi.auth);
 
@@ -42,7 +41,7 @@ export const query = createQuery<
 >({
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(authResponse)),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 sample({
@@ -68,6 +67,11 @@ sample({
 	clock: query.finished.success,
 	fn: ({ result, }) => result.user,
 	target: $user,
+});
+
+sample({
+	clock: query.finished.failure,
+	target: $user.reinit!,
 });
 
 export const chainAuthorized = <Params extends RouteParams>(

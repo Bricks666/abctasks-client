@@ -1,7 +1,7 @@
 import { HTTPError } from 'ky';
 
-export const isHttpError = (error: Error): error is HTTPError => {
-	return 'request' in error;
+export const isHttpError = (error: any): error is HTTPError => {
+	return !!error && 'request' in error;
 };
 
 export const isHttpErrorCode = (error: any, code: number): boolean => {

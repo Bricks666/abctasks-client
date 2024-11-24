@@ -1,0 +1,148 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/template-header/template-header > should render header with center slot > center slot 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorDefault MuiAppBar-positionStatic _container_5ea642 classname css-w1ga40-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _bar_5ea642 css-hyum1k-MuiToolbar-root"
+  >
+    <div
+      class="_center_5ea642"
+    >
+      <div />
+    </div>
+  </div>
+</header>
+`;
+
+exports[`shared/ui/template-header/template-header > should render header with left and center slots > left and center slots 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorDefault MuiAppBar-positionStatic _container_5ea642 classname css-w1ga40-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _bar_5ea642 css-hyum1k-MuiToolbar-root"
+  >
+    <div
+      class="_left_5ea642 _side_5ea642"
+    >
+      <div />
+    </div>
+    <div
+      class="_center_5ea642"
+    >
+      <div />
+    </div>
+  </div>
+</header>
+`;
+
+exports[`shared/ui/template-header/template-header > should render header with left and right slots > left and right slots 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorDefault MuiAppBar-positionStatic _container_5ea642 classname css-w1ga40-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _bar_5ea642 css-hyum1k-MuiToolbar-root"
+  >
+    <div
+      class="_left_5ea642 _side_5ea642"
+    >
+      <div />
+    </div>
+    <div
+      class="_right_5ea642 _side_5ea642"
+    >
+      <div />
+    </div>
+  </div>
+</header>
+`;
+
+exports[`shared/ui/template-header/template-header > should render header with left slot > left slot 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorDefault MuiAppBar-positionStatic _container_5ea642 classname css-w1ga40-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _bar_5ea642 css-hyum1k-MuiToolbar-root"
+  >
+    <div
+      class="_left_5ea642 _side_5ea642"
+    >
+      <div />
+    </div>
+  </div>
+</header>
+`;
+
+exports[`shared/ui/template-header/template-header > should render header with right and center slots > right and center slots 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorDefault MuiAppBar-positionStatic _container_5ea642 classname css-w1ga40-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _bar_5ea642 css-hyum1k-MuiToolbar-root"
+  >
+    <div
+      class="_center_5ea642"
+    >
+      <div />
+    </div>
+    <div
+      class="_right_5ea642 _side_5ea642"
+    >
+      <div />
+    </div>
+  </div>
+</header>
+`;
+
+exports[`shared/ui/template-header/template-header > should render header with right slot > right slot 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorDefault MuiAppBar-positionStatic _container_5ea642 classname css-w1ga40-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _bar_5ea642 css-hyum1k-MuiToolbar-root"
+  >
+    <div
+      class="_right_5ea642 _side_5ea642"
+    >
+      <div />
+    </div>
+  </div>
+</header>
+`;
+
+exports[`shared/ui/template-header/template-header > should render header with right, center and left slots > right, center and left slots 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorDefault MuiAppBar-positionStatic _container_5ea642 classname css-w1ga40-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _bar_5ea642 css-hyum1k-MuiToolbar-root"
+  >
+    <div
+      class="_left_5ea642 _side_5ea642"
+    >
+      <div />
+    </div>
+    <div
+      class="_center_5ea642"
+    >
+      <div />
+    </div>
+    <div
+      class="_right_5ea642 _side_5ea642"
+    >
+      <div />
+    </div>
+  </div>
+</header>
+`;
+
+exports[`shared/ui/template-header/template-header > should render header without slots > empty variant 1`] = `
+<header
+  class="MuiPaper-root MuiPaper-outlined MuiAppBar-root MuiAppBar-colorDefault MuiAppBar-positionStatic _container_5ea642 classname css-w1ga40-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _bar_5ea642 css-hyum1k-MuiToolbar-root"
+  />
+</header>
+`;

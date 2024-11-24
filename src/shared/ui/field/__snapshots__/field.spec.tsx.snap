@@ -1,0 +1,71 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/field/field > should render field > simple 1`] = `
+<div
+  class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+>
+  <label
+    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+    data-shrink="true"
+    for=":r0:"
+    id=":r0:-label"
+  >
+    label
+  </label>
+  <div
+    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+  >
+    <input
+      aria-invalid="true"
+      class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+      id=":r0:"
+      type="text"
+      value="2134"
+    />
+    <fieldset
+      aria-hidden="true"
+      class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+    >
+      <legend
+        class="css-14lo706"
+      >
+        <span>
+          label
+        </span>
+      </legend>
+    </fieldset>
+  </div>
+</div>
+`;
+
+exports[`shared/ui/field/field > should render with error styles if isValid=false > error 1`] = `
+<div
+  class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+>
+  <div
+    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+  >
+    <input
+      aria-invalid="true"
+      class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+      id=":r1:"
+      type="text"
+      value="2134"
+    />
+    <fieldset
+      aria-hidden="true"
+      class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+    >
+      <legend
+        class="css-ihdtdm"
+      >
+        <span
+          class="notranslate"
+        >
+          ​
+        </span>
+      </legend>
+    </fieldset>
+  </div>
+</div>
+`;

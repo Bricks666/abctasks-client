@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/page-title/page-title > should render title > simple variant 1`] = `
+<div
+  class="_wrapper_b63ed6 classname"
+>
+  <h1
+    class="MuiTypography-root MuiTypography-h4 _title_b63ed6 css-5lbw0b-MuiTypography-root"
+  >
+    title
+  </h1>
+</div>
+`;
+
+exports[`shared/ui/page-title/page-title > should render title with extra > with extras 1`] = `
+<div
+  class="_wrapper_b63ed6 classname"
+>
+  <h1
+    class="MuiTypography-root MuiTypography-h4 _title_b63ed6 css-5lbw0b-MuiTypography-root"
+  >
+    title
+  </h1>
+  <div />
+</div>
+`;

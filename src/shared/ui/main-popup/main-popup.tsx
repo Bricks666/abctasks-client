@@ -9,6 +9,7 @@ import {
 	IconButton
 } from '@mui/material';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { BasePopupProps, CommonProps, VoidFunction } from '@/shared/types';
 
@@ -35,11 +36,18 @@ export const MainPopup: React.FC<React.PropsWithChildren<MainPopupProps>> = (
 		maxWidth = 'sm',
 	} = props;
 
+	const { t, } = useTranslation('common');
+
+	const closeT = t('actions.close');
+
 	return (
 		<Dialog open={isOpen} onClose={onClose} maxWidth={maxWidth} fullWidth>
 			<DialogTitle align='center' {...DialogTitleProps}>
 				{title}
-				<IconButton className={styles.cross} onClick={onClose}>
+				<IconButton
+					className={styles.cross}
+					onClick={onClose}
+					aria-label={closeT}>
 					<CloseIcon />
 				</IconButton>
 			</DialogTitle>

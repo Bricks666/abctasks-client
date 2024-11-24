@@ -18,21 +18,21 @@ export const ConfirmRemoveInvitation: React.FC<ConfirmRemoveInvitationProps> = (
 	const removeInvitation = useUnit(remove);
 	const { t, } = useTranslation('room-invitations');
 
-	const title = t('actions.remove_invitation.title');
-	const content = t('actions.remove_invitation.content');
-	const agree = t('actions.remove_invitation.actions.agree');
-	const disagree = t('actions.remove_invitation.actions.disagree');
+	const titleText = t('actions.remove_invitation.title');
+	const contentText = t('actions.remove_invitation.content');
+	const agreeText = t('actions.remove_invitation.actions.agree');
+	const disagreeText = t('actions.remove_invitation.actions.disagree');
 
 	return (
 		<Confirm
 			className={className}
 			isOpen={isOpen}
 			onClose={close}
-			title={title}
-			content={content}
-			agreeText={agree}
+			title={titleText}
+			content={contentText}
+			agreeText={agreeText}
 			onAgree={removeInvitation}
-			disagreeText={disagree}
+			disagreeText={disagreeText}
 			onDisagree={close}
 		/>
 	);

@@ -1,17 +1,16 @@
 import { cache, createQuery } from '@farfetched/core';
 import { runtypeContract } from '@farfetched/runtypes';
-import { createDomain } from 'effector';
+import { createEffect } from 'effector';
 
 import { Room, roomsApi, room } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
-	InRoomParams,
+	InRoomParams
 } from '@/shared/types';
 
-const roomDomain = createDomain();
-const handlerFx = roomDomain.effect(roomsApi.getOne);
+const handlerFx = createEffect(roomsApi.getOne);
 
 export const query = createQuery<
 	InRoomParams,
@@ -23,7 +22,7 @@ export const query = createQuery<
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(room)),
 
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 export const $canChange = query.$data.map((room) => room?.canChange ?? false);

@@ -1,18 +1,19 @@
 import { querySync } from 'atomic-router';
-import { combine, createDomain, sample } from 'effector';
+import { combine, createEvent, createStore, sample } from 'effector';
 import { debounce } from 'patronum';
 
 import { controls, getParams } from '@/shared/configs';
-
-const popupsDomain = createDomain();
 
 const parsePopups = (raw: string): string[] => {
 	return raw.split(',');
 };
 
-const $rawPopups = popupsDomain.createStore<string>('');
-const $querySyncedPopups = $rawPopups.map(parsePopups);
-const $manualPopups = popupsDomain.createStore<string[]>([]);
+const $rawPopups = createStore<string>('');
+
+const $querySyncedPopups = $rawPopups
+	.map((raw) => parsePopups(raw))
+	.map((popups) => popups.filter((popup) => popup !== ''));
+const $manualPopups = createStore<string[]>([]);
 
 export const $popups = combine(
 	$querySyncedPopups,
@@ -24,13 +25,13 @@ export const $popups = combine(
 export const $mountedPopups = debounce({
 	source: $popups,
 	timeout: 250,
-	target: popupsDomain.createStore<string[]>([]),
+	target: createStore<string[]>([]),
 });
 
-export const openSynced = popupsDomain.event<string>();
-export const closeSynced = popupsDomain.event<string>();
-export const open = popupsDomain.event<string>();
-export const close = popupsDomain.event<string>();
+export const openSynced = createEvent<string>();
+export const closeSynced = createEvent<string>();
+export const open = createEvent<string>();
+export const close = createEvent<string>();
 
 sample({
 	clock: openSynced,

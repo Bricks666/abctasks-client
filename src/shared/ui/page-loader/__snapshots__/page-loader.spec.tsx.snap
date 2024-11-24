@@ -1,0 +1,38 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/page-loader/page-loader > should render loading indicator in the center of the page 1`] = `
+<div
+  class="_center_ffe4db _page_ffe4db classname"
+>
+  <div>
+    <progress
+      class="visibility-hidden"
+    />
+    <div
+      class="_indicatorContainer_dda5ab _medium_dda5ab"
+    >
+      <div
+        class="_circleGroup_dda5ab"
+      >
+        <span
+          class="_circle_dda5ab _circle1_dda5ab"
+        />
+        <span
+          class="_circle_dda5ab _circle2_dda5ab"
+        />
+        <span
+          class="_circle_dda5ab _circle3_dda5ab"
+        />
+        <span
+          class="_circle_dda5ab _circle4_dda5ab"
+        />
+      </div>
+      <h2
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter css-1chgddm-MuiTypography-root"
+      >
+        loading
+      </h2>
+    </div>
+  </div>
+</div>
+`;

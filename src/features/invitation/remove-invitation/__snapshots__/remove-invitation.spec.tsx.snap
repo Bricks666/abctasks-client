@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/invitation/remove-invitation/remove-invitation > should render button 1`] = `
+<button
+  aria-label="actions.remove_invitation.actions.open"
+  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-1kuq5xv-MuiButtonBase-root-MuiIconButton-root"
+  data-mui-internal-clone-element="true"
+  tabindex="0"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="RemoveIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M19 13H5v-2h14v2z"
+    />
+  </svg>
+  <span
+    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+  />
+</button>
+`;

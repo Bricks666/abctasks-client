@@ -21,11 +21,15 @@ export const TemplateHeader: React.FC<TemplateHeaderProps> = (props) => {
 			elevation={0}
 			variant='outlined'>
 			<Toolbar className={styles.bar}>
-				<div className={cn(styles.left, styles.side)}>{slots.left}</div>
+				{slots.left ? (
+					<div className={cn(styles.left, styles.side)}>{slots.left}</div>
+				) : null}
 				{slots.center ? (
 					<div className={styles.center}>{slots.center}</div>
 				) : null}
-				<div className={cn(styles.right, styles.side)}>{slots.right}</div>
+				{slots.right ? (
+					<div className={cn(styles.right, styles.side)}>{slots.right}</div>
+				) : null}
 			</Toolbar>
 		</AppBar>
 	);

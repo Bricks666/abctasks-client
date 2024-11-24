@@ -7,13 +7,11 @@ import styles from './center.module.css';
 
 type Height = 'auto' | 'container' | 'page' | 'content';
 
-export interface CenterProps extends CommonProps {
+export interface CenterProps extends CommonProps, React.PropsWithChildren {
 	readonly height?: Height;
 }
 
-export const Center: React.FC<React.PropsWithChildren<CenterProps>> = (
-	props
-) => {
+export const Center: React.FC<CenterProps> = (props) => {
 	const { className, children, height = 'auto', } = props;
 
 	const classes = cn(styles.center, styles[height], className);

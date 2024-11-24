@@ -1,4 +1,4 @@
-import { createEvent, createStore, sample } from 'effector';
+import { createEvent, createStore, Event, sample, Store } from 'effector';
 import { not } from 'patronum';
 
 import { popupsModel } from '@/shared/models';
@@ -10,6 +10,23 @@ export interface CreatePopupControlModelParams {
 	 * @default true
 	 */
 	readonly sync?: boolean;
+}
+
+export interface PopupControlModelUnitShape {
+	readonly isOpen: Store<boolean>;
+	readonly open: Event<void>;
+	readonly close: Event<void>;
+	readonly opened: Event<void>;
+	readonly closed: Event<void>;
+}
+
+export interface PopupControlModel {
+	readonly $isOpen: Store<boolean>;
+	readonly open: Event<void>;
+	readonly close: Event<void>;
+	readonly opened: Event<void>;
+	readonly closed: Event<void>;
+	readonly '@@unitShape': () => PopupControlModelUnitShape;
 }
 
 export const createPopupControlModel = (

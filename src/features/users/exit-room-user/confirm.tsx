@@ -18,9 +18,8 @@ export const ConfirmUserExit: React.FC<ConfirmUserExitProps> = (props) => {
 
 	const title = t('actions.exit_room.title');
 	const content = t('actions.exit_room.content');
-	const actions = t('actions.exit_room.actions', {
-		returnObjects: true,
-	}) as Record<string, string>;
+	const agreeT = t('actions.exit_room.actions.agree');
+	const disagreeT = t('actions.exit_room.actions.disagree');
 
 	return (
 		<Confirm
@@ -29,9 +28,9 @@ export const ConfirmUserExit: React.FC<ConfirmUserExitProps> = (props) => {
 			onClose={close}
 			title={title}
 			content={content}
-			agreeText={actions.agree}
+			agreeText={agreeT}
 			onAgree={exitRoom}
-			disagreeText={actions.disagree}
+			disagreeText={disagreeT}
 			onDisagree={close}
 		/>
 	);

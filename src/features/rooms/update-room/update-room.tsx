@@ -22,7 +22,6 @@ export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 		deviceInfoModel.$isMobile,
 		deviceInfoModel.$isTabletVertical
 	]);
-	const titleId = React.useId();
 
 	const onClick = useUnit(form.submit);
 	const pending = useUnit(mutation.$pending);
@@ -31,7 +30,7 @@ export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 
-	const title = t('actions.update_room.title');
+	const titleText = t('actions.update_room.title');
 	const buttonText = t('actions.save', { ns: 'common', });
 
 	const actions = isFullscreen ? (
@@ -41,20 +40,13 @@ export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 	) : null;
 
 	return (
-		<Popup
-			{...props}
-			title={title}
-			onClose={onClose}
-			slots={{ actions, }}
-			DialogTitleProps={{
-				id: titleId,
-			}}>
+		<Popup {...props} title={titleText} onClose={onClose} slots={{ actions, }}>
 			{loading ? (
 				<SkeletonRoomForm />
 			) : (
 				<RoomForm
 					className={styles.form}
-					ariaLabelledby={titleId}
+					title={titleText}
 					buttonText={buttonText}
 					$form={form}
 					disabled={pending}

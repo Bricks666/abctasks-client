@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import CopyAllIcon from '@mui/icons-material/CopyAll';
 import { IconButton, Tooltip } from '@mui/material';
 import { useGate, useUnit } from 'effector-react';
@@ -18,11 +19,17 @@ export const GenerateInvitationLink: React.FC<GenerateInvitationLinkProps> = (
 	props
 ) => {
 	const { className, roomId, } = props;
+	const { t, } = useTranslation('room-invitations');
+	const titleText = t('actions.generate_link.title');
 
 	useGate(Gate, { roomId, });
 
 	return (
-		<Form className={className} variant='elevation' elevation={0}>
+		<Form
+			className={className}
+			variant='elevation'
+			elevation={0}
+			aria-label={titleText}>
 			<div className={styles.container}>
 				<InvitationLink />
 				<CopyButton />

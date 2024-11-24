@@ -32,7 +32,8 @@
 		"ru": "Русский",
 		"en": "Английский",
 		"ru_short": "Рус",
-		"en_short": "Англ"
+		"en_short": "Англ",
+		"label": "Язык"
 	},
 	"color_schemes": {
 		"schemes": {
@@ -40,7 +41,8 @@
 			"system": "Системная тема",
 			"light": "Светлая тема"
 		},
-		"activated": "Выбрана $t(color_schemes.schemes.{{ scheme }})"
+		"activated": "Выбрана $t(color_schemes.schemes.{{ scheme }})",
+		"label": "Цветовая тема"
 	},
 	"profile_menu": {
 		"title": "Настройки профиля {{ username }}",

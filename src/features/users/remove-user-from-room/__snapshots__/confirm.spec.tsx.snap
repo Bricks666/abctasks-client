@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/users/remove-user-from-room/confirm > should render popup with text and 2 buttons 1`] = `
+<div
+  aria-labelledby=":r0:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthXs MuiDialog-paperFullWidth css-1wwlbk8-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
+    id=":r0:"
+  >
+    actions.remove_user.title
+  </h2>
+  <div
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+  >
+    <p
+      class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 css-tt5agz-MuiTypography-root-MuiDialogContentText-root"
+    >
+      actions.remove_user.content
+    </p>
+  </div>
+  <div
+    class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      actions.remove_user.actions.disagree
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textError MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textError MuiButton-sizeMedium MuiButton-textSizeMedium css-k37vwo-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      actions.remove_user.actions.agree
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;

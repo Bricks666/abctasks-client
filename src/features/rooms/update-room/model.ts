@@ -41,7 +41,7 @@ export const roomId = createQueryModel<number | null>({
 });
 export const openPopup = createEvent<number>();
 
-const { formValidated, reset, setInitialForm, } = form;
+const { formValidated, reset, setForm, } = form;
 
 sample({
 	clock: openPopup,
@@ -79,7 +79,7 @@ sample({
 sample({
 	clock: roomModel.query.finished.success,
 	fn: ({ result, }) => result,
-	target: setInitialForm,
+	target: setForm,
 });
 
 update(roomsModel.query, {

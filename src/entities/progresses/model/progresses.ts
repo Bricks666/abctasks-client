@@ -4,7 +4,7 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 
 import { progress, Progress, progressApi } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import {
 	StandardResponse,
 	getStandardResponse,
@@ -29,7 +29,7 @@ export const query = createQuery<
 	initialData: [],
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Array(progress))),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 cache(query);

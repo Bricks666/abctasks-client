@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`shared/ui/show/show > should render children if show=true 1`] = `
+<div>
+  Children
+</div>
+`;
+
+exports[`shared/ui/show/show > should render nothing if show=false 1`] = `undefined`;

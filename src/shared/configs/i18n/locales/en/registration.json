@@ -3,6 +3,7 @@
 	"has_account_question": "Do you have an account?",
 	"login_right_now": ["Then", "login it", "right now"],
 	"registration_form": {
+		"title": "Registration form",
 		"fields": {
 			"email": "Email",
 			"username": "Username",
@@ -20,13 +21,11 @@
 			},
 			"username": {
 				"empty": "Username must be provided",
-				"pattern": "Username can only contain latins alphas, numeric and !, *, (, ), _, +",
 				"min_length": "Username must contain at least {{ min_symbols_count }} letters",
 				"max_length": "Username must contain no more {{ max_symbols_count }} letters"
 			},
 			"password": {
 				"empty": "Password must be provided",
-				"pattern": "Password can only contain latins alphas, numeric and !, *, (, ), _, +",
 				"min_length": "Password must contain at least {{ min_symbols_count }} letters",
 				"max_length": "Password must contain no more {{ max_symbols_count }} letters"
 			},

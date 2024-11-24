@@ -12,12 +12,12 @@ export const preparePickerHandler = <
 
 	if (multiple) {
 		return (_: unknown, data: O[]) => {
-			(onChange as any)(data.map((tag) => tag[key]));
+			(onChange as any)(data.map((item) => item[key]));
 		};
 	}
 
 	return (_: unknown, data: O | null) => {
-		(onChange as any)(data?.[key] || null);
+		(onChange as any)(data?.[key] ?? null);
 	};
 };
 

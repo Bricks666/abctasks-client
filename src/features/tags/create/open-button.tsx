@@ -8,13 +8,13 @@ import { CommonProps } from '@/shared/types';
 
 import { popupControls } from './model';
 
-export interface OpenCreateTagFormProps extends CommonProps {}
+export interface OpenCreateTagButtonProps extends CommonProps {}
 
-export const OpenCreateTagForm: React.FC<OpenCreateTagFormProps> = React.memo(
-	(props) => {
-		const { className } = props;
+export const OpenCreateTagButton: React.FC<OpenCreateTagButtonProps> =
+	React.memo((props) => {
+		const { className, } = props;
 		const onClick = useUnit(popupControls.open);
-		const { t } = useTranslation('room-tags');
+		const { t, } = useTranslation('room-tags');
 
 		const title = t('actions.create_tag.actions.open');
 
@@ -25,5 +25,4 @@ export const OpenCreateTagForm: React.FC<OpenCreateTagFormProps> = React.memo(
 				</IconButton>
 			</Tooltip>
 		);
-	}
-);
+	});

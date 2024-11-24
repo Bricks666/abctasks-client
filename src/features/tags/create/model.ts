@@ -86,7 +86,7 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	fn: () => ({
-		message: i18n.t('actions.create_tag.notifications.success', {
+		message: i18n.t('actions.create_tag.notifications.error', {
 			ns: 'room-tags',
 		}),
 		color: 'error' as const,

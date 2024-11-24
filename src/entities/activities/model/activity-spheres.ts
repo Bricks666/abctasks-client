@@ -4,7 +4,7 @@ import { createDomain } from 'effector';
 import { Array } from 'runtypes';
 
 import { activitiesApi, ActivitySphere, activitySphere } from '@/shared/api';
-import { dataExtractor } from '@/shared/lib';
+import { extractData } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
 const activitySpheres = createDomain();
@@ -21,7 +21,7 @@ export const query = createQuery<
 	initialData: [],
 	effect: handlerFx,
 	contract: runtypeContract(getStandardResponse(Array(activitySphere))),
-	mapData: dataExtractor,
+	mapData: extractData,
 });
 
 cache(query);

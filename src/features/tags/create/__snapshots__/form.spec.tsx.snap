@@ -1,0 +1,520 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/tags/create/form > should create tag on submit > small screen 1`] = `
+<div
+  aria-labelledby=":rc:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth css-11b8f9u-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
+    id=":rc:"
+  >
+    actions.create_tag.title
+    <button
+      aria-label="actions.close"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium _cross_c9c479 css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="CloseIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </h2>
+  <div
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+  >
+    <form
+      aria-label="actions.create_tag.title"
+      class="_form_665f84 _form_2cc76a"
+    >
+      <div
+        class="_center_ffe4db _auto_ffe4db _preview_665f84"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 _label_cbafb0 css-goyvpm-MuiTypography-root"
+        >
+          Name
+        </p>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root _input_665f84 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":rd:"
+          id=":rd:-label"
+        >
+          actions.tag_form.fields.name
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":rd:"
+            name="name"
+            type="text"
+            value="Name"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.name
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":re:"
+          id=":re:-label"
+        >
+          actions.tag_form.fields.main_color
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":re:"
+            name="mainColor"
+            type="color"
+            value="#ffffff"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.main_color
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":rf:"
+          id=":rf:-label"
+        >
+          actions.tag_form.fields.second_color
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":rf:"
+            name="secondColor"
+            type="color"
+            value="#000000"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.second_color
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium _button_665f84 css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="submit"
+      >
+        actions.create
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`features/tags/create/form > should render form in fullscreen popup for small screens > small screen 1`] = `
+<div
+  aria-labelledby=":r8:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullScreen css-e9vkov-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root _title_62745c css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
+    id=":r8:"
+  >
+    actions.create_tag.title
+    <button
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium _cross_62745c css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="CloseIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </h2>
+  <div
+    class="MuiDialogContent-root _content_62745c css-ypiqx9-MuiDialogContent-root"
+  >
+    <form
+      aria-label="actions.create_tag.title"
+      class="_form_665f84 _form_2cc76a"
+    >
+      <div
+        class="_center_ffe4db _auto_ffe4db _preview_665f84"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 _label_cbafb0 css-goyvpm-MuiTypography-root"
+        >
+          Name
+        </p>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root _input_665f84 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":r9:"
+          id=":r9:-label"
+        >
+          actions.tag_form.fields.name
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r9:"
+            name="name"
+            type="text"
+            value="Name"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.name
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":ra:"
+          id=":ra:-label"
+        >
+          actions.tag_form.fields.main_color
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":ra:"
+            name="mainColor"
+            type="color"
+            value="#ffffff"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.main_color
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":rb:"
+          id=":rb:-label"
+        >
+          actions.tag_form.fields.second_color
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":rb:"
+            name="secondColor"
+            type="color"
+            value="#000000"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.second_color
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div
+    class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="submit"
+    >
+      actions.create
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;
+
+exports[`features/tags/create/form > should render form in popup > large screen 1`] = `
+<div
+  aria-labelledby=":r0:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth css-11b8f9u-MuiPaper-root-MuiDialog-paper"
+  role="dialog"
+>
+  <h2
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
+    id=":r0:"
+  >
+    actions.create_tag.title
+    <button
+      aria-label="actions.close"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium _cross_c9c479 css-1ccnvf0-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="CloseIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </h2>
+  <div
+    class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+  >
+    <form
+      aria-label="actions.create_tag.title"
+      class="_form_665f84 _form_2cc76a"
+    >
+      <div
+        class="_center_ffe4db _auto_ffe4db _preview_665f84"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body2 _label_cbafb0 css-goyvpm-MuiTypography-root"
+        >
+          Name
+        </p>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root _input_665f84 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":r1:"
+          id=":r1:-label"
+        >
+          actions.tag_form.fields.name
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r1:"
+            name="name"
+            type="text"
+            value="Name"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.name
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":r2:"
+          id=":r2:-label"
+        >
+          actions.tag_form.fields.main_color
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r2:"
+            name="mainColor"
+            type="color"
+            value="#ffffff"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.main_color
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":r3:"
+          id=":r3:-label"
+        >
+          actions.tag_form.fields.second_color
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r3:"
+            name="secondColor"
+            type="color"
+            value="#000000"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                actions.tag_form.fields.second_color
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium _button_665f84 css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="submit"
+      >
+        actions.create
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </form>
+  </div>
+</div>
+`;

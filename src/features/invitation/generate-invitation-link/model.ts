@@ -72,7 +72,7 @@ sample({
 	clock: query.$data,
 	filter: Boolean,
 	fn: (link) => ({ link, }),
-	target: form.setInitialForm,
+	target: form.setForm,
 });
 
 cache(query);
