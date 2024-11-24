@@ -6,6 +6,7 @@ export const hex = Template`#${String.withConstraint(
 )}`;
 export type HEX = Static<typeof hex>;
 
+export type AnyFunction = (...args: any) => any;
 export type VoidFunction = () => void;
 
 export interface ChainedParams {

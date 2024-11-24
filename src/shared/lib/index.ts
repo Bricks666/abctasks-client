@@ -12,3 +12,7 @@ export * from './chain-internal-route';
 export * from './create-flag';
 export * from './create-query-model';
 export * from './create-popup-control-model';
+export * from './construct-name';
+export * from './reconstruct-name';
+export * from './create-singleton-factory';
+export * from './retry-query';
