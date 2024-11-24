@@ -1,4 +1,4 @@
-import * as actions from './actions';
+import * as activities from './activities';
 import * as auth from './auth';
 import * as invitations from './invitations';
 import * as members from './members';
@@ -8,7 +8,7 @@ import * as tasks from './tasks';
 import * as users from './users';
 
 export const standardHandlers = [
-	...actions.standard,
+	...activities.standard,
 	...auth.standard,
 	...invitations.standard,
 	...members.standard,
@@ -19,7 +19,7 @@ export const standardHandlers = [
 ];
 
 export const handlers = {
-	actions,
+	activities,
 	auth,
 	invitations,
 	members,
