@@ -7,6 +7,8 @@ export const activitySphereRT = Record({
 }).asReadonly();
 
 export interface ActivitySphere extends Static<typeof activitySphereRT> {}
+export type ActivitySphereId = ActivitySphere['id'];
+
 export type ActivitySpheres = ActivitySphere[];
 
 export interface ActivitySpheresModel {

@@ -7,6 +7,7 @@ export const activityActionRT = Record({
 }).asReadonly();
 
 export interface ActivityAction extends Static<typeof activityActionRT> {}
+export type ActivityActionId = ActivityAction['id'];
 export type ActivityActions = ActivityAction[];
 
 export interface ActivityActionsModel {
