@@ -1,5 +1,3 @@
-import { Number, Record, Static, String } from 'runtypes';
-
 import {
 	DatesFiltersParams,
 	InRoomParams,
@@ -7,35 +5,25 @@ import {
 	SortParams
 } from '@/shared/types';
 
-import { user } from '../auth';
-
-const activityAction = Record({
-	id: Number,
-	name: String,
-}).asReadonly();
+import { User } from '../auth';
 
 export interface ActivityActionDto {
 	readonly id: number;
 	readonly name: string;
 }
+export interface ActivitySphereDto {
+	readonly id: number;
+	readonly name: string;
+}
 
-const activitySphere = Record({
-	id: Number,
-	name: String,
-}).asReadonly();
-
-export interface ActivitySphereDto extends Static<typeof activitySphere> {}
-
-export const activity = Record({
-	id: Number,
-	roomId: Number,
-	activist: user,
-	action: activityAction,
-	sphere: activitySphere,
-	createdAt: String,
-}).asReadonly();
-
-export interface Activity extends Static<typeof activity> {}
+export interface ActivityDto {
+	readonly id: number;
+	readonly roomId: number;
+	readonly activist: User;
+	readonly action: ActivityActionDto;
+	readonly sphere: ActivitySphereDto;
+	readonly createdAt: string;
+}
 
 export interface GetActivitiesInRoomParams
 	extends InRoomParams,
