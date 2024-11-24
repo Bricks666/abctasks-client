@@ -1,7 +1,17 @@
-import { useUnit } from 'effector-react';
+import { useAtom } from '@reatom/npm-react';
 
-import { activityActionsModel } from '../model';
+import { ActivityActions, activityActionsModel } from '../model';
 
-export const useActivityActions = () => {
-	return useUnit(activityActionsModel.query);
+export interface UseActivityActionsResult {
+	readonly data: ActivityActions;
+	readonly pending: boolean;
+}
+
+export const useActivityActions = (): UseActivityActionsResult => {
+	const model = activityActionsModel.create();
+
+	const [data] = useAtom(model.actionsAtom);
+	const [pending] = useAtom(model.pendingAtom);
+
+	return { data, pending, };
 };

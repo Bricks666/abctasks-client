@@ -29,6 +29,7 @@
 		"@mui/x-date-pickers": "^6.16.2",
 		"@reatom/framework": "^3.4.55",
 		"@reatom/npm-react": "^3.10.2",
+		"@reatom/persist": "^3.4.1",
 		"@withease/web-api": "^1.0.1",
 		"atomic-router": "^0.8.0",
 		"atomic-router-react": "^0.8.5",

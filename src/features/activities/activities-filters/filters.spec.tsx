@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { activityActionsModel } from '@/entities/activities';
 import { usersInRoomModel } from '@/entities/users';
 
 import { deviceInfoModel } from '@/shared/models';
@@ -64,9 +63,6 @@ describe('features/activities/activities-filters/filters', () => {
 		await allSettled(usersInRoomModel.query.start, {
 			scope,
 			params: { roomId, },
-		});
-		await allSettled(activityActionsModel.query.start, {
-			scope,
 		});
 		await act(async () => createComponent());
 	});

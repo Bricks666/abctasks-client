@@ -9,12 +9,15 @@ import {
 
 import { user } from '../auth';
 
-export const activityAction = Record({
+const activityAction = Record({
 	id: Number,
 	name: String,
 }).asReadonly();
 
-export interface ActivityAction extends Static<typeof activityAction> {}
+export interface ActivityActionDto {
+	readonly id: number;
+	readonly name: string;
+}
 
 export const activitySphere = Record({
 	id: Number,

@@ -8,12 +8,12 @@ import {
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ActivityAction } from '@/shared/api';
 import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
 import { useActivityActions } from '../../lib';
+import { ActivityAction } from '../../model';
 import { ActivityActionPicture } from '../activity-action-picture';
 
 export type ActivitiesActionsPickerProps = CommonProps &

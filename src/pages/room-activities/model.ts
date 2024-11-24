@@ -5,7 +5,6 @@ import { activitiesFiltersModel } from '@/features/activities';
 
 import {
 	activitiesInRoomModel,
-	activityActionsModel,
 	activitySpheresModel
 } from '@/entities/activities';
 import { roomModel, roomsModel } from '@/entities/rooms';
@@ -37,7 +36,6 @@ const queries = [
 	activitiesInRoomModel.query,
 	usersInRoomModel.query,
 	roomsModel.query,
-	activityActionsModel.query,
 	activitySpheresModel.query
 ];
 const sorting = {
