@@ -1,10 +1,17 @@
-import { useUnit } from 'effector-react';
+import { useAtom } from '@reatom/npm-react';
 
-import { activitySpheresModel } from '../model';
+import { ActivitySpheres, activitySpheresModel } from '../models';
 
-/**
- * @deprecated
- */
-export const useActivitySpheres = () => {
-	return useUnit(activitySpheresModel.query);
+export interface UseActivitySpheresResult {
+	readonly data: ActivitySpheres;
+	readonly pending: boolean;
+}
+
+export const useActivitySpheres = (): UseActivitySpheresResult => {
+	const model = activitySpheresModel.create();
+
+	const [data] = useAtom(model.spheresAtom);
+	const [pending] = useAtom(model.pendingAtom);
+
+	return { data, pending, };
 };

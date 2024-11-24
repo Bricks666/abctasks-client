@@ -2,12 +2,12 @@ import { Autocomplete, Chip, ListItem, ListItemText } from '@mui/material';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ActivitySphere } from '@/shared/api';
 import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
 import { useActivitySpheres } from '../../lib';
+import { ActivitySphere } from '../../models';
 
 export type ActivitiesSpheresPickerProps = CommonProps &
 	PickerProps<number> &

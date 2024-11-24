@@ -5,7 +5,7 @@ import { instance, normalizeQuery } from '../request';
 import {
 	Activity,
 	ActivityActionDto,
-	ActivitySphere,
+	ActivitySphereDto,
 	GetActivitiesInRoomParams
 } from './types';
 
@@ -29,5 +29,5 @@ export const getActions = async () => {
 export const getSpheres = async () => {
 	return instance
 		.get('activities/spheres/all')
-		.json<StandardResponse<ActivitySphere[]>>();
+		.json<StandardResponse<ActivitySphereDto[]>>();
 };

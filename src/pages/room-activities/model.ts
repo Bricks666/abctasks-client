@@ -3,10 +3,7 @@ import { createEvent, sample } from 'effector';
 
 import { activitiesFiltersModel } from '@/features/activities';
 
-import {
-	activitiesInRoomModel,
-	activitySpheresModel
-} from '@/entities/activities';
+import { activitiesInRoomModel } from '@/entities/activities';
 import { roomModel, roomsModel } from '@/entities/rooms';
 import { usersInRoomModel } from '@/entities/users';
 
@@ -35,8 +32,7 @@ const formApplied = createEvent<void>();
 const queries = [
 	activitiesInRoomModel.query,
 	usersInRoomModel.query,
-	roomsModel.query,
-	activitySpheresModel.query
+	roomsModel.query
 ];
 const sorting = {
 	by: 'createdAt',

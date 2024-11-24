@@ -1,8 +1,6 @@
-import { ActivityActions } from '@/entities/activities';
+import { ActivityActionDto, ActivitySphereDto } from '@/shared/api';
 
-import { ActivitySphere } from '@/shared/api';
-
-export const actions: ActivityActions = [
+export const actions: ActivityActionDto[] = [
 	{
 		id: 1,
 		name: 'created',
@@ -17,7 +15,7 @@ export const actions: ActivityActions = [
 	}
 ];
 
-export const spheres: ActivitySphere[] = [
+export const spheres: ActivitySphereDto[] = [
 	{
 		id: 1,
 		name: 'task',

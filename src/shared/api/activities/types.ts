@@ -19,12 +19,12 @@ export interface ActivityActionDto {
 	readonly name: string;
 }
 
-export const activitySphere = Record({
+const activitySphere = Record({
 	id: Number,
 	name: String,
 }).asReadonly();
 
-export interface ActivitySphere extends Static<typeof activitySphere> {}
+export interface ActivitySphereDto extends Static<typeof activitySphere> {}
 
 export const activity = Record({
 	id: Number,

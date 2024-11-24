@@ -1,6 +1,6 @@
 import { useAtom } from '@reatom/npm-react';
 
-import { ActivityActions, activityActionsModel } from '../model';
+import { ActivityActions, activityActionsModel } from '../models';
 
 export interface UseActivityActionsResult {
 	readonly data: ActivityActions;
