@@ -8,13 +8,11 @@ import { useTranslation } from 'react-i18next';
 
 import { CommonProps } from '@/shared/types';
 
-import { ActivityAction } from '../../model';
+import styles from './activity-action-icon.module.css';
 
-import styles from './activity-action-picture.module.css';
-
-export interface ActivityActionPictureProps
-	extends CommonProps,
-		ActivityAction {}
+export interface ActivityActionIconProps extends CommonProps {
+	readonly action: string;
+}
 
 const colorMap: Record<string, 'success' | 'error' | 'warning'> = {
 	create: 'success',
@@ -28,19 +26,20 @@ const iconMap: Record<string, React.ReactNode> = {
 	update: <EditIcon />,
 };
 
-export const ActivityActionPicture: React.FC<ActivityActionPictureProps> =
-	React.memo((props) => {
-		const { name, className, } = props;
+export const ActivityActionIcon: React.FC<ActivityActionIconProps> = React.memo(
+	(props) => {
+		const { action, className, } = props;
 		const { t, } = useTranslation('activities');
 
-		const label = t(`type.${name}`)!;
+		const label = t(`type.${action}`)!;
 
 		return (
 			<Avatar
-				className={cn(styles.avatar, styles[colorMap[name]], className)}
+				className={cn(styles.avatar, styles[colorMap[action]], className)}
 				aria-label={label}
 				alt={label}>
-				{iconMap[name]}
+				{iconMap[action]}
 			</Avatar>
 		);
-	});
+	}
+);

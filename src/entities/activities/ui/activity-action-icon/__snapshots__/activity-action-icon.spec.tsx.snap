@@ -1,0 +1,115 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`src/entities/activities/ui/activity-action-icon > should render icon for \`create\` action > create 1`] = `
+<div
+  aria-label="type.create"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _success_0061b8 classname css-1bjizj2-MuiAvatar-root"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="AddIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+    />
+  </svg>
+</div>
+`;
+
+exports[`src/entities/activities/ui/activity-action-icon > should render icon for \`remove\` action > remove 1`] = `
+<div
+  aria-label="type.remove"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _error_0061b8 classname css-1bjizj2-MuiAvatar-root"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="DeleteIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+    />
+  </svg>
+</div>
+`;
+
+exports[`src/entities/activities/ui/activity-action-icon > should render icon for \`update\` action > update 1`] = `
+<div
+  aria-label="type.update"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _warning_0061b8 classname css-1bjizj2-MuiAvatar-root"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="EditIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+    />
+  </svg>
+</div>
+`;
+
+exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`create\` action > create 1`] = `
+<div
+  aria-label="type.create"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _success_0061b8 classname css-1bjizj2-MuiAvatar-root"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="AddIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+    />
+  </svg>
+</div>
+`;
+
+exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`remove\` action > remove 1`] = `
+<div
+  aria-label="type.remove"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _error_0061b8 classname css-1bjizj2-MuiAvatar-root"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="DeleteIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+    />
+  </svg>
+</div>
+`;
+
+exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`update\` action > update 1`] = `
+<div
+  aria-label="type.update"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _warning_0061b8 classname css-1bjizj2-MuiAvatar-root"
+>
+  <svg
+    aria-hidden="true"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="EditIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+    />
+  </svg>
+</div>
+`;

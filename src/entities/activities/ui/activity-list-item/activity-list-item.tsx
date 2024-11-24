@@ -8,19 +8,22 @@ import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Activity } from '@/shared/api';
+import { ActivityDto } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { DateTime } from '@/shared/ui';
 
-import { ActivityActionPicture } from '../activity-action-picture';
+import { ActivityActionIcon } from '../activity-action-icon';
 
 import styles from './activity-list-item.module.css';
 
 export interface ActivityListItemProps
 	extends CommonProps,
-		Activity,
-		Omit<ListItemProps, keyof Activity> {}
+		ActivityDto,
+		Omit<ListItemProps, keyof ActivityDto> {}
 
+/**
+ * @todo Rework props. Stay only needed
+ */
 export const ActivityListItem: React.FC<ActivityListItemProps> = (props) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,7 +45,7 @@ export const ActivityListItem: React.FC<ActivityListItemProps> = (props) => {
 	return (
 		<ListItem className={cn(styles.item, className)} {...rest}>
 			<ListItemAvatar>
-				<ActivityActionPicture {...action} />
+				<ActivityActionIcon action={action.name} />
 			</ListItemAvatar>
 			<ListItemText
 				primary={activityText}
