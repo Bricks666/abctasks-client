@@ -1,0 +1,365 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`src/shared/ui/friendly-list/friendly-list > should disbale borders if disableBorder=true > disabled borders 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 _border-disabled_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_container_a7365d _container--vertical_a7365d _container--hide-scroll_a7365d"
+  >
+    <div
+      class="_indicator_a7365d _indicator--start_a7365d"
+    />
+    <div>
+      <ul
+        class="MuiList-root css-1mk9mw3-MuiList-root"
+      >
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value1
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value2
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value3
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+        >
+          value4
+        </li>
+      </ul>
+    </div>
+    <div
+      class="_indicator_a7365d _indicator--end_a7365d"
+    />
+  </div>
+</div>
+`;
+
+exports[`src/shared/ui/friendly-list/friendly-list > should map data if it is not array > with getData 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_container_a7365d _container--vertical_a7365d _container--hide-scroll_a7365d"
+  >
+    <div
+      class="_indicator_a7365d _indicator--start_a7365d"
+    />
+    <div>
+      <ul
+        class="MuiList-root css-1mk9mw3-MuiList-root"
+      >
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value1
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value2
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value3
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+        >
+          value4
+        </li>
+      </ul>
+    </div>
+    <div
+      class="_indicator_a7365d _indicator--end_a7365d"
+    />
+  </div>
+</div>
+`;
+
+exports[`src/shared/ui/friendly-list/friendly-list > should render empty phrase if there is no items > emtpy variant 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-eflgtu-MuiTypography-root"
+    >
+      Empty text
+    </p>
+  </div>
+</div>
+`;
+
+exports[`src/shared/ui/friendly-list/friendly-list > should render error component if is error > message variant 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <span>
+      error
+    </span>
+  </div>
+</div>
+`;
+
+exports[`src/shared/ui/friendly-list/friendly-list > should render list with items for each element > simple variant 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_container_a7365d _container--vertical_a7365d _container--hide-scroll_a7365d"
+  >
+    <div
+      class="_indicator_a7365d _indicator--start_a7365d"
+    />
+    <div>
+      <ul
+        class="MuiList-root css-1mk9mw3-MuiList-root"
+      >
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value1
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value2
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value3
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+        >
+          value4
+        </li>
+      </ul>
+    </div>
+    <div
+      class="_indicator_a7365d _indicator--end_a7365d"
+    />
+  </div>
+</div>
+`;
+
+exports[`src/shared/ui/friendly-list/friendly-list > should render loading spinner if list is loading > loading variant 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_container_a7365d _container--vertical_a7365d _container--hide-scroll_a7365d"
+  >
+    <div
+      class="_indicator_a7365d _indicator--start_a7365d"
+    />
+    <div>
+      <ul
+        class="MuiList-root css-1mk9mw3-MuiList-root"
+      >
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          Skeleton
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          Skeleton
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          Skeleton
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          Skeleton
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+        >
+          Skeleton
+        </li>
+      </ul>
+    </div>
+    <div
+      class="_indicator_a7365d _indicator--end_a7365d"
+    />
+  </div>
+</div>
+`;
+
+exports[`src/shared/ui/friendly-list/friendly-list > slots > should render after slot > after slot 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 _after_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_container_a7365d _container--vertical_a7365d _container--hide-scroll_a7365d"
+  >
+    <div
+      class="_indicator_a7365d _indicator--start_a7365d"
+    />
+    <div>
+      <ul
+        class="MuiList-root css-1mk9mw3-MuiList-root"
+      >
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value1
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value2
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value3
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+        >
+          value4
+        </li>
+      </ul>
+    </div>
+    <div
+      class="_indicator_a7365d _indicator--end_a7365d"
+    />
+  </div>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <div>
+      After slot
+    </div>
+  </div>
+</div>
+`;
+
+exports[`src/shared/ui/friendly-list/friendly-list > slots > should render before slot > before slot 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 _before_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <div>
+      Before slot
+    </div>
+  </div>
+  <div
+    class="_container_a7365d _container--vertical_a7365d _container--hide-scroll_a7365d"
+  >
+    <div
+      class="_indicator_a7365d _indicator--start_a7365d"
+    />
+    <div>
+      <ul
+        class="MuiList-root css-1mk9mw3-MuiList-root"
+      >
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value1
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value2
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value3
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+        >
+          value4
+        </li>
+      </ul>
+    </div>
+    <div
+      class="_indicator_a7365d _indicator--end_a7365d"
+    />
+  </div>
+</div>
+`;
+
+exports[`src/shared/ui/friendly-list/friendly-list > slots > should render both slots > both slots 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 _after_5e2d11 _before_5e2d11 _both_5e2d11 classname css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <div>
+      Before slot
+    </div>
+  </div>
+  <div
+    class="_container_a7365d _container--vertical_a7365d _container--hide-scroll_a7365d"
+  >
+    <div
+      class="_indicator_a7365d _indicator--start_a7365d"
+    />
+    <div>
+      <ul
+        class="MuiList-root css-1mk9mw3-MuiList-root"
+      >
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value1
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value2
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider css-mzpj2l-MuiListItem-root"
+        >
+          value3
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+        >
+          value4
+        </li>
+      </ul>
+    </div>
+    <div
+      class="_indicator_a7365d _indicator--end_a7365d"
+    />
+  </div>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <div>
+      After slot
+    </div>
+  </div>
+</div>
+`;
