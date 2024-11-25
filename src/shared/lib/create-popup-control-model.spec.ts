@@ -2,7 +2,7 @@ import { allSettled, fork, Scope } from 'effector';
 import { createMemoryHistory } from 'history';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { getParams, router } from '../configs';
+import { SEARCH_PARAMS_NAMES, router } from '../configs';
 import { popupsModel } from '../models';
 
 import {
@@ -89,7 +89,7 @@ describe('shared/lib/create-popup-control-model', () => {
 			expect(scope.getState(model.$isOpen)).toBeTruthy();
 			expect(scope.getState(popupsModel.$popups)).toContain(name);
 			expect(scope.getState(router.$query)).toStrictEqual({
-				[getParams.popup]: name,
+				[SEARCH_PARAMS_NAMES.popup]: name,
 			});
 			expect(fn).toHaveBeenCalled();
 			unsubscribe();

@@ -1,4 +1,4 @@
-export const getParams = {
+export const SEARCH_PARAMS_NAMES = {
 	popup: 'popup',
 	taskStatus: 'task-status',
 	taskId: 'task',
@@ -14,7 +14,7 @@ export const getParams = {
 	page: 'p',
 } as const;
 
-export const popupsMap = {
+export const POPUPS_NAMES = {
 	createTask: 'create-task',
 	updateTask: 'update-task',
 	tags: 'tags',
