@@ -4,24 +4,27 @@ import { createDomain, createEvent, sample } from 'effector';
 import { debounce } from 'patronum';
 import { Array } from 'runtypes';
 
-import { SearchUsersQuery, user, User, usersApi } from '@/shared/api';
+import { SearchUsersQuery, user, UserDto, usersApi } from '@/shared/api';
 import { extractData } from '@/shared/lib';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
 
+/**
+ * Move into `features` layer
+ */
 const searchUserDomain = createDomain();
 
 const handlerFx = searchUserDomain.effect<
 	SearchUsersQuery,
-	StandardResponse<User[]>,
+	StandardResponse<UserDto[]>,
 	Error
 >(usersApi.searchUsers);
 
 export const query = createQuery<
 	SearchUsersQuery,
-	StandardResponse<User[]>,
+	StandardResponse<UserDto[]>,
 	Error,
-	StandardResponse<User[]>,
-	User[]
+	StandardResponse<UserDto[]>,
+	UserDto[]
 >({
 	initialData: [],
 	effect: handlerFx,

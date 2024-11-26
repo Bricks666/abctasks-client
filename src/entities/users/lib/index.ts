@@ -1,2 +1,2 @@
 export * from './useSearchedUsers';
-export * from './useUsersInRoom';
+export * from './use-members-model';
