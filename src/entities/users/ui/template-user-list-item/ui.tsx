@@ -8,32 +8,24 @@ import {
 import cn from 'classnames';
 import * as React from 'react';
 
-import { User } from '@/shared/api';
+import { UserDto } from '@/shared/api';
 import { CommonProps, Slots } from '@/shared/types';
 
 import { UserAvatar } from '../user-avatar';
 
-import styles from './template-user-list-item.module.css';
+import styles from './styles.module.css';
 
 export interface TemplateUserListItemProps
 	extends CommonProps,
-		User,
-		Omit<ListItemProps, keyof CommonProps | keyof User | 'slots'> {
+		Pick<UserDto, 'username' | 'email' | 'photo'>,
+		Omit<ListItemProps, keyof CommonProps | keyof UserDto | 'slots'> {
 	readonly slots?: Slots<'actions' | 'extra'>;
 }
 
 export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
 	props
 ) => {
-	const {
-		username,
-		className,
-		photo,
-		email,
-		id: _id,
-		slots = {},
-		...rest
-	} = props;
+	const { username, className, photo, email, slots = {}, ...rest } = props;
 
 	return (
 		<ListItem

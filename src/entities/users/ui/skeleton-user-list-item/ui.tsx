@@ -11,7 +11,7 @@ import * as React from 'react';
 
 import { CommonProps } from '@/shared/types';
 
-import styles from './skeleton-user-list-item.module.css';
+import styles from './styles.module.css';
 
 export interface SkeletonUserListItemProps extends CommonProps, ListItemProps {}
 
