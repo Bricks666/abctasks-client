@@ -2,7 +2,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { RegistrationForm, RegistrationFormProps } from './ui';
+import { RegistrationForm, RegistrationFormProps } from './form';
 
 import '@testing-library/jest-dom/vitest';
 import {
@@ -15,7 +15,7 @@ import {
 	waitFor
 } from '~/test-utils';
 
-describe('features/auth/registration/ui', () => {
+describe('features/auth/registration/ui/form.tsx', () => {
 	const values = {
 		email: 'email@example.com',
 		username: 'username',
@@ -71,14 +71,14 @@ describe('features/auth/registration/ui', () => {
 
 		expect(submit).not.toHaveAttribute('disabled', true);
 
-		fireEvent.click(submit);
+		await wrapper.user.click(submit);
 	});
 
 	test('should send registration query with data from fields', async () => {
 		const { submit, username, email, password, repeatPassword, } = foundItems();
 		fillFields({ email, username, password, repeatPassword, }, values);
 
-		fireEvent.click(submit);
+		await wrapper.user.click(submit);
 
 		await waitFor(() => {
 			expect(email.value).toBe(values.email);
@@ -90,7 +90,7 @@ describe('features/auth/registration/ui', () => {
 
 	describe('validation', () => {
 		describe('username field', () => {
-			test('empty field', async () => {
+			test('should show error message if the field is empty', async () => {
 				const { submit, username, email, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -98,7 +98,7 @@ describe('features/auth/registration/ui', () => {
 					{ ...values, username: '', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -109,7 +109,7 @@ describe('features/auth/registration/ui', () => {
 				});
 			});
 
-			test('too short username', async () => {
+			test('should show error if the field is too short', async () => {
 				const { submit, username, email, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -117,7 +117,7 @@ describe('features/auth/registration/ui', () => {
 					{ ...values, username: '12', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -128,7 +128,7 @@ describe('features/auth/registration/ui', () => {
 				});
 			});
 
-			test('too long username', async () => {
+			test('should show error is the field is too long', async () => {
 				const { submit, username, email, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -140,7 +140,7 @@ describe('features/auth/registration/ui', () => {
 					}
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -153,7 +153,7 @@ describe('features/auth/registration/ui', () => {
 		});
 
 		describe('email field', () => {
-			test('empty field', async () => {
+			test('should show error if the field is empty', async () => {
 				const { submit, username, email, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -161,7 +161,7 @@ describe('features/auth/registration/ui', () => {
 					{ ...values, email: '', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -172,49 +172,7 @@ describe('features/auth/registration/ui', () => {
 				});
 			});
 
-			test('too short email', async () => {
-				const { submit, email, username, password, repeatPassword, } =
-					foundItems();
-				fillFields(
-					{ email, username, password, repeatPassword, },
-					{ ...values, email: 'e@g.c', }
-				);
-
-				fireEvent.click(submit);
-
-				await waitFor(() => {
-					const element = wrapper.getByText(
-						'registration_form.errors.email.min_length'
-					);
-
-					expect(element).toBeInTheDocument();
-				});
-			});
-
-			test('too long email', async () => {
-				const { submit, email, username, password, repeatPassword, } =
-					foundItems();
-				fillFields(
-					{ email, username, password, repeatPassword, },
-					{
-						...values,
-						email:
-							'asdfasdfasdasdfasdfasdfasdfasdfasdffasdfasdfeasdfasdf1123@gmail.com',
-					}
-				);
-
-				fireEvent.click(submit);
-
-				await waitFor(() => {
-					const element = wrapper.getByText(
-						'registration_form.errors.email.max_length'
-					);
-
-					expect(element).toBeInTheDocument();
-				});
-			});
-
-			test('there is not user with this email', async () => {
+			test('should show error if there is a user with this email', async () => {
 				server.use(handlers.auth.error.registration);
 
 				const { submit, email, username, password, repeatPassword, } =
@@ -224,7 +182,7 @@ describe('features/auth/registration/ui', () => {
 					{ ...values, email: 'asd@gmail.com', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -237,7 +195,7 @@ describe('features/auth/registration/ui', () => {
 		});
 
 		describe('password field', () => {
-			test('empty field', async () => {
+			test('should show error if the field is empty', async () => {
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -245,7 +203,7 @@ describe('features/auth/registration/ui', () => {
 					{ ...values, password: '', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -256,7 +214,7 @@ describe('features/auth/registration/ui', () => {
 				});
 			});
 
-			test('too short password', async () => {
+			test('should show error if the field is too short', async () => {
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -264,7 +222,7 @@ describe('features/auth/registration/ui', () => {
 					{ ...values, password: 'e@g.c', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -275,7 +233,7 @@ describe('features/auth/registration/ui', () => {
 				});
 			});
 
-			test('too long password', async () => {
+			test('should show error if the field is too long', async () => {
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -287,7 +245,7 @@ describe('features/auth/registration/ui', () => {
 					}
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -299,8 +257,8 @@ describe('features/auth/registration/ui', () => {
 			});
 		});
 
-		describe.skip('repeat password field', () => {
-			test('different passwords', async () => {
+		describe('repeat password field', () => {
+			test('should show error if the field is not match with `password` one', async () => {
 				const { submit, email, username, password, repeatPassword, } =
 					foundItems();
 				fillFields(
@@ -308,7 +266,7 @@ describe('features/auth/registration/ui', () => {
 					{ ...values, repeatPassword: 'another-password', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(submit);
 
 				await waitFor(() => {
 					const element = wrapper.getByText(

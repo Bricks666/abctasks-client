@@ -1,9 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`features/auth/registration/ui > should render form, 4 inputs and button 1`] = `
+exports[`features/auth/registration/ui/form.tsx > should render form, 4 inputs and button 1`] = `
 <form
   aria-label="registration_form.title"
-  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _form_97cd14 _form_d50c7c css-hpo018-MuiPaper-root"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _form_97cd14 _form_8143fd css-hpo018-MuiPaper-root"
 >
   <div
     class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
