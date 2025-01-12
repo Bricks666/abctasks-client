@@ -18,6 +18,13 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, 'src'),
+			'@reatom/form': path.resolve(
+				__dirname,
+				'src',
+				'shared',
+				'lib',
+				'reatom-form'
+			),
 			'~/test-utils': path.resolve(__dirname, 'test-utils'),
 		},
 	},

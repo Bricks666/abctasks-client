@@ -173,6 +173,13 @@ export default defineConfig(({ mode }) => {
 		resolve: {
 			alias: {
 				'@': path.resolve(__dirname, 'src'),
+				'@reatom/form': path.resolve(
+					__dirname,
+					'src',
+					'shared',
+					'lib',
+					'reatom-form'
+				),
 			},
 		},
 		css: {

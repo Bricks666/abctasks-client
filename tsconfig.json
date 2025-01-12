@@ -18,7 +18,8 @@
 		"baseUrl": "",
 		"paths": {
 			"@/*": ["./src/*"],
-			"~/test-utils": ["./test-utils"]
+			"~/test-utils": ["./test-utils"],
+			"@reatom/form": ["./src/shared/lib/reatom-form/index.ts"]
 		}
 	},
 	"include": ["src"]

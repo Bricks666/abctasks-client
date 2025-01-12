@@ -1,6 +1,9 @@
 import { Rule } from 'effector-forms';
 import Joi from 'joi';
 
+/**
+ * @deprecated
+ */
 export const createRuleFromSchema = <V, T = any>(
 	name: string,
 	schema: Joi.Schema<T>
