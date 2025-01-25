@@ -1,48 +1,47 @@
-import { createDomain, sample } from 'effector';
-
-// eslint-disable-next-line no-restricted-imports
-import { started } from '../app';
+import {
+	atom,
+	mapState,
+	onConnect,
+	readonly,
+	withInit
+} from '@reatom/framework';
 
 import { calculateDevice } from './lib';
 import { Devices } from './types';
 
-const deviceInfoDomain = createDomain();
-
-export const $device = deviceInfoDomain.store<Devices>('desktop-large');
-
-export const $isMobile = $device.map((device) => device === 'mobile');
-export const $isTabletVertical = $device.map(
-	(device) => device === 'tablet-vertical'
-);
-export const $isTabletHorizontal = $device.map(
-	(device) => device === 'tablet-horizontal'
-);
-export const $isDesktopSmall = $device.map(
-	(device) => device === 'desktop-small'
-);
-export const $isDesktopLarge = $device.map(
-	(device) => device === 'desktop-large'
+// eslint-disable-next-line no-underscore-dangle
+const _deviceAtom = atom<Devices>('desktop-large', '_deviceAtom').pipe(
+	withInit(() => {
+		return calculateDevice();
+	})
 );
 
-const calculateDeviceFx = deviceInfoDomain.effect<any, Devices>(
-	calculateDevice
-);
-
-export const subscribeFx = deviceInfoDomain.effect(() => {
-	window.addEventListener('resize', calculateDeviceFx);
-	return calculateDeviceFx({});
+onConnect(_deviceAtom, (ctx) => {
+	window.addEventListener(
+		'resize',
+		() => {
+			_deviceAtom(ctx, calculateDevice());
+		},
+		{
+			signal: ctx.controller.signal,
+		}
+	);
 });
 
-export const unsubscribeFx = deviceInfoDomain.effect(() =>
-	window.removeEventListener('resize', calculateDeviceFx)
+export const deviceAtom = readonly(_deviceAtom);
+
+export const isMobileAtom = deviceAtom.pipe(
+	mapState((_ctx, device) => device === 'mobile')
 );
-
-sample({
-	clock: calculateDeviceFx.doneData,
-	target: $device,
-});
-
-sample({
-	clock: started,
-	target: subscribeFx,
-});
+export const isTabletVerticalAtom = deviceAtom.pipe(
+	mapState((_ctx, device) => device === 'tablet-vertical')
+);
+export const isTabletHorizontalAtom = deviceAtom.pipe(
+	mapState((_ctx, device) => device === 'tablet-horizontal')
+);
+export const isDesktopSmallAtom = deviceAtom.pipe(
+	mapState((_ctx, device) => device === 'desktop-small')
+);
+export const isDesktopLargeAtom = deviceAtom.pipe(
+	mapState((_ctx, device) => device === 'desktop-large')
+);

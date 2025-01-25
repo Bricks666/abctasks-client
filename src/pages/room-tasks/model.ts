@@ -19,12 +19,12 @@ import { tasksInRoomModel } from '@/entities/tasks';
 import { usersInRoomModel } from '@/entities/users';
 
 import {
-	Activity,
+	ActivityDto,
 	UpdateTaskParams,
 	activitiesApi,
 	activity
 } from '@/shared/api';
-import { controls, getParams, routes } from '@/shared/configs';
+import { controls, SEARCH_PARAMS_NAMES, routes } from '@/shared/configs';
 import { extractData } from '@/shared/lib';
 import { sessionModel } from '@/shared/models';
 import {
@@ -44,7 +44,7 @@ const { formValidated, reset, fields, } = tasksFiltersModel.form;
 const activitiesDomain = createDomain();
 const handlerFx = activitiesDomain.effect<
 	InRoomParams,
-	StandardResponse<PaginationResponse<Activity>>
+	StandardResponse<PaginationResponse<ActivityDto>>
 >(({ roomId, }) =>
 	activitiesApi.getAll({ roomId, count: 6, by: 'createdAt', type: 'desc', })
 );
@@ -52,10 +52,10 @@ const $roomId = authorizedRoute.$params.map((params) => params.id);
 
 export const query = createQuery<
 	InRoomParams,
-	StandardResponse<PaginationResponse<Activity>>,
+	StandardResponse<PaginationResponse<ActivityDto>>,
 	Error,
-	StandardResponse<PaginationResponse<Activity>>,
-	PaginationResponse<Activity>
+	StandardResponse<PaginationResponse<ActivityDto>>,
+	PaginationResponse<ActivityDto>
 >({
 	initialData: { items: [], totalCount: 0, limit: 5, },
 	effect: handlerFx,
@@ -76,10 +76,10 @@ const queries = [
 
 const mapQuery = (query: RouteQuery) => {
 	return {
-		authorIds: query[getParams.userId],
-		tagIds: query[getParams.userId],
-		before: query[getParams.before],
-		after: query[getParams.after],
+		authorIds: query[SEARCH_PARAMS_NAMES.userId],
+		tagIds: query[SEARCH_PARAMS_NAMES.userId],
+		before: query[SEARCH_PARAMS_NAMES.before],
+		after: query[SEARCH_PARAMS_NAMES.after],
 	};
 };
 
@@ -98,10 +98,10 @@ sample({
 querySync({
 	controls,
 	source: {
-		[getParams.userId]: fields.authorIds.$value,
-		[getParams.tagId]: fields.tagIds.$value,
-		[getParams.after]: fields.after.$value,
-		[getParams.before]: fields.before.$value,
+		[SEARCH_PARAMS_NAMES.userId]: fields.authorIds.$value,
+		[SEARCH_PARAMS_NAMES.tagId]: fields.tagIds.$value,
+		[SEARCH_PARAMS_NAMES.after]: fields.after.$value,
+		[SEARCH_PARAMS_NAMES.before]: fields.before.$value,
 	},
 	clock: [formValidated, reset],
 	route: authorizedRoute,

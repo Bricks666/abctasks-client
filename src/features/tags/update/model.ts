@@ -6,7 +6,12 @@ import { and, not } from 'patronum';
 import { tagsModel, tagModel } from '@/entities/tags';
 
 import { UpdateTagParams, Tag, tagsApi, tag, GetTagParams } from '@/shared/api';
-import { getParams, i18n, popupsMap, routes } from '@/shared/configs';
+import {
+	SEARCH_PARAMS_NAMES,
+	i18n,
+	POPUPS_NAMES,
+	routes
+} from '@/shared/configs';
 import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -26,12 +31,12 @@ export const mutation = createMutation<
 });
 
 export const popupControls = createPopupControlModel({
-	name: popupsMap.updateTag,
+	name: POPUPS_NAMES.updateTag,
 });
 export const $roomId = routes.room.tags.$params.map((params) => params.id);
 export const form = tagFormModel.create();
 export const tagId = createQueryModel<number | null>({
-	name: getParams.tagId,
+	name: SEARCH_PARAMS_NAMES.tagId,
 	defaultValue: null,
 });
 

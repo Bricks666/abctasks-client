@@ -6,7 +6,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TagPicker } from '@/entities/tags';
-import { UsersInRoomPicker } from '@/entities/users';
+import { MembersPicker } from '@/entities/users';
 
 import { usePreventDefault, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
@@ -108,7 +108,7 @@ const Users: React.FC = () => {
 	const label = t('actions.tasks_filters.fields.authors');
 
 	return (
-		<UsersInRoomPicker
+		<MembersPicker
 			value={authorIds.value}
 			onChange={authorIds.onChange}
 			onBlur={authorIds.onBlur}

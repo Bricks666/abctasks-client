@@ -11,7 +11,12 @@ import {
 	task,
 	TaskStatus
 } from '@/shared/api';
-import { getParams, i18n, popupsMap, routes } from '@/shared/configs';
+import {
+	SEARCH_PARAMS_NAMES,
+	i18n,
+	POPUPS_NAMES,
+	routes
+} from '@/shared/configs';
 import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -39,11 +44,11 @@ export const mutation = createMutation<
 export const form = taskFormModel.create();
 
 export const popupControls = createPopupControlModel({
-	name: popupsMap.createTask,
+	name: POPUPS_NAMES.createTask,
 });
 
 export const status = createQueryModel<TaskStatus | null>({
-	name: getParams.taskStatus,
+	name: SEARCH_PARAMS_NAMES.taskStatus,
 	defaultValue: null,
 });
 export const openPopup = createEvent<TaskStatus>();

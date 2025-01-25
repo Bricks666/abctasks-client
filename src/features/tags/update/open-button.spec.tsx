@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { getParams, popupsMap, router } from '@/shared/configs';
+import { SEARCH_PARAMS_NAMES, POPUPS_NAMES, router } from '@/shared/configs';
 
 import { popupControls } from './model';
 import { OpenUpdateTagButton } from './open-button';
@@ -48,8 +48,8 @@ describe('featuers/tags/update/open-button', () => {
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
 			expect(scope.getState(router.$query)).toStrictEqual({
-				[getParams.popup]: popupsMap.updateTag,
-				[getParams.tagId]: tagId.toString(),
+				[SEARCH_PARAMS_NAMES.popup]: POPUPS_NAMES.updateTag,
+				[SEARCH_PARAMS_NAMES.tagId]: tagId.toString(),
 			});
 		});
 	});

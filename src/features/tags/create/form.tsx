@@ -3,7 +3,7 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { deviceInfoModel } from '@/shared/models';
+import { useIsSmallScreen } from '@/shared/models';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
@@ -20,11 +20,7 @@ export const CreateTag: React.FC<CreateTagProps> = (props) => {
 	const pending = useUnit(mutation.$pending);
 	const onClick = useUnit(form.submit);
 
-	const [isMobile, isVertical] = useUnit([
-		deviceInfoModel.$isMobile,
-		deviceInfoModel.$isTabletVertical
-	]);
-	const isFullscreen = isMobile || isVertical;
+	const isFullscreen = useIsSmallScreen();
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 

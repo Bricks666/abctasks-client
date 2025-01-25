@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { taskModel } from '@/entities/tasks';
 
-import { deviceInfoModel } from '@/shared/models';
+import { useIsSmallScreen } from '@/shared/models';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
@@ -21,15 +21,10 @@ export const UpdateTask: React.FC<UpdateTaskProps> = (props) => {
 	const onClose = useUnit(popupControls.close);
 	const { data: task, } = useUnit(taskModel.query);
 
-	const [isMobile, isVertical] = useUnit([
-		deviceInfoModel.$isMobile,
-		deviceInfoModel.$isTabletVertical
-	]);
+	const isFullscreen = useIsSmallScreen();
 
 	const onClick = useUnit(form.submit);
 	const pending = useUnit(mutation.$pending);
-
-	const isFullscreen = isMobile || isVertical;
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 

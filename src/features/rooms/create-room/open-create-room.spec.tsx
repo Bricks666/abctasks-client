@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { popupsMap, router } from '@/shared/configs';
+import { POPUPS_NAMES, router } from '@/shared/configs';
 import { popupsModel } from '@/shared/models';
 
 import { OpenCreateRoom } from './open-create-room';
@@ -40,6 +40,8 @@ describe('features/rooms/create-room/open-create-room', () => {
 
 		await wrapper.user.click(button);
 
-		expect(scope.getState(popupsModel.$popups)).toContain(popupsMap.createRoom);
+		expect(scope.getState(popupsModel.$popups)).toContain(
+			POPUPS_NAMES.createRoom
+		);
 	});
 });

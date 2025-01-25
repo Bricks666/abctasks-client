@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, test } from 'vitest';
 
 import { tagModel, tagsModel } from '@/entities/tags';
 
-import { getParams, popupsMap, router } from '@/shared/configs';
+import { SEARCH_PARAMS_NAMES, POPUPS_NAMES, router } from '@/shared/configs';
 import { deviceInfoModel, notificationsModel } from '@/shared/models';
 
 import { openPopup, popupControls } from './model';
@@ -123,8 +123,8 @@ describe('features/tags/update/ui', () => {
 			expect(scope.getState(popupControls.$isOpen)).toBeFalsy();
 			expect(scope.getState(router.$query)).not.toContainEqual(
 				expect.objectContaining({
-					[getParams.tagId]: tagId,
-					[getParams.popup]: popupsMap.updateTag,
+					[SEARCH_PARAMS_NAMES.tagId]: tagId,
+					[SEARCH_PARAMS_NAMES.popup]: POPUPS_NAMES.updateTag,
 				})
 			);
 		});

@@ -3,7 +3,7 @@ import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { deviceInfoModel } from '@/shared/models';
+import { useIsSmallScreen } from '@/shared/models';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
@@ -17,14 +17,10 @@ export interface CreateRoomProps extends CommonProps, BasePopupProps {}
 export const CreateRoom: React.FC<CreateRoomProps> = (props) => {
 	const { t, } = useTranslation('rooms');
 	const onClose = useUnit(popupControls.close);
-	const [isMobile, isVertical] = useUnit([
-		deviceInfoModel.$isMobile,
-		deviceInfoModel.$isTabletVertical
-	]);
+	const isFullscreen = useIsSmallScreen();
+
 	const onClick = useUnit(form.submit);
 	const pending = useUnit(mutation.$pending);
-
-	const isFullscreen = isMobile || isVertical;
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 

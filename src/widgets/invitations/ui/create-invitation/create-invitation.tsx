@@ -13,7 +13,7 @@ import {
 
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
-import { deviceInfoModel } from '@/shared/models';
+import { useIsSmallScreen } from '@/shared/models';
 import { BasePopupProps, CommonProps } from '@/shared/types';
 import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
@@ -30,12 +30,7 @@ export const CreateInvitation: React.FC<CreateInvitationProps> = (props) => {
 
 	const close = useUnit(createInvitationModel.popupControls.close);
 
-	const [isVertical, isMobile] = useUnit([
-		deviceInfoModel.$isTabletVertical,
-		deviceInfoModel.$isMobile
-	]);
-
-	const fullscreenPopup = isVertical || isMobile;
+	const fullscreenPopup = useIsSmallScreen();
 
 	const translation = t('actions', { returnObjects: true, }) as Record<
 		string,

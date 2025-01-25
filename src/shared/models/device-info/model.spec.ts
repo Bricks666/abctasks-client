@@ -1,39 +1,37 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import { createEffect } from 'effector';
 import { beforeEach, describe, expect, test } from 'vitest';
 
-// eslint-disable-next-line no-restricted-imports
-import { started } from '../app';
-
 import {
-	$device,
-	$isDesktopLarge,
-	$isDesktopSmall,
-	$isMobile,
-	$isTabletHorizontal,
-	$isTabletVertical
+	deviceAtom,
+	isDesktopLargeAtom,
+	isDesktopSmallAtom,
+	isMobileAtom,
+	isTabletHorizontalAtom,
+	isTabletVerticalAtom
 } from './model';
 
-import { Scope, allSettled, fork } from '~/test-utils';
+import { TestCtx, createTestCtx } from '~/test-utils';
 
 describe('shared/models/device-info/model', () => {
-	let scope: Scope;
+	let ctx: TestCtx;
 
 	beforeEach(async () => {
-		scope = fork();
+		ctx = createTestCtx();
 
 		window.innerWidth = 1920;
-
-		await allSettled(started, { scope, });
 	});
 
 	test('should calculate initialal size on app start', () => {
-		expect(scope.getState($device)).toBe('desktop-large');
-		expect(scope.getState($isMobile)).toBeFalsy();
-		expect(scope.getState($isTabletVertical)).toBeFalsy();
-		expect(scope.getState($isTabletHorizontal)).toBeFalsy();
-		expect(scope.getState($isDesktopSmall)).toBeFalsy();
-		expect(scope.getState($isDesktopLarge)).toBeTruthy();
+		const track = ctx.subscribeTrack(deviceAtom);
+
+		expect(track.lastInput()).toBe('desktop-large');
+		expect(ctx.get(isMobileAtom)).toBeFalsy();
+		expect(ctx.get(isTabletVerticalAtom)).toBeFalsy();
+		expect(ctx.get(isTabletHorizontalAtom)).toBeFalsy();
+		expect(ctx.get(isDesktopSmallAtom)).toBeFalsy();
+		expect(ctx.get(isDesktopLargeAtom)).toBeTruthy();
+
+		track.unsubscribe();
 	});
 
 	test.each([
@@ -57,23 +55,16 @@ describe('shared/models/device-info/model', () => {
 		async ({ size, type, }) => {
 			window.innerWidth = size;
 
-			await allSettled(
-				createEffect(() => {
-					window.dispatchEvent(new Event('resize'));
-				}),
-				{ scope, }
-			);
+			window.dispatchEvent(new Event('resize'));
 
-			expect(scope.getState($device)).toBe(type);
-			expect(scope.getState($isMobile)).toBe(type === 'mobile');
-			expect(scope.getState($isTabletVertical)).toBe(
-				type === 'tablet-vertical'
-			);
-			expect(scope.getState($isTabletHorizontal)).toBe(
+			expect(ctx.get(deviceAtom)).toBe(type);
+			expect(ctx.get(isMobileAtom)).toBe(type === 'mobile');
+			expect(ctx.get(isTabletVerticalAtom)).toBe(type === 'tablet-vertical');
+			expect(ctx.get(isTabletHorizontalAtom)).toBe(
 				type === 'tablet-horizontal'
 			);
-			expect(scope.getState($isDesktopSmall)).toBe(type === 'desktop-small');
-			expect(scope.getState($isDesktopLarge)).toBe(type === 'desktop-large');
+			expect(ctx.get(isDesktopSmallAtom)).toBe(type === 'desktop-small');
+			expect(ctx.get(isDesktopLargeAtom)).toBe(type === 'desktop-large');
 		}
 	);
 });

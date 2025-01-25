@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { getParams, popupsMap, router } from '@/shared/configs';
+import { SEARCH_PARAMS_NAMES, POPUPS_NAMES, router } from '@/shared/configs';
 
 import { popupControls } from './model';
 import { OpenCreateTaskButton } from './open-button';
@@ -50,8 +50,8 @@ describe('features/tasks/create-task/open-button', () => {
 		await waitFor(() => {
 			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
 			expect(scope.getState(router.$query)).toStrictEqual({
-				[getParams.popup]: popupsMap.createTask,
-				[getParams.taskStatus]: columnStatus,
+				[SEARCH_PARAMS_NAMES.popup]: POPUPS_NAMES.createTask,
+				[SEARCH_PARAMS_NAMES.taskStatus]: columnStatus,
 			});
 		});
 	});

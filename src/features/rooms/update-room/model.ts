@@ -5,8 +5,8 @@ import { and, not } from 'patronum';
 
 import { roomModel, roomsModel } from '@/entities/rooms';
 
-import { UpdateRoomParams, Room, roomsApi, room } from '@/shared/api';
-import { getParams, i18n, popupsMap } from '@/shared/configs';
+import { UpdateRoomParams, RoomDto, roomsApi, room } from '@/shared/api';
+import { SEARCH_PARAMS_NAMES, i18n, POPUPS_NAMES } from '@/shared/configs';
 import { createPopupControlModel, createQueryModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -17,14 +17,14 @@ const updateRoomDomain = createDomain();
 
 const handlerFx = updateRoomDomain.effect<
 	UpdateRoomParams,
-	StandardResponse<Room>,
+	StandardResponse<RoomDto>,
 	Error
 >(roomsApi.update);
 
 export const mutation = createMutation<
 	UpdateRoomParams,
-	StandardResponse<Room>,
-	StandardResponse<Room>,
+	StandardResponse<RoomDto>,
+	StandardResponse<RoomDto>,
 	Error
 >({
 	effect: handlerFx,
@@ -33,10 +33,10 @@ export const mutation = createMutation<
 
 export const form = roomFormModel.create();
 export const popupControls = createPopupControlModel({
-	name: popupsMap.updateRoom,
+	name: POPUPS_NAMES.updateRoom,
 });
 export const roomId = createQueryModel<number | null>({
-	name: getParams.roomId,
+	name: SEARCH_PARAMS_NAMES.roomId,
 	defaultValue: null,
 });
 export const openPopup = createEvent<number>();
