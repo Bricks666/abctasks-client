@@ -13,8 +13,8 @@ import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
 import { useActivityActions } from '../../lib';
-import { ActivityAction } from '../../model';
-import { ActivityActionPicture } from '../activity-action-picture';
+import { ActivityAction } from '../../models';
+import { ActivityActionIcon } from '../activity-action-icon';
 
 export type ActivitiesActionsPickerProps = CommonProps &
 	PickerProps<number> &
@@ -55,7 +55,7 @@ export const ActivitiesActionsPicker: React.FC<ActivitiesActionsPickerProps> =
 					return (
 						<ListItem {...props}>
 							<ListItemAvatar>
-								<ActivityActionPicture {...option} />
+								<ActivityActionIcon {...option} />
 							</ListItemAvatar>
 							<ListItemText>{activity}</ListItemText>
 						</ListItem>

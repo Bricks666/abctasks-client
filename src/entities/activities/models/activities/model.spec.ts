@@ -20,7 +20,7 @@ describe('src/entities/activitites/models/activities/model', () => {
 	let model: ActivitiesModel;
 
 	const createModel = (roomId = defaultRoomId) => {
-		model = create({ roomId, });
+		model = create({ roomId, name: 'test', });
 	};
 
 	beforeEach(() => {
@@ -37,7 +37,7 @@ describe('src/entities/activitites/models/activities/model', () => {
 	test('should create signleton model for the same room', () => {
 		createModel();
 
-		const anotherModel = create({ roomId: defaultRoomId, });
+		const anotherModel = create({ roomId: defaultRoomId, name: 'test', });
 
 		expect(model).toBe(anotherModel);
 	});
@@ -45,7 +45,7 @@ describe('src/entities/activitites/models/activities/model', () => {
 	test('should create different models for different rooms', () => {
 		createModel();
 
-		const anotherModel = create({ roomId: rooms[1].id, });
+		const anotherModel = create({ roomId: rooms[1].id, name: 'test', });
 
 		expect(model).not.toBe(anotherModel);
 	});
@@ -57,7 +57,7 @@ describe('src/entities/activitites/models/activities/model', () => {
 
 		track.unsubscribe();
 
-		expect(model).not.toBe(create({ roomId: defaultRoomId, }));
+		expect(model).not.toBe(create({ roomId: defaultRoomId, name: 'test', }));
 	});
 
 	test('should load all activitites', async () => {

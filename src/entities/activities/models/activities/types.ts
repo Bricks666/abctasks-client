@@ -11,8 +11,6 @@ import {
 import { ActivityActionId, activityActionRT } from '../actions';
 import { ActivitySphereId, activitySphereRT } from '../spheres';
 
-
-
 export const activityRT = Record({
 	id: Number,
 	roomId: Number,
@@ -29,7 +27,6 @@ export type Activities = Activity[];
 
 export interface FetchActivititesParams {
 	readonly page?: number;
-	readonly count?: number;
 	readonly by?: string | null;
 	readonly type?: SortDirection | null;
 	readonly before?: string | null;
@@ -43,7 +40,13 @@ export interface FetchActivititesParams {
 }
 
 export interface CreateActivitiesModelParams {
+	readonly name: string;
 	readonly roomId: number;
+
+	/**
+	 * @default 50
+	 */
+	readonly count?: number;
 }
 
 export interface ActivitiesModel {
@@ -52,6 +55,7 @@ export interface ActivitiesModel {
 		StandardResponse<PaginationResponse<Activity>>
 	>;
 	readonly activititesAtom: Atom<Activities>;
+	readonly errorAtom: Atom<Error | null>;
 	readonly pagesCountAtom: Atom<number>;
 	readonly hasItemsAtom: Atom<boolean>;
 	readonly pendingAtom: Atom<boolean>;

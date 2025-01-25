@@ -6,7 +6,8 @@ import {
 	withRetry,
 	reatomAsync,
 	onConnect,
-	withAbort
+	withAbort,
+	withErrorAtom
 } from '@reatom/framework';
 
 import { activitiesApi } from '@/shared/api';
@@ -25,46 +26,53 @@ import {
 	FetchActivititesParams
 } from './types';
 
-const modelName = constructName('activitites', 'in-room');
+const modelName = 'list';
 
 export const create = createSingletonFactory(
 	(params: CreateActivitiesModelParams): ActivitiesModel => {
-		const { roomId, } = params;
+		const { name, roomId, count = 50, } = params;
 
-		const fetch = reatomAsync(async (ctx, params?: FetchActivititesParams) => {
-			return ctx.schedule(() =>
-				activitiesApi.getAll({ ...params, roomId, }, ctx.controller.signal)
-			);
-		}, constructName(modelName, 'fetch')).pipe(
+		const fetch = reatomAsync(
+			async (ctx, params?: FetchActivititesParams) => {
+				return ctx.schedule(() =>
+					activitiesApi.getAll(
+						{ ...params, roomId, count, },
+						ctx.controller.signal
+					)
+				);
+			},
+			constructName(name, modelName, 'fetch')
+		).pipe(
 			withDataAtom(
 				{ items: [], totalCount: 0, limit: 50, } as PaginationResponse<Activity>,
 				mapStandardResponse
 			),
 			withCache(),
 			withRetry(),
-			withAbort()
+			withAbort(),
+			withErrorAtom(undefined, { initState: null, })
 		);
 
 		const pendingAtom = atom(
 			(ctx) => !!ctx.spy(fetch.pendingAtom),
-			constructName(modelName, 'pendingAtom')
+			constructName(name, modelName, 'pendingAtom')
 		);
-
 		const activititesAtom = atom(
 			(ctx) => ctx.spy(fetch.dataAtom).items,
-			constructName(modelName, 'activititesAtom')
+			constructName(name, modelName, 'activititesAtom')
 		);
-
 		const hasItemsAtom = atom(
 			(ctx) => !!ctx.spy(fetch.dataAtom).totalCount,
-			constructName(modelName, 'hasItemsAtom')
+			constructName(name, modelName, 'hasItemsAtom')
 		);
+		const pagesCountAtom = atom(
+			(ctx) => {
+				const { limit, totalCount, } = ctx.spy(fetch.dataAtom);
 
-		const pagesCountAtom = atom((ctx) => {
-			const { limit, totalCount, } = ctx.spy(fetch.dataAtom);
-
-			return Math.ceil(totalCount / limit);
-		}, constructName(modelName, 'pagesCountAtom'));
+				return Math.ceil(totalCount / limit);
+			},
+			constructName(name, modelName, 'pagesCountAtom')
+		);
 
 		onConnect(fetch.dataAtom, (ctx) => {
 			fetch(ctx);
@@ -84,6 +92,7 @@ export const create = createSingletonFactory(
 			pagesCountAtom,
 			hasItemsAtom,
 			pendingAtom,
+			errorAtom: fetch.errorAtom,
 		};
 	},
 	{

@@ -1,31 +1,35 @@
-import { beforeEach, describe, expect, test } from 'vitest';
-
-import { usersInRoomModel } from '@/entities/users';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { deviceInfoModel } from '@/shared/models';
 
 import { ActivitiesFilters } from './filters';
-import { form } from './model';
 
 import {
 	RenderResult,
-	Scope,
+	TestCtx,
 	act,
-	allSettled,
+	createTestCtx,
 	fireEvent,
-	fork,
 	render,
 	screen,
 	waitFor
 } from '~/test-utils';
 
-describe('features/activities/activities-filters/filters', () => {
+describe('features/activities/activities-filters/ui/filters.tsx', () => {
 	const roomId = 123;
+	const onFiltersChanged = vi.fn();
+	let ctx: TestCtx;
 	let wrapper: RenderResult;
-	let scope: Scope;
 
 	const createComponent = () => {
-		wrapper = render(<ActivitiesFilters />, { scope, });
+		wrapper = render(
+			<ActivitiesFilters
+				className='classname'
+				roomId={roomId}
+				onFiltersChanged={onFiltersChanged}
+			/>,
+			{ ctx, }
+		);
 	};
 	const findOpenButton = () =>
 		wrapper.getByRole('button', { name: 'actions.filter_activities.title', });
@@ -54,39 +58,38 @@ describe('features/activities/activities-filters/filters', () => {
 		fireEvent.click(button);
 	};
 
-	beforeEach(async () => {
-		scope = fork();
-		await allSettled(deviceInfoModel.$device, {
-			scope,
-			params: 'desktop-large',
-		});
-		await allSettled(usersInRoomModel.query.start, {
-			scope,
-			params: { roomId, },
-		});
-		await act(async () => createComponent());
+	beforeEach(() => {
+		ctx = createTestCtx();
 	});
 
-	test('should render buttons to open filters form', () => {
+	test('should render buttons to open filters form', async () => {
+		await act(async () => createComponent());
+
 		expect(document.body).toMatchSnapshot('closed filters');
 	});
 
-	test('should render form in popover for lerge screen', () => {
+	test('should render form in popover for lerge screen', async () => {
+		await act(async () => createComponent());
+
 		openForm();
 
 		expect(document.body).toMatchSnapshot('filters in popover');
 	});
 
 	test('should render form in popup for screen small screen', async () => {
-		await act(() =>
-			allSettled(deviceInfoModel.$device, { scope, params: 'tablet-vertical', })
-		);
+		ctx.mock(deviceInfoModel.deviceAtom, 'tablet-vertical');
+		ctx.mock(deviceInfoModel.isTabletVerticalAtom, true);
+
+		await act(async () => createComponent());
+
 		openForm();
 
 		expect(document.body).toMatchSnapshot('filters in popup');
 	});
 
 	test('should submit form and close form on submit button click', async () => {
+		await act(async () => createComponent());
+
 		expect.assertions(2);
 
 		openForm();
@@ -110,7 +113,7 @@ describe('features/activities/activities-filters/filters', () => {
 		await wrapper.user.click(findSubmitButton());
 
 		expect(findForm).toThrow();
-		expect(scope.getState(form.$values)).toStrictEqual(
+		expect(onFiltersChanged).toHaveBeenCalledWith(
 			expect.objectContaining({
 				actionIds: [1],
 				activistIds: [1],
@@ -119,6 +122,8 @@ describe('features/activities/activities-filters/filters', () => {
 	});
 
 	test('should reset form and close form on reset button click', async () => {
+		await act(async () => createComponent());
+
 		expect.assertions(4);
 
 		openForm();
@@ -150,7 +155,7 @@ describe('features/activities/activities-filters/filters', () => {
 			expect(userField).toHaveValue('');
 			expect(actionField).toHaveValue('');
 		});
-		expect(scope.getState(form.$values)).toStrictEqual(
+		expect(onFiltersChanged).toHaveBeenCalledWith(
 			expect.objectContaining({
 				actionIds: [],
 				activistIds: [],
