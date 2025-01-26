@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as path from 'node:path';
 
-import { babel } from '@rollup/plugin-babel';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite';
@@ -15,13 +14,6 @@ export default defineConfig(({ mode }) => {
 
 	const plugins = [
 		react(),
-		babel({
-			babelrc: true,
-			configFile: true,
-			babelHelpers: 'bundled',
-			browserslistConfigFile: true,
-			extensions: ['.ts', '.tsx'],
-		}),
 		splitVendorChunkPlugin(),
 		viteStaticCopy({
 			targets: [

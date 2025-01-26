@@ -1,5 +1,4 @@
 import * as path from 'node:path';
-import { babel } from '@rollup/plugin-babel';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -28,13 +27,5 @@ export default defineConfig({
 			'~/test-utils': path.resolve(__dirname, 'test-utils'),
 		},
 	},
-	plugins: [
-		babel({
-			babelrc: true,
-			configFile: true,
-			babelHelpers: 'bundled',
-			browserslistConfigFile: true,
-			extensions: ['.ts', '.tsx'],
-		}),
-	],
+	plugins: [],
 });
