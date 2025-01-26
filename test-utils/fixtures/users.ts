@@ -1,6 +1,6 @@
-import { User } from '@/shared/api';
+import { UserDto } from '@/shared/api';
 
-export const users: User[] = [
+export const users: UserDto[] = [
 	{
 		id: 1,
 		email: 'email@example.org',

@@ -5,7 +5,7 @@ import {
 	ListItemAvatar,
 	ListItemText
 } from '@mui/material';
-import * as React from 'react';
+import { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
@@ -20,8 +20,8 @@ export type ActivitiesActionsPickerProps = CommonProps &
 	PickerProps<number> &
 	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'>;
 
-export const ActivitiesActionsPicker: React.FC<ActivitiesActionsPickerProps> =
-	React.memo((props) => {
+export const ActivitiesActionsPicker: FC<ActivitiesActionsPickerProps> = memo(
+	(props) => {
 		const { value, onChange, className, multiple, limitTags, ...rest } = props;
 		const actions = useActivityActions();
 		const { t, } = useTranslation('activities');
@@ -77,4 +77,5 @@ export const ActivitiesActionsPicker: React.FC<ActivitiesActionsPickerProps> =
 				multiple={multiple}
 			/>
 		);
-	});
+	}
+);

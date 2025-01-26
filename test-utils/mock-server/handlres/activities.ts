@@ -6,7 +6,8 @@ import { BASE_URL } from '../constants';
 import {
 	createPaginationResponse,
 	createStandardResponse,
-	createUrl
+	createUrl,
+	internalServerError
 } from '../utils';
 
 const baseUrl = createUrl(BASE_URL, 'activities');
@@ -18,22 +19,26 @@ function filterActivities(
 	roomId: string,
 	actionIds: string[],
 	sphereIds: string[],
-	activistIds: string[]
+	activistIds: string[],
+	page: number,
+	count: number
 ) {
-	return activities.filter((activity) => {
-		return (
-			activity.roomId === +roomId &&
-			(actionIds.length
-				? actionIds.includes(activity.action.id.toString())
-				: true) &&
-			(sphereIds.length
-				? sphereIds.includes(activity.sphere.id.toString())
-				: true) &&
-			(activistIds.length
-				? activistIds.includes(activity.activist.id.toString())
-				: true)
-		);
-	});
+	return activities
+		.filter((activity) => {
+			return (
+				activity.roomId === +roomId &&
+				(actionIds.length
+					? actionIds.includes(activity.action.id.toString())
+					: true) &&
+				(sphereIds.length
+					? sphereIds.includes(activity.sphere.id.toString())
+					: true) &&
+				(activistIds.length
+					? activistIds.includes(activity.activist.id.toString())
+					: true)
+			);
+		})
+		.slice((page - 1) * count, count);
 }
 
 export const success = {
@@ -46,6 +51,8 @@ export const success = {
 	getAll: http.get(getAllUrl, ({ params, request, }) => {
 		const { roomId, } = params;
 		const url = new URL(request.url);
+		const count = (url.searchParams.getAll('count') ?? 50) as number;
+		const page = (url.searchParams.getAll('page') ?? 1) as number;
 		const actionIds = (url.searchParams.getAll('actionIds') ?? []) as string[];
 		const sphereIds = (url.searchParams.getAll('sphereIds') ?? []) as string[];
 		const activistIds = (url.searchParams.getAll('activistIds') ??
@@ -55,10 +62,18 @@ export const success = {
 			roomId as string,
 			actionIds,
 			sphereIds,
-			activistIds
+			activistIds,
+			+page,
+			+count
 		);
 
 		return createPaginationResponse(filtered);
+	}),
+};
+
+export const error = {
+	getAll: http.get(getAllUrl, () => {
+		return internalServerError;
 	}),
 };
 

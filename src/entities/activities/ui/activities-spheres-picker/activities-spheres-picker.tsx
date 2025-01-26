@@ -1,5 +1,5 @@
 import { Autocomplete, Chip, ListItem, ListItemText } from '@mui/material';
-import * as React from 'react';
+import { memo, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
@@ -13,8 +13,8 @@ export type ActivitiesSpheresPickerProps = CommonProps &
 	PickerProps<number> &
 	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'>;
 
-export const ActivitiesSpheresPicker: React.FC<ActivitiesSpheresPickerProps> =
-	React.memo((props) => {
+export const ActivitiesSpheresPicker: FC<ActivitiesSpheresPickerProps> = memo(
+	(props) => {
 		const { value, onChange, multiple, limitTags, className, ...rest } = props;
 		const spheres = useActivitySpheres();
 		const { t, } = useTranslation('activities');
@@ -67,4 +67,5 @@ export const ActivitiesSpheresPicker: React.FC<ActivitiesSpheresPickerProps> =
 				multiple={multiple}
 			/>
 		);
-	});
+	}
+);

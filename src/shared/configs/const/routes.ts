@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 export const SEARCH_PARAMS_NAMES = {
 	popup: 'popup',
 	taskStatus: 'task-status',
@@ -14,6 +17,11 @@ export const SEARCH_PARAMS_NAMES = {
 	page: 'p',
 } as const;
 
+export const PAGE_SEARCH_PARAM_NAME = 'p';
+
+/**
+ * @deprecated
+ */
 export const POPUPS_NAMES = {
 	createTask: 'create-task',
 	updateTask: 'update-task',

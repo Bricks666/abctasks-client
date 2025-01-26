@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { ActivitiesModel, activititesModel } from '../models';
 
 export interface UseActivitiesParams {
+	readonly name: string;
 	readonly roomId: number;
 
 	/**
@@ -12,9 +13,9 @@ export interface UseActivitiesParams {
 }
 
 export const useActivities = (params: UseActivitiesParams): ActivitiesModel => {
-	const { roomId, count, } = params;
+	const { roomId, count, name, } = params;
 
 	return useMemo(() => {
 		return activititesModel.create(params);
-	}, [roomId, count]);
+	}, [roomId, count, name]);
 };

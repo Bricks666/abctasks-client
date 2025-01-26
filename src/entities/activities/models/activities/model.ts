@@ -4,10 +4,11 @@ import {
 	atom,
 	onDisconnect,
 	withRetry,
-	reatomAsync,
-	onConnect,
-	withAbort,
-	withErrorAtom
+	withErrorAtom,
+	reatomRecord,
+	reatomResource,
+	action,
+	withStatusesAtom
 } from '@reatom/framework';
 
 import { activitiesApi } from '@/shared/api';
@@ -32,8 +33,27 @@ export const create = createSingletonFactory(
 	(params: CreateActivitiesModelParams): ActivitiesModel => {
 		const { name, roomId, count = 50, } = params;
 
-		const fetch = reatomAsync(
-			async (ctx, params?: FetchActivititesParams) => {
+		const paramsAtom = reatomRecord<FetchActivititesParams>(
+			{
+				page: 1,
+				actionIds: [],
+				activistIds: [],
+				after: null,
+				before: null,
+				by: null,
+				sphereIds: [],
+				type: null,
+			},
+			constructName(name, modelName, 'paramsAtom')
+		);
+
+		/**
+		 * @todo Add `zod` validation
+		 */
+		const fetch = reatomResource(
+			async (ctx) => {
+				const params = ctx.spy(paramsAtom);
+
 				return ctx.schedule(() =>
 					activitiesApi.getAll(
 						{ ...params, roomId, count, },
@@ -49,12 +69,23 @@ export const create = createSingletonFactory(
 			),
 			withCache(),
 			withRetry(),
-			withAbort(),
+			withStatusesAtom(),
 			withErrorAtom(undefined, { initState: null, })
 		);
 
+		const changeFetchActivitiesParams = action(
+			(ctx, params: FetchActivititesParams) => {
+				if ('page' in params) {
+					return paramsAtom.merge(ctx, params);
+				}
+
+				return paramsAtom.merge(ctx, { ...params, page: 1, });
+			},
+			constructName(name, modelName, 'changeFetchActivitiesParams')
+		);
+
 		const pendingAtom = atom(
-			(ctx) => !!ctx.spy(fetch.pendingAtom),
+			(ctx) => ctx.spy(fetch.statusesAtom).isFirstPending,
 			constructName(name, modelName, 'pendingAtom')
 		);
 		const activititesAtom = atom(
@@ -74,24 +105,21 @@ export const create = createSingletonFactory(
 			constructName(name, modelName, 'pagesCountAtom')
 		);
 
-		onConnect(fetch.dataAtom, (ctx) => {
-			fetch(ctx);
-
-			return () => fetch.abort(ctx);
-		});
-
 		retryQuery({
 			query: fetch,
 			store: activititesAtom,
 			timeout: 5000,
 		});
 
+		const { retry: refetch, } = fetch;
+
 		return {
-			fetch,
+			changeFetchActivitiesParams,
 			activititesAtom,
 			pagesCountAtom,
 			hasItemsAtom,
 			pendingAtom,
+			refetch,
 			errorAtom: fetch.errorAtom,
 		};
 	},

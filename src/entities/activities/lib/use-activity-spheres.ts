@@ -1,4 +1,5 @@
 import { useAtom } from '@reatom/npm-react';
+import { useMemo } from 'react';
 
 import { ActivitySpheres, activitySpheresModel } from '../models';
 
@@ -8,7 +9,7 @@ export interface UseActivitySpheresResult {
 }
 
 export const useActivitySpheres = (): UseActivitySpheresResult => {
-	const model = activitySpheresModel.create();
+	const model = useMemo(activitySpheresModel.create, []);
 
 	const [data] = useAtom(model.spheresAtom);
 	const [pending] = useAtom(model.pendingAtom);

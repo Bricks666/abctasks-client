@@ -7,5 +7,4 @@ const createTestCtx = (options?: CtxOptions): TestCtx => {
 };
 
 export * from '@reatom/testing';
-export { Scope, allSettled, fork, scopeBind } from 'effector';
 export { createTestCtx };

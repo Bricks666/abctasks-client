@@ -1,12 +1,15 @@
 import { Atom } from '@reatom/framework';
-import { Number, Record, Static, String } from 'runtypes';
+import zod from 'zod';
 
-export const activityActionRT = Record({
-	id: Number,
-	name: String,
-}).asReadonly();
+export const activityActionSchema = zod
+	.object({
+		id: zod.number(),
+		name: zod.string(),
+	})
+	.readonly();
 
-export interface ActivityAction extends Static<typeof activityActionRT> {}
+export interface ActivityAction
+	extends zod.infer<typeof activityActionSchema> {}
 export type ActivityActionId = ActivityAction['id'];
 export type ActivityActions = ActivityAction[];
 

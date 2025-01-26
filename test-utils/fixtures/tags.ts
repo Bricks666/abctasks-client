@@ -1,8 +1,8 @@
-import { Tag } from '@/shared/api';
+import { TagDto } from '@/shared/api';
 
 import { generateId } from './generate-id';
 
-export const tags: Tag[] = [
+export const tags: TagDto[] = [
 	{
 		id: 1,
 		roomId: 1,
@@ -28,7 +28,7 @@ export const tags: Tag[] = [
 
 export const defaultTag = tags[0];
 
-export const createTag = (tag?: Partial<Tag>): Tag => {
+export const createTag = (tag?: Partial<TagDto>): TagDto => {
 	return {
 		...defaultTag,
 		id: generateId(),

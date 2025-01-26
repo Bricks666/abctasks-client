@@ -1,26 +1,25 @@
-import { AsyncAction, Atom } from '@reatom/framework';
-import { Number, Record, Static, String } from 'runtypes';
+import { Action, Atom } from '@reatom/framework';
+import zod from 'zod';
 
-import { user } from '@/shared/api';
-import {
-	PaginationResponse,
-	SortDirection,
-	StandardResponse
-} from '@/shared/types';
+import { userSchema } from '@/entities/users/@x/activities';
 
-import { ActivityActionId, activityActionRT } from '../actions';
-import { ActivitySphereId, activitySphereRT } from '../spheres';
+import { SortDirection } from '@/shared/types';
 
-export const activityRT = Record({
-	id: Number,
-	roomId: Number,
-	activist: user,
-	action: activityActionRT,
-	sphere: activitySphereRT,
-	createdAt: String,
-}).asReadonly();
+import { ActivityActionId, activityActionSchema } from '../actions';
+import { ActivitySphereId, activitySphereSchema } from '../spheres';
 
-export interface Activity extends Static<typeof activityRT> {}
+export const activitySchema = zod
+	.object({
+		id: zod.number(),
+		roomId: zod.number(),
+		activist: userSchema,
+		action: activityActionSchema,
+		sphere: activitySphereSchema,
+		createdAt: zod.string(),
+	})
+	.readonly();
+
+export interface Activity extends zod.infer<typeof activitySchema> {}
 export type ActivityId = Activity['id'];
 
 export type Activities = Activity[];
@@ -39,6 +38,11 @@ export interface FetchActivititesParams {
 	readonly actionIds?: ActivityActionId[];
 }
 
+type ChangeFetchActivitiesParams = Action<
+	[params: FetchActivititesParams],
+	FetchActivititesParams
+>;
+
 export interface CreateActivitiesModelParams {
 	readonly name: string;
 	readonly roomId: number;
@@ -50,13 +54,11 @@ export interface CreateActivitiesModelParams {
 }
 
 export interface ActivitiesModel {
-	readonly fetch: AsyncAction<
-		[params?: FetchActivititesParams],
-		StandardResponse<PaginationResponse<Activity>>
-	>;
 	readonly activititesAtom: Atom<Activities>;
 	readonly errorAtom: Atom<Error | null>;
 	readonly pagesCountAtom: Atom<number>;
 	readonly hasItemsAtom: Atom<boolean>;
 	readonly pendingAtom: Atom<boolean>;
+	readonly refetch: Action;
+	readonly changeFetchActivitiesParams: ChangeFetchActivitiesParams;
 }

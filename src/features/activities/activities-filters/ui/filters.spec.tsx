@@ -1,9 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { deviceInfoModel } from '@/shared/models';
-
-import { ActivitiesFilters } from './filters';
-
 import {
 	RenderResult,
 	TestCtx,
@@ -14,6 +10,11 @@ import {
 	screen,
 	waitFor
 } from '~/test-utils';
+
+import { deviceInfoModel } from '@/shared/models';
+
+import { ActivitiesFilters } from './filters';
+
 
 describe('features/activities/activities-filters/ui/filters.tsx', () => {
 	const roomId = 123;
@@ -162,4 +163,6 @@ describe('features/activities/activities-filters/ui/filters.tsx', () => {
 			})
 		);
 	});
+
+	test.todo('should sync fitlers with href');
 });

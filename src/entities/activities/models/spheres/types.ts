@@ -1,12 +1,15 @@
 import { Atom } from '@reatom/framework';
-import { Number, Record, Static, String } from 'runtypes';
+import zod from 'zod';
 
-export const activitySphereRT = Record({
-	id: Number,
-	name: String,
-}).asReadonly();
+export const activitySphereSchema = zod
+	.object({
+		id: zod.number(),
+		name: zod.string(),
+	})
+	.readonly();
 
-export interface ActivitySphere extends Static<typeof activitySphereRT> {}
+export interface ActivitySphere
+	extends zod.infer<typeof activitySphereSchema> {}
 export type ActivitySphereId = ActivitySphere['id'];
 
 export type ActivitySpheres = ActivitySphere[];

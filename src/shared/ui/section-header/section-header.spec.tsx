@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import { SectionHeader, SectionHeaderProps } from './section-header';
-
 import { render, RenderResult } from '~/test-utils';
+
+import { SectionHeader, SectionHeaderProps } from './section-header';
 
 describe('shared/ui/section-header/section-header', () => {
 	let wrapper: RenderResult;
@@ -24,7 +24,7 @@ describe('shared/ui/section-header/section-header', () => {
 	});
 
 	test('should render header with title and actions', () => {
-		createComponent({ ...defaultProps, actions: <div />, });
+		createComponent({ ...defaultProps, slots: { actions: <div />, }, });
 
 		expect(findHeader()).toMatchSnapshot('with actions');
 	});

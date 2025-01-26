@@ -1,11 +1,12 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import TuneIcon from '@mui/icons-material/Tune';
 import { Button } from '@mui/material';
-import { FieldAtom } from '@reatom/form';
 import { useAction, useAtom } from '@reatom/npm-react';
 import cn from 'classnames';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { FieldAtom } from '@reatom/form';
 
 import {
 	ActivitiesActionsPicker,
@@ -48,10 +49,10 @@ export const ActivitiesFilters: FC<ActivitiesFiltersProps> = (props) => {
 		toggleOff();
 	});
 
-	const onReset = () => {
+	const onReset = usePreventDefault(() => {
 		reset();
 		toggleOff();
-	};
+	});
 
 	const titleT = t('title');
 	const submitT = t('actions.submit');
@@ -106,7 +107,7 @@ interface FieldProps {
 	readonly field: FieldAtom;
 }
 
-const Action: FC<FieldProps> = (props) => {
+const Action: FC<FieldProps> = memo((props) => {
 	const { field, } = props;
 
 	const [value] = useAtom(field.value);
@@ -120,7 +121,7 @@ const Action: FC<FieldProps> = (props) => {
 	});
 	const labelT = t('action');
 
-	const isError = !error;
+	const isError = !!error;
 
 	return (
 		<ActivitiesActionsPicker
@@ -137,9 +138,9 @@ const Action: FC<FieldProps> = (props) => {
 			fullWidth
 		/>
 	);
-};
+});
 
-const Spheres: FC<FieldProps> = (props) => {
+const Spheres: FC<FieldProps> = memo((props) => {
 	const { field, } = props;
 
 	const [value] = useAtom(field.value);
@@ -154,7 +155,7 @@ const Spheres: FC<FieldProps> = (props) => {
 
 	const labelT = t('spheres');
 
-	const isError = !error;
+	const isError = !!error;
 
 	return (
 		<ActivitiesSpheresPicker
@@ -171,9 +172,9 @@ const Spheres: FC<FieldProps> = (props) => {
 			fullWidth
 		/>
 	);
-};
+});
 
-const Users: FC<FieldProps & { readonly roomId: number }> = (props) => {
+const Users: FC<FieldProps & { readonly roomId: number }> = memo((props) => {
 	const { field, roomId, } = props;
 
 	const [value] = useAtom(field.value);
@@ -188,7 +189,7 @@ const Users: FC<FieldProps & { readonly roomId: number }> = (props) => {
 
 	const labelT = t('users');
 
-	const isError = !error;
+	const isError = !!error;
 
 	return (
 		<MembersPicker
@@ -205,9 +206,9 @@ const Users: FC<FieldProps & { readonly roomId: number }> = (props) => {
 			multiple
 		/>
 	);
-};
+});
 
-const After: FC<FieldProps> = (props) => {
+const After: FC<FieldProps> = memo((props) => {
 	const { field, } = props;
 
 	const [value] = useAtom(field.value);
@@ -220,7 +221,7 @@ const After: FC<FieldProps> = (props) => {
 
 	const labelT = t('fields.create_after');
 
-	const isError = !error;
+	const isError = !!error;
 
 	return (
 		<DatePicker
@@ -234,9 +235,9 @@ const After: FC<FieldProps> = (props) => {
 			name='after'
 		/>
 	);
-};
+});
 
-const Before: FC<FieldProps> = (props) => {
+const Before: FC<FieldProps> = memo((props) => {
 	const { field, } = props;
 
 	const [value] = useAtom(field.value);
@@ -249,7 +250,7 @@ const Before: FC<FieldProps> = (props) => {
 
 	const labelT = t('fields.create_before');
 
-	const isError = !error;
+	const isError = !!error;
 
 	return (
 		<DatePicker
@@ -263,4 +264,4 @@ const Before: FC<FieldProps> = (props) => {
 			name='before'
 		/>
 	);
-};
+});

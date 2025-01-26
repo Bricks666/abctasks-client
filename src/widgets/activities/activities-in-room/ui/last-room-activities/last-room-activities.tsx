@@ -1,56 +1,59 @@
 import ReplayIcon from '@mui/icons-material/Replay';
 import { Typography } from '@mui/material';
-import { useUnit } from 'effector-react';
-import * as React from 'react';
+import { useAction } from '@reatom/npm-react';
+import { FC, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { OpenAllRoomActivities } from '@/features/activities';
 
 import {
 	ActivityListItem,
-	SkeletonActivityListItem
+	SkeletonActivityListItem,
+	useActivities
 } from '@/entities/activities';
 
-import { routes } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { FriendlyList, TextWithAction } from '@/shared/ui';
 
-import { query } from '../../model';
-
-export interface LastActivitiesProps extends CommonProps {
+export interface LastRoomActivitiesProps extends CommonProps {
+	readonly roomId: number;
 	readonly disableBorder?: boolean;
 }
 
-export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
-	const { className, disableBorder, } = props;
+export const LastRoomActivities: FC<LastRoomActivitiesProps> = (props) => {
+	const { roomId, className, disableBorder, } = props;
+
+	const id = useId();
+	const model = useActivities({
+		name: 'last-activities',
+		roomId,
+		count: 6,
+	});
+
 	const { t, } = useTranslation('activities');
-	const id = React.useId();
 
-	const emptyText = t('list.empty_text');
-	const title = t('blocks.last_activities.title', { ns: 'room-tasks', });
+	const emptyT = t('list.empty_text');
+	const titleT = t('blocks.last_activities.title', { ns: 'room-tasks', });
 
-	/**
-	 * @todo
-	 */
 	return (
 		<FriendlyList
 			className={className}
-			$query={query}
-			getData={(data) => data.items}
+			dataAtom={model.activititesAtom}
+			errorAtom={model.errorAtom}
 			getKey={(item) => item.id}
+			pendingAtom={model.pendingAtom}
 			skeletonsCount={6}
 			ErrorComponent={Error}
 			ItemComponent={ActivityListItem}
 			SkeletonComponent={SkeletonActivityListItem}
-			emptyText={emptyText}
+			emptyText={emptyT}
 			slots={{
 				before: (
 					<Typography id={id} variant='h6' component='h2' fontWeight={700}>
-						{title}
+						{titleT}
 					</Typography>
 				),
-				after: <OpenAllRoomActivities />,
+				after: <OpenAllRoomActivities roomId={roomId} />,
 			}}
 			disableBorder={disableBorder}
 			rootProps={{
@@ -61,24 +64,22 @@ export const LastActivities: React.FC<LastActivitiesProps> = (props) => {
 	);
 };
 
-const Error: React.FC = () => {
+const Error: FC = () => {
 	const { t, } = useTranslation('activities');
 
-	const roomId = useParam(routes.room.tasks, 'id');
-	const start = useUnit(query.start);
-
-	const onRetry = React.useCallback(() => {
-		start({ roomId, });
-	}, [roomId]);
-
 	const actionText = t('actions.retry', { ns: 'common', });
-	const text = t('actions.retry_actions.text');
+	const textT = t('actions.retry_actions.text');
+
+	/**
+	 * @todo Implement refetch
+	 */
+	const refetch = useAction(() => console.log('refetch'), []);
 
 	return (
 		<TextWithAction
 			actionText={actionText}
-			text={text}
-			onClick={onRetry}
+			text={textT}
+			onClick={refetch}
 			icon={<ReplayIcon />}
 		/>
 	);

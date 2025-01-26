@@ -23,6 +23,7 @@ export const ActivitiesPagination: FC<ActivitiesPaginationProps> = (props) => {
 		setPage(page);
 	};
 
+	// @todo Add localization for aria-labels of pagination
 	return (
 		<Pagination
 			className={className}

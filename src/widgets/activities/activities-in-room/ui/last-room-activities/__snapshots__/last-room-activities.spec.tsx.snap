@@ -1,0 +1,424 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`widgets/activities/activities-in-room/ui/last-room-activities/last-room-activities.tsx > should render empty list with text if there is no items > empty list 1`] = `
+<section
+  aria-labelledby=":r1:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 _after_5e2d11 _before_5e2d11 _both_5e2d11 classnames css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <h2
+      class="MuiTypography-root MuiTypography-h6 css-tjvwag-MuiTypography-root"
+      id=":r1:"
+    >
+      blocks.last_activities.title
+    </h2>
+  </div>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-eflgtu-MuiTypography-root"
+    >
+      list.empty_text
+    </p>
+  </div>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <a
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+      href="/rooms/2/activities"
+      tabindex="0"
+    >
+      blocks.last_activities.actions.open
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </a>
+  </div>
+</section>
+`;
+
+exports[`widgets/activities/activities-in-room/ui/last-room-activities/last-room-activities.tsx > should render title, list with 6 items and button to go to all list > last activities 1`] = `
+<section
+  aria-labelledby=":r0:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 _after_5e2d11 _before_5e2d11 _both_5e2d11 classnames css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <h2
+      class="MuiTypography-root MuiTypography-h6 css-tjvwag-MuiTypography-root"
+      id=":r0:"
+    >
+      blocks.last_activities.title
+    </h2>
+  </div>
+  <div
+    class="_container_a7365d _container--vertical_a7365d _container--hide-scroll_a7365d"
+  >
+    <div
+      class="_indicator_a7365d _indicator--start_a7365d"
+    />
+    <div>
+      <ul
+        class="MuiList-root css-1mk9mw3-MuiList-root"
+      >
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider _item_151d8f css-mzpj2l-MuiListItem-root"
+        >
+          <div
+            class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+          >
+            <div
+              aria-label="type.created"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _undefined_0061b8 css-1bjizj2-MuiAvatar-root"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+            >
+              card.text
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+            >
+              <time
+                class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                datetime="2022-11-12T12:28:01.000Z"
+                title="2022-11-12T12:28:01.000Z"
+              >
+                12:28 Nov 12
+              </time>
+            </p>
+          </div>
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider _item_151d8f css-mzpj2l-MuiListItem-root"
+        >
+          <div
+            class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+          >
+            <div
+              aria-label="type.updated"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _undefined_0061b8 css-1bjizj2-MuiAvatar-root"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+            >
+              card.text
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+            >
+              <time
+                class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                datetime="2022-11-13T12:28:01.000Z"
+                title="2022-11-13T12:28:01.000Z"
+              >
+                12:28 Nov 13
+              </time>
+            </p>
+          </div>
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider _item_151d8f css-mzpj2l-MuiListItem-root"
+        >
+          <div
+            class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+          >
+            <div
+              aria-label="type.updated"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _undefined_0061b8 css-1bjizj2-MuiAvatar-root"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+            >
+              card.text
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+            >
+              <time
+                class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                datetime="2022-11-13T14:28:01.000Z"
+                title="2022-11-13T14:28:01.000Z"
+              >
+                14:28 Nov 13
+              </time>
+            </p>
+          </div>
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider _item_151d8f css-mzpj2l-MuiListItem-root"
+        >
+          <div
+            class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+          >
+            <div
+              aria-label="type.created"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _undefined_0061b8 css-1bjizj2-MuiAvatar-root"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+            >
+              card.text
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+            >
+              <time
+                class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                datetime="2022-11-12T12:28:01.000Z"
+                title="2022-11-12T12:28:01.000Z"
+              >
+                12:28 Nov 12
+              </time>
+            </p>
+          </div>
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider _item_151d8f css-mzpj2l-MuiListItem-root"
+        >
+          <div
+            class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+          >
+            <div
+              aria-label="type.updated"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _undefined_0061b8 css-1bjizj2-MuiAvatar-root"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+            >
+              card.text
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+            >
+              <time
+                class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                datetime="2022-11-13T12:28:01.000Z"
+                title="2022-11-13T12:28:01.000Z"
+              >
+                12:28 Nov 13
+              </time>
+            </p>
+          </div>
+        </li>
+        <li
+          class="MuiListItem-root MuiListItem-gutters MuiListItem-padding _item_151d8f css-q9mp92-MuiListItem-root"
+        >
+          <div
+            class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+          >
+            <div
+              aria-label="type.updated"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _undefined_0061b8 css-1bjizj2-MuiAvatar-root"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+            >
+              card.text
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+            >
+              <time
+                class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                datetime="2022-11-13T14:28:01.000Z"
+                title="2022-11-13T14:28:01.000Z"
+              >
+                14:28 Nov 13
+              </time>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="_indicator_a7365d _indicator--end_a7365d"
+    />
+  </div>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <a
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+      href="/rooms/1/activities"
+      tabindex="0"
+    >
+      blocks.last_activities.actions.open
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </a>
+  </div>
+</section>
+`;
+
+exports[`widgets/activities/activities-in-room/ui/last-room-activities/last-room-activities.tsx > should show error message if error occured during request > error 1`] = `
+<section
+  aria-labelledby=":r2:"
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 _paper_5e2d11 _after_5e2d11 _before_5e2d11 _both_5e2d11 classnames css-hpo018-MuiPaper-root"
+>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <h2
+      class="MuiTypography-root MuiTypography-h6 css-tjvwag-MuiTypography-root"
+      id=":r2:"
+    >
+      blocks.last_activities.title
+    </h2>
+  </div>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <div
+      class="_box_253fa6"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+      >
+        actions.retry_actions.text
+      </p>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ReplayIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"
+            />
+          </svg>
+        </span>
+        actions.retry
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+  <div
+    class="_center_ffe4db _auto_ffe4db"
+  >
+    <a
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+      href="/rooms/1/activities"
+      tabindex="0"
+    >
+      blocks.last_activities.actions.open
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </a>
+  </div>
+</section>
+`;

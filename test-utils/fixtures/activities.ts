@@ -37,29 +37,32 @@ export const spheres: ActivitySphereDto[] = [
 	}
 ];
 
-export const activities: ActivityDto[] = [
-	{
-		id: 1,
-		action: actions[0],
-		sphere: spheres[0],
-		roomId: defaultRoom.id,
-		activist: defaultUser,
-		createdAt: '2022-11-12T12:28:01',
-	},
-	{
-		id: 2,
-		action: actions[1],
-		sphere: spheres[0],
-		roomId: defaultRoom.id,
-		activist: defaultUser,
-		createdAt: '2022-11-13T12:28:01',
-	},
-	{
-		id: 3,
-		action: actions[1],
-		sphere: spheres[1],
-		roomId: defaultRoom.id,
-		activist: defaultUser,
-		createdAt: '2022-11-13T14:28:01',
-	}
-];
+export const activities: ActivityDto[] = new Array(60)
+	.fill(0)
+	.map((_, index) => [
+		{
+			id: index * 3 + 1,
+			action: actions[0],
+			sphere: spheres[0],
+			roomId: defaultRoom.id,
+			activist: defaultUser,
+			createdAt: '2022-11-12T12:28:01',
+		},
+		{
+			id: index * 3 + 2,
+			action: actions[1],
+			sphere: spheres[0],
+			roomId: defaultRoom.id,
+			activist: defaultUser,
+			createdAt: '2022-11-13T12:28:01',
+		},
+		{
+			id: index * 3 + 3,
+			action: actions[1],
+			sphere: spheres[1],
+			roomId: defaultRoom.id,
+			activist: defaultUser,
+			createdAt: '2022-11-13T14:28:01',
+		}
+	])
+	.flat();

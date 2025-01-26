@@ -51,7 +51,7 @@ export const create = (
 	// 		parse: (v = '') =>
 	// 			qs.parse(v, { parseArrays: true }) as any as ActivitiesFitlers,
 	// 		serialize: (v: ActivitiesFitlers) =>
-	// 			qs.stringify(v, { arrayFormat: 'brackets' }),
+	// 			queryString.stringify(v, { arrayFormat: 'brackets' }),
 	// 	})
 	// );
 

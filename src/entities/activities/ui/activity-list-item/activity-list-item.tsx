@@ -28,6 +28,8 @@ export const ActivityListItem: React.FC<ActivityListItemProps> = (props) => {
 	const {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		id: _,
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		roomId: _roomId,
 		action,
 		sphere,
 		className,

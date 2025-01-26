@@ -1,5 +1,5 @@
 import { urlAtom } from '@reatom/url';
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { RenderResult, TestCtx, createTestCtx, render } from '~/test-utils';
 
@@ -36,10 +36,6 @@ describe('features/activities/activities-pagination/ui/pagination.tsx', () => {
 		ctx = createTestCtx();
 
 		urlAtom.go(ctx, '/', true);
-	});
-
-	afterEach(() => {
-		window.location.href = '/';
 	});
 
 	test('should render pagination', () => {
