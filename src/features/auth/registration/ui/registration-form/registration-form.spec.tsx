@@ -2,9 +2,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { RegistrationForm, RegistrationFormProps } from './form';
-
-import '@testing-library/jest-dom/vitest';
 import {
 	RenderResult,
 	act,
@@ -15,7 +12,10 @@ import {
 	waitFor
 } from '~/test-utils';
 
-describe('features/auth/registration/ui/form.tsx', () => {
+import { RegistrationForm, RegistrationFormProps } from './registration-form';
+
+
+describe('features/auth/registration/ui/registration-form/registration-form.tsx', () => {
 	const values = {
 		email: 'email@example.com',
 		username: 'username',

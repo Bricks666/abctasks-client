@@ -1,5 +1,6 @@
-import { FieldAtom } from '@reatom/form';
 import { AsyncAction, Atom } from '@reatom/framework';
+
+import { FieldAtom } from '@reatom/form';
 
 export interface RegistrationModel {
 	readonly submit: AsyncAction<[], void>;

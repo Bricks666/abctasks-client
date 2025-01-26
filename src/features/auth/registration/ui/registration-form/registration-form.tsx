@@ -12,9 +12,9 @@ import { usePreventDefault } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Field, Form, PasswordField } from '@/shared/ui';
 
-import { useRegistrationModel } from '../lib';
+import { useRegistrationModel } from '../../lib';
 
-import styles from './form.module.css';
+import styles from './styles.module.css';
 
 export interface RegistrationFormProps extends CommonProps {}
 
