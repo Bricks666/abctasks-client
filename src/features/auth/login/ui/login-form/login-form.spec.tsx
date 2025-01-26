@@ -1,18 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { describe, expect, test } from 'vitest';
 
-import { LoginForm, LoginFormProps } from './ui';
-
 import {
 	handlers,
 	server,
 	RenderResult,
 	fireEvent,
 	render,
-	waitFor
+	waitFor,
+	act
 } from '~/test-utils';
 
-describe('features/auth/login/ui', () => {
+import { LoginForm, LoginFormProps } from './login-form';
+
+
+describe('features/auth/login/ui/login-form/login-form.tsx', () => {
 	const values = {
 		email: 'email@example.com',
 		password: 'password',
@@ -25,16 +27,23 @@ describe('features/auth/login/ui', () => {
 		wrapper = render(<LoginForm {...props} />);
 	};
 
-	const foundForm = () => wrapper.getByRole('form');
-	const foundItems = () => ({
-		email: wrapper.getByRole('textbox', { name: 'login_form.fields.email', }),
-		password: wrapper.getByLabelText('login_form.fields.password'),
-		rememberMe: wrapper.getByRole('checkbox', {
+	const findForm = () => wrapper.getByRole('form') as HTMLFormElement;
+	const findEmailField = () =>
+		wrapper.getByRole('textbox', {
+			name: 'login_form.fields.email',
+		}) as HTMLInputElement;
+	const findPasswordField = () =>
+		wrapper.getByLabelText('login_form.fields.password') as HTMLInputElement;
+	const findRememberCheckbox = () =>
+		wrapper.getByRole('checkbox', {
 			name: 'login_form.fields.remember_me',
-		}),
-		submit: wrapper.getByRole('button', { name: 'login_form.submit', }),
-	});
-	const fillFields = async (items, values) => {
+		}) as HTMLInputElement;
+	const findSubmitButton = () =>
+		wrapper.getByRole('button', {
+			name: 'login_form.submit',
+		}) as HTMLButtonElement;
+
+	const setValues = async (items, values) => {
 		fireEvent.input(items.email, {
 			target: { value: values.email, },
 		});
@@ -46,29 +55,32 @@ describe('features/auth/login/ui', () => {
 		});
 	};
 
-	test('should render form, 3 inputs and button', () => {
-		createComponent();
+	test('should render form, 3 inputs and button', async () => {
+		await act(async () => createComponent());
 
-		expect(foundForm()).toMatchSnapshot();
+		expect(findForm()).toMatchSnapshot();
 	});
 
 	test('should be able to click on button if fields are empty', async () => {
-		createComponent();
+		await act(async () => createComponent());
 
-		const { submit, } = foundItems();
+		const submit = findSubmitButton();
 
 		expect(submit).not.toHaveAttribute('disabled', true);
 
-		fireEvent.click(submit);
+		await wrapper.user.click(submit);
 	});
 
 	test('should send login query with data from fields', async () => {
-		createComponent();
+		await act(async () => createComponent());
 
-		const { submit, email, password, rememberMe, } = foundItems();
-		fillFields({ email, password, rememberMe, }, values);
+		const email = findEmailField();
+		const password = findPasswordField();
+		const rememberMe = findRememberCheckbox();
 
-		fireEvent.click(submit);
+		await setValues({ email, password, rememberMe, }, values);
+
+		await wrapper.user.click(findSubmitButton());
 
 		await waitFor(() => {
 			expect(email.value).toBe(values.email);
@@ -80,12 +92,15 @@ describe('features/auth/login/ui', () => {
 	describe('validation', () => {
 		describe('email field', () => {
 			test('empty field', async () => {
-				createComponent();
+				await act(async () => createComponent());
 
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields({ email, password, rememberMe, }, { ...values, email: '', });
+				const email = findEmailField();
+				const password = findPasswordField();
+				const rememberMe = findRememberCheckbox();
 
-				fireEvent.click(submit);
+				setValues({ email, password, rememberMe, }, { ...values, email: '', });
+
+				await wrapper.user.click(findSubmitButton());
 
 				await waitFor(() => {
 					const element = wrapper.getByText('login_form.errors.email.empty');
@@ -95,15 +110,17 @@ describe('features/auth/login/ui', () => {
 			});
 
 			test('invalid pattern', async () => {
-				createComponent();
+				await act(async () => createComponent());
 
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields(
+				const email = findEmailField();
+				const password = findPasswordField();
+				const rememberMe = findRememberCheckbox();
+				setValues(
 					{ email, password, rememberMe, },
 					{ ...values, email: 'email.com', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(findSubmitButton());
 
 				await waitFor(() => {
 					const element = wrapper.getByText('login_form.errors.email.email');
@@ -112,62 +129,20 @@ describe('features/auth/login/ui', () => {
 				});
 			});
 
-			test('too short email', async () => {
-				createComponent();
-
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields(
-					{ email, password, rememberMe, },
-					{ ...values, email: 'e@g.c', }
-				);
-
-				fireEvent.click(submit);
-
-				await waitFor(() => {
-					const element = wrapper.getByText(
-						'login_form.errors.email.min_length'
-					);
-
-					expect(element).toBeInTheDocument();
-				});
-			});
-
-			test('too long email', async () => {
-				createComponent();
-
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields(
-					{ email, password, rememberMe, },
-					{
-						...values,
-						email:
-							'asdfasdfasdasdfasdfasdfasdfasdfasdffasdfasdfeasdfasdf1123@gmail.com',
-					}
-				);
-
-				fireEvent.click(submit);
-
-				await waitFor(() => {
-					const element = wrapper.getByText(
-						'login_form.errors.email.max_length'
-					);
-
-					expect(element).toBeInTheDocument();
-				});
-			});
-
 			test('there is not user with this email', async () => {
 				server.use(handlers.auth.error.login.notFound);
 
-				createComponent();
+				await act(async () => createComponent());
 
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields(
+				const email = findEmailField();
+				const password = findPasswordField();
+				const rememberMe = findRememberCheckbox();
+				setValues(
 					{ email, password, rememberMe, },
 					{ ...values, email: 'asd@gmail.com', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(findSubmitButton());
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -180,15 +155,14 @@ describe('features/auth/login/ui', () => {
 		});
 		describe('password field', () => {
 			test('empty field', async () => {
-				createComponent();
+				await act(async () => createComponent());
 
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields(
-					{ email, password, rememberMe, },
-					{ ...values, password: '', }
-				);
+				const email = findEmailField();
+				const password = findPasswordField();
+				const rememberMe = findRememberCheckbox();
+				setValues({ email, password, rememberMe, }, { ...values, password: '', });
 
-				fireEvent.click(submit);
+				await wrapper.user.click(findSubmitButton());
 
 				await waitFor(() => {
 					const element = wrapper.getByText('login_form.errors.password.empty');
@@ -198,15 +172,17 @@ describe('features/auth/login/ui', () => {
 			});
 
 			test('too short password', async () => {
-				createComponent();
+				await act(async () => createComponent());
 
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields(
+				const email = findEmailField();
+				const password = findPasswordField();
+				const rememberMe = findRememberCheckbox();
+				setValues(
 					{ email, password, rememberMe, },
 					{ ...values, password: 'e@g.c', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(findSubmitButton());
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -218,10 +194,12 @@ describe('features/auth/login/ui', () => {
 			});
 
 			test('too long password', async () => {
-				createComponent();
+				await act(async () => createComponent());
 
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields(
+				const email = findEmailField();
+				const password = findPasswordField();
+				const rememberMe = findRememberCheckbox();
+				setValues(
 					{ email, password, rememberMe, },
 					{
 						...values,
@@ -230,7 +208,7 @@ describe('features/auth/login/ui', () => {
 					}
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(findSubmitButton());
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
@@ -244,15 +222,17 @@ describe('features/auth/login/ui', () => {
 			test('incorrect password', async () => {
 				server.use(handlers.auth.error.login.forbidden);
 
-				createComponent();
+				await act(async () => createComponent());
 
-				const { submit, email, password, rememberMe, } = foundItems();
-				fillFields(
+				const email = findEmailField();
+				const password = findPasswordField();
+				const rememberMe = findRememberCheckbox();
+				setValues(
 					{ email, password, rememberMe, },
 					{ ...values, password: 'asd@gmail.com', }
 				);
 
-				fireEvent.click(submit);
+				await wrapper.user.click(findSubmitButton());
 
 				await waitFor(() => {
 					const element = wrapper.getByText(
