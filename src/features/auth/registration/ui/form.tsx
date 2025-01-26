@@ -1,10 +1,11 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { Button } from '@mui/material';
-import { FieldAtom } from '@reatom/form';
 import { useAction, useAtom } from '@reatom/npm-react';
 import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { FieldAtom } from '@reatom/form';
 
 import { MIN_LENGTH, MAX_SHORT_LENGTH } from '@/shared/configs';
 import { usePreventDefault } from '@/shared/lib';
@@ -108,8 +109,6 @@ const Username: React.FC<FieldProps> = (props) => {
 		min_symbols_count: MIN_LENGTH,
 		max_symbols_count: MAX_SHORT_LENGTH,
 	});
-
-	console.log(useAtom(fieldAtom.validation)[0]);
 
 	const isError = !!errorText;
 	const errorHelperText = isError ? error : null;

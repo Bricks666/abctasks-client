@@ -1,77 +1,92 @@
+import { atom, onDisconnect } from '@reatom/framework';
+import zod from 'zod';
+
 import { reatomZodForm } from '@reatom/form';
-import { atom } from '@reatom/framework';
-import z from 'zod';
 
 import { authApi } from '@/shared/api';
 import { MIN_LENGTH, MAX_SHORT_LENGTH } from '@/shared/configs';
-import { constructName, isHttpErrorCode } from '@/shared/lib';
+import {
+	constructName,
+	createSingletonFactory,
+	isHttpErrorCode
+} from '@/shared/lib';
 
 import { RegistrationModel } from './types';
 
-const schema = z
+const schema = zod
 	.object({
-		email: z.string().email('email').nonempty('empty'),
-		username: z
+		email: zod.string().email('email').nonempty('empty'),
+		username: zod
 			.string()
 			.min(MIN_LENGTH, 'min_length')
 			.max(MAX_SHORT_LENGTH, 'max_length')
 			.nonempty('empty'),
-		password: z
+		password: zod
 			.string()
 			.min(MIN_LENGTH, 'min_length')
 			.max(MAX_SHORT_LENGTH, 'max_length')
 			.nonempty('empty'),
-		repeatPassword: z.string(),
+		repeatPassword: zod.string(),
 	})
 	.refine((data) => data.password === data.repeatPassword, {
 		message: 'equal',
 		path: ['repeatPassword'],
 	});
 
-export const create = (): RegistrationModel => {
-	const form = reatomZodForm(
-		{
-			username: '',
-			email: '',
-			password: '',
-			repeatPassword: '',
-		},
-		{
-			name: `registration-form`,
-			resetOnSubmit: false,
-			schema,
-			onSubmit: async (ctx, state) => {
-				try {
-					await authApi.registration(state);
-				} catch (error) {
-					if (isHttpErrorCode(error, 409)) {
-						form.fields.email.validation.merge(ctx, { error: 'exists', });
-					}
+const modelName = 'registration-form';
 
-					throw error;
-				} finally {
-					form.fields.password.reset(ctx);
-					form.fields.repeatPassword.reset(ctx);
-				}
+export const create = createSingletonFactory(
+	(): RegistrationModel => {
+		const form = reatomZodForm(
+			{
+				username: '',
+				email: '',
+				password: '',
+				repeatPassword: '',
 			},
-		}
-	);
+			{
+				name: modelName,
+				resetOnSubmit: false,
+				schema,
+				onSubmit: async (ctx, state) => {
+					try {
+						await authApi.registration(state);
+					} catch (error) {
+						if (isHttpErrorCode(error, 409)) {
+							form.fields.email.validation.merge(ctx, { error: 'exists', });
+						}
 
-	const { submit, } = form;
-	const { statusesAtom, } = submit;
-	const { email, password, repeatPassword, username, } = form.fields;
+						throw error;
+					} finally {
+						form.fields.password.reset(ctx);
+						form.fields.repeatPassword.reset(ctx);
+					}
+				},
+			}
+		);
 
-	const submittingAtom = atom(
-		(ctx) => ctx.spy(statusesAtom).isPending,
-		constructName('registration-form', 'submittingAtom')
-	);
+		const { submit, } = form;
+		const { statusesAtom, } = submit;
+		const { email, password, repeatPassword, username, } = form.fields;
 
-	return {
-		submit,
-		submittingAtom,
-		email,
-		password,
-		repeatPassword,
-		username,
-	};
-};
+		const submittingAtom = atom(
+			(ctx) => ctx.spy(statusesAtom).isPending,
+			constructName(modelName, 'submittingAtom')
+		);
+
+		return {
+			submit,
+			submittingAtom,
+			email,
+			password,
+			repeatPassword,
+			username,
+		};
+	},
+	{
+		key: modelName,
+		hooks: {
+			staleOn: (result, stale) => onDisconnect(result.username, stale),
+		},
+	}
+);
