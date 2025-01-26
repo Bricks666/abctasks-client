@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ProfileMenu } from '@/features/auth';
+import { LogoutButton } from '@/features/auth';
 import { AdaptiveColorSchemeToggler, ChangeLanguage } from '@/features/page';
 
 import { CommonProps } from '@/shared/types';
@@ -29,7 +29,7 @@ export const MainHeader: React.FC<MainHeaderProps> = (props) => {
 						{slots?.right}
 						<ChangeLanguage />
 						<AdaptiveColorSchemeToggler />
-						<ProfileMenu />
+						<LogoutButton />
 					</>
 				),
 			}}
