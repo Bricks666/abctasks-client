@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { http } from 'msw';
 
-import { users } from '../../fixtures';
+import { members } from '../../fixtures';
 import { BASE_URL } from '../constants';
 import { createUrl, createStandardResponse, notFoundError } from '../utils';
 
@@ -12,7 +12,7 @@ const removeMemberUrl = createUrl(baseUrl, 'remove', ':userId');
 
 export const success = {
 	members: http.get(getMembersUrl, () => {
-		return createStandardResponse(users);
+		return createStandardResponse(structuredClone(members));
 	}),
 	exit: http.delete(exitMembersUrl, () => {
 		return createStandardResponse(true);
@@ -23,6 +23,9 @@ export const success = {
 };
 
 export const error = {
+	members: http.get(getMembersUrl, () => {
+		return notFoundError;
+	}),
 	exit: http.delete(exitMembersUrl, () => {
 		return notFoundError;
 	}),

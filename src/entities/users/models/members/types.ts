@@ -23,5 +23,5 @@ export interface MembersModel {
 	readonly membersAtom: Atom<Users>;
 	readonly pendingAtom: Atom<boolean>;
 	readonly errorAtom: Atom<Error | null>;
-	readonly retry: Action<[], Promise<StandardResponse<Users>>>;
+	readonly retry: Action<[after?: number], Promise<StandardResponse<Users>>>;
 }

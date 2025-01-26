@@ -2,17 +2,17 @@ import { Autocomplete } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 
-import { User } from '@/shared/api';
-import { CommonProps } from '@/shared/types';
+import { UserDto } from '@/shared/api';
+import { CommonProps, Fn } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
 import { useSearchedUsers } from '../../lib';
-import { searchUserModel } from '../../model';
+import { searchUserModel } from '../../models';
 import { TemplateUserListItem } from '../template-user-list-item';
 
 export interface UserSearchProps extends CommonProps, FieldProps {
-	readonly onChange?: (user: User | null) => unknown;
-	readonly value?: User | null;
+	readonly onChange?: Fn<[user: UserDto | null], unknown>;
+	readonly value?: UserDto | null;
 }
 
 export const UserSearch: React.FC<UserSearchProps> = (props) => {
@@ -21,7 +21,7 @@ export const UserSearch: React.FC<UserSearchProps> = (props) => {
 	const resetUsers = useUnit(searchUserModel.query.reset);
 	const searchChanged = useUnit(searchUserModel.searchChanged);
 
-	const handleChange = (_: unknown, user: User | null) => {
+	const handleChange = (_: unknown, user: UserDto | null) => {
 		onChange?.(user);
 	};
 
