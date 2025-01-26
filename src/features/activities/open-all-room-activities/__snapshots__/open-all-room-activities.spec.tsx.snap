@@ -2,7 +2,7 @@
 
 exports[`features/activities/open-all-room-activities/open-all-room-activities > should render link looks like button 1`] = `
 <a
-  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-15qnkk1-MuiButtonBase-root-MuiButton-root"
   href="/rooms/123/activities"
   tabindex="0"
 >
