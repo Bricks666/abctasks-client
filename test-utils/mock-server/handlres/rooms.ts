@@ -54,6 +54,25 @@ export const success = {
 };
 
 export const error = {
+	getAll: {
+		invalidData: http.get(getAllUrl, () => {
+			return createStandardResponse(rooms[0]);
+		}),
+		internalError: http.get(getAllUrl, () => {
+			return internalServerError;
+		}),
+	},
+	getOne: {
+		invalidData: http.get(getOneUrl, () => {
+			return createStandardResponse(rooms);
+		}),
+		internalError: http.get(getOneUrl, () => {
+			return internalServerError;
+		}),
+		notFound: http.get(getOneUrl, () => {
+			return notFoundError;
+		}),
+	},
 	update: http.put(getUpdateUrl, async () => {
 		return notFoundError;
 	}),

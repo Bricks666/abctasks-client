@@ -2,38 +2,33 @@ import {
 	Avatar,
 	ListItem,
 	ListItemAvatar,
-	ListItemButton,
+	ListItemProps,
 	ListItemText
 } from '@mui/material';
-import { RouteInstance } from 'atomic-router';
-import { Link } from 'atomic-router-react';
 import * as React from 'react';
 
-import { Room } from '@/shared/api';
-import { routes } from '@/shared/configs';
 import { stringToColor } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 
-export interface RoomListItemProps extends CommonProps, Room {}
+import { Room } from '../../models';
+
+export interface RoomListItemProps extends CommonProps, ListItemProps {
+	readonly room: Room;
+}
 
 export const RoomListItem: React.FC<RoomListItemProps> = (props) => {
-	const { description, id, name, className, } = props;
+	const { room, className, ...rest } = props;
 
 	const style = {
-		background: stringToColor(''.padEnd(15, id.toString())),
+		background: stringToColor(''.padEnd(15, room.id.toString())),
 	};
 
 	return (
-		<ListItem className={className} disablePadding>
-			<ListItemButton
-				to={routes.room.tasks as RouteInstance<any>}
-				params={{ id, }}
-				component={Link}>
-				<ListItemAvatar>
-					<Avatar style={style}>{name.at(0)}</Avatar>
-				</ListItemAvatar>
-				<ListItemText primary={name} secondary={description} />
-			</ListItemButton>
+		<ListItem className={className} {...rest} disablePadding>
+			<ListItemAvatar>
+				<Avatar style={style}>{room.name.at(0)}</Avatar>
+			</ListItemAvatar>
+			<ListItemText primary={room.name} secondary={room.description} />
 		</ListItem>
 	);
 };

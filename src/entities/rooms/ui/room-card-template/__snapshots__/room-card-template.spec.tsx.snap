@@ -1,0 +1,90 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/rooms/ui/room-card-template/room-card-template.tsx > should render card with name and description > without slots 1`] = `
+<li
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_95def3 classname css-1vehtnn-MuiPaper-root-MuiCard-root"
+>
+  <div
+    class="MuiCardMedia-root css-17pe9dm-MuiCardMedia-root"
+  />
+  <div
+    class="MuiCardHeader-root _header_95def3 css-185gdzj-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-content css-1qbkelo-MuiCardHeader-content"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-1qvr50w-MuiTypography-root"
+      >
+        name
+      </span>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root _content_95def3 css-46bh2p-MuiCardContent-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+    >
+      card.description
+      : 
+      description
+    </p>
+  </div>
+  <div
+    class="MuiCardActions-root MuiCardActions-spacing _actions_95def3 css-dnrpxu-MuiCardActions-root"
+  />
+</li>
+`;
+
+exports[`entities/rooms/ui/room-card-template/room-card-template.tsx > should render slots > with slots 1`] = `
+<li
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_95def3 classname css-1vehtnn-MuiPaper-root-MuiCard-root"
+>
+  <div
+    class="MuiCardMedia-root css-17pe9dm-MuiCardMedia-root"
+  />
+  <div
+    class="MuiCardHeader-root _header_95def3 css-185gdzj-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-content css-1qbkelo-MuiCardHeader-content"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-1qvr50w-MuiTypography-root"
+      >
+        name
+      </span>
+    </div>
+    <div
+      class="MuiCardHeader-action css-sgoict-MuiCardHeader-action"
+    >
+      <button
+        type="button"
+      >
+        Header action
+      </button>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root _content_95def3 css-46bh2p-MuiCardContent-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+    >
+      card.description
+      : 
+      description
+    </p>
+  </div>
+  <div
+    class="MuiCardActions-root MuiCardActions-spacing _actions_95def3 css-dnrpxu-MuiCardActions-root"
+  >
+    <button
+      type="button"
+    >
+      Footer actions
+    </button>
+  </div>
+</li>
+`;

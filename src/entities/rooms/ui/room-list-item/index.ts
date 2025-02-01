@@ -1,1 +1,1 @@
-export { RoomListItem, type RoomListItemProps } from './room-list-item';
+export * from './room-list-item';

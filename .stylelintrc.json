@@ -20,7 +20,10 @@
 
 		"pitcher/no-nested-media": true,
 
-		"plugin/no-low-performance-animation-properties": true
+		"plugin/no-low-performance-animation-properties": [
+			true,
+			{ "ignoreProperties": ["box-shadow"] }
+		]
 	},
 	"ignoreFiles": ["**/*.[jt]sx?", "**/third-party/*", "**/PlanEditor/*"]
 }

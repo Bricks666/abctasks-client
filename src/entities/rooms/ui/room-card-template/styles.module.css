@@ -18,14 +18,12 @@
 }
 
 .content {
-	padding: 1em;
-
 	height: max-content;
+	padding: 1em;
 }
 
 .actions {
 	display: flex;
 	justify-content: flex-end;
-
 	padding: 1em;
 }
