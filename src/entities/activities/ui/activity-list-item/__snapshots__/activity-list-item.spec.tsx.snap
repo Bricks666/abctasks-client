@@ -3,7 +3,6 @@
 exports[`src/entities/activities/ui/activity-list-item/activity-list-item > should render activity list item 1`] = `
 <li
   class="MuiListItem-root MuiListItem-gutters MuiListItem-padding _item_151d8f classname css-q9mp92-MuiListItem-root"
-  roomid="1"
 >
   <div
     class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"

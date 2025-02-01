@@ -3,6 +3,7 @@ import zod from 'zod';
 
 import { userSchema } from '@/entities/users/@x/activities';
 
+import { createPaginationResponseSchema } from '@/shared/lib';
 import { SortDirection } from '@/shared/types';
 
 import { ActivityActionId, activityActionSchema } from '../actions';
@@ -18,6 +19,8 @@ export const activitySchema = zod
 		createdAt: zod.string(),
 	})
 	.readonly();
+export const acitivitiesResponseSchema =
+	createPaginationResponseSchema(activitySchema);
 
 export interface Activity extends zod.infer<typeof activitySchema> {}
 export type ActivityId = Activity['id'];

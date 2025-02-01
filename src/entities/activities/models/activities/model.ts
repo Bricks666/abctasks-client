@@ -18,13 +18,14 @@ import {
 	mapStandardResponse,
 	retryQuery
 } from '@/shared/lib';
-import { PaginationResponse } from '@/shared/types';
+import { Paginated } from '@/shared/types';
 
 import {
 	ActivitiesModel,
 	Activity,
 	CreateActivitiesModelParams,
-	FetchActivititesParams
+	FetchActivititesParams,
+	acitivitiesResponseSchema
 } from './types';
 
 const modelName = 'list';
@@ -47,24 +48,23 @@ export const create = createSingletonFactory(
 			constructName(name, modelName, 'paramsAtom')
 		);
 
-		/**
-		 * @todo Add `zod` validation
-		 */
 		const fetch = reatomResource(
 			async (ctx) => {
 				const params = ctx.spy(paramsAtom);
 
 				return ctx.schedule(() =>
-					activitiesApi.getAll(
-						{ ...params, roomId, count, },
-						ctx.controller.signal
-					)
+					activitiesApi
+						.getAll(
+							{ ...params, roomId, count, },
+							{ signal: ctx.controller.signal, }
+						)
+						.then(acitivitiesResponseSchema.parseAsync)
 				);
 			},
 			constructName(name, modelName, 'fetch')
 		).pipe(
 			withDataAtom(
-				{ items: [], totalCount: 0, limit: 50, } as PaginationResponse<Activity>,
+				{ items: [], totalCount: 0, limit: 50, } as Paginated<Activity>,
 				mapStandardResponse
 			),
 			withCache(),

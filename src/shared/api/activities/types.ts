@@ -2,10 +2,12 @@ import {
 	DatesFiltersParams,
 	InRoomParams,
 	PaginationParams,
-	SortParams
+	PaginationResponse,
+	SortParams,
+	StandardResponse
 } from '@/shared/types';
 
-import { User } from '../auth';
+import { UserDto } from '../users';
 
 export interface ActivityActionDto {
 	readonly id: number;
@@ -19,13 +21,13 @@ export interface ActivitySphereDto {
 export interface ActivityDto {
 	readonly id: number;
 	readonly roomId: number;
-	readonly activist: User;
+	readonly activist: UserDto;
 	readonly action: ActivityActionDto;
 	readonly sphere: ActivitySphereDto;
 	readonly createdAt: string;
 }
 
-export interface GetActivitiesInRoomParams
+export interface GetActivitiesInRoomRequestParams
 	extends InRoomParams,
 		PaginationParams,
 		SortParams,
@@ -34,7 +36,14 @@ export interface GetActivitiesInRoomParams
 	readonly sphereIds?: number[];
 	readonly actionIds?: number[];
 }
+export type GetActivitiesInRoomResponseData = Promise<
+	PaginationResponse<ActivityDto>
+>;
 
-export interface GetLastActivitiesInRoomParams extends InRoomParams {
-	readonly count: number;
-}
+export type GetActivityActionsResponseData = Promise<
+	StandardResponse<ActivityActionDto[]>
+>;
+
+export type GetActivitySpheresResponseData = Promise<
+	StandardResponse<ActivitySphereDto[]>
+>;

@@ -1,34 +1,34 @@
-import { PaginationResponse, StandardResponse } from '@/shared/types';
+import queryString from 'query-string';
 
-import { instance, normalizeQuery } from '../request';
+import { instance } from '../request';
 
 import {
-	ActivityDto,
-	ActivityActionDto,
-	ActivitySphereDto,
-	GetActivitiesInRoomParams
+	GetActivitiesInRoomRequestParams,
+	GetActivitiesInRoomResponseData,
+	GetActivityActionsResponseData,
+	GetActivitySpheresResponseData
 } from './types';
 
 export const getAll = async (
-	{ roomId, ...query }: GetActivitiesInRoomParams,
-	signal?: AbortSignal
-) => {
+	{ roomId, ...query }: GetActivitiesInRoomRequestParams,
+	options?: globalThis.RequestInit
+): GetActivitiesInRoomResponseData => {
 	return instance
 		.get(`activities/${roomId}`, {
-			searchParams: new URLSearchParams(normalizeQuery(query)),
-			signal,
+			...options,
+			searchParams: new URLSearchParams(queryString.stringify(query)),
 		})
-		.json<StandardResponse<PaginationResponse<ActivityDto>>>();
+		.json();
 };
 
-export const getActions = async (signal?: AbortSignal) => {
-	return instance
-		.get('activities/actions/all', { signal, })
-		.json<StandardResponse<ActivityActionDto[]>>();
+export const getActions = async (
+	options?: globalThis.RequestInit
+): GetActivityActionsResponseData => {
+	return instance.get('activities/actions/all', options).json();
 };
 
-export const getSpheres = async (signal?: AbortSignal) => {
-	return instance
-		.get('activities/spheres/all', { signal, })
-		.json<StandardResponse<ActivitySphereDto[]>>();
+export const getSpheres = async (
+	options?: globalThis.RequestInit
+): GetActivitySpheresResponseData => {
+	return instance.get('activities/spheres/all', options).json();
 };

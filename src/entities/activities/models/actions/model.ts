@@ -13,15 +13,26 @@ import {
 	mapStandardResponse
 } from '@/shared/lib';
 
-import { ActivityActions, ActivityActionsModel } from './types';
+import {
+	ActivityActions,
+	ActivityActionsModel,
+	activityActionsResponseSchema
+} from './types';
 
 const modelName = constructName('activitites', 'actions');
 
 export const create = createSingletonFactory(
 	(): ActivityActionsModel => {
-		const getActions = reatomResource(async (ctx) => {
-			return ctx.schedule(() => activitiesApi.getActions());
-		}, constructName(modelName, 'getActions')).pipe(
+		const getActions = reatomResource(
+			async (ctx) => {
+				return ctx.schedule(() =>
+					activitiesApi
+						.getActions({ signal: ctx.controller.signal, })
+						.then(activityActionsResponseSchema.parseAsync)
+				);
+			},
+			constructName(modelName, 'getActions')
+		).pipe(
 			withDataAtom([] as ActivityActions, mapStandardResponse),
 			withCache()
 		);

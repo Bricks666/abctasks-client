@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
+import { TestCtx, actions, createTestCtx, waitNextTick } from '~/test-utils';
+
 import { create } from './model';
 import { ActivityActionsModel } from './types';
 
-import { TestCtx, actions, createTestCtx, waitNextTick } from '~/test-utils';
-
-describe('src/entities/activitites/models/actions/model', () => {
+describe('src/entities/activitites/models/actions/model.ts', () => {
 	let ctx: TestCtx;
 	let model: ActivityActionsModel;
 
