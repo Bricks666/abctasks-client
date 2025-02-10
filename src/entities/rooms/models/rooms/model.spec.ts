@@ -1,8 +1,9 @@
 import { noop, take } from '@reatom/framework';
+import { getDefaultInjector } from 'bunshi';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import {
-	TestCtx,
+	type TestCtx,
 	createTestCtx,
 	defaultUser,
 	handlers,
@@ -11,17 +12,17 @@ import {
 	waitNextTick
 } from '~/test-utils';
 
-import { Room } from '../room';
+import type { Room } from '../room';
 
-import { create } from './model';
-import { RoomsModel } from './types';
+import { RoomsMolecule } from './model';
+import type { RoomsModel } from './types';
 
 describe('entities/rooms/model/rooms/model.ts', () => {
 	let ctx: TestCtx;
 	let model: RoomsModel;
 
 	const createModel = () => {
-		model = create();
+		model = getDefaultInjector().get(RoomsMolecule);
 	};
 
 	beforeEach(() => {

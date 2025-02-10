@@ -1,5 +1,6 @@
 import { take } from '@reatom/framework';
-import { beforeEach, describe, expect, test } from 'vitest';
+import { getDefaultInjector } from 'bunshi';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import {
 	TestCtx,
@@ -11,19 +12,15 @@ import {
 	waitNextTick
 } from '~/test-utils';
 
-import { create } from './model';
-import { CreateRoomModelParams, RoomModel } from './types';
+import { RoomMolecule, RoomScope } from './model';
+import type { RoomModel } from './types';
 
 describe('entieies/rooms/models/room/model.ts', () => {
 	let ctx: TestCtx;
 	let model: RoomModel;
 
-	const defaultParams: CreateRoomModelParams = {
-		roomId: defaultRoom.id,
-	};
-
-	const createModel = (params?: Partial<CreateRoomModelParams>) => {
-		model = create({ ...defaultParams, ...params, });
+	const createModel = (roomId = defaultRoom.id) => {
+		model = getDefaultInjector().get(RoomMolecule, [RoomScope, roomId]);
 	};
 
 	beforeEach(() => {
@@ -94,7 +91,26 @@ describe('entieies/rooms/models/room/model.ts', () => {
 		track.unsubscribe();
 	});
 
-	test.todo('should refetch query every 5 seconds');
+	test('should refetch query every 5 seconds', async () => {
+		vi.useFakeTimers();
+
+		createModel();
+
+		server.use(handlers.rooms.error.getOne.invalidData);
+
+		const track = ctx.subscribeTrack(model.roomAtom);
+
+		await vi.advanceTimersByTimeAsync(5000);
+
+		expect(track.lastInput()).toBeNull();
+		expect(ctx.get(model.errorAtom)).not.toBeNull();
+		expect(ctx.get(model.pendingAtom)).toBeFalsy();
+
+		track.unsubscribe();
+
+		await vi.runOnlyPendingTimersAsync();
+		vi.useRealTimers();
+	});
 
 	test('should creaet different instance for different room ids', async () => {
 		createModel();

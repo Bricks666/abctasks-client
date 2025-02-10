@@ -1,13 +1,10 @@
-import { useMemo } from 'react';
+import { useMolecule } from 'bunshi/react';
 
-import { RoomId, roomModel } from '../models';
+import { roomModel } from '../models';
 
-export interface UseRoomParams {
-	readonly roomId: RoomId;
-}
-
-export const useRoom = (params: UseRoomParams) => {
-	const { roomId, } = params;
-
-	return useMemo(() => roomModel.create({ roomId, }), [roomId]);
+/**
+ * Use room provided in current scope where the component is mounted
+ */
+export const useRoom = () => {
+	return useMolecule(roomModel.RoomMolecule);
 };

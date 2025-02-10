@@ -23,11 +23,6 @@ export const roomIdSchema = roomSchema.unwrap().shape.id;
 export interface Room extends zod.infer<typeof roomSchema> {}
 export type RoomId = Room['id'];
 
-export interface CreateRoomModelParams {
-	// May be atom?
-	readonly roomId: RoomId;
-}
-
 export interface RoomModel {
 	readonly roomAtom: Atom<Room | null>;
 	readonly errorAtom: Atom<Error | null>;

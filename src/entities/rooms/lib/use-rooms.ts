@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
+import { useMolecule } from 'bunshi/react';
 
 import { roomsModel } from '../models';
 
 export const useRooms = () => {
-	return useMemo(roomsModel.create, []);
+	return useMolecule(roomsModel.RoomsMolecule);
 };
