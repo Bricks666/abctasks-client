@@ -1,0 +1,1 @@
+export { roomModel } from '../models';

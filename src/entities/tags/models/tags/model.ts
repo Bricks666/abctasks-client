@@ -1,72 +1,76 @@
 /* eslint-disable no-underscore-dangle */
 import {
-	action,
-	atom,
 	reatomResource,
-	withCache,
 	withDataAtom,
 	withErrorAtom,
-	withRetry
+	withRetry,
+	withCache,
+	action,
+	atom
 } from '@reatom/framework';
 import { createMemStorage, reatomPersist } from '@reatom/persist';
-import { molecule } from 'bunshi';
+import { molecule, use } from 'bunshi';
 
-import { roomsApi } from '@/shared/api';
+import { roomModel } from '@/entities/rooms/@x/tags';
+
+import { tagsApi } from '@/shared/api';
 import { constructName, mapStandardResponse, retryQuery } from '@/shared/lib';
 
-import { Room, RoomId } from '../room';
+import { Tag, TagId } from '../tag';
 
-import { type Rooms, type RoomsModel, roomsResponseSchema } from './types';
+import { Tags, TagsModel, tagsResponseSchema } from './types';
 
-const modelName = 'rooms';
+const modelName = 'tags';
 
 const storage = createMemStorage({ name: modelName, });
 // eslint-disable-next-line @reatom/reatom-prefix-rule
 const withPersist = reatomPersist(storage);
 
-export const Molecule = molecule((): RoomsModel => {
+export const Molecule = molecule((): TagsModel => {
+	const roomId = use(roomModel.Scope);
+
 	const fetch = reatomResource(
 		async (ctx) => {
 			return ctx.schedule(() => {
-				return roomsApi
-					.getAll({ signal: ctx.controller.signal, })
-					.then(roomsResponseSchema.parseAsync);
+				return tagsApi
+					.getAll({ roomId, }, { signal: ctx.controller.signal, })
+					.then(tagsResponseSchema.parseAsync);
 			});
 		},
 		constructName(modelName, 'fetch')
 	).pipe(
-		withDataAtom([] as Rooms, mapStandardResponse),
+		withDataAtom([] as Tags, mapStandardResponse),
 		withErrorAtom(undefined, { initState: null, }),
 		withRetry(),
 		withCache({ withPersist, })
 	);
 
 	const add = action(
-		(ctx, room: Room) => {
-			const rooms = ctx.get(roomsAtom);
+		(ctx, tag: Tag) => {
+			const tags = ctx.get(tagsAtom);
 
-			const roomsWithNewOne = [...rooms, room];
+			const tagsWithNewOne = [...tags, tag];
 
 			storage.snapshotAtom(ctx, (snapshot) => {
 				return {
 					...snapshot,
 					[fetch.__reatom.name!]: {
 						...snapshot[fetch.__reatom.name!],
-						data: roomsWithNewOne,
+						data: tagsWithNewOne,
 					},
 				};
 			});
 
-			return roomsAtom(ctx, roomsWithNewOne);
+			return tagsAtom(ctx, tagsWithNewOne);
 		},
 		constructName(modelName, 'add')
 	);
 	const update = action(
-		(ctx, room: Room) => {
-			const rooms = ctx.get(roomsAtom);
+		(ctx, tag: Tag) => {
+			const tags = ctx.get(tagsAtom);
 
-			const updatedRooms = rooms.map((oldRoom) =>
-				oldRoom.id === room.id ? room : oldRoom
+			const updatedTags = tags.map((oldTag) =>
+				oldTag.id === tag.id ? tag : oldTag
 			);
 
 			storage.snapshotAtom(ctx, (snapshot) => {
@@ -74,32 +78,32 @@ export const Molecule = molecule((): RoomsModel => {
 					...snapshot,
 					[fetch.__reatom.name!]: {
 						...snapshot[fetch.__reatom.name!],
-						data: updatedRooms,
+						data: updatedTags,
 					},
 				};
 			});
 
-			return roomsAtom(ctx, updatedRooms);
+			return tagsAtom(ctx, updatedTags);
 		},
 		constructName(modelName, 'update')
 	);
 	const remove = action(
-		(ctx, roomId: RoomId) => {
-			const rooms = ctx.get(roomsAtom);
+		(ctx, tagId: TagId) => {
+			const tags = ctx.get(tagsAtom);
 
-			const filteredRooms = rooms.filter((room) => room.id !== roomId);
+			const filteredTags = tags.filter((tag) => tag.id !== tagId);
 
 			storage.snapshotAtom(ctx, (snapshot) => {
 				return {
 					...snapshot,
 					[fetch.__reatom.name!]: {
 						...snapshot[fetch.__reatom.name!],
-						data: filteredRooms,
+						data: filteredTags,
 					},
 				};
 			});
 
-			return roomsAtom(ctx, filteredRooms);
+			return tagsAtom(ctx, filteredTags);
 		},
 		constructName(modelName, 'remove')
 	);
@@ -110,11 +114,11 @@ export const Molecule = molecule((): RoomsModel => {
 		},
 		constructName(modelName, 'pendingAtom')
 	);
-	const { errorAtom, dataAtom: roomsAtom, retry: refetch, } = fetch;
+	const { errorAtom, dataAtom: tagsAtom, retry: refetch, } = fetch;
 
 	retryQuery({
 		query: fetch,
-		store: roomsAtom,
+		store: tagsAtom,
 		timeout: 5000,
 	});
 
@@ -124,7 +128,7 @@ export const Molecule = molecule((): RoomsModel => {
 		pendingAtom,
 		refetch,
 		remove,
-		roomsAtom,
+		tagsAtom,
 		update,
 	};
 });

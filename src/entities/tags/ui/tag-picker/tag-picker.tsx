@@ -2,7 +2,7 @@ import { Autocomplete, ListItem } from '@mui/material';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 
-import { Tag } from '@/shared/api';
+import { TagDto } from '@/shared/api';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
@@ -19,11 +19,11 @@ export const TagPicker: React.FC<TagPickerProps> = React.memo((props) => {
 
 	let changeHandler;
 	if (multiple) {
-		changeHandler = (_: unknown, tags: Tag[]) => {
+		changeHandler = (_: unknown, tags: TagDto[]) => {
 			onChange(tags.map((tag) => tag.id));
 		};
 	} else {
-		changeHandler = (_: unknown, tag: Tag | null) => {
+		changeHandler = (_: unknown, tag: TagDto | null) => {
 			onChange(tag?.id || null);
 		};
 	}

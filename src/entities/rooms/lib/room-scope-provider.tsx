@@ -13,7 +13,7 @@ export const RoomScopeProvider: FC<RoomScopeProviderProps> = (
 	const { children, roomId, } = props;
 
 	return (
-		<ScopeProvider scope={roomModel.RoomScope} value={roomId}>
+		<ScopeProvider scope={roomModel.Scope} value={roomId}>
 			{children}
 		</ScopeProvider>
 	);

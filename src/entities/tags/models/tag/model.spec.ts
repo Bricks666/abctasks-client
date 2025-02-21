@@ -5,50 +5,56 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 import {
 	TestCtx,
 	createTestCtx,
-	defaultRoom,
 	handlers,
-	rooms,
+	tags,
 	server,
-	waitNextTick
+	waitNextTick,
+	defaultTag
 } from '~/test-utils';
 
+import { roomModel } from '@/entities/rooms';
+
 import { Molecule, Scope } from './model';
-import type { RoomModel } from './types';
+import { TagModel } from './types';
 
-describe('entities/rooms/models/room/model.ts', () => {
+describe('entities/tags/models/tag/model.ts', () => {
 	let ctx: TestCtx;
-	let model: RoomModel;
+	let model: TagModel;
 
-	const createModel = (roomId = defaultRoom.id) => {
-		model = getDefaultInjector().get(Molecule, [Scope, roomId]);
+	const createModel = (tagId = defaultTag.id) => {
+		model = getDefaultInjector().get(
+			Molecule,
+			[roomModel.Scope, defaultTag.roomId],
+			[Scope, tagId]
+		);
 	};
 
 	beforeEach(() => {
 		ctx = createTestCtx();
 	});
 
-	test('should load room by roomId', async () => {
+	test('should load tag by tagId', async () => {
 		createModel();
 
-		const track = ctx.subscribeTrack(model.roomAtom);
+		const track = ctx.subscribeTrack(model.tagAtom);
 
 		expect(ctx.get(model.pendingAtom)).toBeTruthy();
 
 		await waitNextTick();
 
-		expect(track.lastInput()).toStrictEqual(defaultRoom);
+		expect(track.lastInput()).toStrictEqual(defaultTag);
 		expect(ctx.get(model.errorAtom)).toBeNull();
 		expect(ctx.get(model.pendingAtom)).toBeFalsy();
 
 		track.unsubscribe();
 	});
 
-	test('should save error if room has not been found', async () => {
+	test('should save error if tag has not been found', async () => {
 		createModel();
 
-		server.use(handlers.rooms.error.getOne.notFound);
+		server.use(handlers.tags.error.getOne.notFound);
 
-		const track = ctx.subscribeTrack(model.roomAtom);
+		const track = ctx.subscribeTrack(model.tagAtom);
 
 		await waitNextTick();
 
@@ -62,9 +68,9 @@ describe('entities/rooms/models/room/model.ts', () => {
 	test('should save error if something went wrong', async () => {
 		createModel();
 
-		server.use(handlers.rooms.error.getOne.internalError);
+		server.use(handlers.tags.error.getOne.internalError);
 
-		const track = ctx.subscribeTrack(model.roomAtom);
+		const track = ctx.subscribeTrack(model.tagAtom);
 
 		await waitNextTick();
 
@@ -78,9 +84,9 @@ describe('entities/rooms/models/room/model.ts', () => {
 	test('should save error if returned invalid data', async () => {
 		createModel();
 
-		server.use(handlers.rooms.error.getOne.invalidData);
+		server.use(handlers.tags.error.getOne.invalidData);
 
-		const track = ctx.subscribeTrack(model.roomAtom);
+		const track = ctx.subscribeTrack(model.tagAtom);
 
 		await waitNextTick();
 
@@ -96,9 +102,9 @@ describe('entities/rooms/models/room/model.ts', () => {
 
 		createModel();
 
-		server.use(handlers.rooms.error.getOne.invalidData);
+		server.use(handlers.tags.error.getOne.invalidData);
 
-		const track = ctx.subscribeTrack(model.roomAtom);
+		const track = ctx.subscribeTrack(model.tagAtom);
 
 		await vi.advanceTimersByTimeAsync(5000);
 
@@ -112,12 +118,12 @@ describe('entities/rooms/models/room/model.ts', () => {
 		vi.useRealTimers();
 	});
 
-	test('should creaet different instance for different room ids', async () => {
+	test('should creaet different instance for different tag ids', async () => {
 		createModel();
 
 		const oldModel = model;
 
-		createModel(rooms[1].id);
+		createModel({ tagId: tags[1].id, });
 
 		expect(model).not.toBe(oldModel);
 	});

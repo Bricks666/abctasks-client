@@ -7,15 +7,15 @@ import {
 } from '@mui/material';
 import * as React from 'react';
 
-import { Tag } from '@/shared/api';
+import { TagDto } from '@/shared/api';
 import { CommonProps, Slots } from '@/shared/types';
 
 import { TagLabel } from '../tag-label';
 
 export interface TemplateTagListItemProps
 	extends CommonProps,
-		Tag,
-		Omit<ListItemProps, keyof Tag | 'slots'> {
+		TagDto,
+		Omit<ListItemProps, keyof TagDto | 'slots'> {
 	readonly slots?: Slots<'actions'>;
 }
 

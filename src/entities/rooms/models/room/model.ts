@@ -19,7 +19,7 @@ import {
 	roomResponseSchema
 } from './types';
 
-export const RoomScope = createScope<RoomId>(-1);
+export const Scope = createScope<RoomId>(-1);
 
 const modelName = 'room';
 
@@ -27,8 +27,8 @@ const storage = createMemStorage({ name: modelName, });
 // eslint-disable-next-line @reatom/reatom-prefix-rule
 const withPersist = reatomPersist(storage);
 
-export const RoomMolecule = molecule((): RoomModel => {
-	const roomId = use(RoomScope);
+export const Molecule = molecule((): RoomModel => {
+	const roomId = use(Scope);
 
 	const fetch = reatomResource(
 		async (ctx) => {
