@@ -1,76 +1,58 @@
-import {
-	Record,
-	Number,
-	String,
-	Static,
-	Union,
-	Literal,
-	Array
-} from 'runtypes';
+import { DatesFiltersParams, StandardResponse } from '@/shared/types';
 
-import { DatesFiltersParams, InRoomParams } from '@/shared/types';
+import { TagsDto } from '../tags';
+import { UserDto } from '../users';
 
-import { user } from '../auth';
-import { tag } from '../tags';
+export type TaskStatusDto = 'done' | 'in_progress' | 'review' | 'ready';
 
-export const taskStatus = Union(
-	Literal('done'),
-	Literal('in_progress'),
-	Literal('review'),
-	Literal('ready')
-);
-
-export type TaskStatus = Static<typeof taskStatus>;
-export const statuses: TaskStatus[] = [
-	'done',
-	'in_progress',
-	'ready',
-	'review'
-];
-
-export const task = Record({
-	id: Number,
-	roomId: Number,
-	tags: Array(tag),
-	author: user,
-	title: String,
-	description: String.nullable(),
-	status: taskStatus,
-	createdAt: String,
-	updatedAt: String.nullable(),
-});
-
-export interface Task extends Static<typeof task> {}
-
-export type Tasks = Task[];
-
-export interface GroupedByStatusTasks {
-	readonly ready: Tasks;
-	readonly in_progress: Tasks;
-	readonly needReview: Tasks;
-	readonly done: Tasks;
+export interface TaskDto {
+	readonly id: number;
+	readonly roomId: number;
+	readonly tags: TagsDto;
+	readonly author: UserDto;
+	readonly title: string;
+	readonly description: string | null;
+	readonly status: TaskStatusDto;
+	readonly createdAt: string;
+	readonly updatedAt: string | null;
 }
+export type TasksDto = TaskDto[];
 
-export interface GetTasksParams extends InRoomParams, DatesFiltersParams {
+export interface GetTasksRequestParams extends DatesFiltersParams {
+	readonly roomId: number;
 	readonly authorIds?: number[];
 	readonly tagIds?: number[];
 }
+export type GetTasksResponseData = Promise<StandardResponse<TasksDto>>;
 
-export interface GetTaskParams extends InRoomParams {
+export interface GetTaskRequestParams {
+	readonly roomId: number;
 	readonly id: number;
 }
+export type GetTaskResponseData = Promise<StandardResponse<TaskDto>>;
 
-export interface CreateTaskParams
-	extends Pick<Task, 'roomId' | 'title' | 'status' | 'description'> {
+export interface CreateTaskRequestParams
+	extends Pick<TaskDto, 'roomId' | 'title' | 'status' | 'description'> {
+	readonly roomId: number;
+	readonly title: string;
+	readonly status: TaskStatusDto;
+	readonly description: string;
 	readonly tagIds: number[];
 }
+export type CreateTaskResponseData = Promise<StandardResponse<TaskDto>>;
 
-export interface UpdateTaskParams
-	extends Partial<Omit<CreateTaskParams, 'roomId'>>,
-		InRoomParams {
+export interface UpdateTaskRequestParams {
 	readonly id: number;
+	readonly roomId: number;
+	readonly title: string;
+	readonly status: TaskStatusDto;
+	readonly description: string;
+	readonly tagIds: number[];
 }
+export type UpdateTaskResponseData = Promise<StandardResponse<TaskDto>>;
 
-export interface RemoveTaskParams extends InRoomParams {
+export interface RemoveTaskRequestParams {
 	readonly id: number;
+	readonly roomId: number;
 }
+export type RemoveTaskResponseData = Promise<StandardResponse<boolean>>;
