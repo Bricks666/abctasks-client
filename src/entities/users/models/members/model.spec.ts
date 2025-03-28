@@ -1,8 +1,6 @@
 import { take } from '@reatom/framework';
+import { getDefaultInjector } from 'bunshi';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-
-import { create } from './model';
-import { MembersModel } from './types';
 
 import {
 	TestCtx,
@@ -10,15 +8,20 @@ import {
 	defaultRoom,
 	handlers,
 	members,
+	rooms,
 	server
 } from '~/test-utils';
 
-describe('src/entities/users/models/members/model', () => {
+import { Molecule, Scope } from './model';
+import { MembersModel } from './types';
+
+
+describe('src/entities/users/models/members/model.ts', () => {
 	let ctx: TestCtx;
 	let model: MembersModel;
 
-	const createModel = () => {
-		model = create({ roomId: defaultRoom.id, });
+	const createModel = (roomId = defaultRoom.id) => {
+		model = getDefaultInjector().get(Molecule, [Scope, roomId]);
 	};
 
 	beforeEach(() => {
@@ -36,7 +39,9 @@ describe('src/entities/users/models/members/model', () => {
 	test('should create the same model for the same room id', () => {
 		createModel();
 
-		const anotherModel = create({ roomId: defaultRoom.id, });
+		const anotherModel = model;
+
+		createModel();
 
 		expect(anotherModel).toBe(model);
 	});
@@ -44,7 +49,9 @@ describe('src/entities/users/models/members/model', () => {
 	test('should create different models for different room ids', () => {
 		createModel();
 
-		const anotherModel = create({ roomId: 2, });
+		const anotherModel = model;
+
+		createModel(rooms[1].id);
 
 		expect(anotherModel).not.toBe(model);
 	});

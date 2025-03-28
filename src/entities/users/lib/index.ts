@@ -1,2 +1,2 @@
-export * from './useSearchedUsers';
-export * from './use-members-model';
+export * from './use-users';
+export * from './use-members';
