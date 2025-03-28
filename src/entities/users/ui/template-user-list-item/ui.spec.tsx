@@ -1,16 +1,17 @@
 import { describe, expect, test } from 'vitest';
 
+import { RenderResult, defaultUser, render } from '~/test-utils';
+
 import { Slots } from '@/shared/types';
 
 import { TemplateUserListItem } from './ui';
 
-import { RenderResult, defaultUser, render } from '~/test-utils';
 
 describe('src/entities/users/ui/template-user-list-item/ui', () => {
 	let wrapper: RenderResult;
 
 	const createComponent = (slots?: Slots<'actions' | 'extra'>) => {
-		wrapper = render(<TemplateUserListItem {...defaultUser} slots={slots} />);
+		wrapper = render(<TemplateUserListItem user={defaultUser} slots={slots} />);
 	};
 
 	const findListItem = () => wrapper.getByRole('listitem');

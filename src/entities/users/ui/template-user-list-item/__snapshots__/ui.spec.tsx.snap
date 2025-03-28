@@ -3,14 +3,13 @@
 exports[`src/entities/users/ui/template-user-list-item/ui > should render actions into right slot > with actions slot 1`] = `
 <li
   class="MuiListItem-root MuiListItem-gutters MuiListItem-padding _card_9cc384 css-1gh3v4f-MuiListItem-root"
-  id="1"
 >
   <div
     class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
   >
     <div
       aria-label="username"
-      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1i3y8b0-MuiAvatar-root"
+      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1d5obdn-MuiAvatar-root"
       data-mui-internal-clone-element="true"
     >
       <svg
@@ -53,14 +52,13 @@ exports[`src/entities/users/ui/template-user-list-item/ui > should render action
 exports[`src/entities/users/ui/template-user-list-item/ui > should render extra into right slot > with extra slot 1`] = `
 <li
   class="MuiListItem-root MuiListItem-gutters MuiListItem-padding _card_9cc384 css-q9mp92-MuiListItem-root"
-  id="1"
 >
   <div
     class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
   >
     <div
       aria-label="username"
-      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1i3y8b0-MuiAvatar-root"
+      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1d5obdn-MuiAvatar-root"
       data-mui-internal-clone-element="true"
     >
       <svg
@@ -99,14 +97,13 @@ exports[`src/entities/users/ui/template-user-list-item/ui > should render extra 
 exports[`src/entities/users/ui/template-user-list-item/ui > should render list item for user 1`] = `
 <li
   class="MuiListItem-root MuiListItem-gutters MuiListItem-padding _card_9cc384 css-q9mp92-MuiListItem-root"
-  id="1"
 >
   <div
     class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
   >
     <div
       aria-label="username"
-      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1i3y8b0-MuiAvatar-root"
+      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1d5obdn-MuiAvatar-root"
       data-mui-internal-clone-element="true"
     >
       <svg

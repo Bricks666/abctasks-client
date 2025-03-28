@@ -11,7 +11,7 @@ exports[`src/entities/users/ui/skeleton-user-list-item/ui > should render skelet
       class="MuiSkeleton-root MuiSkeleton-circular MuiSkeleton-pulse MuiSkeleton-withChildren MuiSkeleton-fitContent MuiSkeleton-heightAuto css-10fet10-MuiSkeleton-root"
     >
       <div
-        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1bjizj2-MuiAvatar-root"
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-pcn37w-MuiAvatar-root"
       >
         <svg
           aria-hidden="true"

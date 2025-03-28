@@ -6,26 +6,24 @@ import {
 	ListItemText
 } from '@mui/material';
 import cn from 'classnames';
-import * as React from 'react';
+import { FC } from 'react';
 
-import { UserDto } from '@/shared/api';
 import { CommonProps, Slots } from '@/shared/types';
 
+import { User } from '../../models';
 import { UserAvatar } from '../user-avatar';
 
 import styles from './styles.module.css';
 
 export interface TemplateUserListItemProps
 	extends CommonProps,
-		Pick<UserDto, 'username' | 'email' | 'photo'>,
-		Omit<ListItemProps, keyof CommonProps | keyof UserDto | 'slots'> {
+		Omit<ListItemProps, keyof CommonProps | 'slots'> {
+	readonly user: User;
 	readonly slots?: Slots<'actions' | 'extra'>;
 }
 
-export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
-	props
-) => {
-	const { username, className, photo, email, slots = {}, ...rest } = props;
+export const TemplateUserListItem: FC<TemplateUserListItemProps> = (props) => {
+	const { user, className, slots = {}, ...rest } = props;
 
 	return (
 		<ListItem
@@ -33,11 +31,15 @@ export const TemplateUserListItem: React.FC<TemplateUserListItemProps> = (
 			secondaryAction={slots.actions}
 			{...rest}>
 			<ListItemAvatar>
-				<UserAvatar username={username} email={email} photo={photo} />
+				<UserAvatar
+					username={user.username}
+					email={user.email}
+					photo={user.photo}
+				/>
 			</ListItemAvatar>
 			<ListItemText
-				primary={username}
-				secondary={email}
+				primary={user.username}
+				secondary={user.email}
 				primaryTypographyProps={{ variant: 'subtitle1', component: 'p', }}
 			/>
 			{slots.extra}
