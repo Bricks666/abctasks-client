@@ -9,7 +9,7 @@ import {
 import cn from 'classnames';
 import * as React from 'react';
 
-import { Task } from '@/shared/api';
+import { TaskDto } from '@/shared/api';
 import { CommonProps, Slots } from '@/shared/types';
 import { DateTime } from '@/shared/ui';
 
@@ -17,8 +17,8 @@ import styles from './template-task-card.module.css';
 
 export interface TemplateTaskCardProps
 	extends CommonProps,
-		Pick<Task, 'title' | 'description' | 'createdAt' | 'status' | 'id'>,
-		Omit<CardProps, keyof Task> {
+		Pick<TaskDto, 'title' | 'description' | 'createdAt' | 'status' | 'id'>,
+		Omit<CardProps, keyof TaskDto> {
 	readonly slots: Slots<'actions' | 'tags' | 'userAvatar'>;
 }
 
