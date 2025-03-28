@@ -3,7 +3,7 @@
 exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`create\` action > create 1`] = `
 <div
   aria-label="type.create"
-  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _success_0061b8 classname css-1bjizj2-MuiAvatar-root"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _success_0061b8 classname css-pcn37w-MuiAvatar-root"
 >
   <svg
     aria-hidden="true"
@@ -22,7 +22,7 @@ exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > 
 exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`remove\` action > remove 1`] = `
 <div
   aria-label="type.remove"
-  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _error_0061b8 classname css-1bjizj2-MuiAvatar-root"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _error_0061b8 classname css-pcn37w-MuiAvatar-root"
 >
   <svg
     aria-hidden="true"
@@ -41,7 +41,7 @@ exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > 
 exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`update\` action > update 1`] = `
 <div
   aria-label="type.update"
-  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _warning_0061b8 classname css-1bjizj2-MuiAvatar-root"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _warning_0061b8 classname css-pcn37w-MuiAvatar-root"
 >
   <svg
     aria-hidden="true"

@@ -9,7 +9,7 @@ exports[`src/entities/activities/ui/activity-list-item/activity-list-item > shou
   >
     <div
       aria-label="type.created"
-      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _undefined_0061b8 css-1bjizj2-MuiAvatar-root"
+      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _undefined_0061b8 css-pcn37w-MuiAvatar-root"
     >
       <svg
         aria-hidden="true"
