@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/tags/ui/tag-label/tag-label.tsx > renders correctly 1`] = `
+<span
+  class="MuiTypography-root MuiTypography-body2 _label_79a1f3 css-1etqv6i-MuiTypography-root"
+>
+  A tag
+</span>
+`;

@@ -7,30 +7,24 @@ import {
 } from '@mui/material';
 import * as React from 'react';
 
-import { TagDto } from '@/shared/api';
 import { CommonProps, Slots } from '@/shared/types';
 
+import { Tag } from '../../models';
 import { TagLabel } from '../tag-label';
 
-export interface TemplateTagListItemProps
+type TagListItemTemplateSlots = 'actions';
+
+export interface TagListItemTemplateProps
 	extends CommonProps,
-		TagDto,
-		Omit<ListItemProps, keyof TagDto | 'slots'> {
-	readonly slots?: Slots<'actions'>;
+		Pick<Tag, 'mainColor' | 'secondColor' | 'name'>,
+		Omit<ListItemProps, keyof Tag | 'slots'> {
+	readonly slots?: Slots<TagListItemTemplateSlots>;
 }
 
-export const TemplateTagListItem: React.FC<TemplateTagListItemProps> = (
+export const TagListItemTemplate: React.FC<TagListItemTemplateProps> = (
 	props
 ) => {
-	const {
-		id: _,
-		mainColor,
-		secondColor,
-		name,
-		className,
-		slots,
-		...rest
-	} = props;
+	const { mainColor, secondColor, name, className, slots, ...rest } = props;
 
 	return (
 		<ListItem className={className} {...rest}>

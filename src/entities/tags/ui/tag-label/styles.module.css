@@ -2,11 +2,10 @@
 	display: inline-block;
 
 	width: max-content;
-
 	padding: 2px 12px;
 
-	border-radius: 1.5rem;
-
-	word-wrap: break-word;
 	word-break: break-all;
+	word-wrap: break-word;
+
+	border-radius: 1.5rem;
 }

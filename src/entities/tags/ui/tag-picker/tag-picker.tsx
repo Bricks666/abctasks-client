@@ -1,52 +1,33 @@
-import { Autocomplete, ListItem } from '@mui/material';
-import { useUnit } from 'effector-react';
-import * as React from 'react';
+import { Autocomplete } from '@mui/material';
+import { FC, memo } from 'react';
 
-import { TagDto } from '@/shared/api';
-import { CommonProps, PickerProps } from '@/shared/types';
+import { CommonProps, Fn, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
-import { tagsModel } from '../../model';
+import { Tag, Tags } from '../../models';
 import { TagLabel } from '../tag-label';
+import { TagListItemTemplate } from '../tag-list-item-template';
 
 export type TagPickerProps = CommonProps &
-	PickerProps<number> &
-	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'>;
+	PickerProps<Tag> &
+	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'> & {
+		readonly onInputChange?: Fn<[value: string], void>;
+		readonly tags: Tags;
+	};
 
-export const TagPicker: React.FC<TagPickerProps> = React.memo((props) => {
-	const { className, onChange, value, limitTags, multiple, ...rest } = props;
-	const tags = useUnit(tagsModel.query);
-
-	let changeHandler;
-	if (multiple) {
-		changeHandler = (_: unknown, tags: TagDto[]) => {
-			onChange(tags.map((tag) => tag.id));
-		};
-	} else {
-		changeHandler = (_: unknown, tag: TagDto | null) => {
-			onChange(tag?.id || null);
-		};
-	}
-
-	let selected;
-	if (multiple) {
-		selected = tags.data.filter((tag) => value.includes(tag.id));
-	} else {
-		selected = tags.data.find((tag) => tag.id === value) ?? null;
-	}
+export const TagPicker: FC<TagPickerProps> = memo((props) => {
+	const { className, onChange, value, limitTags, multiple, tags, ...rest } =
+		props;
 
 	return (
 		<Autocomplete
 			className={className}
-			options={tags.data}
-			loading={tags.pending}
-			onChange={changeHandler as any}
-			value={selected as any}
+			options={tags}
+			onChange={onChange}
+			value={value}
 			getOptionLabel={(tag) => tag.name}
 			renderOption={(props, tag) => (
-				<ListItem {...props} key={tag.id}>
-					<TagLabel {...tag} />
-				</ListItem>
+				<TagListItemTemplate {...props} {...tag} key={tag.id} />
 			)}
 			renderTags={(tags, getTagProps) => {
 				return tags.map((tag, index) => (

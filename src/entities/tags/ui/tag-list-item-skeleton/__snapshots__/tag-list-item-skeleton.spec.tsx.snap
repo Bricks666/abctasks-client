@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/tags/ui/tag-list-item-skeleton/tag-list-item-skeleton.tsx > should render without slot > without slot 1`] = `
+<li
+  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+>
+  <span
+    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-1mhfe40-MuiSkeleton-root"
+    style="width: 5em; height: 1.5em;"
+  />
+</li>
+`;

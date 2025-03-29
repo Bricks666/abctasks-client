@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/tags/ui/tag-label-skeleton/tag-label-skeleton.tsx > should render correctly 1`] = `
+<span
+  class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-1mhfe40-MuiSkeleton-root"
+  style="width: 5em; height: 1.5em;"
+/>
+`;
