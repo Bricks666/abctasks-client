@@ -56,6 +56,25 @@ export const success = {
 };
 
 export const error = {
+	getAll: {
+		invalidData: http.get(getAllUrl, () => {
+			return createStandardResponse({});
+		}),
+		internalError: http.get(getAllUrl, () => {
+			return internalServerError;
+		}),
+	},
+	getOne: {
+		invalidData: http.get(getOneUrl, () => {
+			return createStandardResponse(null);
+		}),
+		notFound: http.get(getOneUrl, () => {
+			return notFoundError;
+		}),
+		internalError: http.get(getOneUrl, () => {
+			return internalServerError;
+		}),
+	},
 	create: http.post(createTagUrl, async () => {
 		return internalServerError;
 	}),
