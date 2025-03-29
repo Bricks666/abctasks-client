@@ -3,7 +3,7 @@
 exports[`features/auth/logout/ui/logout-button/logout-button.tsx > should render logout button > button 1`] = `
 <button
   aria-label="profile_menu.items.logout"
-  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium classname css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary classname css-15qnkk1-MuiButtonBase-root-MuiButton-root"
   data-mui-internal-clone-element="true"
   tabindex="0"
   type="button"

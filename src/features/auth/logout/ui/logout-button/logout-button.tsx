@@ -1,29 +1,29 @@
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Button, Tooltip } from '@mui/material';
-import { useAction } from '@reatom/npm-react';
-import * as React from 'react';
+import { reatomComponent } from '@reatom/npm-react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CommonProps } from '@/shared/types';
 
-import { logoutModel } from '../../model';
+import { useLogout } from '../../lib';
 
 export interface LogoutButtonProps extends CommonProps {}
 
-export const LogoutButton: React.FC<LogoutButtonProps> = (props) => {
-	const { className, } = props;
+export const LogoutButton: FC<LogoutButtonProps> = reatomComponent((props) => {
+	const { className, ctx, } = props;
 
 	const { t, } = useTranslation('common', { keyPrefix: 'profile_menu', });
 
-	const logout = useAction(logoutModel.logout);
+	const model = useLogout();
 
 	const titleT = t('items.logout');
 
 	return (
 		<Tooltip title={titleT}>
-			<Button className={className} onClick={logout}>
+			<Button className={className} onClick={ctx.bind(model.logout)}>
 				<LogoutIcon />
 			</Button>
 		</Tooltip>
 	);
-};
+}, 'LogoutButton');
