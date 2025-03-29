@@ -1,9 +1,9 @@
-import { Invitation } from '@/shared/api';
+import type { InvitationsDto } from '@/shared/api';
 
 import { defaultRoom } from './rooms';
 import { defaultUser, users } from './users';
 
-export const invitations: Invitation[] = [
+export const invitations: InvitationsDto = [
 	{
 		id: 1,
 		room: defaultRoom,
@@ -22,6 +22,6 @@ export const invitations: Invitation[] = [
 
 export const defaultInvitation = invitations[0];
 
-export const createInvitationLink = (roomId: number): string => {
+export const createInvitationDtoLink = (roomId: number): string => {
 	return `${window.location.origin}/invitation-link-to-room-${roomId}`;
 };
