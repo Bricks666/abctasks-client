@@ -11,7 +11,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
     <li>
       <button
         aria-label="Go to previous page"
-        class="MuiButtonBase-root Mui-disabled MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-previousNext css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        class="MuiButtonBase-root Mui-disabled MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-previousNext css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
         disabled=""
         role="link"
         tabindex="-1"
@@ -34,7 +34,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
       <button
         aria-current="true"
         aria-label="page 1"
-        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary Mui-selected MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary Mui-selected MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
         role="link"
         tabindex="0"
         type="button"
@@ -48,7 +48,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
     <li>
       <button
         aria-label="Go to page 2"
-        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
         role="link"
         tabindex="0"
         type="button"
@@ -62,7 +62,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
     <li>
       <button
         aria-label="Go to page 3"
-        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
         role="link"
         tabindex="0"
         type="button"
@@ -76,7 +76,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
     <li>
       <button
         aria-label="Go to page 4"
-        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
         role="link"
         tabindex="0"
         type="button"
@@ -90,7 +90,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
     <li>
       <button
         aria-label="Go to page 5"
-        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
         role="link"
         tabindex="0"
         type="button"
@@ -103,7 +103,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
     </li>
     <li>
       <div
-        class="MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary MuiPaginationItem-ellipsis css-3wij1h-MuiPaginationItem-root"
+        class="MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-ellipsis css-3wij1h-MuiPaginationItem-root"
       >
         …
       </div>
@@ -111,7 +111,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
     <li>
       <button
         aria-label="Go to page 10"
-        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
         role="link"
         tabindex="0"
         type="button"
@@ -125,7 +125,7 @@ exports[`features/activities/activities-pagination/ui/pagination.tsx > should re
     <li>
       <button
         aria-label="Go to next page"
-        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-textPrimary MuiPaginationItem-previousNext css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-previousNext css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
         role="link"
         tabindex="0"
         type="button"

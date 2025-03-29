@@ -5,7 +5,7 @@ import { RenderResult, TestCtx, createTestCtx, render } from '~/test-utils';
 
 import { PAGE_SEARCH_PARAM_NAME } from '@/shared/configs';
 
-import { ActivitiesPagination } from './pagination';
+import { ActivitiesPagination } from '.';
 
 describe('features/activities/activities-pagination/ui/pagination.tsx', () => {
 	let wrapper: RenderResult;
