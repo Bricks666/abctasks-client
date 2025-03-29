@@ -1,1 +1,1 @@
-export * from './use-registration-model';
+export * from './use-registration';
