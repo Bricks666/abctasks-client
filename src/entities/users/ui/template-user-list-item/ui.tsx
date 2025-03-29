@@ -17,13 +17,13 @@ import styles from './styles.module.css';
 
 export interface TemplateUserListItemProps
 	extends CommonProps,
+		Pick<User, 'email' | 'photo' | 'username'>,
 		Omit<ListItemProps, keyof CommonProps | 'slots'> {
-	readonly user: User;
 	readonly slots?: Slots<'actions' | 'extra'>;
 }
 
 export const TemplateUserListItem: FC<TemplateUserListItemProps> = (props) => {
-	const { user, className, slots = {}, ...rest } = props;
+	const { username, email, photo, className, slots = {}, ...rest } = props;
 
 	return (
 		<ListItem
@@ -31,15 +31,11 @@ export const TemplateUserListItem: FC<TemplateUserListItemProps> = (props) => {
 			secondaryAction={slots.actions}
 			{...rest}>
 			<ListItemAvatar>
-				<UserAvatar
-					username={user.username}
-					email={user.email}
-					photo={user.photo}
-				/>
+				<UserAvatar username={username} email={email} photo={photo} />
 			</ListItemAvatar>
 			<ListItemText
-				primary={user.username}
-				secondary={user.email}
+				primary={username}
+				secondary={email}
 				primaryTypographyProps={{ variant: 'subtitle1', component: 'p', }}
 			/>
 			{slots.extra}

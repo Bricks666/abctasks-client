@@ -1,79 +1,78 @@
 import { Autocomplete } from '@mui/material';
-import { Atom } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
 import {
-	ComponentType,
-	HTMLAttributes,
-	ReactNode,
-	SyntheticEvent,
+	type ComponentType,
+	type FC,
+	type HTMLAttributes,
+	type SyntheticEvent,
 	memo
 } from 'react';
 
-import { CommonProps, Fn, PickerProps } from '@/shared/types';
-import { Field, FieldProps } from '@/shared/ui';
+import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
+import type { CommonProps, Fn, PickerProps } from '@/shared/types';
+import { Field, type FieldProps } from '@/shared/ui';
 
-import { User } from '../../models';
+import type { User, UserId, Users } from '../../models';
 import { TemplateUserListItem } from '../template-user-list-item';
 
-export type UsersPickerProps<T extends User> = CommonProps &
-	PickerProps<T> &
+export type UsersPickerProps = CommonProps &
+	PickerProps<UserId> &
 	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'> & {
-		readonly onInputChange: Fn<[event: SyntheticEvent, value: string], void>;
-		readonly dataAtom: Atom<T[]>;
-		readonly pendingAtom: Atom<boolean>;
-
+		readonly users: Users;
+		readonly loading?: boolean;
+		readonly onInputChange?: Fn<[event: SyntheticEvent, value: string], void>;
 		/**
 		 * @default {@link TemplateUserListItem}
 		 */
-		readonly UserListItem?: ComponentType<
-			HTMLAttributes<HTMLLIElement> & { readonly user: T }
-		>;
+		readonly UserListItem?: ComponentType<HTMLAttributes<HTMLLIElement> & User>;
 	};
 
-export const UsersPicker = memo(
-	<T extends User>(props: UsersPickerProps<T>): ReactNode => {
-		const {
+export const UsersPicker: FC<UsersPickerProps> = memo((props) => {
+	const {
+		onChange,
+		value,
+		className,
+		multiple,
+		limitTags,
+		users,
+		onInputChange,
+		loading,
+		UserListItem = TemplateUserListItem,
+		...rest
+	} = props;
+
+	const handleChange = preparePickerHandler(
+		{
 			onChange,
-			value,
-			className,
 			multiple,
-			limitTags,
-			dataAtom,
-			onInputChange,
-			pendingAtom,
-			UserListItem = TemplateUserListItem,
-			...rest
-		} = props;
+		},
+		'id'
+	);
+	const selected = preparePickerSelectedValue(
+		{
+			value,
+			multiple,
+		},
+		users,
+		'id'
+	);
 
-		const [users] = useAtom(dataAtom);
-		const [pending] = useAtom(pendingAtom);
-
-		const handleChange = (event: SyntheticEvent, users: T[] | T | null) => {
-			if (multiple) {
-				return onChange?.(users as T[]);
-			}
-
-			return onChange?.(users as T | null);
-		};
-
-		return (
-			<Autocomplete
-				className={className}
-				options={users}
-				value={value as T[] | T | null}
-				onChange={handleChange as (_: unknown, users: T[]) => void}
-				getOptionLabel={(member) => member.username}
-				loading={pending}
-				onInputChange={onInputChange}
-				renderOption={(params, option) => (
-					<UserListItem {...params} user={option} />
-				)}
-				renderInput={(params) => {
-					return <Field {...params} {...rest} />;
-				}}
-				limitTags={limitTags}
-				multiple={multiple}
-			/>
-		);
-	}
-);
+	return (
+		<Autocomplete
+			className={className}
+			options={users}
+			value={selected}
+			onChange={handleChange}
+			getOptionLabel={(member) => member.username}
+			loading={loading}
+			onInputChange={onInputChange}
+			renderOption={(params, option) => (
+				<UserListItem {...params} {...option} />
+			)}
+			renderInput={(params) => {
+				return <Field {...params} {...rest} />;
+			}}
+			limitTags={limitTags}
+			multiple={multiple}
+		/>
+	);
+});

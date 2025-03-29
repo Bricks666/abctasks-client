@@ -6,12 +6,18 @@ import { Slots } from '@/shared/types';
 
 import { TemplateUserListItem } from './ui';
 
-
 describe('src/entities/users/ui/template-user-list-item/ui', () => {
 	let wrapper: RenderResult;
 
 	const createComponent = (slots?: Slots<'actions' | 'extra'>) => {
-		wrapper = render(<TemplateUserListItem user={defaultUser} slots={slots} />);
+		wrapper = render(
+			<TemplateUserListItem
+				email={defaultUser.email}
+				username={defaultUser.username}
+				photo={defaultUser.photo}
+				slots={slots}
+			/>
+		);
 	};
 
 	const findListItem = () => wrapper.getByRole('listitem');
