@@ -1,46 +1,55 @@
-// import qs from 'qs';
-import { reatomForm } from '@reatom/form';
+import { reaction, select } from '@reatom/framework';
+import { createScope, molecule, use } from 'bunshi';
+
+import { FormFieldOptions, reatomForm } from '@reatom/form';
 // import { withSearchParamsPersist } from '@reatom/url';
 
 import { constructName } from '@/shared/lib';
 
-import {
+import type {
 	ActivitiesFiltersModel,
 	ActivitiesFitlers,
-	CreateActivitiesFiltersModelParams
+	OnFiltersChanged
 } from './types';
 
-export const create = (
-	params: CreateActivitiesFiltersModelParams
-): ActivitiesFiltersModel => {
-	const { name, onFiltersChanged, } = params;
+const modelName = 'activities-filters';
+
+export const Scope = createScope<unknown>(null);
+
+export const Molecule = molecule((): ActivitiesFiltersModel => {
+	use(Scope);
 
 	const form = reatomForm(
 		{
-			actionIds: {
-				initState: [] satisfies ActivitiesFitlers['actionIds'],
-			},
+			actionIds: { initState: [] as ActivitiesFitlers['actionIds'], },
 			activistIds: {
-				initState: [] satisfies ActivitiesFitlers['activistIds'],
-			},
+				initState: [],
+			} as FormFieldOptions<ActivitiesFitlers['activistIds']>,
 			after: null as ActivitiesFitlers['after'],
 			before: null as ActivitiesFitlers['before'],
-			sphereIds: {
-				initState: [] satisfies ActivitiesFitlers['sphereIds'],
-			},
+			sphereIds: { initState: [] as ActivitiesFitlers['sphereIds'], },
 		},
 		{
-			onSubmit: (_ctx, state) => {
-				onFiltersChanged(state);
-			},
 			resetOnSubmit: false,
-			name: constructName(name, 'form'),
+			name: constructName(modelName, 'form'),
 		}
 	);
 
-	form.reset.onCall((ctx) => {
-		onFiltersChanged(ctx.get(form.fieldsState));
-	});
+	const onFiltersChanged = reaction(
+		(ctx, onChange: OnFiltersChanged) => {
+			// Take some state
+			const filters = select(ctx, (ctx) => {
+				ctx.spy(form.submit.onFulfill);
+				ctx.spy(form.reset);
+
+				return ctx.get(form.fieldsState);
+			});
+
+			// @todo Remove type assertion when parseAtoms types will be fixed
+			return onChange(filters as unknown as ActivitiesFitlers);
+		},
+		constructName(modelName, 'onFiltersChanged')
+	);
 
 	/**
 	 * @todo It does not work
@@ -66,5 +75,6 @@ export const create = (
 		after,
 		before,
 		sphereIds,
+		onFiltersChanged,
 	};
-};
+});

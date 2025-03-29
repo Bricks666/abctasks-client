@@ -15,7 +15,7 @@
 	grid-column: 2;
 }
 
-@media (max-width: 720px) {
+@media (width <= 720px) {
 	.form {
 		grid-template-columns: 1fr;
 	}

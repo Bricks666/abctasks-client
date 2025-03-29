@@ -4,7 +4,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render b
 <body>
   <div>
     <button
-      aria-controls=":r0:"
+      aria-controls=":r1:"
       aria-expanded="false"
       aria-haspopup="true"
       aria-label="actions.filter_activities.title"
@@ -40,7 +40,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
     aria-hidden="true"
   >
     <button
-      aria-controls=":r2:"
+      aria-controls=":r4:"
       aria-expanded="true"
       aria-haspopup="true"
       aria-label="actions.filter_activities.title"
@@ -68,7 +68,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
   <div
     aria-label="actions.filter_activities.title"
     class="MuiPopover-root MuiModal-root css-1o2t9a7-MuiModal-root-MuiPopover-root"
-    id=":r2:"
+    id=":r4:"
     role="presentation"
   >
     <div
@@ -87,41 +87,41 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
     >
       <form
         aria-label="actions.filter_activities.title"
-        class="_form_d9fefc classname"
+        class="_form_1a0038 classname"
       >
         <div
-          class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+          class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1x6bjyf-MuiAutocomplete-root"
         >
           <div
             class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
           >
             <label
-              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
               data-shrink="false"
-              for=":r4:"
-              id=":r4:-label"
+              for=":r6:"
+              id=":r6:-label"
             >
               actions.filter_activities.fields.action
             </label>
             <div
-              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
+              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
             >
               <input
                 aria-autocomplete="list"
                 aria-expanded="false"
-                aria-invalid="true"
+                aria-invalid="false"
                 autocapitalize="none"
                 autocomplete="off"
                 class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                id=":r4:"
-                name="action"
+                id=":r6:"
+                name="actionIds"
                 role="combobox"
                 spellcheck="false"
                 type="text"
                 value=""
               />
               <div
-                class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
               >
                 <button
                   aria-label="Open"
@@ -162,38 +162,38 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
           </div>
         </div>
         <div
-          class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+          class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1x6bjyf-MuiAutocomplete-root"
         >
           <div
             class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
           >
             <label
-              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
               data-shrink="false"
-              for=":r6:"
-              id=":r6:-label"
+              for=":r8:"
+              id=":r8:-label"
             >
               actions.filter_activities.fields.spheres
             </label>
             <div
-              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
+              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
             >
               <input
                 aria-autocomplete="list"
                 aria-expanded="false"
-                aria-invalid="true"
+                aria-invalid="false"
                 autocapitalize="none"
                 autocomplete="off"
                 class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                id=":r6:"
-                name="spheres"
+                id=":r8:"
+                name="sphereIds"
                 role="combobox"
                 spellcheck="false"
                 type="text"
                 value=""
               />
               <div
-                class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
               >
                 <button
                   aria-label="Open"
@@ -234,38 +234,38 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
           </div>
         </div>
         <div
-          class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+          class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1x6bjyf-MuiAutocomplete-root"
         >
           <div
             class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
           >
             <label
-              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+              class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
               data-shrink="false"
-              for=":r8:"
-              id=":r8:-label"
+              for=":ra:"
+              id=":ra:-label"
             >
               actions.filter_activities.fields.users
             </label>
             <div
-              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
+              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
             >
               <input
                 aria-autocomplete="list"
                 aria-expanded="false"
-                aria-invalid="true"
+                aria-invalid="false"
                 autocapitalize="none"
                 autocomplete="off"
                 class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                id=":r8:"
-                name="activists"
+                id=":ra:"
+                name="activistIds"
                 role="combobox"
                 spellcheck="false"
                 type="text"
                 value=""
               />
               <div
-                class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
               >
                 <button
                   aria-label="Open"
@@ -309,22 +309,22 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
           class="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
         >
           <label
-            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="true"
-            for=":rb:"
-            id=":rb:-label"
+            for=":rd:"
+            id=":rd:-label"
           >
             fields.create_after
           </label>
           <div
-            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
           >
             <input
-              aria-invalid="true"
+              aria-invalid="false"
               aria-label="Choose date"
               autocomplete="off"
               class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":rb:"
+              id=":rd:"
               inputmode="text"
               name="after"
               placeholder="MM/DD/YYYY"
@@ -350,22 +350,22 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
           class="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
         >
           <label
-            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="true"
-            for=":re:"
-            id=":re:-label"
+            for=":rg:"
+            id=":rg:-label"
           >
             fields.create_before
           </label>
           <div
-            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
           >
             <input
-              aria-invalid="true"
+              aria-invalid="false"
               aria-label="Choose date"
               autocomplete="off"
               class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
-              id=":re:"
+              id=":rg:"
               inputmode="text"
               name="before"
               placeholder="MM/DD/YYYY"
@@ -389,7 +389,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
         </div>
          
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium _reset_d9fefc css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary _reset_1a0038 css-15qnkk1-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="reset"
         >
@@ -399,7 +399,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
           />
         </button>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium _submit_d9fefc css-4ic0kc-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary _submit_1a0038 css-4ic0kc-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="submit"
         >
@@ -426,7 +426,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
     aria-hidden="true"
   >
     <button
-      aria-controls=":rg:"
+      aria-controls=":rj:"
       aria-expanded="true"
       aria-haspopup="true"
       aria-label="actions.filter_activities.title"
@@ -453,7 +453,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
   </div>
   <div
     class="MuiDialog-root MuiModal-root css-1p9gn7o-MuiModal-root-MuiDialog-root"
-    id=":rg:"
+    id=":rj:"
     role="presentation"
   >
     <div
@@ -472,13 +472,13 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
       tabindex="-1"
     >
       <div
-        aria-labelledby=":ri:"
+        aria-labelledby=":rl:"
         class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullScreen css-e9vkov-MuiPaper-root-MuiDialog-paper"
         role="dialog"
       >
         <h2
           class="MuiTypography-root MuiTypography-h6 MuiTypography-alignCenter MuiDialogTitle-root _title_62745c css-xrt2rx-MuiTypography-root-MuiDialogTitle-root"
-          id=":ri:"
+          id=":rl:"
         >
           actions.filter_activities.title
           <button
@@ -507,41 +507,41 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
         >
           <form
             aria-label="actions.filter_activities.title"
-            class="_form_d9fefc classname"
+            class="_form_1a0038 classname"
           >
             <div
-              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1x6bjyf-MuiAutocomplete-root"
             >
               <div
                 class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
               >
                 <label
-                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for=":rj:"
-                  id=":rj:-label"
+                  for=":rm:"
+                  id=":rm:-label"
                 >
                   actions.filter_activities.fields.action
                 </label>
                 <div
-                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
                 >
                   <input
                     aria-autocomplete="list"
                     aria-expanded="false"
-                    aria-invalid="true"
+                    aria-invalid="false"
                     autocapitalize="none"
                     autocomplete="off"
                     class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":rj:"
-                    name="action"
+                    id=":rm:"
+                    name="actionIds"
                     role="combobox"
                     spellcheck="false"
                     type="text"
                     value=""
                   />
                   <div
-                    class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                    class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                   >
                     <button
                       aria-label="Open"
@@ -582,38 +582,38 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
               </div>
             </div>
             <div
-              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1x6bjyf-MuiAutocomplete-root"
             >
               <div
                 class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
               >
                 <label
-                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for=":rl:"
-                  id=":rl:-label"
+                  for=":ro:"
+                  id=":ro:-label"
                 >
                   actions.filter_activities.fields.spheres
                 </label>
                 <div
-                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
                 >
                   <input
                     aria-autocomplete="list"
                     aria-expanded="false"
-                    aria-invalid="true"
+                    aria-invalid="false"
                     autocapitalize="none"
                     autocomplete="off"
                     class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":rl:"
-                    name="spheres"
+                    id=":ro:"
+                    name="sphereIds"
                     role="combobox"
                     spellcheck="false"
                     type="text"
                     value=""
                   />
                   <div
-                    class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                    class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                   >
                     <button
                       aria-label="Open"
@@ -654,38 +654,38 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
               </div>
             </div>
             <div
-              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1x6bjyf-MuiAutocomplete-root"
             >
               <div
                 class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
               >
                 <label
-                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1p1nhed-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for=":rn:"
-                  id=":rn:-label"
+                  for=":rq:"
+                  id=":rq:-label"
                 >
                   actions.filter_activities.fields.users
                 </label>
                 <div
-                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lw3us5-MuiInputBase-root-MuiOutlinedInput-root"
                 >
                   <input
                     aria-autocomplete="list"
                     aria-expanded="false"
-                    aria-invalid="true"
+                    aria-invalid="false"
                     autocapitalize="none"
                     autocomplete="off"
                     class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1mv6xrr-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":rn:"
-                    name="activists"
+                    id=":rq:"
+                    name="activistIds"
                     role="combobox"
                     spellcheck="false"
                     type="text"
                     value=""
                   />
                   <div
-                    class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                    class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                   >
                     <button
                       aria-label="Open"
@@ -729,22 +729,22 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
               class="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
             >
               <label
-                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
                 data-shrink="true"
-                for=":rq:"
-                id=":rq:-label"
+                for=":rt:"
+                id=":rt:-label"
               >
                 fields.create_after
               </label>
               <div
-                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
               >
                 <input
-                  aria-invalid="true"
+                  aria-invalid="false"
                   aria-label="Choose date"
                   autocomplete="off"
                   class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
-                  id=":rq:"
+                  id=":rt:"
                   inputmode="text"
                   name="after"
                   placeholder="MM/DD/YYYY"
@@ -770,22 +770,22 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
               class="MuiFormControl-root MuiTextField-root css-z3c6am-MuiFormControl-root-MuiTextField-root"
             >
               <label
-                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1im7hqj-MuiFormLabel-root-MuiInputLabel-root"
                 data-shrink="true"
-                for=":rt:"
-                id=":rt:-label"
+                for=":r10:"
+                id=":r10:-label"
               >
                 fields.create_before
               </label>
               <div
-                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl Mui-readOnly MuiInputBase-readOnly css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
               >
                 <input
-                  aria-invalid="true"
+                  aria-invalid="false"
                   aria-label="Choose date"
                   autocomplete="off"
                   class="MuiInputBase-input MuiOutlinedInput-input Mui-readOnly MuiInputBase-readOnly css-1gjhcy5-MuiInputBase-input-MuiOutlinedInput-input"
-                  id=":rt:"
+                  id=":r10:"
                   inputmode="text"
                   name="before"
                   placeholder="MM/DD/YYYY"
@@ -813,7 +813,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
           class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium _reset_d9fefc css-15qnkk1-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary _reset_1a0038 css-15qnkk1-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="reset"
           >
@@ -823,7 +823,7 @@ exports[`features/activities/activities-filters/ui/filters.tsx > should render f
             />
           </button>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium _submit_d9fefc css-4ic0kc-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary _submit_1a0038 css-4ic0kc-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="submit"
           >

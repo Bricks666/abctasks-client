@@ -1,54 +1,50 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import TuneIcon from '@mui/icons-material/Tune';
 import { Button } from '@mui/material';
-import { useAction, useAtom } from '@reatom/npm-react';
+import { reatomComponent, useAction } from '@reatom/npm-react';
 import cn from 'classnames';
-import { FC, memo } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { FieldAtom } from '@reatom/form';
 
 import {
 	ActivitiesActionsPicker,
-	ActivitiesSpheresPicker
+	ActivitiesSpheresPicker,
+	useActivityActions,
+	useActivitySpheres
 } from '@/entities/activities';
-import { MembersPicker } from '@/entities/users';
+import { UsersPicker, useMembers } from '@/entities/users';
 
-import { usePreventDefault, useToggle } from '@/shared/lib';
+import { usePreventDefault, useToggle, withProvider } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { DatePicker, FiltersPopover, Show } from '@/shared/ui';
 
-import { useActivityFilters } from '../lib';
-import { OnFiltersChanged } from '../model';
+import { ActivitiesFiltersScopeProvider, useActivityFilters } from '../../lib';
+import { OnFiltersChanged } from '../../model';
 
-import styles from './filters.module.css';
+import styles from './styles.module.css';
 
 export interface ActivitiesFiltersProps extends CommonProps {
-	readonly roomId: number;
 	readonly onFiltersChanged: OnFiltersChanged;
 }
 
-export const ActivitiesFilters: FC<ActivitiesFiltersProps> = (props) => {
-	const { className, onFiltersChanged, roomId, } = props;
+export const ActivitiesFilters: FC<ActivitiesFiltersProps> = withProvider(
+	ActivitiesFiltersScopeProvider
+)((props: ActivitiesFiltersProps) => {
+	const { className, onFiltersChanged, } = props;
 	const { t, } = useTranslation('room-activities', {
 		keyPrefix: 'actions.filter_activities',
 	});
 
 	const model = useActivityFilters({
 		onFiltersChanged,
-		name: 'activities-filters',
 	});
-
 	const submit = useAction(model.submit);
 	const reset = useAction(model.reset);
-
 	const [open, { toggleOff, toggleOn, }] = useToggle();
-
 	const onSubmit = usePreventDefault(() => {
 		submit();
 		toggleOff();
 	});
-
 	const onReset = usePreventDefault(() => {
 		reset();
 		toggleOff();
@@ -90,31 +86,32 @@ export const ActivitiesFilters: FC<ActivitiesFiltersProps> = (props) => {
 				<form
 					className={cn(styles.form, className)}
 					onSubmit={onSubmit}
+					onReset={onReset}
 					aria-label={titleT}>
-					<Action field={model.actionIds} />
-					<Spheres field={model.sphereIds} />
-					<Users field={model.activistIds} roomId={roomId} />
-					<After field={model.after} />
-					<Before field={model.before} />
+					<Action />
+					<Spheres />
+					<Users />
+					<After />
+					<Before />
 					<Show show={!isPopup}> {buttons}</Show>
 				</form>
 			)}
 		</FiltersPopover>
 	);
-};
+});
 
-interface FieldProps {
-	readonly field: FieldAtom;
-}
-
-const Action: FC<FieldProps> = memo((props) => {
-	const { field, } = props;
-
-	const [value] = useAtom(field.value);
-	const [error] = useAtom((ctx) => ctx.spy(field.validation).error, [field]);
-	const change = useAction(field.change);
-	const focus = useAction(field.focus.in);
-	const blur = useAction(field.focus.out);
+const Action: FC = reatomComponent((props) => {
+	const { ctx, } = props;
+	const model = useActivityFilters();
+	const field = model.actionIds;
+	const { pendingAtom, actionsAtom, } = useActivityActions();
+	const actions = ctx.spy(actionsAtom);
+	const loading = ctx.spy(pendingAtom);
+	const value = ctx.spy(field.value);
+	const {error,} = ctx.spy(field.validation);
+	const change = ctx.bind(field.change);
+	const focus = ctx.bind(field.focus.in);
+	const blur = ctx.bind(field.focus.out);
 
 	const { t, } = useTranslation('room-activities', {
 		keyPrefix: 'actions.filter_activities.fields',
@@ -125,29 +122,35 @@ const Action: FC<FieldProps> = memo((props) => {
 
 	return (
 		<ActivitiesActionsPicker
+			actions={actions}
+			loading={loading}
 			value={value}
 			onChange={change}
 			onBlur={blur}
 			onFocus={focus}
 			helperText={error}
 			isError={isError}
-			name='action'
+			name='actionIds'
 			label={labelT}
 			limitTags={2}
 			multiple
 			fullWidth
 		/>
 	);
-});
+}, 'Action');
 
-const Spheres: FC<FieldProps> = memo((props) => {
-	const { field, } = props;
-
-	const [value] = useAtom(field.value);
-	const [error] = useAtom((ctx) => ctx.spy(field.validation).error, [field]);
-	const change = useAction(field.change);
-	const focus = useAction(field.focus.in);
-	const blur = useAction(field.focus.out);
+const Spheres: FC = reatomComponent((props) => {
+	const { ctx, } = props;
+	const model = useActivityFilters();
+	const field = model.sphereIds;
+	const { pendingAtom, spheresAtom, } = useActivitySpheres();
+	const spheres = ctx.spy(spheresAtom);
+	const loading = ctx.spy(pendingAtom);
+	const value = ctx.spy(field.value);
+	const {error,} = ctx.spy(field.validation);
+	const change = ctx.bind(field.change);
+	const focus = ctx.bind(field.focus.in);
+	const blur = ctx.bind(field.focus.out);
 
 	const { t, } = useTranslation('room-activities', {
 		keyPrefix: 'actions.filter_activities.fields',
@@ -159,6 +162,8 @@ const Spheres: FC<FieldProps> = memo((props) => {
 
 	return (
 		<ActivitiesSpheresPicker
+			spheres={spheres}
+			loading={loading}
 			value={value}
 			onChange={change}
 			onBlur={blur}
@@ -166,22 +171,27 @@ const Spheres: FC<FieldProps> = memo((props) => {
 			helperText={error}
 			isError={isError}
 			limitTags={2}
-			name='spheres'
+			name='sphereIds'
 			label={labelT}
 			multiple
 			fullWidth
 		/>
 	);
-});
+}, 'Spheres');
 
-const Users: FC<FieldProps & { readonly roomId: number }> = memo((props) => {
-	const { field, roomId, } = props;
+const Users: FC = reatomComponent((props) => {
+	const { ctx, } = props;
+	const model = useActivityFilters();
+	const field = model.activistIds;
+	const { membersAtom, pendingAtom, } = useMembers();
 
-	const [value] = useAtom(field.value);
-	const [error] = useAtom((ctx) => ctx.spy(field.validation).error, [field]);
-	const change = useAction(field.change);
-	const focus = useAction(field.focus.in);
-	const blur = useAction(field.focus.out);
+	const members = ctx.spy(membersAtom);
+	const loading = ctx.spy(pendingAtom);
+	const value = ctx.spy(field.value);
+	const {error,} = ctx.spy(field.validation);
+	const change = ctx.bind(field.change);
+	const focus = ctx.bind(field.focus.in);
+	const blur = ctx.bind(field.focus.out);
 
 	const { t, } = useTranslation('room-activities', {
 		keyPrefix: 'actions.filter_activities.fields',
@@ -192,30 +202,32 @@ const Users: FC<FieldProps & { readonly roomId: number }> = memo((props) => {
 	const isError = !!error;
 
 	return (
-		<MembersPicker
-			roomId={roomId}
+		<UsersPicker
 			value={value}
 			onChange={change}
+			users={members}
+			loading={loading}
 			onBlur={blur}
 			onFocus={focus}
 			helperText={error}
 			isError={isError}
-			name='activists'
+			name='activistIds'
 			label={labelT}
 			limitTags={1}
 			multiple
 		/>
 	);
-});
+}, 'Users');
 
-const After: FC<FieldProps> = memo((props) => {
-	const { field, } = props;
-
-	const [value] = useAtom(field.value);
-	const [error] = useAtom((ctx) => ctx.spy(field.validation).error, [field]);
-	const change = useAction(field.change);
-	const focus = useAction(field.focus.in);
-	const blur = useAction(field.focus.out);
+const After: FC = reatomComponent((props) => {
+	const { ctx, } = props;
+	const model = useActivityFilters();
+	const field = model.after;
+	const value = ctx.spy(field.value);
+	const {error,} = ctx.spy(field.validation);
+	const change = ctx.bind(field.change);
+	const focus = ctx.bind(field.focus.in);
+	const blur = ctx.bind(field.focus.out);
 
 	const { t, } = useTranslation('common');
 
@@ -235,16 +247,17 @@ const After: FC<FieldProps> = memo((props) => {
 			name='after'
 		/>
 	);
-});
+}, 'After');
 
-const Before: FC<FieldProps> = memo((props) => {
-	const { field, } = props;
-
-	const [value] = useAtom(field.value);
-	const [error] = useAtom((ctx) => ctx.spy(field.validation).error, [field]);
-	const change = useAction(field.change);
-	const focus = useAction(field.focus.in);
-	const blur = useAction(field.focus.out);
+const Before: FC = reatomComponent((props) => {
+	const { ctx, } = props;
+	const model = useActivityFilters();
+	const field = model.before;
+	const value = ctx.spy(field.value);
+	const {error,} = ctx.spy(field.validation);
+	const change = ctx.bind(field.change);
+	const focus = ctx.bind(field.focus.in);
+	const blur = ctx.bind(field.focus.out);
 
 	const { t, } = useTranslation('common');
 
@@ -264,4 +277,4 @@ const Before: FC<FieldProps> = memo((props) => {
 			name='before'
 		/>
 	);
-});
+}, 'Before');

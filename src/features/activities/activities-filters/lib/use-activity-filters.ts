@@ -1,22 +1,26 @@
-import { useMemo } from 'react';
+import { useCtx } from '@reatom/npm-react';
+import { useMolecule } from 'bunshi/react';
+import { useEffect } from 'react';
 
-import {
-	ActivitiesFiltersModel,
-	OnFiltersChanged,
-	activitiesFiltersModel
-} from '../model';
+import { activitiesFiltersModel, type OnFiltersChanged } from '../model';
 
 export interface UseActivityFiltersParams {
-	readonly name: string;
-	readonly onFiltersChanged: OnFiltersChanged;
+	readonly onFiltersChanged?: OnFiltersChanged;
 }
 
-export const useActivityFilters = (
-	params: UseActivityFiltersParams
-): ActivitiesFiltersModel => {
-	const { name, onFiltersChanged, } = params;
+export const useActivityFilters = (params: UseActivityFiltersParams = {}) => {
+	const { onFiltersChanged, } = params;
 
-	return useMemo(() => {
-		return activitiesFiltersModel.create({ name, onFiltersChanged, });
-	}, [name, onFiltersChanged]);
+	const ctx = useCtx();
+	const model = useMolecule(activitiesFiltersModel.Molecule);
+
+	useEffect(() => {
+		if (onFiltersChanged) {
+			const reactionAtom = model.onFiltersChanged(ctx, onFiltersChanged);
+
+			return () => reactionAtom.unsubscribe();
+		}
+	}, [model, ctx, onFiltersChanged]);
+
+	return model;
 };

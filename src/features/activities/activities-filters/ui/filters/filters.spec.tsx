@@ -11,10 +11,11 @@ import {
 	waitFor
 } from '~/test-utils';
 
+import { RoomScopeProvider } from '@/entities/rooms';
+
 import { deviceInfoModel } from '@/shared/models';
 
 import { ActivitiesFilters } from './filters';
-
 
 describe('features/activities/activities-filters/ui/filters.tsx', () => {
 	const roomId = 123;
@@ -24,11 +25,12 @@ describe('features/activities/activities-filters/ui/filters.tsx', () => {
 
 	const createComponent = () => {
 		wrapper = render(
-			<ActivitiesFilters
-				className='classname'
-				roomId={roomId}
-				onFiltersChanged={onFiltersChanged}
-			/>,
+			<RoomScopeProvider roomId={roomId}>
+				<ActivitiesFilters
+					className='classname'
+					onFiltersChanged={onFiltersChanged}
+				/>
+			</RoomScopeProvider>,
 			{ ctx, }
 		);
 	};
