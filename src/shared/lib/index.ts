@@ -13,7 +13,6 @@ export * from './create-flag';
 export * from './create-query-model';
 export * from './construct-name';
 export * from './reconstruct-name';
-export * from './create-singleton-factory';
 export * from './retry-query';
 export * from './create-response-schemas';
 export * from './with-scope';
