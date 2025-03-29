@@ -1,10 +1,8 @@
 import { Button } from '@mui/material';
-import { useAction, useAtom } from '@reatom/npm-react';
+import { reatomComponent } from '@reatom/npm-react';
 import cn from 'classnames';
-import { FC, memo } from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { FieldAtom } from '@reatom/form';
 
 import { MAX_SHORT_LENGTH, MIN_LENGTH } from '@/shared/configs';
 import { usePreventDefault } from '@/shared/lib';
@@ -17,13 +15,13 @@ import styles from './styles.module.css';
 
 export interface LoginFormProps extends CommonProps {}
 
-export const LoginForm: FC<LoginFormProps> = memo((props) => {
-	const { className, } = props;
+export const LoginForm: FC<LoginFormProps> = reatomComponent((props) => {
+	const { className, ctx, } = props;
 
 	const { t, } = useTranslation('login');
 
 	const model = useLogin();
-	const submit = useAction(model.submit);
+	const submit = ctx.bind(model.submit);
 	const onSubmit = usePreventDefault(submit);
 
 	const submitT = t('login_form.submit');
@@ -34,26 +32,24 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
 			className={cn(styles.form, className)}
 			onSubmit={onSubmit}
 			aria-label={titleT}>
-			<Email field={model.email} />
-			<Password field={model.password} />
-			<RememberMe field={model.rememberMe} />
+			<Email />
+			<Password />
+			<RememberMe />
 			<Button type='submit'>{submitT}</Button>
 		</Form>
 	);
-});
+}, 'LoginForm');
 
-interface FieldProps {
-	readonly field: FieldAtom;
-}
+const Email: FC = reatomComponent((props) => {
+	const { ctx, } = props;
+	const model = useLogin();
+	const field = model.email;
 
-const Email: FC<FieldProps> = memo((props) => {
-	const { field, } = props;
-
-	const [value] = useAtom(field.value);
-	const [error] = useAtom((ctx) => ctx.spy(field.validation).error);
-	const change = useAction(field.change);
-	const focus = useAction(field.focus.in);
-	const blur = useAction(field.focus.out);
+	const value = ctx.spy(field.value);
+	const {error,} = ctx.spy(field.validation);
+	const change = ctx.bind(field.change);
+	const focus = ctx.bind(field.focus.in);
+	const blur = ctx.bind(field.focus.out);
 	const { t, } = useTranslation('login', { keyPrefix: 'login_form', });
 
 	const labelT = t('fields.email');
@@ -78,16 +74,18 @@ const Email: FC<FieldProps> = memo((props) => {
 			label={labelT}
 		/>
 	);
-});
+}, 'Email');
 
-const Password: FC<FieldProps> = memo((props) => {
-	const { field, } = props;
+const Password: FC = reatomComponent((props) => {
+	const { ctx, } = props;
+	const model = useLogin();
+	const field = model.password;
 
-	const [value] = useAtom(field.value);
-	const [error] = useAtom((ctx) => ctx.spy(field.validation).error);
-	const change = useAction(field.change);
-	const focus = useAction(field.focus.in);
-	const blur = useAction(field.focus.out);
+	const value = ctx.spy(field.value);
+	const {error,} = ctx.spy(field.validation);
+	const change = ctx.bind(field.change);
+	const focus = ctx.bind(field.focus.in);
+	const blur = ctx.bind(field.focus.out);
 	const { t, } = useTranslation('login', { keyPrefix: 'login_form', });
 
 	const labelT = t('fields.password');
@@ -112,13 +110,15 @@ const Password: FC<FieldProps> = memo((props) => {
 			label={labelT}
 		/>
 	);
-});
+}, 'Password');
 
-const RememberMe: FC<FieldProps> = memo((props) => {
-	const { field, } = props;
+const RememberMe: FC = reatomComponent((props) => {
+	const { ctx, } = props;
+	const model = useLogin();
+	const field = model.rememberMe;
 
-	const [value] = useAtom(field.value);
-	const change = useAction(field.change);
+	const value = ctx.spy(field.value);
+	const change = ctx.bind(field.change);
 	const { t, } = useTranslation('login', { keyPrefix: 'login_form', });
 
 	const labelT = t('fields.remember_me');
@@ -132,4 +132,4 @@ const RememberMe: FC<FieldProps> = memo((props) => {
 			label={labelT}
 		/>
 	);
-});
+}, 'RememberMe');
