@@ -16,3 +16,11 @@ export type VoidFunction = Fn<[], void>;
 export interface ChainedParams {
 	readonly otherwise?: Event<any> | Effect<any, any>;
 }
+
+export type DeepPartial<T> = {
+	[K in keyof T]?: T[K] extends Record<any, any> ? DeepPartial<T[K]> : T[K];
+};
+
+export type DeepRequired<T> = {
+	[K in keyof T]-?: T[K] extends Record<any, any> ? DeepRequired<T[K]> : T[K];
+};

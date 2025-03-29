@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 export interface InRoomParams {
 	readonly roomId: number;
 }

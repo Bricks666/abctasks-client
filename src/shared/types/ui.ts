@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { VoidFunction } from './common';
+
 export type Size = 'small' | 'medium' | 'large';
 
 export interface CommonProps {
@@ -8,8 +10,8 @@ export interface CommonProps {
 
 export interface BasePopupProps extends CommonProps {
 	readonly isOpen: boolean;
+	readonly onClose: VoidFunction;
 	readonly id?: string;
-	readonly slots?: Slots<'actions'>;
 }
 
 interface SinglePickerProps<T> {
