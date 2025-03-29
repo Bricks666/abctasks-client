@@ -1,16 +1,17 @@
+import { getDefaultInjector } from 'bunshi';
 import { beforeEach, describe, expect, test } from 'vitest';
 
 import { TestCtx, actions, createTestCtx, waitNextTick } from '~/test-utils';
 
-import { create } from './model';
+import { Molecule } from './model';
 import { ActivityActionsModel } from './types';
 
-describe('src/entities/activitites/models/actions/model.ts', () => {
+describe('entities/activitites/models/actions/model.ts', () => {
 	let ctx: TestCtx;
 	let model: ActivityActionsModel;
 
 	const createModel = () => {
-		model = create();
+		model = getDefaultInjector().get(Molecule);
 	};
 
 	beforeEach(() => {
@@ -20,27 +21,11 @@ describe('src/entities/activitites/models/actions/model.ts', () => {
 	test('should create signleton model', () => {
 		createModel();
 
-		const anotherModel = create();
+		const oldModel = model;
 
-		expect(model).toBe(anotherModel);
-	});
-
-	test('should stale model only after last susbcriber unsubscribe', () => {
 		createModel();
-		const anotherModel = create();
 
-		const track = ctx.subscribeTrack(model.actionsAtom);
-		const anotherTrack = ctx.subscribeTrack(anotherModel.actionsAtom);
-
-		expect(model).toBe(anotherModel);
-
-		anotherTrack.unsubscribe();
-
-		expect(model).toBe(create());
-
-		track.unsubscribe();
-
-		expect(model).not.toBe(create());
+		expect(model).toBe(oldModel);
 	});
 
 	test('should load all actions', async () => {

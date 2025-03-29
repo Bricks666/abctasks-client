@@ -1,17 +1,16 @@
 import {
 	atom,
-	onDisconnect,
 	reatomResource,
 	withCache,
-	withDataAtom
+	withDataAtom,
+	withErrorAtom,
+	withRetry
 } from '@reatom/framework';
+import { createMemStorage, reatomPersist } from '@reatom/persist';
+import { molecule } from 'bunshi';
 
 import { activitiesApi } from '@/shared/api';
-import {
-	constructName,
-	createSingletonFactory,
-	mapStandardResponse
-} from '@/shared/lib';
+import { constructName, mapStandardResponse } from '@/shared/lib';
 
 import {
 	ActivitySpheres,
@@ -21,36 +20,36 @@ import {
 
 const modelName = constructName('activitites', 'spheres');
 
-export const create = createSingletonFactory(
-	(): ActivitySpheresModel => {
-		const getSpheres = reatomResource(
-			async (ctx) => {
-				return ctx.schedule(() =>
-					activitiesApi
-						.getSpheres({ signal: ctx.controller.signal, })
-						.then(activitySpheresResponseSchema.parseAsync)
-				);
-			},
-			constructName(modelName, 'getSpheres')
-		).pipe(
-			withDataAtom([] as ActivitySpheres, mapStandardResponse),
-			withCache()
-		);
+// eslint-disable-next-line @reatom/reatom-prefix-rule
+const withPersist = reatomPersist(createMemStorage({ name: modelName, }));
 
-		const pendingAtom = atom(
-			(ctx) => !!ctx.spy(getSpheres.pendingAtom),
-			constructName(modelName, 'pendingAtom')
-		);
-
-		return {
-			spheresAtom: getSpheres.dataAtom,
-			pendingAtom,
-		};
-	},
-	{
-		key: modelName,
-		hooks: {
-			staleOn: (result, stale) => onDisconnect(result.spheresAtom, stale),
+export const Molecule = molecule((): ActivitySpheresModel => {
+	const fetch = reatomResource(
+		async (ctx) => {
+			return ctx.schedule(() =>
+				activitiesApi
+					.getSpheres({ signal: ctx.controller.signal, })
+					.then(activitySpheresResponseSchema.parseAsync)
+			);
 		},
-	}
-);
+		constructName(modelName, 'fetch')
+	).pipe(
+		withDataAtom([] as ActivitySpheres, mapStandardResponse),
+		withCache({ withPersist, }),
+		withRetry(),
+		withErrorAtom(undefined, { initState: null, })
+	);
+
+	const { dataAtom: spheresAtom, errorAtom, } = fetch;
+
+	const pendingAtom = atom(
+		(ctx) => !!ctx.spy(fetch.pendingAtom),
+		constructName(modelName, 'pendingAtom')
+	);
+
+	return {
+		spheresAtom,
+		errorAtom,
+		pendingAtom,
+	};
+});

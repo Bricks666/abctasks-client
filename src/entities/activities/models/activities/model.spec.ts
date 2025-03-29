@@ -1,4 +1,5 @@
 import { take, takeNested } from '@reatom/framework';
+import { getDefaultInjector } from 'bunshi';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import {
@@ -10,17 +11,20 @@ import {
 	rooms
 } from '~/test-utils';
 
-import { create } from './model';
+// eslint-disable-next-line no-restricted-imports
+import { roomModel } from '@/entities/rooms/@x/activities';
+
+import { Molecule } from './model';
 import { ActivitiesModel } from './types';
 
-describe('src/entities/activitites/models/activities/model.ts', () => {
+describe('entities/activitites/models/activities/model.ts', () => {
 	const defaultRoomId = defaultRoom.id;
 
 	let ctx: TestCtx;
 	let model: ActivitiesModel;
 
 	const createModel = (roomId = defaultRoomId) => {
-		model = create({ roomId, name: 'test', });
+		model = getDefaultInjector().get(Molecule, [roomModel.Scope, roomId]);
 	};
 
 	beforeEach(() => {
@@ -37,27 +41,21 @@ describe('src/entities/activitites/models/activities/model.ts', () => {
 	test('should create signleton model for the same room', () => {
 		createModel();
 
-		const anotherModel = create({ roomId: defaultRoomId, name: 'test', });
+		const oldModel = model;
 
-		expect(model).toBe(anotherModel);
+		createModel();
+
+		expect(model).toBe(oldModel);
 	});
 
 	test('should create different models for different rooms', () => {
 		createModel();
 
-		const anotherModel = create({ roomId: rooms[1].id, name: 'test', });
+		const anotherModel = model;
+
+		createModel(rooms[1].id);
 
 		expect(model).not.toBe(anotherModel);
-	});
-
-	test('should create new model for the same room if old one has been unused', () => {
-		createModel();
-
-		const track = ctx.subscribeTrack(model.activititesAtom);
-
-		track.unsubscribe();
-
-		expect(model).not.toBe(create({ roomId: defaultRoomId, name: 'test', }));
 	});
 
 	test('should load all activitites', async () => {

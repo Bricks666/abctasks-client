@@ -22,5 +22,6 @@ export type ActivityActions = ActivityAction[];
 
 export interface ActivityActionsModel {
 	readonly actionsAtom: Atom<ActivityActions>;
+	readonly errorAtom: Atom<Error | null>;
 	readonly pendingAtom: Atom<boolean>;
 }

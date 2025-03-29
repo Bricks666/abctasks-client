@@ -1,18 +1,7 @@
-import { useAtom } from '@reatom/npm-react';
-import { useMemo } from 'react';
+import { useMolecule } from 'bunshi/react';
 
-import { ActivityActions, activityActionsModel } from '../models';
+import { activityActionsModel } from '../models';
 
-export interface UseActivityActionsResult {
-	readonly data: ActivityActions;
-	readonly pending: boolean;
-}
-
-export const useActivityActions = (): UseActivityActionsResult => {
-	const model = useMemo(activityActionsModel.create, []);
-
-	const [data] = useAtom(model.actionsAtom);
-	const [pending] = useAtom(model.pendingAtom);
-
-	return { data, pending, };
+export const useActivityActions = () => {
+	return useMolecule(activityActionsModel.Molecule);
 };

@@ -22,5 +22,6 @@ export type ActivitySpheres = ActivitySphere[];
 
 export interface ActivitySpheresModel {
 	readonly spheresAtom: Atom<ActivitySpheres>;
+	readonly errorAtom: Atom<Error | null>;
 	readonly pendingAtom: Atom<boolean>;
 }

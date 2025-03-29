@@ -28,6 +28,10 @@ export type ActivityId = Activity['id'];
 export type Activities = Activity[];
 
 export interface FetchActivititesParams {
+	/**
+	 * @default 50
+	 */
+	readonly count?: number;
 	readonly page?: number;
 	readonly by?: string | null;
 	readonly type?: SortDirection | null;
@@ -45,16 +49,6 @@ type ChangeFetchActivitiesParams = Action<
 	[params: FetchActivititesParams],
 	FetchActivititesParams
 >;
-
-export interface CreateActivitiesModelParams {
-	readonly name: string;
-	readonly roomId: number;
-
-	/**
-	 * @default 50
-	 */
-	readonly count?: number;
-}
 
 export interface ActivitiesModel {
 	readonly activititesAtom: Atom<Activities>;
