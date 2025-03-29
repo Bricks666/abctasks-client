@@ -18,7 +18,7 @@ interface SingletonFactoryHooks<Result> {
 
 export interface CreateSingletonFactoryOptions<
 	Args extends Array<any>,
-	Result
+	Result,
 > {
 	readonly key?: CacheKey | GetCacheKey<Args>;
 	readonly cache?: Cache<Result>;
@@ -60,11 +60,13 @@ const defaultStaleOn: SingletonFactoryHooks<any>['staleOn'] = noop;
  *
  * @remarks
  * See examples in test cases
+ *
+ * @deprecated Use {@link bunshi} instead
  */
 export const createSingletonFactory = <
 	Factory extends AnyFunction,
 	Args extends Parameters<Factory> = Parameters<Factory>,
-	Result extends ReturnType<Factory> = ReturnType<Factory>
+	Result extends ReturnType<Factory> = ReturnType<Factory>,
 >(
 		factory: Factory,
 		options: CreateSingletonFactoryOptions<Args, Result> = {}

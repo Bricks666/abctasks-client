@@ -10,6 +10,9 @@ interface UseToggleHandlers {
 
 export type UseToggleResult = [toggled: boolean, handlers: UseToggleHandlers];
 
+/**
+ * @deprecated use {@link 'react-use'.useToggle} instead
+ */
 export const useToggle = (defaultValue = false): UseToggleResult => {
 	const [toggled, setToggled] = React.useState(defaultValue);
 
