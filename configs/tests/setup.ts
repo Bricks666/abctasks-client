@@ -1,4 +1,5 @@
 import { expect, afterEach, beforeAll, afterAll, vi } from 'vitest';
+import { resetDefaultInjector } from 'bunshi';
 import { cleanup } from '@testing-library/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
 import {
@@ -29,6 +30,7 @@ afterEach(() => {
 	cleanup();
 	server.resetHandlers();
 	cleanupMatchMedia();
+	resetDefaultInjector();
 });
 
 afterAll(() => {
@@ -37,3 +39,4 @@ afterAll(() => {
 
 window.MediaQueryListEvent = MediaQueryListEvent;
 window.matchMedia = matchMedia;
+window.scrollTo = vi.fn();

@@ -1,0 +1,60 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TaskStatusSelect > should render correctly 1`] = `
+<div
+  class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+>
+  <div
+    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-6wnkke-MuiInputBase-root-MuiOutlinedInput-root"
+  >
+    <div
+      aria-controls=":r1:"
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-labelledby=":r0:"
+      class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1idmfta-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+      id=":r0:"
+      role="combobox"
+      tabindex="0"
+    >
+      <span
+        class="notranslate"
+      >
+        ​
+      </span>
+    </div>
+    <input
+      aria-hidden="true"
+      aria-invalid="false"
+      class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      tabindex="-1"
+      value=""
+    />
+    <svg
+      aria-hidden="true"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1i1js26-MuiSvgIcon-root-MuiSelect-icon"
+      data-testid="ArrowDropDownIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M7 10l5 5 5-5z"
+      />
+    </svg>
+    <fieldset
+      aria-hidden="true"
+      class="MuiOutlinedInput-notchedOutline css-jnltum-MuiOutlinedInput-notchedOutline"
+    >
+      <legend
+        class="css-ihdtdm"
+      >
+        <span
+          class="notranslate"
+        >
+          ​
+        </span>
+      </legend>
+    </fieldset>
+  </div>
+</div>
+`;

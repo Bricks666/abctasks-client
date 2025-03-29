@@ -1,0 +1,98 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TaskCardTemplate > should render actions if they are passed > with actions 1`] = `
+<article
+  aria-labelledby=":r1:"
+  class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root _card_91dc4b css-1d8sk3e-MuiPaper-root-MuiCard-root"
+>
+  <div
+    class="MuiCardHeader-root _header_91dc4b css-185gdzj-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-content css-1qbkelo-MuiCardHeader-content"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+        id=":r1:"
+      >
+        Title 1
+      </p>
+    </div>
+    <div
+      class="MuiCardHeader-action css-sgoict-MuiCardHeader-action"
+    >
+      <div>
+        Actions
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root _content_91dc4b css-46bh2p-MuiCardContent-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 _description_91dc4b css-ahj2mt-MuiTypography-root"
+    >
+      Description 1
+    </p>
+  </div>
+  <div
+    class="MuiCardActions-root MuiCardActions-spacing _actions_91dc4b css-dnrpxu-MuiCardActions-root"
+  >
+    <time
+      class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      datetime="2022-09-17T00:00:00.000Z"
+      title="2022-09-17T00:00:00.000Z"
+    >
+      00:00 17 Sep
+    </time>
+  </div>
+</article>
+`;
+
+exports[`TaskCardTemplate > should render correctly 1`] = `
+<article
+  aria-labelledby=":r0:"
+  class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root _card_91dc4b css-1d8sk3e-MuiPaper-root-MuiCard-root"
+>
+  <div
+    class="MuiCardHeader-root _header_91dc4b css-185gdzj-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-content css-1qbkelo-MuiCardHeader-content"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+        id=":r0:"
+      >
+        Title 1
+      </p>
+      <div>
+        Tags
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root _content_91dc4b css-46bh2p-MuiCardContent-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 _description_91dc4b css-ahj2mt-MuiTypography-root"
+    >
+      Description 1
+    </p>
+  </div>
+  <div
+    class="MuiCardActions-root MuiCardActions-spacing _actions_91dc4b css-dnrpxu-MuiCardActions-root"
+  >
+    <div>
+      User Avatar
+    </div>
+    <time
+      class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      datetime="2022-09-17T00:00:00.000Z"
+      title="2022-09-17T00:00:00.000Z"
+    >
+      00:00 17 Sep
+    </time>
+  </div>
+</article>
+`;

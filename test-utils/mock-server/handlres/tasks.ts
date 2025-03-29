@@ -63,6 +63,25 @@ export const success = {
 };
 
 export const error = {
+	getAll: {
+		invalidData: http.get(getAllUrl, () => {
+			return createStandardResponse(tasks[0]);
+		}),
+		internalError: http.get(getAllUrl, () => {
+			return internalServerError;
+		}),
+	},
+	getOne: {
+		invalidData: http.get(getOneUrl, () => {
+			return createStandardResponse(tasks);
+		}),
+		internalError: http.get(getOneUrl, () => {
+			return internalServerError;
+		}),
+		notFound: http.get(getOneUrl, () => {
+			return notFoundError;
+		}),
+	},
 	create: http.post(createTaskUrl, async () => {
 		return internalServerError;
 	}),
