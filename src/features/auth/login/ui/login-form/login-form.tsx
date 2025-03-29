@@ -11,10 +11,9 @@ import { usePreventDefault } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Checkbox, Field, Form, PasswordField } from '@/shared/ui';
 
-import { useLoginModel } from '../../lib';
+import { useLogin } from '../../lib';
 
 import styles from './styles.module.css';
-
 
 export interface LoginFormProps extends CommonProps {}
 
@@ -23,7 +22,7 @@ export const LoginForm: FC<LoginFormProps> = memo((props) => {
 
 	const { t, } = useTranslation('login');
 
-	const model = useLoginModel();
+	const model = useLogin();
 	const submit = useAction(model.submit);
 	const onSubmit = usePreventDefault(submit);
 
