@@ -1,4 +1,1 @@
-export {
-	SkeletonActivityListItem,
-	type SkeletonActivityListItemProps
-} from './skeleton-activity-list-item';
+export * from './activity-list-item-skeleton';
