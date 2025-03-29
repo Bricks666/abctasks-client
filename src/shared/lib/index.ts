@@ -16,3 +16,5 @@ export * from './reconstruct-name';
 export * from './create-singleton-factory';
 export * from './retry-query';
 export * from './create-response-schemas';
+export * from './with-scope';
+export * from './with-provider';
