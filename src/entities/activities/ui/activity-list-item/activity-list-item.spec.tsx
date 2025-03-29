@@ -1,15 +1,26 @@
+import { List } from '@mui/material';
 import { describe, expect, test } from 'vitest';
-
-import { ActivityListItem } from './activity-list-item';
 
 import { RenderResult, activities, render } from '~/test-utils';
 
-describe('src/entities/activities/ui/activity-list-item/activity-list-item', () => {
+import { ActivityListItem } from './activity-list-item';
+
+
+describe('entities/activities/ui/activity-list-item/activity-list-item', () => {
 	let wrapper: RenderResult;
 
 	const createComponent = () => {
 		wrapper = render(
-			<ActivityListItem className='classname' {...activities[0]} />
+			<ActivityListItem
+				className='classname'
+				action={activities[0].action}
+				activist={activities[0].activist}
+				createdAt={activities[0].createdAt}
+				sphere={activities[0].sphere}
+			/>,
+			{
+				wrapper: List,
+			}
 		);
 	};
 

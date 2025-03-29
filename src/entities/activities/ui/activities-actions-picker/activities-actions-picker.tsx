@@ -5,10 +5,10 @@ import {
 	ListItemAvatar,
 	ListItemText
 } from '@mui/material';
+import { reatomComponent } from '@reatom/npm-react';
 import { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
@@ -17,25 +17,15 @@ import { ActivityAction } from '../../models';
 import { ActivityActionIcon } from '../activity-action-icon';
 
 export type ActivitiesActionsPickerProps = CommonProps &
-	PickerProps<number> &
+	PickerProps<ActivityAction> &
 	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'>;
 
 export const ActivitiesActionsPicker: FC<ActivitiesActionsPickerProps> = memo(
-	(props) => {
-		const { value, onChange, className, multiple, limitTags, ...rest } = props;
+	reatomComponent((props) => {
+		const { value, onChange, className, multiple, limitTags, ctx, ...rest } =
+			props;
 		const actions = useActivityActions();
 		const { t, } = useTranslation('activities');
-
-		const changeHandler = preparePickerHandler<ActivityAction, 'id', number>(
-			{ multiple, onChange, },
-			'id'
-		);
-
-		const selected = preparePickerSelectedValue(
-			{ value, multiple, },
-			actions.data,
-			'id'
-		);
 
 		const translate = (name: string) => {
 			return t(`type.${name}`);
@@ -44,10 +34,10 @@ export const ActivitiesActionsPicker: FC<ActivitiesActionsPickerProps> = memo(
 		return (
 			<Autocomplete
 				className={className}
-				value={selected as any}
-				onChange={changeHandler as any}
-				loading={actions.pending}
-				options={actions.data}
+				value={value}
+				onChange={onChange}
+				loading={ctx.spy(actions.pendingAtom)}
+				options={ctx.spy(actions.actionsAtom)}
 				getOptionLabel={(actions) => actions.name}
 				renderOption={(props, option) => {
 					const activity = translate(option.name);
@@ -55,7 +45,7 @@ export const ActivitiesActionsPicker: FC<ActivitiesActionsPickerProps> = memo(
 					return (
 						<ListItem {...props}>
 							<ListItemAvatar>
-								<ActivityActionIcon {...option} />
+								<ActivityActionIcon action={option.name} />
 							</ListItemAvatar>
 							<ListItemText>{activity}</ListItemText>
 						</ListItem>
@@ -77,5 +67,5 @@ export const ActivitiesActionsPicker: FC<ActivitiesActionsPickerProps> = memo(
 				multiple={multiple}
 			/>
 		);
-	}
+	}, 'ActivitiesActionsPicker')
 );

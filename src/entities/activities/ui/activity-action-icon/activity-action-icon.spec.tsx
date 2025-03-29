@@ -1,10 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
-import { ActivityActionIcon } from './activity-action-icon';
-
 import { RenderResult, render } from '~/test-utils';
 
-describe('src/entities/activities/ui/activity-action-icon/activity-action-icon', () => {
+import { ActivityActionIcon } from './activity-action-icon';
+
+
+describe('entities/activities/ui/activity-action-icon/activity-action-icon', () => {
 	let wrapper: RenderResult;
 
 	const createComponent = (action: string) => {

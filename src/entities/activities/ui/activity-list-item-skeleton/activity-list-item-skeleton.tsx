@@ -7,18 +7,18 @@ import {
 	Skeleton
 } from '@mui/material';
 import cn from 'classnames';
-import * as React from 'react';
+import { type FC, memo } from 'react';
 
 import { CommonProps } from '@/shared/types';
 
-import styles from './skeleton-activity-list-item.module.css';
+import styles from './styles.module.css';
 
-export interface SkeletonActivityListItemProps
+export interface ActivityListItemSkeletonProps
 	extends CommonProps,
 		ListItemProps {}
 
-export const SkeletonActivityListItem: React.FC<SkeletonActivityListItemProps> =
-	React.memo(function SkeletonActivityCard(props) {
+export const ActivityListItemSkeleton: FC<ActivityListItemSkeletonProps> = memo(
+	(props) => {
 		const { className, ...rest } = props;
 		return (
 			<ListItem className={cn(styles.item, className)} {...rest}>
@@ -33,4 +33,5 @@ export const SkeletonActivityListItem: React.FC<SkeletonActivityListItemProps> =
 				/>
 			</ListItem>
 		);
-	});
+	}
+);

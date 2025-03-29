@@ -1,9 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`create\` action > create 1`] = `
+exports[`entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`create\` action > create 1`] = `
 <div
   aria-label="type.create"
-  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _success_0061b8 classname css-pcn37w-MuiAvatar-root"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_1360a4 _success_1360a4 classname css-pcn37w-MuiAvatar-root"
 >
   <svg
     aria-hidden="true"
@@ -19,10 +19,10 @@ exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > 
 </div>
 `;
 
-exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`remove\` action > remove 1`] = `
+exports[`entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`remove\` action > remove 1`] = `
 <div
   aria-label="type.remove"
-  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _error_0061b8 classname css-pcn37w-MuiAvatar-root"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_1360a4 _error_1360a4 classname css-pcn37w-MuiAvatar-root"
 >
   <svg
     aria-hidden="true"
@@ -38,10 +38,10 @@ exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > 
 </div>
 `;
 
-exports[`src/entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`update\` action > update 1`] = `
+exports[`entities/activities/ui/activity-action-icon/activity-action-icon > should render icon for \`update\` action > update 1`] = `
 <div
   aria-label="type.update"
-  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_0061b8 _warning_0061b8 classname css-pcn37w-MuiAvatar-root"
+  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_1360a4 _warning_1360a4 classname css-pcn37w-MuiAvatar-root"
 >
   <svg
     aria-hidden="true"

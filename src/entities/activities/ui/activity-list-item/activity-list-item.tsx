@@ -8,35 +8,24 @@ import cn from 'classnames';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ActivityDto } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { DateTime } from '@/shared/ui';
 
+import { Activity } from '../../models';
 import { ActivityActionIcon } from '../activity-action-icon';
 
-import styles from './activity-list-item.module.css';
+import styles from './styles.module.css';
 
 export interface ActivityListItemProps
 	extends CommonProps,
-		ActivityDto,
-		Omit<ListItemProps, keyof ActivityDto> {}
+		Pick<Activity, 'activist' | 'sphere' | 'action' | 'createdAt'>,
+		ListItemProps {}
 
 /**
  * @todo Rework props. Stay only needed
  */
 export const ActivityListItem: React.FC<ActivityListItemProps> = (props) => {
-	const {
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		id: _,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		roomId: _roomId,
-		action,
-		sphere,
-		className,
-		createdAt,
-		activist,
-		...rest
-	} = props;
+	const { action, sphere, className, createdAt, activist, ...rest } = props;
 	const { t, } = useTranslation('activities');
 	const activityText = t('card.text', {
 		type: action.name,

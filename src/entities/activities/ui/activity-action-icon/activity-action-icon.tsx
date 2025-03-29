@@ -3,12 +3,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Avatar } from '@mui/material';
 import cn from 'classnames';
-import * as React from 'react';
+import { type FC, memo, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CommonProps } from '@/shared/types';
 
-import styles from './activity-action-icon.module.css';
+import styles from './styles.module.css';
 
 export interface ActivityActionIconProps extends CommonProps {
 	readonly action: string;
@@ -20,26 +20,26 @@ const colorMap: Record<string, 'success' | 'error' | 'warning'> = {
 	update: 'warning',
 };
 
-const iconMap: Record<string, React.ReactNode> = {
+const iconMap: Record<string, ReactNode> = {
 	create: <AddIcon />,
 	remove: <DeleteIcon />,
 	update: <EditIcon />,
 };
 
-export const ActivityActionIcon: React.FC<ActivityActionIconProps> = React.memo(
-	(props) => {
-		const { action, className, } = props;
-		const { t, } = useTranslation('activities');
+export const ActivityActionIcon: FC<ActivityActionIconProps> = memo((props) => {
+	const { action, className, } = props;
+	const { t, } = useTranslation('activities');
 
-		const label = t(`type.${action}`)!;
+	const labelT = t(`type.${action}`)!;
 
-		return (
-			<Avatar
-				className={cn(styles.avatar, styles[colorMap[action]], className)}
-				aria-label={label}
-				alt={label}>
-				{iconMap[action]}
-			</Avatar>
-		);
-	}
-);
+	const icon = iconMap[action];
+
+	return (
+		<Avatar
+			className={cn(styles.avatar, styles[colorMap[action]], className)}
+			aria-label={labelT}
+			alt={labelT}>
+			{icon}
+		</Avatar>
+	);
+});

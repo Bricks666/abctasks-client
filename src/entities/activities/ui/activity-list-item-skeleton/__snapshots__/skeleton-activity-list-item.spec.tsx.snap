@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`src/entities/activities/ui/skeleton-activity-list-item/skeleton-activity-list-item > should render skeleton of activity list item 1`] = `
+exports[`entities/activities/ui/activity-list-item-skeleton/activity-list-item-skeleton.tsx > should render skeleton of activity list item 1`] = `
 <li
-  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding _item_81be25 classname css-q9mp92-MuiListItem-root"
+  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding _item_74a227 classname css-q9mp92-MuiListItem-root"
 >
   <div
     class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"

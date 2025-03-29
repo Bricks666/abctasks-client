@@ -1,8 +1,8 @@
 import { Autocomplete, Chip, ListItem, ListItemText } from '@mui/material';
+import { reatomComponent } from '@reatom/npm-react';
 import { memo, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
 import { CommonProps, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
@@ -10,25 +10,15 @@ import { useActivitySpheres } from '../../lib';
 import { ActivitySphere } from '../../models';
 
 export type ActivitiesSpheresPickerProps = CommonProps &
-	PickerProps<number> &
+	PickerProps<ActivitySphere> &
 	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'>;
 
 export const ActivitiesSpheresPicker: FC<ActivitiesSpheresPickerProps> = memo(
-	(props) => {
-		const { value, onChange, multiple, limitTags, className, ...rest } = props;
+	reatomComponent((props) => {
+		const { value, onChange, multiple, limitTags, className, ctx, ...rest } =
+			props;
 		const spheres = useActivitySpheres();
 		const { t, } = useTranslation('activities');
-
-		const changeHandler = preparePickerHandler<ActivitySphere, 'id', number>(
-			{ multiple, onChange, },
-			'id'
-		);
-
-		const selected = preparePickerSelectedValue(
-			{ value, multiple, },
-			spheres.data,
-			'id'
-		);
 
 		const translate = (name: string) => {
 			return t(`spheres.${name}`);
@@ -37,10 +27,10 @@ export const ActivitiesSpheresPicker: FC<ActivitiesSpheresPickerProps> = memo(
 		return (
 			<Autocomplete
 				className={className}
-				value={selected as any}
-				onChange={changeHandler as any}
-				loading={spheres.pending}
-				options={spheres.data}
+				value={value}
+				onChange={onChange}
+				loading={ctx.spy(spheres.pendingAtom)}
+				options={ctx.spy(spheres.spheresAtom)}
 				getOptionLabel={(sphere) => sphere.name}
 				renderInput={(params) => {
 					return <Field {...params} {...rest} />;
@@ -67,5 +57,5 @@ export const ActivitiesSpheresPicker: FC<ActivitiesSpheresPickerProps> = memo(
 				multiple={multiple}
 			/>
 		);
-	}
+	}, 'ActivitiesSpheresPicker')
 );
