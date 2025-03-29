@@ -1,25 +1,27 @@
 import {
 	ListItem,
 	ListItemAvatar,
-	ListItemProps,
 	ListItemSecondaryAction,
-	ListItemText
+	ListItemText,
+	type ListItemProps
 } from '@mui/material';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CommonProps, Slots } from '@/shared/types';
+import type { CommonProps, Slots } from '@/shared/types';
 
-export interface TemplateInvitationListItemProps
+type InvitationSlots = 'actions' | 'userAvatar';
+type RequiredInvitationSlots = Extract<InvitationSlots, 'userAvatar'>;
+
+export interface InvitationListItemTemplateProps
 	extends CommonProps,
 		Omit<ListItemProps, 'slots'> {
-	readonly slots: Required<Slots<'userAvatar'>> &
-		Slots<'actions' | 'userAvatar'>;
+	readonly slots: Slots<InvitationSlots, RequiredInvitationSlots>;
 	readonly inviterName: string;
 	readonly username: string;
 }
 
-export const TemplateInvitationListItem: FC<TemplateInvitationListItemProps> = (
+export const InvitationListItemTemplate: FC<InvitationListItemTemplateProps> = (
 	props
 ) => {
 	const { slots, inviterName, username, ...rest } = props;
@@ -36,7 +38,6 @@ export const TemplateInvitationListItem: FC<TemplateInvitationListItemProps> = (
 		<ListItem {...rest}>
 			<ListItemAvatar>{userAvatar}</ListItemAvatar>
 			<ListItemText primary={username} secondary={secondaryLabel} />
-
 			{actionsItem}
 		</ListItem>
 	);

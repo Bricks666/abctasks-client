@@ -3,26 +3,28 @@ import {
 	CardActions,
 	CardContent,
 	CardHeader,
+	CardProps,
 	Typography
 } from '@mui/material';
 import cn from 'classnames';
-import * as React from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CommonProps, Slots } from '@/shared/types';
+import type { CommonProps, Slots } from '@/shared/types';
 
-import styles from './ui.module.css';
+import styles from './styles.module.css';
 
+type CardSlots = 'userAvatar' | 'inviterAvatar' | 'actions';
+type RequiredCardSlots = Extract<CardSlots, 'userAvatar' | 'inviterAvatar'>;
 
-export interface TemplateInvitationCardProps extends CommonProps {
-	readonly slots: Required<Slots<'userAvatar' | 'inviterAvatar'>> &
-		Slots<'actions'>;
+export interface InvitationCardTemplateProps extends CommonProps, CardProps {
+	readonly slots: Slots<CardSlots, RequiredCardSlots>;
 	readonly inviterName: string;
 	readonly username: string;
 	readonly roomName: string;
 }
 
-export const TemplateInvitationCard: React.FC<TemplateInvitationCardProps> = (
+export const InvitationCardTemplate: FC<InvitationCardTemplateProps> = (
 	props
 ) => {
 	const { inviterName, roomName, slots, username, className, } = props;

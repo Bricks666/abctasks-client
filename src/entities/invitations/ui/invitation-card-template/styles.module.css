@@ -1,17 +1,15 @@
 .card {
 	max-width: 560px;
-
 }
 
 .content {
 	display: flex;
-  align-items: center;
 	gap: 1em;
+	align-items: center;
 }
 
 .text {
 	max-width: 250px;
-
 	text-align: center;
 }
 
