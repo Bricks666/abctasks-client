@@ -7,7 +7,12 @@ import {
 	invitations
 } from '../../fixtures';
 import { BASE_URL } from '../constants';
-import { createStandardResponse, createUrl, notFoundError } from '../utils';
+import {
+	createStandardResponse,
+	createUrl,
+	internalServerError,
+	notFoundError
+} from '../utils';
 
 const baseUrl = createUrl(BASE_URL, 'invitations');
 const getAllUrl = createUrl(baseUrl, ':roomId');
@@ -54,6 +59,14 @@ export const success = {
 };
 
 export const error = {
+	getAll: {
+		invalidData: http.get(getAllUrl, () => {
+			return createStandardResponse(invitations[0]);
+		}),
+		internalError: http.get(getAllUrl, () => {
+			return internalServerError;
+		}),
+	},
 	approve: http.put(approveUrl, () => {
 		return notFoundError;
 	}),
