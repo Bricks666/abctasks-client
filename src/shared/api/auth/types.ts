@@ -1,35 +1,36 @@
-import { Record, String, Static, Number } from 'runtypes';
+import type { StandardResponse } from '@/shared/types';
 
-import { tokens } from '../request';
+import type { UserDto } from '../users';
 
-export const user = Record({
-	id: Number,
-	email: String,
-	username: String,
-	photo: String.nullable(),
-}).asReadonly();
+export interface TokensDto {
+	readonly refreshToken: string;
+	readonly accessToken: string;
+}
 
-export interface User extends Static<typeof user> {}
+export interface AuthResponseDto {
+	readonly user: UserDto;
+	readonly tokens: TokensDto;
+}
 
-export const authResponse = Record({
-	tokens,
-	user,
-}).asReadonly();
+export type AuthResponseData = Promise<StandardResponse<AuthResponseDto>>;
 
-export interface AuthResponse extends Static<typeof authResponse> {}
-
-export interface LoginParams {
+export interface LoginRequestParams {
 	readonly email: string;
 	readonly password: string;
 	readonly rememberMe: boolean;
 }
+export type LoginResponseData = Promise<StandardResponse<AuthResponseDto>>;
 
-export interface RegistrationParams {
+export interface RegistrationRequestParams {
 	readonly email: string;
 	readonly username: string;
 	readonly password: string;
 }
+export type RegistrationResponseData = Promise<StandardResponse<UserDto>>;
 
-export interface ActivateParams {
+export interface ActivateUserRequestParams {
 	readonly token: string;
 }
+export type ActivateUserResponseData = Promise<StandardResponse<boolean>>;
+
+export type LogoutResponseData = Promise<StandardResponse<boolean>>;

@@ -1,45 +1,60 @@
-import { StandardResponse } from '@/shared/types';
+import queryString from 'query-string';
 
-import { instance, normalizeQuery } from '../request';
+import { instance } from '../request';
 
-import {
-	ActivateParams,
-	AuthResponse,
-	LoginParams,
-	RegistrationParams,
-	User
+import type {
+	ActivateUserRequestParams,
+	ActivateUserResponseData,
+	AuthResponseData,
+	LoginRequestParams,
+	LoginResponseData,
+	LogoutResponseData,
+	RegistrationRequestParams,
+	RegistrationResponseData
 } from './types';
 
-export const auth = async () => {
-	return instance
-		.get('auth', { credentials: 'include', })
-		.json<StandardResponse<AuthResponse>>();
+export const auth = async (): AuthResponseData => {
+	return instance.get('auth', { credentials: 'include', }).json();
 };
 
-export const login = async (body: LoginParams) => {
+export const login = async (
+	params: LoginRequestParams,
+	options?: globalThis.RequestInit
+): LoginResponseData => {
 	return instance
 		.post('auth/login', {
-			json: body,
+			json: params,
+			...options,
 		})
-		.json<StandardResponse<AuthResponse>>();
+		.json();
 };
 
-export const registration = async (body: RegistrationParams) => {
+export const registration = async (
+	params: RegistrationRequestParams,
+	options?: globalThis.RequestInit
+): RegistrationResponseData => {
 	return instance
 		.post('auth/registration', {
-			json: body,
+			json: params,
+			...options,
 		})
-		.json<StandardResponse<User>>();
+		.json();
 };
 
-export const activate = async (query: ActivateParams) => {
+export const activateUser = async (
+	params: ActivateUserRequestParams,
+	options?: globalThis.RequestInit
+): ActivateUserResponseData => {
 	return instance
 		.put('auth/registration/activate', {
-			searchParams: new URLSearchParams(normalizeQuery(query)),
+			...options,
+			searchParams: new URLSearchParams(queryString.stringify(params)),
 		})
-		.json<StandardResponse<boolean>>();
+		.json();
 };
 
-export const logout = async () => {
-	return instance.delete('auth/logout').json<StandardResponse<boolean>>();
+export const logout = async (
+	options?: globalThis.RequestInit
+): LogoutResponseData => {
+	return instance.delete('auth/logout', options).json();
 };

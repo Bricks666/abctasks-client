@@ -1,14 +1,13 @@
-import { AuthResponse } from '@/shared/api';
-import { Tokens } from '@/shared/api/request';
+import type { AuthResponseDto, TokensDto } from '@/shared/api';
 
 import { defaultUser } from './users';
 
-export const tokens: Tokens = {
+export const tokens: TokensDto = {
 	accessToken: 'accessToken',
 	refreshToken: 'refreshToken',
 };
 
-export const defaultAuthData: AuthResponse = {
+export const defaultAuthData: AuthResponseDto = {
 	user: defaultUser,
 	tokens,
 };
