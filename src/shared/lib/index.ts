@@ -17,3 +17,4 @@ export * from './retry-query';
 export * from './create-response-schemas';
 export * from './with-scope';
 export * from './with-provider';
+export * from './use-reaction';
