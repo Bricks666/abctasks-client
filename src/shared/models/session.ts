@@ -1,5 +1,5 @@
 import { createQuery } from '@farfetched/core';
-import { runtypeContract } from '@farfetched/runtypes';
+// import { runtypeContract } from '@farfetched/runtypes';
 import {
 	RouteInstance,
 	RouteParams,
@@ -14,33 +14,28 @@ import {
 	createEffect,
 	Event
 } from 'effector';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { equals } from 'patronum';
 
-import { User, AuthResponse, authResponse, authApi } from '@/shared/api';
+import { authApi } from '@/shared/api';
 import { extractData } from '@/shared/lib';
 import {
-	ChainedParams,
-	StandardResponse,
-	getStandardResponse
+	ChainedParams
+	// StandardResponse,
+	// getStandardResponseSchema
 } from '@/shared/types';
 
 type Status = 'initial' | 'pending' | 'authorized' | 'anonymous';
 
-export const $user = createStore<User | null>(null);
+export const $user = createStore(null);
 export const $status = createStore<Status>('initial');
 export const $isAuth = $status.map((status) => status === 'authorized');
 
 const handlerFx = createEffect(authApi.auth);
 
-export const query = createQuery<
-	void,
-	StandardResponse<AuthResponse>,
-	Error,
-	StandardResponse<AuthResponse>,
-	AuthResponse
->({
+export const query = createQuery({
 	effect: handlerFx,
-	contract: runtypeContract(getStandardResponse(authResponse)),
+	// contract: runtypeContract(getStandardResponseSchema(authResponse)),
 	mapData: extractData,
 });
 
