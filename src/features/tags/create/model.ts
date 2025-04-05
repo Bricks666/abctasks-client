@@ -5,7 +5,7 @@ import { createEffect, sample } from 'effector';
 import { tagsModel } from '@/entities/tags';
 
 import { CreateTagParams, tag, Tag, tagsApi } from '@/shared/api';
-import { i18n, popupsMap, routes } from '@/shared/configs';
+import { i18n, POPUPS_NAMES, routes } from '@/shared/configs';
 import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -13,7 +13,7 @@ import { StandardResponse, getStandardResponse } from '@/shared/types';
 import { tagFormModel } from '../form';
 
 export const popupControls = createPopupControlModel({
-	name: popupsMap.createTag,
+	name: POPUPS_NAMES.createTag,
 });
 
 export const form = tagFormModel.create();

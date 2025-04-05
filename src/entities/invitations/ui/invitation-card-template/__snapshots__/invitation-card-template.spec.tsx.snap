@@ -1,0 +1,131 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/invitations/ui/invitation-card-template/invitation-card-template.tsx > should render actions if they are provided > with actions 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_b23b2c css-1vehtnn-MuiPaper-root-MuiCard-root"
+>
+  <div
+    class="MuiCardHeader-root css-185gdzj-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-avatar css-1ssile9-MuiCardHeader-avatar"
+    >
+      <div>
+        Inviter avatar
+      </div>
+    </div>
+    <div
+      class="MuiCardHeader-content css-1qbkelo-MuiCardHeader-content"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-body2 MuiCardHeader-title css-q6yvc7-MuiTypography-root"
+      >
+        card.title
+      </span>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+  >
+    <div
+      class="_content_b23b2c"
+    >
+      <div>
+        Inviter avatar
+      </div>
+      <p
+        class="MuiTypography-root MuiTypography-body2 _text_b23b2c css-e784if-MuiTypography-root"
+      >
+        c
+        <b>
+          a
+        </b>
+        r
+        <b>
+          d
+        </b>
+        .
+        <b>
+          t
+        </b>
+      </p>
+      <div>
+        User avatar
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiCardActions-root MuiCardActions-spacing _actions_b23b2c css-dnrpxu-MuiCardActions-root"
+  >
+    <div>
+      <button
+        type="button"
+      >
+        Accept
+      </button>
+      <button
+        type="button"
+      >
+        Decline
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`entities/invitations/ui/invitation-card-template/invitation-card-template.tsx > should render correctly > default 1`] = `
+<div
+  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_b23b2c css-1vehtnn-MuiPaper-root-MuiCard-root"
+>
+  <div
+    class="MuiCardHeader-root css-185gdzj-MuiCardHeader-root"
+  >
+    <div
+      class="MuiCardHeader-avatar css-1ssile9-MuiCardHeader-avatar"
+    >
+      <div>
+        Inviter avatar
+      </div>
+    </div>
+    <div
+      class="MuiCardHeader-content css-1qbkelo-MuiCardHeader-content"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-body2 MuiCardHeader-title css-q6yvc7-MuiTypography-root"
+      >
+        card.title
+      </span>
+    </div>
+  </div>
+  <div
+    class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+  >
+    <div
+      class="_content_b23b2c"
+    >
+      <div>
+        Inviter avatar
+      </div>
+      <p
+        class="MuiTypography-root MuiTypography-body2 _text_b23b2c css-e784if-MuiTypography-root"
+      >
+        c
+        <b>
+          a
+        </b>
+        r
+        <b>
+          d
+        </b>
+        .
+        <b>
+          t
+        </b>
+      </p>
+      <div>
+        User avatar
+      </div>
+    </div>
+  </div>
+</div>
+`;

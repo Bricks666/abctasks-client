@@ -1,9 +1,9 @@
-import { Room } from '@/shared/api';
+import { RoomDto } from '@/shared/api';
 
 import { generateId } from './generate-id';
 import { defaultUser } from './users';
 
-export const rooms: Room[] = [
+export const rooms: RoomDto[] = [
 	{
 		id: 1,
 		ownerId: defaultUser.id,
@@ -22,7 +22,7 @@ export const rooms: Room[] = [
 
 export const defaultRoom = rooms[0];
 
-export const createRoom = (room?: Partial<Room>): Room => {
+export const createRoom = (room?: Partial<RoomDto>): RoomDto => {
 	return {
 		...defaultRoom,
 		id: generateId(),

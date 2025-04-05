@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { VoidFunction } from './common';
+
 export type Size = 'small' | 'medium' | 'large';
 
 export interface CommonProps {
@@ -8,8 +10,8 @@ export interface CommonProps {
 
 export interface BasePopupProps extends CommonProps {
 	readonly isOpen: boolean;
+	readonly onClose: VoidFunction;
 	readonly id?: string;
-	readonly slots?: Slots<'actions'>;
 }
 
 interface SinglePickerProps<T> {
@@ -28,8 +30,10 @@ interface MultiplePickerProps<T> {
 
 export type PickerProps<T> = SinglePickerProps<T> | MultiplePickerProps<T>;
 
-export type Slots<T extends string> = {
-	readonly [K in T]?: ReactNode | null;
+export type Slots<Names extends string, RequiredNames extends Names = never> = {
+	readonly [Name in Names]?: ReactNode | null;
+} & {
+	readonly [Name in RequiredNames]: ReactNode | null;
 };
 
 export type Classes<T extends string> = {

@@ -1,9 +1,10 @@
 import cn from 'classnames';
 import * as React from 'react';
 
+import { LastRoomActivities } from '@/widgets/activities';
+
 import { CommonProps } from '@/shared/types';
 
-import { LastActivities } from '../last-activities';
 import { TasksProgress } from '../tasks-progresses';
 
 import styles from './aside.module.css';
@@ -18,7 +19,7 @@ export const Aside: React.FC<AsideProps> = (props) => {
 	return (
 		<div className={cn(styles.aside, className)}>
 			<TasksProgress disableBorder={disableBorder} />
-			<LastActivities disableBorder={disableBorder} />
+			<LastRoomActivities roomId={1} disableBorder={disableBorder} />
 		</div>
 	);
 };

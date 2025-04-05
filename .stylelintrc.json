@@ -12,16 +12,18 @@
 		"color-format/format": {
 			"format": "hsl"
 		},
-		"media-feature-range-notation": "prefix",
+		"media-feature-range-notation": "context",
 
 		"plugin/z-index-value-constraint": {
-			"min": -1,
 			"max": 10000
 		},
 
 		"pitcher/no-nested-media": true,
 
-		"plugin/no-low-performance-animation-properties": true
+		"plugin/no-low-performance-animation-properties": [
+			true,
+			{ "ignoreProperties": ["box-shadow"] }
+		]
 	},
 	"ignoreFiles": ["**/*.[jt]sx?", "**/third-party/*", "**/PlanEditor/*"]
 }

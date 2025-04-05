@@ -6,7 +6,7 @@ import { Literal } from 'runtypes';
 import { tasksInRoomModel } from '@/entities/tasks';
 
 import { RemoveTaskParams, tasksApi } from '@/shared/api';
-import { i18n, popupsMap, routes } from '@/shared/configs';
+import { i18n, POPUPS_NAMES, routes } from '@/shared/configs';
 import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -22,7 +22,7 @@ const handlerFx = removeTaskDomain.effect<
 const $id = createStore<number | null>(null);
 
 export const popupControls = createPopupControlModel({
-	name: popupsMap.removeTask,
+	name: POPUPS_NAMES.removeTask,
 	sync: false,
 });
 

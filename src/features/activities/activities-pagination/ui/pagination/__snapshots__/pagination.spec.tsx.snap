@@ -1,0 +1,151 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`features/activities/activities-pagination/ui/pagination.tsx > should render pagination 1`] = `
+<nav
+  aria-label="pagination navigation"
+  class="MuiPagination-root MuiPagination-text classname css-1oj2twp-MuiPagination-root"
+>
+  <ul
+    class="MuiPagination-ul css-wjh20t-MuiPagination-ul"
+  >
+    <li>
+      <button
+        aria-label="Go to previous page"
+        class="MuiButtonBase-root Mui-disabled MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-previousNext css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        disabled=""
+        role="link"
+        tabindex="-1"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiPaginationItem-icon css-n8417t-MuiSvgIcon-root-MuiPaginationItem-icon"
+          data-testid="NavigateBeforeIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+          />
+        </svg>
+      </button>
+    </li>
+    <li>
+      <button
+        aria-current="true"
+        aria-label="page 1"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary Mui-selected MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        role="link"
+        tabindex="0"
+        type="button"
+      >
+        1
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </li>
+    <li>
+      <button
+        aria-label="Go to page 2"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        role="link"
+        tabindex="0"
+        type="button"
+      >
+        2
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </li>
+    <li>
+      <button
+        aria-label="Go to page 3"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        role="link"
+        tabindex="0"
+        type="button"
+      >
+        3
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </li>
+    <li>
+      <button
+        aria-label="Go to page 4"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        role="link"
+        tabindex="0"
+        type="button"
+      >
+        4
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </li>
+    <li>
+      <button
+        aria-label="Go to page 5"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        role="link"
+        tabindex="0"
+        type="button"
+      >
+        5
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </li>
+    <li>
+      <div
+        class="MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-ellipsis css-3wij1h-MuiPaginationItem-root"
+      >
+        …
+      </div>
+    </li>
+    <li>
+      <button
+        aria-label="Go to page 10"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-page css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        role="link"
+        tabindex="0"
+        type="button"
+      >
+        10
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </li>
+    <li>
+      <button
+        aria-label="Go to next page"
+        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeLarge MuiPaginationItem-text MuiPaginationItem-circular MuiPaginationItem-colorPrimary MuiPaginationItem-textPrimary MuiPaginationItem-previousNext css-1erlt03-MuiButtonBase-root-MuiPaginationItem-root"
+        role="link"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiPaginationItem-icon css-n8417t-MuiSvgIcon-root-MuiPaginationItem-icon"
+          data-testid="NavigateNextIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </li>
+  </ul>
+</nav>
+`;

@@ -1,4 +1,0 @@
-{
-	"presets": ["atomic-router/babel-preset"],
-	"plugins": ["effector/babel-plugin"]
-}

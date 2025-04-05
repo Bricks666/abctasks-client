@@ -1,12 +1,7 @@
-import { useUnit } from 'effector-react';
+import { useMolecule } from 'bunshi/react';
 
-import { tagsModel } from '../model';
+import { tagsModel } from '../models';
 
 export const useTags = () => {
-	const query = useUnit(tagsModel.query);
-	const status = useUnit(tagsModel.query.$status);
-	return {
-		...query,
-		status,
-	};
+	return useMolecule(tagsModel.Molecule);
 };

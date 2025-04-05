@@ -6,7 +6,7 @@ import { Literal } from 'runtypes';
 import { tagsModel } from '@/entities/tags';
 
 import { RemoveTagParams, tagsApi } from '@/shared/api';
-import { i18n, popupsMap, routes } from '@/shared/configs';
+import { i18n, POPUPS_NAMES, routes } from '@/shared/configs';
 import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { StandardResponse, getStandardResponse } from '@/shared/types';
@@ -22,7 +22,7 @@ const handlerFx = removeTagDomain.effect<
 const $id = createStore<number | null>(null);
 
 export const popupControls = createPopupControlModel({
-	name: popupsMap.removeTag,
+	name: POPUPS_NAMES.removeTag,
 	sync: false,
 });
 
@@ -50,8 +50,8 @@ sample({
 		id: $id,
 		roomId: routes.room.tags.$params.map((params) => params.id),
 	},
-	filter: ({ id, roomId }) => !!id && !!roomId,
-	fn: ({ roomId, id }) => {
+	filter: ({ id, roomId, }) => !!id && !!roomId,
+	fn: ({ roomId, id, }) => {
 		return {
 			roomId,
 			id,
@@ -73,7 +73,7 @@ sample({
 update(tagsModel.query, {
 	on: mutation,
 	by: {
-		success: ({ query, mutation }) => {
+		success: ({ query, mutation, }) => {
 			if (!query) {
 				return {
 					result: [],

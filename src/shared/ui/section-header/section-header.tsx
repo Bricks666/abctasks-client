@@ -2,17 +2,21 @@ import { Typography } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
 
-import { CommonProps } from '@/shared/types';
+import { CommonProps, Slots } from '@/shared/types';
 
 import styles from './section-header.module.css';
 
 export interface SectionHeaderProps extends CommonProps {
 	readonly title: string;
+	readonly slots?: Slots<'actions'>;
 	readonly actions?: React.ReactElement | null;
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = (props) => {
-	const { title, actions, className, } = props;
+	const { title, className, slots = {}, } = props;
+
+	const { actions, } = slots;
+
 	return (
 		<header className={cn(styles.wrapper, className)}>
 			<Typography variant='h5' component='h2' fontWeight={700}>

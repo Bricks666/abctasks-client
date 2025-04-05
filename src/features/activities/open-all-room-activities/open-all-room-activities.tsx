@@ -1,31 +1,29 @@
 import { Button } from '@mui/material';
-import { RouteInstance } from 'atomic-router';
-import { Link } from 'atomic-router-react';
 import * as React from 'react';
+import { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { routes } from '@/shared/configs';
-import { useParam } from '@/shared/lib';
+import { ROUTES } from '@/shared/configs';
 import { CommonProps } from '@/shared/types';
 
+export interface OpenAllRoomActivitiesProps extends CommonProps {
+	readonly roomId: number;
+}
 
-export const OpenAllRoomActivities: React.FC<CommonProps> = React.memo(
+export const OpenAllRoomActivities: FC<OpenAllRoomActivitiesProps> = memo(
 	(props) => {
-		const { className, } = props;
+		const { className, roomId, } = props;
 		const { t, } = useTranslation('room-tasks');
 
-		const roomId = useParam(routes.room.tasks, 'id');
-
-		const text = t('blocks.last_activities.actions.open');
+		const textT = t('blocks.last_activities.actions.open');
 
 		return (
 			<Button
 				className={className}
+				href={ROUTES.room.activities.getPath({ id: roomId.toString(), })}
 				variant='text'
-				to={routes.room.activities as RouteInstance<any>}
-				params={{ id: roomId, }}
-				component={Link}>
-				{text}
+				component='a'>
+				{textT}
 			</Button>
 		);
 	}

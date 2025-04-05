@@ -1,22 +1,20 @@
 import { TextField, TextFieldProps } from '@mui/material';
-import { ConnectedField } from 'effector-forms';
-import * as React from 'react';
+import { type ChangeEventHandler, type FC, memo } from 'react';
 
-import { CommonProps } from '@/shared/types';
+import type { CommonProps, Fn } from '@/shared/types';
 
 export interface FieldProps
 	extends CommonProps,
-		Partial<
-			Pick<
-				ConnectedField<any>,
-				'isValid' | 'name' | 'onChange' | 'onBlur' | 'value'
-			>
-		>,
-		Omit<TextFieldProps, keyof ConnectedField<any>> {}
+		Omit<TextFieldProps, 'onChange'> {
+	readonly label?: string;
+	readonly onChange?: Fn<[value: string], void>;
+	readonly value?: any;
+	readonly isError?: boolean;
+}
 
-export const Field: React.FC<FieldProps> = React.memo((props) => {
-	const { isValid, onChange, ...rest } = props;
-	const handleChange: React.ChangeEventHandler<HTMLInputElement> = (evt) => {
+export const Field: FC<FieldProps> = memo((props) => {
+	const { isError, onChange, ...rest } = props;
+	const handleChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
 		onChange?.(evt.target.value);
 	};
 
@@ -24,7 +22,7 @@ export const Field: React.FC<FieldProps> = React.memo((props) => {
 		<TextField
 			{...(rest as TextFieldProps)}
 			onChange={handleChange}
-			error={!isValid}
+			error={!isError}
 		/>
 	);
 });

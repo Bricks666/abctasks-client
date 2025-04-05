@@ -1,39 +1,61 @@
-import { InRoomParams, StandardResponse } from '@/shared/types';
-
 import { instance } from '../request';
 
-import {
-	GetTagParams,
-	CreateTagParams,
-	UpdateTagParams,
-	RemoveTagParams,
-	Tag
+import type {
+	GetTagRequestParams,
+	CreateTagRequestParams,
+	UpdateTagRequestParams,
+	RemoveTagRequestParams,
+	GetAllTagsRequestParams,
+	GetAllTagsResponseData,
+	GetTagResponseData,
+	RemoveTagResponseData,
+	UpdateTagResponseData,
+	CreateTagResponseData
 } from './types';
 
-export const getAll = async (params: InRoomParams) => {
-	return instance.get(`tags/${params.roomId}`).json<StandardResponse<Tag[]>>();
+export const getAll = async (
+	params: GetAllTagsRequestParams,
+	options?: globalThis.RequestInit
+): GetAllTagsResponseData => {
+	return instance.get(`tags/${params.roomId}`, options).json();
 };
 
-export const getOne = async ({ roomId, id, }: GetTagParams) => {
-	return instance.get(`tags/${roomId}/${id}`).json<StandardResponse<Tag>>();
+export const getOne = async (
+	params: GetTagRequestParams,
+	options?: globalThis.RequestInit
+): GetTagResponseData => {
+	const { roomId, id, } = params;
+
+	return instance.get(`tags/${roomId}/${id}`, options).json();
 };
 
-export const create = async ({ roomId, ...body }: CreateTagParams) => {
+export const create = async (
+	params: CreateTagRequestParams,
+	options?: globalThis.RequestInit
+): CreateTagResponseData => {
+	const { roomId, ...body } = params;
+
 	return instance
-		.post(`tags/${roomId}/create`, { json: body, })
-		.json<StandardResponse<Tag>>();
+		.post(`tags/${roomId}/create`, { ...options, json: body, })
+		.json();
 };
 
-export const update = async ({ id, roomId, ...body }: UpdateTagParams) => {
+export const update = async (
+	params: UpdateTagRequestParams,
+	options?: globalThis.RequestInit
+): UpdateTagResponseData => {
+	const { id, roomId, ...body } = params;
+
 	return instance
-		.put(`tags/${roomId}/${id}/update`, {
-			json: body,
-		})
-		.json<StandardResponse<Tag>>();
+		.put(`tags/${roomId}/${id}/update`, { ...options, json: body, })
+		.json();
 };
 
-export const remove = async ({ roomId, id, }: RemoveTagParams) => {
-	return instance
-		.delete(`tags/${roomId}/${id}/remove`)
-		.json<StandardResponse<boolean>>();
+export const remove = async (
+	params: RemoveTagRequestParams,
+	options?: globalThis.RequestInit
+): RemoveTagResponseData => {
+	const { roomId, id, } = params;
+
+	return instance.delete(`tags/${roomId}/${id}/remove`, options).json();
 };

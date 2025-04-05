@@ -1,25 +1,37 @@
 import { Typography } from '@mui/material';
 import cn from 'classnames';
-import * as React from 'react';
+import { memo, type FC, type ComponentProps, useId } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { CommonProps, Slots } from '@/shared/types';
+import type { CommonProps, Slots } from '@/shared/types';
 
-import styles from './task-column-header.module.css';
+import type { TaskStatus } from '../../models';
 
-export interface TaskColumnHeaderComponent extends CommonProps {
-	readonly id?: string;
-	readonly slots?: Slots<'actions'>;
+import styles from './styles.module.css';
+
+type TaskColumnSlots = 'actions';
+
+export interface TaskColumnHeaderProps
+	extends CommonProps,
+		ComponentProps<'header'> {
+	readonly status: TaskStatus;
+	readonly slots?: Slots<TaskColumnSlots>;
 }
 
-export const TaskColumnHeader: React.FC<
-	React.PropsWithChildren<TaskColumnHeaderComponent>
-> = React.memo((props) => {
-	const { children, className, slots, id, } = props;
+export const TaskColumnHeader: FC<TaskColumnHeaderProps> = memo((props) => {
+	const { className, slots, status, ...rest } = props;
+	const id = useId();
+	const { t, } = useTranslation('tasks');
+
+	const headerT = t(`statuses.${status}`);
 
 	return (
-		<header className={cn(styles.header, className)} id={id}>
-			<Typography className={styles.title} variant='h6' component='h3'>
-				{children}
+		<header
+			className={cn(styles.header, className)}
+			{...rest}
+			aria-labelledby={id}>
+			<Typography className={styles.title} id={id} variant='h6' component='h3'>
+				{headerT}
 			</Typography>
 			{slots?.actions}
 		</header>

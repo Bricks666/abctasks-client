@@ -1,29 +1,44 @@
-import { Record, Number, String, Static } from 'runtypes';
+import { StandardResponse } from '@/shared/types';
 
-import { hex, InRoomParams } from '@/shared/types';
-
-export const tag = Record({
-	id: Number,
-	roomId: Number,
-	name: String,
-	mainColor: hex,
-	secondColor: hex,
-});
-
-export interface Tag extends Static<typeof tag> {}
-
-export interface GetTagParams extends InRoomParams {
+export interface TagDto {
 	readonly id: number;
+	readonly roomId: number;
+	readonly name: string;
+	readonly mainColor: string;
+	readonly secondColor: string;
 }
+export type TagsDto = TagDto[];
 
-export interface CreateTagParams extends Omit<Tag, 'id'> {}
+export interface GetAllTagsRequestParams {
+	readonly roomId: number;
+}
+export type GetAllTagsResponseData = Promise<StandardResponse<TagsDto>>;
 
-export interface UpdateTagParams
-	extends Partial<Omit<CreateTagParams, 'roomId'>>,
-		InRoomParams {
+export interface GetTagRequestParams {
 	readonly id: number;
+	readonly roomId: number;
 }
+export type GetTagResponseData = Promise<StandardResponse<TagDto>>;
 
-export interface RemoveTagParams extends InRoomParams {
-	readonly id: number;
+export interface CreateTagRequestParams {
+	readonly roomId: number;
+	readonly name: string;
+	readonly mainColor: string;
+	readonly secondColor: string;
 }
+export type CreateTagResponseData = Promise<StandardResponse<TagDto>>;
+
+export interface UpdateTagRequestParams {
+	readonly id: number;
+	readonly roomId: number;
+	readonly name?: string;
+	readonly mainColor?: string;
+	readonly secondColor?: string;
+}
+export type UpdateTagResponseData = Promise<StandardResponse<TagDto>>;
+
+export interface RemoveTagRequestParams {
+	readonly id: number;
+	readonly roomId: number;
+}
+export type RemoveTagResponseData = Promise<StandardResponse<boolean>>;

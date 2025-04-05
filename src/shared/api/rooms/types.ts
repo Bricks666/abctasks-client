@@ -1,18 +1,35 @@
-import { Record, Number, String, Static, Boolean } from 'runtypes';
+import { StandardResponse } from '@/shared/types';
 
-import { InRoomParams } from '@/shared/types';
+export interface RoomDto {
+	readonly id: number;
+	readonly ownerId: number;
+	readonly name: string;
+	readonly description: string;
+	readonly canChange: boolean | null;
+}
+export type RoomsDto = RoomDto[];
 
-export const room = Record({
-	id: Number,
-	ownerId: Number,
-	name: String,
-	description: String,
-	canChange: Boolean.optional(),
-}).asReadonly();
+export type GetRoomsResponseData = Promise<StandardResponse<RoomsDto>>;
 
-export interface Room extends Static<typeof room> {}
+export interface GetRoomRequestParams {
+	readonly roomId: number;
+}
+export type GetRoomResponseData = Promise<StandardResponse<RoomDto>>;
 
-export interface CreateRoomParams extends Pick<Room, 'description' | 'name'> {}
-export interface UpdateRoomParams
-	extends Partial<CreateRoomParams>,
-		InRoomParams {}
+export interface CreateRoomRequestParams {
+	readonly name: string;
+	readonly description: string;
+}
+export type CreateRoomResponseData = Promise<StandardResponse<RoomDto>>;
+
+export interface UpdateRoomRequestParams {
+	readonly roomId: number;
+	readonly name: string;
+	readonly description: string;
+}
+export type UpdateRoomResponseData = Promise<StandardResponse<RoomDto>>;
+
+export interface RemoveRoomRequestParams {
+	readonly roomId: number;
+}
+export type RemoveRoomResponseData = Promise<StandardResponse<boolean>>;

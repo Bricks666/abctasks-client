@@ -1,0 +1,48 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/activities/ui/activity-list-item/activity-list-item > should render activity list item 1`] = `
+<li
+  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding _item_a534db classname css-q9mp92-MuiListItem-root"
+>
+  <div
+    class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+  >
+    <div
+      aria-label="type.created"
+      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault _avatar_1360a4 _undefined_1360a4 css-pcn37w-MuiAvatar-root"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+        data-testid="PersonIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+    >
+      card.text
+    </span>
+    <p
+      class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+    >
+      <time
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+        datetime="2022-11-12T12:28:01.000Z"
+        title="2022-11-12T12:28:01.000Z"
+      >
+        12:28 Nov 12
+      </time>
+    </p>
+  </div>
+</li>
+`;

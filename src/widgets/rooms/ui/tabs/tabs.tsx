@@ -4,13 +4,12 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleIcon from '@mui/icons-material/People';
 import { TabContext, TabList } from '@mui/lab';
 import { Tab } from '@mui/material';
-import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { routes } from '@/shared/configs';
 import { useParam } from '@/shared/lib';
-import { deviceInfoModel } from '@/shared/models';
+import { useIsSmallScreen } from '@/shared/models';
 import { CommonProps } from '@/shared/types';
 
 export const Tabs: React.FC<CommonProps> = React.memo(() => {
@@ -20,12 +19,9 @@ export const Tabs: React.FC<CommonProps> = React.memo(() => {
 
 	const tabs = t('tabs', { returnObjects: true, }) as Record<string, string>;
 
-	const [isVertical, isMobile] = useUnit([
-		deviceInfoModel.$isTabletVertical,
-		deviceInfoModel.$isMobile
-	]);
+	const isSmallScreen = useIsSmallScreen();
 
-	const showLabels = !isVertical && !isMobile;
+	const showLabels = !isSmallScreen;
 
 	const onChange = React.useCallback(
 		(_evt: unknown, value: string) => {

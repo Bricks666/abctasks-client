@@ -6,7 +6,7 @@ import { Literal } from 'runtypes';
 import { roomsModel } from '@/entities/rooms';
 
 import { roomsApi } from '@/shared/api';
-import { i18n, popupsMap } from '@/shared/configs';
+import { i18n, POPUPS_NAMES } from '@/shared/configs';
 import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import {
@@ -22,7 +22,7 @@ const handlerFx = createEffect<InRoomParams, StandardResponse<boolean>, Error>(
 const $id = createStore<number | null>(null);
 
 export const popupControls = createPopupControlModel({
-	name: popupsMap.removeRoom,
+	name: POPUPS_NAMES.removeRoom,
 	sync: false,
 });
 

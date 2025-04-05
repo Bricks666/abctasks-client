@@ -4,8 +4,8 @@ import { createDomain, sample } from 'effector';
 
 import { roomsModel } from '@/entities/rooms';
 
-import { CreateRoomParams, room, Room, roomsApi } from '@/shared/api';
-import { i18n, popupsMap } from '@/shared/configs';
+import { CreateRoomParams, room, RoomDto, roomsApi } from '@/shared/api';
+import { i18n, POPUPS_NAMES } from '@/shared/configs';
 import { createPopupControlModel } from '@/shared/lib';
 import { notificationsModel } from '@/shared/models';
 import { getStandardResponse, StandardResponse } from '@/shared/types';
@@ -18,8 +18,8 @@ const handlerFx = createRoomsDomain.effect(roomsApi.create);
 
 export const mutation = createMutation<
 	CreateRoomParams,
-	StandardResponse<Room>,
-	StandardResponse<Room>,
+	StandardResponse<RoomDto>,
+	StandardResponse<RoomDto>,
 	Error
 >({
 	effect: handlerFx,
@@ -29,7 +29,7 @@ export const mutation = createMutation<
 export const form = roomFormModel.create();
 
 export const popupControls = createPopupControlModel({
-	name: popupsMap.createRoom,
+	name: POPUPS_NAMES.createRoom,
 });
 const { resetValues, formValidated, } = form;
 

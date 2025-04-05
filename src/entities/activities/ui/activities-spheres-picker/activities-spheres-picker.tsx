@@ -1,32 +1,47 @@
 import { Autocomplete, Chip, ListItem, ListItemText } from '@mui/material';
-import * as React from 'react';
+import { memo, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ActivitySphere } from '@/shared/api';
 import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
-import { CommonProps, PickerProps } from '@/shared/types';
-import { Field, FieldProps } from '@/shared/ui';
+import type { CommonProps, PickerProps } from '@/shared/types';
+import { Field, type FieldProps } from '@/shared/ui';
 
-import { useActivitySpheres } from '../../lib';
+import type { ActivitySphereId, ActivitySpheres } from '../../models';
 
 export type ActivitiesSpheresPickerProps = CommonProps &
-	PickerProps<number> &
-	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'>;
+	PickerProps<ActivitySphereId> &
+	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'> & {
+		readonly spheres: ActivitySpheres;
+		readonly loading?: boolean;
+	};
 
-export const ActivitiesSpheresPicker: React.FC<ActivitiesSpheresPickerProps> =
-	React.memo((props) => {
-		const { value, onChange, multiple, limitTags, className, ...rest } = props;
-		const spheres = useActivitySpheres();
+export const ActivitiesSpheresPicker: FC<ActivitiesSpheresPickerProps> = memo(
+	(props) => {
+		const {
+			value,
+			onChange,
+			multiple,
+			limitTags,
+			className,
+			spheres,
+			loading,
+			...rest
+		} = props;
 		const { t, } = useTranslation('activities');
 
-		const changeHandler = preparePickerHandler<ActivitySphere, 'id', number>(
-			{ multiple, onChange, },
+		const handleChange = preparePickerHandler(
+			{
+				onChange,
+				multiple,
+			},
 			'id'
 		);
-
 		const selected = preparePickerSelectedValue(
-			{ value, multiple, },
-			spheres.data,
+			{
+				value,
+				multiple,
+			},
+			spheres,
 			'id'
 		);
 
@@ -37,10 +52,10 @@ export const ActivitiesSpheresPicker: React.FC<ActivitiesSpheresPickerProps> =
 		return (
 			<Autocomplete
 				className={className}
-				value={selected as any}
-				onChange={changeHandler as any}
-				loading={spheres.pending}
-				options={spheres.data}
+				value={selected}
+				onChange={handleChange}
+				loading={loading}
+				options={spheres}
 				getOptionLabel={(sphere) => sphere.name}
 				renderInput={(params) => {
 					return <Field {...params} {...rest} />;
@@ -67,4 +82,5 @@ export const ActivitiesSpheresPicker: React.FC<ActivitiesSpheresPickerProps> =
 				multiple={multiple}
 			/>
 		);
-	});
+	}
+);

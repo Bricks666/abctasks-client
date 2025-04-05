@@ -8,6 +8,7 @@ import {
 	createStandardResponse,
 	createUrl,
 	forbiddenError,
+	internalServerError,
 	notFoundError,
 	unauthorizedError
 } from '../utils';
@@ -56,9 +57,17 @@ export const error = {
 			return forbiddenError;
 		}),
 	},
-	activate: http.put(activateUrl, () => {
-		return createStandardResponse(123);
-	}),
+	activate: {
+		invalidData: http.put(activateUrl, () => {
+			return createStandardResponse(123);
+		}),
+		alreadyActivated: http.put(activateUrl, () => {
+			return conflictError;
+		}),
+		serverError: http.put(activateUrl, () => {
+			return internalServerError;
+		}),
+	},
 };
 
 export const standard = Object.values(success);

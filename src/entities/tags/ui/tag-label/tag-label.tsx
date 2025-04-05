@@ -1,25 +1,33 @@
 import { SxProps, Typography } from '@mui/material';
 import cn from 'classnames';
-import * as React from 'react';
+import { ComponentProps, FC, memo } from 'react';
 
-import { Tag } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 
-import styles from './tag-label.module.css';
+import { Tag } from '../../models';
 
-export interface TagProps extends CommonProps, Omit<Tag, 'id' | 'roomId'> {}
+import styles from './styles.module.css';
 
-export const TagLabel: React.FC<TagProps> = React.memo(function TagLabel(
-	props
-) {
-	const { className, mainColor, name, secondColor, } = props;
+export interface TagLabelProps
+	extends CommonProps,
+		Pick<Tag, 'mainColor' | 'secondColor' | 'name'>,
+		Omit<ComponentProps<'span'>, 'color' | 'backgroundColor' | 'id'> {}
+
+export const TagLabel: FC<TagLabelProps> = memo((props) => {
+	const { className, mainColor, name, secondColor, ...rest } = props;
+
 	const sx: SxProps = {
 		backgroundColor: secondColor,
 		color: mainColor,
 	};
 
 	return (
-		<Typography className={cn(styles.label, className)} variant='body2' sx={sx}>
+		<Typography
+			className={cn(styles.label, className)}
+			variant='body2'
+			component='span'
+			sx={sx}
+			{...rest}>
 			{name}
 		</Typography>
 	);

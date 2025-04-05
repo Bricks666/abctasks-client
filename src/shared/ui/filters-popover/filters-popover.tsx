@@ -1,8 +1,7 @@
 import { Tooltip, IconButton, Popover } from '@mui/material';
-import { useUnit } from 'effector-react';
 import * as React from 'react';
 
-import { deviceInfoModel } from '@/shared/models';
+import { useIsSmallScreen } from '@/shared/models';
 import { CommonProps, VoidFunction } from '@/shared/types';
 
 import { FullWidthPopup, FullWidthPopupProps } from '../full-width-popup';
@@ -28,12 +27,7 @@ export const FiltersPopover: React.FC<FiltersPopoverProps> = (props) => {
 	const [ref, setRef] = React.useState<HTMLElement | null>(null);
 	const popupId = React.useId();
 
-	const [isMobile, isVertical] = useUnit([
-		deviceInfoModel.$isMobile,
-		deviceInfoModel.$isTabletVertical
-	]);
-
-	const isPopup = isMobile || isVertical;
+	const isPopup = useIsSmallScreen();
 
 	const child = React.createElement(children, { isPopup, });
 

@@ -1,7 +1,7 @@
-import { useUnit } from 'effector-react';
+import { useMolecule } from 'bunshi/react';
 
-import { activityActionsModel } from '../model';
+import { activityActionsModel } from '../models';
 
 export const useActivityActions = () => {
-	return useUnit(activityActionsModel.query);
+	return useMolecule(activityActionsModel.Molecule);
 };

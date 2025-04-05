@@ -3,6 +3,7 @@ import {
 	MenuItem,
 	TextField
 } from '@mui/material';
+import { useAtom } from '@reatom/npm-react';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +21,7 @@ export const ChangeLanguage: React.FC = () => {
 		i18nModel.$language,
 		i18nModel.changeLanguage
 	]);
-	const isMobile = useUnit(deviceInfoModel.$isMobile);
+	const [isMobile] = useAtom(deviceInfoModel.isMobileAtom);
 	const [t] = useTranslation('common');
 
 	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

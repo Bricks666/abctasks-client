@@ -1,3 +1,3 @@
-export * from './skeleton-room-card';
-export * from './template-room-card';
+export * from './room-card-skeleton';
+export * from './room-card-template';
 export * from './room-list-item';

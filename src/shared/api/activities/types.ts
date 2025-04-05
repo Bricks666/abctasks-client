@@ -1,40 +1,33 @@
-import { Number, Record, Static, String } from 'runtypes';
-
 import {
 	DatesFiltersParams,
 	InRoomParams,
 	PaginationParams,
-	SortParams
+	PaginationResponse,
+	SortParams,
+	StandardResponse
 } from '@/shared/types';
 
-import { user } from '../auth';
+import { UserDto } from '../users';
 
-export const activityAction = Record({
-	id: Number,
-	name: String,
-}).asReadonly();
+export interface ActivityActionDto {
+	readonly id: number;
+	readonly name: string;
+}
+export interface ActivitySphereDto {
+	readonly id: number;
+	readonly name: string;
+}
 
-export interface ActivityAction extends Static<typeof activityAction> {}
+export interface ActivityDto {
+	readonly id: number;
+	readonly roomId: number;
+	readonly activist: UserDto;
+	readonly action: ActivityActionDto;
+	readonly sphere: ActivitySphereDto;
+	readonly createdAt: string;
+}
 
-export const activitySphere = Record({
-	id: Number,
-	name: String,
-}).asReadonly();
-
-export interface ActivitySphere extends Static<typeof activitySphere> {}
-
-export const activity = Record({
-	id: Number,
-	roomId: Number,
-	activist: user,
-	action: activityAction,
-	sphere: activitySphere,
-	createdAt: String,
-}).asReadonly();
-
-export interface Activity extends Static<typeof activity> {}
-
-export interface GetActivitiesInRoomParams
+export interface GetActivitiesInRoomRequestParams
 	extends InRoomParams,
 		PaginationParams,
 		SortParams,
@@ -43,7 +36,14 @@ export interface GetActivitiesInRoomParams
 	readonly sphereIds?: number[];
 	readonly actionIds?: number[];
 }
+export type GetActivitiesInRoomResponseData = Promise<
+	PaginationResponse<ActivityDto>
+>;
 
-export interface GetLastActivitiesInRoomParams extends InRoomParams {
-	readonly count: number;
-}
+export type GetActivityActionsResponseData = Promise<
+	StandardResponse<ActivityActionDto[]>
+>;
+
+export type GetActivitySpheresResponseData = Promise<
+	StandardResponse<ActivitySphereDto[]>
+>;

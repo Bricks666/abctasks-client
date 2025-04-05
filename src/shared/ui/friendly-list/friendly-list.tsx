@@ -1,4 +1,3 @@
-import { Query } from '@farfetched/core';
 import {
 	List,
 	ListItemProps,
@@ -6,9 +5,10 @@ import {
 	PaperProps,
 	Typography
 } from '@mui/material';
+import { Atom } from '@reatom/framework';
+import { useAtom } from '@reatom/npm-react';
 import cn from 'classnames';
-import { useUnit } from 'effector-react';
-import * as React from 'react';
+import { ComponentType, Key, ReactElement, createElement } from 'react';
 
 import { getEmptyArray } from '@/shared/configs';
 import { Classes, CommonProps, Slots } from '@/shared/types';
@@ -18,93 +18,107 @@ import { Scrollable } from '../scrollable';
 
 import styles from './friendly-list.module.css';
 
+interface SkeletonOptions<ListItemOmittedProps> {
+	readonly skeletonsCount: number;
+	readonly SkeletonComponent: ComponentType<ListItemOmittedProps>;
+}
+
+interface ErrorOptions<Error> {
+	readonly errorAtom: Atom<Error | null>;
+	readonly ErrorComponent: ComponentType<{ readonly error: Error }>;
+}
+
+interface LoadingOptions {
+	readonly pendingAtom: Atom<boolean>;
+}
+
+interface ItemOptions<Item, ListItemOmittedProps> {
+	readonly ItemComponent: ComponentType<
+		ListItemOmittedProps & Item & CommonProps
+	>;
+	readonly emptyText: string;
+	readonly getKey: (item: Item) => Key | null;
+}
+
 interface BaseFriendlyListProps<
 	Item,
 	Error,
 	ListItemOmittedProps = Omit<ListItemProps, keyof Item>
-> extends CommonProps {
-	readonly skeletonsCount: number;
-	readonly ItemComponent: React.ComponentType<
-		ListItemOmittedProps & Item & CommonProps
-	>;
-	readonly SkeletonComponent: React.ComponentType<ListItemOmittedProps>;
-	readonly ErrorComponent: React.ComponentType<{ readonly error: Error }>;
-	readonly emptyText: string;
-	readonly getKey: (item: Item) => React.Key | null;
+> extends CommonProps,
+		SkeletonOptions<ListItemOmittedProps>,
+		ErrorOptions<Error>,
+		LoadingOptions,
+		ItemOptions<Item, ListItemOmittedProps> {
 	readonly slots?: Slots<'before' | 'after'>;
 	readonly classes?: Classes<'list'>;
 	readonly disableBorder?: boolean;
 	readonly rootProps?: Omit<PaperProps, 'className'>;
 }
 
-interface ArrayQueryFriendlyListProps<Item, Error>
+interface ArrayDataFriendlyListProps<Item, Error>
 	extends BaseFriendlyListProps<Item, Error> {
-	readonly $query: Query<any, Item[], Error, any>;
+	readonly dataAtom: Atom<Item[]>;
 	readonly getData?: never;
 }
 
-interface AnyQueryFriendlyListProps<RawData, Item, Error>
+interface AnyDataFriendlyListProps<RawData, Item, Error>
 	extends BaseFriendlyListProps<Item, Error> {
-	readonly $query: Query<any, RawData, Error, any>;
+	readonly dataAtom: Atom<RawData>;
 	readonly getData: (data: RawData) => Item[] | null;
 }
 
 export type FriendlyListProps<RawData, Item, Error> =
-	| ArrayQueryFriendlyListProps<Item, Error>
-	| AnyQueryFriendlyListProps<RawData, Item, Error>;
+	| ArrayDataFriendlyListProps<Item, Error>
+	| AnyDataFriendlyListProps<RawData, Item, Error>;
 
 export const FriendlyList = <RawData, Item, Error>(
 	props: FriendlyListProps<RawData, Item, Error>
-): React.ReactElement => {
+): ReactElement => {
 	const {
-		$query,
+		className,
+
+		dataAtom,
+		pendingAtom,
+		errorAtom,
+
 		getData,
 		getKey,
+
 		emptyText,
+
 		ErrorComponent,
 		ItemComponent,
 		SkeletonComponent,
+
 		skeletonsCount,
-		className,
+
 		slots,
 		disableBorder,
 		classes,
 		rootProps,
 	} = props;
 
-	const finished = useUnit($query.finished);
-	const [alreadyFetched, setAlreadyFetched] = React.useState(finished);
+	const [data] = useAtom(dataAtom);
+	const [pending] = useAtom(pendingAtom);
+	const [error] = useAtom(errorAtom);
 
-	React.useEffect(() => {
-		if (finished) {
-			setAlreadyFetched(finished);
-		}
-	}, [finished]);
-
-	const query = useUnit($query as Query<any, Item[] | RawData, any>);
-
-	const arrayData = (getData ? getData(query.data as RawData) : query.data) as
+	const arrayData = (getData ? getData(data as RawData) : data) as
 		| Item[]
 		| null;
 
 	const isEmpty = !arrayData?.length;
-	const isLoading = query.pending && !alreadyFetched;
-	const isError = !query.error;
+	const isError = !!error;
 
-	let content: React.ReactElement | null = null;
+	let content: ReactElement | null = null;
 
-	if (!isError) {
-		content = (
-			<Center>
-				{React.createElement(ErrorComponent, { error: query.error, })}
-			</Center>
-		);
-	} else if (isLoading) {
+	if (isError) {
+		content = <Center>{createElement(ErrorComponent, { error, })}</Center>;
+	} else if (pending) {
 		const array = getEmptyArray(skeletonsCount);
 		const count = array.length;
 
 		const skeletons = array.map((_, index) =>
-			React.createElement(SkeletonComponent, {
+			createElement(SkeletonComponent, {
 				key: index,
 				divider: index + 1 !== count,
 			} as any)
@@ -126,7 +140,7 @@ export const FriendlyList = <RawData, Item, Error>(
 	} else {
 		const count = arrayData.length;
 		const items = arrayData.map((item, index) =>
-			React.createElement(ItemComponent, {
+			createElement(ItemComponent, {
 				...item,
 				divider: index + 1 !== count,
 				key: getKey(item),

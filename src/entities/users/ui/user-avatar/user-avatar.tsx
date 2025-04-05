@@ -2,9 +2,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Avatar, Tooltip } from '@mui/material';
 import * as React from 'react';
 
-import { User } from '@/shared/api';
 import { stringToColor } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+
+import { User } from '../../models';
 
 export interface UserAvatarProps
 	extends CommonProps,

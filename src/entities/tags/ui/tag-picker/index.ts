@@ -1,1 +1,1 @@
-export { TagPicker, type TagPickerProps } from './tag-picker';
+export * from './tag-picker';

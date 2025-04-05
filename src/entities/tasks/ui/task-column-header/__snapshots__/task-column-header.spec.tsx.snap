@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TaskColumnHeader > should render column header 1`] = `
+<header
+  aria-labelledby=":r0:"
+  class="_header_185010"
+>
+  <h3
+    class="MuiTypography-root MuiTypography-h6 _title_185010 css-2ulfj5-MuiTypography-root"
+    id=":r0:"
+  >
+    statuses.done
+  </h3>
+</header>
+`;
+
+exports[`TaskColumnHeader > should render header with passed actions > with actions 1`] = `
+<header
+  aria-labelledby=":r1:"
+  class="_header_185010"
+>
+  <h3
+    class="MuiTypography-root MuiTypography-h6 _title_185010 css-2ulfj5-MuiTypography-root"
+    id=":r1:"
+  >
+    statuses.done
+  </h3>
+  <div>
+    Actions
+  </div>
+</header>
+`;

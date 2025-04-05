@@ -3,6 +3,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 
+import { __DEV__ } from '../const';
+
 i18n
 	.use(Backend)
 	.use(LanguageDetector)
@@ -10,7 +12,9 @@ i18n
 	.init({
 		fallbackLng: 'ru',
 		partialBundledLanguages: true,
-		debug: import.meta.env.DEV,
+		debug: __DEV__,
+		appendNamespaceToCIMode: true,
+		appendNamespaceToMissingKey: true,
 		interpolation: {
 			escapeValue: false,
 		},

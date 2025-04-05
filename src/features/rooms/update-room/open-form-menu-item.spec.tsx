@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { popupsMap, router } from '@/shared/configs';
+import { POPUPS_NAMES, router } from '@/shared/configs';
 import { popupsModel } from '@/shared/models';
 
 import { OpenUpdateRoomFormMenuItem } from './open-form-menu-item';
@@ -46,6 +46,8 @@ describe('features/rooms/update-room/open-form-menu-item', () => {
 
 		await wrapper.user.click(button);
 
-		expect(scope.getState(popupsModel.$popups)).toContain(popupsMap.updateRoom);
+		expect(scope.getState(popupsModel.$popups)).toContain(
+			POPUPS_NAMES.updateRoom
+		);
 	});
 });

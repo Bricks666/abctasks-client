@@ -2,6 +2,7 @@
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { reatomContext } from '@reatom/npm-react';
 import {
 	render as rtlRender,
 	RenderOptions as RTLRenderOptions,
@@ -11,8 +12,6 @@ import {
 	RenderHookResult as RTLRenderHookResult
 } from '@testing-library/react';
 import userEvent, { UserEvent } from '@testing-library/user-event';
-import { RouterProvider } from 'atomic-router-react';
-import { Provider as StoreProvider } from 'effector-react';
 import React, {
 	ComponentType,
 	Fragment,
@@ -21,35 +20,29 @@ import React, {
 	ReactNode
 } from 'react';
 
-import { router as appRouter } from '@/shared/configs';
-
-import { HistoryRouter } from './routing';
-import { fork, Scope } from './state-manager';
+import { createTestCtx, TestCtx } from './state-manager';
 
 interface CreateAllProvidersOptions {
-	readonly scope: Scope;
-	readonly router: HistoryRouter;
+	readonly ctx: TestCtx;
 	readonly wrapper: JSXElementConstructor<PropsWithChildren>;
 }
 
 const createAllProviders = (
 	options: CreateAllProvidersOptions
 ): ComponentType<PropsWithChildren> => {
-	const { router, scope, wrapper: Wrapper, } = options;
+	const { ctx, wrapper: Wrapper, } = options;
 
 	return (props) => {
 		const { children, } = props;
 
 		return (
-			<StoreProvider value={scope}>
-				<RouterProvider router={router}>
-					<CssVarsProvider>
-						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<Wrapper>{children}</Wrapper>
-						</LocalizationProvider>
-					</CssVarsProvider>
-				</RouterProvider>
-			</StoreProvider>
+			<reatomContext.Provider value={ctx}>
+				<CssVarsProvider>
+					<LocalizationProvider dateAdapter={AdapterDayjs}>
+						<Wrapper>{children}</Wrapper>
+					</LocalizationProvider>
+				</CssVarsProvider>
+			</reatomContext.Provider>
 		);
 	};
 };
@@ -63,14 +56,9 @@ interface RenderResult extends RTLRenderResult {
 }
 
 const render = (ui: ReactNode, options: RenderOptions = {}): RenderResult => {
-	const {
-		scope = fork(),
-		router = appRouter,
-		wrapper = Fragment,
-		...rest
-	} = options;
+	const { wrapper = Fragment, ctx = createTestCtx(), ...rest } = options;
 
-	const AllProviders = createAllProviders({ scope, router, wrapper, });
+	const AllProviders = createAllProviders({ wrapper, ctx, });
 
 	const defaultResult = rtlRender(ui, { ...rest, wrapper: AllProviders, });
 
@@ -93,14 +81,9 @@ const renderHook = <Result, Props>(
 	render: (initialProps: Props) => Result,
 	options: RenderHookOptions<Result, Props> = {}
 ): RenderHookResult<Result, Props> => {
-	const {
-		scope = fork(),
-		router = appRouter,
-		wrapper = Fragment,
-		...rest
-	} = options;
+	const { wrapper = Fragment, ctx = createTestCtx(), ...rest } = options;
 
-	const AllProviders = createAllProviders({ scope, router, wrapper, });
+	const AllProviders = createAllProviders({ wrapper, ctx, });
 
 	return rtlRenderHook(render, { ...rest, wrapper: AllProviders, });
 };

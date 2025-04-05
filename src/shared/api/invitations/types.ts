@@ -1,66 +1,58 @@
-import { Literal, Number, Record, Static, Union } from 'runtypes';
+import type { StandardResponse } from '@/shared/types';
 
-import { InRoomParams, StandardResponse } from '@/shared/types';
+import type { RoomDto } from '../rooms';
+import type { UserDto } from '../users';
 
-import { user } from '../auth';
-import { room } from '../rooms';
+export type InvitationStatusDto = 'sended' | 'approved' | 'rejected';
 
-export const invitationStatus = Union(
-	Literal('sended'),
-	Literal('approved'),
-	Literal('rejected')
-);
+export interface InvitationDto {
+	readonly id: number;
+	readonly room: RoomDto;
+	readonly user: UserDto | null;
+	readonly inviter: UserDto;
+	readonly status: InvitationStatusDto;
+}
+export type InvitationsDto = InvitationDto[];
 
-export type InvitationStatus = Static<typeof invitationStatus>;
-
-export const invitation = Record({
-	id: Number,
-	room,
-	user: user.nullable(),
-	inviter: user,
-	status: invitationStatus,
-});
-
-export interface Invitation extends Static<typeof invitation> {}
-
-export type GetAllInvitationsRequestParams = InRoomParams;
-
+export interface GetAllInvitationsRequestParams {
+	readonly roomId: number;
+}
 export type GetAllInvitationsResponseData = Promise<
-	StandardResponse<Invitation[]>
+	StandardResponse<InvitationsDto>
 >;
 
 export interface GetInvitationViaTokenRequestParams {
 	readonly token: string;
 }
-
 export type GetInvitationViaTokenResponseData = Promise<
-	StandardResponse<Invitation>
+	StandardResponse<InvitationDto>
 >;
 
-export type GenerateLinkRequestParams = InRoomParams;
+export interface GenerateInvitationLinkRequestParams {
+	readonly roomId: number;
+}
+export type GenerateInvitationLinkResponseData = Promise<
+	StandardResponse<string>
+>;
 
-export type GenerateLinkResponseData = Promise<StandardResponse<string>>;
-
-export interface InviteUserRequestParams extends InRoomParams {
+export interface InviteUserRequestParams {
+	readonly roomId: number;
 	readonly userId: number;
 }
-
-export type InviteUserResponseData = Promise<StandardResponse<Invitation>>;
+export type InviteUserResponseData = Promise<StandardResponse<InvitationDto>>;
 
 export interface ApproveInvitationRequestParams {
 	readonly id: number;
 }
-
 export type ApproveInvitationResponseData = Promise<StandardResponse<boolean>>;
 
 export interface RejectInvitationRequestParams {
 	readonly id: number;
 }
-
 export type RejectInvitationResponseData = Promise<StandardResponse<boolean>>;
 
-export interface RemoveInvitationRequestParams extends InRoomParams {
+export interface RemoveInvitationRequestParams {
+	readonly roomId: number;
 	readonly id: number;
 }
-
 export type RemoveInvitationResponseData = Promise<StandardResponse<boolean>>;

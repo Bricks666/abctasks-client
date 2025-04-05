@@ -5,6 +5,7 @@ import { withGlobalStyles } from './withGlobalStyles';
 import { withI18n } from './withI18n';
 import { withNotifications } from './withNotifications';
 import { withRouter } from './withRouter';
+import { withStore } from './withStore';
 import { withStrictMode } from './withStrictMode';
 
 export const withProviders = compose(
@@ -13,5 +14,6 @@ export const withProviders = compose(
 	withRouter,
 	withGlobalStyles,
 	withErrorBoundary,
-	withNotifications
+	withNotifications,
+	withStore
 );

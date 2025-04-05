@@ -10,7 +10,13 @@ import { CommonProps } from '@/shared/types';
 
 import { Field, FieldProps } from '../field';
 
-type FieldKeys = 'value' | 'onBlur' | 'name' | 'isValid' | 'helperText';
+type FieldKeys =
+	| 'value'
+	| 'onBlur'
+	| 'onFocus'
+	| 'name'
+	| 'isError'
+	| 'helperText';
 
 export interface DatePickerProps
 	extends CommonProps,
@@ -21,8 +27,16 @@ export interface DatePickerProps
 
 export const DatePicker = React.memo(
 	(props: DatePickerProps): React.ReactElement => {
-		const { onChange, value, isValid, name, onBlur, helperText, ...rest } =
-			props;
+		const {
+			onChange,
+			value,
+			isError,
+			name,
+			onBlur,
+			onFocus,
+			helperText,
+			...rest
+		} = props;
 		const preparedValue = dayjs(value);
 		const handleChange: MUIDatePIckerProps<Dayjs>['onChange'] = (date) => {
 			let newDate: string | null;
@@ -44,11 +58,19 @@ export const DatePicker = React.memo(
 				params.onBlur?.(...args);
 			};
 
+			const handleFocus = (...args: any[]) => {
+				onFocus?.();
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				params.onFocus?.(...args);
+			};
+
 			return (
 				<Field
 					{...params}
 					onBlur={handleBlur}
-					isValid={isValid}
+					onFocus={handleFocus}
+					isError={isError}
 					name={name}
 					helperText={helperText}
 				/>

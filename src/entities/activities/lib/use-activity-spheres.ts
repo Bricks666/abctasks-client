@@ -1,10 +1,7 @@
-import { useUnit } from 'effector-react';
+import { useMolecule } from 'bunshi/react';
 
-import { activitySpheresModel } from '../model';
+import { activitySpheresModel } from '../models';
 
-/**
- * @deprecated
- */
 export const useActivitySpheres = () => {
-	return useUnit(activitySpheresModel.query);
+	return useMolecule(activitySpheresModel.Molecule);
 };

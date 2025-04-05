@@ -1,7 +1,6 @@
-import { cache, createQuery, update } from '@farfetched/core';
-import { runtypeContract } from '@farfetched/runtypes';
-import { RouteQuery, querySync } from 'atomic-router';
-import { createDomain, sample } from 'effector';
+import { update } from '@farfetched/core';
+import { RouteQuery } from 'atomic-router';
+import { sample } from 'effector';
 
 import { dragTaskModel } from '@/widgets/tasks';
 
@@ -16,74 +15,36 @@ import { progressesModel } from '@/entities/progresses';
 import { roomModel, roomsModel } from '@/entities/rooms';
 import { tagsModel } from '@/entities/tags';
 import { tasksInRoomModel } from '@/entities/tasks';
-import { usersInRoomModel } from '@/entities/users';
 
-import {
-	Activity,
-	UpdateTaskParams,
-	activitiesApi,
-	activity
-} from '@/shared/api';
-import { controls, getParams, routes } from '@/shared/configs';
-import { extractData } from '@/shared/lib';
+import { UpdateTaskParams } from '@/shared/api';
+import { SEARCH_PARAMS_NAMES } from '@/shared/configs';
 import { sessionModel } from '@/shared/models';
-import {
-	InRoomParams,
-	StandardResponse,
-	PaginationResponse,
-	getStandardResponse,
-	getPaginationResponse
-} from '@/shared/types';
+
+const routes = {};
 
 export const currentRoute = routes.room.tasks;
 export const authorizedRoute = sessionModel.chainAuthorized(currentRoute, {
 	otherwise: routes.login.open,
 });
-const { formValidated, reset, fields, } = tasksFiltersModel.form;
+const { formValidated, reset, } = tasksFiltersModel.form;
 
-const activitiesDomain = createDomain();
-const handlerFx = activitiesDomain.effect<
-	InRoomParams,
-	StandardResponse<PaginationResponse<Activity>>
->(({ roomId, }) =>
-	activitiesApi.getAll({ roomId, count: 6, by: 'createdAt', type: 'desc', })
-);
 const $roomId = authorizedRoute.$params.map((params) => params.id);
-
-export const query = createQuery<
-	InRoomParams,
-	StandardResponse<PaginationResponse<Activity>>,
-	Error,
-	StandardResponse<PaginationResponse<Activity>>,
-	PaginationResponse<Activity>
->({
-	initialData: { items: [], totalCount: 0, limit: 5, },
-	effect: handlerFx,
-	contract: runtypeContract(
-		getStandardResponse(getPaginationResponse(activity))
-	),
-	mapData: extractData,
-});
 
 const queries = [
 	tasksInRoomModel.query,
 	tagsModel.query,
 	roomsModel.query,
-	usersInRoomModel.query,
-	progressesModel.query,
-	query
+	progressesModel.query
 ];
 
 const mapQuery = (query: RouteQuery) => {
 	return {
-		authorIds: query[getParams.userId],
-		tagIds: query[getParams.userId],
-		before: query[getParams.before],
-		after: query[getParams.after],
+		authorIds: query[SEARCH_PARAMS_NAMES.userId],
+		tagIds: query[SEARCH_PARAMS_NAMES.userId],
+		before: query[SEARCH_PARAMS_NAMES.before],
+		after: query[SEARCH_PARAMS_NAMES.after],
 	};
 };
-
-cache(query);
 
 sample({
 	clock: [$roomId, authorizedRoute.opened],
@@ -95,17 +56,18 @@ sample({
 	target: queries.map((query) => query.start).concat(roomModel.query.start),
 });
 
-querySync({
-	controls,
-	source: {
-		[getParams.userId]: fields.authorIds.$value,
-		[getParams.tagId]: fields.tagIds.$value,
-		[getParams.after]: fields.after.$value,
-		[getParams.before]: fields.before.$value,
-	},
-	clock: [formValidated, reset],
-	route: authorizedRoute,
-});
+// @todo Move to tasks filters model
+// querySync({
+// 	controls,
+// 	source: {
+// 		[SEARCH_PARAMS_NAMES.userId]: fields.authorIds.$value,
+// 		[SEARCH_PARAMS_NAMES.tagId]: fields.tagIds.$value,
+// 		[SEARCH_PARAMS_NAMES.after]: fields.after.$value,
+// 		[SEARCH_PARAMS_NAMES.before]: fields.before.$value,
+// 	},
+// 	clock: [formValidated, reset],
+// 	route: authorizedRoute,
+// });
 
 sample({
 	clock: [formValidated, reset],
@@ -134,7 +96,7 @@ sample({
 	target: updateTaskModel.mutation.start,
 });
 
-const queriesForUpdate = [progressesModel.query, query];
+const queriesForUpdate = [progressesModel.query];
 
 [
 	updateTaskModel.mutation,

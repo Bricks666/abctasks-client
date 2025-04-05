@@ -1,46 +1,75 @@
-import { StandardResponse } from '@/shared/types';
+import queryString from 'query-string';
 
-import { instance, normalizeQuery } from '../request';
+import { instance } from '../request';
 
-import {
-	GetTaskParams,
-	CreateTaskParams,
-	UpdateTaskParams,
-	RemoveTaskParams,
-	Task,
-	GetTasksParams
+import type {
+	CreateTaskRequestParams,
+	CreateTaskResponseData,
+	GetTaskRequestParams,
+	GetTaskResponseData,
+	GetTasksRequestParams,
+	GetTasksResponseData,
+	RemoveTaskRequestParams,
+	RemoveTaskResponseData,
+	UpdateTaskRequestParams,
+	UpdateTaskResponseData
 } from './types';
 
-export const getAll = async ({ roomId, ...query }: GetTasksParams) => {
+export const getAll = async (
+	params: GetTasksRequestParams,
+	options?: globalThis.RequestInit
+): GetTasksResponseData => {
+	const { roomId, ...query } = params;
 	return instance
 		.get(`tasks/${roomId}`, {
-			searchParams: new URLSearchParams(normalizeQuery(query)),
+			...options,
+			searchParams: new URLSearchParams(queryString.stringify(query)),
 		})
-		.json<StandardResponse<Task[]>>();
+		.json();
 };
 
-export const getOne = async ({ roomId, id, }: GetTaskParams) => {
-	return instance.get(`tasks/${roomId}/${id}`).json<StandardResponse<Task>>();
+export const getOne = async (
+	params: GetTaskRequestParams,
+	options?: globalThis.RequestInit
+): GetTaskResponseData => {
+	const { roomId, id, } = params;
+
+	return instance.get(`tasks/${roomId}/${id}`, options).json();
 };
 
-export const create = async ({ roomId, ...body }: CreateTaskParams) => {
+export const create = async (
+	params: CreateTaskRequestParams,
+	options?: globalThis.RequestInit
+): CreateTaskResponseData => {
+	const { roomId, ...body } = params;
+
 	return instance
 		.post(`tasks/${roomId}/create`, {
+			...options,
 			json: body,
 		})
-		.json<StandardResponse<Task>>();
+		.json();
 };
 
-export const update = async ({ id, roomId, ...body }: UpdateTaskParams) => {
+export const update = async (
+	params: UpdateTaskRequestParams,
+	options?: globalThis.RequestInit
+): UpdateTaskResponseData => {
+	const { roomId, id, ...body } = params;
+
 	return instance
 		.put(`tasks/${roomId}/${id}/update`, {
+			...options,
 			json: body,
 		})
-		.json<StandardResponse<Task>>();
+		.json();
 };
 
-export const remove = async ({ roomId, id, }: RemoveTaskParams) => {
-	return instance
-		.delete(`tasks/${roomId}/${id}/remove`)
-		.json<StandardResponse<boolean>>();
+export const remove = async (
+	params: RemoveTaskRequestParams,
+	options?: globalThis.RequestInit
+): RemoveTaskResponseData => {
+	const { roomId, id, } = params;
+
+	return instance.delete(`tasks/${roomId}/${id}/remove`, options).json();
 };

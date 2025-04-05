@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { roomModel } from '@/entities/rooms';
 
-import { deviceInfoModel } from '@/shared/models';
+import { useIsSmallScreen } from '@/shared/models';
 import { BasePopupProps } from '@/shared/types';
 import { FullWidthPopup, MainPopup } from '@/shared/ui';
 
@@ -18,15 +18,10 @@ export const UpdateRoom: React.FC<BasePopupProps> = (props) => {
 	const { t, } = useTranslation('rooms');
 	const { pending: loading, } = useUnit(roomModel.query);
 	const onClose = useUnit(popupControls.close);
-	const [isMobile, isVertical] = useUnit([
-		deviceInfoModel.$isMobile,
-		deviceInfoModel.$isTabletVertical
-	]);
+	const isFullscreen = useIsSmallScreen();
 
 	const onClick = useUnit(form.submit);
 	const pending = useUnit(mutation.$pending);
-
-	const isFullscreen = isMobile || isVertical;
 
 	const Popup = isFullscreen ? FullWidthPopup : MainPopup;
 

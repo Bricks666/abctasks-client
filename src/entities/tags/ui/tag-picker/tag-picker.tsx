@@ -1,52 +1,60 @@
-import { Autocomplete, ListItem } from '@mui/material';
-import { useUnit } from 'effector-react';
-import * as React from 'react';
+import { Autocomplete } from '@mui/material';
+import { FC, memo } from 'react';
 
-import { Tag } from '@/shared/api';
-import { CommonProps, PickerProps } from '@/shared/types';
+import { preparePickerHandler, preparePickerSelectedValue } from '@/shared/lib';
+import { CommonProps, Fn, PickerProps } from '@/shared/types';
 import { Field, FieldProps } from '@/shared/ui';
 
-import { tagsModel } from '../../model';
+import { TagId, Tags } from '../../models';
 import { TagLabel } from '../tag-label';
+import { TagListItemTemplate } from '../tag-list-item-template';
 
 export type TagPickerProps = CommonProps &
-	PickerProps<number> &
-	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'>;
+	PickerProps<TagId> &
+	Omit<FieldProps, 'onChange' | 'value' | 'className' | 'multiline'> & {
+		readonly onInputChange?: Fn<[value: string], void>;
+		readonly tags: Tags;
+		readonly loading?: boolean;
+	};
 
-export const TagPicker: React.FC<TagPickerProps> = React.memo((props) => {
-	const { className, onChange, value, limitTags, multiple, ...rest } = props;
-	const tags = useUnit(tagsModel.query);
+export const TagPicker: FC<TagPickerProps> = memo((props) => {
+	const {
+		className,
+		onChange,
+		value,
+		limitTags,
+		multiple,
+		tags,
+		loading,
+		...rest
+	} = props;
 
-	let changeHandler;
-	if (multiple) {
-		changeHandler = (_: unknown, tags: Tag[]) => {
-			onChange(tags.map((tag) => tag.id));
-		};
-	} else {
-		changeHandler = (_: unknown, tag: Tag | null) => {
-			onChange(tag?.id || null);
-		};
-	}
-
-	let selected;
-	if (multiple) {
-		selected = tags.data.filter((tag) => value.includes(tag.id));
-	} else {
-		selected = tags.data.find((tag) => tag.id === value) ?? null;
-	}
+	const handleChange = preparePickerHandler(
+		{
+			onChange,
+			multiple,
+		},
+		'id'
+	);
+	const selected = preparePickerSelectedValue(
+		{
+			value,
+			multiple,
+		},
+		tags,
+		'id'
+	);
 
 	return (
 		<Autocomplete
 			className={className}
-			options={tags.data}
-			loading={tags.pending}
-			onChange={changeHandler as any}
-			value={selected as any}
+			options={tags}
+			loading={loading}
+			value={selected}
+			onChange={handleChange}
 			getOptionLabel={(tag) => tag.name}
 			renderOption={(props, tag) => (
-				<ListItem {...props} key={tag.id}>
-					<TagLabel {...tag} />
-				</ListItem>
+				<TagListItemTemplate {...props} {...tag} key={tag.id} />
 			)}
 			renderTags={(tags, getTagProps) => {
 				return tags.map((tag, index) => (

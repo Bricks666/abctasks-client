@@ -1,0 +1,1 @@
+export { tagSchema } from '../models';

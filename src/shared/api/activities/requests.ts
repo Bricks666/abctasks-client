@@ -1,33 +1,34 @@
-import { PaginationResponse, StandardResponse } from '@/shared/types';
+import queryString from 'query-string';
 
-import { instance, normalizeQuery } from '../request';
+import { instance } from '../request';
 
 import {
-	Activity,
-	ActivityAction,
-	ActivitySphere,
-	GetActivitiesInRoomParams
+	GetActivitiesInRoomRequestParams,
+	GetActivitiesInRoomResponseData,
+	GetActivityActionsResponseData,
+	GetActivitySpheresResponseData
 } from './types';
 
-export const getAll = async ({
-	roomId,
-	...query
-}: GetActivitiesInRoomParams) => {
+export const getAll = async (
+	{ roomId, ...query }: GetActivitiesInRoomRequestParams,
+	options?: globalThis.RequestInit
+): GetActivitiesInRoomResponseData => {
 	return instance
 		.get(`activities/${roomId}`, {
-			searchParams: new URLSearchParams(normalizeQuery(query)),
+			...options,
+			searchParams: new URLSearchParams(queryString.stringify(query)),
 		})
-		.json<StandardResponse<PaginationResponse<Activity>>>();
+		.json();
 };
 
-export const getActions = async () => {
-	return instance
-		.get('activities/actions/all')
-		.json<StandardResponse<ActivityAction[]>>();
+export const getActions = async (
+	options?: globalThis.RequestInit
+): GetActivityActionsResponseData => {
+	return instance.get('activities/actions/all', options).json();
 };
 
-export const getSpheres = async () => {
-	return instance
-		.get('activities/spheres/all')
-		.json<StandardResponse<ActivitySphere[]>>();
+export const getSpheres = async (
+	options?: globalThis.RequestInit
+): GetActivitySpheresResponseData => {
+	return instance.get('activities/spheres/all', options).json();
 };

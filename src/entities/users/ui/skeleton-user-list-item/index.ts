@@ -1,4 +1,1 @@
-export {
-	SkeletonUserListItem,
-	type SkeletonUserListItemProps
-} from './skeleton-user-list-item';
+export * from './ui';

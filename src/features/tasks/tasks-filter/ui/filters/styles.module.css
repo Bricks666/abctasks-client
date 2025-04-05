@@ -1,0 +1,12 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1em;
+	padding: 2em;
+}
+
+@media (width <= 600px) {
+	.wrapper {
+		grid-template-columns: 1fr;
+	}
+}

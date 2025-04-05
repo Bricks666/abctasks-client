@@ -1,14 +1,17 @@
-import { StandardResponse } from '@/shared/types';
+import queryString from 'query-string';
 
-import { User } from '../auth';
-import { instance, normalizeQuery } from '../request';
+import { instance } from '../request';
 
-import { SearchUsersQuery } from './types';
+import { GetUsersRequestParams, GetUsersResponseData } from './types';
 
-export const searchUsers = async (query: SearchUsersQuery) => {
+export const getUsers = async (
+	query: GetUsersRequestParams,
+	signal?: AbortSignal
+): GetUsersResponseData => {
 	return instance
 		.get('users', {
-			searchParams: new URLSearchParams(normalizeQuery(query)),
+			searchParams: new URLSearchParams(queryString.stringify(query)),
+			signal,
 		})
-		.json<StandardResponse<User[]>>();
+		.json();
 };

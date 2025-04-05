@@ -1,0 +1,54 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/tags/ui/tag-list-item-template/tag-list-item-template.tsx > should render with slot > with slot 1`] = `
+<li
+  class="MuiListItem-container css-oyakqy-MuiListItem-container"
+>
+  <div
+    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-secondaryAction css-1sq15pq-MuiListItem-root"
+  >
+    <div
+      class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-body2 _label_79a1f3 css-1etqv6i-MuiTypography-root"
+        >
+          A tag
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    class="MuiListItemSecondaryAction-root css-518kzi-MuiListItemSecondaryAction-root"
+  >
+    <button
+      type="button"
+    >
+      Test
+    </button>
+  </div>
+</li>
+`;
+
+exports[`entities/tags/ui/tag-list-item-template/tag-list-item-template.tsx > should render without slot > without slot 1`] = `
+<li
+  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-q9mp92-MuiListItem-root"
+>
+  <div
+    class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-body2 _label_79a1f3 css-1etqv6i-MuiTypography-root"
+      >
+        A tag
+      </span>
+    </span>
+  </div>
+</li>
+`;

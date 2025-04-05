@@ -1,35 +1,61 @@
-import { InRoomParams, StandardResponse } from '@/shared/types';
-
 import { instance } from '../request';
 
-import { CreateRoomParams, Room, UpdateRoomParams } from './types';
+import {
+	CreateRoomRequestParams,
+	CreateRoomResponseData,
+	GetRoomRequestParams,
+	GetRoomsResponseData,
+	RemoveRoomRequestParams,
+	RemoveRoomResponseData,
+	UpdateRoomRequestParams,
+	UpdateRoomResponseData
+} from './types';
 
-export const getAll = async () => {
-	return instance.get('rooms').json<StandardResponse<Room[]>>();
+export const getAll = async (
+	options?: globalThis.RequestInit
+): GetRoomsResponseData => {
+	return instance.get('rooms', options).json();
 };
 
-export const getOne = async ({ roomId, }: InRoomParams) => {
-	return instance.get(`rooms/${roomId}`).json<StandardResponse<Room>>();
+export const getOne = async (
+	params: GetRoomRequestParams,
+	options?: globalThis.RequestInit
+) => {
+	const { roomId, } = params;
+
+	return instance.get(`rooms/${roomId}`, options).json();
 };
 
-export const create = async (body: CreateRoomParams) => {
+export const create = async (
+	params: CreateRoomRequestParams,
+	options?: globalThis.RequestInit
+): CreateRoomResponseData => {
 	return instance
 		.post('rooms/create', {
-			json: body,
+			...options,
+			json: params,
 		})
-		.json<StandardResponse<Room>>();
+		.json();
 };
 
-export const update = async ({ roomId, ...body }: UpdateRoomParams) => {
+export const update = async (
+	params: UpdateRoomRequestParams,
+	options?: globalThis.RequestInit
+): UpdateRoomResponseData => {
+	const { roomId, ...body } = params;
 	return instance
 		.put(`rooms/${roomId}/update`, {
+			...options,
 			json: body,
 		})
-		.json<StandardResponse<Room>>();
+		.json();
 };
 
-export const remove = async ({ roomId, }: InRoomParams) => {
-	return instance
-		.delete(`rooms/${roomId}/remove`)
-		.json<StandardResponse<boolean>>();
+export const remove = async (
+	params: RemoveRoomRequestParams,
+	options?: globalThis.RequestInit
+): RemoveRoomResponseData => {
+	const { roomId, } = params;
+
+	return instance.delete(`rooms/${roomId}/remove`, options).json();
 };

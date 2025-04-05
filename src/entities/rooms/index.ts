@@ -1,3 +1,3 @@
-export * from './model';
-export * from './ui';
+export * from './models';
 export * from './lib';
+export * from './ui';

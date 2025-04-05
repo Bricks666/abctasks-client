@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/rooms/ui/room-list-item/room-list-item.tsx > should render list item 1`] = `
+<li
+  class="MuiListItem-root MuiListItem-gutters classname css-qefhw6-MuiListItem-root"
+>
+  <div
+    class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+  >
+    <div
+      class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-pcn37w-MuiAvatar-root"
+      style="background: rgb(81, 217, 7);"
+    >
+      n
+    </div>
+  </div>
+  <div
+    class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+    >
+      name
+    </span>
+    <p
+      class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+    >
+      description
+    </p>
+  </div>
+</li>
+`;

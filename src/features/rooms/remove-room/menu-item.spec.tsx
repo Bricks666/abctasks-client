@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { popupsMap } from '@/shared/configs';
+import { POPUPS_NAMES } from '@/shared/configs';
 import { popupsModel } from '@/shared/models';
 
 import { RemoveRoomMenuItem } from './menu-item';
@@ -43,6 +43,8 @@ describe('features/rooms/remove-room/remove-item', () => {
 
 		await wrapper.user.click(menuitem);
 
-		expect(scope.getState(popupsModel.$popups)).toContain(popupsMap.removeRoom);
+		expect(scope.getState(popupsModel.$popups)).toContain(
+			POPUPS_NAMES.removeRoom
+		);
 	});
 });

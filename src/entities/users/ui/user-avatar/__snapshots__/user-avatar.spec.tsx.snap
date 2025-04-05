@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`src/entities/users/ui/user-avatar/user-avatar > should render user avatar with passed photo 1`] = `
+<div
+  aria-label="Shit-user"
+  class="MuiAvatar-root MuiAvatar-circular css-1jymjzk-MuiAvatar-root"
+  data-mui-internal-clone-element="true"
+>
+  <img
+    alt="Shit-user"
+    class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+    src="/some/photo/path.jpg"
+  />
+</div>
+`;

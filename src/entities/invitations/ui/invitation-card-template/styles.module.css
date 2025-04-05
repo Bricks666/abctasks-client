@@ -1,0 +1,19 @@
+.card {
+	max-width: 560px;
+}
+
+.content {
+	display: flex;
+	gap: 1em;
+	align-items: center;
+}
+
+.text {
+	max-width: 250px;
+	text-align: center;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+}

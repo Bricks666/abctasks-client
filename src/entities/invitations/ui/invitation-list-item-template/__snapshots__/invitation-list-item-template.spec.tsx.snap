@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`entities/invitations/ui/invitation-list-item-template/invitation-list-item-template.tsx > should render actions if they are provided > with actions 1`] = `
+<div
+  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-secondaryAction css-1sq15pq-MuiListItem-root"
+>
+  <div
+    class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+  >
+    <div>
+      User avatar
+    </div>
+  </div>
+  <div
+    class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+    >
+      Cool-user
+    </span>
+    <p
+      class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-ymve6q-MuiTypography-root"
+    >
+      list.item.inviter
+    </p>
+  </div>
+</div>
+`;
+
+exports[`entities/invitations/ui/invitation-list-item-template/invitation-list-item-template.tsx > should render correctly > default 1`] = `
+<div
+  class="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+>
+  <div>
+    User avatar
+  </div>
+</div>
+`;

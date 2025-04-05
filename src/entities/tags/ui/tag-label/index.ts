@@ -1,1 +1,1 @@
-export { TagLabel, type TagProps } from './tag-label';
+export * from './tag-label';

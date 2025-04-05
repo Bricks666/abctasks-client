@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { getParams, popupsMap, router } from '@/shared/configs';
+import { SEARCH_PARAMS_NAMES, POPUPS_NAMES, router } from '@/shared/configs';
 
 import { popupControls } from './model';
 import { OpenCreateTagButton } from './open-button';
@@ -47,7 +47,7 @@ describe('features/tags/create/open-button', () => {
 			expect(scope.getState(popupControls.$isOpen)).toBeTruthy();
 			expect(scope.getState(router.$query)).toStrictEqual(
 				expect.objectContaining({
-					[getParams.popup]: popupsMap.createTag,
+					[SEARCH_PARAMS_NAMES.popup]: POPUPS_NAMES.createTag,
 				})
 			);
 		});
