@@ -1,34 +1,35 @@
-import { beforeEach, describe, expect, test } from 'vitest';
-
-import { tagsModel } from '@/entities/tags';
-import { usersInRoomModel } from '@/entities/users';
-
-import { router } from '@/shared/configs';
-import { deviceInfoModel } from '@/shared/models';
-
-import { form } from './model';
-import { TasksFilters } from './tasks-filters';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import {
-	RenderResult,
-	Scope,
+	type RenderResult,
+	type TestCtx,
 	act,
-	allSettled,
-	fireEvent,
-	fork,
+	createTestCtx,
+	defaultRoom,
 	render,
 	screen,
-	useTestRouter,
 	waitFor
 } from '~/test-utils';
 
-describe('features/tasks/tasks-filters/tasks-filters', () => {
-	let scope: Scope;
+import { RoomScopeProvider } from '@/entities/rooms';
+
+import { deviceInfoModel } from '@/shared/models';
+
+import { TasksFilters } from './filters';
+
+describe('features/tasks/tasks-filters/ui/filters/filters.tsx', () => {
 	let wrapper: RenderResult;
-	const roomId = 123;
+	let ctx: TestCtx;
+	const onFiltersChanged = vi.fn();
+	const roomId = defaultRoom.id;
 
 	const createComponent = () => {
-		wrapper = render(<TasksFilters />, { scope, router, });
+		wrapper = render(
+			<RoomScopeProvider roomId={roomId}>
+				<TasksFilters onFiltersChanged={onFiltersChanged} />
+			</RoomScopeProvider>,
+			{ ctx, }
+		);
 	};
 	const findOpenButton = () =>
 		wrapper.getByRole('button', {
@@ -53,53 +54,45 @@ describe('features/tasks/tasks-filters/tasks-filters', () => {
 			name: 'actions.tasks_filters.fields.tags',
 		});
 
-	const openForm = () => {
+	const openForm = async () => {
 		const button = findOpenButton();
 
-		fireEvent.click(button);
+		await wrapper.user.click(button);
 	};
 
-	beforeEach(async () => {
-		scope = fork();
-
-		await useTestRouter({ scope, router, });
-		await allSettled(usersInRoomModel.query.start, {
-			scope,
-			params: { roomId, },
-		});
-		await allSettled(tagsModel.query.start, {
-			scope,
-			params: { roomId, },
-		});
-		await act(async () => createComponent());
+	beforeEach(() => {
+		ctx = createTestCtx();
 	});
 
 	test('should render buttons to open filters form', async () => {
+		await act(async () => createComponent());
+
 		expect(document.body).toMatchSnapshot('closed filters');
 	});
 
 	test('should render form in popover for screen with width > 720', async () => {
-		openForm();
+		await act(async () => createComponent());
+
+		await openForm();
 
 		expect(document.body).toMatchSnapshot('filters in popover');
 	});
 
 	test('should render form in popup for screen with width <= 720', async () => {
-		await act(() =>
-			allSettled(deviceInfoModel.$device, {
-				scope,
-				params: 'mobile',
-			})
-		);
-		openForm();
+		ctx.mock(deviceInfoModel.deviceAtom, 'tablet-vertical');
+		ctx.mock(deviceInfoModel.isTabletVerticalAtom, true);
+
+		await act(async () => createComponent());
+
+		await openForm();
 
 		expect(document.body).toMatchSnapshot('filters in popup');
 	});
 
 	test('should submit form and close form on submit button click', async () => {
-		expect.assertions(2);
+		await act(async () => createComponent());
 
-		openForm();
+		await openForm();
 		const authorsField = findAuthorsField();
 		const tagsField = findTagsFild();
 
@@ -118,7 +111,8 @@ describe('features/tasks/tasks-filters/tasks-filters', () => {
 		await wrapper.user.click(findSubmitButton());
 
 		expect(findForm).toThrow();
-		expect(scope.getState(form.$values)).toStrictEqual(
+		expect(onFiltersChanged).toHaveBeenCalledOnce();
+		expect(onFiltersChanged).toHaveBeenCalledWith(
 			expect.objectContaining({
 				authorIds: [1],
 				tagIds: [1],
@@ -127,9 +121,9 @@ describe('features/tasks/tasks-filters/tasks-filters', () => {
 	});
 
 	test('should reset form and close form on reset button click', async () => {
-		expect.assertions(4);
+		await act(async () => createComponent());
 
-		openForm();
+		await openForm();
 		const authorsField = findAuthorsField();
 		const tagsField = findTagsFild();
 
@@ -147,16 +141,17 @@ describe('features/tasks/tasks-filters/tasks-filters', () => {
 
 		await wrapper.user.click(findSubmitButton());
 
-		openForm();
+		await openForm();
 		await wrapper.user.click(findResetButton());
 
 		expect(findForm).toThrow();
-		await waitFor(() => {
-			openForm();
+		await waitFor(async () => {
+			await openForm();
 			expect(authorsField).toHaveValue('');
 			expect(tagsField).toHaveValue('');
 		});
-		expect(scope.getState(form.$values)).toStrictEqual(
+		expect(onFiltersChanged).toHaveBeenCalledTimes(2);
+		expect(onFiltersChanged).toHaveBeenCalledWith(
 			expect.objectContaining({
 				tagIds: [],
 				authorIds: [],
